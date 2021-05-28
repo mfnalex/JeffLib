@@ -15,9 +15,6 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Proudly stolen from EssentialsX
- */
 public final class ReflUtil {
     public static final NMSVersion V1_12_R1 = NMSVersion.fromString("v1_12_R1");
     public static final NMSVersion V1_9_R1 = NMSVersion.fromString("v1_9_R1");
