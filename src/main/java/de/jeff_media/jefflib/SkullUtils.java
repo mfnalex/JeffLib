@@ -8,8 +8,11 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
@@ -73,6 +76,32 @@ public class SkullUtils {
         } catch (final IllegalArgumentException | IllegalAccessException | SecurityException | InvocationTargetException | InstantiationException e) {
             Bukkit.getLogger().warning("JeffLib: Could not set custom base64 player head.");
         }
+    }
 
+    public static ItemStack getHead(final String base64) {
+        final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        final SkullMeta meta = (SkullMeta) head.getItemMeta();
+        final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
+        profile.getProperties().put("textures", new Property("textures", base64));
+        final Field profileField;
+        try {
+            profileField = meta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            profileField.set(meta, profile);
+        } catch (final IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+            e.printStackTrace();
+            return new ItemStack(Material.PLAYER_HEAD);
+        }
+
+        head.setItemMeta(meta);
+        return head;
+    }
+
+    public static ItemStack getHead(final UUID uuid) {
+        final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
+        final SkullMeta skullMeta = (SkullMeta) (head.hasItemMeta() ? head.getItemMeta() : Bukkit.getItemFactory().getItemMeta(Material.PLAYER_HEAD));
+        skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(uuid));
+        head.setItemMeta(skullMeta);
+        return head;
     }
 }
