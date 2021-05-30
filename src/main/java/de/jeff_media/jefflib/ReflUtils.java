@@ -19,7 +19,7 @@ import java.util.regex.Pattern;
  * Proudly "stolen" from EssentialsX
  * https://github.com/EssentialsX/Essentials
  */
-public final class ReflUtil {
+public final class ReflUtils {
     public static final NMSVersion V1_12_R1 = NMSVersion.fromString("v1_12_R1");
     public static final NMSVersion V1_9_R1 = NMSVersion.fromString("v1_9_R1");
     public static final NMSVersion V1_11_R1 = NMSVersion.fromString("v1_11_R1");
@@ -32,7 +32,7 @@ public final class ReflUtil {
     private static NMSVersion nmsVersionObject;
     private static String nmsVersion;
 
-    private ReflUtil() {
+    private ReflUtils() {
     }
 
     public static String getNMSVersion() {
