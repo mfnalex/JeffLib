@@ -7,10 +7,12 @@ import org.bukkit.block.Block;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Set;
 
 public class BlockTracker {
 
@@ -47,13 +49,26 @@ public class BlockTracker {
         return playerPlacedPDC.has(getKey(block), PersistentDataType.BYTE);
     }
 
+    public static @NotNull Collection<Block> getPlayerPlacedBlocks(Chunk chunk) {
+        Set<Block> blocks = new HashSet<>();
+        PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);
+        for(NamespacedKey key : pdc.getKeys()) {
+            if(!key.getNamespace().equals(PLAYER_PLACED_TAG.getNamespace())) continue;
+            String[] parts = key.getKey().split("/");
+            int x = Integer.parseInt(parts[0]);
+            int y = Integer.parseInt(parts[1]);
+            int z = Integer.parseInt(parts[2]);
+            blocks.add(chunk.getBlock(x,y,z));
+        }
+        return blocks;
+    }
+
     public static void setPlayerPlacedBlock(Block block, boolean playerPlaced) {
         PersistentDataContainer pdc = block.getChunk().getPersistentDataContainer();
         PersistentDataContainer playerPlacedPDC = getPlayerPlacedPDC(block.getChunk());
         NamespacedKey key = getKey(block);
         if (playerPlaced) {
             playerPlacedPDC.set(key, PersistentDataType.BYTE, (byte) 1);
-            System.out.println("Registering player placed block");
         } else {
             playerPlacedPDC.remove(key);
         }
