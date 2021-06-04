@@ -63,14 +63,14 @@ public class SkullUtils {
         profile.getProperties().put("textures", new Property("textures", base64));
 
         try {
-            final Object nmsWorld = ReflUtil.getMethodCached(World.class, "getHandle").invoke(block.getWorld());
-            final Class<?> blockPositionClass = ReflUtil.getNMSClass("BlockPosition");
-            final Class<?> tileEntityClass = ReflUtil.getNMSClass("TileEntitySkull");
-            final Constructor<?> blockPositionConstructor = ReflUtil.getConstructorCached(blockPositionClass, Integer.TYPE, Integer.TYPE, Integer.TYPE);
+            final Object nmsWorld = ReflUtils.getMethodCached(World.class, "getHandle").invoke(block.getWorld());
+            final Class<?> blockPositionClass = ReflUtils.getNMSClass("BlockPosition");
+            final Class<?> tileEntityClass = ReflUtils.getNMSClass("TileEntitySkull");
+            final Constructor<?> blockPositionConstructor = ReflUtils.getConstructorCached(blockPositionClass, Integer.TYPE, Integer.TYPE, Integer.TYPE);
             final Object blockPosition = blockPositionConstructor.newInstance(block.getX(), block.getY(), block.getZ());
-            final Method getTileEntityMethod = ReflUtil.getMethodCached(nmsWorld.getClass(),"getTileEntity", blockPositionClass);
+            final Method getTileEntityMethod = ReflUtils.getMethodCached(nmsWorld.getClass(),"getTileEntity", blockPositionClass);
             final Object tileEntity = getTileEntityMethod.invoke(nmsWorld, blockPosition);
-            final Method setGameProfileMethod = ReflUtil.getMethodCached(tileEntityClass, "setGameProfile", GameProfile.class);
+            final Method setGameProfileMethod = ReflUtils.getMethodCached(tileEntityClass, "setGameProfile", GameProfile.class);
             setGameProfileMethod.invoke(tileEntity, profile);
 
         } catch (final IllegalArgumentException | IllegalAccessException | SecurityException | InvocationTargetException | InstantiationException e) {
@@ -79,6 +79,7 @@ public class SkullUtils {
     }
 
     public static ItemStack getHead(final String base64) {
+
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         final SkullMeta meta = (SkullMeta) head.getItemMeta();
         final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
@@ -97,7 +98,7 @@ public class SkullUtils {
         return head;
     }
 
-    public static ItemStack getHead(final UUID uuid) {
+    public static ItemStack getPlayerHead(final UUID uuid) {
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         final SkullMeta skullMeta = (SkullMeta) (head.hasItemMeta() ? head.getItemMeta() : Bukkit.getItemFactory().getItemMeta(Material.PLAYER_HEAD));
         skullMeta.setOwningPlayer(Bukkit.getOfflinePlayer(uuid));
