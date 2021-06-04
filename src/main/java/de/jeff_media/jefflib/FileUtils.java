@@ -75,4 +75,17 @@ public final class FileUtils {
         }
         return changed;
     }
+
+    /**
+     * Gets a file in the data folder
+     * @param path Path as array, e.g. {"mainDirectory","subDirectory","fileName"}
+     * @return the File
+     */
+    public static File getFile(String... path) {
+        File file = JeffLib.getPlugin().getDataFolder();
+        for (int i = 0; i < path.length; i++) {
+            file = new File(file, path[i]);
+        }
+        return file;
+    }
 }
