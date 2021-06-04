@@ -8,7 +8,7 @@ public class EnchantmentUtils {
 
     public static int getLevel(ItemStack item, Enchantment enchantment) {
         ItemMeta meta = item.getItemMeta();
-        if(meta.hasEnchant(enchantment)) {
+        if (meta.hasEnchant(enchantment)) {
             return meta.getEnchantLevel(enchantment);
         }
         return 0;

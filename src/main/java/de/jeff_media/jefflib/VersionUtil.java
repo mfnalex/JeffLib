@@ -37,6 +37,10 @@ public final class VersionUtil {
     private static final Set<BukkitVersion> supportedVersions = ImmutableSet.of(v1_8_8_R01, v1_9_4_R01, v1_10_2_R01, v1_11_2_R01, v1_12_2_R01, v1_13_2_R01, v1_14_4_R01, v1_15_2_R01, v1_16_5_R01);
 
     private static final Map<String, SupportStatus> unsupportedServerClasses;
+    private static BukkitVersion serverVersion = null;
+    private static SupportStatus supportStatus = null;
+    // Used to find the specific class that caused a given support status
+    private static String supportStatusClass = null;
 
     static {
         final ImmutableMap.Builder<String, SupportStatus> builder = new ImmutableMap.Builder<>();
@@ -60,15 +64,10 @@ public final class VersionUtil {
         builder.put("net.fabricmc.loader.launch.knot.KnotServer", SupportStatus.UNSTABLE);
 
         // Misc translation layers that do not add NMS will be caught by this
-        builder.put("!net.minecraft.server." + ReflUtil.getNMSVersion() + ".MinecraftServer", SupportStatus.NMS_CLEANROOM);
+        builder.put("!net.minecraft.server." + ReflUtils.getNMSVersion() + ".MinecraftServer", SupportStatus.NMS_CLEANROOM);
 
         unsupportedServerClasses = builder.build();
     }
-
-    private static BukkitVersion serverVersion = null;
-    private static SupportStatus supportStatus = null;
-    // Used to find the specific class that caused a given support status
-    private static String supportStatusClass = null;
 
     private VersionUtil() {
     }
@@ -114,6 +113,25 @@ public final class VersionUtil {
 
     public static boolean isServerSupported() {
         return getServerSupportStatus().isSupported();
+    }
+
+    public enum SupportStatus {
+        FULL(true),
+        LIMITED(true),
+        DANGEROUS_FORK(false),
+        NMS_CLEANROOM(false),
+        UNSTABLE(false),
+        OUTDATED(false);
+
+        private final boolean supported;
+
+        SupportStatus(final boolean supported) {
+            this.supported = supported;
+        }
+
+        public boolean isSupported() {
+            return supported;
+        }
     }
 
     public static final class BukkitVersion implements Comparable<BukkitVersion> {
@@ -254,26 +272,6 @@ public final class VersionUtil {
                     }
                 }
             }
-        }
-    }
-
-    public enum SupportStatus {
-        FULL(true),
-        LIMITED(true),
-        DANGEROUS_FORK(false),
-        NMS_CLEANROOM(false),
-        UNSTABLE(false),
-        OUTDATED(false)
-        ;
-
-        private final boolean supported;
-
-        SupportStatus(final boolean supported) {
-            this.supported = supported;
-        }
-
-        public boolean isSupported() {
-            return supported;
         }
     }
 }

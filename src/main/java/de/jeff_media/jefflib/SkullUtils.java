@@ -47,7 +47,7 @@ public class SkullUtils {
     /**
      * Gives an already plaved skull another skin.
      *
-     * @param block Skull
+     * @param block  Skull
      * @param base64 Base64 encoded skin
      */
     public static void changeSkullInWorld(final Block block, final String base64) {
@@ -68,7 +68,7 @@ public class SkullUtils {
             final Class<?> tileEntityClass = ReflUtils.getNMSClass("TileEntitySkull");
             final Constructor<?> blockPositionConstructor = ReflUtils.getConstructorCached(blockPositionClass, Integer.TYPE, Integer.TYPE, Integer.TYPE);
             final Object blockPosition = blockPositionConstructor.newInstance(block.getX(), block.getY(), block.getZ());
-            final Method getTileEntityMethod = ReflUtils.getMethodCached(nmsWorld.getClass(),"getTileEntity", blockPositionClass);
+            final Method getTileEntityMethod = ReflUtils.getMethodCached(nmsWorld.getClass(), "getTileEntity", blockPositionClass);
             final Object tileEntity = getTileEntityMethod.invoke(nmsWorld, blockPosition);
             final Method setGameProfileMethod = ReflUtils.getMethodCached(tileEntityClass, "setGameProfile", GameProfile.class);
             setGameProfileMethod.invoke(tileEntity, profile);

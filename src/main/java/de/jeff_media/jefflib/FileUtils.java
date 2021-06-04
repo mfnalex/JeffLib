@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 
+import lombok.SneakyThrows;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.*;
@@ -11,7 +12,7 @@ import java.util.List;
 public final class FileUtils {
 
     public static void appendLines(final File file, final String line) {
-        appendLines(file, new String[] {line});
+        appendLines(file, new String[]{line});
     }
 
     public static void appendLines(final File file, final String[] lines) {
@@ -26,8 +27,12 @@ public final class FileUtils {
         }
     }
 
+    @SneakyThrows
     public static List<String> readFileFromResources(JavaPlugin plugin, final String fileName) {
         final InputStream input = plugin.getResource(fileName);
+        if(input == null) {
+            throw new FileNotFoundException();
+        }
         final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
         final List<String> lines = new ArrayList<>();
         String line;
@@ -78,13 +83,14 @@ public final class FileUtils {
 
     /**
      * Gets a file in the data folder
+     *
      * @param path Path as array, e.g. {"mainDirectory","subDirectory","fileName"}
      * @return the File
      */
     public static File getFile(String... path) {
         File file = JeffLib.getPlugin().getDataFolder();
-        for (int i = 0; i < path.length; i++) {
-            file = new File(file, path[i]);
+        for (String s : path) {
+            file = new File(file, s);
         }
         return file;
     }

@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib;
 
-import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -14,7 +13,7 @@ public class MobUtils {
 
     public static Collection<Entity> getEntities(Block min, Block max) {
         World world = min.getWorld();
-        if(!world.equals(max.getWorld())) {
+        if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world!");
         }
         BoundingBox box = BoundingBox.of(min, max);
@@ -23,7 +22,7 @@ public class MobUtils {
 
     public static Collection<? extends Entity> getEntities(Block min, Block max, Class<? extends Entity> entityClass) {
         World world = min.getWorld();
-        if(!world.equals(max.getWorld())) {
+        if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world!");
         }
         BoundingBox box = BoundingBox.of(min, max);

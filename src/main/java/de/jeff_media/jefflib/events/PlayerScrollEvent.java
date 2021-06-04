@@ -1,10 +1,10 @@
 package de.jeff_media.jefflib.events;
 
+import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-import org.bukkit.event.player.PlayerEvent;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -13,8 +13,8 @@ import org.jetbrains.annotations.NotNull;
 public class PlayerScrollEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
 
-    private final Player who;
-    private final ScrollDirection direction;
+    @Getter private final Player who;
+    @Getter private final ScrollDirection direction;
 
     private boolean cancelled = false;
 
@@ -23,12 +23,12 @@ public class PlayerScrollEvent extends Event implements Cancellable {
         this.direction = direction;
     }
 
-    @Override
-    public HandlerList getHandlers() {
+    public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
-    public static HandlerList getHandlerList() {
+    @Override
+    public @NotNull HandlerList getHandlers() {
         return HANDLERS;
     }
 

@@ -28,8 +28,8 @@ public class TimeUtils {
     public static void endTimings(String identifier) {
         long now = System.nanoTime();
         Long then = measurements.get(identifier);
-        if(then == null) {
-            throw new IllegalArgumentException("No timings with identifier \""+identifier+"\" running");
+        if (then == null) {
+            throw new IllegalArgumentException("No timings with identifier \"" + identifier + "\" running");
         }
         long nanoseconds = now - then;
         double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
