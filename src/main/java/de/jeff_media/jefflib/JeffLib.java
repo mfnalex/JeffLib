@@ -1,5 +1,7 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.events.listeners.PlayerScrollListener;
+import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 public class JeffLib {
@@ -12,6 +14,7 @@ public class JeffLib {
 
     public static void init(Plugin plugin) {
         main=plugin;
+        Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
     }
 
 }
