@@ -9,8 +9,17 @@ import org.bukkit.util.BoundingBox;
 import java.util.Collection;
 import java.util.function.Predicate;
 
+/**
+ * Provides methods related to entities
+ */
 public class MobUtils {
 
+    /**
+     * Gets all entities inside {@param min} and {@param max}
+     * @param min first corner
+     * @param max second corner
+     * @return Collection of all entities inside {@param min} and {@param max}
+     */
     public static Collection<Entity> getEntities(Block min, Block max) {
         World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
@@ -20,6 +29,13 @@ public class MobUtils {
         return world.getNearbyEntities(box);
     }
 
+    /**
+     * Gets all entities inside {@param min} and {@param max} that extend {@param entityClass}
+     * @param min first corner
+     * @param max second corner
+     * @param entityClass class the entities have to extend
+     * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
+     */
     public static Collection<? extends Entity> getEntities(Block min, Block max, Class<? extends Entity> entityClass) {
         World world = min.getWorld();
         if (!world.equals(max.getWorld())) {

@@ -15,6 +15,15 @@ import java.util.Set;
  */
 public class ParticleUtils {
 
+    /**
+     * Returns a runnable that creates cube-formed particles
+     * @param min first corner
+     * @param max second corner
+     * @param player player to show the particles to
+     * @param particleType particle type
+     * @param particleCount particle count
+     * @return Runnable that shows the particles to the player
+     */
     public static BukkitRunnable drawHollowCube(Block min, Block max, Player player, Particle particleType, int particleCount) {
         World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
@@ -23,6 +32,15 @@ public class ParticleUtils {
         return drawHollowCube(world, BoundingBox.of(min, max), player, particleType, particleCount);
     }
 
+    /**
+     * Returns a runnable that creates cube-formed particles
+     * @param min first corner
+     * @param max second corner
+     * @param player player to show the particles to
+     * @param particleType particle type
+     * @param particleCount particle count
+     * @return Runnable that shows the particles to the player
+     */
     public static BukkitRunnable drawHollowCube(Location min, Location max, Player player, Particle particleType, int particleCount) {
         World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
@@ -31,6 +49,15 @@ public class ParticleUtils {
         return drawHollowCube(world, BoundingBox.of(min, max), player, particleType, particleCount);
     }
 
+    /**
+     * Returns a runnable that creates cube-formed particles
+     * @param world world
+     * @param boundingBox bounding box
+     * @param player player to show the particles to
+     * @param particleType particle type
+     * @param particleCount particle count
+     * @return Runnable that shows the particles to the player
+     */
     public static BukkitRunnable drawHollowCube(World world, BoundingBox boundingBox, Player player, Particle particleType, int particleCount) {
         Set<Location> points = GeometryUtils.getHollowCube(boundingBox.getMin().toLocation(world), boundingBox.getMax().toLocation(world), 0.5);
         return new BukkitRunnable() {
