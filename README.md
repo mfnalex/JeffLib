@@ -1,6 +1,15 @@
-# Maven
+## Usage
+Just include JeffLib as dependency in your pom.xml.
 
-## Repository
+**Note:** JeffLib has to be initialized for some methods to work. Just add this to your onEnable():
+
+```java
+JeffLib.init(this);
+```
+
+## Maven
+
+### Repository
 
 ```xml
 <repository>
@@ -9,7 +18,7 @@
 </repository>
 ```
 
-## Dependency
+### Dependency
 
 ```xml
 <dependency>
@@ -19,3 +28,7 @@
     <scope>compile</scope>
 </dependency>
 ```
+
+## JavaDocs
+
+Coming soon
