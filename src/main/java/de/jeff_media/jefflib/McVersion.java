@@ -8,31 +8,40 @@ public final class McVersion {
 
     public static int getMajor() {
         if (major != null) return major;
-        major = getVersionField(0);
+        major = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
         return major;
     }
 
     public static int getMinor() {
         if (minor != null) return minor;
-        minor = getVersionField(1);
+        minor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1]);
         return minor;
     }
 
     public static int getPatch() {
         if (patch != null) return patch;
-        patch = getVersionField(2);
+        patch = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]);
         return patch;
     }
 
-    private static int getVersionField(int index) {
-        return Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[index]);
-    }
+    public static boolean isAtLeast(int major, int minor, int patch) {
+        if(major > getMajor()) {
+            return false;
+        }
+        if(getMajor() > major) {
+            return true;
+        }
+        if(minor > getMinor()) {
+            return false;
+        }
+        if(getMinor() > minor) {
+            return true;
+        }
+        if( getPatch() >= patch) {
+            return true;
+        }
+        return false;
 
-    public boolean isAtLeast(int major, int minor, int patch) {
-        if (getMajor() > major) return true;
-        if (getMinor() > minor) return true;
-        if (getPatch() > patch) return true;
-        return getMajor() == major && getMinor() == minor && getPatch() == patch;
     }
 
 }

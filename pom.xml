@@ -78,6 +78,7 @@
                             <exclude>org.slf4j</exclude>
                         </excludes>
                     </artifactSet>
+                    <minimizeJar>true</minimizeJar>
                 </configuration>
                 <executions>
                     <execution>
