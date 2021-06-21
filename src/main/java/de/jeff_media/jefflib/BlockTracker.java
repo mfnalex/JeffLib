@@ -9,21 +9,44 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
+import javax.naming.Name;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Tracks player placed blocks.
+ *
+ * Uses the chunk's PersistentDataContainer to store information about which blocks have been placed
+ * by the player. You can track all block types or only certain ones.
+ */
 public class BlockTracker {
 
     private static final Plugin plugin = JeffLib.getPlugin();
     private static final NamespacedKey PLAYER_PLACED_TAG = new NamespacedKey(plugin, "playerplaced");
     private static final Collection<Material> TRACKED_TYPES = new HashSet<>();
 
+    /**
+     * Adds a new material to the block tracker
+     * @param type material to track
+     */
+    public static void addTrackedBlockType(Material type) {
+        TRACKED_TYPES.add(type);
+    }
+
+    /**
+     * Adds new materials to the block tracker
+     * @param types materials to track
+     */
     public static void addTrackedBlockTypes(Collection<Material> types) {
         TRACKED_TYPES.addAll(types);
     }
 
+    /**
+     * Gets a collection containing all tracked materials
+     * @return
+     */
     public static Collection<Material> getTrackedBlockTypes() {
         return TRACKED_TYPES;
     }

@@ -8,19 +8,26 @@ public final class McVersion {
 
     public static int getMajor() {
         if (major != null) return major;
-        major = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
+        String majorString = Bukkit.getBukkitVersion().split("\\.")[0];
+        System.out.println("major: " + majorString);
         return major;
     }
 
     public static int getMinor() {
         if (minor != null) return minor;
-        minor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1]);
+        String minorString = Bukkit.getBukkitVersion().split("\\.")[1];
+        if(minorString.contains("-")) {
+            minorString = minorString.split("-")[0];
+            patch = 0;
+        }
+        minor = Integer.parseInt(minorString);
         return minor;
     }
 
     public static int getPatch() {
         if (patch != null) return patch;
-        patch = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]);
+        String patchString = Bukkit.getBukkitVersion().split("\\.")[2];
+        patch = Integer.parseInt(patchString);
         return patch;
     }
 

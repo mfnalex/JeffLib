@@ -17,10 +17,13 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.UUID;
 
+/**
+ * Provides skull / player head related methods
+ */
 public class SkullUtils {
 
     /**
-     * Gives an already plaved skull another skin.
+     * Gives an already placed skull another skin.
      *
      * @param block Skull
      * @param uuid  UUID of the player
@@ -45,7 +48,7 @@ public class SkullUtils {
     // Use a predefined texture
 
     /**
-     * Gives an already plaved skull another skin.
+     * Gives an already placed skull another skin.
      *
      * @param block  Skull
      * @param base64 Base64 encoded skin
@@ -78,6 +81,12 @@ public class SkullUtils {
         }
     }
 
+    /**
+     * Creates an ItemStack of PLAYER_HEAD with the given base64 encoded skin
+     *
+     * @param base64 Base64 encoded skin
+     * @return ItemStack of PLAYER_HEAD using the given skin
+     */
     public static ItemStack getHead(final String base64) {
 
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
@@ -98,6 +107,12 @@ public class SkullUtils {
         return head;
     }
 
+    /**
+     * Creates an ItemStack of PLAYER_HEAD with the given player's skin
+     *
+     * @param uuid UUID of the player
+     * @return ItemStack of PLAYER_HEAD with the given player's skin
+     */
     public static ItemStack getPlayerHead(final UUID uuid) {
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         final SkullMeta skullMeta = (SkullMeta) (head.hasItemMeta() ? head.getItemMeta() : Bukkit.getItemFactory().getItemMeta(Material.PLAYER_HEAD));

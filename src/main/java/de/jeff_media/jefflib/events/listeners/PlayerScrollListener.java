@@ -3,12 +3,14 @@ package de.jeff_media.jefflib.events.listeners;
 import de.jeff_media.jefflib.events.PlayerScrollEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerItemHeldEvent;
 
 public class PlayerScrollListener implements Listener {
 
-
+    @EventHandler
     public void onScroll(PlayerItemHeldEvent event) {
         Player who = event.getPlayer();
         PlayerScrollEvent.ScrollDirection direction;

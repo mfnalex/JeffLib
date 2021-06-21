@@ -10,6 +10,9 @@ import org.bukkit.util.BoundingBox;
 
 import java.util.Set;
 
+/**
+ * Provides particle related methods
+ */
 public class ParticleUtils {
 
     public static BukkitRunnable drawHollowCube(Block min, Block max, Player player, Particle particleType, int particleCount) {

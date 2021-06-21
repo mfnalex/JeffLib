@@ -15,6 +15,7 @@ import java.util.regex.Pattern;
 /**
  * Proudly stolen from EssentialsX
  */
+@Deprecated
 public final class VersionUtil {
 
     public static final BukkitVersion v1_14_R01 = BukkitVersion.fromString("1.14-R0.1-SNAPSHOT");
