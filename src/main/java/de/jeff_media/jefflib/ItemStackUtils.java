@@ -16,6 +16,11 @@ public class ItemStackUtils {
         return itemStack == null || itemStack.getType() == Material.AIR || itemStack.getAmount() == 1;
     }
 
+    /**
+     * Merges ItemStacks
+     * @param items ItemStacks to merge
+     * @return merged ItemStacks
+     */
     public static List<ItemStack> mergeItemStacks(ItemStack... items) {
         HashMap<Integer, ItemStack> overflow = null;
         items = getNonNullItems(items);
@@ -31,6 +36,11 @@ public class ItemStackUtils {
         return mergedItems;
     }
 
+    /**
+     * Returns an array of all given ItemStacks that are neither null nor AIR
+     * @param items ItemStacks to check
+     * @return All given ItemStacks that are neither null nor air
+     */
     public static ItemStack[] getNonNullItems(ItemStack... items) {
         ArrayList<ItemStack> nonNullItems = new ArrayList<>();
         for (ItemStack item : items) {

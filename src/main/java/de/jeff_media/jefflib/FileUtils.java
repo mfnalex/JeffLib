@@ -11,10 +11,20 @@ import java.util.List;
 
 public final class FileUtils {
 
+    /**
+     * Appends the given line to the file
+     * @param file File to append to
+     * @param line line to append
+     */
     public static void appendLines(final File file, final String line) {
         appendLines(file, new String[]{line});
     }
 
+    /**
+     * Appends the given lines to the file
+     * @param file File to append to
+     * @param lines lines to append
+     */
     public static void appendLines(final File file, final String[] lines) {
         try {
             final Writer output = new OutputStreamWriter(new FileOutputStream(file, true), StandardCharsets.UTF_8);
@@ -27,6 +37,12 @@ public final class FileUtils {
         }
     }
 
+    /**
+     * Reads a file from the resources directory and returns it as List of Strings
+     * @param plugin Plugin
+     * @param fileName File name
+     * @return A list of Strings of the file's contents
+     */
     @SneakyThrows
     public static List<String> readFileFromResources(JavaPlugin plugin, final String fileName) {
         final InputStream input = plugin.getResource(fileName);

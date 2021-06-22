@@ -21,20 +21,23 @@ public class CustomBlockData implements PersistentDataContainer {
     private static final Plugin plugin = JeffLib.getPlugin();
     private final PersistentDataContainer pdc;
     private final Block block;
+    private final Chunk chunk;
+    private final NamespacedKey key;
 
     public CustomBlockData(Block block) {
-        pdc = get(block);
+        this.pdc = getPDC(block);
         this.block = block;
+        this.chunk = block.getChunk();
+        this.key = getKey(block);
     }
 
     static {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
     }
 
-    private PersistentDataContainer get(Block block) {
+    private PersistentDataContainer getPDC(Block block) {
         Chunk chunk = block.getChunk();
         PersistentDataContainer chunkPDC = chunk.getPersistentDataContainer();
-        NamespacedKey key = getKey(block);
         if(chunkPDC.has(key, PersistentDataType.TAG_CONTAINER)) {
             return chunkPDC.get(key, PersistentDataType.TAG_CONTAINER);
         }
@@ -44,8 +47,6 @@ public class CustomBlockData implements PersistentDataContainer {
     }
 
     private void save() {
-        Chunk chunk = block.getChunk();
-        NamespacedKey key = getKey(block);
         chunk.getPersistentDataContainer().set(key, PersistentDataType.TAG_CONTAINER, pdc);
     }
 
@@ -89,6 +90,7 @@ public class CustomBlockData implements PersistentDataContainer {
     @Override
     public void remove(@NotNull NamespacedKey namespacedKey) {
         pdc.remove(namespacedKey);
+        save();
     }
 
     @Override
