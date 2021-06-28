@@ -15,7 +15,9 @@ import java.util.Objects;
 
 /**
  * Provides methods to store and retrieve Strings from PersistentDataHolders or ItemStacks
+ * @deprecated Use {@link de.jeff_media.jefflib.PDCUtils} instead
  */
+@Deprecated
 public class NBTAPI {
 
     public static @NotNull String getNBT(@NotNull PersistentDataHolder holder, @NotNull String key, @NotNull String defaultValue) {

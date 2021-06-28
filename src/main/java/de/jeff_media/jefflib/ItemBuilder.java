@@ -13,17 +13,13 @@ public class ItemBuilder {
     private final ItemStack item;
     private final ItemMeta meta;
 
-    private ItemBuilder(Material mat, int amount) {
+    public ItemBuilder(Material mat, int amount) {
         item = new ItemStack(mat, amount);
         meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(mat);
     }
 
-    public static ItemBuilder create(Material material) {
-        return new ItemBuilder(material, 1);
-    }
-
-    public static ItemBuilder create(Material material, int amount) {
-        return new ItemBuilder(material, amount);
+    public ItemBuilder(Material mat) {
+        this(mat, 1);
     }
 
     public ItemStack build() {

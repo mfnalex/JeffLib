@@ -14,14 +14,20 @@ import java.util.Objects;
 
 public class CommandUtils {
 
+    private static final Plugin plugin = JeffLib.getPlugin();
+
     public static void registerCommand(final String permission, final String... aliases) {
-        Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
-        final PluginCommand command = getCommand(aliases[0], JeffLib.getPlugin());
+
+        if(plugin == null) {
+            throw new IllegalStateException(JeffLib.Messages.NOT_INITIALIZED);
+        }
+
+        final PluginCommand command = getCommand(aliases[0], plugin);
 
         command.setAliases(Arrays.asList(aliases));
         command.setPermission(permission);
 
-        getCommandMap().register(JeffLib.getPlugin().getDescription().getName(), command);
+        getCommandMap().register(plugin.getDescription().getName(), command);
     }
 
     private static PluginCommand getCommand(final String name, final Plugin plugin) {

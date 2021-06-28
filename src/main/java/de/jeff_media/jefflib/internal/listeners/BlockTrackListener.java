@@ -1,4 +1,4 @@
-package de.jeff_media.jefflib.events.listeners;
+package de.jeff_media.jefflib.internal.listeners;
 
 import de.jeff_media.jefflib.BlockTracker;
 import de.jeff_media.jefflib.JeffLib;
