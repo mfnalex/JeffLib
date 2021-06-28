@@ -2,6 +2,9 @@ package de.jeff_media.jefflib;
 
 import org.bukkit.Bukkit;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Used to check the MC version
  */
@@ -15,8 +18,8 @@ public final class McVersion {
      */
     public static int getMajor() {
         if (major != null) return major;
-        String majorString = Bukkit.getBukkitVersion().split("\\.")[0];
-        System.out.println("major: " + majorString);
+        String string = Bukkit.getBukkitVersion().split("\\.")[0];
+        major = Integer.parseInt(string);
         return major;
     }
 
@@ -26,12 +29,8 @@ public final class McVersion {
      */
     public static int getMinor() {
         if (minor != null) return minor;
-        String minorString = Bukkit.getBukkitVersion().split("\\.")[1];
-        if(minorString.contains("-")) {
-            minorString = minorString.split("-")[0];
-            patch = 0;
-        }
-        minor = Integer.parseInt(minorString);
+        String string = Bukkit.getBukkitVersion().split("\\.")[1].split("-")[0];
+        minor = Integer.parseInt(string);
         return minor;
     }
 
@@ -41,8 +40,12 @@ public final class McVersion {
      */
     public static int getPatch() {
         if (patch != null) return patch;
-        String patchString = Bukkit.getBukkitVersion().split("\\.")[2];
-        patch = Integer.parseInt(patchString);
+        if(Bukkit.getBukkitVersion().chars().filter(ch -> ch == '.').count() == 2) {
+            patch = 0;
+        } else {
+            String string = Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0];
+            patch = Integer.valueOf(string);
+        }
         return patch;
     }
 
