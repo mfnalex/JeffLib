@@ -48,10 +48,10 @@
                 <version>3.1.0</version>
                 <configuration>
                     <relocations>
-                        <!--<relocation>
+                        <relocation>
                             <pattern>de.jeff_media.updatechecker</pattern>
                             <shadedPattern>${project.groupId}.jefflib.updatechecker</shadedPattern>
-                        </relocation>-->
+                        </relocation>
                         <relocation>
                             <pattern>de.jeff_media.customblockdata.CustomBlockData</pattern>
                             <shadedPattern>${project.groupId}.jefflib.CustomBlockData</shadedPattern>
@@ -121,6 +121,13 @@
     </repositories>
 
     <dependencies>
+
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>SpigotUpdateChecker</artifactId>
+            <version>1.2.4</version>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.spigotmc</groupId>

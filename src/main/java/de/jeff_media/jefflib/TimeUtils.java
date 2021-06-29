@@ -1,8 +1,11 @@
 package de.jeff_media.jefflib;
 
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 /**
  * Provides time related methods, like measuring time and converting nanoseconds to milliseconds, etc.
@@ -34,6 +37,10 @@ public class TimeUtils {
         return (double) (milliSeconds / milliSecondsPerTick * 100);
     }
 
+    public static String formatNanoseconds(long nanoSeconds) {
+        return String.format("%.4f ms",nanoSecondsToMilliSecondsDouble(nanoSeconds));
+    }
+
     /**
      * Starts to record the time, using a String identifier, to be used in conjunction with {@link #endTimings(String)}
      * @param identifier Name of the task to be measured
@@ -42,12 +49,7 @@ public class TimeUtils {
         measurements.put(identifier, System.nanoTime());
     }
 
-    /**
-     * Ends the time measurement, prints out the duration in either nanoseconds or milliseconds
-     * @param identifier Name of the task to be measured
-     * @return duration the task took in nanoseconds
-     */
-    public static long endTimings(String identifier) {
+    public static long endTimings(String identifier, @Nullable Plugin plugin, boolean sendMessage) {
         long now = System.nanoTime();
         Long then = measurements.get(identifier);
         if (then == null) {
@@ -55,8 +57,24 @@ public class TimeUtils {
         }
         long nanoseconds = now - then;
         double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
-        Bukkit.getLogger().info(String.format("Task \"%s\" finished in %.4f ms", identifier, milliseconds));
+        if(sendMessage) {
+            Logger logger = plugin == null ? Bukkit.getLogger() : plugin.getLogger();
+            logger.info(String.format("Task \"%s\" finished in %.4f ms", identifier, milliseconds));
+        }
         return nanoseconds;
+    }
+
+    /**
+     * Ends the time measurement, prints out the duration in either nanoseconds or milliseconds
+     * @param identifier Name of the task to be measured
+     * @return duration the task took in nanoseconds
+     */
+    public static long endTimings(String identifier, boolean sendMessage) {
+        return endTimings(identifier,null, sendMessage);
+    }
+
+    public static long endTimings(String identifier) {
+        return endTimings(identifier, true);
     }
 
 }
