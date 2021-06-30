@@ -12,6 +12,23 @@ import java.util.List;
 public final class FileUtils {
 
     /**
+     * Replaces or creates a file with the given content
+     * @param file File to write to
+     * @param lines lines to append
+     */
+    public static void writeToFile(final File file, final List<String> lines) {
+        try {
+            final Writer output = new OutputStreamWriter(new FileOutputStream(file, false), StandardCharsets.UTF_8);
+            for (final String line : lines) {
+                output.append(line).append(System.lineSeparator());
+            }
+            output.close();
+        } catch (final IOException ioException) {
+            ioException.printStackTrace();
+        }
+    }
+
+    /**
      * Appends the given line to the file
      * @param file File to append to
      * @param line line to append
