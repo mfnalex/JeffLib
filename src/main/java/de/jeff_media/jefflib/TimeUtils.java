@@ -5,6 +5,7 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
@@ -38,7 +39,7 @@ public class TimeUtils {
     }
 
     public static String formatNanoseconds(long nanoSeconds) {
-        return String.format("%.4f ms",nanoSecondsToMilliSecondsDouble(nanoSeconds));
+        return String.format(Locale.ROOT,"%.4f ms",nanoSecondsToMilliSecondsDouble(nanoSeconds));
     }
 
     /**
@@ -59,7 +60,7 @@ public class TimeUtils {
         double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
         if(sendMessage) {
             Logger logger = plugin == null ? Bukkit.getLogger() : plugin.getLogger();
-            logger.info(String.format("Task \"%s\" finished in %.4f ms", identifier, milliseconds));
+            logger.info(String.format(Locale.ROOT,"Task \"%s\" finished in %.4f ms", identifier, milliseconds));
         }
         return nanoseconds;
     }

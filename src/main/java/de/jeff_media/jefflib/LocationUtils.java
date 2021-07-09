@@ -9,6 +9,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
 import java.util.UUID;
 
 public class LocationUtils {
@@ -105,6 +106,23 @@ public class LocationUtils {
         int cz = chunkCoordinates.getZ();
         if(!location.getWorld().isChunkGenerated(cx,cz)) return false;
         return location.getWorld().isChunkLoaded(cx, cz);
+    }
+
+    public static String toPrettyString(Location loc, boolean showYawAndPitch, boolean showWorld) {
+        double x = loc.getX();
+        double y = loc.getY();
+        double z = loc.getZ();
+        double yaw = loc.getYaw();
+        double pitch = loc.getPitch();
+        String world = loc.getWorld().getName();
+        String result = String.format(Locale.ROOT, "x=%.2f, y=%.2f, z=%.2f", x,y,z);
+        if(showYawAndPitch) {
+            result += String.format(", yaw=%.2f, pitch=%.2f",yaw, pitch);
+        }
+        if(showWorld) {
+            result += ", world=" + world;
+        }
+        return result;
     }
 
     public static class ChunkCoordinates {
