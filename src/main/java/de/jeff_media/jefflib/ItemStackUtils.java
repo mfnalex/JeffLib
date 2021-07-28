@@ -12,6 +12,9 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * Methods related to ItemStacks
+ */
 public class ItemStackUtils {
 
     public static boolean isNullOrEmpty(ItemStack itemStack) {
@@ -19,7 +22,7 @@ public class ItemStackUtils {
     }
 
     /**
-     * Merges ItemStacks
+     * Merges ItemStacks when possible
      * @param items ItemStacks to merge
      * @return merged ItemStacks
      */

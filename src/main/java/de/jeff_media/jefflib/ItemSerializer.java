@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +16,12 @@ import java.util.Base64;
 
 public class ItemSerializer {
 
+    /**
+     * Turns an ItemStack into a byte array
+     * @param itemStack ItemStack
+     * @return ItemStack as byte array
+     * @throws IOException
+     */
     public static byte[] toBytes(ItemStack itemStack) throws IOException {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
              BukkitObjectOutputStream objectOutputStream = new BukkitObjectOutputStream(outputStream)
@@ -24,11 +31,24 @@ public class ItemSerializer {
         }
     }
 
+    /**
+     * Turns an ItemStack into a Base64 String
+     * @param itemStack ItemStack
+     * @return ItemStack as Base64 String
+     * @throws IOException
+     */
     public static String toBase64(ItemStack itemStack) throws IOException {
         return Base64.getEncoder().encodeToString(toBytes(itemStack));
     }
 
-    public static ItemStack fromBytes(byte[] input) throws IOException, ClassNotFoundException {
+    /**
+     * Turns a byte array into an ItemStack
+     * @param input byte array
+     * @return ItemStack
+     * @throws IOException
+     */
+    @SneakyThrows
+    public static ItemStack fromBytes(byte[] input) throws IOException {
         try (ByteArrayInputStream inputStream = new ByteArrayInputStream(input);
              BukkitObjectInputStream objectInputStream = new BukkitObjectInputStream(inputStream)
         ) {
@@ -36,7 +56,13 @@ public class ItemSerializer {
         }
     }
 
-    public static ItemStack fromBase64(String input) throws IOException, ClassNotFoundException {
+    /**
+     * Turns a Base64 String into an ItemStack
+     * @param input Base64 String
+     * @return ItemStack
+     * @throws IOException
+     */
+    public static ItemStack fromBase64(String input) throws IOException {
         return fromBytes(Base64.getDecoder().decode(input));
     }
 

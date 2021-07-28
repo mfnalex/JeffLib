@@ -12,6 +12,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 import java.util.UUID;
 
+/**
+ * Methods related to Locations
+ */
 public class LocationUtils {
 
     /**
@@ -83,16 +86,32 @@ public class LocationUtils {
         return new Location(world,x,y,z,(float)yaw,(float)pitch);
     }
 
+    /**
+     * Returns a {@link ChunkCoordinates} object for the given location
+     * @param location Location
+     * @return ChunkCoordinates for the given Location
+     */
     public static ChunkCoordinates getChunkCoordinates(Location location) {
         int cx = location.getBlockX() >> 4;
         int cz = location.getBlockZ() >> 4;
         return new ChunkCoordinates(cx,cz);
     }
 
+    /**
+     * Returns a {@link ChunkCoordinates} object for the given x and z coordinates
+     * @param x X coordinate
+     * @param z Z coordinate
+     * @return ChunkCoordinates for the given Location
+     */
     public static ChunkCoordinates getChunkCoordinates(int x, int z) {
         return new ChunkCoordinates(x >> 4, z >> 4);
     }
 
+    /**
+     * Returns whether a chunk at a given location has been generated (without generating it)
+     * @param location Location
+     * @return true when the chunk has been generated, otherwise false
+     */
     public static boolean isChunkGenerated(Location location) {
         ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
         int cx = chunkCoordinates.getX();
@@ -100,6 +119,11 @@ public class LocationUtils {
         return location.getWorld().isChunkGenerated(cx,cz);
     }
 
+    /**
+     * Returns whether a chunk at a given location is loaded (without loading it)
+     * @param location Location
+     * @return true when the chunk is loaded, otherwise false
+     */
     public static boolean isChunkLoaded(Location location) {
         ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
         int cx = chunkCoordinates.getX();
@@ -108,6 +132,13 @@ public class LocationUtils {
         return location.getWorld().isChunkLoaded(cx, cz);
     }
 
+    /**
+     * Turns a location into a human readable String, optionally including yaw/pitch and the world. Example: x=10, y=64, z=-10 or x=10, y=64, z=-10, yaw=0, pitch=0, world=world_the_end
+     * @param loc Location
+     * @param showYawAndPitch Whether to include Yaw and Pitch
+     * @param showWorld Whether to include the world's name
+     * @return Human readable location string
+     */
     public static String toPrettyString(Location loc, boolean showYawAndPitch, boolean showWorld) {
         double x = loc.getX();
         double y = loc.getY();
@@ -125,6 +156,9 @@ public class LocationUtils {
         return result;
     }
 
+    /**
+     * Represents a pair of X,Z chunk coordinates
+     */
     public static class ChunkCoordinates {
         @Override
         public String toString() {

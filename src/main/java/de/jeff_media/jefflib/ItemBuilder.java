@@ -9,6 +9,9 @@ import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Provides a builder for ItemStacks
+ */
 public class ItemBuilder {
     private final ItemStack item;
     private final ItemMeta meta;
@@ -22,6 +25,10 @@ public class ItemBuilder {
         this(mat, 1);
     }
 
+    /**
+     * Returns the built ItemStack
+     * @return ItemStack
+     */
     public ItemStack build() {
         item.setItemMeta(meta);
         return item;

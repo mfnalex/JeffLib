@@ -49,10 +49,24 @@ public class MobUtils {
         return entities;
     }
 
+    /**
+     * Gets all entities inside min and max that belong to the given EntityType
+     * @param min first corner
+     * @param max second corner
+     * @param entityType desired EntityType
+     * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
+     */
     public static Collection<? extends Entity> getEntities(Block min, Block max, EntityType entityType) {
         return getEntities(min, max, entityType.getEntityClass());
     }
 
+    /**
+     * Converts a list of Entities to a list of the desired Entity class. All entities not extending the given class will not be included in the returned list.
+     * @param list Existing list of entities
+     * @param desiredClass Desired Entity class
+     *
+     * @return Collection of all entities of the original list that extend desiredClass
+     */
     public static <E extends Entity> List<E> castEntityList(List<? extends Entity> list, Class<? extends E> desiredClass) {
         List<E> newList = new ArrayList<>();
         for(Entity entity : list) {

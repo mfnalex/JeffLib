@@ -12,7 +12,7 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Main class of the library
+ * Main class of the library, has to be initialized for certain methods to work.
  */
 public class JeffLib {
 
@@ -28,6 +28,8 @@ public class JeffLib {
     public static Random getRandom() {
         return random;
     }
+
+    private JeffLib() {}
 
     /**
      * Initializes the Library

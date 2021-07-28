@@ -50,7 +50,7 @@ public final class McVersion {
     }
 
     /**
-     * Checks whether the currently running MC version is at least the given version
+     * Checks whether the currently running MC version is at least the given version. For example, isAtLeast(1.16.4) will return true for all versions including and above 1.16.4
      * @param major Major version
      * @param minor Minor version
      * @param patch Patch version

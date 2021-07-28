@@ -2,8 +2,16 @@ package de.jeff_media.jefflib;
 
 import org.bukkit.event.inventory.InventoryDragEvent;
 
+/**
+ * Methods regarding Inventories
+ */
 public class InventoryUtils {
 
+    /**
+     * Checks whether the given InventoryDragEvent also affects the top Inventory.
+     * @param event InventoryDragEvent
+     * @return true when the given InventoryDragEvent also affects the top inventory
+     */
     public static boolean affectsTopInventory(InventoryDragEvent event) {
         int minSlot = 999;
         for (final int i : event.getRawSlots()) {
