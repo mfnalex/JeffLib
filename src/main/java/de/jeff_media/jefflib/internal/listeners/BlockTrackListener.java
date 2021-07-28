@@ -13,6 +13,9 @@ import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.world.StructureGrowEvent;
 import org.bukkit.plugin.Plugin;
 
+/**
+ * Keeps track of player placed blocks
+ */
 public class BlockTrackListener implements Listener {
 
     private final Plugin plugin = JeffLib.getPlugin();
