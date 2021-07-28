@@ -2,12 +2,14 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.internal.listeners.*;
 
+import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import java.util.Collection;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Main class of the library
@@ -16,7 +18,8 @@ public class JeffLib {
 
     private static Plugin main;
 
-    private static final Random random = new Random();
+    @Getter private static final Random random = new Random();
+    @Getter private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
 
     public static Plugin getPlugin() {
         return main;
@@ -51,14 +54,6 @@ public class JeffLib {
     
     public static class Messages {
         public static final String NOT_INITIALIZED = "\"JeffLib hasn't been initialized. Use JeffLib#init before using this method.\"";
-    }
-
-    public static <T> T getRandomFromCollection(Collection<T> collection) {
-        int index = random.nextInt(collection.size());
-        if(collection instanceof List) {
-            return ((List<T>) collection).get(index);
-        }
-        return (T) collection.toArray()[index];
     }
 
 }

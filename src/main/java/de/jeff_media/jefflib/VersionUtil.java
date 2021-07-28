@@ -15,6 +15,11 @@ import java.util.regex.Pattern;
 /**
  * Proudly stolen from EssentialsX
  */
+
+/**
+ * Deprecated. Use {@link de.jeff_media.jefflib.McVersion} instead
+ * @deprecated
+ */
 @Deprecated
 public final class VersionUtil {
 

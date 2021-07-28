@@ -6,7 +6,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.BoundingBox;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.function.Predicate;
 
 /**
@@ -49,5 +51,15 @@ public class MobUtils {
 
     public static Collection<? extends Entity> getEntities(Block min, Block max, EntityType entityType) {
         return getEntities(min, max, entityType.getEntityClass());
+    }
+
+    public static <E extends Entity> List<E> castEntityList(List<? extends Entity> list, Class<? extends E> desiredClass) {
+        List<E> newList = new ArrayList<>();
+        for(Entity entity : list) {
+            if(desiredClass.isInstance(entity)) {
+                newList.add((E) entity);
+            }
+        }
+        return newList;
     }
 }

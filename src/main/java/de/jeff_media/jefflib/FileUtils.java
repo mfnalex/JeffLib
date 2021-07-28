@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public final class FileUtils {
@@ -14,7 +15,7 @@ public final class FileUtils {
     /**
      * Replaces or creates a file with the given content
      * @param file File to write to
-     * @param lines lines to append
+     * @param lines lines to write
      */
     public static void writeToFile(final File file, final List<String> lines) {
         try {
@@ -52,6 +53,15 @@ public final class FileUtils {
         } catch (final IOException ioException) {
             ioException.printStackTrace();
         }
+    }
+
+    /**
+     * Appends the given lines to the file
+     * @param file File to append to
+     * @param lines lines to append
+     */
+    public static void appendLines(final File file, final Collection<String> lines) {
+        appendLines(file, lines.toArray(new String[lines.size()]));
     }
 
     /**

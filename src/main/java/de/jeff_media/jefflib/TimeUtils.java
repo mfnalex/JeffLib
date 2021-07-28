@@ -34,10 +34,19 @@ public class TimeUtils {
         return ((double) nanoSeconds) / (double) 1000000;
     }
 
+    /**
+     * Converts an amount of milliseconds to tick percentage. E.g. 50 will return 100 and 25 will return 50
+     * @param milliSeconds
+     * @return
+     */
     public static double milliSecondsToTickPercentage(long milliSeconds) {
         return (double) (milliSeconds / milliSecondsPerTick * 100);
     }
 
+    /**
+     * Formats nanoseconds to a human readable format in milliseconds with 4 decimal places
+     * @param nanoSeconds Duration in nanoseconds
+     */
     public static String formatNanoseconds(long nanoSeconds) {
         return String.format(Locale.ROOT,"%.4f ms",nanoSecondsToMilliSecondsDouble(nanoSeconds));
     }
@@ -50,6 +59,13 @@ public class TimeUtils {
         measurements.put(identifier, System.nanoTime());
     }
 
+    /**
+     * Ends the time measurement and optionally prints out the duration in human readable milliseconds
+     * @param identifier Name of the mask to be measured
+     * @param plugin Plugin of which Logger to use
+     * @param sendMessage Whether to send a message
+     * @return Duration in nanoseconds
+     */
     public static long endTimings(String identifier, @Nullable Plugin plugin, boolean sendMessage) {
         long now = System.nanoTime();
         Long then = measurements.get(identifier);
@@ -66,7 +82,7 @@ public class TimeUtils {
     }
 
     /**
-     * Ends the time measurement, prints out the duration in either nanoseconds or milliseconds
+     * Ends the time measurement, prints out the duration in human readable milliseconds
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */
