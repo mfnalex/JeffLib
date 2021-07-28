@@ -1,3 +1,5 @@
+# JeffLib Spigot Library
+
 JeffLib includes a ton of useful methods that you would normally have to write yourself, as well as already
 shaded and relocated other libraries like
 
@@ -37,6 +39,24 @@ JeffLib.init(this);
     <version>3.0.0-SNAPSHOT</version> <!-- The version will only change when there are breaking changes -->
     <scope>compile</scope>
 </dependency>
+```
+
+### Relocation
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-shade-plugin</artifactId>
+    <version>3.1.0</version>
+    <configuration>
+        <relocations>
+            <relocation>
+                <pattern>de.jeff_media.jefflib</pattern>
+                <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
+            </relocation>
+        </relocations>
+    </configuration>
+</plugin>
 ```
 
 ## JavaDocs
