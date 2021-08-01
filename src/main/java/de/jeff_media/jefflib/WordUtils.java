@@ -14,7 +14,11 @@ public class WordUtils {
      */
     public static String getNiceMaterialName(Material mat) {
         StringBuilder builder = new StringBuilder();
-        Arrays.stream(mat.name().split("_")).forEach(word -> builder.append(upperCaseFirstLetterOnly(word)));
+        Iterator<String> iterator = Arrays.stream(mat.name().split("_")).iterator();
+        while(iterator.hasNext()) {
+            builder.append(upperCaseFirstLetterOnly(iterator.next()));
+            if(iterator.hasNext()) builder.append(" ");
+        }
         return builder.toString();
     }
 
