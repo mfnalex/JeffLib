@@ -8,6 +8,14 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class RandomUtils {
 
+    public static boolean chance(double chance) {
+        return getDouble(0,1) <= chance;
+    }
+
+    public static boolean chance100(double chance) {
+        return getDouble(0,100) <= chance;
+    }
+
     /**
      * Returns a double between {@param min} (inclusive) and {@param max} (exclusive)
      * @param min min

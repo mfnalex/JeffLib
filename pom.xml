@@ -6,7 +6,7 @@
     <groupId>de.jeff_media</groupId>
     <name>JeffLib</name>
     <artifactId>JeffLib</artifactId>
-    <version>3.0.0-SNAPSHOT</version>
+    <version>4.0.0-SNAPSHOT</version>
     <description>Library for Spigot plugins</description>
 
     <properties>
@@ -174,12 +174,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>io.papermc</groupId>
             <artifactId>paperlib</artifactId>
             <version>1.0.4</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
 
         <dependency>
             <groupId>de.jeff_media</groupId>
@@ -195,12 +195,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-lang3</artifactId>
             <version>3.12.0</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>

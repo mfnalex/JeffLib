@@ -1,6 +1,6 @@
 package de.jeff_media.jefflib;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 
 /**
  * Provides some methods to print nice formatted texts/banners to console

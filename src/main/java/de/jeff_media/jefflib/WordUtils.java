@@ -11,7 +11,9 @@ public class WordUtils {
      * Turns Material names into a nicer name. E.g. DIAMOND_PICKAXE will return "Diamond Pickaxe"
      * @param mat The Material
      * @return Human readable name
+     * @deprecated Use {@link de.jeff_media.jefflib.MaterialUtils#getNiceMaterialName} instead
      */
+    @Deprecated
     public static String getNiceMaterialName(Material mat) {
         StringBuilder builder = new StringBuilder();
         Iterator<String> iterator = Arrays.stream(mat.name().split("_")).iterator();

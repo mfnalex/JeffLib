@@ -6,6 +6,7 @@ import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +17,13 @@ import java.util.UUID;
  * Methods related to Locations
  */
 public class LocationUtils {
+
+    public static Vector getCoordinatesInsideChunk(Location location) {
+        final int x = location.getBlockX() & 0x000F;
+        final int y = location.getBlockY() & 0x00FF;
+        final int z = location.getBlockZ() & 0x000F;
+        return new Vector(x,y,z);
+    }
 
     /**
      * Gets a Location from a ConfigurationSection.
