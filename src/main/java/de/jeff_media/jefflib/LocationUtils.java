@@ -28,7 +28,7 @@ public class LocationUtils {
     /**
      * Gets a Location from a ConfigurationSection.
      *
-     * The values "x", "y" and "z" must be defined.
+     * The values "x", "y" and "z" must be defined, or "spawn" must be set to true.
      * If no world is given, "world" must be defined as well (the world's name, not UID)
      * "pitch" and "yaw" can be defined, but if so, BOTH have to be defined.
      *
@@ -37,6 +37,13 @@ public class LocationUtils {
      */
     @NotNull
     public static Location getLocationFromSection(ConfigurationSection config, @Nullable World world) throws InvalidLocationDefinitionException {
+        if(config.getBoolean("spawn")) {
+            World world2 = Bukkit.getWorld(config.getString("world"));
+            if(world2 == null) {
+                throw new InvalidLocationDefinitionException("World \""+world+"\" is not found.");
+            }
+            return world2.getSpawnLocation();
+        }
         if(!config.isSet("x") || (!config.isDouble("x") && !config.isInt("x"))) {
             throw new InvalidLocationDefinitionException("\"x\" coordinate not defined or not a number");
         }

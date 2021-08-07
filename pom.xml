@@ -88,22 +88,6 @@
                             <shadedPattern>${project.groupId}.jefflib.CustomBlockData</shadedPattern>
                         </relocation>
                         <relocation>
-                            <pattern>com.google.gson</pattern>
-                            <shadedPattern>${project.groupId}.jefflib.thirdparty.com.google.gson</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.apache.commons.lang3</pattern>
-                            <shadedPattern>${project.groupId}.jefflib.thirdparty.org.apache.commons.lang3</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.intellij.lang.annotations</pattern>
-                            <shadedPattern>${project.groupId}.jefflib.thirdparty.org.intellij.lang.annotations</shadedPattern>
-                        </relocation>
-                        <relocation>
-                            <pattern>org.jetbrains.annotations</pattern>
-                            <shadedPattern>${project.groupId}.jefflib.thirdparty.org.jetbrains.annotations</shadedPattern>
-                        </relocation>
-                        <relocation>
                             <pattern>io.papermc.lib</pattern>
                             <shadedPattern>${project.groupId}.jefflib.thirdparty.io.papermc.paperlib</shadedPattern>
                         </relocation>
@@ -156,7 +140,7 @@
         <dependency>
             <groupId>de.jeff_media</groupId>
             <artifactId>SpigotUpdateChecker</artifactId>
-            <version>1.2.6</version>
+            <version>1.3.0</version>
             <scope>compile</scope>
         </dependency>
 
@@ -201,12 +185,12 @@
             <version>3.12.0</version>
             <scope>compile</scope>
         </dependency>-->
-        <dependency>
+        <!--<dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.6</version>
             <scope>compile</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <distributionManagement>
