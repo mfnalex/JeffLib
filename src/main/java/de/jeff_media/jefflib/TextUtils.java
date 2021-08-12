@@ -17,14 +17,22 @@ import java.util.regex.Pattern;
  */
 public class TextUtils {
 
+    /*
+    TODO:
+    For gradients:
+    <#firstColor> bla bla bla <#/secondColor> bla bla bla <#/thirdColor>
+     */
+
     private static final int MIN_BANNER_WIDTH = 30;
     private static final char BANNER_CHAR = '#';
     private static final char SPACE = ' ';
     private static final String EMPTY = "";
-    private static final String AMPERSAND_HASH_REGEX = "&#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])";
-    private static final Pattern AMPERSAND_HASH_PATTERN = Pattern.compile(AMPERSAND_HASH_REGEX);
-    private static final String XML_LIKE_HASH_REGEX = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
-    private static final Pattern XML_LIKE_HASH_PATTERN = Pattern.compile(XML_LIKE_HASH_REGEX);
+    private static final String REGEX_HEX = "[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]";
+    private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
+    private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
+    private static final String REGEX_XML_LIKE_HASH = "<#("+REGEX_HEX+")>";
+    private static final Pattern PATTERN_XML_LIKE_HASH = Pattern.compile(REGEX_XML_LIKE_HASH);
+    private static final String REGEX_CURLY_HASH =
     private static AtomicReference<Plugin> itemsAdderPlugin = null;
     private static AtomicReference<Plugin> placerholderApiPlugin = null;
 
@@ -78,8 +86,8 @@ public class TextUtils {
      * @return
      */
     public static String color(String text) {
-        text = replaceRegexWithGroup(text, AMPERSAND_HASH_PATTERN, 1, TextUtils::addAmpersandsToHex);
-        text = replaceRegexWithGroup(text, XML_LIKE_HASH_PATTERN, 1, TextUtils::addAmpersandsToHex);
+        text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
+        text = replaceRegexWithGroup(text, PATTERN_XML_LIKE_HASH, 1, TextUtils::addAmpersandsToHex);
         return ChatColor.translateAlternateColorCodes('&', text);
     }
 
