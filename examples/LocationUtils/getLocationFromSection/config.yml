@@ -1,0 +1,13 @@
+# Returns the spawnpoint for "world_the_end"
+location1:
+  world: world_the_end
+  spawn: true
+
+# Returns this exact location
+location2:
+  world: world # optional, when you pass a World instance to the method
+  x: 123.45
+  y: 67.89
+  z: -123.45
+  yaw: 90 # optional
+  pitch: 0 # optional
