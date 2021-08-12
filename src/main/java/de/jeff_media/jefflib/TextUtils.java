@@ -3,7 +3,9 @@ package de.jeff_media.jefflib;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
@@ -24,6 +26,7 @@ public class TextUtils {
     private static final String XML_LIKE_HASH_REGEX = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
     private static final Pattern XML_LIKE_HASH_PATTERN = Pattern.compile(XML_LIKE_HASH_REGEX);
     private static AtomicReference<Plugin> itemsAdderPlugin = null;
+    private static AtomicReference<Plugin> placerholderApiPlugin = null;
 
     /**
      * Prints a banner / headline to console
@@ -81,8 +84,23 @@ public class TextUtils {
     }
 
     public static String format(String text) {
+        return format(text, null);
+    }
+
+    public static String format(String text, @Nullable OfflinePlayer player) {
         text = color(text);
         text = replaceEmojis(text);
+        text = replacePlaceholders(text, player);
+        return text;
+    }
+
+    public static String replacePlaceholders(String text, @Nullable OfflinePlayer player) {
+        if (placerholderApiPlugin == null) {
+            placerholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
+        }
+        if(placerholderApiPlugin.get()!=null) {
+            text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
+        }
         return text;
     }
 }
