@@ -28,11 +28,14 @@ public class TextUtils {
     private static final char SPACE = ' ';
     private static final String EMPTY = "";
     private static final String REGEX_HEX = "[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]";
-    private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
-    private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
+
+    private static final String REGEX_HEX_GRADIENT = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])\\/>(.*?)<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
+    private static final Pattern PATTERN_HEX_GRADIENT = Pattern.compile(REGEX_HEX_GRADIENT);
+
+    //private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
+    //private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
     private static final String REGEX_XML_LIKE_HASH = "<#("+REGEX_HEX+")>";
     private static final Pattern PATTERN_XML_LIKE_HASH = Pattern.compile(REGEX_XML_LIKE_HASH);
-    private static final String REGEX_CURLY_HASH =
     private static AtomicReference<Plugin> itemsAdderPlugin = null;
     private static AtomicReference<Plugin> placerholderApiPlugin = null;
 
@@ -86,9 +89,26 @@ public class TextUtils {
      * @return
      */
     public static String color(String text) {
-        text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
+        //text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
+        text = text.replace("&&","{ampersand}");
+        text = replaceGradients(text);
         text = replaceRegexWithGroup(text, PATTERN_XML_LIKE_HASH, 1, TextUtils::addAmpersandsToHex);
-        return ChatColor.translateAlternateColorCodes('&', text);
+        text = ChatColor.translateAlternateColorCodes('&', text);
+        text = text.replace("{ampersand}","&");
+        return text;
+    }
+
+    private static String replaceGradients(String text) {
+        Matcher matcher = PATTERN_HEX_GRADIENT.matcher(text);
+        StringBuffer sb = new StringBuffer();
+        while(matcher.find()) {
+            HexColor startColor = new HexColor(matcher.group(1));
+            HexColor endColor = new HexColor(matcher.group(3));
+            String partText = matcher.group(2);
+            matcher.appendReplacement(sb,HexColor.applyGradient(partText,startColor, endColor));
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
     public static String format(String text) {
@@ -111,4 +131,5 @@ public class TextUtils {
         }
         return text;
     }
+
 }
