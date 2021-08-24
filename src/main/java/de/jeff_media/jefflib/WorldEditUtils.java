@@ -1,28 +1,52 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.WorldBoundingBox;
-import de.jeff_media.jefflib.exceptions.MissingWorldEditException;
-import org.bukkit.block.Block;
+import de.jeff_media.jefflib.exceptions.MissingPluginException;
+import de.jeff_media.jefflib.internal.blackhole.WorldEditHandler;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.Nullable;
 
+/**
+ * WorldEdit related methods. Can be safely used even when WorldEdit is not installed, as long as you catch the {@link MissingPluginException}
+ */
 public class WorldEditUtils {
 
-    @Nullable
-    public static WorldBoundingBox getSelection(Player player) throws MissingWorldEditException {
+    /**
+     * Checks WorldEdit is installed and enabled
+     * @return true when WorldEdit is installed and enabled, otherwise false
+     */
+    public static boolean isWorldEditInstalled() {
+        return Bukkit.getPluginManager().getPlugin("WorldEdit") != null && Bukkit.getPluginManager().isPluginEnabled("WorldEdit");
+    }
+
+    /**
+     * Returns a {@link WorldBoundingBox} of the player's WorldEdit selection, or null if the player doesn't have any or only an incomplete selection.
+     * <p>
+     * Example usage:
+     *
+     * <pre>
+     * try {
+     *     WorldBoundingBox boundingBox = WorldEditUtils.getSelection(player);
+     *     if(boundingBox==null) {
+     *         player.sendMessage("You don't have any WorldEdit selection, or it is incomplete.");
+     *     } else {
+     *         player.sendMessage("Your WorldEdit selection: " + boundingBox);
+     *     }
+     * } catch (MissingPluginException e) {
+     *     player.sendMessage("WorldEdit is not installed!");
+     * }
+     * </pre>
+     *
+     * @param player Player to check
+     * @return {@link WorldBoundingBox} containing the player's WorldEdit selection, or null if the player doesn't have any or only an incomplete selection.
+     * @throws MissingPluginException Exception thrown when WorldEdit is not installed
+     */
+    public static WorldBoundingBox getSelection(Player player) throws MissingPluginException {
+
         try {
-            com.sk89q.worldedit.bukkit.BukkitPlayer actor = com.sk89q.worldedit.bukkit.BukkitAdapter.adapt(player);
-            com.sk89q.worldedit.session.SessionManager manager = com.sk89q.worldedit.WorldEdit.getInstance().getSessionManager();
-            com.sk89q.worldedit.LocalSession session = manager.get(actor);
-            com.sk89q.worldedit.world.World selectionWorld = session.getSelectionWorld();
-            com.sk89q.worldedit.regions.Region region = session.getSelection(selectionWorld);
-            Block max = com.sk89q.worldedit.bukkit.BukkitAdapter.adapt(player.getWorld(), region.getMaximumPoint()).getBlock();
-            Block min = com.sk89q.worldedit.bukkit.BukkitAdapter.adapt(player.getWorld(), region.getMinimumPoint()).getBlock();
-            return new WorldBoundingBox(player.getWorld(), BoundingBox.of(min, max));
+            return WorldEditHandler.getSelection(player);
         } catch (Throwable throwable) {
-            throwable.printStackTrace();
-            throw new MissingWorldEditException();
+            throw new MissingPluginException("WorldEdit");
         }
     }
 }

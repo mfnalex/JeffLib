@@ -45,7 +45,7 @@ public class PlayerData extends YamlConfiguration {
     /**
      * Saves the data to file
      *
-     * @throws IOException
+     * @throws IOException exception
      */
     public void save() throws IOException {
         save(file);

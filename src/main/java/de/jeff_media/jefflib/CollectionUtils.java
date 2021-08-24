@@ -33,6 +33,7 @@ public class CollectionUtils {
      * @return Copy of the given list, sorted by value
      */
     public static <K, V extends Comparable> Map<K, V> sortByEntry(Map<K, V> map) {
+        //noinspection unchecked
         return map.entrySet().stream()
                 .sorted((e1, e2) -> -e1.getValue().compareTo(e2.getValue()))
                 .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
@@ -65,6 +66,7 @@ public class CollectionUtils {
         if (collection instanceof List) {
             return ((List<T>) collection).get(index);
         }
+        //noinspection unchecked
         return (T) collection.toArray()[index];
     }
 

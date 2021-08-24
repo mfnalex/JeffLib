@@ -24,7 +24,7 @@ public class ItemSerializer {
      *
      * @param itemStack ItemStack
      * @return ItemStack as byte array
-     * @throws IOException
+     * @throws IOException exception
      */
     public static byte[] toBytes(ItemStack itemStack) throws IOException {
         try (ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -40,7 +40,7 @@ public class ItemSerializer {
      *
      * @param itemStack ItemStack
      * @return ItemStack as Base64 String
-     * @throws IOException
+     * @throws IOException exception
      */
     public static String toBase64(ItemStack itemStack) throws IOException {
         return Base64.getEncoder().encodeToString(toBytes(itemStack));
@@ -76,7 +76,7 @@ public class ItemSerializer {
      *
      * @param playerInventory to turn into an array of strings.
      * @return Array of strings: [ main content, armor content ]
-     * @throws IllegalStateException
+     * @throws IllegalStateException exception
      */
     public static String[] playerInventoryToBase64(PlayerInventory playerInventory) throws IllegalStateException {
         //get the main content part, this doesn't return the armor
@@ -95,7 +95,7 @@ public class ItemSerializer {
      *
      * @param items to turn into a Base64 String.
      * @return Base64 string of the items.
-     * @throws IllegalStateException
+     * @throws IllegalStateException exception
      */
     public static String itemStackArrayToBase64(ItemStack[] items) throws IllegalStateException {
         try {
@@ -130,7 +130,7 @@ public class ItemSerializer {
      *
      * @param inventory to serialize
      * @return Base64 string of the provided inventory
-     * @throws IllegalStateException
+     * @throws IllegalStateException exception
      */
     public static String toBase64(Inventory inventory) throws IllegalStateException {
         try {
@@ -165,7 +165,7 @@ public class ItemSerializer {
      *
      * @param data Base64 string of data containing an inventory.
      * @return Inventory created from the Base64 string.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static Inventory inventoryFromBase64(String data) throws IOException {
         try {
@@ -188,13 +188,11 @@ public class ItemSerializer {
     /**
      * Gets an array of ItemStacks from Base64 string.
      * <p>
-     * <p/>
-     * <p>
      * Base off of {@link #fromBase64(String)}.
      *
      * @param data Base64 string to convert to ItemStack array.
      * @return ItemStack array created from the Base64 string.
-     * @throws IOException
+     * @throws IOException exception
      */
     public static ItemStack[] itemStackArrayFromBase64(String data) throws IOException {
         try {

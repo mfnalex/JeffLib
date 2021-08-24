@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib.internal.listeners;
 
 import de.jeff_media.jefflib.events.PlayerScrollEvent;
+import de.jeff_media.jefflib.internal.InternalOnly;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -10,6 +11,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
 /**
  * Listens to PlayerItemHeldEvent and calls the {@link de.jeff_media.jefflib.events.PlayerScrollEvent}
  */
+@InternalOnly
 public class PlayerScrollListener implements Listener {
 
     @EventHandler

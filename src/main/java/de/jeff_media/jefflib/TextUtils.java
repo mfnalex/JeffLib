@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.data.HexColor;
 import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;

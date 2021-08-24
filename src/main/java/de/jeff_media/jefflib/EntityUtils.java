@@ -74,6 +74,7 @@ public class EntityUtils {
         List<E> newList = new ArrayList<>();
         for (Entity entity : list) {
             if (desiredClass.isInstance(entity)) {
+                //noinspection unchecked
                 newList.add((E) entity);
             }
         }

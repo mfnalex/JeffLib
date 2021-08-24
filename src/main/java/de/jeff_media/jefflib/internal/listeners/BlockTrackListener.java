@@ -2,6 +2,7 @@ package de.jeff_media.jefflib.internal.listeners;
 
 import de.jeff_media.jefflib.BlockTracker;
 import de.jeff_media.jefflib.JeffLib;
+import de.jeff_media.jefflib.internal.InternalOnly;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
@@ -16,6 +17,7 @@ import org.bukkit.plugin.Plugin;
 /**
  * Keeps track of player placed blocks
  */
+@InternalOnly
 public class BlockTrackListener implements Listener {
 
     private final Plugin plugin = JeffLib.getPlugin();
