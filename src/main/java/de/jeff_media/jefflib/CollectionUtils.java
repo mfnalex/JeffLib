@@ -1,5 +1,9 @@
 package de.jeff_media.jefflib;
 
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.configuration.file.FileConfiguration;
+
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -58,6 +62,31 @@ public class CollectionUtils {
             return ((List<T>) collection).get(index);
         }
         return (T) collection.toArray()[index];
+    }
+
+    /**
+     * Returns a list of all loaded Worlds from a config's String list. Worlds can be specified by UUID or by name. Missing worlds will be silently ignored.
+     * @param config Configuration file
+     * @param node Path to the string list
+     * @return List containing all worlds specified in the list that are currently loaded
+     */
+    public static List<World> getWorldList(FileConfiguration config, String node) {
+        List<World> list = new ArrayList<>();
+        for(String entry : config.getStringList(node)) {
+            World world = Bukkit.getWorld(entry);
+            if(world == null) {
+                try {
+                    UUID uuid = UUID.fromString(entry);
+                    world = Bukkit.getWorld(uuid);
+                } catch (IllegalArgumentException ignored) {
+
+                }
+            }
+            if(world != null) {
+                list.add(world);
+            }
+        }
+        return list;
     }
 
 }

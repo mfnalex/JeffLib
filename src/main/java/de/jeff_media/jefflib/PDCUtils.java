@@ -15,7 +15,7 @@ import java.util.Set;
 
 /**
  * PersistentDataContainer related methods.
- * @deprecated Draft & unfinished at the moment
+ * @deprecated Draft, unfinished at the moment
  */
 @Deprecated
 public class PDCUtils {

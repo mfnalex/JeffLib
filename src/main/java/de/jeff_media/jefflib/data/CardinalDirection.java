@@ -1,4 +1,4 @@
-package de.jeff_media.jefflib;
+package de.jeff_media.jefflib.data;
 
 /**
  * Represents the 16 cardinal directions (north, north north east, north east, east north east, ...)

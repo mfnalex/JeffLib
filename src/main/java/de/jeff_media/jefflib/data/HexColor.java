@@ -1,8 +1,10 @@
-package de.jeff_media.jefflib;
+package de.jeff_media.jefflib.data;
 
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.Validate;
+
+import java.util.Objects;
 
 /**
  * Represents a hex color code
@@ -200,5 +202,27 @@ public class HexColor {
     public void setB(int b) {
         Validate.inclusiveBetween(0,255,b);
         this.b = b;
+    }
+
+    @Override
+    public String toString() {
+        return "HexColor{" +
+                "r=" + r +
+                ", g=" + g +
+                ", b=" + b +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        HexColor hexColor = (HexColor) o;
+        return r == hexColor.r && g == hexColor.g && b == hexColor.b;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(r, g, b);
     }
 }
