@@ -87,9 +87,8 @@ public class HexColor {
         int g = getSingleValueAtPositionInGradient(start.getG(), end.getG(), colorsNeeded, position);
         int b = getSingleValueAtPositionInGradient(start.getB(), end.getB(), colorsNeeded, position);
 
-        HexColor result = new HexColor(r,g,b);
         //System.out.println(result.toHex());
-        return result;
+        return new HexColor(r,g,b);
     }
 
     /**
@@ -127,9 +126,6 @@ public class HexColor {
         int length = text.length();
         StringBuilder sb = new StringBuilder();
         String nextFormat = "";
-        //System.out.println("Applying gradient");
-        //System.out.println("  Text: " + text);
-        //System.out.println("  Colors: " + start.toHex() + " > " + end.toHex());
         for(int i = 0; i < length; i++) {
             //System.out.println("Current char: " + chars[i]);
             if(nextFormat.length() % 2 == 1) {

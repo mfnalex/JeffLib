@@ -1,7 +1,6 @@
 package de.jeff_media.jefflib;
 
 import org.bukkit.Material;
-import org.bukkit.entity.Entity;
 
 import java.util.*;
 

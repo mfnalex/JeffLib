@@ -1,9 +1,10 @@
 package de.jeff_media.jefflib;
 
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
+
+import java.util.Objects;
 
 /**
  * Experience related methods
@@ -38,7 +39,7 @@ public class ExpUtils {
      * @param xp Amount of experience
      */
     public static void dropExp(final Location location, final int xp) {
-        final ExperienceOrb orb = (ExperienceOrb) location.getWorld().spawnEntity(location, EntityType.EXPERIENCE_ORB);
+        final ExperienceOrb orb = (ExperienceOrb) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.EXPERIENCE_ORB);
         orb.setExperience(xp);
     }
 

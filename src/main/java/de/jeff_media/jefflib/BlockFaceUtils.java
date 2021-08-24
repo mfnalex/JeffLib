@@ -2,9 +2,7 @@ package de.jeff_media.jefflib;
 
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
-import org.bukkit.block.data.Attachable;
 import org.bukkit.block.data.Directional;
-import org.bukkit.block.data.type.Ladder;
 
 import static org.bukkit.block.BlockFace.*;
 
@@ -84,10 +82,10 @@ public class BlockFaceUtils {
     }
 
     /**
-     * Gets the BlockFace of the existing to which the new Block was placed against
-     * @param existing
-     * @param newBlock
-     * @return
+     * Gets the BlockFace of the existing block that must have been right-clicked to place the new Block
+     * @param existing Existing block
+     * @param newBlock New block
+     * @return Existing block's BlockFace that must have been right-clicked to place the new block
      */
     public static BlockFace getPlacedAgainstFace(Block existing, Block newBlock) {
         for(BlockFace blockFace : BlockFace.values()) {

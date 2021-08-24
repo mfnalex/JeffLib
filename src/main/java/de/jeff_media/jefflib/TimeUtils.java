@@ -36,8 +36,8 @@ public class TimeUtils {
 
     /**
      * Converts an amount of milliseconds to tick percentage. E.g. 50 will return 100 and 25 will return 50
-     * @param milliSeconds
-     * @return
+     * @param milliSeconds milliseconds
+     * @return percentage of tick
      */
     public static double milliSecondsToTickPercentage(long milliSeconds) {
         return (double) (milliSeconds / milliSecondsPerTick * 100);

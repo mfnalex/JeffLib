@@ -9,6 +9,8 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
 
+import java.util.Objects;
+
 /**
  * Data class to wrap all information needed to play a sound
  */
@@ -49,7 +51,7 @@ public class SoundData {
      * @param location Location
      */
     public void playToWorld(Location location) {
-        location.getWorld().playSound(location,sound,soundCategory,volume,getFinalPitch());
+        Objects.requireNonNull(location.getWorld()).playSound(location,sound,soundCategory,volume,getFinalPitch());
     }
 
 }

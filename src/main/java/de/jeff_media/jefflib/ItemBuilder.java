@@ -28,7 +28,7 @@ public class ItemBuilder {
 
     /**
      * Creates a new ItemBuilder with the given material and an amount of 1
-     * @param mat
+     * @param mat Material
      */
     public ItemBuilder(Material mat) {
         this(mat, 1);
@@ -45,7 +45,7 @@ public class ItemBuilder {
 
     /**
      * Sets the amount
-     * @param amount
+     * @param amount Amount
      * @return ItemBuilder instance
      */
     public ItemBuilder setAmount(int amount) {

@@ -56,6 +56,7 @@ public class TextUtils {
         return sb.toString();
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static String replaceRegexWithGroup(String text, Pattern pattern, int group, Function<String, String> function) {
         Matcher matcher = pattern.matcher(text);
         StringBuffer sb = new StringBuffer();

@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -43,7 +44,7 @@ public class ParticleUtils {
      */
     public static BukkitRunnable drawHollowCube(Location min, Location max, Player player, Particle particleType, int particleCount) {
         World world = min.getWorld();
-        if (!world.equals(max.getWorld())) {
+        if (!Objects.requireNonNull(world).equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world");
         }
         return drawHollowCube(world, BoundingBox.of(min, max), player, particleType, particleCount);

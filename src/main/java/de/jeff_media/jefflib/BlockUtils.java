@@ -1,15 +1,10 @@
 package de.jeff_media.jefflib;
 
 import org.bukkit.Location;
-import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.function.BiPredicate;
+import java.util.*;
 import java.util.function.Predicate;
 
 /**
@@ -25,7 +20,7 @@ public class BlockUtils {
     public static List<Map.Entry<String, String>> getBlockDataAsEntries(final Block block) {
         List<Map.Entry<String,String>> list = new ArrayList<>();
 
-        String split[] = block.getBlockData().getAsString().split("\\[");
+        String[] split = block.getBlockData().getAsString().split("\\[");
         if(split.length==1) {
             return list;
         }
@@ -51,7 +46,7 @@ public class BlockUtils {
         /**
          * A sphere radius, for example all blocks within a range of X*X*X blocks that are not further away from the center than the given distance
          */
-        SPHERE;
+        SPHERE
     }
 
     /**
@@ -161,7 +156,7 @@ public class BlockUtils {
         for (int x = center.getBlockX()-radius; x<= center.getBlockX()+radius;x++) {
             for (int y = center.getBlockY()-radius; y<= center.getBlockY()+radius;y++) {
                 for (int z = center.getBlockZ()-radius; z<= center.getBlockZ()+radius;z++) {
-                    Block block = center.getWorld().getBlockAt(x, y, z);
+                    Block block = Objects.requireNonNull(center.getWorld()).getBlockAt(x, y, z);
                     if(predicate.test(block)) {
                         blocks.add(block);
                     }

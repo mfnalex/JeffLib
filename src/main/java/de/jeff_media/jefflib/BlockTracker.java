@@ -9,7 +9,6 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 
-import javax.naming.Name;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -45,7 +44,7 @@ public class BlockTracker {
 
     /**
      * Gets a collection containing all tracked materials
-     * @return
+     * @return Collection containing all tracked materials
      */
     public static Collection<Material> getTrackedBlockTypes() {
         return TRACKED_TYPES;

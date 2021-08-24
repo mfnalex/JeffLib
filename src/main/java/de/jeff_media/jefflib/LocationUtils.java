@@ -2,7 +2,6 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.InvalidLocationDefinitionException;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
@@ -11,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
+import java.util.Objects;
 import java.util.UUID;
 
 /**
@@ -43,7 +43,7 @@ public class LocationUtils {
     @NotNull
     public static Location getLocationFromSection(ConfigurationSection config, @Nullable World world) throws InvalidLocationDefinitionException {
         if(config.getBoolean("spawn")) {
-            World world2 = Bukkit.getWorld(config.getString("world"));
+            World world2 = Bukkit.getWorld(Objects.requireNonNull(config.getString("world")));
             if(world2 == null) {
                 throw new InvalidLocationDefinitionException("World \""+world+"\" is not found.");
             }
@@ -136,7 +136,7 @@ public class LocationUtils {
         ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
         int cx = chunkCoordinates.getX();
         int cz = chunkCoordinates.getZ();
-        return location.getWorld().isChunkGenerated(cx,cz);
+        return Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx,cz);
     }
 
     /**
@@ -148,7 +148,7 @@ public class LocationUtils {
         ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
         int cx = chunkCoordinates.getX();
         int cz = chunkCoordinates.getZ();
-        if(!location.getWorld().isChunkGenerated(cx,cz)) return false;
+        if(!Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx,cz)) return false;
         return location.getWorld().isChunkLoaded(cx, cz);
     }
 
@@ -165,7 +165,7 @@ public class LocationUtils {
         double z = loc.getZ();
         double yaw = loc.getYaw();
         double pitch = loc.getPitch();
-        String world = loc.getWorld().getName();
+        String world = Objects.requireNonNull(loc.getWorld()).getName();
         String result = String.format(Locale.ROOT, "x=%.2f, y=%.2f, z=%.2f", x,y,z);
         if(showYawAndPitch) {
             result += String.format(", yaw=%.2f, pitch=%.2f",yaw, pitch);

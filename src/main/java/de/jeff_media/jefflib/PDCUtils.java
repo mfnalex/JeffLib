@@ -48,8 +48,8 @@ public class PDCUtils {
      * @param key Key name
      * @param type Data type
      * @param value Value
-     * @param <T>
-     * @param <Z>
+     * @param <T> primitive data type
+     * @param <Z> complex data type
      */
     public static <T, Z> void set(@NotNull PersistentDataHolder holder,
                                   @NotNull String key,

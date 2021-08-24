@@ -64,7 +64,7 @@ public final class FileUtils {
      * @param lines lines to append
      */
     public static void appendLines(final File file, final Collection<String> lines) {
-        appendLines(file, lines.toArray(new String[lines.size()]));
+        appendLines(file, lines.toArray(new String[0]));
     }
 
     /**

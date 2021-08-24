@@ -17,9 +17,6 @@ public class InventoryUtils {
         for (final int i : event.getRawSlots()) {
             minSlot = Math.min(i, minSlot);
         }
-        if (minSlot < event.getView().getTopInventory().getSize()) {
-            return true;
-        }
-        return false;
+        return minSlot < event.getView().getTopInventory().getSize();
     }
 }

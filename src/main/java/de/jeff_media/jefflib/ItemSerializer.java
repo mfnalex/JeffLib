@@ -48,10 +48,9 @@ public class ItemSerializer {
      * Turns a byte array into an ItemStack
      * @param input byte array
      * @return ItemStack
-     * @throws IOException
      */
     @SneakyThrows
-    public static ItemStack fromBytes(byte[] input) throws IOException {
+    public static ItemStack fromBytes(byte[] input) {
         try (ByteArrayInputStream inputStream = new ByteArrayInputStream(input);
              BukkitObjectInputStream objectInputStream = new BukkitObjectInputStream(inputStream)
         ) {
@@ -63,9 +62,8 @@ public class ItemSerializer {
      * Turns a Base64 String into an ItemStack
      * @param input Base64 String
      * @return ItemStack
-     * @throws IOException
      */
-    public static ItemStack fromBase64(String input) throws IOException {
+    public static ItemStack fromBase64(String input) {
         return fromBytes(Base64.getDecoder().decode(input));
     }
 
@@ -105,8 +103,8 @@ public class ItemSerializer {
             dataOutput.writeInt(items.length);
 
             // Save every element in the list
-            for (int i = 0; i < items.length; i++) {
-                dataOutput.writeObject(items[i]);
+            for (ItemStack item : items) {
+                dataOutput.writeObject(item);
             }
 
             // Serialize that array

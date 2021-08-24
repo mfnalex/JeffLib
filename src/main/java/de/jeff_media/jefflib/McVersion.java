@@ -2,9 +2,6 @@ package de.jeff_media.jefflib;
 
 import org.bukkit.Bukkit;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * Represents a Minecraft version, e.g. "1.16.5"
  */
@@ -69,10 +66,7 @@ public final class McVersion {
         if(getMinor() > minor) {
             return true;
         }
-        if( getPatch() >= patch) {
-            return true;
-        }
-        return false;
+        return getPatch() >= patch;
 
     }
 

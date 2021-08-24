@@ -1,8 +1,5 @@
 package de.jeff_media.jefflib;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
-
 /**
  * Random number related methods
  */

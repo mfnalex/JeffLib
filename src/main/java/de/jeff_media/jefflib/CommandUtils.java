@@ -12,14 +12,11 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
-import java.util.Objects;
 
 /**
  * Command registration related methods
  */
 public class CommandUtils {
-
-    private static final Plugin plugin = JeffLib.getPlugin();
 
     /**
      * Registers a new command
@@ -28,26 +25,26 @@ public class CommandUtils {
      */
     public static void registerCommand(final @Nullable String permission, final String... aliases) {
 
-        if(plugin == null) {
+        if(JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
         }
 
-        final PluginCommand command = getCommand(aliases[0], plugin);
+        final PluginCommand command = getCommand(aliases[0]);
 
         command.setAliases(Arrays.asList(aliases));
         command.setPermission(permission);
 
-        getCommandMap().register(plugin.getDescription().getName(), command);
+        getCommandMap().register(JeffLib.getPlugin().getDescription().getName(), command);
     }
 
-    private static PluginCommand getCommand(final String name, final Plugin plugin) {
+    private static PluginCommand getCommand(final String name) {
         PluginCommand command = null;
 
         try {
             final Constructor<PluginCommand> c = PluginCommand.class.getDeclaredConstructor(String.class, Plugin.class);
             c.setAccessible(true);
 
-            command = c.newInstance(name, plugin);
+            command = c.newInstance(name, JeffLib.getPlugin());
         } catch (final SecurityException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalArgumentException e) {
             e.printStackTrace();
         }

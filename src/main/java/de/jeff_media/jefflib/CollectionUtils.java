@@ -14,12 +14,9 @@ public class CollectionUtils {
      * @param <T> Type
      * @return List of all given elements
      */
+    @SafeVarargs
     public static <T> List<T> createList(T... elements) {
-        ArrayList<T> list = new ArrayList<>();
-        for(T element : elements) {
-            list.add(element);
-        }
-        return list;
+        return new ArrayList<>(Arrays.asList(elements));
     }
 
     /**
