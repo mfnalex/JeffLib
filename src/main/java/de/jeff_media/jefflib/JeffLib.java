@@ -16,6 +16,7 @@ public class JeffLib {
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
+
     private JeffLib() {
     }
 

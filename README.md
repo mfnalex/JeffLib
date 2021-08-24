@@ -44,6 +44,7 @@ JeffLib.init(this);
 ### Relocation
 
 ```xml
+
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>

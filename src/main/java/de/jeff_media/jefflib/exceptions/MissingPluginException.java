@@ -1,7 +1,7 @@
 package de.jeff_media.jefflib.exceptions;
 
 /**
- * Called when a plugin is not installed that is required by a specific API method
+ * Gets thrown when a plugin is not installed that is required by a specific API method
  */
 public class MissingPluginException extends Exception {
 

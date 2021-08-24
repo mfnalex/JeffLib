@@ -25,8 +25,8 @@ public class WorldEditHandler {
             LocalSession session = manager.get(actor);
             World selectionWorld = session.getSelectionWorld();
             Region region = session.getSelection(selectionWorld);
-            Block max = BukkitAdapter.adapt(player.getWorld(),region.getMaximumPoint()).getBlock();
-            Block min = BukkitAdapter.adapt(player.getWorld(),region.getMinimumPoint()).getBlock();
+            Block max = BukkitAdapter.adapt(player.getWorld(), region.getMaximumPoint()).getBlock();
+            Block min = BukkitAdapter.adapt(player.getWorld(), region.getMinimumPoint()).getBlock();
             return new WorldBoundingBox(player.getWorld(), BoundingBox.of(min, max));
         } catch (IncompleteRegionException exception) {
             return null;

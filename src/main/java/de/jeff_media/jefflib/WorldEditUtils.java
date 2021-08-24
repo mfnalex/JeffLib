@@ -13,6 +13,7 @@ public class WorldEditUtils {
 
     /**
      * Checks WorldEdit is installed and enabled
+     *
      * @return true when WorldEdit is installed and enabled, otherwise false
      */
     public static boolean isWorldEditInstalled() {

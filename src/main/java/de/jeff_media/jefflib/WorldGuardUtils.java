@@ -6,7 +6,6 @@ import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
@@ -15,6 +14,7 @@ public class WorldGuardUtils {
 
     /**
      * Gets a collection of all region names at a specific location
+     *
      * @param location Location to check
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
@@ -29,7 +29,16 @@ public class WorldGuardUtils {
 
     /**
      * Checks whether a location is inside a region of the given name/id
-     * @param location Location to check
+     * <p>
+     * Example Usage:
+     *
+     * <pre>
+     *     if(WorldGuardUtils.isInsideRegion(player.getLocation(), "my-region") {
+     *         System.out.println("The player is inside the region \"my-region\"!");
+     *     }
+     * </pre>
+     *
+     * @param location   Location to check
      * @param regionName Name of the region to check
      * @return true when the location is inside the given region, otherwise false
      * @throws MissingPluginException exception
