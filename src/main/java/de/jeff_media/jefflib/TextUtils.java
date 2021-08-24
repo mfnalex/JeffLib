@@ -29,11 +29,11 @@ public class TextUtils {
     private static final String EMPTY = "";
     private static final String REGEX_HEX = "[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]";
 
-    private static final String REGEX_HEX_GRADIENT = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])\\/>(.*?)<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
+    private static final String REGEX_HEX_GRADIENT = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>(.*?)<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
     private static final Pattern PATTERN_HEX_GRADIENT = Pattern.compile(REGEX_HEX_GRADIENT);
 
-    //private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
-    //private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
+    private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
+    private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
     private static final String REGEX_XML_LIKE_HASH = "<#("+REGEX_HEX+")>";
     private static final Pattern PATTERN_XML_LIKE_HASH = Pattern.compile(REGEX_XML_LIKE_HASH);
     private static AtomicReference<Plugin> itemsAdderPlugin = null;
@@ -93,12 +93,16 @@ public class TextUtils {
         text = text.replace("&&","{ampersand}");
         text = replaceGradients(text);
         text = replaceRegexWithGroup(text, PATTERN_XML_LIKE_HASH, 1, TextUtils::addAmpersandsToHex);
+        text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
         text = ChatColor.translateAlternateColorCodes('&', text);
         text = text.replace("{ampersand}","&");
         return text;
     }
 
     private static String replaceGradients(String text) {
+
+        text = text.replaceAll("<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>","<#/$1><#$1>");
+
         Matcher matcher = PATTERN_HEX_GRADIENT.matcher(text);
         StringBuffer sb = new StringBuffer();
         while(matcher.find()) {
@@ -108,7 +112,11 @@ public class TextUtils {
             matcher.appendReplacement(sb,HexColor.applyGradient(partText,startColor, endColor));
         }
         matcher.appendTail(sb);
-        return sb.toString();
+        String result = sb.toString();
+        while(result.matches(".*&x&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]$")) {
+            result = result.substring(0,result.length()-14);
+        }
+        return result;
     }
 
     public static String format(String text) {

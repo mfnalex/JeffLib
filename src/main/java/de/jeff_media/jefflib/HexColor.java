@@ -1,5 +1,7 @@
 package de.jeff_media.jefflib;
 
+import org.bukkit.ChatColor;
+
 public class HexColor {
 
     public int r, g, b;
@@ -62,21 +64,28 @@ public class HexColor {
         int length = text.length();
         StringBuilder sb = new StringBuilder();
         String nextFormat = "";
+        //System.out.println("Applying gradient");
+        //System.out.println("  Text: " + text);
+        //System.out.println("  Colors: " + start.toHex() + " > " + end.toHex());
         for(int i = 0; i < length; i++) {
+            //System.out.println("Current char: " + chars[i]);
             if(nextFormat.length() % 2 == 1) {
                 if(chars[i] == 'r' || chars[i] == 'R') {
-                    sb.append("&r");
+                    //System.out.println("Formatting cleared");
+                    sb.append(ChatColor.translateAlternateColorCodes('&',"&r"));
                     nextFormat = "";
                     continue;
                 }
+                //System.out.println("Found format: " + chars[i]);
                 nextFormat = nextFormat + chars[i];
                 continue;
             }
-            if(chars[i] == '&') {
+            if(chars[i] == '&' || chars[i] == '§') {
                 nextFormat = nextFormat + "&";
                 continue;
             }
-            sb.append(getHexAtPositionInGradient(start,end,length,i).toColorCode()).append(nextFormat+chars[i]);
+            //System.out.println("Next formatting: " + nextFormat);
+            sb.append(getHexAtPositionInGradient(start, end, length, i).toColorCode()).append(ChatColor.translateAlternateColorCodes('&',nextFormat)).append(chars[i]);
             //nextFormat="";
         }
         return sb.toString();

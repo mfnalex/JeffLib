@@ -2,51 +2,49 @@ package de.jeff_media.jefflib;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 /**
  * @deprecated "Draft"
  */
 @Deprecated()
-public class PlayerData {
+public class PlayerData extends YamlConfiguration {
 
-    private final YamlConfiguration yaml;
-    private final OfflinePlayer player;
-    private final JavaPlugin plugin;
+    private final UUID uuid;
     private final File file;
 
-    public PlayerData(OfflinePlayer player, JavaPlugin plugin) {
-        this.player = player;
-        this.plugin = plugin;
-        this.file = getFile(player,plugin);
-        this.yaml = YamlConfiguration.loadConfiguration(file);
+    public PlayerData(OfflinePlayer offlinePlayer) {
+        this(offlinePlayer.getUniqueId());
     }
 
-    private static File getFile(OfflinePlayer player, JavaPlugin plugin) {
-        return new File(new File(plugin.getDataFolder(),"playerdata"),player.getUniqueId()+".yml");
-    }
-
-    public YamlConfiguration get() {
-        return yaml;
+    public PlayerData(UUID uniqueId) {
+        this.uuid = uniqueId;
+        this.file = new File(new File(JeffLib.getPlugin().getDataFolder(),"playerdata"),uniqueId.toString()+".yml");
+        try {
+            load(file);
+        } catch (IOException | InvalidConfigurationException exception) {
+            exception.printStackTrace();
+        }
     }
 
     public void save() throws IOException {
-        yaml.save(file);
+        save(file);
     }
 
     public void saveAsync() {
-        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), () -> {
             try {
                 save();
-            } catch (IOException e) {
-                e.printStackTrace();
+            } catch (IOException exception) {
+                exception.printStackTrace();
             }
         });
     }
-
 }
