@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.MissingPluginException;
+import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.blackhole.WorldGuardHandler;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
@@ -11,6 +12,15 @@ import java.util.Collection;
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
  */
 public class WorldGuardUtils {
+
+    /**
+     * Checks whether WorldGuard is installed and enabled
+     *
+     * @return true when WorldGuard is installed and enabled, otherwise false
+     */
+    public static boolean isWorldGuardInstalled() {
+        return PluginUtils.isInstalledAndEnabled("WorldGuard");
+    }
 
     /**
      * Gets a collection of all region names at a specific location

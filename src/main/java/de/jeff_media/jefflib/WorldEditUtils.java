@@ -2,6 +2,7 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.MissingPluginException;
+import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.blackhole.WorldEditHandler;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -12,12 +13,12 @@ import org.bukkit.entity.Player;
 public class WorldEditUtils {
 
     /**
-     * Checks WorldEdit is installed and enabled
+     * Checks whether WorldEdit is installed and enabled
      *
      * @return true when WorldEdit is installed and enabled, otherwise false
      */
     public static boolean isWorldEditInstalled() {
-        return Bukkit.getPluginManager().getPlugin("WorldEdit") != null && Bukkit.getPluginManager().isPluginEnabled("WorldEdit");
+        return PluginUtils.isInstalledAndEnabled("WorldEdit");
     }
 
     /**
