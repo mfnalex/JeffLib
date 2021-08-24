@@ -9,7 +9,7 @@ import org.bukkit.block.data.type.Ladder;
 import static org.bukkit.block.BlockFace.*;
 
 /**
- * Methods related to BlocKFaces
+ * BlockFace related methods
  */
 public class BlockFaceUtils {
 

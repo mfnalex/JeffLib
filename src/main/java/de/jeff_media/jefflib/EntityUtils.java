@@ -12,9 +12,9 @@ import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Provides methods related to entities
+ * Entity related methods
  */
-public class MobUtils {
+public class EntityUtils {
 
     /**
      * Gets all entities inside {@param min} and {@param max}

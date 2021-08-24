@@ -13,15 +13,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Provides some text related methods
+ * Methods related to color translation, placeholder and emoji application and more
  */
 public class TextUtils {
-
-    /*
-    TODO:
-    For gradients:
-    <#firstColor> bla bla bla <#/secondColor> bla bla bla <#/thirdColor>
-     */
 
     private static final int MIN_BANNER_WIDTH = 30;
     private static final char BANNER_CHAR = '#';
@@ -72,6 +66,11 @@ public class TextUtils {
         return sb.toString();
     }
 
+    /**
+     * Replaces ItemsAdder emojis inside the given text when ItemsAdder is installed
+     * @param text Text to apply emojis to
+     * @return Translated text
+     */
     public static String replaceEmojis(String text) {
         if (itemsAdderPlugin == null) {
             itemsAdderPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("ItemsAdder"));
@@ -83,10 +82,11 @@ public class TextUtils {
     }
 
     /**
-     * Replaces color codes using &. Also supports hex colors using &x&r&r&g&g&b&b, &#rrggbb and <#rrggbb>
+     * Replaces color codes using &. Also supports hex colors using &x&r&r&g&g&b&b, &#rrggbb and <pre><#rrggbb></pre>,
+     * and gradients using <pre><#rrggbb> <#/rrggbb> [<#/rrggbb> ...]</pre>
      *
-     * @param text
-     * @return
+     * @param text Text to translate
+     * @return Translated text
      */
     public static String color(String text) {
         //text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
@@ -119,10 +119,21 @@ public class TextUtils {
         return result;
     }
 
+    /**
+     * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
+     * @param text Text to translate
+     * @return Translated text
+     */
     public static String format(String text) {
         return format(text, null);
     }
 
+    /**
+     * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
+     * @param text Text to translate
+     * @param player Player to apply placeholders for, or null
+     * @return Translated text
+     */
     public static String format(String text, @Nullable OfflinePlayer player) {
         text = color(text);
         text = replaceEmojis(text);
@@ -130,6 +141,12 @@ public class TextUtils {
         return text;
     }
 
+    /**
+     * Replaces PlacerholderAPI placeholders inside the given text, when PlaceholderAPI is installed
+     * @param text Text to translate
+     * @param player Player to translate placeholders for, or null
+     * @return Translated text
+     */
     public static String replacePlaceholders(String text, @Nullable OfflinePlayer player) {
         if (placerholderApiPlugin == null) {
             placerholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));

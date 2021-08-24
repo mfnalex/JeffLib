@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Used to check the MC version
+ * Represents a Minecraft version, e.g. "1.16.5"
  */
 public final class McVersion {
 

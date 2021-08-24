@@ -14,10 +14,15 @@ import java.util.Locale;
 import java.util.UUID;
 
 /**
- * Methods related to Locations
+ * Location related methods
  */
 public class LocationUtils {
 
+    /**
+     * Converts a location to a Vector containing the location's coordinates inside the chunk (rounded to int values)
+     * @param location Location
+     * @return Vector containing the X, Y and Z int values of the location inside its chunk
+     */
     public static Vector getCoordinatesInsideChunk(Location location) {
         final int x = location.getBlockX() & 0x000F;
         final int y = location.getBlockY() & 0x00FF;
@@ -32,8 +37,8 @@ public class LocationUtils {
      * If no world is given, "world" must be defined as well (the world's name, not UID)
      * "pitch" and "yaw" can be defined, but if so, BOTH have to be defined.
      *
-     * @param world
-     * @return
+     * @param world Default world to use when to world is specified in the ConfigurationSection
+     * @return Location parsed from the given configuration section
      */
     @NotNull
     public static Location getLocationFromSection(ConfigurationSection config, @Nullable World world) throws InvalidLocationDefinitionException {

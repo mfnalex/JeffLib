@@ -16,8 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Proudly "stolen" from EssentialsX
- * https://github.com/EssentialsX/Essentials
+ * Reflection related methods, stolen from EssentialsX: https://github.com/EssentialsX/Essentials
  */
 public final class ReflUtils {
     public static final NMSVersion V1_12_R1 = NMSVersion.fromString("v1_12_R1");

@@ -8,8 +8,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.*;
 
+/**
+ * Material related methods
+ */
 public class MaterialUtils {
 
+    /**
+     * Returns the "vanilla namespaced" name for this material, e.g. "block.minecraft.dirt" or "item.minecraft.diamond_hoe"
+     * @param mat Material
+     * @return "Vanilla namespaced" name
+     */
     public static String getMinecraftNamespacedName(Material mat) {
         if(mat.isBlock()) {
             return "block.minecraft." + mat.name().toLowerCase(Locale.ROOT);
@@ -18,6 +26,11 @@ public class MaterialUtils {
         }
     }
 
+    /**
+     * Reads Minecraft's client translation files into a map
+     * @param minecraftTranslationFile Minecraft's client translation file
+     * @return Map mapping all Materials to their translated name
+     */
     public static Map<Material,String> getTranslatedMaterialMap(File minecraftTranslationFile) {
         Gson gson = new Gson();
         Map<Material,String> map = new HashMap<>();

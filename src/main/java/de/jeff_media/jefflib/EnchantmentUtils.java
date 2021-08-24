@@ -4,6 +4,9 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
+/**
+ * Enchantment related methods
+ */
 public class EnchantmentUtils {
 
     /**
@@ -13,7 +16,11 @@ public class EnchantmentUtils {
      * @return Level of the enchantmant, or 0 if not present
      */
     public static int getLevel(ItemStack item, Enchantment enchantment) {
+        if(!item.hasItemMeta()) {
+            return 0;
+        }
         ItemMeta meta = item.getItemMeta();
+        assert meta != null;
         if (meta.hasEnchant(enchantment)) {
             return meta.getEnchantLevel(enchantment);
         }

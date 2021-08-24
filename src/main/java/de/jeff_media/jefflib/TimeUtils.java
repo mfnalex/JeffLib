@@ -9,7 +9,7 @@ import java.util.Locale;
 import java.util.logging.Logger;
 
 /**
- * Provides time related methods, like measuring time and converting nanoseconds to milliseconds, etc.
+ * Time related methods, like measuring time and converting nanoseconds to milliseconds, etc.
  */
 public class TimeUtils {
 
@@ -82,7 +82,7 @@ public class TimeUtils {
     }
 
     /**
-     * Ends the time measurement, prints out the duration in human readable milliseconds
+     * Ends the time measurement, and optionally prints out the duration in human readable milliseconds
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */
@@ -90,6 +90,11 @@ public class TimeUtils {
         return endTimings(identifier,null, sendMessage);
     }
 
+    /**
+     * Ends the time measurement and prints out the duration in human readable milliseconds
+     * @param identifier Name of the task to be measured
+     * @return duration the task took in nanoseconds
+     */
     public static long endTimings(String identifier) {
         return endTimings(identifier, true);
     }

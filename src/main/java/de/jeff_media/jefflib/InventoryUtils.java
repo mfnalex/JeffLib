@@ -3,7 +3,7 @@ package de.jeff_media.jefflib;
 import org.bukkit.event.inventory.InventoryDragEvent;
 
 /**
- * Methods regarding Inventories
+ * Inventory related methods
  */
 public class InventoryUtils {
 

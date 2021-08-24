@@ -1,5 +1,8 @@
 package de.jeff_media.jefflib;
 
+/**
+ * Represents the 16 cardinal directions (north, north north east, north east, east north east, ...)
+ */
 public enum CardinalDirection {
 
     NORTH, NORTH_NORTH_EAST, NORTH_EAST, EAST_NORTH_EAST,
@@ -9,6 +12,11 @@ public enum CardinalDirection {
 
     private static final double WIDTH = 22.5;
 
+    /**
+     * Converts a given yaw value to its cardinal direction
+     * @param yaw Yaw
+     * @return Corresponding cardinal direction
+     */
     public static CardinalDirection fromYaw(double yaw) {
         int index = 0;
         while(true) {
@@ -22,6 +30,11 @@ public enum CardinalDirection {
         }
     }
 
+    /**
+     * Converts an integer between 0 (inclusive) and 16 (inclusive) to its cardinal direction. 0 and 16 both return NORTH.
+     * @param index Index
+     * @return Corresponding cardinal direction
+     */
     public static CardinalDirection fromIndex(int index) {
         switch (index) {
             case 0: case 16: return NORTH;
@@ -44,6 +57,10 @@ public enum CardinalDirection {
         }
     }
 
+    /**
+     * Gets the abbreviated direction name, e.g. "N" for NORTH or "SSE" for SOUTH_SOUTH_EAST
+     * @return Abbreviated name
+     */
     public String getShortName() {
         switch (this) {
             case SOUTH_SOUTH_EAST: return "SSE";

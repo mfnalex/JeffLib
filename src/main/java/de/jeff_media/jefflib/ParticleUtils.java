@@ -11,7 +11,7 @@ import org.bukkit.util.BoundingBox;
 import java.util.Set;
 
 /**
- * Provides particle related methods
+ * Particle related methods
  */
 public class ParticleUtils {
 

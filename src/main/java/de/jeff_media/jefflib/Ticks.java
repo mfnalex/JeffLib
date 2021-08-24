@@ -1,7 +1,7 @@
 package de.jeff_media.jefflib;
 
 /**
- * Provides methods to convert durations into ticks
+ * Converts seconds, minutes or hours to their correseponding amount of ticks
  */
 public class Ticks {
 

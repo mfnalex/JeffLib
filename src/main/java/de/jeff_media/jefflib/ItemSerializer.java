@@ -14,6 +14,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Base64;
 
+/**
+ * Provides methods to serialize and deserialize ItemStacks, ItemStack arrays and Inventories to/from byte arrays and/or base64
+ */
 public class ItemSerializer {
 
     /**

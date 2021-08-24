@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Methods regarding Files.
+ * File related methods
  */
 public final class FileUtils {
 

@@ -14,23 +14,43 @@ import java.util.concurrent.ThreadLocalRandom;
  */
 public class JeffLib {
 
-    @Getter
     private static final Random random = new Random();
-    @Getter
+
+    /**
+     * Returns the ThreadLocalRandom instance.
+     * @return ThreadLocalRandom instance
+     */
+    public static ThreadLocalRandom getThreadLocalRandom() {
+        return threadLocalRandom;
+    }
+
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
 
     private JeffLib() {
     }
 
+    /**
+     * Returns the Plugin instance.
+     * @return Plugin instance
+     */
     public static Plugin getPlugin() {
         return main;
     }
 
+    /**
+     * Returns the Random instance.
+     * @return Random instance
+     */
     public static Random getRandom() {
         return random;
     }
 
+    /**
+     * Initializes the library. Needed for some methods.
+     * @param plugin Plugin instance
+     * @param trackBlocks Whether to use the BlockTracker feature. Only available in 1.16.3 and later.
+     */
     public static void init(Plugin plugin, boolean trackBlocks) {
         main = plugin;
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
@@ -46,7 +66,7 @@ public class JeffLib {
     /**
      * Initializes the Library
      *
-     * @param plugin Main class of your plugin
+     * @param plugin Plugin instance
      */
     public static void init(Plugin plugin) {
         init(plugin, true);
@@ -64,10 +84,6 @@ public class JeffLib {
         } catch (ClassNotFoundException ignored) {
             return false;
         }
-    }
-
-    public static class Messages {
-        public static final String NOT_INITIALIZED = "\"JeffLib hasn't been initialized. Use JeffLib#init before using this method.\"";
     }
 
 }

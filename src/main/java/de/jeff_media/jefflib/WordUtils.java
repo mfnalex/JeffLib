@@ -5,6 +5,9 @@ import org.bukkit.entity.Entity;
 
 import java.util.*;
 
+/**
+ * Word related methods, like capitalization
+ */
 public class WordUtils {
 
     /**

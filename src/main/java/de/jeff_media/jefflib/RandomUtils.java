@@ -4,14 +4,24 @@ import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Provides methods to generate numbers in a certain bound
+ * Random number related methods
  */
 public class RandomUtils {
 
+    /**
+     * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 1 (always true)
+     * @param chance chance to return true (0-1)
+     * @return true when the chance succeeds, otherwise false
+     */
     public static boolean chance(double chance) {
         return getDouble(0,1) <= chance;
     }
 
+    /**
+     * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 100 (always true)
+     * @param chance chance to return true (0-100)
+     * @return true when the chance succeeds, otherwise false
+     */
     public static boolean chance100(double chance) {
         return getDouble(0,100) <= chance;
     }

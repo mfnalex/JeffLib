@@ -51,27 +51,52 @@ public class BlockTracker {
         return TRACKED_TYPES;
     }
 
+    /**
+     * Tracks all materials
+     */
     public static void trackAllBlockTypes() {
         addTrackedBlockTypes(Arrays.asList(Material.values()));
     }
 
+    /**
+     * Clears the list of tracked materials
+     */
     public static void clearTrackedBlockTypes() {
         TRACKED_TYPES.clear();
     }
 
+    /**
+     * Checks whether a given material is already one of the tracked block types.
+     * @param type Material to check
+     * @return true when this material is already tracked, otherwise false
+     */
     public static boolean isTrackedBlockType(Material type) {
         return TRACKED_TYPES.contains(type);
     }
 
+    /**
+     * Removes all given block types from the list of tracked block types
+     * @param types Collection of Materials to stop tracking
+     */
     public static void removeTrackedBlockTypes(Collection<Material> types) {
         TRACKED_TYPES.removeAll(types);
     }
 
+    /**
+     * Checks whether a given block has been placed by a player
+     * @param block Block to check
+     * @return true when the block was player-placed and tracked, otherwise false
+     */
     public static boolean isPlayerPlacedBlock(Block block) {
         PersistentDataContainer playerPlacedPDC = getPlayerPlacedPDC(block.getChunk());
         return playerPlacedPDC.has(getKey(block), PersistentDataType.BYTE);
     }
 
+    /**
+     * Gets a collection of all blocks that have been placed by players inside a chunk
+     * @param chunk Chunk to check
+     * @return Collection of all blocks inside the chunk that have been placed by players
+     */
     public static @NotNull Collection<Block> getPlayerPlacedBlocks(Chunk chunk) {
         Set<Block> blocks = new HashSet<>();
         PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);
@@ -86,6 +111,11 @@ public class BlockTracker {
         return blocks;
     }
 
+    /**
+     * Manually sets whether a player placed this block
+     * @param block Block
+     * @param playerPlaced Whether the block was player placed
+     */
     public static void setPlayerPlacedBlock(Block block, boolean playerPlaced) {
         PersistentDataContainer pdc = block.getChunk().getPersistentDataContainer();
         PersistentDataContainer playerPlacedPDC = getPlayerPlacedPDC(block.getChunk());

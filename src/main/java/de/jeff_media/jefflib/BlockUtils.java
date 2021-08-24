@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 
@@ -12,7 +13,7 @@ import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 /**
- * Methods related to blocks
+ * Block related methods
  */
 public class BlockUtils {
 
@@ -114,19 +115,29 @@ public class BlockUtils {
      * @param radiusType RadiusType
      * @return List of all blocks within the radius
      */
-    private static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType) {
+    public static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType) {
         return getBlocksInRadius(center, radius, radiusType, block -> true);
     }
 
     /**
      * Gets all blocks in a given radius around a center location that matches the given Predicate (see also {@link Predicates}
+     *
+     * Example usage:
+     * <pre>
+     *     // Get all air blocks within a 10x10x10 cuboid radius around the location
+     *     List<Block> nearbyAir = BlockUtils.getBlocksInRadius(location, 10, BlockUtils.RadiusType.CUBOID, BlockUtils.Predicates.AIR);
+     *
+     *     // Get all blocks with a hardness greater than 1 in a spherical radius
+     *     List<Block> nearbyHardBlocks = BlockUtils.getBlocksInRadius(center, 3, RadiusType.SPHERE, block -> block.getType().getHardness()>1);
+     * </pre>
+     *
      * @param center Center Location
      * @param radius Radius
      * @param radiusType RadiusType
      * @param predicate Predicate to check for
      * @return List of all blocks within the radius that match the given Predicate
      */
-    private static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType, Predicate<Block> predicate) {
+    public static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType, Predicate<Block> predicate) {
         switch (radiusType) {
             case SPHERE:
                 return getBlocksInRadiusCircle(center, radius, predicate);

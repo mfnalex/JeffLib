@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.UUID;
 
 /**
- * @deprecated "Draft"
+ * Provides a YamlConfiguration per player.
+ * @deprecated Draft
  */
 @Deprecated()
 public class PlayerData extends YamlConfiguration {
@@ -20,10 +21,18 @@ public class PlayerData extends YamlConfiguration {
     private final UUID uuid;
     private final File file;
 
+    /**
+     * Creates new PlayerData or loads the existing PlayerData for the given OfflinePlayer
+     * @param offlinePlayer player
+     */
     public PlayerData(OfflinePlayer offlinePlayer) {
         this(offlinePlayer.getUniqueId());
     }
 
+    /**
+     * Creates new PlayerData or loads the existing PlayerData for the given UUID
+     * @param uniqueId player's UUID
+     */
     public PlayerData(UUID uniqueId) {
         this.uuid = uniqueId;
         this.file = new File(new File(JeffLib.getPlugin().getDataFolder(),"playerdata"),uniqueId.toString()+".yml");
@@ -34,10 +43,17 @@ public class PlayerData extends YamlConfiguration {
         }
     }
 
+    /**
+     * Saves the data to file
+     * @throws IOException
+     */
     public void save() throws IOException {
         save(file);
     }
 
+    /**
+     * Saves the data to file asynchronously
+     */
     public void saveAsync() {
         Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), () -> {
             try {

@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -12,6 +13,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Set;
 
+/**
+ * PersistentDataContainer related methods.
+ * @deprecated Draft & unfinished at the moment
+ */
+@Deprecated
 public class PDCUtils {
     public static final PersistentDataType<Byte, Byte> BYTE = PersistentDataType.BYTE;
     public static final PersistentDataType<byte[], byte[]> BYTES = PersistentDataType.BYTE_ARRAY;
@@ -24,13 +30,27 @@ public class PDCUtils {
 
     private static final Plugin plugin = JeffLib.getPlugin();
 
+    /**
+     * Creates a NamespacedKey. <b>JeffLib has to be initialized first.</b>
+     * @param key Key name
+     * @return NamespacedKey
+     */
     public static NamespacedKey getKey(String key) {
         if(plugin == null) {
-            throw new IllegalStateException(JeffLib.Messages.NOT_INITIALIZED);
+            throw new JeffLibNotInitializedException();
         }
         return new NamespacedKey(JeffLib.getPlugin(), key);
     }
 
+    /**
+     * Sets a value in the holder's PDC
+     * @param holder Holder
+     * @param key Key name
+     * @param type Data type
+     * @param value Value
+     * @param <T>
+     * @param <Z>
+     */
     public static <T, Z> void set(@NotNull PersistentDataHolder holder,
                                   @NotNull String key,
                                   @NotNull PersistentDataType<T, Z> type,

@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * Methods related to ItemStacks
+ * ItemStack related methods
  */
 public class ItemStackUtils {
 

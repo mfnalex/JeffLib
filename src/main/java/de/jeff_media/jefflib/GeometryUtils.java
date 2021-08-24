@@ -6,8 +6,18 @@ import org.bukkit.World;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * Geometry related methods
+ */
 public class GeometryUtils {
 
+    /**
+     * Gets a set of all Locations in a specific distance describing a hollow cube around two locations
+     * @param min First location
+     * @param max Sedond location
+     * @param distance Distance between locations
+     * @return Set of all locations describing a hollow cube around both locations
+     */
     public static Set<Location> getHollowCube(Location min, Location max, double distance) {
         Set<Location> result = new HashSet<>();
         World world = min.getWorld();
