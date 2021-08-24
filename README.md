@@ -1,7 +1,7 @@
 # JeffLib Spigot Library
 
-JeffLib includes a ton of useful methods that you would normally have to write yourself, as well as already
-shaded and relocated other libraries like
+JeffLib includes a ton of useful methods that you would normally have to write yourself, as well as already shaded and
+relocated other libraries like
 
 - my UpdateChecker
 - my CustomBlockData library
@@ -10,10 +10,10 @@ shaded and relocated other libraries like
 - Apache Commons Lang3
 
 ## Usage
+
 Just include JeffLib as dependency in your pom.xml.
 
-**Note:** JeffLib has to be initialized for some methods to work.
-Just add this to your plugin's `onLoad()` method:
+**Note:** JeffLib has to be initialized for some methods to work. Just add this to your plugin's `onLoad()` method:
 
 ```java
 JeffLib.init(this);

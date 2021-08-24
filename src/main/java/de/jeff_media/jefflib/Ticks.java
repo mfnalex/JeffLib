@@ -7,6 +7,7 @@ public class Ticks {
 
     /**
      * Converts seconds to ticks
+     *
      * @param seconds Duration
      * @return Duration in ticks
      */
@@ -16,6 +17,7 @@ public class Ticks {
 
     /**
      * Converts minutes to ticks
+     *
      * @param minutes Duration
      * @return Duration in ticks
      */
@@ -25,6 +27,7 @@ public class Ticks {
 
     /**
      * Converts hours to ticks
+     *
      * @param hours Duration
      * @return Duration in ticks
      */

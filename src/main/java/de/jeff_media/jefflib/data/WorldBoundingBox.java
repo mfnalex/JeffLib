@@ -19,6 +19,11 @@ public class WorldBoundingBox {
     @NotNull
     private BoundingBox boundingBox;
 
+    public WorldBoundingBox(final @NotNull World world, final @NotNull BoundingBox boundingBox) {
+        this.world = world;
+        this.boundingBox = boundingBox;
+    }
+
     @Override
     public String toString() {
         return "WorldBoundingBox{" +
@@ -38,10 +43,5 @@ public class WorldBoundingBox {
     @Override
     public int hashCode() {
         return Objects.hash(world, boundingBox);
-    }
-
-    public WorldBoundingBox(final @NotNull World world, final @NotNull BoundingBox boundingBox) {
-        this.world = world;
-        this.boundingBox = boundingBox;
     }
 }

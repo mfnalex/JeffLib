@@ -13,6 +13,7 @@ public class BlockFaceUtils {
 
     /**
      * Returns the opposite BlockFace for a given BlockFace. E.g. EAST_NORTH_EAST will return WEST_SOUTH_WEST. SELF will return SELF.
+     *
      * @param face Original BlockFace
      * @return Opposite BlockFace
      */
@@ -71,11 +72,12 @@ public class BlockFaceUtils {
 
     /**
      * Gets the block another block (e.g. a ladder) is attached to
+     *
      * @param directional Block to check
      * @return Block that supports the block to check
      */
     public static Block getSupportingBlock(Block directional) {
-        if(directional.getBlockData() instanceof Directional) {
+        if (directional.getBlockData() instanceof Directional) {
             return directional.getRelative(getOpposite(((Directional) directional.getBlockData()).getFacing()));
         }
         throw new IllegalArgumentException("Provided Block's BlockData is no instanceof Directional");
@@ -83,13 +85,14 @@ public class BlockFaceUtils {
 
     /**
      * Gets the BlockFace of the existing block that must have been right-clicked to place the new Block
+     *
      * @param existing Existing block
      * @param newBlock New block
      * @return Existing block's BlockFace that must have been right-clicked to place the new block
      */
     public static BlockFace getPlacedAgainstFace(Block existing, Block newBlock) {
-        for(BlockFace blockFace : BlockFace.values()) {
-            if(existing.getRelative(blockFace).equals(newBlock)) return blockFace;
+        for (BlockFace blockFace : BlockFace.values()) {
+            if (existing.getRelative(blockFace).equals(newBlock)) return blockFace;
         }
         throw new IllegalArgumentException("No BlockFace found");
     }

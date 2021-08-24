@@ -15,6 +15,7 @@ import java.util.Set;
 
 /**
  * PersistentDataContainer related methods.
+ *
  * @deprecated Draft, unfinished at the moment
  */
 @Deprecated
@@ -32,11 +33,12 @@ public class PDCUtils {
 
     /**
      * Creates a NamespacedKey. <b>JeffLib has to be initialized first.</b>
+     *
      * @param key Key name
      * @return NamespacedKey
      */
     public static NamespacedKey getKey(String key) {
-        if(plugin == null) {
+        if (plugin == null) {
             throw new JeffLibNotInitializedException();
         }
         return new NamespacedKey(JeffLib.getPlugin(), key);
@@ -44,12 +46,13 @@ public class PDCUtils {
 
     /**
      * Sets a value in the holder's PDC
+     *
      * @param holder Holder
-     * @param key Key name
-     * @param type Data type
-     * @param value Value
-     * @param <T> primitive data type
-     * @param <Z> complex data type
+     * @param key    Key name
+     * @param type   Data type
+     * @param value  Value
+     * @param <T>    primitive data type
+     * @param <Z>    complex data type
      */
     public static <T, Z> void set(@NotNull PersistentDataHolder holder,
                                   @NotNull String key,

@@ -11,6 +11,7 @@ import java.util.UUID;
 
 /**
  * Provides a YamlConfiguration per player.
+ *
  * @deprecated Draft
  */
 @Deprecated()
@@ -20,6 +21,7 @@ public class PlayerData extends YamlConfiguration {
 
     /**
      * Creates new PlayerData or loads the existing PlayerData for the given OfflinePlayer
+     *
      * @param offlinePlayer player
      */
     public PlayerData(OfflinePlayer offlinePlayer) {
@@ -28,10 +30,11 @@ public class PlayerData extends YamlConfiguration {
 
     /**
      * Creates new PlayerData or loads the existing PlayerData for the given UUID
+     *
      * @param uniqueId player's UUID
      */
     public PlayerData(UUID uniqueId) {
-        this.file = new File(new File(JeffLib.getPlugin().getDataFolder(),"playerdata"),uniqueId.toString()+".yml");
+        this.file = new File(new File(JeffLib.getPlugin().getDataFolder(), "playerdata"), uniqueId.toString() + ".yml");
         try {
             load(file);
         } catch (IOException | InvalidConfigurationException exception) {
@@ -41,6 +44,7 @@ public class PlayerData extends YamlConfiguration {
 
     /**
      * Saves the data to file
+     *
      * @throws IOException
      */
     public void save() throws IOException {

@@ -21,6 +21,7 @@ public class ItemStackUtils {
 
     /**
      * Merges ItemStacks when possible
+     *
      * @param items ItemStacks to merge
      * @return merged ItemStacks
      */
@@ -41,6 +42,7 @@ public class ItemStackUtils {
 
     /**
      * Returns an array of all given ItemStacks that are neither null nor AIR
+     *
      * @param items ItemStacks to check
      * @return All given ItemStacks that are neither null nor air
      */

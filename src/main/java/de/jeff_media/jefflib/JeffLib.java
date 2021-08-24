@@ -14,23 +14,23 @@ import java.util.concurrent.ThreadLocalRandom;
 public class JeffLib {
 
     private static final Random random = new Random();
+    private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+    private static Plugin main;
+    private JeffLib() {
+    }
 
     /**
      * Returns the ThreadLocalRandom instance.
+     *
      * @return ThreadLocalRandom instance
      */
     public static ThreadLocalRandom getThreadLocalRandom() {
         return threadLocalRandom;
     }
 
-    private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
-    private static Plugin main;
-
-    private JeffLib() {
-    }
-
     /**
      * Returns the Plugin instance.
+     *
      * @return Plugin instance
      */
     public static Plugin getPlugin() {
@@ -39,6 +39,7 @@ public class JeffLib {
 
     /**
      * Returns the Random instance.
+     *
      * @return Random instance
      */
     public static Random getRandom() {
@@ -47,7 +48,8 @@ public class JeffLib {
 
     /**
      * Initializes the library. Needed for some methods.
-     * @param plugin Plugin instance
+     *
+     * @param plugin      Plugin instance
      * @param trackBlocks Whether to use the BlockTracker feature. Only available in 1.16.3 and later.
      */
     public static void init(Plugin plugin, boolean trackBlocks) {

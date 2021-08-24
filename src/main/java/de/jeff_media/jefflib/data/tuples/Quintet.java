@@ -6,12 +6,21 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class Quintet<A,B,C,D,E> extends Quartet<A,B,C,D> {
+public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
     @Getter
     @Setter
     @Nullable
     private E fifth;
+
+    public Quintet(final @Nullable A first,
+                   final @Nullable B second,
+                   final @Nullable C third,
+                   final @Nullable D fourth,
+                   final @Nullable E fifth) {
+        super(first, second, third, fourth);
+        this.fifth = fifth;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -25,14 +34,5 @@ public class Quintet<A,B,C,D,E> extends Quartet<A,B,C,D> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fifth);
-    }
-
-    public Quintet(final @Nullable A first,
-                   final @Nullable B second,
-                   final @Nullable C third,
-                   final @Nullable D fourth,
-                   final @Nullable E fifth) {
-        super(first, second, third, fourth);
-        this.fifth = fifth;
     }
 }

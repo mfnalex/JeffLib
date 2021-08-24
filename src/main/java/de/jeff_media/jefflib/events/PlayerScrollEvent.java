@@ -13,8 +13,10 @@ import org.jetbrains.annotations.NotNull;
 public class PlayerScrollEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
 
-    @Getter private final Player who;
-    @Getter private final ScrollDirection direction;
+    @Getter
+    private final Player who;
+    @Getter
+    private final ScrollDirection direction;
 
     private boolean cancelled = false;
 

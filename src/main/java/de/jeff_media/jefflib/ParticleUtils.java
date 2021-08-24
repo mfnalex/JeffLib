@@ -18,10 +18,11 @@ public class ParticleUtils {
 
     /**
      * Returns a runnable that creates cube-formed particles
-     * @param min first corner
-     * @param max second corner
-     * @param player player to show the particles to
-     * @param particleType particle type
+     *
+     * @param min           first corner
+     * @param max           second corner
+     * @param player        player to show the particles to
+     * @param particleType  particle type
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
@@ -35,10 +36,11 @@ public class ParticleUtils {
 
     /**
      * Returns a runnable that creates cube-formed particles
-     * @param min first corner
-     * @param max second corner
-     * @param player player to show the particles to
-     * @param particleType particle type
+     *
+     * @param min           first corner
+     * @param max           second corner
+     * @param player        player to show the particles to
+     * @param particleType  particle type
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
@@ -52,10 +54,11 @@ public class ParticleUtils {
 
     /**
      * Returns a runnable that creates cube-formed particles
-     * @param world world
-     * @param boundingBox bounding box
-     * @param player player to show the particles to
-     * @param particleType particle type
+     *
+     * @param world         world
+     * @param boundingBox   bounding box
+     * @param player        player to show the particles to
+     * @param particleType  particle type
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */

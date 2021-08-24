@@ -15,6 +15,7 @@ import java.util.Objects;
 
 /**
  * Provides methods to store and retrieve Strings from PersistentDataHolders or ItemStacks
+ *
  * @deprecated Use {@link de.jeff_media.jefflib.PDCUtils} instead
  */
 @Deprecated
@@ -38,7 +39,8 @@ public class NBTAPI {
         return defaultValue;
     }
 
-    public static @Nullable String getNBT(@NotNull PersistentDataHolder holder, @NotNull String key) {
+    public static @Nullable
+    String getNBT(@NotNull PersistentDataHolder holder, @NotNull String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");

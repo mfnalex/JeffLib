@@ -13,6 +13,7 @@ public class ExpUtils {
 
     /**
      * Gets the total amount of XP required to achieve a certain level when starting from 0 levels
+     *
      * @param targetLevel Target level
      * @return Amount of XP required to reach the target level
      */
@@ -24,6 +25,7 @@ public class ExpUtils {
 
     /**
      * Gets the total amount of XP required to reach currentLevel+1 from currentLevel
+     *
      * @param currentLevel Current level
      * @return Amount of XP required to reach currentLevel+1
      */
@@ -35,8 +37,9 @@ public class ExpUtils {
 
     /**
      * Drops an experience orb at the given location with the given amount of experience
+     *
      * @param location Location
-     * @param xp Amount of experience
+     * @param xp       Amount of experience
      */
     public static void dropExp(final Location location, final int xp) {
         final ExperienceOrb orb = (ExperienceOrb) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.EXPERIENCE_ORB);

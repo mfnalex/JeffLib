@@ -18,6 +18,7 @@ public class TimeUtils {
 
     /**
      * Converts nanoseconds to milliseconds
+     *
      * @param nanoSeconds duration in nanoseconds
      * @return duration in milliseconds
      */
@@ -27,6 +28,7 @@ public class TimeUtils {
 
     /**
      * Converts nanoseconds to milliseconds, returning a double value
+     *
      * @param nanoSeconds duration in nanoseconds
      * @return duration in milliseconds
      */
@@ -36,6 +38,7 @@ public class TimeUtils {
 
     /**
      * Converts an amount of milliseconds to tick percentage. E.g. 50 will return 100 and 25 will return 50
+     *
      * @param milliSeconds milliseconds
      * @return percentage of tick
      */
@@ -45,14 +48,16 @@ public class TimeUtils {
 
     /**
      * Formats nanoseconds to a human readable format in milliseconds with 4 decimal places
+     *
      * @param nanoSeconds Duration in nanoseconds
      */
     public static String formatNanoseconds(long nanoSeconds) {
-        return String.format(Locale.ROOT,"%.4f ms",nanoSecondsToMilliSecondsDouble(nanoSeconds));
+        return String.format(Locale.ROOT, "%.4f ms", nanoSecondsToMilliSecondsDouble(nanoSeconds));
     }
 
     /**
      * Starts to record the time, using a String identifier, to be used in conjunction with {@link #endTimings(String)}
+     *
      * @param identifier Name of the task to be measured
      */
     public static void startTimings(String identifier) {
@@ -61,8 +66,9 @@ public class TimeUtils {
 
     /**
      * Ends the time measurement and optionally prints out the duration in human readable milliseconds
-     * @param identifier Name of the mask to be measured
-     * @param plugin Plugin of which Logger to use
+     *
+     * @param identifier  Name of the mask to be measured
+     * @param plugin      Plugin of which Logger to use
      * @param sendMessage Whether to send a message
      * @return Duration in nanoseconds
      */
@@ -74,24 +80,26 @@ public class TimeUtils {
         }
         long nanoseconds = now - then;
         double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
-        if(sendMessage) {
+        if (sendMessage) {
             Logger logger = plugin == null ? Bukkit.getLogger() : plugin.getLogger();
-            logger.info(String.format(Locale.ROOT,"Task \"%s\" finished in %.4f ms", identifier, milliseconds));
+            logger.info(String.format(Locale.ROOT, "Task \"%s\" finished in %.4f ms", identifier, milliseconds));
         }
         return nanoseconds;
     }
 
     /**
      * Ends the time measurement, and optionally prints out the duration in human readable milliseconds
+     *
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */
     public static long endTimings(String identifier, boolean sendMessage) {
-        return endTimings(identifier,null, sendMessage);
+        return endTimings(identifier, null, sendMessage);
     }
 
     /**
      * Ends the time measurement and prints out the duration in human readable milliseconds
+     *
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */

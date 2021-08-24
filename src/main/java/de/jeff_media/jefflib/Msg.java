@@ -13,9 +13,10 @@ public class Msg {
 
     /**
      * Sends a message to the given CommandSender, translating all placeholders / color codes
+     *
      * @param receiver CommandSender to receive the message
-     * @param text Text to send
-     * @param player OfflinePlayer to use for replacing PlaceholderAPI placeholders, or null
+     * @param text     Text to send
+     * @param player   OfflinePlayer to use for replacing PlaceholderAPI placeholders, or null
      */
     public static void send(CommandSender receiver, String text, @Nullable OfflinePlayer player) {
         receiver.sendMessage(TextUtils.format(text, player));
@@ -23,12 +24,13 @@ public class Msg {
 
     /**
      * Sends a message to the given CommandSender, translating all placeholders / color codes. When the CommandSender is instanceof {@link Player}, it will be used to translate the PlaceholderAPI placeholders.
+     *
      * @param receiver CommandSender to receive the message
-     * @param text Text to send
+     * @param text     Text to send
      */
     public static void send(CommandSender receiver, String text) {
-        if(receiver instanceof Player) {
-            receiver.sendMessage(TextUtils.format(text,(Player) receiver));
+        if (receiver instanceof Player) {
+            receiver.sendMessage(TextUtils.format(text, (Player) receiver));
         } else {
             receiver.sendMessage(TextUtils.format(text));
         }

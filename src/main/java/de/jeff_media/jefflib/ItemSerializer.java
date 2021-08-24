@@ -21,6 +21,7 @@ public class ItemSerializer {
 
     /**
      * Turns an ItemStack into a byte array
+     *
      * @param itemStack ItemStack
      * @return ItemStack as byte array
      * @throws IOException
@@ -36,6 +37,7 @@ public class ItemSerializer {
 
     /**
      * Turns an ItemStack into a Base64 String
+     *
      * @param itemStack ItemStack
      * @return ItemStack as Base64 String
      * @throws IOException
@@ -46,6 +48,7 @@ public class ItemSerializer {
 
     /**
      * Turns a byte array into an ItemStack
+     *
      * @param input byte array
      * @return ItemStack
      */
@@ -60,6 +63,7 @@ public class ItemSerializer {
 
     /**
      * Turns a Base64 String into an ItemStack
+     *
      * @param input Base64 String
      * @return ItemStack
      */
@@ -79,15 +83,14 @@ public class ItemSerializer {
         String content = toBase64(playerInventory);
         String armor = itemStackArrayToBase64(playerInventory.getArmorContents());
 
-        return new String[] { content, armor };
+        return new String[]{content, armor};
     }
 
     /**
-     *
      * A method to serialize an {@link ItemStack} array to Base64 String.
-     *
-     * <p />
-     *
+     * <p>
+     * <p/>
+     * <p>
      * Based off of {@link #toBase64(Inventory)}.
      *
      * @param items to turn into a Base64 String.
@@ -117,9 +120,9 @@ public class ItemSerializer {
 
     /**
      * A method to serialize an inventory to Base64 string.
-     *
-     * <p />
-     *
+     * <p>
+     * <p/>
+     * <p>
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
      *
@@ -151,11 +154,10 @@ public class ItemSerializer {
     }
 
     /**
-     *
      * A method to get an {@link Inventory} from an encoded, Base64, string.
-     *
-     * <p />
-     *
+     * <p>
+     * <p/>
+     * <p>
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
      *
@@ -185,9 +187,9 @@ public class ItemSerializer {
 
     /**
      * Gets an array of ItemStacks from Base64 string.
-     *
-     * <p />
-     *
+     * <p>
+     * <p/>
+     * <p>
      * Base off of {@link #fromBase64(String)}.
      *
      * @param data Base64 string to convert to ItemStack array.

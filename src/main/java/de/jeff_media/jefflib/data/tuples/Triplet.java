@@ -6,7 +6,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class Triplet<A,B,C> extends Pair<A,B> {
+public class Triplet<A, B, C> extends Pair<A, B> {
 
     @Getter
     @Setter

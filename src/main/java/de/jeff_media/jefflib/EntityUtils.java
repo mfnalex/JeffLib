@@ -18,6 +18,7 @@ public class EntityUtils {
 
     /**
      * Gets all entities inside {@param min} and {@param max}
+     *
      * @param min first corner
      * @param max second corner
      * @return Collection of all entities inside {@param min} and {@param max}
@@ -33,8 +34,9 @@ public class EntityUtils {
 
     /**
      * Gets all entities inside {@param min} and {@param max} that extend {@param entityClass}
-     * @param min first corner
-     * @param max second corner
+     *
+     * @param min         first corner
+     * @param max         second corner
      * @param entityClass class the entities have to extend
      * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
      */
@@ -51,8 +53,9 @@ public class EntityUtils {
 
     /**
      * Gets all entities inside min and max that belong to the given EntityType
-     * @param min first corner
-     * @param max second corner
+     *
+     * @param min        first corner
+     * @param max        second corner
      * @param entityType desired EntityType
      * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
      */
@@ -62,15 +65,15 @@ public class EntityUtils {
 
     /**
      * Converts a list of Entities to a list of the desired Entity class. All entities not extending the given class will not be included in the returned list.
-     * @param list Existing list of entities
-     * @param desiredClass Desired Entity class
      *
+     * @param list         Existing list of entities
+     * @param desiredClass Desired Entity class
      * @return Collection of all entities of the original list that extend desiredClass
      */
     public static <E extends Entity> List<E> castEntityList(List<? extends Entity> list, Class<? extends E> desiredClass) {
         List<E> newList = new ArrayList<>();
-        for(Entity entity : list) {
-            if(desiredClass.isInstance(entity)) {
+        for (Entity entity : list) {
+            if (desiredClass.isInstance(entity)) {
                 newList.add((E) entity);
             }
         }

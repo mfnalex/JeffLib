@@ -18,7 +18,8 @@ public class ItemBuilder {
 
     /**
      * Creates a new ItemBuilder with the given material and amount
-     * @param mat Material
+     *
+     * @param mat    Material
      * @param amount Amount
      */
     public ItemBuilder(Material mat, int amount) {
@@ -28,6 +29,7 @@ public class ItemBuilder {
 
     /**
      * Creates a new ItemBuilder with the given material and an amount of 1
+     *
      * @param mat Material
      */
     public ItemBuilder(Material mat) {
@@ -36,6 +38,7 @@ public class ItemBuilder {
 
     /**
      * Returns the built ItemStack
+     *
      * @return ItemStack
      */
     public ItemStack build() {
@@ -45,6 +48,7 @@ public class ItemBuilder {
 
     /**
      * Sets the amount
+     *
      * @param amount Amount
      * @return ItemBuilder instance
      */
@@ -55,6 +59,7 @@ public class ItemBuilder {
 
     /**
      * Sets the item's display name
+     *
      * @param name Item's display name (or null)
      * @return ItemBuilder instance
      */
@@ -65,6 +70,7 @@ public class ItemBuilder {
 
     /**
      * Sets the item's lore
+     *
      * @param lore Lore (or null)
      * @return ItemBuilder instance
      */
@@ -75,11 +81,12 @@ public class ItemBuilder {
 
     /**
      * Sets the item's lore
+     *
      * @param lore Lore (or null)
      * @return ItemBuilder instance
      */
     public ItemBuilder setLore(@Nullable String... lore) {
-        if(lore==null) {
+        if (lore == null) {
             meta.setLore(null);
         } else {
             meta.setLore(Arrays.asList(lore));
@@ -89,6 +96,7 @@ public class ItemBuilder {
 
     /**
      * Sets the item's Custom Model Data
+     *
      * @param data Custom Model Data as int value, or null
      * @return ItemBuilder instance
      */

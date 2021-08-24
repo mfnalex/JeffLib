@@ -18,6 +18,7 @@ import java.lang.reflect.Method;
 import java.util.UUID;
 
 // TODO: Check 1.17 compatibility
+
 /**
  * Player head / skull related methods - <b>Might not be 100% compatible with 1.17+ yet</b>
  */

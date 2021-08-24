@@ -9,6 +9,7 @@ public class InventoryUtils {
 
     /**
      * Checks whether the given InventoryDragEvent also affects the top Inventory.
+     *
      * @param event InventoryDragEvent
      * @return true when the given InventoryDragEvent also affects the top inventory
      */

@@ -26,9 +26,9 @@ public class TextUtils {
     private static final String REGEX_HEX_GRADIENT = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>(.*?)<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
     private static final Pattern PATTERN_HEX_GRADIENT = Pattern.compile(REGEX_HEX_GRADIENT);
 
-    private static final String REGEX_AMPERSAND_HASH = "&#("+REGEX_HEX+")";
+    private static final String REGEX_AMPERSAND_HASH = "&#(" + REGEX_HEX + ")";
     private static final Pattern PATTERN_AMPERSAND_HASH = Pattern.compile(REGEX_AMPERSAND_HASH);
-    private static final String REGEX_XML_LIKE_HASH = "<#("+REGEX_HEX+")>";
+    private static final String REGEX_XML_LIKE_HASH = "<#(" + REGEX_HEX + ")>";
     private static final Pattern PATTERN_XML_LIKE_HASH = Pattern.compile(REGEX_XML_LIKE_HASH);
     private static AtomicReference<Plugin> itemsAdderPlugin = null;
     private static AtomicReference<Plugin> placerholderApiPlugin = null;
@@ -69,6 +69,7 @@ public class TextUtils {
 
     /**
      * Replaces ItemsAdder emojis inside the given text when ItemsAdder is installed
+     *
      * @param text Text to apply emojis to
      * @return Translated text
      */
@@ -76,7 +77,7 @@ public class TextUtils {
         if (itemsAdderPlugin == null) {
             itemsAdderPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("ItemsAdder"));
         }
-        if(itemsAdderPlugin.get()!=null) {
+        if (itemsAdderPlugin.get() != null) {
             text = dev.lone.itemsadder.api.FontImages.FontImageWrapper.replaceFontImages(text);
         }
         return text;
@@ -91,37 +92,38 @@ public class TextUtils {
      */
     public static String color(String text) {
         //text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
-        text = text.replace("&&","{ampersand}");
+        text = text.replace("&&", "{ampersand}");
         text = replaceGradients(text);
         text = replaceRegexWithGroup(text, PATTERN_XML_LIKE_HASH, 1, TextUtils::addAmpersandsToHex);
         text = replaceRegexWithGroup(text, PATTERN_AMPERSAND_HASH, 1, TextUtils::addAmpersandsToHex);
         text = ChatColor.translateAlternateColorCodes('&', text);
-        text = text.replace("{ampersand}","&");
+        text = text.replace("{ampersand}", "&");
         return text;
     }
 
     private static String replaceGradients(String text) {
 
-        text = text.replaceAll("<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>","<#/$1><#$1>");
+        text = text.replaceAll("<#\\/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>", "<#/$1><#$1>");
 
         Matcher matcher = PATTERN_HEX_GRADIENT.matcher(text);
         StringBuffer sb = new StringBuffer();
-        while(matcher.find()) {
+        while (matcher.find()) {
             HexColor startColor = new HexColor(matcher.group(1));
             HexColor endColor = new HexColor(matcher.group(3));
             String partText = matcher.group(2);
-            matcher.appendReplacement(sb,HexColor.applyGradient(partText,startColor, endColor));
+            matcher.appendReplacement(sb, HexColor.applyGradient(partText, startColor, endColor));
         }
         matcher.appendTail(sb);
         String result = sb.toString();
-        while(result.matches(".*&x&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]$")) {
-            result = result.substring(0,result.length()-14);
+        while (result.matches(".*&x&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]$")) {
+            result = result.substring(0, result.length() - 14);
         }
         return result;
     }
 
     /**
      * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
+     *
      * @param text Text to translate
      * @return Translated text
      */
@@ -131,7 +133,8 @@ public class TextUtils {
 
     /**
      * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
-     * @param text Text to translate
+     *
+     * @param text   Text to translate
      * @param player Player to apply placeholders for, or null
      * @return Translated text
      */
@@ -144,7 +147,8 @@ public class TextUtils {
 
     /**
      * Replaces PlacerholderAPI placeholders inside the given text, when PlaceholderAPI is installed
-     * @param text Text to translate
+     *
+     * @param text   Text to translate
      * @param player Player to translate placeholders for, or null
      * @return Translated text
      */
@@ -152,7 +156,7 @@ public class TextUtils {
         if (placerholderApiPlugin == null) {
             placerholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
         }
-        if(placerholderApiPlugin.get()!=null) {
+        if (placerholderApiPlugin.get() != null) {
             text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
         }
         return text;

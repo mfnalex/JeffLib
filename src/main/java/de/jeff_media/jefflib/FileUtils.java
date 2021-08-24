@@ -17,7 +17,8 @@ public final class FileUtils {
 
     /**
      * Replaces or creates a file with the given content
-     * @param file File to write to
+     *
+     * @param file  File to write to
      * @param lines lines to write
      */
     public static void writeToFile(final File file, final List<String> lines) {
@@ -34,6 +35,7 @@ public final class FileUtils {
 
     /**
      * Appends the given line to the file
+     *
      * @param file File to append to
      * @param line line to append
      */
@@ -43,7 +45,8 @@ public final class FileUtils {
 
     /**
      * Appends the given lines to the file
-     * @param file File to append to
+     *
+     * @param file  File to append to
      * @param lines lines to append
      */
     public static void appendLines(final File file, final String[] lines) {
@@ -60,7 +63,8 @@ public final class FileUtils {
 
     /**
      * Appends the given lines to the file
-     * @param file File to append to
+     *
+     * @param file  File to append to
      * @param lines lines to append
      */
     public static void appendLines(final File file, final Collection<String> lines) {
@@ -69,14 +73,15 @@ public final class FileUtils {
 
     /**
      * Reads a file from the resources directory and returns it as List of Strings
-     * @param plugin Plugin
+     *
+     * @param plugin   Plugin
      * @param fileName File name
      * @return A list of Strings of the file's contents
      */
     @SneakyThrows
     public static List<String> readFileFromResources(JavaPlugin plugin, final String fileName) {
         final InputStream input = plugin.getResource(fileName);
-        if(input == null) {
+        if (input == null) {
             throw new FileNotFoundException();
         }
         final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));

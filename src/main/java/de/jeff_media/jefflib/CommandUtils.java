@@ -20,12 +20,13 @@ public class CommandUtils {
 
     /**
      * Registers a new command
+     *
      * @param permission Required permission or null
-     * @param aliases Aliases of the command. First element is the "real" command name.
+     * @param aliases    Aliases of the command. First element is the "real" command name.
      */
     public static void registerCommand(final @Nullable String permission, final String... aliases) {
 
-        if(JeffLib.getPlugin() == null) {
+        if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
         }
 

@@ -6,11 +6,20 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
-public class Pair<A,B>  {
+public class Pair<A, B> {
     @Getter
     @Setter
     @Nullable
     private A first;
+    @Getter
+    @Setter
+    @Nullable
+    private B second;
+
+    public Pair(@Nullable final A first, @Nullable final B second) {
+        this.first = first;
+        this.second = second;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -23,16 +32,6 @@ public class Pair<A,B>  {
     @Override
     public int hashCode() {
         return Objects.hash(first, second);
-    }
-
-    @Getter
-    @Setter
-    @Nullable
-    private B second;
-
-    public Pair(@Nullable final A first, @Nullable final B second) {
-        this.first=first;
-        this.second=second;
     }
 
 }
