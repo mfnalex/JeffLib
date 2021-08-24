@@ -6,6 +6,14 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Tuple of five values. If you ever need more, <b>just create your own data class</b> (sigh)
+ * @param <A> Type of first element
+ * @param <B> Type of second element
+ * @param <C> Type of third element
+ * @param <D> Type of fourth element
+ * @param <E> Type of fifth element
+ */
 public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
     @Getter

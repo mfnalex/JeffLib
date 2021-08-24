@@ -44,7 +44,17 @@ public class PlayerScrollEvent extends Event implements Cancellable {
         this.cancelled = cancelled;
     }
 
+    /**
+     * Represents the direction in which the player scrolled
+     */
     public enum ScrollDirection {
-        UP, DOWN
+        /**
+         * Represents scrolling up / to the right
+         */
+        UP,
+        /**
+         * Represents scrolling down / to the left
+         */
+        DOWN
     }
 }

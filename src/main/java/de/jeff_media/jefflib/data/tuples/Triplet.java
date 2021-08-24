@@ -6,6 +6,12 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Tuple of three values
+ * @param <A> Type of first element
+ * @param <B> Type of second element
+ * @param <C> Type of third element
+ */
 public class Triplet<A, B, C> extends Pair<A, B> {
 
     @Getter

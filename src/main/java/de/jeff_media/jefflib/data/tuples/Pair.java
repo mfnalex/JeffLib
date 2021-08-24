@@ -6,6 +6,11 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Tuple of two values
+ * @param <A> Type of first element
+ * @param <B> Type of second element
+ */
 public class Pair<A, B> {
     @Getter
     @Setter

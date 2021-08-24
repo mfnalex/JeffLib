@@ -6,6 +6,13 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
 
+/**
+ * Tuple of four values
+ * @param <A> Type of first element
+ * @param <B> Type of second element
+ * @param <C> Type of third element
+ * @param <D> Type of fourth element
+ */
 public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     @Getter

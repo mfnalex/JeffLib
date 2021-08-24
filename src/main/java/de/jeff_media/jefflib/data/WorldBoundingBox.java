@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
 
+/**
+ * Represents a {@link BoundingBox} linked to a {@link World}
+ */
 public class WorldBoundingBox {
     @Getter
     @Setter
