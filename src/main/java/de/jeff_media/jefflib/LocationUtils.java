@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.InvalidLocationDefinitionException;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -16,7 +17,8 @@ import java.util.UUID;
 /**
  * Location related methods
  */
-public class LocationUtils {
+@UtilityClass
+public final class LocationUtils {
 
     /**
      * Converts a location to a Vector containing the location's coordinates inside the chunk (rounded to int values)
@@ -24,7 +26,7 @@ public class LocationUtils {
      * @param location Location
      * @return Vector containing the X, Y and Z int values of the location inside its chunk
      */
-    public static Vector getCoordinatesInsideChunk(Location location) {
+    public static Vector getCoordinatesInsideChunk(final Location location) {
         final int x = location.getBlockX() & 0x000F;
         final int y = location.getBlockY() & 0x00FF;
         final int z = location.getBlockZ() & 0x000F;
@@ -42,9 +44,9 @@ public class LocationUtils {
      * @return Location parsed from the given configuration section
      */
     @NotNull
-    public static Location getLocationFromSection(ConfigurationSection config, @Nullable World world) throws InvalidLocationDefinitionException {
+    public static Location getLocationFromSection(final ConfigurationSection config, @Nullable World world) {
         if (config.getBoolean("spawn")) {
-            World world2 = Bukkit.getWorld(Objects.requireNonNull(config.getString("world")));
+            final World world2 = Bukkit.getWorld(Objects.requireNonNull(config.getString("world")));
             if (world2 == null) {
                 throw new InvalidLocationDefinitionException("World \"" + world + "\" is not found.");
             }
@@ -53,28 +55,28 @@ public class LocationUtils {
         if (!config.isSet("x") || (!config.isDouble("x") && !config.isInt("x"))) {
             throw new InvalidLocationDefinitionException("\"x\" coordinate not defined or not a number");
         }
-        double x = config.getDouble("x");
+        final double x = config.getDouble("x");
 
         if (!config.isSet("y") || (!config.isDouble("y") && !config.isInt("y"))) {
             throw new InvalidLocationDefinitionException("\"y\" coordinate not defined or not a number");
         }
-        double y = config.getDouble("y");
+        final double y = config.getDouble("y");
 
         if (!config.isSet("z") || (!config.isDouble("z") && !config.isInt("z"))) {
             throw new InvalidLocationDefinitionException("\"z\" coordinate not defined or not a number");
         }
-        double z = config.getDouble("z");
+        final double z = config.getDouble("z");
 
         if (config.isSet("world")) {
-            String worldName = config.getString("world");
+            final String worldName = config.getString("world");
             assert worldName != null;
             if (Bukkit.getWorld(worldName) != null) {
                 world = Bukkit.getWorld(worldName);
             } else {
                 try {
-                    UUID uuid = UUID.fromString(worldName);
+                    final UUID uuid = UUID.fromString(worldName);
                     world = Bukkit.getWorld(uuid);
-                } catch (IllegalArgumentException ignored) {
+                } catch (final IllegalArgumentException ignored) {
 
                 }
             }
@@ -97,12 +99,12 @@ public class LocationUtils {
         if ((!config.isDouble("pitch") && !config.isInt("pitch"))) {
             throw new InvalidLocationDefinitionException("\"pitch\" value is not a valid number");
         }
-        double pitch = config.getDouble("pitch");
+        final double pitch = config.getDouble("pitch");
 
         if ((!config.isDouble("yaw") && !config.isInt("yaw"))) {
             throw new InvalidLocationDefinitionException("\"yaw\" value is not a valid number");
         }
-        double yaw = config.getDouble("yaw");
+        final double yaw = config.getDouble("yaw");
 
         return new Location(world, x, y, z, (float) yaw, (float) pitch);
     }
@@ -113,9 +115,9 @@ public class LocationUtils {
      * @param location Location
      * @return ChunkCoordinates for the given Location
      */
-    public static ChunkCoordinates getChunkCoordinates(Location location) {
-        int cx = location.getBlockX() >> 4;
-        int cz = location.getBlockZ() >> 4;
+    public static ChunkCoordinates getChunkCoordinates(final Location location) {
+        final int cx = location.getBlockX() >> 4;
+        final int cz = location.getBlockZ() >> 4;
         return new ChunkCoordinates(cx, cz);
     }
 
@@ -126,7 +128,7 @@ public class LocationUtils {
      * @param z Z coordinate
      * @return ChunkCoordinates for the given Location
      */
-    public static ChunkCoordinates getChunkCoordinates(int x, int z) {
+    public static ChunkCoordinates getChunkCoordinates(final int x, final int z) {
         return new ChunkCoordinates(x >> 4, z >> 4);
     }
 
@@ -136,10 +138,10 @@ public class LocationUtils {
      * @param location Location
      * @return true when the chunk has been generated, otherwise false
      */
-    public static boolean isChunkGenerated(Location location) {
-        ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
-        int cx = chunkCoordinates.getX();
-        int cz = chunkCoordinates.getZ();
+    public static boolean isChunkGenerated(final Location location) {
+        final ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
+        final int cx = chunkCoordinates.getX();
+        final int cz = chunkCoordinates.getZ();
         return Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx, cz);
     }
 
@@ -149,10 +151,10 @@ public class LocationUtils {
      * @param location Location
      * @return true when the chunk is loaded, otherwise false
      */
-    public static boolean isChunkLoaded(Location location) {
-        ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
-        int cx = chunkCoordinates.getX();
-        int cz = chunkCoordinates.getZ();
+    public static boolean isChunkLoaded(final Location location) {
+        final ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
+        final int cx = chunkCoordinates.getX();
+        final int cz = chunkCoordinates.getZ();
         if (!Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx, cz)) return false;
         return location.getWorld().isChunkLoaded(cx, cz);
     }
@@ -165,13 +167,13 @@ public class LocationUtils {
      * @param showWorld       Whether to include the world's name
      * @return Human readable location string
      */
-    public static String toPrettyString(Location loc, boolean showYawAndPitch, boolean showWorld) {
-        double x = loc.getX();
-        double y = loc.getY();
-        double z = loc.getZ();
-        double yaw = loc.getYaw();
-        double pitch = loc.getPitch();
-        String world = Objects.requireNonNull(loc.getWorld()).getName();
+    public static String toPrettyString(final Location loc, final boolean showYawAndPitch, final boolean showWorld) {
+        final double x = loc.getX();
+        final double y = loc.getY();
+        final double z = loc.getZ();
+        final double yaw = loc.getYaw();
+        final double pitch = loc.getPitch();
+        final String world = Objects.requireNonNull(loc.getWorld()).getName();
         String result = String.format(Locale.ROOT, "x=%.2f, y=%.2f, z=%.2f", x, y, z);
         if (showYawAndPitch) {
             result += String.format(", yaw=%.2f, pitch=%.2f", yaw, pitch);
@@ -185,10 +187,10 @@ public class LocationUtils {
     /**
      * Represents a pair of X,Z chunk coordinates
      */
-    public static class ChunkCoordinates {
+    public static final class ChunkCoordinates {
         private final int x, z;
 
-        public ChunkCoordinates(int x, int z) {
+        public ChunkCoordinates(final int x, final int z) {
             this.x = x;
             this.z = z;
         }

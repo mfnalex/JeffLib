@@ -2,6 +2,7 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
@@ -11,14 +12,12 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Main class of the library, has to be initialized for certain methods to work.
  */
-public class JeffLib {
+@UtilityClass
+public final class JeffLib {
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
-
-    private JeffLib() {
-    }
 
     /**
      * Returns the ThreadLocalRandom instance.
@@ -53,7 +52,7 @@ public class JeffLib {
      * @param plugin      Plugin instance
      * @param trackBlocks Whether to use the BlockTracker feature. Only available in 1.16.3 and later.
      */
-    public static void init(Plugin plugin, boolean trackBlocks) {
+    public static void init(final Plugin plugin, final boolean trackBlocks) {
         main = plugin;
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
         if (trackBlocks) {
@@ -70,7 +69,7 @@ public class JeffLib {
      *
      * @param plugin Plugin instance
      */
-    public static void init(Plugin plugin) {
+    public static void init(final Plugin plugin) {
         init(plugin, true);
     }
 
@@ -83,7 +82,7 @@ public class JeffLib {
         try {
             Class.forName("net.md_5.bungee.api.ChatColor");
             return true;
-        } catch (ClassNotFoundException ignored) {
+        } catch (final ClassNotFoundException ignored) {
             return false;
         }
     }

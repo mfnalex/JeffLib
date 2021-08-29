@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.PluginCommand;
@@ -16,7 +17,8 @@ import java.util.Arrays;
 /**
  * Command registration related methods
  */
-public class CommandUtils {
+@UtilityClass
+public final class CommandUtils {
 
     /**
      * Registers a new command
@@ -24,7 +26,7 @@ public class CommandUtils {
      * @param permission Required permission or null
      * @param aliases    Aliases of the command. First element is the "real" command name.
      */
-    public static void registerCommand(final @Nullable String permission, final String... aliases) {
+    public static void registerCommand(@Nullable final String permission, final String... aliases) {
 
         if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
@@ -42,10 +44,10 @@ public class CommandUtils {
         PluginCommand command = null;
 
         try {
-            final Constructor<PluginCommand> c = PluginCommand.class.getDeclaredConstructor(String.class, Plugin.class);
-            c.setAccessible(true);
+            final Constructor<PluginCommand> constructor = PluginCommand.class.getDeclaredConstructor(String.class, Plugin.class);
+            constructor.setAccessible(true);
 
-            command = c.newInstance(name, JeffLib.getPlugin());
+            command = constructor.newInstance(name, JeffLib.getPlugin());
         } catch (final SecurityException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalArgumentException e) {
             e.printStackTrace();
         }
@@ -58,10 +60,10 @@ public class CommandUtils {
 
         try {
             if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
-                final Field f = SimplePluginManager.class.getDeclaredField("commandMap");
-                f.setAccessible(true);
+                final Field field = SimplePluginManager.class.getDeclaredField("commandMap");
+                field.setAccessible(true);
 
-                commandMap = (CommandMap) f.get(Bukkit.getPluginManager());
+                commandMap = (CommandMap) field.get(Bukkit.getPluginManager());
             }
         } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
             e.printStackTrace();

@@ -2,7 +2,8 @@ package de.jeff_media.jefflib;
 
 
 import lombok.SneakyThrows;
-import org.bukkit.plugin.java.JavaPlugin;
+import lombok.experimental.UtilityClass;
+import org.bukkit.plugin.Plugin;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
@@ -13,6 +14,7 @@ import java.util.List;
 /**
  * File related methods
  */
+@UtilityClass
 public final class FileUtils {
 
     /**
@@ -21,7 +23,7 @@ public final class FileUtils {
      * @param file  File to write to
      * @param lines lines to write
      */
-    public static void writeToFile(final File file, final List<String> lines) {
+    public static void writeToFile(final File file, final Iterable<String> lines) {
         try {
             final Writer output = new OutputStreamWriter(new FileOutputStream(file, false), StandardCharsets.UTF_8);
             for (final String line : lines) {
@@ -79,7 +81,7 @@ public final class FileUtils {
      * @return A list of Strings of the file's contents
      */
     @SneakyThrows
-    public static List<String> readFileFromResources(JavaPlugin plugin, final String fileName) {
+    public static List<String> readFileFromResources(final Plugin plugin, final String fileName) {
         final InputStream input = plugin.getResource(fileName);
         if (input == null) {
             throw new FileNotFoundException();
@@ -106,7 +108,7 @@ public final class FileUtils {
      * @param replace  String for replacement
      * @return true if the file has been changed, otherwise false
      */
-    public static boolean replaceStringsInFile(final File file, final String toSearch, final String replace) throws IOException {
+    public static boolean replaceStringsInFile(final File file, final CharSequence toSearch, final CharSequence replace) throws IOException {
 
         boolean changed = false;
         final BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
@@ -119,7 +121,7 @@ public final class FileUtils {
                 changed = true;
             }
             inputBuffer.append(line);
-            inputBuffer.append('\n');
+            inputBuffer.append(System.lineSeparator());
         }
         bufferedReader.close();
 
@@ -138,9 +140,9 @@ public final class FileUtils {
      * @param path Path as array, e.g. {"mainDirectory","subDirectory","fileName"}
      * @return the File
      */
-    public static File getFile(String... path) {
+    public static File getFile(final String... path) {
         File file = JeffLib.getPlugin().getDataFolder();
-        for (String s : path) {
+        for (final String s : path) {
             file = new File(file, s);
         }
         return file;

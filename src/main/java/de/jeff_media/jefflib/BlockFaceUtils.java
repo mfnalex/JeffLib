@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Directional;
@@ -9,7 +10,8 @@ import static org.bukkit.block.BlockFace.*;
 /**
  * BlockFace related methods
  */
-public class BlockFaceUtils {
+@UtilityClass
+public final class BlockFaceUtils {
 
     /**
      * Returns the opposite BlockFace for a given BlockFace. E.g. EAST_NORTH_EAST will return WEST_SOUTH_WEST. SELF will return SELF.
@@ -17,7 +19,7 @@ public class BlockFaceUtils {
      * @param face Original BlockFace
      * @return Opposite BlockFace
      */
-    public static BlockFace getOpposite(BlockFace face) {
+    public static BlockFace getOpposite(final BlockFace face) {
         switch (face) {
             case UP:
                 return DOWN;
@@ -76,7 +78,7 @@ public class BlockFaceUtils {
      * @param directional Block to check
      * @return Block that supports the block to check
      */
-    public static Block getSupportingBlock(Block directional) {
+    public static Block getSupportingBlock(final Block directional) {
         if (directional.getBlockData() instanceof Directional) {
             return directional.getRelative(getOpposite(((Directional) directional.getBlockData()).getFacing()));
         }
@@ -90,8 +92,8 @@ public class BlockFaceUtils {
      * @param newBlock New block
      * @return Existing block's BlockFace that must have been right-clicked to place the new block
      */
-    public static BlockFace getPlacedAgainstFace(Block existing, Block newBlock) {
-        for (BlockFace blockFace : BlockFace.values()) {
+    public static BlockFace getPlacedAgainstFace(final Block existing, final Block newBlock) {
+        for (final BlockFace blockFace : BlockFace.values()) {
             if (existing.getRelative(blockFace).equals(newBlock)) return blockFace;
         }
         throw new IllegalArgumentException("No BlockFace found");

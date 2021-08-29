@@ -1,8 +1,11 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Converts seconds, minutes or hours to their correseponding amount of ticks
  */
+@UtilityClass
 public class Ticks {
 
     /**

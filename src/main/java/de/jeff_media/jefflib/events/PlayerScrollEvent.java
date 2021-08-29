@@ -10,7 +10,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Gets called when a player scrolls through their hotbar. When cancelled, the main hand slot will not be changed.
  */
-public class PlayerScrollEvent extends Event implements Cancellable {
+public final class PlayerScrollEvent extends Event implements Cancellable {
     private static final HandlerList HANDLERS = new HandlerList();
 
     @Getter
@@ -18,9 +18,9 @@ public class PlayerScrollEvent extends Event implements Cancellable {
     @Getter
     private final ScrollDirection direction;
 
-    private boolean cancelled = false;
+    private boolean cancelled;
 
-    public PlayerScrollEvent(@NotNull Player who, ScrollDirection direction) {
+    public PlayerScrollEvent(@NotNull final Player who, final ScrollDirection direction) {
         this.who = who;
         this.direction = direction;
     }
@@ -40,7 +40,7 @@ public class PlayerScrollEvent extends Event implements Cancellable {
     }
 
     @Override
-    public void setCancelled(boolean cancelled) {
+    public void setCancelled(final boolean cancelled) {
         this.cancelled = cancelled;
     }
 

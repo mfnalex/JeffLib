@@ -1,8 +1,11 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
+
 /**
  * Random number related methods
  */
+@UtilityClass
 public class RandomUtils {
 
     /**
@@ -11,7 +14,7 @@ public class RandomUtils {
      * @param chance chance to return true (0-1)
      * @return true when the chance succeeds, otherwise false
      */
-    public static boolean chance(double chance) {
+    public static boolean chance(final double chance) {
         return getDouble(0, 1) <= chance;
     }
 
@@ -21,7 +24,7 @@ public class RandomUtils {
      * @param chance chance to return true (0-100)
      * @return true when the chance succeeds, otherwise false
      */
-    public static boolean chance100(double chance) {
+    public static boolean chance100(final double chance) {
         return getDouble(0, 100) <= chance;
     }
 
@@ -32,7 +35,7 @@ public class RandomUtils {
      * @param max max (exclusive)
      * @return double between {@param min} (inclusive) and {@param max} (exclusive)
      */
-    public static double getDouble(double min, double max) {
+    public static double getDouble(final double min, final double max) {
         return JeffLib.getThreadLocalRandom().nextDouble(min, max);
     }
 
@@ -43,7 +46,7 @@ public class RandomUtils {
      * @param max max (exclusive)
      * @return int between {@param min} (inclusive) and {@param max} (exclusive)
      */
-    public static int getInt(int min, int max) {
+    public static int getInt(final int min, final int max) {
         return JeffLib.getRandom().nextInt(max - min) + min;
     }
 }

@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
@@ -9,7 +10,8 @@ import java.util.Objects;
 /**
  * Experience related methods
  */
-public class ExpUtils {
+@UtilityClass
+public final class ExpUtils {
 
     /**
      * Gets the total amount of XP required to achieve a certain level when starting from 0 levels

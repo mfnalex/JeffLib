@@ -18,7 +18,7 @@ public enum CardinalDirection {
      * @param yaw Yaw
      * @return Corresponding cardinal direction
      */
-    public static CardinalDirection fromYaw(double yaw) {
+    public static CardinalDirection fromYaw(final double yaw) {
         int index = 0;
         while (true) {
             if (yaw >= -180 - WIDTH / 2 + (index * WIDTH) && yaw <= -180 + WIDTH / 2 + (index * WIDTH)) {
@@ -37,7 +37,7 @@ public enum CardinalDirection {
      * @param index Index
      * @return Corresponding cardinal direction
      */
-    public static CardinalDirection fromIndex(int index) {
+    public static CardinalDirection fromIndex(final int index) {
         switch (index) {
             case 0:
             case 16:

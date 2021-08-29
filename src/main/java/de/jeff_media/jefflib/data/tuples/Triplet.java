@@ -25,11 +25,11 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        Triplet<?, ?, ?> triplet = (Triplet<?, ?, ?>) o;
+        final Triplet<?, ?, ?> triplet = (Triplet<?, ?, ?>) o;
         return Objects.equals(third, triplet.third);
     }
 

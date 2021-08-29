@@ -12,7 +12,7 @@ import java.util.List;
 /**
  * Provides a builder for ItemStacks
  */
-public class ItemBuilder {
+public final class ItemBuilder {
     private final ItemStack item;
     private final ItemMeta meta;
 
@@ -22,7 +22,7 @@ public class ItemBuilder {
      * @param mat    Material
      * @param amount Amount
      */
-    public ItemBuilder(Material mat, int amount) {
+    public ItemBuilder(final Material mat, final int amount) {
         item = new ItemStack(mat, amount);
         meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(mat);
     }
@@ -32,7 +32,7 @@ public class ItemBuilder {
      *
      * @param mat Material
      */
-    public ItemBuilder(Material mat) {
+    public ItemBuilder(final Material mat) {
         this(mat, 1);
     }
 
@@ -52,7 +52,7 @@ public class ItemBuilder {
      * @param amount Amount
      * @return ItemBuilder instance
      */
-    public ItemBuilder setAmount(int amount) {
+    public ItemBuilder setAmount(final int amount) {
         item.setAmount(amount);
         return this;
     }
@@ -63,7 +63,7 @@ public class ItemBuilder {
      * @param name Item's display name (or null)
      * @return ItemBuilder instance
      */
-    public ItemBuilder setName(@Nullable String name) {
+    public ItemBuilder setName(@Nullable final String name) {
         meta.setDisplayName(name);
         return this;
     }
@@ -74,7 +74,7 @@ public class ItemBuilder {
      * @param lore Lore (or null)
      * @return ItemBuilder instance
      */
-    public ItemBuilder setLore(@Nullable List<String> lore) {
+    public ItemBuilder setLore(@Nullable final List<String> lore) {
         meta.setLore(lore);
         return this;
     }
@@ -85,7 +85,7 @@ public class ItemBuilder {
      * @param lore Lore (or null)
      * @return ItemBuilder instance
      */
-    public ItemBuilder setLore(@Nullable String... lore) {
+    public ItemBuilder setLore(@Nullable final String... lore) {
         if (lore == null) {
             meta.setLore(null);
         } else {
@@ -100,7 +100,7 @@ public class ItemBuilder {
      * @param data Custom Model Data as int value, or null
      * @return ItemBuilder instance
      */
-    public ItemBuilder setCustomModelData(@Nullable Integer data) {
+    public ItemBuilder setCustomModelData(@Nullable final Integer data) {
         meta.setCustomModelData(data);
         return this;
     }

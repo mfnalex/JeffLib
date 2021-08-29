@@ -1,12 +1,14 @@
 package de.jeff_media.jefflib;
 
 import lombok.Getter;
+import lombok.experimental.UtilityClass;
 import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.Validate;
 
 /**
  * GUI related methods
  */
-public class GUIUtils {
+@UtilityClass
+public final class GUIUtils {
 
     /**
      * Converts a slot number to a {@link MenuPosition}
@@ -16,8 +18,8 @@ public class GUIUtils {
      */
     public static MenuPosition slotToPosition(final int slot) {
         Validate.inclusiveBetween(0, 54, slot);
-        int row = Math.floorDiv(slot, 9);
-        int column = row * 9;
+        final int row = Math.floorDiv(slot, 9);
+        final int column = row * 9;
         return new MenuPosition(row + 1, column + 1);
     }
 
@@ -34,14 +36,14 @@ public class GUIUtils {
     /**
      * Represents a position inside a GUI
      */
-    public static class MenuPosition {
+    public static final class MenuPosition {
         @Getter
         private final int row;
 
         @Getter
         private final int column;
 
-        public MenuPosition(int row, int column) {
+        public MenuPosition(final int row, final int column) {
             Validate.inclusiveBetween(1, 6, row);
             Validate.inclusiveBetween(1, 9, column);
             this.row = row;

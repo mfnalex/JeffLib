@@ -6,9 +6,9 @@ import org.bukkit.configuration.ConfigurationSection;
 /**
  * Gets thrown when a location definition inside a ConfigurationSection is invalid. See {@link de.jeff_media.jefflib.LocationUtils#getLocationFromSection(ConfigurationSection, World)}
  */
-public class InvalidLocationDefinitionException extends IllegalArgumentException {
+public final class InvalidLocationDefinitionException extends IllegalArgumentException {
 
-    public InvalidLocationDefinitionException(String errorMessage) {
+    public InvalidLocationDefinitionException(final String errorMessage) {
         super(errorMessage);
     }
 

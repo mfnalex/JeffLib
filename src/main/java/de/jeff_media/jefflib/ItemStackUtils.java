@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
@@ -13,9 +14,10 @@ import java.util.List;
 /**
  * ItemStack related methods
  */
-public class ItemStackUtils {
+@UtilityClass
+public final class ItemStackUtils {
 
-    public static boolean isNullOrEmpty(ItemStack itemStack) {
+    public static boolean isNullOrEmpty(final ItemStack itemStack) {
         return itemStack == null || itemStack.getType() == Material.AIR || itemStack.getAmount() == 1;
     }
 
@@ -28,7 +30,7 @@ public class ItemStackUtils {
     public static List<ItemStack> mergeItemStacks(ItemStack... items) {
         HashMap<Integer, ItemStack> overflow = null;
         items = getNonNullItems(items);
-        List<ItemStack> mergedItems = new ArrayList<>();
+        final List<ItemStack> mergedItems = new ArrayList<>();
         Inventory inventory;
 
         do {
@@ -46,9 +48,9 @@ public class ItemStackUtils {
      * @param items ItemStacks to check
      * @return All given ItemStacks that are neither null nor air
      */
-    public static ItemStack[] getNonNullItems(ItemStack... items) {
-        ArrayList<ItemStack> nonNullItems = new ArrayList<>();
-        for (ItemStack item : items) {
+    public static ItemStack[] getNonNullItems(final ItemStack... items) {
+        final ArrayList<ItemStack> nonNullItems = new ArrayList<>();
+        for (final ItemStack item : items) {
             if (!isNullOrEmpty(item)) nonNullItems.add(item);
         }
         return nonNullItems.toArray(new ItemStack[0]);

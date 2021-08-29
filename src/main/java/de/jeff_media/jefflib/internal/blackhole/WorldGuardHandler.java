@@ -7,20 +7,22 @@ import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import de.jeff_media.jefflib.internal.InternalOnly;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @InternalOnly
-public class WorldGuardHandler {
+@UtilityClass
+public final class WorldGuardHandler {
 
-    public static List<String> getRegionsAtLocation(Location location) {
-        List<String> regionList = new ArrayList<>();
-        RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
-        RegionQuery query = container.createQuery();
-        ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(location));
-        for (ProtectedRegion region : set.getRegions()) {
+    public static List<String> getRegionsAtLocation(final Location location) {
+        final List<String> regionList = new ArrayList<>();
+        final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
+        final RegionQuery query = container.createQuery();
+        final ApplicableRegionSet set = query.getApplicableRegions(BukkitAdapter.adapt(location));
+        for (final ProtectedRegion region : set.getRegions()) {
             regionList.add(region.getId());
         }
         return regionList;

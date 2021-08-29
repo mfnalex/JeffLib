@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
@@ -14,7 +15,8 @@ import java.util.function.Predicate;
 /**
  * Entity related methods
  */
-public class EntityUtils {
+@UtilityClass
+public final class EntityUtils {
 
     /**
      * Gets all entities inside {@param min} and {@param max}
@@ -23,12 +25,12 @@ public class EntityUtils {
      * @param max second corner
      * @return Collection of all entities inside {@param min} and {@param max}
      */
-    public static Collection<Entity> getEntities(Block min, Block max) {
-        World world = min.getWorld();
+    public static Collection<Entity> getEntities(final Block min, final Block max) {
+        final World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world!");
         }
-        BoundingBox box = BoundingBox.of(min, max);
+        final BoundingBox box = BoundingBox.of(min, max);
         return world.getNearbyEntities(box);
     }
 
@@ -40,13 +42,13 @@ public class EntityUtils {
      * @param entityClass class the entities have to extend
      * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
      */
-    public static Collection<? extends Entity> getEntities(Block min, Block max, Class<? extends Entity> entityClass) {
-        World world = min.getWorld();
+    public static Collection<? extends Entity> getEntities(final Block min, final Block max, final Class<? extends Entity> entityClass) {
+        final World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world!");
         }
-        BoundingBox box = BoundingBox.of(min, max);
-        Collection<? extends Entity> entities = world.getEntitiesByClass(entityClass);
+        final BoundingBox box = BoundingBox.of(min, max);
+        final Collection<? extends Entity> entities = world.getEntitiesByClass(entityClass);
         entities.removeIf((Predicate<Entity>) entity -> !box.contains(entity.getLocation().toVector()));
         return entities;
     }
@@ -59,7 +61,7 @@ public class EntityUtils {
      * @param entityType desired EntityType
      * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
      */
-    public static Collection<? extends Entity> getEntities(Block min, Block max, EntityType entityType) {
+    public static Collection<? extends Entity> getEntities(final Block min, final Block max, final EntityType entityType) {
         return getEntities(min, max, entityType.getEntityClass());
     }
 
@@ -70,9 +72,9 @@ public class EntityUtils {
      * @param desiredClass Desired Entity class
      * @return Collection of all entities of the original list that extend desiredClass
      */
-    public static <E extends Entity> List<E> castEntityList(List<? extends Entity> list, Class<? extends E> desiredClass) {
-        List<E> newList = new ArrayList<>();
-        for (Entity entity : list) {
+    public static <E extends Entity> List<E> castEntityList(final Iterable<? extends Entity> list, final Class<? extends E> desiredClass) {
+        final List<E> newList = new ArrayList<>();
+        for (final Entity entity : list) {
             if (desiredClass.isInstance(entity)) {
                 //noinspection unchecked
                 newList.add((E) entity);

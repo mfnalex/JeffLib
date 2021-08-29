@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.World;
@@ -14,7 +15,8 @@ import java.util.Set;
 /**
  * Particle related methods
  */
-public class ParticleUtils {
+@UtilityClass
+public final class ParticleUtils {
 
     /**
      * Returns a runnable that creates cube-formed particles
@@ -26,8 +28,8 @@ public class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(Block min, Block max, Player player, Particle particleType, int particleCount) {
-        World world = min.getWorld();
+    public static BukkitRunnable drawHollowCube(final Block min, final Block max, final Player player, final Particle particleType, final int particleCount) {
+        final World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world");
         }
@@ -44,8 +46,8 @@ public class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(Location min, Location max, Player player, Particle particleType, int particleCount) {
-        World world = min.getWorld();
+    public static BukkitRunnable drawHollowCube(final Location min, final Location max, final Player player, final Particle particleType, final int particleCount) {
+        final World world = min.getWorld();
         if (!Objects.requireNonNull(world).equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world");
         }
@@ -62,14 +64,14 @@ public class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(World world, BoundingBox boundingBox, Player player, Particle particleType, int particleCount) {
-        Set<Location> points = GeometryUtils.getHollowCube(boundingBox.getMin().toLocation(world), boundingBox.getMax().toLocation(world), 0.5);
+    public static BukkitRunnable drawHollowCube(final World world, final BoundingBox boundingBox, final Player player, final Particle particleType, final int particleCount) {
+        final Set<Location> points = GeometryUtils.getHollowCube(boundingBox.getMin().toLocation(world), boundingBox.getMax().toLocation(world), 0.5);
         return new BukkitRunnable() {
-            int count = 0;
+            int count;
 
             @Override
             public void run() {
-                for (Location location : points) {
+                for (final Location location : points) {
                     player.spawnParticle(particleType, location, particleCount);
                 }
                 count++;

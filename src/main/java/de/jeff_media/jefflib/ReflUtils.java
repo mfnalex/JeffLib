@@ -4,6 +4,7 @@ import com.google.common.base.Objects;
 import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 
 import java.lang.reflect.Constructor;
@@ -18,6 +19,8 @@ import java.util.regex.Pattern;
 /**
  * Reflection related methods, stolen from EssentialsX: https://github.com/EssentialsX/Essentials
  */
+@SuppressWarnings("NonThreadSafeLazyInitialization")
+@UtilityClass
 public final class ReflUtils {
     public static final NMSVersion V1_12_R1 = NMSVersion.fromString("v1_12_R1");
     public static final NMSVersion V1_9_R1 = NMSVersion.fromString("v1_9_R1");
@@ -30,9 +33,6 @@ public final class ReflUtils {
     private static final Table<Class<?>, ConstructorParams, Constructor<?>> constructorParamCache = HashBasedTable.create();
     private static NMSVersion nmsVersionObject;
     private static String nmsVersion;
-
-    private ReflUtils() {
-    }
 
     public static String getNMSVersion() {
         if (nmsVersion == null) {
@@ -148,7 +148,7 @@ public final class ReflUtils {
     }
 
     // Adapted from @minecrafter
-    private static class MethodParams {
+    private static final class MethodParams {
         private final String name;
         private final Class<?>[] params;
 
@@ -197,7 +197,7 @@ public final class ReflUtils {
     }
 
     // Necessary for deepequals
-    private static class ConstructorParams {
+    private static final class ConstructorParams {
         private final Class<?>[] params;
 
         ConstructorParams(final Class<?>[] params) {
@@ -241,7 +241,7 @@ public final class ReflUtils {
             Preconditions.checkNotNull(string, "string cannot be null.");
             Matcher matcher = VERSION_PATTERN.matcher(string);
             if (!matcher.matches()) {
-                if (!Bukkit.getName().equals("Essentials Fake Server")) {
+                if (!"Essentials Fake Server".equals(Bukkit.getName())) {
                     throw new IllegalArgumentException(string + " is not in valid version format. e.g. v1_10_R1");
                 }
                 matcher = VERSION_PATTERN.matcher(V1_12_R1.toString());

@@ -12,12 +12,12 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
  * Listens to PlayerItemHeldEvent and calls the {@link de.jeff_media.jefflib.events.PlayerScrollEvent}
  */
 @InternalOnly
-public class PlayerScrollListener implements Listener {
+public final class PlayerScrollListener implements Listener {
 
     @EventHandler
-    public void onScroll(PlayerItemHeldEvent event) {
-        Player who = event.getPlayer();
-        PlayerScrollEvent.ScrollDirection direction;
+    public void onScroll(final PlayerItemHeldEvent event) {
+        final Player who = event.getPlayer();
+        final PlayerScrollEvent.ScrollDirection direction;
         if (event.getPreviousSlot() == 8 && event.getNewSlot() == 0) {
             direction = PlayerScrollEvent.ScrollDirection.UP;
         } else if (event.getPreviousSlot() == 0 && event.getNewSlot() == 8) {
@@ -27,7 +27,7 @@ public class PlayerScrollListener implements Listener {
         } else {
             direction = PlayerScrollEvent.ScrollDirection.DOWN;
         }
-        PlayerScrollEvent scrollEvent = new PlayerScrollEvent(who, direction);
+        final PlayerScrollEvent scrollEvent = new PlayerScrollEvent(who, direction);
         Bukkit.getPluginManager().callEvent(scrollEvent);
         if (scrollEvent.isCancelled()) {
             event.setCancelled(true);

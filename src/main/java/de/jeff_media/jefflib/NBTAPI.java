@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -19,9 +20,10 @@ import java.util.Objects;
  * @deprecated Use {@link de.jeff_media.jefflib.PDCUtils} instead
  */
 @Deprecated
+@UtilityClass
 public class NBTAPI {
 
-    public static @NotNull String getNBT(@NotNull PersistentDataHolder holder, @NotNull String key, @NotNull String defaultValue) {
+    public static @NotNull String getNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key, @NotNull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(holder, key)) {
@@ -30,7 +32,7 @@ public class NBTAPI {
         return defaultValue;
     }
 
-    public static @NotNull String getNBT(@NotNull ItemStack item, @NotNull String key, @NotNull String defaultValue) {
+    public static @NotNull String getNBT(@NotNull final ItemStack item, @NotNull final String key, @NotNull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(item, key)) {
@@ -39,21 +41,23 @@ public class NBTAPI {
         return defaultValue;
     }
 
-    public static @Nullable
-    String getNBT(@NotNull PersistentDataHolder holder, @NotNull String key) {
+    @Nullable
+    public static
+    String getNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
-        PersistentDataContainer pdc = holder.getPersistentDataContainer();
-        NamespacedKey namespacedKey = new NamespacedKey(JeffLib.getPlugin(), key);
+        final PersistentDataContainer pdc = holder.getPersistentDataContainer();
+        final NamespacedKey namespacedKey = new NamespacedKey(JeffLib.getPlugin(), key);
         if (pdc.has(namespacedKey, PersistentDataType.STRING)) {
             return pdc.get(namespacedKey, PersistentDataType.STRING);
         }
         return null;
     }
 
-    public static @Nullable
-    String getNBT(@NotNull ItemStack item, @NotNull String key) {
+    @Nullable
+    public static
+    String getNBT(@NotNull final ItemStack item, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -61,77 +65,77 @@ public class NBTAPI {
         return getNBT(item.getItemMeta(), key);
     }
 
-    public static void addNBT(@NotNull PersistentDataHolder holder, @NotNull String key, @NotNull String value) {
+    public static void addNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key, @NotNull final String value) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
         Objects.requireNonNull(key, "Value must not be null");
-        PersistentDataContainer pdc = holder.getPersistentDataContainer();
-        NamespacedKey namespacedKey = new NamespacedKey(JeffLib.getPlugin(), key);
+        final PersistentDataContainer pdc = holder.getPersistentDataContainer();
+        final NamespacedKey namespacedKey = new NamespacedKey(JeffLib.getPlugin(), key);
         pdc.set(namespacedKey, PersistentDataType.STRING, value);
     }
 
-    public static void addNBT(@NotNull ItemStack item, @NotNull String key, @NotNull String value) {
+    public static void addNBT(@NotNull final ItemStack item, @NotNull final String key, @NotNull final String value) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
         Objects.requireNonNull(key, "Value must not be null");
-        ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(item.getType());
+        final ItemMeta meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(item.getType());
         addNBT(meta, key, value);
         item.setItemMeta(meta);
     }
 
-    public static boolean hasNBT(@NotNull ItemStack item, @NotNull String key) {
+    public static boolean hasNBT(@NotNull final ItemStack item, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
         if (!item.hasItemMeta()) return false;
-        ItemMeta meta = item.getItemMeta();
-        PersistentDataContainer pdc = meta.getPersistentDataContainer();
+        final ItemMeta meta = item.getItemMeta();
+        final PersistentDataContainer pdc = meta.getPersistentDataContainer();
         return pdc.has(new NamespacedKey(JeffLib.getPlugin(), key), PersistentDataType.STRING);
     }
 
-    public static boolean hasNBT(@NotNull PersistentDataHolder holder, @NotNull String key) {
+    public static boolean hasNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
-        PersistentDataContainer pdc = holder.getPersistentDataContainer();
+        final PersistentDataContainer pdc = holder.getPersistentDataContainer();
         return pdc.has(new NamespacedKey(JeffLib.getPlugin(), key), PersistentDataType.STRING);
     }
 
-    public static void removeNBT(@NotNull ItemStack item, @NotNull String key) {
+    public static void removeNBT(@NotNull final ItemStack item, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
         if (!item.hasItemMeta()) return;
-        ItemMeta meta = item.getItemMeta();
+        final ItemMeta meta = item.getItemMeta();
         removeNBT(meta, key);
         item.setItemMeta(meta);
     }
 
-    public static void removeNBT(@NotNull PersistentDataHolder holder, @NotNull String key) {
+    public static void removeNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
-        PersistentDataContainer pdc = holder.getPersistentDataContainer();
+        final PersistentDataContainer pdc = holder.getPersistentDataContainer();
         pdc.remove(new NamespacedKey(JeffLib.getPlugin(), key));
     }
 
-    public static HashMap<String, String> getAllValues(@NotNull PersistentDataHolder holder) {
+    public static HashMap<String, String> getAllValues(@NotNull final PersistentDataHolder holder) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
-        HashMap<String, String> map = new HashMap<>();
-        PersistentDataContainer pdc = holder.getPersistentDataContainer();
-        for (NamespacedKey key : pdc.getKeys()) {
+        final HashMap<String, String> map = new HashMap<>();
+        final PersistentDataContainer pdc = holder.getPersistentDataContainer();
+        for (final NamespacedKey key : pdc.getKeys()) {
             map.put(key.toString(), pdc.get(key, PersistentDataType.STRING));
         }
         return map;
     }
 
-    public static HashMap<String, String> getAllValues(@NotNull ItemStack item) {
+    public static HashMap<String, String> getAllValues(@NotNull final ItemStack item) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
-        HashMap<String, String> map = new HashMap<>();
+        final HashMap<String, String> map = new HashMap<>();
         if (!item.hasItemMeta()) return map;
         return getAllValues(item.getItemMeta());
     }

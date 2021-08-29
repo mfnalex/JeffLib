@@ -11,7 +11,7 @@ import java.util.Objects;
 /**
  * Represents a {@link BoundingBox} linked to a {@link World}
  */
-public class WorldBoundingBox {
+public final class WorldBoundingBox {
     @Getter
     @Setter
     @NotNull
@@ -36,10 +36,10 @@ public class WorldBoundingBox {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        WorldBoundingBox that = (WorldBoundingBox) o;
+        final WorldBoundingBox that = (WorldBoundingBox) o;
         return world.equals(that.world) && boundingBox.equals(that.boundingBox);
     }
 

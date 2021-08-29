@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
 import java.util.Arrays;
@@ -9,6 +10,7 @@ import java.util.Locale;
 /**
  * Word related methods, like capitalization
  */
+@UtilityClass
 public class WordUtils {
 
     /**
@@ -19,9 +21,9 @@ public class WordUtils {
      * @deprecated Use {@link de.jeff_media.jefflib.MaterialUtils#getNiceMaterialName} instead
      */
     @Deprecated
-    public static String getNiceMaterialName(Material mat) {
-        StringBuilder builder = new StringBuilder();
-        Iterator<String> iterator = Arrays.stream(mat.name().split("_")).iterator();
+    public static String getNiceMaterialName(final Material mat) {
+        final StringBuilder builder = new StringBuilder();
+        final Iterator<String> iterator = Arrays.stream(mat.name().split("_")).iterator();
         while (iterator.hasNext()) {
             builder.append(upperCaseFirstLetterOnly(iterator.next()));
             if (iterator.hasNext()) builder.append(" ");
@@ -34,7 +36,7 @@ public class WordUtils {
      *
      * @param word String to change
      */
-    public static String upperCaseFirstLetterOnly(String word) {
+    public static String upperCaseFirstLetterOnly(final String word) {
         return upperCaseFirstLetter(word.toLowerCase(Locale.ROOT));
     }
 
@@ -43,7 +45,7 @@ public class WordUtils {
      *
      * @param word String to change
      */
-    public static String upperCaseFirstLetter(String word) {
+    public static String upperCaseFirstLetter(final String word) {
         if (word.length() < 1) return word;
         if (word.length() == 1) return word.toUpperCase(Locale.ROOT);
         return word.substring(0, 1).toUpperCase(Locale.ROOT) + word.substring(1);

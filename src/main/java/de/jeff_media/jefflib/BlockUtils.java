@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
@@ -10,7 +11,8 @@ import java.util.function.Predicate;
 /**
  * Block related methods
  */
-public class BlockUtils {
+@UtilityClass
+public final class BlockUtils {
 
     /**
      * Returns a list of entries containing all BlockData from a given block
@@ -19,18 +21,18 @@ public class BlockUtils {
      * @return List of entries this Block's BlockData contains
      */
     public static List<Map.Entry<String, String>> getBlockDataAsEntries(final Block block) {
-        List<Map.Entry<String, String>> list = new ArrayList<>();
+        final List<Map.Entry<String, String>> list = new ArrayList<>();
 
-        String[] split = block.getBlockData().getAsString().split("\\[");
+        final String[] split = block.getBlockData().getAsString().split("\\[");
         if (split.length == 1) {
             return list;
         }
         String info = split[1];
         info = info.substring(0, info.length() - 1);
-        String[] entries = info.split(",");
-        for (String entry : entries) {
-            String key = entry.split("=")[0];
-            String value = entry.split("=")[1];
+        final String[] entries = info.split(",");
+        for (final String entry : entries) {
+            final String key = entry.split("=")[0];
+            final String value = entry.split("=")[1];
             list.add(new AbstractMap.SimpleEntry<>(key, value));
         }
         return list;
@@ -44,7 +46,7 @@ public class BlockUtils {
      * @param radiusType RadiusType
      * @return List of all blocks within the radius
      */
-    public static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType) {
+    public static List<Block> getBlocksInRadius(final Location center, final int radius, final RadiusType radiusType) {
         return getBlocksInRadius(center, radius, radiusType, block -> true);
     }
 
@@ -66,7 +68,7 @@ public class BlockUtils {
      * @param predicate  Predicate to check for
      * @return List of all blocks within the radius that match the given Predicate
      */
-    public static List<Block> getBlocksInRadius(Location center, int radius, RadiusType radiusType, Predicate<Block> predicate) {
+    public static List<Block> getBlocksInRadius(final Location center, final int radius, final RadiusType radiusType, final Predicate<Block> predicate) {
         switch (radiusType) {
             case SPHERE:
                 return getBlocksInRadiusCircle(center, radius, predicate);
@@ -82,16 +84,16 @@ public class BlockUtils {
      * @param block Block
      * @return Center Location
      */
-    public static Location getCenter(Block block) {
+    public static Location getCenter(final Block block) {
         return block.getLocation().add(0.5, 0.5, 0.5);
     }
 
-    private static List<Block> getBlocksInRadiusSquare(Location center, int radius, Predicate<Block> predicate) {
-        List<Block> blocks = new ArrayList<>();
+    private static List<Block> getBlocksInRadiusSquare(final Location center, final int radius, final Predicate<Block> predicate) {
+        final List<Block> blocks = new ArrayList<>();
         for (int x = center.getBlockX() - radius; x <= center.getBlockX() + radius; x++) {
             for (int y = center.getBlockY() - radius; y <= center.getBlockY() + radius; y++) {
                 for (int z = center.getBlockZ() - radius; z <= center.getBlockZ() + radius; z++) {
-                    Block block = Objects.requireNonNull(center.getWorld()).getBlockAt(x, y, z);
+                    final Block block = Objects.requireNonNull(center.getWorld()).getBlockAt(x, y, z);
                     if (predicate.test(block)) {
                         blocks.add(block);
                     }
@@ -101,16 +103,16 @@ public class BlockUtils {
         return blocks;
     }
 
-    private static List<Block> getBlocksInRadiusCircle(Location center, int radius, Predicate<Block> predicate) {
-        List<Block> blocks = new ArrayList<>();
-        World world = center.getWorld();
+    private static List<Block> getBlocksInRadiusCircle(final Location center, final int radius, final Predicate<Block> predicate) {
+        final List<Block> blocks = new ArrayList<>();
+        final World world = center.getWorld();
         for (int x = center.getBlockX() - radius; x <= center.getBlockX() + radius; x++) {
             for (int y = center.getBlockY() - radius; y <= center.getBlockY() + radius; y++) {
                 for (int z = center.getBlockZ() - radius; z <= center.getBlockZ() + radius; z++) {
-                    Location location = new Location(world, x, y, z);
-                    double distanceSquared = location.distanceSquared(center);
+                    final Location location = new Location(world, x, y, z);
+                    final double distanceSquared = location.distanceSquared(center);
                     if (distanceSquared <= radius * radius) {
-                        Block block = location.getBlock();
+                        final Block block = location.getBlock();
                         if (predicate.test(block)) {
                             blocks.add(block);
                         }
@@ -138,7 +140,8 @@ public class BlockUtils {
     /**
      * Some predefined Block Predicates
      */
-    public static class Predicates {
+    @UtilityClass
+    public static final class Predicates {
         /**
          * Represents AIR and CAVE_AIR
          */

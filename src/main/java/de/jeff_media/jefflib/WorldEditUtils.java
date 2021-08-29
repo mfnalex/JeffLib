@@ -4,12 +4,13 @@ import de.jeff_media.jefflib.data.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.blackhole.WorldEditHandler;
-import org.bukkit.Bukkit;
+import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 
 /**
  * WorldEdit related methods. Can be safely used even when WorldEdit is not installed, as long as you catch the {@link MissingPluginException}
  */
+@UtilityClass
 public class WorldEditUtils {
 
     /**
@@ -43,11 +44,11 @@ public class WorldEditUtils {
      * @return {@link WorldBoundingBox} containing the player's WorldEdit selection, or null if the player doesn't have any or only an incomplete selection.
      * @throws MissingPluginException Exception thrown when WorldEdit is not installed
      */
-    public static WorldBoundingBox getSelection(Player player) throws MissingPluginException {
+    public static WorldBoundingBox getSelection(final Player player) throws MissingPluginException {
 
         try {
             return WorldEditHandler.getSelection(player);
-        } catch (Throwable throwable) {
+        } catch (final Throwable throwable) {
             throw new MissingPluginException("WorldEdit");
         }
     }

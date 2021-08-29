@@ -18,11 +18,11 @@ import java.util.Objects;
 @Builder
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class SoundData {
+public final class SoundData {
     private final Sound sound;
     private float volume = 1;
     private float pitch = 1;
-    private float pitchRange = 0;
+    private float pitchRange;
     private SoundCategory soundCategory = SoundCategory.MASTER;
 
     private float getFinalPitch() {
@@ -34,7 +34,7 @@ public class SoundData {
      *
      * @param player Player
      */
-    public void playToPlayer(Player player) {
+    public void playToPlayer(final Player player) {
         player.playSound(player.getLocation(), sound, soundCategory, volume, getFinalPitch());
     }
 
@@ -44,7 +44,7 @@ public class SoundData {
      * @param player   Player
      * @param location Location
      */
-    public void playToPlayer(Player player, Location location) {
+    public void playToPlayer(final Player player, final Location location) {
         player.playSound(location, sound, soundCategory, volume, getFinalPitch());
     }
 
@@ -53,7 +53,7 @@ public class SoundData {
      *
      * @param location Location
      */
-    public void playToWorld(Location location) {
+    public void playToWorld(final Location location) {
         Objects.requireNonNull(location.getWorld()).playSound(location, sound, soundCategory, volume, getFinalPitch());
     }
 

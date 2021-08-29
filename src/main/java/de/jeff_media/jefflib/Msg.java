@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -9,7 +10,8 @@ import javax.annotation.Nullable;
 /**
  * Sends messages to CommandSenders while applying color codes, gradients, placeholders and emojis
  */
-public class Msg {
+@UtilityClass
+public final class Msg {
 
     /**
      * Sends a message to the given CommandSender, translating all placeholders / color codes
@@ -18,7 +20,7 @@ public class Msg {
      * @param text     Text to send
      * @param player   OfflinePlayer to use for replacing PlaceholderAPI placeholders, or null
      */
-    public static void send(CommandSender receiver, String text, @Nullable OfflinePlayer player) {
+    public static void send(final CommandSender receiver, final String text, @Nullable final OfflinePlayer player) {
         receiver.sendMessage(TextUtils.format(text, player));
     }
 
@@ -28,9 +30,9 @@ public class Msg {
      * @param receiver CommandSender to receive the message
      * @param text     Text to send
      */
-    public static void send(CommandSender receiver, String text) {
+    public static void send(final CommandSender receiver, final String text) {
         if (receiver instanceof Player) {
-            receiver.sendMessage(TextUtils.format(text, (Player) receiver));
+            receiver.sendMessage(TextUtils.format(text, (OfflinePlayer) receiver));
         } else {
             receiver.sendMessage(TextUtils.format(text));
         }

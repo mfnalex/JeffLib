@@ -18,27 +18,27 @@ import org.bukkit.plugin.Plugin;
  * Keeps track of player placed blocks
  */
 @InternalOnly
-public class BlockTrackListener implements Listener {
+public final class BlockTrackListener implements Listener {
 
     private final Plugin plugin = JeffLib.getPlugin();
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onPlace(BlockPlaceEvent event) {
+    public void onPlace(final BlockPlaceEvent event) {
         if (!BlockTracker.isTrackedBlockType(event.getBlock().getType())) return;
         BlockTracker.setPlayerPlacedBlock(event.getBlock(), true);
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onBreak(BlockBreakEvent event) {
+    public void onBreak(final BlockBreakEvent event) {
         if (BlockTracker.isPlayerPlacedBlock(event.getBlock())) {
             Bukkit.getScheduler().runTaskLater(plugin, () -> BlockTracker.setPlayerPlacedBlock(event.getBlock(), false), 1L);
         }
     }
 
     @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-    public void onStructureGrow(StructureGrowEvent event) {
-        for (BlockState blockState : event.getBlocks()) {
-            Block block = blockState.getBlock();
+    public void onStructureGrow(final StructureGrowEvent event) {
+        for (final BlockState blockState : event.getBlocks()) {
+            final Block block = blockState.getBlock();
             BlockTracker.setPlayerPlacedBlock(block, false);
         }
     }

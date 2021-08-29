@@ -3,6 +3,7 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.blackhole.WorldGuardHandler;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.jetbrains.annotations.NotNull;
 
@@ -11,6 +12,7 @@ import java.util.Collection;
 /**
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
  */
+@UtilityClass
 public class WorldGuardUtils {
 
     /**
@@ -29,10 +31,10 @@ public class WorldGuardUtils {
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
      */
-    public static @NotNull Collection<String> getRegionsAtLocation(Location location) throws MissingPluginException {
+    public static @NotNull Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.getRegionsAtLocation(location);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             throw new MissingPluginException("WorldGuard");
         }
     }
@@ -53,10 +55,10 @@ public class WorldGuardUtils {
      * @return true when the location is inside the given region, otherwise false
      * @throws MissingPluginException exception
      */
-    public static boolean isInsideRegion(Location location, String regionName) throws MissingPluginException {
+    public static boolean isInsideRegion(final Location location, final String regionName) throws MissingPluginException {
         try {
             return getRegionsAtLocation(location).contains(regionName);
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             throw new MissingPluginException("WorldGuard");
         }
     }

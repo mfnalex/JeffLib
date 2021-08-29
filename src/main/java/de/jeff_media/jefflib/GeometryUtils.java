@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.World;
 
@@ -9,7 +10,8 @@ import java.util.Set;
 /**
  * Geometry related methods
  */
-public class GeometryUtils {
+@UtilityClass
+public final class GeometryUtils {
 
     /**
      * Gets a set of all Locations in a specific distance describing a hollow cube around two locations
@@ -19,15 +21,15 @@ public class GeometryUtils {
      * @param distance Distance between locations
      * @return Set of all locations describing a hollow cube around both locations
      */
-    public static Set<Location> getHollowCube(Location min, Location max, double distance) {
-        Set<Location> result = new HashSet<>();
-        World world = min.getWorld();
-        double minX = Math.min(min.getX(), max.getX());
-        double minY = Math.min(min.getY(), max.getY());
-        double minZ = Math.min(min.getZ(), max.getZ());
-        double maxX = Math.max(min.getX(), max.getX());
-        double maxY = Math.max(min.getY(), max.getY());
-        double maxZ = Math.max(min.getZ(), max.getZ());
+    public static Set<Location> getHollowCube(final Location min, final Location max, final double distance) {
+        final Set<Location> result = new HashSet<>();
+        final World world = min.getWorld();
+        final double minX = Math.min(min.getX(), max.getX());
+        final double minY = Math.min(min.getY(), max.getY());
+        final double minZ = Math.min(min.getZ(), max.getZ());
+        final double maxX = Math.max(min.getX(), max.getX());
+        final double maxY = Math.max(min.getY(), max.getY());
+        final double maxZ = Math.max(min.getZ(), max.getZ());
 
         for (double x = minX; x <= maxX; x += distance) {
             for (double y = minY; y <= maxY; y += distance) {

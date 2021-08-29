@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 /**
  * Time related methods, like measuring time and converting nanoseconds to milliseconds, etc.
  */
+@UtilityClass
 public class TimeUtils {
 
     private static final int milliSecondsPerTick = 50;
@@ -22,7 +24,7 @@ public class TimeUtils {
      * @param nanoSeconds duration in nanoseconds
      * @return duration in milliseconds
      */
-    public static long nanoSecondsToMilliSeconds(long nanoSeconds) {
+    public static long nanoSecondsToMilliSeconds(final long nanoSeconds) {
         return nanoSeconds / 1000000;
     }
 
@@ -32,7 +34,7 @@ public class TimeUtils {
      * @param nanoSeconds duration in nanoseconds
      * @return duration in milliseconds
      */
-    public static double nanoSecondsToMilliSecondsDouble(long nanoSeconds) {
+    public static double nanoSecondsToMilliSecondsDouble(final long nanoSeconds) {
         return ((double) nanoSeconds) / (double) 1000000;
     }
 
@@ -42,7 +44,7 @@ public class TimeUtils {
      * @param milliSeconds milliseconds
      * @return percentage of tick
      */
-    public static double milliSecondsToTickPercentage(long milliSeconds) {
+    public static double milliSecondsToTickPercentage(final long milliSeconds) {
         return (double) (milliSeconds / milliSecondsPerTick * 100);
     }
 
@@ -51,7 +53,7 @@ public class TimeUtils {
      *
      * @param nanoSeconds Duration in nanoseconds
      */
-    public static String formatNanoseconds(long nanoSeconds) {
+    public static String formatNanoseconds(final long nanoSeconds) {
         return String.format(Locale.ROOT, "%.4f ms", nanoSecondsToMilliSecondsDouble(nanoSeconds));
     }
 
@@ -60,7 +62,7 @@ public class TimeUtils {
      *
      * @param identifier Name of the task to be measured
      */
-    public static void startTimings(String identifier) {
+    public static void startTimings(final String identifier) {
         measurements.put(identifier, System.nanoTime());
     }
 
@@ -72,16 +74,16 @@ public class TimeUtils {
      * @param sendMessage Whether to send a message
      * @return Duration in nanoseconds
      */
-    public static long endTimings(String identifier, @Nullable Plugin plugin, boolean sendMessage) {
-        long now = System.nanoTime();
-        Long then = measurements.get(identifier);
+    public static long endTimings(final String identifier, @Nullable final Plugin plugin, final boolean sendMessage) {
+        final long now = System.nanoTime();
+        final Long then = measurements.get(identifier);
         if (then == null) {
             throw new IllegalArgumentException("No timings with identifier \"" + identifier + "\" running");
         }
-        long nanoseconds = now - then;
-        double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
+        final long nanoseconds = now - then;
+        final double milliseconds = nanoSecondsToMilliSecondsDouble(nanoseconds);
         if (sendMessage) {
-            Logger logger = plugin == null ? Bukkit.getLogger() : plugin.getLogger();
+            final Logger logger = plugin == null ? Bukkit.getLogger() : plugin.getLogger();
             logger.info(String.format(Locale.ROOT, "Task \"%s\" finished in %.4f ms", identifier, milliseconds));
         }
         return nanoseconds;
@@ -93,7 +95,7 @@ public class TimeUtils {
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */
-    public static long endTimings(String identifier, boolean sendMessage) {
+    public static long endTimings(final String identifier, final boolean sendMessage) {
         return endTimings(identifier, null, sendMessage);
     }
 
@@ -103,7 +105,7 @@ public class TimeUtils {
      * @param identifier Name of the task to be measured
      * @return duration the task took in nanoseconds
      */
-    public static long endTimings(String identifier) {
+    public static long endTimings(final String identifier) {
         return endTimings(identifier, true);
     }
 
