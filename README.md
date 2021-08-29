@@ -36,7 +36,7 @@ JeffLib.init(this);
 <dependency>
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version>3.0.0-SNAPSHOT</version> <!-- The version will only change when there are breaking changes -->
+    <version>5.0.0-SNAPSHOT</version> <!-- The version will only change when there are breaking changes -->
     <scope>compile</scope>
 </dependency>
 ```
