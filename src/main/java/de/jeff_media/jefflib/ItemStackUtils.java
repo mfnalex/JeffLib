@@ -5,6 +5,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,6 +56,12 @@ public final class ItemStackUtils {
             if (!isNullOrEmpty(item)) nonNullItems.add(item);
         }
         return nonNullItems.toArray(new ItemStack[0]);
+    }
+
+    public static void setDisplayName(@NotNull final ItemStack item, @NotNull final String name) {
+        final ItemMeta meta = item.getItemMeta();
+        meta.setDisplayName(name);
+        item.setItemMeta(meta);
     }
 
 }

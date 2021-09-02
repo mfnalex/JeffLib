@@ -1,15 +1,19 @@
 package de.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 /**
@@ -81,5 +85,31 @@ public final class EntityUtils {
             }
         }
         return newList;
+    }
+
+    @NotNull
+    public static <T extends Entity> Collection<T> getEntities(@NotNull final Class<T> entityClass) {
+        final Collection<T> list = new ArrayList<>();
+        for(final World world : Bukkit.getWorlds()) {
+            list.addAll(world.getEntitiesByClass(entityClass));
+        }
+        return list;
+    }
+
+    @NotNull
+    public static Collection<Entity> getAllEntities() {
+        final Collection<Entity> list = new ArrayList<>();
+        for(final World world : Bukkit.getWorlds()) {
+            list.addAll(world.getEntities());
+        }
+        return list;
+    }
+
+    @Nullable
+    public static Entity getEntityById(final int id) {
+        for(final Entity entity : getAllEntities()) {
+            if(entity.getEntityId()==id) return entity;
+        }
+        return null;
     }
 }
