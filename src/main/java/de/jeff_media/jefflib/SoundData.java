@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import com.google.common.base.Enums;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,8 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.Locale;
 import java.util.Objects;
 
 /**
@@ -22,11 +27,33 @@ public final class SoundData {
     private final Sound sound;
     private float volume = 1;
     private float pitch = 1;
-    private float pitchRange;
+    private float pitchVariant;
     private SoundCategory soundCategory = SoundCategory.MASTER;
 
+    public static SoundData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) {
+        if(prefix == null) prefix = "";
+        final String soundName = config.getString(prefix + "effect");
+        if(soundName == null || soundName.isEmpty()) {
+            throw new IllegalArgumentException("No sound effect defined");
+        }
+        final Sound sound = Enums.getIfPresent(Sound.class, soundName.toUpperCase(Locale.ROOT)).orNull();
+        if(sound == null) {
+            throw new IllegalArgumentException("Unknown sound effect: " + soundName);
+        }
+        final float volume = (float) config.getDouble(prefix + "volume", 1.0D);
+        final float pitch = (float) config.getDouble(prefix + "pitch", 1.0D);
+        final float pitchVariant = (float) config.getDouble(prefix + "pitch-variant", 1.0D);
+        final String soundCategoryName = config.getString(prefix + "sound-category",SoundCategory.MASTER.name()).toUpperCase(Locale.ROOT);
+        final SoundCategory soundCategory = Enums.getIfPresent(SoundCategory.class, soundCategoryName).orNull();
+        if(soundCategory == null) {
+            throw new IllegalArgumentException("Unknown sound category: " + soundCategoryName);
+        }
+
+        return new SoundData(sound, volume, pitch, pitchVariant, soundCategory);
+    }
+
     private float getFinalPitch() {
-        return (float) (pitch - (pitchRange / 2) + JeffLib.getThreadLocalRandom().nextDouble(0, pitchRange));
+        return (float) (pitch - (pitchVariant / 2) + JeffLib.getThreadLocalRandom().nextDouble(0, pitchVariant));
     }
 
     /**

@@ -32,6 +32,22 @@ public final class InventoryUtils {
         return minSlot < event.getView().getTopInventory().getSize();
     }
 
+    public static int countItemStacks(@NotNull final ItemStack[] inventory, @NotNull final ItemStack item) {
+        final AtomicInteger amount = new AtomicInteger(0);
+        Arrays.stream(inventory)
+                .filter(itemStack -> itemStack.isSimilar(item))
+                .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        return amount.get();
+    }
+
+    public static int countItemStacks(@NotNull final ItemStack[] inventory, @NotNull final Material material) {
+        final AtomicInteger amount = new AtomicInteger(0);
+        Arrays.stream(inventory)
+                .filter(candidate -> candidate.getType() == material)
+                .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        return amount.get();
+    }
+
     public static int countItemStacks(@NotNull final Inventory inventory, @NotNull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
         Arrays.stream(inventory.getContents())
@@ -42,7 +58,7 @@ public final class InventoryUtils {
 
     public static int countMaterials(@NotNull final Inventory inventory, @NotNull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
-        inventory.all(material).values().stream()
+        inventory.all(material).values()
                 .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
