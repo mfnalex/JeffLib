@@ -17,7 +17,7 @@ import java.util.Objects;
 /**
  * Provides methods to store and retrieve Strings from PersistentDataHolders or ItemStacks
  *
- * @deprecated Use {@link de.jeff_media.jefflib.PDCUtils} instead
+ * @deprecated Use {@link PDCUtils} instead
  */
 @Deprecated
 @UtilityClass

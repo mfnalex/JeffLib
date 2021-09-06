@@ -18,7 +18,7 @@ public class WordUtils {
      *
      * @param mat The Material
      * @return Human readable name
-     * @deprecated Use {@link de.jeff_media.jefflib.MaterialUtils#getNiceMaterialName} instead
+     * @deprecated Use {@link MaterialUtils#getNiceMaterialName} instead
      */
     @Deprecated
     public static String getNiceMaterialName(final Material mat) {

@@ -1,11 +1,13 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.internal.nms.NMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -18,6 +20,11 @@ public final class JeffLib {
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
+    private static NMSHandler nmsHandler;
+
+    public static NMSHandler getNMSHandler() {
+        return nmsHandler;
+    }
 
     /**
      * Returns the ThreadLocalRandom instance.
@@ -61,6 +68,14 @@ public final class JeffLib {
             } else {
                 plugin.getLogger().info("You are using an MC version below 1.16.3 - Block Tracking features will be disabled.");
             }
+        }
+        try {
+            final String packageName = JeffLib.class.getPackage().getName();
+            final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            nmsHandler = (NMSHandler) Class.forName(packageName + ".internals.nms.v" + internalsName).getConstructor((Class<?>) null).newInstance(null);
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
+            plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
+            exception.printStackTrace();
         }
     }
 
