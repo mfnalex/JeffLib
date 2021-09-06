@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib.internal.nms;
 
-import de.jeff_media.jefflib.internal.nms.NMSHandler;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.PacketListenerPlayOut;
 import net.minecraft.network.protocol.game.PacketPlayOutEntityStatus;

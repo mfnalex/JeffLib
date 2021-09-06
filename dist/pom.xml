@@ -1,6 +1,6 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>JeffLib-dist</artifactId>
+    <artifactId>JeffLib</artifactId>
     <version>${project.parent.version}</version>
     <packaging>jar</packaging>
     <parent>
@@ -9,7 +9,7 @@
         <version>5.0.0-SNAPSHOT</version>
     </parent>
     <build>
-        <!--<directory>../target</directory>-->
+        <directory>../target</directory>
         <finalName>JeffLib</finalName>
         <plugins>
             <plugin>
@@ -43,6 +43,11 @@
         <dependency>
             <groupId>de.jeff_media</groupId>
             <artifactId>JeffLib-spigot_1_17_R1</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_16_R3</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>

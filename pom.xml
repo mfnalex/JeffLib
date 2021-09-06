@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.jeff_media</groupId>
-    <artifactId>JeffLib</artifactId>
+    <artifactId>JeffLib-parent</artifactId>
     <version>5.0.0-SNAPSHOT</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
@@ -20,6 +20,7 @@
         <module>core</module>
         <!--<module>spigot_1_16_R3</module> --><!-- 1.16.4, 1.16.5 -->
         <module>spigot_1_17_R1</module> <!-- 1.17, 1.17.1 -->
+        <module>spigot_1_16_R3</module> <!-- 1.16.4, 1.16.5 -->
         <module>dist</module>
     </modules>
 
@@ -70,10 +71,6 @@
             <url>https://repo.jeff-media.de/maven2</url>
         </repository>
     </repositories>
-
-    <dependencies>
-
-    </dependencies>
 
     <distributionManagement>
         <repository>

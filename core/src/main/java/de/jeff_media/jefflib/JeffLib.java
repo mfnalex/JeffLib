@@ -7,6 +7,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -72,8 +73,8 @@ public final class JeffLib {
         try {
             final String packageName = JeffLib.class.getPackage().getName();
             final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            nmsHandler = (NMSHandler) Class.forName(packageName + ".internals.nms.v" + internalsName).getConstructor((Class<?>) null).newInstance(null);
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
+            nmsHandler = (NMSHandler) Class.forName(packageName + ".internal.nms." + internalsName).newInstance();
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException  exception) {
             plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }

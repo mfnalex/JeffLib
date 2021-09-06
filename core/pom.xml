@@ -15,7 +15,7 @@
 
     <parent>
         <groupId>de.jeff_media</groupId>
-        <artifactId>JeffLib</artifactId>
+        <artifactId>JeffLib-parent</artifactId>
         <version>5.0.0-SNAPSHOT</version>
     </parent>
 
