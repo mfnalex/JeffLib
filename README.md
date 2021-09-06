@@ -1,13 +1,6 @@
 # JeffLib Spigot Library
 
-JeffLib includes a ton of useful methods that you would normally have to write yourself, as well as already shaded and
-relocated other libraries like
-
-- my UpdateChecker
-- my CustomBlockData library
-- PaperLib
-- Google Gson
-- Apache Commons Lang3
+JeffLib includes a ton of useful methods that you would normally have to write yourself.
 
 ## Usage
 
