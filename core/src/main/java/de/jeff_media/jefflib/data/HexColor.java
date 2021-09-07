@@ -72,8 +72,8 @@ public final class HexColor {
         if (position == 0) return start;
         if (position == colorsNeeded) return end;
         if (start == end) return start;
-        if (start < end) return (start + end) / colorsNeeded * position;
-        return start + end - ((start - end) / colorsNeeded * position);
+        int diff = start - end;
+        return start - (diff / colorsNeeded) * position;
     }
 
     /**
@@ -93,7 +93,6 @@ public final class HexColor {
         final int r = getSingleValueAtPositionInGradient(start.getRed(), end.getRed(), colorsNeeded, position);
         final int g = getSingleValueAtPositionInGradient(start.getGreen(), end.getGreen(), colorsNeeded, position);
         final int b = getSingleValueAtPositionInGradient(start.getBlue(), end.getBlue(), colorsNeeded, position);
-
         //System.out.println(result.toHex());
         return new HexColor(r, g, b);
     }

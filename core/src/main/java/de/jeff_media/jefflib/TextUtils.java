@@ -10,6 +10,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -150,6 +152,14 @@ public class TextUtils {
         text = color(text);
         text = replaceEmojis(text);
         text = replacePlaceholders(text, player);
+        return text;
+    }
+
+    public static List<String> format(List<String> text, @Nullable final OfflinePlayer player) {
+        text = new ArrayList<>(text);
+        for(int i = 0; i < text.size(); i++) {
+            text.set(i, format(text.get(i)));
+        }
         return text;
     }
 
