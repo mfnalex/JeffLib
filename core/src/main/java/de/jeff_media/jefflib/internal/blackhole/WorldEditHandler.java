@@ -30,7 +30,7 @@ public final class WorldEditHandler {
             final Block max = BukkitAdapter.adapt(player.getWorld(), region.getMaximumPoint()).getBlock();
             final Block min = BukkitAdapter.adapt(player.getWorld(), region.getMinimumPoint()).getBlock();
             return new WorldBoundingBox(player.getWorld(), BoundingBox.of(min, max));
-        } catch (final IncompleteRegionException exception) {
+        } catch (final Throwable exception) {
             return null;
         }
     }
