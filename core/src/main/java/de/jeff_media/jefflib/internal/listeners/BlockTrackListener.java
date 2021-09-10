@@ -18,6 +18,7 @@ import org.bukkit.plugin.Plugin;
  * Keeps track of player placed blocks
  */
 @InternalOnly
+@Deprecated
 public final class BlockTrackListener implements Listener {
 
     private final Plugin plugin = JeffLib.getPlugin();

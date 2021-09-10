@@ -12,6 +12,7 @@ import org.bukkit.event.player.PlayerItemHeldEvent;
  * Listens to PlayerItemHeldEvent and calls the {@link de.jeff_media.jefflib.events.PlayerScrollEvent}
  */
 @InternalOnly
+@Deprecated
 public final class PlayerScrollListener implements Listener {
 
     @EventHandler

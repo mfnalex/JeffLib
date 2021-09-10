@@ -27,7 +27,14 @@ public final class ItemStackUtils {
 
     public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
         String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
-        int amount = config.getInt("amount",1);
+
+        int amount = 1;
+        if(config.isSet("amount")) {
+            if(config.isInt("amount")) {
+                amount = config.getInt("amount");
+            }
+        }
+
         ItemStack item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
 
         List<String> lore = null;
