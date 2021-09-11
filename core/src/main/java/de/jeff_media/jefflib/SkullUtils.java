@@ -12,6 +12,7 @@ import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
 import java.util.UUID;
@@ -73,6 +74,18 @@ public class SkullUtils {
             e.printStackTrace();
         }
         return head;
+    }
+
+    @Nullable
+    public static String getBase64Texture(@NotNull SkullMeta skullMeta) {
+        try {
+            final Field profileField = skullMeta.getClass().getDeclaredField("profile");
+            profileField.setAccessible(true);
+            final GameProfile profile = (GameProfile) profileField.get(skullMeta);
+            return profile.getProperties().get("textures").stream().findFirst().get().getValue();
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
 }
