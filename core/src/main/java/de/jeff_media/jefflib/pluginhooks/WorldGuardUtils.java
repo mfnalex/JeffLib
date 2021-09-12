@@ -5,6 +5,7 @@ import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.blackhole.WorldGuardHandler;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
+import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Collection;
@@ -58,6 +59,14 @@ public class WorldGuardUtils {
     public static boolean isInsideRegion(final Location location, final String regionName) throws MissingPluginException {
         try {
             return getRegionsAtLocation(location).contains(regionName);
+        } catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }
+    }
+
+    public static boolean canBuild(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+        try {
+            return WorldGuardHandler.canBuild(player, location);
         } catch (final Throwable t) {
             throw new MissingPluginException("WorldGuard");
         }
