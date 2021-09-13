@@ -20,8 +20,9 @@ public class ProtectionUtils {
 
     public static boolean canBuildHere(@NotNull final Player player, @NotNull final Block block) {
 
-        final boolean alreadyMuted = ChatMuteHandler.isMuted(player);
+        boolean alreadyMuted = false;
         try {
+            alreadyMuted = ChatMuteHandler.isMuted(player);
             ChatMuteHandler.mute(player, true);
         } catch (Throwable ignored) {
 
