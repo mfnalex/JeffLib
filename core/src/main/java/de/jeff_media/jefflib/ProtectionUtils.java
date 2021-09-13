@@ -4,6 +4,7 @@ import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import de.jeff_media.jefflib.internal.blackhole.ChatMuteHandler;
 import de.jeff_media.jefflib.pluginhooks.WorldGuardUtils;
 import lombok.experimental.UtilityClass;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -20,11 +21,19 @@ public class ProtectionUtils {
     public static boolean canBuildHere(@NotNull final Player player, @NotNull final Block block) {
 
         final boolean alreadyMuted = ChatMuteHandler.isMuted(player);
-        ChatMuteHandler.mute(player, true);
+        try {
+            ChatMuteHandler.mute(player, true);
+        } catch (Throwable ignored) {
+
+        }
 
         try {
             if (!WorldGuardUtils.canBuild(player, block.getLocation())) {
-                ChatMuteHandler.mute(player, alreadyMuted);
+                try {
+                    ChatMuteHandler.mute(player, alreadyMuted);
+                } catch (Throwable ignored) {
+
+                }
                 return false;
             }
         } catch (final MissingPluginException ignored) {
@@ -33,7 +42,11 @@ public class ProtectionUtils {
 
         final BlockPlaceEvent event = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.SELF), new ItemStack(block.getType()),player,true, EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
-        ChatMuteHandler.mute(player, alreadyMuted);
+        try {
+            ChatMuteHandler.mute(player, alreadyMuted);
+        } catch (Throwable ignored) {
+
+        }
         return !event.isCancelled();
     }
 
