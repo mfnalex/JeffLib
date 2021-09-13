@@ -1,5 +1,7 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.internal.PluginUtils;
+import de.jeff_media.jefflib.internal.blackhole.ChatMuteHandler;
 import de.jeff_media.jefflib.internal.nms.NMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
@@ -78,6 +80,12 @@ public final class JeffLib {
             plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }
+        // Doing this delayed because 99% of people forget to put ProtocolLib into their "softdepend" list (including me)
+        Bukkit.getScheduler().runTaskLater(JeffLib.getPlugin(), () -> {
+            if(PluginUtils.isInstalledAndEnabled("ProtocolLib")) {
+                ChatMuteHandler.init();
+            }
+        }, 20L);
     }
 
     /**
