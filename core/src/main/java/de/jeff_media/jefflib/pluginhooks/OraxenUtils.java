@@ -8,7 +8,7 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class OraxenUtils {
 
-    public static boolean isBlock(String blockId) {
+    public static boolean isBlock(final String blockId) {
         final NoteBlockMechanicFactory factory = NoteBlockMechanicFactory.getInstance();
         final Mechanic mechanic = factory.getMechanic(blockId);
         return mechanic != null;

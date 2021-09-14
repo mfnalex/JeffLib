@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
@@ -17,7 +16,7 @@ public class AnimationUtils {
         playTotemAnimation(player, null);
     }
 
-    public static void playTotemAnimation(@NotNull final Player player, @Nullable Integer customModelData) {
+    public static void playTotemAnimation(@NotNull final Player player, @Nullable final Integer customModelData) {
         NMSNotSupportedException.check();
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
         final ItemMeta meta = totem.getItemMeta();

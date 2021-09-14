@@ -39,7 +39,7 @@ public final class EnchantmentUtils {
 
     @Nullable
     public static Enchantment getByName(@NotNull final String name) {
-        for(Enchantment enchant : Enchantment.values()) {
+        for(final Enchantment enchant : Enchantment.values()) {
             if(enchant.getKey().getKey().equalsIgnoreCase(name)) {
                 return enchant;
             }

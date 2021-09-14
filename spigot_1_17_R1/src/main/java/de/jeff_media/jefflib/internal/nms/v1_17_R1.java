@@ -8,18 +8,11 @@ import net.minecraft.network.protocol.game.PacketPlayOutEntityStatus;
 import net.minecraft.server.level.EntityPlayer;
 import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.level.World;
-import net.minecraft.world.level.block.entity.TileEntity;
-import net.minecraft.world.level.block.entity.TileEntityComparator;
-import net.minecraft.world.level.block.entity.TileEntityJukeBox;
 import net.minecraft.world.level.block.entity.TileEntitySkull;
 import org.bukkit.block.Block;
-import org.bukkit.block.Comparator;
-import org.bukkit.block.data.type.Jukebox;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nullable;
 
 public class v1_17_R1 implements NMSHandler {
 

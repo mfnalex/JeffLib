@@ -3,11 +3,11 @@ package de.jeff_media.jefflib;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
@@ -17,6 +17,7 @@ import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Field;
 import java.util.UUID;
 
+@UtilityClass
 public class SkullUtils {
 
     private static void checkIfIsSkull(@NotNull final Block block) throws IllegalArgumentException {
@@ -60,7 +61,7 @@ public class SkullUtils {
 
     public static ItemStack getHead(@NotNull final String base64) {
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
-        final SkullMeta meta = (SkullMeta) head.getItemMeta();
+        @SuppressWarnings("TypeMayBeWeakened") final SkullMeta meta = (SkullMeta) head.getItemMeta();
         final GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "");
         gameProfile.getProperties().put("textures", new Property("textures", base64));
         final Field profileField;
@@ -77,13 +78,13 @@ public class SkullUtils {
     }
 
     @Nullable
-    public static String getBase64Texture(@NotNull SkullMeta skullMeta) {
+    public static String getBase64Texture(@NotNull final SkullMeta skullMeta) {
         try {
             final Field profileField = skullMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);
             final GameProfile profile = (GameProfile) profileField.get(skullMeta);
             return profile.getProperties().get("textures").stream().findFirst().get().getValue();
-        } catch (Throwable t) {
+        } catch (final Throwable t) {
             return null;
         }
     }

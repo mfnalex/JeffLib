@@ -72,7 +72,7 @@ public final class HexColor {
         if (position == 0) return start;
         if (position == colorsNeeded) return end;
         if (start == end) return start;
-        int diff = start - end;
+        final int diff = start - end;
         return start - (diff / colorsNeeded) * position;
     }
 

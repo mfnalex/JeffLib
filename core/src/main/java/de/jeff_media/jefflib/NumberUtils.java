@@ -7,20 +7,20 @@ import javax.annotation.Nullable;
 @UtilityClass
 public class NumberUtils {
 
-    public boolean isInteger(String text) {
+    public boolean isInteger(final String text) {
         try {
             Integer.parseInt(text);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return false;
         }
     }
 
     @Nullable
-    public Integer parseInteger(String text) {
+    public Integer parseInteger(final String text) {
         try {
             return Integer.parseInt(text);
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             return null;
         }
     }

@@ -15,24 +15,24 @@ public class LootManager {
 
     Map<Enum, List<VariableItemStack>> map = new HashMap<>();
 
-    private void add(Enum key, VariableItemStack item) {
+    private void add(final Enum key, final VariableItemStack item) {
         if(map.containsKey(key)) {
             map.get(key).add(item);
         } else {
-            List<VariableItemStack> list = new ArrayList<>();
+            final List<VariableItemStack> list = new ArrayList<>();
             list.add(item);
             map.put(key, list);
         }
     }
 
     public static LootManager fromConfigurationSection(final ConfigurationSection config) {
-        LootManager lootManager = new LootManager();
-        for(String key : config.getKeys(false)) {
-            ConfigurationSection section = config.getConfigurationSection(key);
-            VariableItemStack itemStack = VariableItemStack.fromConfigurationSection(section);
+        final LootManager lootManager = new LootManager();
+        for(final String key : config.getKeys(false)) {
+            final ConfigurationSection section = config.getConfigurationSection(key);
+            final VariableItemStack itemStack = VariableItemStack.fromConfigurationSection(section);
 
-            Material matKey = Enums.getIfPresent(Material.class,key.toUpperCase(Locale.ROOT)).orNull();
-            EntityType entityKey = Enums.getIfPresent(EntityType.class, key.toUpperCase(Locale.ROOT)).orNull();
+            final Material matKey = Enums.getIfPresent(Material.class,key.toUpperCase(Locale.ROOT)).orNull();
+            final EntityType entityKey = Enums.getIfPresent(EntityType.class, key.toUpperCase(Locale.ROOT)).orNull();
 
             if(matKey != null) {
                 lootManager.add(matKey, itemStack);
@@ -43,10 +43,10 @@ public class LootManager {
         return lootManager;
     }
 
-    public List<ItemStack> getDrops(Enum key) {
-        List<ItemStack> drops = new ArrayList<>();
+    public List<ItemStack> getDrops(final Enum key) {
+        final List<ItemStack> drops = new ArrayList<>();
         if(map.containsKey(key)) {
-            for(VariableItemStack drop : map.get(key)) {
+            for(final VariableItemStack drop : map.get(key)) {
                 if(drop.getChance()>=100 || RandomUtils.getDouble(0,100) <= drop.getChance()) {
                     drops.add(drop.getItemStack());
                 }

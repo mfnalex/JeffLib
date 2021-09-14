@@ -26,7 +26,7 @@ public final class ItemStackUtils {
     }
 
     public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
-        String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
+        final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;
         if(config.isSet("amount")) {
@@ -35,7 +35,7 @@ public final class ItemStackUtils {
             }
         }
 
-        ItemStack item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
+        final ItemStack item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
 
         List<String> lore = null;
         if(config.isSet("lore")) {
@@ -56,7 +56,7 @@ public final class ItemStackUtils {
             modelData = config.getInt("custom-model-data");
         }
 
-        int damage = config.getInt("damage",0);
+        final int damage = config.getInt("damage",0);
 
         final ItemMeta meta = item.getItemMeta();
         meta.setLore(lore);
@@ -64,9 +64,9 @@ public final class ItemStackUtils {
         meta.setCustomModelData(modelData);
 
         if(config.isConfigurationSection("enchantments")) {
-            for(String key : config.getConfigurationSection("enchantments").getKeys(false)) {
-                Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(key));
-                int level = config.getConfigurationSection("enchantments").getInt(key);
+            for(final String key : config.getConfigurationSection("enchantments").getKeys(false)) {
+                final Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(key));
+                final int level = config.getConfigurationSection("enchantments").getInt(key);
                 meta.addEnchant(enchantment, level,true);
             }
         }

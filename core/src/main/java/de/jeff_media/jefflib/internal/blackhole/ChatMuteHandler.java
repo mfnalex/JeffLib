@@ -7,23 +7,25 @@ import com.comphenix.protocol.events.PacketAdapter;
 import com.comphenix.protocol.events.PacketEvent;
 import de.jeff_media.jefflib.JeffLib;
 import de.jeff_media.jefflib.internal.InternalOnly;
+import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 @InternalOnly
 @Deprecated
+@UtilityClass
 public class ChatMuteHandler {
 
-    private static final List<Player> mutedPlayers = new ArrayList<>();
+    private static final Collection<Player> mutedPlayers = new ArrayList<>();
 
     public static boolean isMuted(@NotNull final Player player) {
         return mutedPlayers.contains(player);
     }
 
-    public static void mute(@NotNull final Player player, boolean muted) {
+    public static void mute(@NotNull final Player player, final boolean muted) {
         if(muted) {
             mutedPlayers.add(player);
         } else {
@@ -36,12 +38,18 @@ public class ChatMuteHandler {
         ProtocolLibrary.getProtocolManager().addPacketListener(new PacketAdapter(JeffLib.getPlugin(), ListenerPriority.HIGHEST, PacketType.Play.Server.CHAT) {
 
             @Override
-            public void onPacketSending(PacketEvent event) {
+            public void onPacketSending(final PacketEvent event) {
 
                 if (event.getPacketType() != PacketType.Play.Server.CHAT) return;
 
+                /*System.out.println("Chat event: ");
+                for(WrappedChatComponent comp : event.getPacket().getChatComponents().getValues()) {
+                    System.out.println(comp.getJson());
+                }*/
+
                 if (mutedPlayers.contains(event.getPlayer())) {
                     event.setCancelled(true);
+                    //System.out.println("  (Cancelled)");
                 }
 
             }

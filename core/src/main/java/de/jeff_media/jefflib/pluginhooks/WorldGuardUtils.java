@@ -64,9 +64,25 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canBuild(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         try {
-            return WorldGuardHandler.canBuild(player, location);
+            return WorldGuardHandler.canPlace(player, location);
+        } catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }
+    }
+
+    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+        try {
+            return WorldGuardHandler.canInteract(player, location);
+        } catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }
+    }
+
+    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+        try {
+            return WorldGuardHandler.canBreak(player, location);
         } catch (final Throwable t) {
             throw new MissingPluginException("WorldGuard");
         }

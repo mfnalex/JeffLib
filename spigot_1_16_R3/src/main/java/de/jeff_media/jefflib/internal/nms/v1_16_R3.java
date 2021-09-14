@@ -7,8 +7,6 @@ import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
-
 public class v1_16_R3 implements NMSHandler {
 
     /*@Nullable

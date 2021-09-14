@@ -43,7 +43,7 @@ public final class PlaceholderAPIHandler {
     private static final class AnonymousPlaceholderExpansion extends PlaceholderExpansion {
 
         Map<String,Function<OfflinePlayer,String>> functions = new HashMap<>();
-        List<BiFunction<OfflinePlayer,String,String>> biFunctions = new ArrayList<>();
+        Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
         public @NotNull String getIdentifier() {

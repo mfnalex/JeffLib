@@ -59,10 +59,10 @@ public final class NetUtils {
             throw new JeffLibNotInitializedException();
         }
         try {
-            List<String> answer = downloadToStringList("https://ifconfig.me/ip");
+            final List<String> answer = downloadToStringList("https://ifconfig.me/ip");
             if(answer.isEmpty()) return null;
             return answer.get(0);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             return null;
         }
     }

@@ -16,8 +16,8 @@ public class VariableItemStack {
     private final int maxAmount;
     private final double chance;
 
-    public static VariableItemStack fromConfigurationSection(ConfigurationSection section) {
-        ItemStack itemStack = ItemStackUtils.fromConfigurationSection(section);
+    public static VariableItemStack fromConfigurationSection(final ConfigurationSection section) {
+        final ItemStack itemStack = ItemStackUtils.fromConfigurationSection(section);
         Integer minAmount = null;
         Integer maxAmount = null;
         if(section.isSet("amount") && section.getString("amount").contains("-")) {
@@ -29,7 +29,7 @@ public class VariableItemStack {
             maxAmount = itemStack.getAmount();
         }
         if(minAmount > maxAmount) {
-            int tmp = minAmount;
+            final int tmp = minAmount;
             minAmount = maxAmount;
             maxAmount = minAmount;
         }
@@ -45,7 +45,7 @@ public class VariableItemStack {
     }
 
     public ItemStack getItemStack() {
-        ItemStack clone = itemStack.clone();
+        final ItemStack clone = itemStack.clone();
         clone.setAmount(RandomUtils.getInt(minAmount, maxAmount));
         return clone;
     }
