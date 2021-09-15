@@ -1,8 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.internal.PluginUtils;
-import de.jeff_media.jefflib.internal.blackhole.ChatMuteHandler;
-import de.jeff_media.jefflib.internal.nms.NMSHandler;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import lombok.experimental.UtilityClass;
@@ -21,10 +20,10 @@ public final class JeffLib {
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
-    private static NMSHandler nmsHandler;
+    private static AbstractNMSHandler abstractNmsHandler;
 
-    public static NMSHandler getNMSHandler() {
-        return nmsHandler;
+    public static AbstractNMSHandler getNMSHandler() {
+        return abstractNmsHandler;
     }
 
     /**
@@ -73,17 +72,21 @@ public final class JeffLib {
         try {
             final String packageName = JeffLib.class.getPackage().getName();
             final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            nmsHandler = (NMSHandler) Class.forName(packageName + ".internal.nms." + internalsName).newInstance();
+            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
         } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException  exception) {
             plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }
+
+        /*
         // Doing this delayed because 99% of people forget to put ProtocolLib into their "softdepend" list (including me)
         Bukkit.getScheduler().runTaskLater(JeffLib.getPlugin(), () -> {
             if(PluginUtils.isInstalledAndEnabled("ProtocolLib")) {
                 ChatMuteHandler.init();
             }
         }, 20L);
+        */
+
     }
 
     /**
