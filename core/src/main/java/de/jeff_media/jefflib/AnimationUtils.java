@@ -9,6 +9,9 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Animation related methods. Currently only contains methods to play custom Totem animations
+ */
 @UtilityClass
 public class AnimationUtils {
 

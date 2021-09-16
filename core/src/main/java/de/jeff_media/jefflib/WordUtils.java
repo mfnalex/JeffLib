@@ -2,6 +2,8 @@ package de.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -27,6 +29,17 @@ public class WordUtils {
         while (iterator.hasNext()) {
             builder.append(upperCaseFirstLetterOnly(iterator.next()));
             if (iterator.hasNext()) builder.append(" ");
+        }
+        return builder.toString();
+    }
+
+    public static String getNiceName(@NotNull final NamespacedKey key) {
+        final String[] split = key.getKey().split("_");
+        final Iterator<String> iterator = Arrays.stream(split).iterator();
+        final StringBuilder builder = new StringBuilder();
+        while (iterator.hasNext()) {
+            builder.append(upperCaseFirstLetterOnly(iterator.next().toLowerCase(Locale.ROOT)));
+            if(iterator.hasNext()) builder.append(" ");
         }
         return builder.toString();
     }

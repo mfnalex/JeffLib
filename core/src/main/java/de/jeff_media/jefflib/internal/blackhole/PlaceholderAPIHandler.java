@@ -27,6 +27,7 @@ public final class PlaceholderAPIHandler {
         if(expansion == null) {
             expansion = new AnonymousPlaceholderExpansion();
             expansion.register();
+            expansion.persist();
         }
     }
 
