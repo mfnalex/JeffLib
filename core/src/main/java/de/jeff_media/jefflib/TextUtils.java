@@ -149,16 +149,16 @@ public class TextUtils {
      * @return Translated text
      */
     public static String format(String text, @Nullable final OfflinePlayer player) {
-        text = color(text);
         text = replaceEmojis(text);
         text = replacePlaceholders(text, player);
+        text = color(text);
         return text;
     }
 
     public static List<String> format(List<String> text, @Nullable final OfflinePlayer player) {
         text = new ArrayList<>(text);
         for(int i = 0; i < text.size(); i++) {
-            text.set(i, format(text.get(i)));
+            text.set(i, format(text.get(i),player));
         }
         return text;
     }
@@ -172,6 +172,7 @@ public class TextUtils {
      */
     @SuppressWarnings("NonThreadSafeLazyInitialization")
     public static String replacePlaceholders(String text, @Nullable final OfflinePlayer player) {
+        //System.out.println("Replacing placeholders");
         if (placerholderApiPlugin == null) {
             placerholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
         }

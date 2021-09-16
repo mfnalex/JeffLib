@@ -50,5 +50,15 @@
             <artifactId>JeffLib-spigot_1_16_R3</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_16_R2</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_16_R1</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 </project>

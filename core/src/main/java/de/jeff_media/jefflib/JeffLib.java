@@ -1,13 +1,20 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.data.Hologram;
+import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
+import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import de.jeff_media.jefflib.HologramManager;
 import de.jeff_media.jefflib.internal.PluginUtils;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.Plugin;
 
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -53,6 +60,7 @@ public final class JeffLib {
         return random;
     }
 
+
     /**
      * Initializes the library. Needed for some methods.
      *
@@ -62,6 +70,7 @@ public final class JeffLib {
     public static void init(final Plugin plugin, final boolean trackBlocks) {
         main = plugin;
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
+        ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
         if (trackBlocks) {
             if (McVersion.isAtLeast(1, 16, 3)) {
                 Bukkit.getPluginManager().registerEvents(new BlockTrackListener(), main);
