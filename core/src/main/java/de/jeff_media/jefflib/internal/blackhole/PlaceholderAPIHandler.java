@@ -27,7 +27,6 @@ public final class PlaceholderAPIHandler {
         if(expansion == null) {
             expansion = new AnonymousPlaceholderExpansion();
             expansion.register();
-            expansion.persist();
         }
     }
 
@@ -43,8 +42,13 @@ public final class PlaceholderAPIHandler {
 
     private static final class AnonymousPlaceholderExpansion extends PlaceholderExpansion {
 
-        Map<String,Function<OfflinePlayer,String>> functions = new HashMap<>();
-        Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
+        @Override
+        public boolean persist() {
+            return true;
+        }
+
+        private final Map<String,Function<OfflinePlayer,String>> functions = new HashMap<>();
+        private final Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
         public @NotNull String getIdentifier() {
