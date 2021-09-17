@@ -25,7 +25,26 @@ public final class ItemStackUtils {
         return itemStack == null || itemStack.getType() == Material.AIR || itemStack.getAmount() == 1;
     }
 
-    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
+    public ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
+        return fromConfigurationSection(config, new HashMap<>());
+    }
+
+    private String replaceInString(String string, HashMap<String,String> placeholders) {
+        for(Map.Entry<String, String> entry : placeholders.entrySet()) {
+            if(entry.getKey()==null ||entry.getValue()==null) continue;
+            string = string.replace(entry.getKey(), entry.getValue());
+        }
+        return string;
+    }
+
+    private List<String> replaceInString(List<String> strings, HashMap<String,String> placeholders) {
+        for(int i = 0; i < strings.size(); i++) {
+            strings.set(i, replaceInString(strings.get(i),placeholders));
+        }
+        return strings;
+    }
+
+    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, HashMap<String,String> placeholders) {
         final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;
@@ -40,15 +59,15 @@ public final class ItemStackUtils {
         List<String> lore = null;
         if(config.isSet("lore")) {
             if(config.isString("lore")) {
-                lore.add(TextUtils.format(config.getString("lore")));
+                lore.add(TextUtils.format(replaceInString(config.getString("lore"),placeholders)));
             } else {
-                lore = TextUtils.format(config.getStringList("lore"),null);
+                lore = TextUtils.format(replaceInString(config.getStringList("lore"),placeholders),null);
             }
         }
 
         String name = null;
         if(config.isSet("display-name")) {
-            name = TextUtils.format(config.getString("display-name"));
+            name = TextUtils.format(replaceInString(config.getString("display-name"),placeholders));
         }
 
         Integer modelData = null;

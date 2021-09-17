@@ -4,7 +4,11 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.jetbrains.annotations.NotNull;
 
+import javax.annotation.Nullable;
+import javax.annotation.ParametersAreNonnullByDefault;
+import javax.annotation.ParametersAreNullableByDefault;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -13,6 +17,20 @@ import java.util.function.Predicate;
  */
 @UtilityClass
 public final class BlockUtils {
+
+    @Nullable
+    public static Block getLowestBlockAt(@NotNull final  World world, final int x, final int z) {
+        for(int y = world.getMinHeight(); y < world.getMaxHeight(); y++) {
+            final Block current = world.getBlockAt(x,y,z);
+            if(!current.getType().isAir()) return current;
+        }
+        return null;
+    }
+
+    @Nullable
+    public static Block getLowestBlockAt(@NotNull Location location) {
+        return getLowestBlockAt(location.getWorld(), location.getBlockX(), location.getBlockZ());
+    }
 
     /**
      * Returns a list of entries containing all BlockData from a given block
