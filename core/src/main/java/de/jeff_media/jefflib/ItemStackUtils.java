@@ -54,7 +54,14 @@ public final class ItemStackUtils {
             }
         }
 
-        final ItemStack item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
+        final ItemStack item;
+
+        if(materialName.equalsIgnoreCase("PLAYER_HEAD") && config.isSet("base64") && config.isString("base64")) {
+            item = SkullUtils.getHead(config.getString("base64"));
+            //System.out.println("Creating custom head with base64" + config.getString("base64"));
+        } else {
+            item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
+        }
 
         List<String> lore = null;
         if(config.isSet("lore")) {
