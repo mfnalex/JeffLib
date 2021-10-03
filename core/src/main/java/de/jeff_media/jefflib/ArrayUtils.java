@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -12,6 +13,13 @@ import java.util.List;
  */
 @UtilityClass
 public class ArrayUtils {
+
+    public static <T> T[] createArray(@NotNull final Class<T> componentType) {
+        return createArray(componentType, 0);
+    }
+    public static <T> T[] createArray(@NotNull final Class<T> componentType, final int length) {
+        return (T[]) Array.newInstance(componentType, length);
+    }
 
     /**
      * Removes an item from the array at a given location, returning the remaining array

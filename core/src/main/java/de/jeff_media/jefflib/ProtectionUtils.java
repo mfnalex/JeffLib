@@ -22,105 +22,35 @@ import org.jetbrains.annotations.NotNull;
 public class ProtectionUtils {
 
     public static boolean canBreak(@NotNull final Player player, @NotNull final Block block) {
-        final BlockBreakEvent event = new BlockBreakEvent(block, new ShadowPlayer(player));
+        return canBreak(player, block, true);
+    }
+
+    public static boolean canBreak(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        final BlockBreakEvent event = new BlockBreakEvent(block, mute ? new ShadowPlayer(player) : player);
         Bukkit.getPluginManager().callEvent(event);
         return !event.isCancelled();
     }
 
     public static boolean canPlace(@NotNull final Player player, @NotNull final Block block) {
-        final BlockPlaceEvent event = new BlockPlaceEvent(block,block.getState(),block.getRelative(BlockFace.DOWN),player.getInventory().getItemInMainHand(),new ShadowPlayer(player),true,EquipmentSlot.HAND);
+        return canPlace(player, block, true);
+    }
+
+    public static boolean canPlace(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        final BlockPlaceEvent event = new BlockPlaceEvent(block,block.getState(),block.getRelative(BlockFace.DOWN),player.getInventory().getItemInMainHand(),mute ? new ShadowPlayer(player) : player,true,EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         return !event.isCancelled();
     }
 
     public static boolean canInteract(@NotNull final Player player, @NotNull final Block block) {
-        final PlayerInteractEvent event = new PlayerInteractEvent(new ShadowPlayer(player), Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP,EquipmentSlot.HAND);
+        return canInteract(player, block, true);
+    }
+
+    public static boolean canInteract(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP,EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         if(event.isCancelled() || event.useInteractedBlock() == Event.Result.DENY) {
             return false;
         }
         return true;
     }
-
-    /*public static boolean canBreak(@NotNull final Player player, @NotNull final Block block) {
-        final boolean alreadyMuted = ChatUtils.isDeaf(player);
-        ChatUtils.setDeaf(player, true);
-
-        try {
-            if (!WorldGuardUtils.canBreak(player, block.getLocation())) {
-                ChatUtils.setDeaf(player, alreadyMuted);
-                return false;
-            }
-        } catch (final MissingPluginException ignored) {
-
-        }
-
-        final BlockBreakEvent event = new BlockBreakEvent(block, player);
-        Bukkit.getPluginManager().callEvent(event);
-        try {
-            ChatUtils.setDeaf(player, alreadyMuted);
-        } catch (final Throwable ignored) {
-
-        }
-        return !event.isCancelled();
-    }
-
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Block block) {
-        final boolean alreadyMuted = ChatUtils.isDeaf(player);
-        ChatUtils.setDeaf(player, true);
-        try {
-            if (!WorldGuardUtils.canPlace(player, block.getLocation())) {
-                ChatUtils.setDeaf(player, alreadyMuted);
-                return false;
-            }
-        } catch (final MissingPluginException ignored) {
-
-        }
-
-        final BlockPlaceEvent event = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.SELF), new ItemStack(block.getType()),player,true, EquipmentSlot.HAND);
-        Bukkit.getPluginManager().callEvent(event);
-        try {
-            ChatUtils.setDeaf(player, alreadyMuted);
-        } catch (final Throwable ignored) {
-
-        }
-        return !event.isCancelled();
-    }
-
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Block block) {
-        final boolean alreadyMuted = ChatUtils.isDeaf(player);
-        ChatUtils.setDeaf(player, true);
-        try {
-            if (!WorldGuardUtils.canInteract(player, block.getLocation())) {
-                ChatUtils.setDeaf(player, alreadyMuted);
-                return false;
-            }
-        } catch (final MissingPluginException ignored) {
-
-        }
-
-        final PlayerInteractEvent event = new PlayerInteractEvent(player, Action.RIGHT_CLICK_BLOCK,player.getInventory().getItemInMainHand(),block,BlockFace.SELF, EquipmentSlot.HAND);
-        Bukkit.getPluginManager().callEvent(event);
-        try {
-            ChatUtils.setDeaf(player, alreadyMuted);
-        } catch (final Throwable ignored) {
-
-        }
-        if(event.useInteractedBlock() == Event.Result.DENY || event.isCancelled()) {
-            return false;
-        }
-        return true;
-    }
-
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) {
-        return canBreak(player, location.getBlock());
-    }
-
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) {
-        return canPlace(player, location.getBlock());
-    }
-
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) {
-        return canInteract(player, location.getBlock());
-    }*/
 }

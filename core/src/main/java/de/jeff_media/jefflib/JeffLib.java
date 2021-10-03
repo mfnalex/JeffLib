@@ -60,6 +60,10 @@ public final class JeffLib {
         return random;
     }
 
+    public static void listenOnPlayerScrollEvent() {
+        JeffLibNotInitializedException.check();
+        Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
+    }
 
     /**
      * Initializes the library. Needed for some methods.
@@ -69,7 +73,6 @@ public final class JeffLib {
      */
     public static void init(final Plugin plugin, final boolean trackBlocks) {
         main = plugin;
-        Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
         if (trackBlocks) {
             if (McVersion.isAtLeast(1, 16, 3)) {
@@ -86,15 +89,6 @@ public final class JeffLib {
             plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }
-
-        /*
-        // Doing this delayed because 99% of people forget to put ProtocolLib into their "softdepend" list (including me)
-        Bukkit.getScheduler().runTaskLater(JeffLib.getPlugin(), () -> {
-            if(PluginUtils.isInstalledAndEnabled("ProtocolLib")) {
-                ChatMuteHandler.init();
-            }
-        }, 20L);
-        */
 
     }
 
