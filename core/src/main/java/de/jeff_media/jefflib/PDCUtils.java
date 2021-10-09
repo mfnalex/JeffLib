@@ -2,34 +2,26 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
  * PersistentDataContainer related methods.
  *
- * @deprecated Draft, unfinished at the moment
+ * ALL methods accepting Strings as Keys need JeffLib to be initialized first!
  */
-@Deprecated
 @UtilityClass
 public class PDCUtils {
-    public static final PersistentDataType<Byte, Byte> BYTE = PersistentDataType.BYTE;
-    public static final PersistentDataType<byte[], byte[]> BYTES = PersistentDataType.BYTE_ARRAY;
-    public static final PersistentDataType<String, String> STRING = PersistentDataType.STRING;
-    public static final PersistentDataType<Integer, Integer> INT = PersistentDataType.INTEGER;
-    public static final PersistentDataType<int[], int[]> INTS = PersistentDataType.INTEGER_ARRAY;
-    public static final PersistentDataType<Double, Double> DOUBLE = PersistentDataType.DOUBLE;
-    public static final PersistentDataType<PersistentDataContainer, PersistentDataContainer> CONTAINER = PersistentDataType.TAG_CONTAINER;
-    public static final PersistentDataType<PersistentDataContainer[], PersistentDataContainer[]> CONTAINERS = PersistentDataType.TAG_CONTAINER_ARRAY;
 
     private static final Plugin plugin = JeffLib.getPlugin();
 
@@ -60,14 +52,28 @@ public class PDCUtils {
                                   @NotNull final String key,
                                   @NotNull final PersistentDataType<T, Z> type,
                                   @NotNull final Z value) {
-        holder.getPersistentDataContainer().set(getKey(key), type, value);
+        set(holder, getKey(key), type, value);
+    }
+
+    public static <T, Z> void set(@NotNull final PersistentDataHolder holder,
+                                  @NotNull final NamespacedKey key,
+                                  @NotNull final PersistentDataType<T, Z> type,
+                                  @NotNull final Z value) {
+        holder.getPersistentDataContainer().set(key, type, value);
     }
 
     @Nullable
     public static <T, Z> Z get(@NotNull final PersistentDataHolder holder,
                                @NotNull final String key,
                                @NotNull final PersistentDataType<T, Z> type) {
-        return holder.getPersistentDataContainer().get(getKey(key), type);
+        return get(holder, getKey(key), type);
+    }
+
+    @Nullable
+    public static <T, Z> Z get(@NotNull final PersistentDataHolder holder,
+                               @NotNull final NamespacedKey key,
+                               @NotNull final PersistentDataType<T, Z> type) {
+        return holder.getPersistentDataContainer().get(key, type);
     }
 
     @NotNull
@@ -75,14 +81,30 @@ public class PDCUtils {
                                         @NotNull final String key,
                                         @NotNull final PersistentDataType<T, Z> type,
                                         @NotNull final Z defaultValue) {
-        return holder.getPersistentDataContainer().getOrDefault(getKey(key), type, defaultValue);
+        return getOrDefault(holder, getKey(key), type, defaultValue);
+    }
+
+    @NotNull
+    public static <T, Z> Z getOrDefault(@NotNull final PersistentDataHolder holder,
+                                        @NotNull final NamespacedKey key,
+                                        @NotNull final PersistentDataType<T, Z> type,
+                                        @NotNull final Z defaultValue) {
+        return holder.getPersistentDataContainer().getOrDefault(key, type, defaultValue);
     }
 
     public static <T, Z> void set(@NotNull final ItemStack holder,
                                   @NotNull final String key,
                                   @NotNull final PersistentDataType<T, Z> type,
                                   @NotNull final Z value) {
+        set(holder, getKey(key), type, value);
+    }
+
+    public static <T, Z> void set(@NotNull final ItemStack holder,
+                                  @NotNull final NamespacedKey key,
+                                  @NotNull final PersistentDataType<T, Z> type,
+                                  @NotNull final Z value) {
         final ItemMeta meta = holder.getItemMeta();
+        Objects.requireNonNull(meta);
         set(meta, key, type, value);
         holder.setItemMeta(meta);
     }
@@ -91,6 +113,15 @@ public class PDCUtils {
     public static <T, Z> Z get(@NotNull final ItemStack holder,
                                @NotNull final String key,
                                @NotNull final PersistentDataType<T, Z> type) {
+        Objects.requireNonNull(holder.getItemMeta());
+        return get(holder.getItemMeta(), getKey(key), type);
+    }
+
+    @Nullable
+    public static <T, Z> Z get(@NotNull final ItemStack holder,
+                               @NotNull final NamespacedKey key,
+                               @NotNull final PersistentDataType<T, Z> type) {
+        Objects.requireNonNull(holder.getItemMeta());
         return get(holder.getItemMeta(), key, type);
     }
 
@@ -99,18 +130,39 @@ public class PDCUtils {
                                         @NotNull final String key,
                                         @NotNull final PersistentDataType<T, Z> type,
                                         @NotNull final Z defaultValue) {
+        Objects.requireNonNull(holder.getItemMeta());
+        return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
+    }
+
+    @NotNull
+    public static <T, Z> Z getOrDefault(@NotNull final ItemStack holder,
+                                        @NotNull final NamespacedKey key,
+                                        @NotNull final PersistentDataType<T, Z> type,
+                                        @NotNull final Z defaultValue) {
+        Objects.requireNonNull(holder.getItemMeta());
         return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
     }
 
     public static void remove(@NotNull final PersistentDataHolder holder,
                               @NotNull final String key) {
-        holder.getPersistentDataContainer().remove(getKey(key));
+        remove(holder, getKey(key));
+    }
+
+    public static void remove(@NotNull final PersistentDataHolder holder,
+                              @NotNull final NamespacedKey key) {
+        holder.getPersistentDataContainer().remove(key);
     }
 
     public static <T, Z> boolean has(@NotNull final PersistentDataHolder holder,
                                      @NotNull final String key,
                                      @NotNull final PersistentDataType<T, Z> type) {
         return holder.getPersistentDataContainer().has(getKey(key), type);
+    }
+
+    public static <T, Z> boolean has(@NotNull final PersistentDataHolder holder,
+                                     @NotNull final NamespacedKey key,
+                                     @NotNull final PersistentDataType<T, Z> type) {
+        return holder.getPersistentDataContainer().has(key, type);
     }
 
     @NotNull
@@ -123,24 +175,42 @@ public class PDCUtils {
     }
 
     public static void remove(@NotNull final ItemStack holder,
-                              @NotNull final String key) {
+                              @NotNull final NamespacedKey key) {
         final ItemMeta meta = holder.getItemMeta();
+        Objects.requireNonNull(meta);
         remove(meta, key);
         holder.setItemMeta(meta);
+    }
+
+    public static void remove(@NotNull final ItemStack holder,
+                              @NotNull final String key) {
+        final ItemMeta meta = holder.getItemMeta();
+        Objects.requireNonNull(meta);
+        remove(meta, getKey(key));
     }
 
     public <T, Z> boolean has(@NotNull final ItemStack holder,
                               @NotNull final String key,
                               @NotNull final PersistentDataType<T, Z> type) {
+        Objects.requireNonNull(holder.getItemMeta());
+        return has(holder.getItemMeta(), getKey(key), type);
+    }
+
+    public <T, Z> boolean has(@NotNull final ItemStack holder,
+                              @NotNull final NamespacedKey key,
+                              @NotNull final PersistentDataType<T, Z> type) {
+        Objects.requireNonNull(holder.getItemMeta());
         return has(holder.getItemMeta(), key, type);
     }
 
     @NotNull
     public Set<NamespacedKey> getKeys(@NotNull final ItemStack holder) {
+        Objects.requireNonNull(holder.getItemMeta());
         return getKeys(holder.getItemMeta());
     }
 
     public static boolean isEmpty(@NotNull final ItemStack holder) {
+        Objects.requireNonNull(holder.getItemMeta());
         return isEmpty(holder.getItemMeta());
     }
 
