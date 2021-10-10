@@ -146,9 +146,9 @@ public final class HexColor {
     }
 
     /**
-     * Converts the HexColor into color codes readable by {@link net.md_5.bungee.api.ChatColor#translateAlternateColorCodes(char, String)}, using the ampersand (&) as alternate color character
+     * Converts the HexColor into color codes readable by {@link net.md_5.bungee.api.ChatColor#translateAlternateColorCodes(char, String)}, using the ampersand (&amp;) as alternate color character
      *
-     * @return HexColor as color code, e.g. "&x&0&0&f&f&0&0"
+     * @return HexColor as color code, e.g. "&amp;x&amp;0&amp;0&amp;f&amp;f&amp;0&amp;0"
      */
     public String toColorCode() {
         final StringBuilder sb = new StringBuilder("&x");

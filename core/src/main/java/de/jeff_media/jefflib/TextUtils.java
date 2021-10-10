@@ -94,8 +94,8 @@ public class TextUtils {
     }
 
     /**
-     * Replaces color codes using &. Also supports hex colors using <pre>&x&r&r&g&g&b&b</pre>, <pre>&#rrggbb</pre> and <pre><#rrggbb></pre>,
-     * and gradients using <pre><#rrggbb> <#/rrggbb> [<#/rrggbb> ...]</pre>
+     * Replaces color codes using &amp;. Also supports hex colors using <pre>&amp;x&amp;r&amp;r&amp;g&amp;g&amp;b&amp;b</pre>, <pre>&amp;#rrggbb</pre> and <pre>&lt;#rrggbb></pre>,
+     * and gradients using <pre>&lt;#rrggbb> &lt;#/rrggbb></pre>
      *
      * @param text Text to translate
      * @return Translated text
