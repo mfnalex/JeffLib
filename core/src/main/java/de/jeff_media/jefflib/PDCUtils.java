@@ -2,7 +2,6 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.Validate;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -17,13 +16,48 @@ import java.util.Set;
 
 /**
  * PersistentDataContainer related methods.
- *
+ * <p>
  * ALL methods accepting Strings as Keys need JeffLib to be initialized first!
  */
 @UtilityClass
+@SuppressWarnings("unused")
 public class PDCUtils {
 
     private static final Plugin plugin = JeffLib.getPlugin();
+
+    /**
+     * Sets a value in the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    Key name
+     * @param type   Data type
+     * @param value  Value
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
+    public static <T, Z> void set(@NotNull final PersistentDataHolder holder,
+                                  @NotNull final String key,
+                                  @NotNull final PersistentDataType<T, Z> type,
+                                  @NotNull final Z value) {
+        set(holder, getKey(key), type, value);
+    }
+
+    /**
+     * Sets a value in the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param type   Data type
+     * @param value  Value
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
+    public static <T, Z> void set(@NotNull final PersistentDataHolder holder,
+                                  @NotNull final NamespacedKey key,
+                                  @NotNull final PersistentDataType<T, Z> type,
+                                  @NotNull final Z value) {
+        holder.getPersistentDataContainer().set(key, type, value);
+    }
 
     /**
      * Creates a NamespacedKey. <b>JeffLib has to be initialized first.</b>
@@ -39,29 +73,14 @@ public class PDCUtils {
     }
 
     /**
-     * Sets a value in the holder's PDC
+     * Gets a value from the holder's PDC
      *
      * @param holder Holder
      * @param key    Key name
      * @param type   Data type
-     * @param value  Value
-     * @param <T>    primitive data type
-     * @param <Z>    complex data type
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
      */
-    public static <T, Z> void set(@NotNull final PersistentDataHolder holder,
-                                  @NotNull final String key,
-                                  @NotNull final PersistentDataType<T, Z> type,
-                                  @NotNull final Z value) {
-        set(holder, getKey(key), type, value);
-    }
-
-    public static <T, Z> void set(@NotNull final PersistentDataHolder holder,
-                                  @NotNull final NamespacedKey key,
-                                  @NotNull final PersistentDataType<T, Z> type,
-                                  @NotNull final Z value) {
-        holder.getPersistentDataContainer().set(key, type, value);
-    }
-
     @Nullable
     public static <T, Z> Z get(@NotNull final PersistentDataHolder holder,
                                @NotNull final String key,
@@ -69,6 +88,15 @@ public class PDCUtils {
         return get(holder, getKey(key), type);
     }
 
+    /**
+     * Gets a value from the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param type   Data type
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
     @Nullable
     public static <T, Z> Z get(@NotNull final PersistentDataHolder holder,
                                @NotNull final NamespacedKey key,
@@ -76,22 +104,16 @@ public class PDCUtils {
         return holder.getPersistentDataContainer().get(key, type);
     }
 
-    @NotNull
-    public static <T, Z> Z getOrDefault(@NotNull final PersistentDataHolder holder,
-                                        @NotNull final String key,
-                                        @NotNull final PersistentDataType<T, Z> type,
-                                        @NotNull final Z defaultValue) {
-        return getOrDefault(holder, getKey(key), type, defaultValue);
-    }
-
-    @NotNull
-    public static <T, Z> Z getOrDefault(@NotNull final PersistentDataHolder holder,
-                                        @NotNull final NamespacedKey key,
-                                        @NotNull final PersistentDataType<T, Z> type,
-                                        @NotNull final Z defaultValue) {
-        return holder.getPersistentDataContainer().getOrDefault(key, type, defaultValue);
-    }
-
+    /**
+     * Sets a value in the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param type   Data type
+     * @param value  Value
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
     public static <T, Z> void set(@NotNull final ItemStack holder,
                                   @NotNull final String key,
                                   @NotNull final PersistentDataType<T, Z> type,
@@ -99,6 +121,16 @@ public class PDCUtils {
         set(holder, getKey(key), type, value);
     }
 
+    /**
+     * Sets a value in the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param type   Data type
+     * @param value  Value
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
     public static <T, Z> void set(@NotNull final ItemStack holder,
                                   @NotNull final NamespacedKey key,
                                   @NotNull final PersistentDataType<T, Z> type,
@@ -109,6 +141,15 @@ public class PDCUtils {
         holder.setItemMeta(meta);
     }
 
+    /**
+     * Gets a value from the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    Key name
+     * @param type   Data type
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
     @Nullable
     public static <T, Z> Z get(@NotNull final ItemStack holder,
                                @NotNull final String key,
@@ -117,6 +158,15 @@ public class PDCUtils {
         return get(holder.getItemMeta(), getKey(key), type);
     }
 
+    /**
+     * Gets a value from the holder's PDC
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param type   Data type
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     */
     @Nullable
     public static <T, Z> Z get(@NotNull final ItemStack holder,
                                @NotNull final NamespacedKey key,
@@ -125,6 +175,16 @@ public class PDCUtils {
         return get(holder.getItemMeta(), key, type);
     }
 
+    /**
+     * Gets a value from the holder's PDC or the default value when the key is not set
+     *
+     * @param holder       Holder
+     * @param key          Key name
+     * @param type         Data type
+     * @param defaultValue Default value
+     * @param <T>          Primitive data type
+     * @param <Z>          Complex data type
+     */
     @NotNull
     public static <T, Z> Z getOrDefault(@NotNull final ItemStack holder,
                                         @NotNull final String key,
@@ -134,6 +194,52 @@ public class PDCUtils {
         return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
     }
 
+    /**
+     * Gets a value from the holder's PDC or the default value when the key is not set
+     *
+     * @param holder       Holder
+     * @param key          Key name
+     * @param type         Data type
+     * @param defaultValue Default value
+     * @param <T>          Primitive data type
+     * @param <Z>          Complex data type
+     */
+    @NotNull
+    public static <T, Z> Z getOrDefault(@NotNull final PersistentDataHolder holder,
+                                        @NotNull final String key,
+                                        @NotNull final PersistentDataType<T, Z> type,
+                                        @NotNull final Z defaultValue) {
+        return getOrDefault(holder, getKey(key), type, defaultValue);
+    }
+
+    /**
+     * Gets a value from the holder's PDC or the default value when the key is not set
+     *
+     * @param holder       Holder
+     * @param key          NamespacedKey
+     * @param type         Data type
+     * @param defaultValue Default value
+     * @param <T>          Primitive data type
+     * @param <Z>          Complex data type
+     */
+    @NotNull
+    public static <T, Z> Z getOrDefault(@NotNull final PersistentDataHolder holder,
+                                        @NotNull final NamespacedKey key,
+                                        @NotNull final PersistentDataType<T, Z> type,
+                                        @NotNull final Z defaultValue) {
+        return holder.getPersistentDataContainer().getOrDefault(key, type, defaultValue);
+    }
+
+    /**
+     * Gets a value from the holder's PDC or the default value when the key is not set
+     *
+     * @param holder       Holder
+     * @param key          NamespacedKey
+     * @param type         Data type
+     * @param defaultValue Default value
+     * @param <T>          Primitive data type
+     * @param <Z>          Complex data type
+     */
     @NotNull
     public static <T, Z> Z getOrDefault(@NotNull final ItemStack holder,
                                         @NotNull final NamespacedKey key,
@@ -143,37 +249,46 @@ public class PDCUtils {
         return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
     }
 
+    /**
+     * Removes a key from the holder's PDC
+     * @param holder    Holder
+     * @param key       Key name
+     */
     public static void remove(@NotNull final PersistentDataHolder holder,
                               @NotNull final String key) {
         remove(holder, getKey(key));
     }
 
+    /**
+     * Removes a key from the holder's PDC
+     * @param holder    Holder
+     * @param key       NamespacedKey
+     */
     public static void remove(@NotNull final PersistentDataHolder holder,
                               @NotNull final NamespacedKey key) {
         holder.getPersistentDataContainer().remove(key);
     }
 
+    /**
+     * Checks whether the holder's PDC contains a key
+     * @param holder    Holder
+     * @param key       Key name
+     * @param type      Data type
+     * @param <T>       Primitive data type
+     * @param <Z>       Complex data type
+     * @return          True when the PDC contains the key, otherwise false
+     */
     public static <T, Z> boolean has(@NotNull final PersistentDataHolder holder,
                                      @NotNull final String key,
                                      @NotNull final PersistentDataType<T, Z> type) {
         return holder.getPersistentDataContainer().has(getKey(key), type);
     }
 
-    public static <T, Z> boolean has(@NotNull final PersistentDataHolder holder,
-                                     @NotNull final NamespacedKey key,
-                                     @NotNull final PersistentDataType<T, Z> type) {
-        return holder.getPersistentDataContainer().has(key, type);
-    }
-
-    @NotNull
-    public static Set<NamespacedKey> getKeys(@NotNull final PersistentDataHolder holder) {
-        return holder.getPersistentDataContainer().getKeys();
-    }
-
-    public static boolean isEmpty(@NotNull final PersistentDataHolder holder) {
-        return holder.getPersistentDataContainer().isEmpty();
-    }
-
+    /**
+     * Removes a key from the holder's PDC
+     * @param holder    Holder
+     * @param key       NamespacedKey
+     */
     public static void remove(@NotNull final ItemStack holder,
                               @NotNull final NamespacedKey key) {
         final ItemMeta meta = holder.getItemMeta();
@@ -182,6 +297,11 @@ public class PDCUtils {
         holder.setItemMeta(meta);
     }
 
+    /**
+     * Removes a key from the holder's PDC
+     * @param holder    Holder
+     * @param key       Key name
+     */
     public static void remove(@NotNull final ItemStack holder,
                               @NotNull final String key) {
         final ItemMeta meta = holder.getItemMeta();
@@ -189,6 +309,15 @@ public class PDCUtils {
         remove(meta, getKey(key));
     }
 
+    /**
+     * Checks whether the holder's PDC contains a key
+     * @param holder    Holder
+     * @param key       Key name
+     * @param type      Data type
+     * @param <T>       Primitive data type
+     * @param <Z>       Complex data type
+     * @return          True when the PDC contains the key, otherwise false
+     */
     public <T, Z> boolean has(@NotNull final ItemStack holder,
                               @NotNull final String key,
                               @NotNull final PersistentDataType<T, Z> type) {
@@ -196,6 +325,30 @@ public class PDCUtils {
         return has(holder.getItemMeta(), getKey(key), type);
     }
 
+    /**
+     * Checks whether the holder's PDC contains a key
+     * @param holder    Holder
+     * @param key       NamespacedKey
+     * @param type      Data type
+     * @param <T>       Primitive data type
+     * @param <Z>       Complex data type
+     * @return          True when the PDC contains the key, otherwise false
+     */
+    public static <T, Z> boolean has(@NotNull final PersistentDataHolder holder,
+                                     @NotNull final NamespacedKey key,
+                                     @NotNull final PersistentDataType<T, Z> type) {
+        return holder.getPersistentDataContainer().has(key, type);
+    }
+
+    /**
+     * Checks whether the holder's PDC contains a key
+     * @param holder    Holder
+     * @param key       NamespacedKey
+     * @param type      Data type
+     * @param <T>       Primitive data type
+     * @param <Z>       Complex data type
+     * @return          True when the PDC contains the key, otherwise false
+     */
     public <T, Z> boolean has(@NotNull final ItemStack holder,
                               @NotNull final NamespacedKey key,
                               @NotNull final PersistentDataType<T, Z> type) {
@@ -203,15 +356,44 @@ public class PDCUtils {
         return has(holder.getItemMeta(), key, type);
     }
 
+    /**
+     * Returns a Set of all the NamespacedKeys the holder's PDC contains
+     * @param holder    Holder
+     * @return          Set of all NamespacedKeys the holder's PDC contains
+     */
     @NotNull
     public Set<NamespacedKey> getKeys(@NotNull final ItemStack holder) {
         Objects.requireNonNull(holder.getItemMeta());
         return getKeys(holder.getItemMeta());
     }
 
+    /**
+     * Returns a Set of all the NamespacedKeys the holder's PDC contains
+     * @param holder    Holder
+     * @return          Set of all NamespacedKeys the holder's PDC contains
+     */
+    @NotNull
+    public static Set<NamespacedKey> getKeys(@NotNull final PersistentDataHolder holder) {
+        return holder.getPersistentDataContainer().getKeys();
+    }
+
+    /**
+     * Checks whether the holder's PDC is empty
+     * @param holder    Holder
+     * @return          True when the holder's PDC is empty, otherwise false
+     */
     public static boolean isEmpty(@NotNull final ItemStack holder) {
         Objects.requireNonNull(holder.getItemMeta());
         return isEmpty(holder.getItemMeta());
+    }
+
+    /**
+     * Checks whether the holder's PDC is empty
+     * @param holder    Holder
+     * @return          True when the holder's PDC is empty, otherwise false
+     */
+    public static boolean isEmpty(@NotNull final PersistentDataHolder holder) {
+        return holder.getPersistentDataContainer().isEmpty();
     }
 
 }

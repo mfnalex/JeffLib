@@ -9,9 +9,7 @@ import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_16_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
-import org.bukkit.craftbukkit.v1_16_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftChatMessage;
 //import org.bukkit.entity.Entity;
@@ -21,9 +19,9 @@ import org.jetbrains.annotations.NotNull;
 public class NMSHandler implements AbstractNMSHandler {
 
     @Override
-    public void changeNMSEntityName(@NotNull Object entity, @NotNull String name) {
+    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for(final Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new PacketPlayOutEntityMetadata(((Entity)entity).getId(),((Entity)entity).getDataWatcher(),true));
         }
     }
@@ -60,17 +58,17 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void showEntityToPlayer(@NotNull final Object entity, @NotNull Player player) {
-        PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
+    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
+        final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
         PacketUtils.sendPacket(player, packetSpawn);
 
-        PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
+        final PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
         PacketUtils.sendPacket(player, packetMeta);
     }
 
     @Override
-    public void hideEntityFromPlayer(@NotNull Object entity, @NotNull Player player) {
-        PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
+    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
+        final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
         PacketUtils.sendPacket(player, packetDestroy);
     }
 
@@ -80,12 +78,12 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public Pair<String, String> getBiomeName(@NotNull Location location) {
+    public Pair<String, String> getBiomeName(@NotNull final Location location) {
         return NMSBiomeUtils.getBiomeName(location);
     }
 
     @Override
-    public void playTotemAnimation(final Player player) {
+    public void playTotemAnimation(final @NotNull Player player) {
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<PacketListenerPlayOut> packet = new PacketPlayOutEntityStatus(entityPlayer, (byte) 35);
         final PlayerConnection playerConnection = entityPlayer.playerConnection;
@@ -93,7 +91,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void setHeadTexture(final Block block, final GameProfile gameProfile) {
+    public void setHeadTexture(final Block block, final @NotNull GameProfile gameProfile) {
         final World world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPosition blockPosition = new BlockPosition(block.getX(), block.getY(), block.getZ());
         final TileEntitySkull skull = (TileEntitySkull) world.getTileEntity(blockPosition);

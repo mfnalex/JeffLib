@@ -6,29 +6,20 @@ import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import net.minecraft.core.BlockPosition;
-import net.minecraft.core.IRegistry;
-import net.minecraft.core.IRegistryWritable;
 import net.minecraft.network.chat.IChatBaseComponent;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
-import net.minecraft.resources.MinecraftKey;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.EntityPlayer;
 import net.minecraft.server.network.PlayerConnection;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityAreaEffectCloud;
 import net.minecraft.world.entity.decoration.EntityArmorStand;
 import net.minecraft.world.level.World;
-import net.minecraft.world.level.biome.BiomeBase;
 import net.minecraft.world.level.block.entity.TileEntitySkull;
-import net.minecraft.world.level.chunk.Chunk;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
 import org.bukkit.entity.Player;
@@ -37,24 +28,24 @@ import org.jetbrains.annotations.NotNull;
 public class NMSHandler implements AbstractNMSHandler {
 
     @Override
-    public void showEntityToPlayer(@NotNull final Object entity, @NotNull Player player) {
-        PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
+    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
+        final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
         PacketUtils.sendPacket(player, packetSpawn);
 
-        PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
+        final PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
         PacketUtils.sendPacket(player, packetMeta);
     }
 
     @Override
-    public void hideEntityFromPlayer(@NotNull Object entity, @NotNull Player player) {
-        PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
+    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
+        final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
         PacketUtils.sendPacket(player, packetDestroy);
     }
 
     @Override
-    public void changeNMSEntityName(@NotNull Object entity, @NotNull String name) {
+    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
-        for(Player player : Bukkit.getOnlinePlayers()) {
+        for(final Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new PacketPlayOutEntityMetadata(((Entity)entity).getId(),((Entity)entity).getDataWatcher(),true));
         }
     }

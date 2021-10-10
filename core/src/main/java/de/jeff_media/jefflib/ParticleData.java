@@ -7,15 +7,12 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.Location;
 import org.bukkit.Particle;
-import org.bukkit.Sound;
-import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Locale;
-import java.util.Objects;
 
 /**
  * Data class to wrap all information needed to play a sound
@@ -40,7 +37,7 @@ public final class ParticleData {
             throw new IllegalArgumentException("No particle type defined");
         }
 
-        Particle particle = Enums.getIfPresent(Particle.class, particleName.toUpperCase(Locale.ROOT)).orNull();
+        final Particle particle = Enums.getIfPresent(Particle.class, particleName.toUpperCase(Locale.ROOT)).orNull();
         if(particle == null) {
             throw new IllegalArgumentException("Unknown particle type: " + particleName);
         }

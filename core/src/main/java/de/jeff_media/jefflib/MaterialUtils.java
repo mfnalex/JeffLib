@@ -42,7 +42,7 @@ public final class MaterialUtils {
             map.put(mat, getNiceMaterialName(mat));
         }
         try {
-            final Map tmpMap = gson.fromJson(new FileReader(minecraftTranslationFile), Map.class);
+            final Map<?,?> tmpMap = gson.fromJson(new FileReader(minecraftTranslationFile), Map.class);
             for (final Material mat : Material.values()) {
                 map.put(mat, (String) tmpMap.get(getMinecraftNamespacedName(mat)));
             }

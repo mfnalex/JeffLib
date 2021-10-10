@@ -13,9 +13,9 @@ import java.util.*;
 @Deprecated
 public class LootManager {
 
-    Map<Enum, List<VariableItemStack>> map = new HashMap<>();
+    final Map<Enum<?>, List<VariableItemStack>> map = new HashMap<>();
 
-    private void add(final Enum key, final VariableItemStack item) {
+    private void add(final Enum<?> key, final VariableItemStack item) {
         if(map.containsKey(key)) {
             map.get(key).add(item);
         } else {
@@ -43,7 +43,7 @@ public class LootManager {
         return lootManager;
     }
 
-    public List<ItemStack> getDrops(final Enum key) {
+    public List<ItemStack> getDrops(final Enum<?> key) {
         final List<ItemStack> drops = new ArrayList<>();
         if(map.containsKey(key)) {
             for(final VariableItemStack drop : map.get(key)) {
@@ -59,6 +59,8 @@ public class LootManager {
         return getDrops(entity.getType());
     }
 
-    public List<ItemStack> getDrops(final Material mat) { return getDrops((Enum) mat); }
+    public List<ItemStack> getDrops(final Material mat) {
+        return getDrops((Enum<?>) mat); // Casting is needed to avoid calling this function
+    }
 
 }

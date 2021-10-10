@@ -809,7 +809,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean sendChunkChange(@NotNull final Location location, final int i, final int i1, final int i2, @NotNull final byte[] bytes) {
+    public boolean sendChunkChange(@NotNull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
         return false;
     }
 
@@ -1000,7 +1000,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setResourcePack(@NotNull final String s, @NotNull final byte[] bytes) {
+    public void setResourcePack(@NotNull final String s, final byte[] bytes) {
 
     }
 
@@ -1934,7 +1934,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void sendPluginMessage(@NotNull final Plugin plugin, @NotNull final String s, @NotNull final byte[] bytes) {
+    public void sendPluginMessage(@NotNull final Plugin plugin, @NotNull final String s, final byte[] bytes) {
 
     }
 

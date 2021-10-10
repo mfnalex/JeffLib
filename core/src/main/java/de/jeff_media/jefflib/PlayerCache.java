@@ -10,7 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
-public class PlayerCache {
+public final class PlayerCache {
 
     private static final File cacheFile;
     private static final YamlConfiguration cache;
@@ -24,8 +24,8 @@ public class PlayerCache {
     }
 
     @NotNull
-    public static String getName(OfflinePlayer player) {
-        String name = player.getName();
+    public static String getName(final OfflinePlayer player) {
+        final String name = player.getName();
         if(name!=null) {
             cache.set(player.getUniqueId().toString(),name);
             return name;
@@ -33,14 +33,14 @@ public class PlayerCache {
         return cache.getString(player.getUniqueId().toString(),"Unknown Player (" + player.getUniqueId().toString().split("-")[0] + ")");
     }
 
-    public static String getName(UUID uuid) {
+    public static String getName(final UUID uuid) {
         return getName(Bukkit.getOfflinePlayer(uuid));
     }
 
     public static void save() {
         try {
             cache.save(cacheFile);
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }

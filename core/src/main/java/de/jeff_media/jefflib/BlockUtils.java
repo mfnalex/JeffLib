@@ -7,8 +7,6 @@ import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
-import javax.annotation.ParametersAreNonnullByDefault;
-import javax.annotation.ParametersAreNullableByDefault;
 import java.util.*;
 import java.util.function.Predicate;
 
@@ -28,7 +26,7 @@ public final class BlockUtils {
     }
 
     @Nullable
-    public static Block getLowestBlockAt(@NotNull Location location) {
+    public static Block getLowestBlockAt(@NotNull final Location location) {
         return getLowestBlockAt(location.getWorld(), location.getBlockX(), location.getBlockZ());
     }
 

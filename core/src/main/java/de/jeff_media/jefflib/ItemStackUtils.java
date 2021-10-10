@@ -29,22 +29,22 @@ public final class ItemStackUtils {
         return fromConfigurationSection(config, new HashMap<>());
     }
 
-    private String replaceInString(String string, HashMap<String,String> placeholders) {
-        for(Map.Entry<String, String> entry : placeholders.entrySet()) {
+    private String replaceInString(String string, final HashMap<String,String> placeholders) {
+        for(final Map.Entry<String, String> entry : placeholders.entrySet()) {
             if(entry.getKey()==null ||entry.getValue()==null) continue;
             string = string.replace(entry.getKey(), entry.getValue());
         }
         return string;
     }
 
-    private List<String> replaceInString(List<String> strings, HashMap<String,String> placeholders) {
+    private List<String> replaceInString(final List<String> strings, final HashMap<String,String> placeholders) {
         for(int i = 0; i < strings.size(); i++) {
             strings.set(i, replaceInString(strings.get(i),placeholders));
         }
         return strings;
     }
 
-    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, HashMap<String,String> placeholders) {
+    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, final HashMap<String,String> placeholders) {
         final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;

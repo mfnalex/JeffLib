@@ -7,16 +7,16 @@ import org.bukkit.inventory.ItemStack;
 @UtilityClass
 public class UselessUtils {
 
-    public static int getItemStackMaxAmount(ItemStack item) {
+    public static int getItemStackMaxAmount(final ItemStack item) {
         return item.getMaxStackSize();
     }
 
-    public static void getItemStackMaxAmountButDontReturnIt(ItemStack item) {
+    public static void getItemStackMaxAmountButDontReturnIt(final ItemStack item) {
         item.getMaxStackSize();
     }
 
     @SneakyThrows
-    public static Cloneable getClone(Cloneable cloneable){
+    public static Cloneable getClone(final Cloneable cloneable){
         return (Cloneable) cloneable.getClass().getDeclaredMethod("clone").invoke(cloneable);
     }
 

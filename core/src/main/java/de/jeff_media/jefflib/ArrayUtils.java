@@ -18,6 +18,7 @@ public class ArrayUtils {
         return createArray(componentType, 0);
     }
     public static <T> T[] createArray(@NotNull final Class<T> componentType, final int length) {
+        //noinspection unchecked
         return (T[]) Array.newInstance(componentType, length);
     }
 
@@ -34,6 +35,7 @@ public class ArrayUtils {
         }
         final List<T> list = new ArrayList<>(Arrays.asList(arr));
         list.remove(index);
+        //noinspection unchecked
         return list.toArray((T[]) Array.newInstance(arr.getClass().getComponentType(),0));
     }
 
@@ -47,6 +49,7 @@ public class ArrayUtils {
     public static <T> T[] addAfter(final T[] arr, final T object) {
         final List<T> list = new ArrayList<>(Arrays.asList(arr));
         list.add(object);
+        //noinspection unchecked
         return list.toArray((T[]) Array.newInstance(arr.getClass().getComponentType(), 0));
     }
 }

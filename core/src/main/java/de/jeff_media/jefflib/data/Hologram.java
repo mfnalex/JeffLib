@@ -12,11 +12,9 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import java.lang.reflect.Method;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -47,13 +45,11 @@ public class Hologram implements ConfigurationSerializable {
                 JeffLib.getNMSHandler().changeNMSEntityName(entities.get(i), format().get(i));
             }
         } else {
-            for(Object entity : entities) {
-                for(Player player : Bukkit.getOnlinePlayers()) {
+            for(final Object entity : entities) {
+                for(final Player player : Bukkit.getOnlinePlayers()) {
                     JeffLib.getNMSHandler().hideEntityFromPlayer(entity, player);
                 }
             }
-            //HologramManager.getHolograms().remove(this);
-            //entities.clear();
             create();
         }
     }
@@ -123,7 +119,7 @@ public class Hologram implements ConfigurationSerializable {
                 '}';
     }
 
-    public void update(int ticks) {
+    public void update(final int ticks) {
         if(task != null) {
             Bukkit.getScheduler().cancelTask(task);
         }
@@ -134,9 +130,9 @@ public class Hologram implements ConfigurationSerializable {
 
     public void create() {
         Location current = location.clone();
-        for(String line : format()) {
+        for(final String line : format()) {
             System.out.println("Creating hologram line: " + line);
-            Object entity = JeffLib.getNMSHandler().createHologram(current, line, type);
+            final Object entity = JeffLib.getNMSHandler().createHologram(current, line, type);
             entities.add(entity);
             System.out.println(entity.toString());
             current = current.add(0,lineOffset,0);
@@ -148,10 +144,12 @@ public class Hologram implements ConfigurationSerializable {
         final Type type = Enums.getIfPresent(Type.class,(String) map.getOrDefault(Keys.TYPE,"ARMORSTAND")).or(Type.ARMORSTAND);
         final Hologram hologram = new Hologram(type);
         hologram.setLineOffset((double) map.getOrDefault(Keys.LINE_OFFSET,LINE_OFFSET_DEFAULT));
+        //noinspection unchecked
         hologram.getLines().addAll((List<String>) map.getOrDefault(Keys.LINES, new ArrayList<String>()));
         hologram.setVisibleForAnyone((boolean) map.getOrDefault(Keys.IS_VISIBlE_FOR_ANYONE, VISIBLE_FOR_ANYONE_DEFAULT));
         hologram.setVisibilityRadius((double) map.getOrDefault(Keys.VISIBILITY_RADIUS,VISIBILITY_RADIUS_DEFAULT));
         hologram.setLocation((Location) map.get(Keys.LOCATION));
+        //noinspection unchecked
         final List<String> offlinePlayerUUIDs = (List<String>) map.getOrDefault(Keys.PLAYERS,new ArrayList<String>());
         offlinePlayerUUIDs.forEach(entry -> {
             try {
