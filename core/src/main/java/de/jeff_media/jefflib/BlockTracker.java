@@ -20,6 +20,8 @@ import java.util.HashSet;
  * <p>
  * Uses the chunk's PersistentDataContainer to store information about which blocks have been placed
  * by the player. You can track all block types or only certain ones.
+ * <p>
+ * <b>Important: Tracking blocks requires registering the listener using {@link JeffLib#registerBlockTracker()}</b>
  */
 @UtilityClass
 public final class BlockTracker {

@@ -24,6 +24,10 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @AllArgsConstructor
 public final class SoundData {
+
+    /**
+     *
+     */
     private final Sound sound;
     private float volume = 1;
     private float pitch = 1;

@@ -30,7 +30,7 @@ public final class JeffLib {
     }
 
     /**
-     * Returns the ThreadLocalRandom instance.
+     * Returns the {@link ThreadLocalRandom} instance.
      *
      * @return ThreadLocalRandom instance
      */
@@ -39,7 +39,7 @@ public final class JeffLib {
     }
 
     /**
-     * Returns the Plugin instance.
+     * Returns the {@link Plugin} instance that initialized JeffLib.
      *
      * @return Plugin instance
      */
@@ -48,7 +48,7 @@ public final class JeffLib {
     }
 
     /**
-     * Returns the Random instance.
+     * Returns the {@link Random} instance.
      *
      * @return Random instance
      */
@@ -56,9 +56,23 @@ public final class JeffLib {
         return random;
     }
 
-    public static void listenOnPlayerScrollEvent() {
+    /**
+     * Registers the listeners needed to call the {@link de.jeff_media.jefflib.events.PlayerScrollEvent}
+     */
+    public static void registerPlayerScrollEvent() {
         JeffLibNotInitializedException.check();
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
+    }
+
+    /**
+     * Registers the listeners needed to track blocks using {@link BlockTracker}
+     */
+    public static void registerBlockTracker() {
+        if (McVersion.isAtLeast(1, 16, 3)) {
+            Bukkit.getPluginManager().registerEvents(new BlockTrackListener(), main);
+        } else {
+            main.getLogger().info("You are using an MC version below 1.16.3 - Block Tracking features will be disabled.");
+        }
     }
 
     /**
@@ -70,13 +84,6 @@ public final class JeffLib {
     public static void init(final Plugin plugin, final boolean trackBlocks) {
         main = plugin;
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
-        if (trackBlocks) {
-            if (McVersion.isAtLeast(1, 16, 3)) {
-                Bukkit.getPluginManager().registerEvents(new BlockTrackListener(), main);
-            } else {
-                plugin.getLogger().info("You are using an MC version below 1.16.3 - Block Tracking features will be disabled.");
-            }
-        }
         try {
             final String packageName = JeffLib.class.getPackage().getName();
             final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];

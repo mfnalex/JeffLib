@@ -45,7 +45,7 @@ public class TextUtils {
      * @param text text to be printed
      */
     public static void banner(final CharSequence text) {
-        if(JeffLib.getPlugin() == null) {
+        if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
         }
         final int bannerWidth = Math.max(text.length() + 4, MIN_BANNER_WIDTH);
@@ -142,7 +142,7 @@ public class TextUtils {
     }
 
     /**
-     * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
+     * Replaces Emojis, PlacedeholderAPI placeholders and colors (see {@link #color(String)})
      *
      * @param text   Text to translate
      * @param player Player to apply placeholders for, or null
@@ -155,10 +155,16 @@ public class TextUtils {
         return text;
     }
 
+    /**
+     * Replaces Emojis, PlaceholderAPI placeholders and colors ({see {@link #color(String)})
+     * @param text      Text to translate
+     * @param player    Player to apply placeholders for, or null
+     * @return          Translated text
+     */
     public static List<String> format(List<String> text, @Nullable final OfflinePlayer player) {
         text = new ArrayList<>(text);
-        for(int i = 0; i < text.size(); i++) {
-            text.set(i, format(text.get(i),player));
+        for (int i = 0; i < text.size(); i++) {
+            text.set(i, format(text.get(i), player));
         }
         return text;
     }

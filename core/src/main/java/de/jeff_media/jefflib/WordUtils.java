@@ -33,6 +33,11 @@ public class WordUtils {
         return builder.toString();
     }
 
+    /**
+     * Converts a NamespacedKey into a human readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
+     * @param key NamespacedKey
+     * @return Human readable key name
+     */
     public static String getNiceName(@NotNull final NamespacedKey key) {
         final String[] split = key.getKey().split("_");
         final Iterator<String> iterator = Arrays.stream(split).iterator();
