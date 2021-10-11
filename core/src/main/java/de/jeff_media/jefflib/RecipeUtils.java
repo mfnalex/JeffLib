@@ -2,6 +2,7 @@ package de.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
 import de.jeff_media.jefflib.exceptions.InvalidRecipeException;
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -9,26 +10,124 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.function.BiConsumer;
+import java.util.stream.Collectors;
 
+@UtilityClass
 public class RecipeUtils {
+
+    private static boolean isCookingRecipe(String type) {
+        switch (type) {
+            case "blasting":
+            case "campfire":
+            case "furnace":
+            case "smoking":
+                return true;
+            default: return false;
+        }
+    }
 
     public static Recipe getRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
         if(!section.isString("type") || section.getString("type").isEmpty()) {
             throw new InvalidRecipeException("No recipe type defined");
         }
 
-        if(!section.isList("ingredients") && section.isConfigurationSection("ingredients")) {
-            throw new InvalidRecipeException("No recipe ingredients defined");
+        String type = section.getString("type","unknown").toLowerCase(Locale.ROOT);
+
+        if(!section.isList("ingredients") && !section.isConfigurationSection("ingredients")) {
+            if(!isCookingRecipe(type)) {
+                throw new InvalidRecipeException("No recipe ingredients defined");
+            }
+            if(isCookingRecipe(type) && !section.isSet("ingredient")) {
+                throw new InvalidRecipeException("No recipe ingredient defined");
+            }
         }
 
-        switch(section.getString("type","unknown").toLowerCase(Locale.ROOT)) {
+        switch(type) {
             case "shapeless":
                 return getShapelessRecipe(section, key, result);
             case "shaped":
                 return getShapedRecipe(section, key, result);
+            case "blasting":
+                return getBlastingRecipe(section, key, result);
+            case "campfire":
+                return getCampfireRecipe(section, key, result);
+            case "furnace":
+                return getFurnaceRecipe(section, key, result);
+            case "merchant":
+                return getMerchantRecipe(section, result);
+            case "smithing":
+                return getSmithingRecipe(section, key, result);
+            case "smoking":
+                return getSmokingRecipe(section, key, result);
+            case "stonecutting":
+                return getStonecuttingRecipe(section, key, result);
             default:
                 throw new InvalidRecipeException("Invalid recipe type: " + section.getString("type","unknown"));
+        }
+    }
+
+    private static BlastingRecipe getBlastingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+        return new BlastingRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
+    }
+
+    private static CampfireRecipe getCampfireRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+        return new CampfireRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
+    }
+
+    private static FurnaceRecipe getFurnaceRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+        return new FurnaceRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
+    }
+
+    private static MerchantRecipe getMerchantRecipe(ConfigurationSection section, ItemStack result) {
+        int maxUses, uses;
+        boolean experienceReward;
+        int villagerExperience = 0;
+        float priceMultiplier = 0;
+
+        if(!section.contains("max-uses")) {
+            throw new InvalidRecipeException("'max-uses' is not defined");
+        }
+        if(!section.isInt("max-uses")) {
+            throw new InvalidRecipeException("'max-uses' must be an integer");
+        }
+        maxUses = section.getInt("max-uses");
+        uses = 0;
+        if(section.contains("uses")) {
+            if(section.isInt("uses")) {
+                uses = section.getInt("uses");
+            } else {
+                throw new InvalidRecipeException("'uses' must be an integer when defined");
+            }
+        }
+        if(section.isSet("experience-reward") && section.getBoolean("experience-reward")) {
+            experienceReward = true;
+
+            if(!section.isSet("villager-experience")) {
+                throw new InvalidRecipeException("'villager-experience' must be defined when 'experience-reward' is true");
+            }
+            if(!section.isInt("villager-experience")) {
+                throw new InvalidRecipeException("'villager-experience' must be an integer");
+            }
+            villagerExperience = section.getInt("villager-experience");
+
+            if(!section.isSet("price-multiplier")) {
+                throw new InvalidRecipeException("'price-multiplier' must be defined when 'experience-reward' is true");
+            }
+            if(!section.isDouble("price-multiplier")) {
+                throw new InvalidRecipeException("'price-multiplier' must be a float");
+            }
+            priceMultiplier = (float) section.getDouble("price-multiplier");
+        } else {
+            experienceReward = false;
+        }
+
+        if(experienceReward) {
+            return new MerchantRecipe(result, uses, maxUses, true, villagerExperience, priceMultiplier);
+        } else {
+            return new MerchantRecipe(result, uses, maxUses, false);
         }
     }
 
@@ -36,8 +135,26 @@ public class RecipeUtils {
         if(!section.isConfigurationSection("ingredients")) {
             throw new InvalidRecipeException("'ingredients' must be a Map for shaped recipes");
         }
-        Map<Character,RecipeChoice> ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients")));
+        if(!section.isList("shape")) {
+            throw new InvalidRecipeException("No shape defined");
+        }
+
+        List<String> shape = section.getStringList("shape");
+        if(shape.size()>3) {
+            throw new InvalidRecipeException("'shape' cannot be longer than 3 lines");
+        }
+        shape.forEach((line) -> {
+            if(line.length()>3) {
+                throw new InvalidRecipeException("Each line in 'shape' must not be longer than 3 characters");
+            }
+        });
+
         ShapedRecipe recipe = new ShapedRecipe(key, result);
+        recipe.shape(shape.toArray(new String[0])); // shape has to be called before the ingredients
+
+        System.out.println(shape.toArray(new String[0]));
+
+        Map<Character,RecipeChoice> ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients")));
         ingredients.forEach(recipe::setIngredient);
         return recipe;
     }
@@ -56,6 +173,37 @@ public class RecipeUtils {
         ShapelessRecipe recipe = new ShapelessRecipe(key, result);
         ingredients.forEach(recipe::addIngredient);
         return recipe;
+    }
+
+    private static SmithingRecipe getSmithingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+
+        RecipeChoice base = null;
+        RecipeChoice addition = null;
+        List<RecipeChoice> choices = null;
+
+        if(section.isList("ingredients")) {
+            choices = getRecipeChoices(Objects.requireNonNull(section.getList("ingredients")));
+        } else if(section.isConfigurationSection("ingredients")) {
+            choices = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients"))).values().stream().collect(Collectors.toList());
+        }
+
+        if(choices.size()!=2) {
+            throw new InvalidRecipeException("'ingredients' must contain exactly two ingredients, found " + choices.size());
+        }
+
+        base = choices.get(0);
+        addition = choices.get(1);
+
+        return new SmithingRecipe(key, result, base, addition);
+    }
+
+    private static SmokingRecipe getSmokingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+        return new SmokingRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
+    }
+
+    private static StonecuttingRecipe getStonecuttingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        return new StonecuttingRecipe(key, result, getRecipeChoice(section));
     }
 
     @NotNull private static Map<Character,RecipeChoice> getRecipeChoices(ConfigurationSection section) {
@@ -99,8 +247,60 @@ public class RecipeUtils {
                 throw new InvalidRecipeException("Invalid ingredient: " + item);
             }
         }
-
         return list;
     }
 
+    @NotNull private static RecipeChoice getRecipeChoice(ConfigurationSection section) {
+        if(section.isSet("ingredients")) {
+            if(section.isConfigurationSection("ingredients")) {
+                Map<Character, RecipeChoice> map = getRecipeChoices(section.getConfigurationSection("ingredients"));
+                if(map.size()!=1) {
+                    throw new InvalidRecipeException("'ingredients' must contain exactly one item, found " + map.size());
+                }
+                return map.values().stream().findFirst().get();
+            } else if(section.isList("ingredients")) {
+                List<RecipeChoice> list = getRecipeChoices(section.getList("ingredients"));
+                if(list.size()!=1) {
+                    throw new InvalidRecipeException("'ingredients' must contain exactly one item, found " + list.size());
+                }
+            } else {
+                throw new InvalidRecipeException("For this recipe type, 'ingredients' must either be a List or Map containing exactly one item");
+            }
+        } else if(section.isSet("ingredient")) {
+            if(section.isItemStack("ingredient")) {
+                return new RecipeChoice.ExactChoice(section.getItemStack("ingredient"));
+            } else {
+                Material mat = Enums.getIfPresent(Material.class, section.getString("ingredient")).orNull();
+                if(mat == null) {
+                    throw new InvalidRecipeException("Invalid ingredient: " + section.getString("ingredient"));
+                }
+                return new RecipeChoice.MaterialChoice(mat);
+            }
+        }
+        throw new InvalidRecipeException("No ingredient defined");
+    }
+
+    private static class AbstractFurnaceRecipe {
+        private final RecipeChoice recipeChoice;
+        private final float experience;
+        private final int cookingTime;
+
+        public AbstractFurnaceRecipe(ConfigurationSection section) {
+            if(!section.isSet("experience")) {
+                throw new InvalidRecipeException("'experience' is not defined");
+            }
+            if(!section.isDouble("experience")) {
+                throw new InvalidRecipeException("'experience' must be a float or integer");
+            }
+            experience = (float) section.getDouble("experience");
+            if(!section.isSet("cooking-time")) {
+                throw new InvalidRecipeException("'cooking-time' is not defined");
+            }
+            if(!section.isInt("cooking-time")) {
+                throw new InvalidRecipeException("'cooking-time' must be an integer");
+            }
+            cookingTime = section.getInt("cooking-time");
+            recipeChoice = RecipeUtils.getRecipeChoice(section);
+        }
+    }
 }
