@@ -1,0 +1,58 @@
+# All crafting recipes support using ItemStacks or Materials as ingredients.
+# Only one example will contain an ItemStack as ingredient though, to keep
+# this file as short as possible.
+
+# This is a shapeless recipe that requires exactly:
+# - 1 Dirt
+# - 1 Diamond
+example_shapeless:
+  type: shapeless
+  ingredients:
+    - DIRT
+    - DIAMOND
+
+# This is a shapeless recipe that requires exactly:
+# - 1 Diamond named "Jeff"
+# - 1 Redstone
+# Important: the diamond has to be renamed using an anvil.
+# When renaming the diamond using a plugin, the resulting ItemStack
+# will look different.
+example_shapeless_named_diamond:
+  type: shapeless
+  ingredients:
+    - ==: org.bukkit.inventory.ItemStack
+      v: 2730
+      type: DIAMOND
+      meta:
+        ==: ItemMeta
+        meta-type: UNSPECIFIC
+        display-name: '{"text":"Jeff"}'
+    - REDSTONE
+
+# This is a shaped recipe that will requires 4 leather helmets
+# in an L-shape.
+example_shaped_recipe:
+  type: shaped
+  shape:
+    - "H "
+    - "H "
+    - "HH"
+  ingredients:
+    H: LEATHER_HELMET
+
+example_blasting_recipe:
+  type: blasting
+  ingredient: COAL
+  experience: 123.45
+  cooking-time: 60 # time in ticks. 20 = 1 second
+
+example_campfire_recipe:
+  type: campfire
+  ingredient: STICK
+  cooking-time: 100
+
+example_furnace_recipe:
+  type: furnace
+  ingredient: PLAYER_HEAD
+  experience: 100000
+  cooking-time: 20

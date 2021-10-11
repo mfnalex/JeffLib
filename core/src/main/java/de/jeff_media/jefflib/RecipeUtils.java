@@ -116,8 +116,8 @@ public class RecipeUtils {
             if(!section.isSet("price-multiplier")) {
                 throw new InvalidRecipeException("'price-multiplier' must be defined when 'experience-reward' is true");
             }
-            if(!section.isDouble("price-multiplier")) {
-                throw new InvalidRecipeException("'price-multiplier' must be a float");
+            if(!section.isDouble("price-multiplier") && !section.isInt("price-multiplier")) {
+                throw new InvalidRecipeException("'price-multiplier' must be a float or integer");
             }
             priceMultiplier = (float) section.getDouble("price-multiplier");
         } else {
@@ -287,12 +287,14 @@ public class RecipeUtils {
 
         public AbstractFurnaceRecipe(ConfigurationSection section) {
             if(!section.isSet("experience")) {
-                throw new InvalidRecipeException("'experience' is not defined");
+                experience = 0;
+            } else {
+                if(!section.isDouble("experience") && !section.isInt("experience")) {
+                    throw new InvalidRecipeException("'experience' must be a float or integer");
+                } else {
+                    experience = (float) section.getDouble("experience");
+                }
             }
-            if(!section.isDouble("experience")) {
-                throw new InvalidRecipeException("'experience' must be a float or integer");
-            }
-            experience = (float) section.getDouble("experience");
             if(!section.isSet("cooking-time")) {
                 throw new InvalidRecipeException("'cooking-time' is not defined");
             }
