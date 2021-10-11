@@ -60,4 +60,5 @@ public final class InventoryUtils {
                 .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
+
 }

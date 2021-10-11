@@ -79,9 +79,8 @@ public final class JeffLib {
      * Initializes the library. Needed for some methods.
      *
      * @param plugin      Plugin instance
-     * @param trackBlocks Whether to use the BlockTracker feature. Only available in 1.16.3 and later.
      */
-    public static void init(final Plugin plugin, final boolean trackBlocks) {
+    public static void init(final Plugin plugin) {
         main = plugin;
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
         try {
@@ -93,15 +92,6 @@ public final class JeffLib {
             exception.printStackTrace();
         }
 
-    }
-
-    /**
-     * Initializes the Library
-     *
-     * @param plugin Plugin instance
-     */
-    public static void init(final Plugin plugin) {
-        init(plugin, true);
     }
 
     /**
