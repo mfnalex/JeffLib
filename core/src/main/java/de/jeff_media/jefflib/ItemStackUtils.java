@@ -29,7 +29,7 @@ public final class ItemStackUtils {
         return fromConfigurationSection(config, new HashMap<>());
     }
 
-    private String replaceInString(String string, final HashMap<String,String> placeholders) {
+    private String replaceInString(String string, final Map<String,String> placeholders) {
         for(final Map.Entry<String, String> entry : placeholders.entrySet()) {
             if(entry.getKey()==null ||entry.getValue()==null) continue;
             string = string.replace(entry.getKey(), entry.getValue());
@@ -57,13 +57,13 @@ public final class ItemStackUtils {
         final ItemStack item;
 
         if(materialName.equalsIgnoreCase("PLAYER_HEAD") && config.isSet("base64") && config.isString("base64")) {
-            item = SkullUtils.getHead(config.getString("base64"));
+            item = SkullUtils.getHead(Objects.requireNonNull(config.getString("base64")));
             //System.out.println("Creating custom head with base64" + config.getString("base64"));
         } else {
             item = new ItemStack(Enums.getIfPresent(Material.class, materialName).or(Material.BARRIER), amount);
         }
 
-        List<String> lore = null;
+        List<String> lore = new ArrayList<>();
         if(config.isSet("lore")) {
             if(config.isString("lore")) {
                 lore.add(TextUtils.format(replaceInString(config.getString("lore"),placeholders)));
@@ -85,14 +85,17 @@ public final class ItemStackUtils {
         final int damage = config.getInt("damage",0);
 
         final ItemMeta meta = item.getItemMeta();
-        meta.setLore(lore);
+        Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(name);
         meta.setCustomModelData(modelData);
 
         if(config.isConfigurationSection("enchantments")) {
-            for(final String key : config.getConfigurationSection("enchantments").getKeys(false)) {
+            for(final String key : Objects.requireNonNull(config.getConfigurationSection("enchantments")).getKeys(false)) {
                 final Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(key));
-                final int level = config.getConfigurationSection("enchantments").getInt(key);
+                if(enchantment == null) {
+                    throw new IllegalArgumentException("Unknown enchantment: " + key);
+                }
+                final int level = Objects.requireNonNull(config.getConfigurationSection("enchantments")).getInt(key,1);
                 meta.addEnchant(enchantment, level,true);
             }
         }
@@ -142,7 +145,7 @@ public final class ItemStackUtils {
 
     public static void setDisplayName(@NotNull final ItemStack item, @NotNull final String name) {
         final ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(name);
+        Objects.requireNonNull(meta).setDisplayName(name);
         item.setItemMeta(meta);
     }
 

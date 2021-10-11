@@ -14,7 +14,6 @@ import java.util.function.Function;
 
 @UtilityClass
 @InternalOnly
-@Deprecated
 public final class PlaceholderAPIHandler {
 
     private static AnonymousPlaceholderExpansion expansion;

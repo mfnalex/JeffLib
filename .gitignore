@@ -2,3 +2,4 @@
 /target/
 *.lst
 *.class
+/.idea/workspace.xml

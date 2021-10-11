@@ -14,13 +14,14 @@ import org.bukkit.entity.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @UtilityClass
 public class HologramManager {
 
     @Getter
     private static final List<Hologram> holograms = new ArrayList<>();
-    private static final HashMap<OfflinePlayer, List<Hologram>> SHOWN_HOLOGRAMS = new HashMap<>();
+    private static final Map<OfflinePlayer, List<Hologram>> SHOWN_HOLOGRAMS = new HashMap<>();
     private static boolean IS_SCHEDULED = false;
 
     private static final Runnable RUNNABLE = () -> {

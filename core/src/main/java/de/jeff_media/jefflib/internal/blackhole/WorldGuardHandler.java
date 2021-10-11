@@ -21,7 +21,6 @@ import java.util.List;
 
 @InternalOnly
 @UtilityClass
-@Deprecated
 public final class WorldGuardHandler {
 
     private static ApplicableRegionSet getRegionSet(@NotNull final Location location) {

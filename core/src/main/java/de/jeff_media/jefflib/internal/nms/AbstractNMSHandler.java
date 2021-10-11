@@ -9,7 +9,6 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-@Deprecated
 @InternalOnly
 public interface AbstractNMSHandler {
 

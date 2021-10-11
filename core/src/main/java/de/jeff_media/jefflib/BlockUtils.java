@@ -27,7 +27,7 @@ public final class BlockUtils {
 
     @Nullable
     public static Block getLowestBlockAt(@NotNull final Location location) {
-        return getLowestBlockAt(location.getWorld(), location.getBlockX(), location.getBlockZ());
+        return getLowestBlockAt(Objects.requireNonNull(location.getWorld()), location.getBlockX(), location.getBlockZ());
     }
 
     /**

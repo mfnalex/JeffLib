@@ -6,10 +6,14 @@ JeffLib includes a ton of useful methods that you would normally have to write y
 
 Just include JeffLib as dependency in your pom.xml.
 
-**Note:** JeffLib has to be initialized for some methods to work. Just add this to your plugin's `onLoad()` method:
+**Note:** JeffLib has to be initialized for some methods to work. The best way to do this is in your plugin's Instance Initialization Block:
 
 ```java
-JeffLib.init(this);
+public class MyPlugin extends JavaPlugin {
+    {
+        JeffLib.init(this);
+    }
+}
 ```
 
 ## Maven

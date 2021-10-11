@@ -196,12 +196,12 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
+        <!--<dependency>
             <groupId>com.Th0rgal</groupId>
             <artifactId>Oraxen</artifactId>
             <version>1.116.1</version>
             <scope>provided</scope>
-        </dependency>
+        </dependency>-->
 
         <!--<dependency>
             <groupId>io.papermc</groupId>

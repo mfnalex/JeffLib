@@ -10,6 +10,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
 import org.bukkit.plugin.Plugin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
@@ -86,8 +87,9 @@ public final class JeffLib {
         try {
             final String packageName = JeffLib.class.getPackage().getName();
             final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
-        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException  exception) {
+            //abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
+            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
+        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
             plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }

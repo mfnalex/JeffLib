@@ -17,7 +17,6 @@ import org.jetbrains.annotations.Nullable;
 
 @InternalOnly
 @UtilityClass
-@Deprecated
 public final class WorldEditHandler {
 
     @Nullable

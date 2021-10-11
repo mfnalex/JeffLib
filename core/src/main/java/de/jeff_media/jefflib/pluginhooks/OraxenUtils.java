@@ -1,3 +1,4 @@
+/*
 package de.jeff_media.jefflib.pluginhooks;
 
 import io.th0rgal.oraxen.mechanics.Mechanic;
@@ -14,3 +15,4 @@ public class OraxenUtils {
         return mechanic != null;
     }
 }
+*/

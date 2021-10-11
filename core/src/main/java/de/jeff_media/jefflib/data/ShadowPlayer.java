@@ -35,6 +35,9 @@ import org.jetbrains.annotations.Nullable;
 import java.net.InetSocketAddress;
 import java.util.*;
 
+// Todo: extend CraftPlayer instead and simply override the message methods
+// Maybe also override other setter methods?
+@SuppressWarnings("deprecation")
 public class ShadowPlayer implements Player {
 
     private final Player player;

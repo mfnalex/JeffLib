@@ -29,9 +29,7 @@ public class VariableItemStack {
             maxAmount = itemStack.getAmount();
         }
         if(minAmount > maxAmount) {
-            final int tmp = minAmount;
             minAmount = maxAmount;
-            maxAmount = minAmount;
         }
         double chance = 100;
         if(section.isSet("chance")) {

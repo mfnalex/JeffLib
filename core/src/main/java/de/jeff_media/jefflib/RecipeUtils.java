@@ -151,16 +151,13 @@ public class RecipeUtils {
 
         ShapedRecipe recipe = new ShapedRecipe(key, result);
         recipe.shape(shape.toArray(new String[0])); // shape has to be called before the ingredients
-
-        System.out.println(shape.toArray(new String[0]));
-
         Map<Character,RecipeChoice> ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients")));
         ingredients.forEach(recipe::setIngredient);
         return recipe;
     }
 
     private static ShapelessRecipe getShapelessRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        Collection<RecipeChoice> ingredients = null;
+        Collection<RecipeChoice> ingredients;
 
         if(section.isConfigurationSection("ingredients")) {
             ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients"))).values();
@@ -177,14 +174,14 @@ public class RecipeUtils {
 
     private static SmithingRecipe getSmithingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
 
-        RecipeChoice base = null;
-        RecipeChoice addition = null;
+        RecipeChoice base;
+        RecipeChoice addition;
         List<RecipeChoice> choices = null;
 
         if(section.isList("ingredients")) {
             choices = getRecipeChoices(Objects.requireNonNull(section.getList("ingredients")));
         } else if(section.isConfigurationSection("ingredients")) {
-            choices = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients"))).values().stream().collect(Collectors.toList());
+            choices = new ArrayList<>(getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients"))).values());
         }
 
         if(choices.size()!=2) {
@@ -207,28 +204,28 @@ public class RecipeUtils {
     }
 
     @NotNull private static Map<Character,RecipeChoice> getRecipeChoices(ConfigurationSection section) {
-        HashMap<Character,RecipeChoice> list = new HashMap<>();
+        Map<Character,RecipeChoice> map = new HashMap<>();
         for(String key : section.getKeys(false)) {
             if(key.length()!=1) {
                 throw new InvalidRecipeException("Ingredient keys must be exactly one character long, found '" + key + "' instead");
             }
             Character aChar = key.toCharArray()[0];
-            if(list.containsKey(aChar)) {
+            if(map.containsKey(aChar)) {
                 throw new InvalidRecipeException("Ingredient key '" + aChar +"' defined more than once");
             }
             if(section.isItemStack(key)) {
-                list.put(aChar,new RecipeChoice.ExactChoice(section.getItemStack(key)));
+                map.put(aChar,new RecipeChoice.ExactChoice(section.getItemStack(key)));
             } else if(section.isString(key)) {
                 Material mat = Enums.getIfPresent(Material.class, section.getString(key).toUpperCase(Locale.ROOT)).orNull();
                 if(mat == null) {
                     throw new InvalidRecipeException("Invalid material defined for ingredient key '"+aChar+"': " + section.getString(key));
                 }
-                list.put(aChar, new RecipeChoice.MaterialChoice(mat));
+                map.put(aChar, new RecipeChoice.MaterialChoice(mat));
             } else {
                 throw new InvalidRecipeException("Invalid ingredient defined for key '" + aChar+"': " + section.get(key));
             }
         }
-        return list;
+        return map;
     }
 
     @NotNull private static List<RecipeChoice> getRecipeChoices(List<?> ingredients) {

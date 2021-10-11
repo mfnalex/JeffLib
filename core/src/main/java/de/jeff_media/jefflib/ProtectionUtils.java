@@ -18,7 +18,7 @@ import org.jetbrains.annotations.NotNull;
 public class ProtectionUtils {
 
     public static boolean canBreak(@NotNull final Player player, @NotNull final Block block) {
-        return canBreak(player, block, true);
+        return canBreak(player, block, false);
     }
 
     public static boolean canBreak(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
@@ -28,7 +28,7 @@ public class ProtectionUtils {
     }
 
     public static boolean canPlace(@NotNull final Player player, @NotNull final Block block) {
-        return canPlace(player, block, true);
+        return canPlace(player, block, false);
     }
 
     public static boolean canPlace(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
@@ -38,12 +38,13 @@ public class ProtectionUtils {
     }
 
     public static boolean canInteract(@NotNull final Player player, @NotNull final Block block) {
-        return canInteract(player, block, true);
+        return canInteract(player, block, false);
     }
 
     public static boolean canInteract(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
         final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP,EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
+        //noinspection deprecation
         return !event.isCancelled() && event.useInteractedBlock() != Event.Result.DENY;
     }
 }
