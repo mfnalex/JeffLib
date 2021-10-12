@@ -13,6 +13,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Crafting recipe related methods
+ */
 @UtilityClass
 public class RecipeUtils {
 
@@ -27,6 +30,13 @@ public class RecipeUtils {
         }
     }
 
+    /**
+     * Parses a crafting recipe from a configuration section (see examples/RecipeUtils_getRecipe.yml)
+     * @param section ConfigurationSection
+     * @param key NamespacedKey
+     * @param result Result
+     * @return Crafting recipe
+     */
     public static Recipe getRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
         if(!section.isString("type") || section.getString("type").isEmpty()) {
             throw new InvalidRecipeException("No recipe type defined");
