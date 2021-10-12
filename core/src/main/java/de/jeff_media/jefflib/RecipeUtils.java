@@ -3,6 +3,7 @@ package de.jeff_media.jefflib;
 import com.google.common.base.Enums;
 import de.jeff_media.jefflib.exceptions.InvalidRecipeException;
 import lombok.experimental.UtilityClass;
+import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
@@ -82,6 +83,12 @@ public class RecipeUtils {
     }
 
     private static MerchantRecipe getMerchantRecipe(ConfigurationSection section, ItemStack result) {
+
+        if(true) {
+            // TODO: Implement. Can take exactly one or two ingredients.
+            throw new NotImplementedException("Merchant trades are not implemented yet.");
+        }
+
         int maxUses, uses;
         boolean experienceReward;
         int villagerExperience = 0;

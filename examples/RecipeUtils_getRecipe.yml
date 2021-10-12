@@ -2,21 +2,12 @@
 # Only one example will contain an ItemStack as ingredient though, to keep
 # this file as short as possible.
 
-# This is a shapeless recipe that requires exactly:
-# - 1 Dirt
-# - 1 Diamond
 example_shapeless:
   type: shapeless
   ingredients:
     - DIRT
     - DIAMOND
 
-# This is a shapeless recipe that requires exactly:
-# - 1 Diamond named "Jeff"
-# - 1 Redstone
-# Important: the diamond has to be renamed using an anvil.
-# When renaming the diamond using a plugin, the resulting ItemStack
-# will look different.
 example_shapeless_named_diamond:
   type: shapeless
   ingredients:
@@ -29,8 +20,6 @@ example_shapeless_named_diamond:
         display-name: '{"text":"Jeff"}'
     - REDSTONE
 
-# This is a shaped recipe that will requires 4 leather helmets
-# in an L-shape.
 example_shaped_recipe:
   type: shaped
   shape:
@@ -56,3 +45,19 @@ example_furnace_recipe:
   ingredient: PLAYER_HEAD
   experience: 100000
   cooking-time: 20
+
+example_smithing_recipe:
+  type: smithing
+  ingredients:
+    - EMERALD
+    - REDSTONE
+
+example_smoking_recipe:
+  type: smoking
+  ingredient: STICK
+  experience: 100
+  cooking-time: 100
+
+example_stonecutting_recipe:
+  type: stonecutting
+  ingredient: COBBLESTONE
