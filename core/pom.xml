@@ -238,11 +238,4 @@
         </dependency>-->
     </dependencies>
 
-    <distributionManagement>
-        <repository>
-            <id>jeff-ftp</id>
-            <url>ftps://ftp.jeff-media.de/maven2</url>
-        </repository>
-    </distributionManagement>
-
 </project>

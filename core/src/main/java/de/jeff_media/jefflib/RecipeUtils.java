@@ -11,7 +11,6 @@ import org.bukkit.inventory.*;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Crafting recipe related methods
@@ -19,12 +18,13 @@ import java.util.stream.Collectors;
 @UtilityClass
 public class RecipeUtils {
 
-    private static boolean isCookingRecipe(String type) {
+    private static boolean requiresExactlyOneIngredient(String type) {
         switch (type) {
             case "blasting":
             case "campfire":
             case "furnace":
             case "smoking":
+            case "stonecutting":
                 return true;
             default: return false;
         }
@@ -45,10 +45,10 @@ public class RecipeUtils {
         String type = section.getString("type","unknown").toLowerCase(Locale.ROOT);
 
         if(!section.isList("ingredients") && !section.isConfigurationSection("ingredients")) {
-            if(!isCookingRecipe(type)) {
+            if(!requiresExactlyOneIngredient(type)) {
                 throw new InvalidRecipeException("No recipe ingredients defined");
             }
-            if(isCookingRecipe(type) && !section.isSet("ingredient")) {
+            if(requiresExactlyOneIngredient(type) && !section.isSet("ingredient")) {
                 throw new InvalidRecipeException("No recipe ingredient defined");
             }
         }

@@ -14,6 +14,7 @@
         <java.version>1.8</java.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <config.version>${maven.build.timestamp}</config.version>
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <modules>
@@ -75,8 +76,8 @@
 
     <distributionManagement>
         <repository>
-            <id>jeff-ftp</id>
-            <url>ftps://ftp.jeff-media.de/maven2</url>
+            <id>jeff-media-public</id>
+            <url>https://nexus.jeff-media.com/repository/jeff-media-public/</url>
         </repository>
     </distributionManagement>
 
