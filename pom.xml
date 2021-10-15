@@ -5,7 +5,7 @@
 
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>6.1.0</version>
+    <version>6.1.1</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 
@@ -77,7 +77,7 @@
     <distributionManagement>
         <repository>
             <id>jeff-media-public</id>
-            <url>https://nexus.jeff-media.com/repository/jeff-media-public/</url>
+            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
         </repository>
     </distributionManagement>
 

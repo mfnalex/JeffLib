@@ -33,7 +33,7 @@ public class MyPlugin extends JavaPlugin {
 <dependency>
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version>6.1.0</version> <!-- The version will only change when there are breaking changes -->
+    <version>6.1.1</version> <!-- The version will only change when there are breaking changes -->
     <scope>compile</scope>
 </dependency>
 ```
