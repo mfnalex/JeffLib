@@ -161,7 +161,7 @@ public final class ItemStackUtils {
      * @param player Player who damaged the item
      * @return Damaged ItemStack
      */
-    public ItemStack damageItem(int amount,ItemStack item,@Nullable Player player){
+    public static ItemStack damageItem(int amount,ItemStack item,@Nullable Player player){
         item = item.clone();
         ItemMeta meta = item.getItemMeta();
         if(!(meta instanceof Damageable) || amount < 0) return item;
