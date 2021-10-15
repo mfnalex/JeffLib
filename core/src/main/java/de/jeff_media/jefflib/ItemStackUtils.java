@@ -7,8 +7,6 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
@@ -16,8 +14,6 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-
-import javax.annotation.Nullable;
 
 /**
  * ItemStack related methods
@@ -152,7 +148,6 @@ public final class ItemStackUtils {
         Objects.requireNonNull(meta).setDisplayName(name);
         item.setItemMeta(meta);
     }
-
 
     /**
      * Damages given ItemStack by specified amount
