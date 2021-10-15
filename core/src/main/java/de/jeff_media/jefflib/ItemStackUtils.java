@@ -155,16 +155,14 @@ public final class ItemStackUtils {
 
 
     /**
-     * Returns a damaged ItemStack by specified amount
+     * Damages given ItemStack by specified amount
      * @param amount damage amount to be applied
      * @param item ItemStack to be damaged
      * @param player Player who damaged the item
-     * @return Damaged ItemStack
      */
-    public static ItemStack damageItem(int amount,ItemStack item,@Nullable Player player){
-        item = item.clone();
+    public static void damageItem(int amount,ItemStack item,@Nullable Player player){
         ItemMeta meta = item.getItemMeta();
-        if(!(meta instanceof Damageable) || amount < 0) return item;
+        if(!(meta instanceof Damageable) || amount < 0) return;
         int m = item.getEnchantmentLevel(Enchantment.DURABILITY);
         int k = 0;
         for (int l = 0; m > 0 && l < amount; l++) {
@@ -180,18 +178,17 @@ public final class ItemStackUtils {
                 damageEvent.getPlayer().updateInventory();
             }
             else if(damageEvent.isCancelled()){
-                return item;
+                return;
             }
             amount = damageEvent.getDamage();
 
         }
         if (amount <= 0)
-            return item; 
+            return; 
         
         Damageable damageable = (Damageable) meta;
         damageable.setDamage(damageable.getDamage()+amount);
-        item.setItemMeta(meta);    
-        return item;
+        item.setItemMeta(meta); 
     }
 
 }
