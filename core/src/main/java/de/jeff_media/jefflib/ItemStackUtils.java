@@ -7,11 +7,14 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
+import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerItemDamageEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 
@@ -155,13 +158,13 @@ public final class ItemStackUtils {
      * @param item ItemStack to be damaged
      * @param player Player who damaged the item
      */
-    public static void damageItem(int amount,ItemStack item,@Nullable Player player){
+    public static void damageItem(int amount, ItemStack item, @Nullable Player player){
         ItemMeta meta = item.getItemMeta();
         if(!(meta instanceof Damageable) || amount < 0) return;
-        int m = item.getEnchantmentLevel(Enchantment.DURABILITY);
+        int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);
         int k = 0;
-        for (int l = 0; m > 0 && l < amount; l++) {
-            if (JeffLib.getRandom().nextInt(m +1) > 0){
+        for (int l = 0; durability > 0 && l < amount; l++) {
+            if (JeffLib.getRandom().nextInt(durability +1) > 0){
                 k++; 
             }
         }  

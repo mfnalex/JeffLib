@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.tuples.Pair;
+import de.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
@@ -9,6 +10,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,20 @@ import java.util.List;
  */
 @UtilityClass
 public final class EnchantmentUtils {
+
+
+    public void registerEnchantment(Enchantment enchantment) throws ConflictingEnchantmentException {
+        try {
+            Field fieldAcceptingNew = Enchantment.class.getDeclaredField("acceptingNew");
+            fieldAcceptingNew.setAccessible(true);
+            fieldAcceptingNew.set(null, true);
+            fieldAcceptingNew.setAccessible(false);
+
+            Enchantment.registerEnchantment(enchantment);
+        } catch (NoSuchFieldException | IllegalAccessException exception) {
+            throw new ConflictingEnchantmentException(exception.getMessage());
+        }
+    }
 
     /**
      * Returns the level of an enchantment on the given item, or 0 if it's not enchanted with this enchantment

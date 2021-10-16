@@ -38,7 +38,9 @@ public class RecipeUtils {
      * @return Crafting recipe
      */
     public static Recipe getRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+        section.getKeys(false).forEach(System.out::println);
         if(!section.isString("type") || section.getString("type").isEmpty()) {
+            //System.out.println("TEST: " + section.getString("type"));
             throw new InvalidRecipeException("No recipe type defined");
         }
 

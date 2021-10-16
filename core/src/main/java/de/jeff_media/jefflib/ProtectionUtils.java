@@ -1,6 +1,8 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.ShadowPlayer;
+import de.jeff_media.jefflib.exceptions.MissingPluginException;
+import de.jeff_media.jefflib.pluginhooks.WorldGuardUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
@@ -22,6 +24,11 @@ public class ProtectionUtils {
     }
 
     public static boolean canBreak(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        try {
+            if(!WorldGuardUtils.canBreak(player, block.getLocation())) return false;
+        } catch (MissingPluginException ignored) {
+
+        }
         final BlockBreakEvent event = new BlockBreakEvent(block, mute ? new ShadowPlayer(player) : player);
         Bukkit.getPluginManager().callEvent(event);
         return !event.isCancelled();
@@ -32,6 +39,11 @@ public class ProtectionUtils {
     }
 
     public static boolean canPlace(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        try {
+            if(!WorldGuardUtils.canPlace(player, block.getLocation())) return false;
+        } catch (MissingPluginException ignored) {
+
+        }
         final BlockPlaceEvent event = new BlockPlaceEvent(block,block.getState(),block.getRelative(BlockFace.DOWN),player.getInventory().getItemInMainHand(),mute ? new ShadowPlayer(player) : player,true,EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         return !event.isCancelled();
@@ -42,6 +54,11 @@ public class ProtectionUtils {
     }
 
     public static boolean canInteract(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+        try {
+            if(!WorldGuardUtils.canInteract(player, block.getLocation())) return false;
+        } catch (MissingPluginException ignored) {
+
+        }
         final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP,EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         //noinspection deprecation
