@@ -3,7 +3,9 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.command.CommandMap;
+import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
@@ -13,6 +15,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Iterator;
 
 /**
  * Command registration related methods
@@ -70,5 +73,20 @@ public final class CommandUtils {
         }
 
         return commandMap;
+    }
+
+    public static void sendHelpMessage(CommandSender sender, String... args) {
+        Iterator<String> iterator = Arrays.stream(args).iterator();
+        while(iterator.hasNext()) {
+            String command = iterator.next();
+            sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + command);
+            if(iterator.hasNext()) {
+                String message = iterator.next();
+                sender.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + message);
+                if(iterator.hasNext()) {
+                    sender.sendMessage("");
+                }
+            }
+        }
     }
 }
