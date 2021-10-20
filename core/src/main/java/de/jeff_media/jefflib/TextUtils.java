@@ -9,6 +9,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NonNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +17,9 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.Arrays;
+
+import java.lang.StringBuilder;
 
 /**
  * Methods related to color translation, placeholder and emoji application and more
@@ -50,6 +54,52 @@ public class TextUtils {
         final int bannerWidth = Math.max(text.length() + 4, MIN_BANNER_WIDTH);
         StringUtils.leftPad(EMPTY, bannerWidth, BANNER_CHAR);
         JeffLib.getPlugin().getLogger().info(StringUtils.center(" " + text + " ", bannerWidth, BANNER_CHAR));
+    }
+    
+    /**
+     * Combines an array of strings into one string.
+     *
+     * @param arr the array to combine
+     * @author Roughly_
+    */
+    public static String arrayToString(final @NotNull String[] arr) {
+        return arrayToString(arr, " ");
+    }
+    
+    /**
+     * Combines an array of strings into one string.
+     *
+     * @param arr the array to combine
+     * @param separator the string to separate the parts of the array with
+     * @author Roughly_
+    */
+    public static String arrayToString(final @NotNull String[] arr, final @NotNull String separator) {
+        return listToString(Arrays.asList(arr), separator);
+    }
+    
+    /**
+     * Combines a list of strings into one string.
+     *
+     * @param list the list to combine
+     * @author Roughly_
+    */
+    public static String listToString(final @NotNull List<String> list) {
+        return listToString(list, " ");
+    }
+    
+    /**
+     * Combines a list of strings into one string.
+     *
+     * @param list the list to combine
+     * @param separator the string to separate the parts of the list with
+     * @author Roughly_
+    */
+    public static String listToString(final @NotNull List<String> list, final @NotNull String separator) {
+        StringBuilder builder = new StringBuilder();
+        list.forEach(string -> {
+                builder.append(string).append(separator);
+        });
+        return builder.toString();
     }
 
     private static String addAmpersandsToHex(final String hex) {
