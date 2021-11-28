@@ -16,7 +16,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>6.1.4</version>
+        <version>7.0.1</version>
     </parent>
 
     <build>
@@ -79,6 +79,12 @@
                 <version>3.2.4</version>
                 <configuration>
                     <minimizeJar>true</minimizeJar>
+                    <relocations>
+                        <relocation>
+                            <pattern>org.apache.commons.lang3</pattern>
+                            <shadedPattern>de.jeff_media.jefflib.libs.org.apache.commons.lang3</shadedPattern>
+                        </relocation>
+                    </relocations>
                 </configuration>
                 <executions>
                     <execution>
@@ -132,7 +138,7 @@
         </repository>
         <repository>
             <id>jeff-media-gbr</id>
-            <url>https://repo.jeff-media.de/maven2</url>
+            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
         </repository>
         <repository>
             <id>jitpack-repo</id>
@@ -157,7 +163,28 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
-            <version>1.17-R0.1-SNAPSHOT</version>
+            <version>1.18-pre8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
+            <version>1.18-pre8-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.mojang</groupId>
+            <artifactId>authlib</artifactId>
+            <version>3.2.38</version>
             <scope>provided</scope>
         </dependency>
 

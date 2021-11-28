@@ -5,6 +5,7 @@ import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -24,6 +25,7 @@ public final class JeffLib {
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
+    @Getter private static String version = "n/a";
     private static AbstractNMSHandler abstractNmsHandler;
 
     public static AbstractNMSHandler getNMSHandler() {
@@ -84,13 +86,20 @@ public final class JeffLib {
     public static void init(final Plugin plugin) {
         main = plugin;
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
+
+        try {
+            version = FileUtils.readFileFromResources(plugin, "jefflib.version").get(0);
+        } catch (Throwable ignored) {
+
+        }
+
         try {
             final String packageName = JeffLib.class.getPackage().getName();
             final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             //abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
             abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
         } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
-            plugin.getLogger().severe("The included JeffLib version does not fully support the Minecraft version you are currently running:");
+            plugin.getLogger().severe("The included JeffLib version (" + version + ")does not fully support the Minecraft version you are currently running:");
             exception.printStackTrace();
         }
 

@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>6.1.4</version>
+        <version>7.0.1</version>
     </parent>
     <build>
         <plugins>
@@ -45,4 +45,10 @@
             <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
+    <repositories>
+        <repository>
+            <id>jeff-media-thirdparty</id>
+            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-thirdparty/</url>
+        </repository>
+    </repositories>
 </project>

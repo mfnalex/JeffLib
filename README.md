@@ -23,7 +23,7 @@ public class MyPlugin extends JavaPlugin {
 ```xml
 <repository>
     <id>jeff-media-gbr</id>
-    <url>https://repo.jeff-media.de/maven2</url>
+    <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
 </repository>
 ```
 
@@ -33,7 +33,7 @@ public class MyPlugin extends JavaPlugin {
 <dependency>
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version>6.1.2</version> <!-- The version will only change when there are breaking changes -->
+    <version>6.1.4</version>
     <scope>compile</scope>
 </dependency>
 ```

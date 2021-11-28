@@ -5,7 +5,7 @@
 
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>6.1.4</version>
+    <version>7.0.1</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 
@@ -14,11 +14,13 @@
         <java.version>1.8</java.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <config.version>${maven.build.timestamp}</config.version>
-        <maven.deploy.skip>true</maven.deploy.skip>
+        <!--<maven.deploy.skip>true</maven.deploy.skip>-->
     </properties>
 
     <modules>
         <module>core</module>
+        <!--<module>spigot_1_18_pre5_R1</module>-->
+        <module>spigot_1_18_R1</module>
         <module>spigot_1_17_R1</module> <!-- 1.17, 1.17.1 -->
         <module>spigot_1_16_R3</module> <!-- 1.16.4, 1.16.5 -->
         <module>spigot_1_16_R2</module> <!-- 1.16.2, 1.16.3 -->
@@ -140,7 +142,7 @@
     <repositories>
         <repository>
             <id>jeff-media-gbr</id>
-            <url>https://repo.jeff-media.de/maven2</url>
+            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
         </repository>
     </repositories>
 

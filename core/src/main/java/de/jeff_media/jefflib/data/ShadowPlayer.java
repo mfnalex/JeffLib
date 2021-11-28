@@ -782,6 +782,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
+    public void stopAllSounds() {
+
+    }
+
+    @Override
     public void playEffect(@NotNull final Location location, @NotNull final Effect effect, final int i) {
 
     }
@@ -812,6 +817,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
+    public void sendEquipmentChange(@NotNull LivingEntity livingEntity, @NotNull EquipmentSlot equipmentSlot, @NotNull ItemStack itemStack) {
+
+    }
+
+    // No Override, was removed in 1.18
     public boolean sendChunkChange(@NotNull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
         return false;
     }
@@ -823,6 +833,11 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void sendSignChange(@NotNull final Location location, @Nullable final String[] strings, @NotNull final DyeColor dyeColor) throws IllegalArgumentException {
+
+    }
+
+    @Override
+    public void sendSignChange(@NotNull Location location, @Nullable String[] strings, @NotNull DyeColor dyeColor, boolean b) throws IllegalArgumentException {
 
     }
 
@@ -1154,6 +1169,16 @@ public class ShadowPlayer implements Player {
     @Override
     public void openBook(@NotNull final ItemStack itemStack) {
 
+    }
+
+    @Override
+    public void showDemoScreen() {
+
+    }
+
+    @Override
+    public boolean isAllowingServerListings() {
+        return false;
     }
 
     @NotNull
