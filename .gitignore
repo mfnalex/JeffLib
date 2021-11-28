@@ -1,0 +1,13 @@
+# Project exclude paths
+/target/
+*.lst
+*.class
+/.idea/workspace.xml
+*.iml
+target/
+compile/
+*/target
+*/compile
+*/target/*
+/.idea
+*/dependency-reduced-pom.xml
