@@ -1,5 +1,0 @@
-# Project exclude paths
-/target/
-*.lst
-*.class
-/.idea/workspace.xml
