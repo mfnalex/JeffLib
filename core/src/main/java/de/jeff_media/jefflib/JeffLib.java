@@ -89,7 +89,7 @@ public final class JeffLib {
 
         try {
             version = FileUtils.readFileFromResources(plugin, "jefflib.version").get(0);
-        } catch (Throwable ignored) {
+        } catch (final Throwable ignored) {
 
         }
 

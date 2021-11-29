@@ -817,7 +817,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void sendEquipmentChange(@NotNull LivingEntity livingEntity, @NotNull EquipmentSlot equipmentSlot, @NotNull ItemStack itemStack) {
+    public void sendEquipmentChange(@NotNull final LivingEntity livingEntity, @NotNull final EquipmentSlot equipmentSlot, @NotNull final ItemStack itemStack) {
 
     }
 
@@ -837,7 +837,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void sendSignChange(@NotNull Location location, @Nullable String[] strings, @NotNull DyeColor dyeColor, boolean b) throws IllegalArgumentException {
+    public void sendSignChange(@NotNull final Location location, @Nullable final String[] strings, @NotNull final DyeColor dyeColor, final boolean b) throws IllegalArgumentException {
 
     }
 

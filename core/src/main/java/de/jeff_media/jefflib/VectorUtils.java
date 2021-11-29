@@ -13,11 +13,11 @@ public final class VectorUtils {
      * @return              Origin location with adjusted yaw and pitch to look exactly towards the given destination
      */
     public static Location lookAt(final Location origin, final Location destination) {
-        Location location = origin.clone();
+        final Location location = origin.clone();
 
-        double dx = destination.getX() - location.getX();
-        double dy = destination.getY() - location.getY();
-        double dz = destination.getZ() - location.getZ();
+        final double dx = destination.getX() - location.getX();
+        final double dy = destination.getY() - location.getY();
+        final double dz = destination.getZ() - location.getZ();
 
         if (dx != 0) {
             if (dx < 0) {
@@ -30,7 +30,7 @@ public final class VectorUtils {
             location.setYaw((float) Math.PI);
         }
 
-        double dxz = Math.sqrt(Math.pow(dx, 2) + Math.pow(dz, 2));
+        final double dxz = Math.sqrt(Math.pow(dx, 2) + Math.pow(dz, 2));
 
         location.setPitch((float) -Math.atan(dy / dxz));
 

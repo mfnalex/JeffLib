@@ -81,7 +81,7 @@ public final class CommandUtils {
             final String command = iterator.next();
             sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + command);
             if(iterator.hasNext()) {
-                String message = iterator.next();
+                final String message = iterator.next();
                 sender.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + message);
                 if(iterator.hasNext()) {
                     sender.sendMessage("");

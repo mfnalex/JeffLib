@@ -158,10 +158,10 @@ public final class ItemStackUtils {
      * @param item ItemStack to be damaged
      * @param player Player who damaged the item
      */
-    public static void damageItem(int amount, ItemStack item, @Nullable Player player){
-        ItemMeta meta = item.getItemMeta();
+    public static void damageItem(int amount, final ItemStack item, @Nullable final Player player){
+        final ItemMeta meta = item.getItemMeta();
         if(!(meta instanceof Damageable) || amount < 0) return;
-        int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);
+        final int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);
         int k = 0;
         for (int l = 0; durability > 0 && l < amount; l++) {
             if (JeffLib.getRandom().nextInt(durability +1) > 0){
@@ -170,7 +170,7 @@ public final class ItemStackUtils {
         }  
         amount -= k;
         if(player != null){
-            PlayerItemDamageEvent damageEvent = new PlayerItemDamageEvent(player, item, amount);
+            final PlayerItemDamageEvent damageEvent = new PlayerItemDamageEvent(player, item, amount);
             Bukkit.getServer().getPluginManager().callEvent(damageEvent);
             if(amount != damageEvent.getDamage() || damageEvent.isCancelled()){
                 damageEvent.getPlayer().updateInventory();
@@ -184,7 +184,7 @@ public final class ItemStackUtils {
         if (amount <= 0)
             return; 
         
-        Damageable damageable = (Damageable) meta;
+        final Damageable damageable = (Damageable) meta;
         damageable.setDamage(damageable.getDamage()+amount);
         item.setItemMeta(meta); 
     }

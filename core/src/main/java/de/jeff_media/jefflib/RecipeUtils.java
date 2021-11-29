@@ -18,7 +18,7 @@ import java.util.*;
 @UtilityClass
 public class RecipeUtils {
 
-    private static boolean requiresExactlyOneIngredient(String type) {
+    private static boolean requiresExactlyOneIngredient(final String type) {
         switch (type) {
             case "blasting":
             case "campfire":
@@ -37,13 +37,13 @@ public class RecipeUtils {
      * @param result Result
      * @return Crafting recipe
      */
-    public static Recipe getRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+    public static Recipe getRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
         if(!section.isString("type") || section.getString("type").isEmpty()) {
             //System.out.println("TEST: " + section.getString("type"));
             throw new InvalidRecipeException("No recipe type defined");
         }
 
-        String type = section.getString("type","unknown").toLowerCase(Locale.ROOT);
+        final String type = section.getString("type","unknown").toLowerCase(Locale.ROOT);
 
         if(!section.isList("ingredients") && !section.isConfigurationSection("ingredients")) {
             if(!requiresExactlyOneIngredient(type)) {
@@ -78,30 +78,31 @@ public class RecipeUtils {
         }
     }
 
-    private static BlastingRecipe getBlastingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+    private static BlastingRecipe getBlastingRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
+        final AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
         return new BlastingRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
     }
 
-    private static CampfireRecipe getCampfireRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+    private static CampfireRecipe getCampfireRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
+        final AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
         return new CampfireRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
     }
 
-    private static FurnaceRecipe getFurnaceRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+    private static FurnaceRecipe getFurnaceRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
+        final AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
         return new FurnaceRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
     }
 
-    private static MerchantRecipe getMerchantRecipe(ConfigurationSection section, ItemStack result) {
+    private static MerchantRecipe getMerchantRecipe(final ConfigurationSection section, final ItemStack result) {
 
         if(true) {
             // TODO: Implement. Can take exactly one or two ingredients.
             throw new NotImplementedException("Merchant trades are not implemented yet.");
         }
 
-        int maxUses, uses;
-        boolean experienceReward;
+        final int maxUses;
+        int uses;
+        final boolean experienceReward;
         int villagerExperience = 0;
         float priceMultiplier = 0;
 
@@ -149,7 +150,7 @@ public class RecipeUtils {
         }
     }
 
-    private static Recipe getShapedRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+    private static Recipe getShapedRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
         if(!section.isConfigurationSection("ingredients")) {
             throw new InvalidRecipeException("'ingredients' must be a Map for shaped recipes");
         }
@@ -157,7 +158,7 @@ public class RecipeUtils {
             throw new InvalidRecipeException("No shape defined");
         }
 
-        List<String> shape = section.getStringList("shape");
+        final List<String> shape = section.getStringList("shape");
         if(shape.size()>3) {
             throw new InvalidRecipeException("'shape' cannot be longer than 3 lines");
         }
@@ -167,15 +168,15 @@ public class RecipeUtils {
             }
         });
 
-        ShapedRecipe recipe = new ShapedRecipe(key, result);
+        final ShapedRecipe recipe = new ShapedRecipe(key, result);
         recipe.shape(shape.toArray(new String[0])); // shape has to be called before the ingredients
-        Map<Character,RecipeChoice> ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients")));
+        final Map<Character,RecipeChoice> ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients")));
         ingredients.forEach(recipe::setIngredient);
         return recipe;
     }
 
-    private static ShapelessRecipe getShapelessRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        Collection<RecipeChoice> ingredients;
+    private static ShapelessRecipe getShapelessRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
+        final Collection<RecipeChoice> ingredients;
 
         if(section.isConfigurationSection("ingredients")) {
             ingredients = getRecipeChoices(Objects.requireNonNull(section.getConfigurationSection("ingredients"))).values();
@@ -185,15 +186,15 @@ public class RecipeUtils {
             throw new InvalidRecipeException("Could not parse recipe ingredients: neither List nor Map");
         }
 
-        ShapelessRecipe recipe = new ShapelessRecipe(key, result);
+        final ShapelessRecipe recipe = new ShapelessRecipe(key, result);
         ingredients.forEach(recipe::addIngredient);
         return recipe;
     }
 
-    private static SmithingRecipe getSmithingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+    private static SmithingRecipe getSmithingRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
 
-        RecipeChoice base;
-        RecipeChoice addition;
+        final RecipeChoice base;
+        final RecipeChoice addition;
         List<RecipeChoice> choices = null;
 
         if(section.isList("ingredients")) {
@@ -212,29 +213,29 @@ public class RecipeUtils {
         return new SmithingRecipe(key, result, base, addition);
     }
 
-    private static SmokingRecipe getSmokingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
-        AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
+    private static SmokingRecipe getSmokingRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
+        final AbstractFurnaceRecipe recipe = new AbstractFurnaceRecipe(section);
         return new SmokingRecipe(key, result, recipe.recipeChoice, recipe.experience, recipe.cookingTime);
     }
 
-    private static StonecuttingRecipe getStonecuttingRecipe(ConfigurationSection section, NamespacedKey key, ItemStack result) {
+    private static StonecuttingRecipe getStonecuttingRecipe(final ConfigurationSection section, final NamespacedKey key, final ItemStack result) {
         return new StonecuttingRecipe(key, result, getRecipeChoice(section));
     }
 
-    @NotNull private static Map<Character,RecipeChoice> getRecipeChoices(ConfigurationSection section) {
-        Map<Character,RecipeChoice> map = new HashMap<>();
-        for(String key : section.getKeys(false)) {
+    @NotNull private static Map<Character,RecipeChoice> getRecipeChoices(final ConfigurationSection section) {
+        final Map<Character,RecipeChoice> map = new HashMap<>();
+        for(final String key : section.getKeys(false)) {
             if(key.length()!=1) {
                 throw new InvalidRecipeException("Ingredient keys must be exactly one character long, found '" + key + "' instead");
             }
-            Character aChar = key.toCharArray()[0];
+            final Character aChar = key.toCharArray()[0];
             if(map.containsKey(aChar)) {
                 throw new InvalidRecipeException("Ingredient key '" + aChar +"' defined more than once");
             }
             if(section.isItemStack(key)) {
                 map.put(aChar,new RecipeChoice.ExactChoice(section.getItemStack(key)));
             } else if(section.isString(key)) {
-                Material mat = Enums.getIfPresent(Material.class, section.getString(key).toUpperCase(Locale.ROOT)).orNull();
+                final Material mat = Enums.getIfPresent(Material.class, section.getString(key).toUpperCase(Locale.ROOT)).orNull();
                 if(mat == null) {
                     throw new InvalidRecipeException("Invalid material defined for ingredient key '"+aChar+"': " + section.getString(key));
                 }
@@ -246,14 +247,14 @@ public class RecipeUtils {
         return map;
     }
 
-    @NotNull private static List<RecipeChoice> getRecipeChoices(List<?> ingredients) {
-        List<RecipeChoice> list = new ArrayList<>();
+    @NotNull private static List<RecipeChoice> getRecipeChoices(final List<?> ingredients) {
+        final List<RecipeChoice> list = new ArrayList<>();
 
-        for(Object item : ingredients) {
+        for(final Object item : ingredients) {
             if(item instanceof ItemStack) {
                 list.add(new RecipeChoice.ExactChoice((ItemStack) item));
             } else if(item instanceof String) {
-                Material mat = Enums.getIfPresent(Material.class, ((String) item).toUpperCase()).orNull();
+                final Material mat = Enums.getIfPresent(Material.class, ((String) item).toUpperCase()).orNull();
                 if(mat == null) {
                     throw new InvalidRecipeException("Invalid ingredient: " + item);
                 }
@@ -265,16 +266,16 @@ public class RecipeUtils {
         return list;
     }
 
-    @NotNull private static RecipeChoice getRecipeChoice(ConfigurationSection section) {
+    @NotNull private static RecipeChoice getRecipeChoice(final ConfigurationSection section) {
         if(section.isSet("ingredients")) {
             if(section.isConfigurationSection("ingredients")) {
-                Map<Character, RecipeChoice> map = getRecipeChoices(section.getConfigurationSection("ingredients"));
+                final Map<Character, RecipeChoice> map = getRecipeChoices(section.getConfigurationSection("ingredients"));
                 if(map.size()!=1) {
                     throw new InvalidRecipeException("'ingredients' must contain exactly one item, found " + map.size());
                 }
                 return map.values().stream().findFirst().get();
             } else if(section.isList("ingredients")) {
-                List<RecipeChoice> list = getRecipeChoices(section.getList("ingredients"));
+                final List<RecipeChoice> list = getRecipeChoices(section.getList("ingredients"));
                 if(list.size()!=1) {
                     throw new InvalidRecipeException("'ingredients' must contain exactly one item, found " + list.size());
                 }
@@ -285,7 +286,7 @@ public class RecipeUtils {
             if(section.isItemStack("ingredient")) {
                 return new RecipeChoice.ExactChoice(section.getItemStack("ingredient"));
             } else {
-                Material mat = Enums.getIfPresent(Material.class, section.getString("ingredient")).orNull();
+                final Material mat = Enums.getIfPresent(Material.class, section.getString("ingredient")).orNull();
                 if(mat == null) {
                     throw new InvalidRecipeException("Invalid ingredient: " + section.getString("ingredient"));
                 }
@@ -300,7 +301,7 @@ public class RecipeUtils {
         private final float experience;
         private final int cookingTime;
 
-        public AbstractFurnaceRecipe(ConfigurationSection section) {
+        public AbstractFurnaceRecipe(final ConfigurationSection section) {
             if(!section.isSet("experience")) {
                 experience = 0;
             } else {

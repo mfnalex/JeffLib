@@ -21,15 +21,15 @@ import java.util.List;
 public final class EnchantmentUtils {
 
 
-    public void registerEnchantment(Enchantment enchantment) throws ConflictingEnchantmentException {
+    public void registerEnchantment(final Enchantment enchantment) throws ConflictingEnchantmentException {
         try {
-            Field fieldAcceptingNew = Enchantment.class.getDeclaredField("acceptingNew");
+            final Field fieldAcceptingNew = Enchantment.class.getDeclaredField("acceptingNew");
             fieldAcceptingNew.setAccessible(true);
             fieldAcceptingNew.set(null, true);
             fieldAcceptingNew.setAccessible(false);
 
             Enchantment.registerEnchantment(enchantment);
-        } catch (NoSuchFieldException | IllegalAccessException exception) {
+        } catch (final NoSuchFieldException | IllegalAccessException exception) {
             throw new ConflictingEnchantmentException(exception.getMessage());
         }
     }

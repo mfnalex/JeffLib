@@ -2,7 +2,7 @@ package de.jeff_media.jefflib.exceptions;
 
 public class InvalidRecipeException extends IllegalArgumentException {
 
-    public InvalidRecipeException(String message) {
+    public InvalidRecipeException(final String message) {
         super(message);
     }
 
