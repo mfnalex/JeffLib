@@ -1,0 +1,42 @@
+<config>
+    <input>
+        <jar in="JeffLib.jar" out="JeffLib.jar"/>
+    </input>
+
+    <!--<keep-names>
+        <class template="class *" />
+        <method template="@org.bukkit.event.EventHandler *(**)" />
+        <class template="class de.jeff_media.drop2inventory.Drop2InventoryAPI">
+            <method template="public *(**)" />
+        </class>
+    </keep-names>-->
+    <keep-names>
+        <method access="public" />
+        <class access="public" />
+        <field access="public" />
+    </keep-names>
+
+    <property name="log-file" value="log.xml"/>
+
+    <property name="packages-naming" value="keep"/>
+    <property name="classes-naming" value="compact keep-$-sign"/> <!-- Makes the .jar a bit smaller -->
+    <property name="methods-naming" value="compact"/> <!-- Makes the .jar a bit smaller -->
+    <property name="fields-naming" value="compact"/> <!-- Makes the .jar a bit smaller -->
+    <property name="local-variables-naming" value="optimize"/>
+    <property name="control-flow-obfuscation" value="enable"/> <!-- Makes the .jar a bit smaller and faster -->
+    <property name="extensive-flow-obfuscation" value="disable"/> <!-- Extensive flow obfuscation decreases performance -->
+    <property name="generics" value="keep"/>
+    <property name="line-numbers" value="keep"/>
+    <property name="inner-classes" value="keep"/>
+    <property name="member-reorder" value="alphabetic"/>
+    <property name="finalize" value="disable"/>
+    <property name="synthetize-methods" value="disable"/>
+    <property name="synthetize-fields" value="disable"/>
+    <property name="remove-toString" value="false"/>
+    <property name="string-encryption" value="disable"/>
+    <property name="output-jar-compression-level" value="9"/>
+
+    <ignore-classes>
+        <class template="class **.blackhole.**"/>
+    </ignore-classes>
+</config>

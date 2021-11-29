@@ -1,8 +1,10 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 
-public class VectorUtils {
+@UtilityClass
+public final class VectorUtils {
 
     /**
      * Returns a location at the same coordinates as origin, looking exactly towards the given destination

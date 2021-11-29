@@ -11,3 +11,4 @@ compile/
 */target/*
 /.idea
 */dependency-reduced-pom.xml
+/dist/allatori/*.jar

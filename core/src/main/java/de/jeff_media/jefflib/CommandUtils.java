@@ -75,10 +75,10 @@ public final class CommandUtils {
         return commandMap;
     }
 
-    public static void sendHelpMessage(CommandSender sender, String... args) {
-        Iterator<String> iterator = Arrays.stream(args).iterator();
+    public static void sendHelpMessage(final CommandSender sender, final String... args) {
+        final Iterator<String> iterator = Arrays.stream(args).iterator();
         while(iterator.hasNext()) {
-            String command = iterator.next();
+            final String command = iterator.next();
             sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + command);
             if(iterator.hasNext()) {
                 String message = iterator.next();

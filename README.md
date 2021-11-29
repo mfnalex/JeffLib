@@ -33,7 +33,7 @@ public class MyPlugin extends JavaPlugin {
 <dependency>
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version>6.1.4</version>
+    <version><!-- Check latest verion in pom.xml --></version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -59,4 +59,4 @@ public class MyPlugin extends JavaPlugin {
 
 ## JavaDocs
 
-Coming soon
+https://hub.jeff-media.com/javadocs/jefflib/
