@@ -146,7 +146,7 @@ public final class BlockTracker {
 
     private static NamespacedKey getKey(final Block block) {
         final int x = block.getX() & 0x000F;
-        final int y = block.getY() & 0x00FF;
+        final int y = block.getY();
         final int z = block.getZ() & 0x000F;
 
         //noinspection HardcodedFileSeparator
