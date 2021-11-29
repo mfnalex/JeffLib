@@ -28,17 +28,13 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void showEntityToPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
-        final Packet<?> packetSpawn = new ClientboundAddEntityPacket((Entity) entity);
-        PacketUtils.sendPacket(player, packetSpawn);
-
-        final Packet<?> packetMeta = new ClientboundSetEntityDataPacket(((Entity)entity).getId(), ((Entity)entity).getEntityData(), true);
-        PacketUtils.sendPacket(player, packetMeta);
+        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
+        PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(), ((Entity)entity).getEntityData(), true));
     }
 
     @Override
     public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
-        final Packet<?> packetDestroy = new ClientboundRemoveEntitiesPacket(((Entity) entity).getId());
-        PacketUtils.sendPacket(player, packetDestroy);
+        PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
     }
 
     @Override
@@ -103,6 +99,7 @@ public class NMSHandler implements AbstractNMSHandler {
         final ServerLevel world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPos blockPosition = new BlockPos(block.getX(), block.getY(), block.getZ());
         final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition,false);
+        assert skull != null;
         skull.setOwner(gameProfile);
     }
 
