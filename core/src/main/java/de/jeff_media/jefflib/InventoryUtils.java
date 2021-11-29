@@ -75,7 +75,7 @@ public final class InventoryUtils {
     public static boolean addOrDrop(final @NotNull Player player, final @Nullable Location dropLocation, final @NotNull Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for(final ItemStack item : items) {
-            player.getInventory().addItem(item).forEach((slot, leftover) -> dropLocation.getWorld().dropItemNaturally(dropLocation, leftover));
+            player.getInventory().addItem(item).values().forEach((leftover) -> dropLocation.getWorld().dropItemNaturally(dropLocation, leftover));
             storedEverything = false;
         }
         return storedEverything;
