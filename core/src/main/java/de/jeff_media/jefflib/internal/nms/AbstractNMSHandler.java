@@ -7,6 +7,7 @@ import de.jeff_media.jefflib.internal.InternalOnly;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 @InternalOnly
@@ -29,5 +30,7 @@ public interface AbstractNMSHandler {
     void playTotemAnimation(@NotNull final Player player);
 
     void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile);
+
+    NBTItem getItem(ItemStack item);
 
 }
