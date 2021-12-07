@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.Hologram;
+import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
@@ -85,7 +86,8 @@ public final class JeffLib {
      */
     public static void init(final Plugin plugin) {
         main = plugin;
-        ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"-hologram");
+        ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"Hologram");
+        ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT)+"WorldBoundingBox");
 
         try {
             version = FileUtils.readFileFromResources(plugin, "jefflib.version").get(0);

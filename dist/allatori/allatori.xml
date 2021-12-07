@@ -19,7 +19,8 @@
     <property name="log-file" value="log.xml"/>
 
     <property name="packages-naming" value="keep"/>
-    <property name="classes-naming" value="compact keep-$-sign"/> <!-- Makes the .jar a bit smaller -->
+    <property name="classes-naming" value="compact"/> <!-- Makes the .jar a bit smaller -->
+    <property name="classes-naming" value="keep-$-sign"/>
     <property name="methods-naming" value="compact"/> <!-- Makes the .jar a bit smaller -->
     <property name="fields-naming" value="compact"/> <!-- Makes the .jar a bit smaller -->
     <property name="local-variables-naming" value="optimize"/>
@@ -28,11 +29,11 @@
     <property name="generics" value="keep"/>
     <property name="line-numbers" value="keep"/>
     <property name="inner-classes" value="keep"/>
-    <property name="member-reorder" value="alphabetic"/>
+    <property name="member-reorder" value="alphabetical"/>
     <property name="finalize" value="disable"/>
     <property name="synthetize-methods" value="disable"/>
     <property name="synthetize-fields" value="disable"/>
-    <property name="remove-toString" value="false"/>
+    <property name="remove-toString" value="disable"/>
     <property name="string-encryption" value="disable"/>
     <property name="output-jar-compression-level" value="9"/>
 

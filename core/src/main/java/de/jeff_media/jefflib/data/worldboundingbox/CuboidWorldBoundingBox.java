@@ -1,17 +1,19 @@
-package de.jeff_media.jefflib.data;
+package de.jeff_media.jefflib.data.worldboundingbox;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
+import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Objects;
+import java.util.*;
 
 /**
  * Represents a {@link BoundingBox} linked to a {@link World}
  */
-public final class WorldBoundingBox {
+public class CuboidWorldBoundingBox extends WorldBoundingBox {
     @Getter
     @Setter
     @NotNull
@@ -22,14 +24,23 @@ public final class WorldBoundingBox {
     @NotNull
     private BoundingBox boundingBox;
 
-    public WorldBoundingBox(final @NotNull World world, final @NotNull BoundingBox boundingBox) {
+    public CuboidWorldBoundingBox(final @NotNull World world, final @NotNull BoundingBox boundingBox) {
         this.world = world;
         this.boundingBox = boundingBox;
     }
 
+    public boolean contains(Location location) {
+        return boundingBox.contains(location.toVector());
+    }
+
+    @Override
+    List<Vector> getPoints() {
+        return Arrays.asList(boundingBox.getMin(), boundingBox.getMax());
+    }
+
     @Override
     public String toString() {
-        return "WorldBoundingBox{" +
+        return "CuboidWorldBoundingBox{" +
                 "world=" + world +
                 ", boundingBox=" + boundingBox +
                 '}';
@@ -39,7 +50,7 @@ public final class WorldBoundingBox {
     public boolean equals(final Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        final WorldBoundingBox that = (WorldBoundingBox) o;
+        final CuboidWorldBoundingBox that = (CuboidWorldBoundingBox) o;
         return world.equals(that.world) && boundingBox.equals(that.boundingBox);
     }
 

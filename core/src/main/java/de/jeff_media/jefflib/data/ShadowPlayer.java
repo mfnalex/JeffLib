@@ -822,6 +822,7 @@ public class ShadowPlayer implements Player {
     }
 
     // No Override, was removed in 1.18
+    @SuppressWarnings("MethodMayBeStatic")
     public boolean sendChunkChange(@NotNull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
         return false;
     }

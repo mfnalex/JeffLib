@@ -2,7 +2,6 @@ package de.jeff_media.jefflib.pluginhooks;
 
 import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import de.jeff_media.jefflib.internal.PluginUtils;
-import de.jeff_media.jefflib.internal.blackhole.WorldGuardHandler;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

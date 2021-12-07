@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib.pluginhooks;
 
-import de.jeff_media.jefflib.internal.blackhole.PlaceholderAPIHandler;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;

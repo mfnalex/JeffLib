@@ -1,4 +1,4 @@
-package de.jeff_media.jefflib.internal.blackhole;
+package de.jeff_media.jefflib.pluginhooks;
 
 import de.jeff_media.jefflib.JeffLib;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;

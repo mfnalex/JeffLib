@@ -83,7 +83,7 @@
 //}
 
 
-package de.jeff_media.jefflib.internal.blackhole;
+package de.jeff_media.jefflib.pluginhooks;
 
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
 import com.sk89q.worldguard.LocalPlayer;
@@ -106,7 +106,7 @@ import java.util.List;
 
 @InternalOnly
 @UtilityClass
-public final class WorldGuardHandler {
+final class WorldGuardHandler {
 
     private static ApplicableRegionSet getRegionSet(@NotNull final Location location) {
         final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
