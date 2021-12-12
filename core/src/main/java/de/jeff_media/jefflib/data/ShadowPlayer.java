@@ -8,6 +8,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.PistonMoveReaction;
+import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
@@ -978,6 +979,18 @@ public class ShadowPlayer implements Player {
         return this.player.canSee(player);
     }
 
+    public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity) {
+
+    }
+
+    public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity) {
+
+    }
+
+    public boolean canSee(@NotNull Entity entity) {
+        return false;
+    }
+
     @Override
     public boolean isFlying() {
         return player.isFlying();
@@ -1169,6 +1182,10 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void openBook(@NotNull final ItemStack itemStack) {
+
+    }
+
+    public void openSign(@NotNull Sign sign) {
 
     }
 
