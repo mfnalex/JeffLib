@@ -5,6 +5,7 @@ import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
+import de.jeff_media.jefflib.internal.nms.NBTItem;
 import net.minecraft.server.v1_16_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -14,6 +15,7 @@ import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftChatMessage;
 //import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 public class NMSHandler implements AbstractNMSHandler {
@@ -99,4 +101,8 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
 
+    @Override
+    public NBTItem getNBTItem(ItemStack item) {
+        return null;
+    }
 }

@@ -23,7 +23,7 @@ public abstract class NBTItem {
 
     public abstract boolean hasKey(String key);
 
-    public abstract ItemStack getItem();
+    public abstract ItemStack getBukkitItem();
 
     public abstract void removeKey(String key);
 

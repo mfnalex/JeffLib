@@ -64,6 +64,7 @@ public final class JeffLib {
      */
     public static void registerPlayerScrollEvent() {
         JeffLibNotInitializedException.check();
+        
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
     }
 

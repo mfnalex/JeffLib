@@ -16,6 +16,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -107,7 +108,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
 
     @Override
-    public NBTItem getItem(ItemStack item) {
+    public NBTItem getNBTItem(ItemStack item) {
         return new NBTItemHandler(item);
     }
 }

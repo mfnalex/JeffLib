@@ -31,6 +31,6 @@ public interface AbstractNMSHandler {
 
     void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile);
 
-    NBTItem getItem(ItemStack item);
+    NBTItem getNBTItem(ItemStack item);
 
 }

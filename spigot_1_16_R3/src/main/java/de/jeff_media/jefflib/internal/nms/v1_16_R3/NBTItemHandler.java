@@ -1,45 +1,44 @@
-package de.jeff_media.jefflib.internal.nms.v1_18_R1;
+package de.jeff_media.jefflib.internal.nms.v1_16_R3;
 
 import de.jeff_media.jefflib.internal.nms.NBTItem;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.world.item.ItemStack;
-import org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack;
+import net.minecraft.server.v1_16_R3.ItemStack;
+import net.minecraft.server.v1_16_R3.NBTTagCompound;
+import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 
 public class NBTItemHandler extends NBTItem {
 
     private ItemStack nmsItem;
-    private CompoundTag compound;
-
+    private NBTTagCompound compound;
 
     public NBTItemHandler(org.bukkit.inventory.ItemStack item){
-        if(item == null) return;
+        if(item==null) return;
         this.nmsItem = CraftItemStack.asNMSCopy(item);
         this.compound = nmsItem.getOrCreateTag();
     }
 
     @Override
     public void setString(String key, String value) {
-        compound.putString(key,value);
+        compound.setString(key,value);
     }
 
     @Override
     public void setBoolean(String key, boolean value) {
-        compound.putBoolean(key,value);
+        compound.setBoolean(key,value);
     }
 
     @Override
     public void setInt(String key, int value) {
-        compound.putInt(key,value);
+        compound.setInt(key,value);
     }
 
     @Override
     public void setLong(String key, long value) {
-        compound.putLong(key,value);
+        compound.setLong(key,value);
     }
 
     @Override
     public void setDouble(String key, double value) {
-
+        compound.setDouble(key,value);
     }
 
     @Override
@@ -69,7 +68,7 @@ public class NBTItemHandler extends NBTItem {
 
     @Override
     public boolean hasKey(String key) {
-        return compound.contains(key);
+        return compound.hasKey(key);
     }
 
     @Override
