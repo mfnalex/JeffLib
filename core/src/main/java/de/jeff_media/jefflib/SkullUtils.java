@@ -45,6 +45,12 @@ public class SkullUtils {
         JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
     }
 
+    public static void setBase64Texture(@NotNull final Block block, @NotNull final String base64) {
+        final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
+        profile.getProperties().put("textures", new Property("textures", base64));
+        setHeadTexture(block, profile);
+    }
+
     public static ItemStack getHead(@NotNull final UUID uuid) {
         final OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         return getHead(player);

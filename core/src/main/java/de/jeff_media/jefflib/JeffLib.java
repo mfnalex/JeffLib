@@ -7,6 +7,7 @@ import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.serialization.ConfigurationSerialization;
@@ -26,8 +27,14 @@ public final class JeffLib {
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin main;
+    @Getter@Setter
+    private static boolean debug = false;
     @Getter private static String version = "n/a";
     private static AbstractNMSHandler abstractNmsHandler;
+
+    public static void debug(String text) {
+        if(debug && main != null) getPlugin().getLogger().info("[JeffLib] [Debug] " + text);
+    }
 
     public static AbstractNMSHandler getNMSHandler() {
         return abstractNmsHandler;

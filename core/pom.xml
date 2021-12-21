@@ -16,7 +16,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>7.1.0-SNAPSHOT</version>
+        <version>7.1.5-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -76,7 +76,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.3.0-SNAPSHOT</version>
                 <configuration>
                     <minimizeJar>true</minimizeJar>
                     <relocations>
@@ -225,6 +225,16 @@
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
             <version>7.0.4</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Oraxen's jitpack is broken because they aren't deploying the the correct .jar file matching the artifactId... -->
+        <!-- You'll have to compile it yourself and then install it with mvn install:install-file -->
+        <!-- example: mvn install:install-file -Dfile=oraxen-1.121.0-all.jar -DgroupId=io.th0rgal -DartifactId=oraxen-mfnalex -Dversion=1.121.0 -Dpackaging=jar -->
+        <dependency>
+            <groupId>io.th0rgal</groupId>
+            <artifactId>oraxen-mfnalex</artifactId>
+            <version>1.121.0</version>
             <scope>provided</scope>
         </dependency>
 
