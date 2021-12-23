@@ -14,6 +14,7 @@ import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.Locale;
+import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class CustomBlock {
@@ -27,10 +28,11 @@ public class CustomBlock {
     @Getter private final BlockData blockData;
     @Getter private final Provider provider;
     @Getter private final Material type;
-    @Getter @Nullable private Consumer<Block> consumer;
+    @Getter private final String rawId;
+    @Getter @Nullable private BiConsumer<Block,OfflinePlayer> consumer;
 
     public static CustomBlock fromMaterial(Material material) {
-        return new CustomBlock(Provider.VANILLA, Bukkit.createBlockData(material));
+        return new CustomBlock(material.name(), Provider.VANILLA, Bukkit.createBlockData(material));
     }
 
     public static CustomBlock fromString(String id) throws MissingPluginException, InvalidBlockDataException {
@@ -48,8 +50,11 @@ public class CustomBlock {
             final Material material = Enums.getIfPresent(Material.class, id.toUpperCase(Locale.ROOT)).orNull();
             if(material == null) throw new InvalidBlockDataException("Could not find material with ID " + id);
             JeffLib.debug("CustomBlock->Vanilla->Type");
-            return new CustomBlock(Provider.VANILLA, Bukkit.createBlockData(material));
+            return new CustomBlock(id, Provider.VANILLA, Bukkit.createBlockData(material));
         }
+
+        // id will always contain ":" from here on
+        final String split = id.split(":")[1];
 
         // Vanilla BlockData
         if(lowercaseId.startsWith("minecraft:")) {
@@ -61,15 +66,10 @@ public class CustomBlock {
             }
         }
 
-        if(!id.contains(":")) {
-            throw new InvalidBlockDataException("Could not parse blockdata: " + id);
-        }
-        final String split = id.split(":")[1];
-
         // Vanilla heads
         if(lowercaseId.startsWith("head:")) {
             JeffLib.debug("CustomBlock->Head->id: " + split);
-            return HeadsHandler.getFromString(split, player);
+            return HeadsHandler.getFromString(split/*, player*/);
         }
 
         // ItemsAdder Block
@@ -89,15 +89,22 @@ public class CustomBlock {
     }
 
     private static CustomBlock fromBlockDataString(String blockDataString) {
-        return new CustomBlock(Provider.VANILLA, Bukkit.createBlockData(blockDataString));
+        return new CustomBlock(blockDataString, Provider.VANILLA, Bukkit.createBlockData(blockDataString));
     }
 
-    public void place(Block block) {
+    public void place(Block block, @Nullable OfflinePlayer player) {
+        JeffLib.debug("Placing MagicMaterial: " + this);
         block.setType(blockData.getMaterial());
-        block.setBlockData(blockData);
+        JeffLib.debug("Set Type to " + blockData.getMaterial());
+        block.setBlockData(blockData,true);
+        JeffLib.debug("Set BlockData to " + blockData.getAsString());
         if(consumer != null) {
-            consumer.accept(block);
+            consumer.accept(block, player);
         }
+        Bukkit.getScheduler().runTaskLater(JeffLib.getPlugin(),() -> {
+            JeffLib.debug("Now updated Blockstate...");
+            block.getState().update();
+        }, 20*20);
     }
 
     private static CustomBlock fromItemsAdderId(String id) throws MissingPluginException, InvalidBlockDataException {
@@ -105,29 +112,31 @@ public class CustomBlock {
         if(blockData == null) {
             throw new InvalidBlockDataException("Could not find ItemsAdder block with ID " + id);
         }
-        return new CustomBlock(CustomBlock.Provider.ITEMSADDER, blockData);
+        return new CustomBlock(id, CustomBlock.Provider.ITEMSADDER, blockData);
     }
 
     public Material getType() {
         return blockData.getMaterial();
     }
 
-    public CustomBlock(final Provider provider, final BlockData blockData) {
-        this(provider,blockData, null);
+    public CustomBlock(final String rawId, final Provider provider, final BlockData blockData) {
+        this(rawId, provider,blockData, null);
     }
 
     @Override
     public String toString() {
         return "CustomBlock{" +
-                "blockData=" + blockData.getAsString() +
+                "rawId=" + rawId +
+                ", blockData=" + blockData.getAsString() +
                 ", provider=" + provider +
                 '}';
     }
 
-    public CustomBlock(final Provider provider, final BlockData blockData, final @Nullable Consumer<Block> consumer) {
+    public CustomBlock(final String rawId, final Provider provider, final BlockData blockData, final @Nullable BiConsumer<Block, OfflinePlayer> consumer) {
         this.blockData = blockData;
         this.provider = provider;
         this.consumer = consumer;
         this.type = blockData.getMaterial();
+        this.rawId = rawId;
     }
 }
