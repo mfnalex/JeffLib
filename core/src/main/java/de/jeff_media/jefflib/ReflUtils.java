@@ -104,6 +104,19 @@ public final class ReflUtils {
         }
     }
 
+    public static void setField(final Object object, final String fieldName, final Object value) {
+        setField(object.getClass(), object, fieldName, value);
+    }
+
+    public static void setField(final Class<?> clazz, final Object object, final String fieldName, final Object value) {
+        try {
+            final Field field = getFieldCached(clazz, fieldName);
+            java.util.Objects.requireNonNull(field).set(object, value);
+        } catch (final IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static Field getFieldCached(final Class<?> clazz, final String fieldName) {
         if (fieldCache.contains(clazz, fieldName)) {
             return fieldCache.get(clazz, fieldName);

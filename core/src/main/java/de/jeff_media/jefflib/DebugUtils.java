@@ -2,6 +2,7 @@ package de.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 
+import java.util.Collection;
 import java.util.Map;
 
 @UtilityClass
@@ -15,5 +16,9 @@ public class DebugUtils {
         for(final Map.Entry<?,?> entry : map.entrySet()) {
             System.out.println(entry.getKey()+" -> " + entry.getValue());
         }
+    }
+
+    public static void print(final Collection<?> collection) {
+        collection.forEach(System.out::println);
     }
 }

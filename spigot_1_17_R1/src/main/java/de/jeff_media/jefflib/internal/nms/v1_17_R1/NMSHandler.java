@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import net.minecraft.core.BlockPosition;
 import net.minecraft.network.chat.IChatBaseComponent;
@@ -27,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 
 public class NMSHandler implements AbstractNMSHandler {
 
+    private final MaterialHandler materialHandler = new MaterialHandler();
+
     @Override
     public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
         final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
@@ -40,6 +43,11 @@ public class NMSHandler implements AbstractNMSHandler {
     public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
         final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
         PacketUtils.sendPacket(player, packetDestroy);
+    }
+
+    @Override
+    public AbstractNMSMaterialHandler getMaterialHandler() {
+        return materialHandler;
     }
 
     @Override

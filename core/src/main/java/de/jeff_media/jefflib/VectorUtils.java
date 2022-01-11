@@ -2,6 +2,8 @@ package de.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
+import org.bukkit.util.EulerAngle;
+import org.bukkit.util.Vector;
 
 @UtilityClass
 public final class VectorUtils {
@@ -38,6 +40,40 @@ public final class VectorUtils {
         location.setPitch(location.getPitch() * 180f / (float) Math.PI);
 
         return location;
+    }
+
+    private static EulerAngle convertVectorToEulerAngle(Vector vec) {
+
+        double x = vec.getX();
+        double y = vec.getY();
+        double z = vec.getZ();
+
+        double xz = Math.sqrt(x*x + z*z);
+
+        double eulX;
+        if(x < 0) {
+            if(y == 0) {
+                eulX = Math.PI*0.5;
+            } else {
+                eulX = Math.atan(xz/y)+Math.PI;
+            }
+        } else {
+            eulX = Math.atan(y/xz)+Math.PI*0.5;
+        }
+
+        double eulY;
+        if(x == 0) {
+            if(z > 0) {
+                eulY = Math.PI;
+            } else {
+                eulY = 0;
+            }
+        } else {
+            eulY = Math.atan(z/x)+Math.PI*0.5;
+        }
+
+        return new EulerAngle(eulX, eulY, 0);
+
     }
 
 }

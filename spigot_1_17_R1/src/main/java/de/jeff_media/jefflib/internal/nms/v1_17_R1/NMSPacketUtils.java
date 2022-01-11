@@ -7,7 +7,7 @@ import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @UtilityClass
-public class NMSPacketUtils {
+class NMSPacketUtils {
 
     private static PlayerConnection getPlayerConnection(final Player player) {
         return ((CraftPlayer)player).getHandle().b;

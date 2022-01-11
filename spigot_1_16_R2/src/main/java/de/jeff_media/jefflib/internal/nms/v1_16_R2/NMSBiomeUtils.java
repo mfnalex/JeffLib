@@ -9,7 +9,7 @@ import org.bukkit.craftbukkit.v1_16_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 
 @UtilityClass
-public class NMSBiomeUtils {
+class NMSBiomeUtils {
 
     private final ResourceKey<IRegistry<BiomeBase>> BIOME_REGISTRY_RESOURCE_KEY = IRegistry.ay;
 

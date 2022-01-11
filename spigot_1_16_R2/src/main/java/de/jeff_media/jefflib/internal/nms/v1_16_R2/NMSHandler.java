@@ -5,6 +5,7 @@ import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -17,6 +18,13 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class NMSHandler implements AbstractNMSHandler {
+
+    private final MaterialHandler materialHandler = new MaterialHandler();
+
+    @Override
+    public AbstractNMSMaterialHandler getMaterialHandler() {
+        return materialHandler;
+    }
 
     @Override
     public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {

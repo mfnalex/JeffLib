@@ -1,6 +1,8 @@
 package de.jeff_media.jefflib;
 
 import com.google.gson.Gson;
+import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
+import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
@@ -66,6 +68,17 @@ public final class MaterialUtils {
             if (iterator.hasNext()) builder.append(" ");
         }
         return builder.toString();
+    }
+
+    /**
+     * Sets this material's max stack size
+     * @param material Material to change
+     * @param maxStackSize new max stack size
+     */
+    public static void setMaxStackSize(final Material material, final int maxStackSize) {
+        NMSNotSupportedException.check();
+        ReflUtils.setField(Material.class, material, "maxStack",maxStackSize);
+        JeffLib.getNMSHandler().getMaterialHandler().setMaxStackSize(material, maxStackSize);
     }
 
 }

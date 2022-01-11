@@ -14,6 +14,8 @@ public interface AbstractNMSHandler {
 
     //void updateMap(@NotNull final MapView map);
 
+    AbstractNMSMaterialHandler getMaterialHandler();
+
     void changeNMSEntityName(@NotNull Object entity, @NotNull String name);
 
     Object createHologram(@NotNull Location location, @NotNull String line, @NotNull Hologram.Type type);

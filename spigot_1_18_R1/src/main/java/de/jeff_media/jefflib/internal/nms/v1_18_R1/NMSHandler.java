@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
@@ -25,6 +26,13 @@ import org.bukkit.craftbukkit.v1_18_R1.util.CraftChatMessage;
 import org.jetbrains.annotations.NotNull;
 
 public class NMSHandler implements AbstractNMSHandler {
+
+    private final MaterialHandler materialHandler = new MaterialHandler();
+
+    @Override
+    public AbstractNMSMaterialHandler getMaterialHandler() {
+        return materialHandler;
+    }
 
     @Override
     public void showEntityToPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
