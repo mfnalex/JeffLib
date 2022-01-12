@@ -77,6 +77,7 @@ public final class MaterialUtils {
      */
     public static void setMaxStackSize(final Material material, final int maxStackSize) {
         NMSNotSupportedException.check();
+        if(!material.isItem()) return; // Can't set the amount for unobtainable items like WATER
         ReflUtils.setField(Material.class, material, "maxStack",maxStackSize);
         JeffLib.getNMSHandler().getMaterialHandler().setMaxStackSize(material, maxStackSize);
     }

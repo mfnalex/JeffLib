@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * File related methods
@@ -82,22 +83,10 @@ public final class FileUtils {
      */
     @SneakyThrows
     public static List<String> readFileFromResources(final Plugin plugin, final String fileName) {
-        final InputStream input = plugin.getResource(fileName);
-        if (input == null) {
-            throw new FileNotFoundException();
+        try(InputStream input = plugin.getResource(fileName);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
+            return reader.lines().collect(Collectors.toList());
         }
-        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(input));
-        final List<String> lines = new ArrayList<>();
-        String line;
-        try {
-            while ((line = bufferedReader.readLine()) != null) {
-                lines.add(line);
-            }
-            bufferedReader.close();
-        } catch (final IOException exception) {
-            exception.printStackTrace();
-        }
-        return lines;
     }
 
     /**

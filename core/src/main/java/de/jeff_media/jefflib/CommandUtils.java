@@ -23,6 +23,10 @@ import java.util.Iterator;
 @UtilityClass
 public final class CommandUtils {
 
+    public enum HelpStyle {
+        NEW_LINE, SAME_LINE_SPACED, SAME_LINE_COMPACT
+    }
+
     /**
      * Registers a new command
      *
@@ -75,7 +79,37 @@ public final class CommandUtils {
         return commandMap;
     }
 
-    public static void sendHelpMessage(final CommandSender sender, final String... args) {
+    public static void sendHelpMessage(final CommandSender sender, HelpStyle style, final String... args) {
+        switch (style) {
+            case NEW_LINE:
+                sendHelpMessageNewLine(sender, args);
+                break;
+            case SAME_LINE_COMPACT:
+                sendHelpMessageSameLine(sender, false, args);
+                break;
+            case SAME_LINE_SPACED:
+            default:
+                sendHelpMessageSameLine(sender, true, args);
+        }
+    }
+
+    private static void sendHelpMessageSameLine(final CommandSender sender, boolean newLine, final String... args) {
+        final Iterator<String> iterator = Arrays.stream(args).iterator();
+        while(iterator.hasNext()) {
+            final String command = iterator.next();
+            String line = ChatColor.GOLD + "" + ChatColor.BOLD + command + ChatColor.RESET;
+            if(iterator.hasNext()) {
+                final String description = iterator.next();
+                line += " " + ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + description;
+                sender.sendMessage(line);
+                if(iterator.hasNext() && newLine ) {
+                    sender.sendMessage(" ");
+                }
+            }
+        }
+    }
+
+    private static void sendHelpMessageNewLine(final CommandSender sender, final String... args) {
         final Iterator<String> iterator = Arrays.stream(args).iterator();
         while(iterator.hasNext()) {
             final String command = iterator.next();
