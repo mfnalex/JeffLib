@@ -2,8 +2,8 @@ package de.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
 import de.jeff_media.jefflib.exceptions.InvalidRecipeException;
+import de.jeff_media.jefflib.internal.cherokee.NotImplementedException;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.NotImplementedException;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;

@@ -1,8 +1,8 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang3.Validate;
 
 /**
  * GUI related methods

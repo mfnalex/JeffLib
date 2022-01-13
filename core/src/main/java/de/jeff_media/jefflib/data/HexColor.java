@@ -1,7 +1,7 @@
 package de.jeff_media.jefflib.data;
 
+import de.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.SneakyThrows;
-import org.apache.commons.lang3.Validate;
 import org.bukkit.ChatColor;
 
 import java.util.Objects;

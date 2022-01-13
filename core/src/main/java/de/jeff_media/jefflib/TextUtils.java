@@ -2,8 +2,8 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.HexColor;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
+import de.jeff_media.jefflib.internal.cherokee.StringUtils;
 import lombok.experimental.UtilityClass;
-import org.apache.commons.lang.StringUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
