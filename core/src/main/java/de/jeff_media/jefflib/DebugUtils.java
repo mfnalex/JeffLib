@@ -1,9 +1,15 @@
 package de.jeff_media.jefflib;
 
+import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
+import org.bukkit.event.Event;
+import org.bukkit.event.inventory.InventoryClickEvent;
+import org.bukkit.inventory.Inventory;
 
+import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
+import java.util.logging.Logger;
 
 @UtilityClass
 public class DebugUtils {
@@ -20,5 +26,29 @@ public class DebugUtils {
 
     public static void print(final Collection<?> collection) {
         collection.forEach(System.out::println);
+    }
+
+    public static class Events {
+        private static Logger logger = JeffLib.getPlugin().getLogger();
+        public static void debug(InventoryClickEvent event) {
+            Inventory top = event.getView().getTopInventory();
+            Inventory bottom = event.getView().getBottomInventory();
+            logger.warning("============================================================");
+            logger.warning("Top inventory holder: " + (top.getHolder() == null ? null : top.getHolder().getClass().getName()));
+            logger.warning("Bottom inventory holder: " + (bottom.getHolder() == null ? null : bottom.getHolder().getClass().getName()));
+            logger.warning("InventoryAction: " + event.getAction().name());
+            logger.warning("Clicked inventory holder: " + (event.getClickedInventory() == null ? null : (event.getClickedInventory().getHolder() == null ? null : event.getClickedInventory().getHolder().getClass().getName())));
+            logger.warning("Current Item: " + event.getCurrentItem());
+            logger.warning("Cursor: " + event.getCursor());
+            logger.warning("Hotbar Button: " + event.getHotbarButton());
+            logger.warning("Raw Slot: " + event.getRawSlot());
+            logger.warning("Slot: " + event.getSlot());
+            logger.warning("Slot Type: " + event.getSlotType().name());
+            logger.warning("Left Click: " + event.isLeftClick());
+            logger.warning("Right Click: " + event.isRightClick());
+            logger.warning("Shift Click: " + event.isShiftClick());
+            logger.warning("============================================================");
+        }
+
     }
 }

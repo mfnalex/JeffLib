@@ -25,7 +25,7 @@ import java.util.*;
 public final class ItemStackUtils {
 
     public static boolean isNullOrEmpty(final ItemStack itemStack) {
-        return itemStack == null || itemStack.getType() == Material.AIR || itemStack.getAmount() == 1;
+        return itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() == 0;
     }
 
     public ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {

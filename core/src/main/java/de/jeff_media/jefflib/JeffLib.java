@@ -3,6 +3,8 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
+import de.jeff_media.jefflib.internal.listeners.ArmorEquipListener;
+import de.jeff_media.jefflib.internal.listeners.DispenserArmorEquipListener;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import de.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
@@ -75,6 +77,12 @@ public final class JeffLib {
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), main);
     }
 
+    public static void registerArmorEquipEvent() {
+        JeffLibNotInitializedException.check();
+        Bukkit.getPluginManager().registerEvents(new ArmorEquipListener(FileUtils.readFileFromResources(main, "armor-equip-blocked-blocks.txt")), main);
+        Bukkit.getPluginManager().registerEvents(new DispenserArmorEquipListener(), main);
+    }
+
     /**
      * Registers the listeners needed to track blocks using {@link BlockTracker}
      */
@@ -97,7 +105,7 @@ public final class JeffLib {
         ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT)+"WorldBoundingBox");
 
         try {
-            version = FileUtils.readFileFromResources(plugin, "jefflib.version").get(0);
+            version = FileUtils.readFileFromResources(plugin, "src/main/resources/jefflib.version").get(0);
         } catch (final Throwable ignored) {
 
         }

@@ -76,4 +76,14 @@ public final class VectorUtils {
 
     }
 
+    public static Vector getCenter(Vector vector1, Vector vector2) {
+        double x1 = vector1.getX();
+        double y1 = vector1.getY();
+        double z1 = vector1.getZ();
+        double x2 = vector2.getX();
+        double y2 = vector2.getY();
+        double z2 = vector2.getZ();
+        return new Vector(x1+x2/2, y1+y2/2, z1+z2/2);
+    }
+
 }
