@@ -16,6 +16,8 @@ public interface AbstractNMSHandler {
 
     AbstractNMSMaterialHandler getMaterialHandler();
 
+    AbstractNMSBlockHandler getBlockHandler();
+
     void changeNMSEntityName(@NotNull Object entity, @NotNull String name);
 
     Object createHologram(@NotNull Location location, @NotNull String line, @NotNull Hologram.Type type);

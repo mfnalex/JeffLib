@@ -4,46 +4,32 @@ import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
-import net.minecraft.core.BlockPosition;
-import net.minecraft.network.chat.IChatBaseComponent;
+import net.minecraft.core.BlockPos;
+import net.minecraft.network.Connection;
+import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
-import net.minecraft.server.level.EntityPlayer;
-import net.minecraft.server.network.PlayerConnection;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityAreaEffectCloud;
-import net.minecraft.world.entity.decoration.EntityArmorStand;
-import net.minecraft.world.level.World;
-import net.minecraft.world.level.block.entity.TileEntitySkull;
+import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class NMSHandler implements AbstractNMSHandler {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
-
-    @Override
-    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
-        final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
-        PacketUtils.sendPacket(player, packetSpawn);
-
-        final PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
-        PacketUtils.sendPacket(player, packetMeta);
-    }
-
-    @Override
-    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
-        final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
-        PacketUtils.sendPacket(player, packetDestroy);
-    }
+    private final BlockHandler blockHandler = new BlockHandler();
 
     @Override
     public AbstractNMSMaterialHandler getMaterialHandler() {
@@ -51,46 +37,62 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
+    public AbstractNMSBlockHandler getBlockHandler() {
+        return blockHandler;
+    }
+
+    @Override
+    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
+        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
+        PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(), ((Entity)entity).getEntityData(), true));
+    }
+
+    @Override
+    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
+        PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
+    }
+
+    @Override
     public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
-        for(final Player player : Bukkit.getOnlinePlayers()) {
-            sendPacket(player, new PacketPlayOutEntityMetadata(((Entity)entity).getId(),((Entity)entity).getDataWatcher(),true));
+        for(final org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
+            sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(),((Entity)entity).getEntityData(),true));
         }
     }
 
     @Override
     public Object createHologram(@NotNull final Location location, final @NotNull String line, @NotNull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
-        final World world = craftWorld.getHandle();
-        final IChatBaseComponent baseComponent = CraftChatMessage.fromString(line)[0];
+        final ServerLevel world = craftWorld.getHandle();
+        final Component baseComponent = CraftChatMessage.fromString(line)[0];
         final Entity entity;
         switch (type) {
             case EFFECTCLOUD:
-                entity = new EntityAreaEffectCloud(world, location.getX(), location.getY(), location.getZ());
-                final EntityAreaEffectCloud effectCloud = (EntityAreaEffectCloud) entity;
+                entity = new AreaEffectCloud(world, location.getX(), location.getY(), location.getZ());
+                final AreaEffectCloud effectCloud = (AreaEffectCloud) entity;
                 effectCloud.setRadius(0);
                 effectCloud.setWaitTime(0);
                 effectCloud.setDuration(Integer.MAX_VALUE);
                 break;
             case ARMORSTAND:
             default:
-                entity = new EntityArmorStand(world, location.getX(), location.getY(), location.getZ());
-                final EntityArmorStand armorStand = (EntityArmorStand) entity;
-                armorStand.setNoGravity(true);
-                armorStand.setInvisible(true);
-                armorStand.setMarker(true);
-                armorStand.setSmall(true);
+                entity = new ArmorStand(world, location.getX(), location.getY(), location.getZ());
+                final ArmorStand armorStand = (ArmorStand) entity;
+                armorStand.setNoGravity(true); // setnogravity
+                armorStand.setInvisible(true); // setinvisible
+                armorStand.setMarker(true); // setmarker
+                armorStand.setSmall(true); // setsmall
         }
 
-        entity.setInvulnerable(true);
-        entity.setSilent(true);
-        entity.setCustomName(baseComponent);
-        entity.setCustomNameVisible(true);
+        entity.setInvulnerable(true); // setinvulnerable
+        entity.setSilent(true); // setsilent
+        entity.setCustomName(baseComponent); // setcustomname
+        entity.setCustomNameVisible(true); // setcustomnamevisible
         return entity;
     }
 
     @Override
-    public void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
+    public void sendPacket(@NotNull final org.bukkit.entity.Player player, @NotNull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
@@ -100,19 +102,20 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void playTotemAnimation(final @NotNull Player player) {
-        final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
-        final Packet<PacketListenerPlayOut> packet = new PacketPlayOutEntityStatus(entityPlayer, (byte) 35);
-        final PlayerConnection playerConnection = entityPlayer.b;
-        playerConnection.sendPacket(packet);
+    public void playTotemAnimation(final @NotNull org.bukkit.entity.Player player) {
+        final ServerPlayer entityPlayer = ((CraftPlayer) player).getHandle();
+        final Packet<?> packet = new ClientboundEntityEventPacket(entityPlayer, (byte) 35);
+        final Connection playerConnection = entityPlayer.connection.connection;
+        playerConnection.send(packet);
     }
 
     @Override
     public void setHeadTexture(final @NotNull Block block, final @NotNull GameProfile gameProfile) {
-        final World world = ((CraftWorld) block.getWorld()).getHandle();
-        final BlockPosition blockPosition = new BlockPosition(block.getX(), block.getY(), block.getZ());
-        final TileEntitySkull skull = (TileEntitySkull) world.getTileEntity(blockPosition);
-        skull.setGameProfile(gameProfile);
+        final ServerLevel world = ((CraftWorld) block.getWorld()).getHandle();
+        final BlockPos blockPosition = new BlockPos(block.getX(), block.getY(), block.getZ());
+        final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition);
+        assert skull != null;
+        skull.setOwner(gameProfile);
     }
 
 

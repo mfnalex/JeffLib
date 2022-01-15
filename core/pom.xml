@@ -160,6 +160,13 @@
     <dependencies>
 
         <dependency>
+            <groupId>com.github.seeseemelk</groupId>
+            <artifactId>MockBukkit-v1.18</artifactId>
+            <version>1.15.5</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
             <version>1.18-R0.1-SNAPSHOT</version>
@@ -178,6 +185,13 @@
             <artifactId>authlib</artifactId>
             <version>3.2.38</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.allatori</groupId>
+            <artifactId>allatori-annotations</artifactId>
+            <version>8.0</version>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib.events;
 
+import com.allatori.annotations.DoNotRename;
 import de.jeff_media.jefflib.ItemStackUtils;
 import de.jeff_media.jefflib.internal.listeners.ArmorEquipListener;
 import org.bukkit.entity.Player;
@@ -8,6 +9,9 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.inventory.ItemStack;
 
+/**
+ * Gets fired when a player equips armor or gets armor equipped through a dispenser. When cancelled, the armor is not equipped.
+ */
 public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList HANDLERS = new HandlerList();
@@ -30,27 +34,19 @@ public final class ArmorEquipEvent extends PlayerEvent implements Cancellable {
         this.newArmorPiece = newArmorPiece;
     }
 
-    /**
-     * Gets a list of handlers handling this event.
-     *
-     * @return A list of handlers handling this event.
-     */
+    @DoNotRename
     public static HandlerList getHandlerList(){
         return HANDLERS;
     }
 
-    /**
-     * Gets a list of handlers handling this event.
-     *
-     * @return A list of handlers handling this event.
-     */
     @Override
+    @DoNotRename
     public final HandlerList getHandlers(){
         return HANDLERS;
     }
 
     /**
-     * Sets if this event should be cancelled.
+     * Sets if this event should be cancelled. If cancelled, the armor will not be changed.
      *
      * @param cancel If this event should be cancelled.
      */

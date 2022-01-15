@@ -1,7 +1,9 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.jetbrains.annotations.NotNull;
@@ -137,6 +139,19 @@ public final class BlockUtils {
             }
         }
         return blocks;
+    }
+
+    /**
+     * Plays the "composter fill" particle animation and optionally plays the sound if the composter has been filled successfully
+     * @param composter Composter block
+     * @param success whether the composting chance succeeded
+     */
+    public static void playComposterFillParticlesAndSound(final Block composter, final boolean success) {
+        /*if(composter.getType() != Material.COMPOSTER) {
+            throw new IllegalStateException("Given block is not a composter: " + composter.toString());
+        }*/
+        NMSNotSupportedException.check();
+        JeffLib.getNMSHandler().getBlockHandler().playComposterParticlesAndSound(composter, success);
     }
 
     /**

@@ -4,6 +4,7 @@ import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import net.minecraft.server.v1_16_R1.*;
@@ -20,10 +21,16 @@ import org.jetbrains.annotations.NotNull;
 public class NMSHandler implements AbstractNMSHandler {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
+    private final BlockHandler blockHandler = new BlockHandler();
 
     @Override
     public AbstractNMSMaterialHandler getMaterialHandler() {
         return materialHandler;
+    }
+
+    @Override
+    public AbstractNMSBlockHandler getBlockHandler() {
+        return blockHandler;
     }
 
     @Override

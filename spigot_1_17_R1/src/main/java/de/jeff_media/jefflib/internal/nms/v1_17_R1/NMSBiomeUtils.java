@@ -2,14 +2,13 @@ package de.jeff_media.jefflib.internal.nms.v1_17_R1;
 
 import de.jeff_media.jefflib.data.tuples.Pair;
 import lombok.experimental.UtilityClass;
-import net.minecraft.core.BlockPosition;
-import net.minecraft.core.IRegistry;
-import net.minecraft.core.IRegistryWritable;
-import net.minecraft.resources.MinecraftKey;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.dedicated.DedicatedServer;
-import net.minecraft.world.level.biome.BiomeBase;
-import net.minecraft.world.level.chunk.Chunk;
+import net.minecraft.world.level.biome.Biome;
+import net.minecraft.world.level.chunk.LevelChunk;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
@@ -19,28 +18,28 @@ import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 @UtilityClass
 class NMSBiomeUtils {
 
-    private final ResourceKey<IRegistry<BiomeBase>> BIOME_REGISTRY_RESOURCE_KEY = IRegistry.aO;
+    private final ResourceKey<Registry<Biome>> BIOME_REGISTRY_RESOURCE_KEY = Registry.BIOME_REGISTRY;
 
     Pair<String,String> getBiomeName(final Location location) {
-        final MinecraftKey key = getBiomeKey(location);
-        return new Pair<>(key.getNamespace(),key.getKey());
+        final ResourceLocation key = getBiomeKey(location);
+        return new Pair<>(key.getNamespace(),key.getPath());
     }
 
-    IRegistryWritable<BiomeBase> getBiomeRegistry() {
+    Registry<Biome> getBiomeRegistry() {
         final DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
-        return dedicatedServer.getCustomRegistry().b(BIOME_REGISTRY_RESOURCE_KEY);
+        return dedicatedServer.registryAccess().registry(BIOME_REGISTRY_RESOURCE_KEY).get();
     }
 
-    MinecraftKey getBiomeKey(final Location location) {
-        final IRegistryWritable<BiomeBase> registry = getBiomeRegistry();
+    ResourceLocation getBiomeKey(final Location location) {
+        final Registry<Biome> registry = getBiomeRegistry();
         return registry.getKey(getBiomeBase(location));
     }
 
-    BiomeBase getBiomeBase(final Location location) {
-        final BlockPosition pos = new BlockPosition(location.getBlockX(), 0, location.getBlockZ());
-        final Chunk nmsChunk = ((CraftWorld)location.getWorld()).getHandle().getChunkAtWorldCoords(pos);
+    Biome getBiomeBase(final Location location) {
+        final BlockPos pos = new BlockPos(location.getBlockX(), 0, location.getBlockZ());
+        final LevelChunk nmsChunk = ((CraftWorld)location.getWorld()).getHandle().getChunkAt(pos);
         if (nmsChunk != null) {
-            return nmsChunk.getBiomeIndex().getBiome(pos.getX(), 0, pos.getZ());
+            return nmsChunk.getBiomes().getNoiseBiome(pos.getX(), 0, pos.getZ());
         }
         return null;
     }

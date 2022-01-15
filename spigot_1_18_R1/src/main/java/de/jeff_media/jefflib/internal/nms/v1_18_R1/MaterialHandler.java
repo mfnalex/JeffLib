@@ -1,6 +1,6 @@
 package de.jeff_media.jefflib.internal.nms.v1_18_R1;
 
-import de.jeff_media.jefflib.ReflUtils;
+import de.jeff_media.jefflib.internal.NMSReflUtils;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import net.minecraft.world.item.Item;
 import org.bukkit.Material;
@@ -12,6 +12,6 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
 
     @Override
     public void setMaxStackSize(final Material material, final int maxStackSize) {
-        ReflUtils.setField(Item.class,CraftMagicNumbers.getItem(material),ITEM_MAXSTACKSIZE_FIELD, maxStackSize);
+        NMSReflUtils.setField(Item.class,CraftMagicNumbers.getItem(material),ITEM_MAXSTACKSIZE_FIELD, maxStackSize);
     }
 }
