@@ -74,10 +74,10 @@ public final class BlockUtils {
      * Example usage:
      * <pre>
      *     // Get all air blocks within a 10x10x10 cuboid radius around the location
-     *     List<Block> nearbyAir = BlockUtils.getBlocksInRadius(location, 10, BlockUtils.RadiusType.CUBOID, BlockUtils.Predicates.AIR);
+     *     List&lt;Block&gt; nearbyAir = BlockUtils.getBlocksInRadius(location, 10, BlockUtils.RadiusType.CUBOID, BlockUtils.Predicates.AIR);
      *
      *     // Get all blocks with a hardness greater than 1 in a spherical radius
-     *     List<Block> nearbyHardBlocks = BlockUtils.getBlocksInRadius(center, 3, RadiusType.SPHERE, block -> block.getType().getHardness()>1);
+     *     List&lt;Block&gt; nearbyHardBlocks = BlockUtils.getBlocksInRadius(center, 3, RadiusType.SPHERE, block -> block.getType().getHardness()>1);
      * </pre>
      *
      * @param center     Center Location

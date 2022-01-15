@@ -20,6 +20,13 @@
     </parent>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
+            </extension>
+        </extensions>
         <resources>
             <resource>
                 <directory>core/src/main/resources</directory>
@@ -70,6 +77,10 @@
                         <goals>
                             <goal>jar</goal>
                         </goals>
+                        <configuration> <!-- add this to disable checking -->
+                            <failOnError>false</failOnError>
+                            <failOnWarnings>false</failOnWarnings>
+                        </configuration>
                     </execution>
                 </executions>
             </plugin>
@@ -110,15 +121,6 @@
                 </executions>
             </plugin>
         </plugins>
-
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-ftp</artifactId>
-                <version>3.4.1</version>
-            </extension>
-        </extensions>
-
     </build>
 
     <repositories>
@@ -288,5 +290,26 @@
         </dependency>
         <!-- MMOItems End -->
     </dependencies>
+
+    <distributionManagement>
+        <site>
+            <id>jeff-media-javadocs</id>
+            <url>dav:https://hub.jeff-media.com/nexus/repository/jeff-media-javadocs/</url>
+        </site>
+    </distributionManagement>
+
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <configuration>
+                    <links>
+                        <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
+                    </links>
+                </configuration>
+            </plugin>
+        </plugins>
+    </reporting>
 
 </project>
