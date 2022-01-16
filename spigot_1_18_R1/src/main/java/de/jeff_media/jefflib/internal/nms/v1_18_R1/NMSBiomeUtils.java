@@ -36,10 +36,10 @@ class NMSBiomeUtils {
     }
 
     Biome getBiomeBase(final Location location) {
-        final BlockPos pos = new BlockPos(location.getBlockX(), 0, location.getBlockZ());
+        final BlockPos pos = new BlockPos(location.getBlockX(), location.getBlockY(), location.getBlockZ());
         final LevelChunk nmsChunk = ((CraftWorld)location.getWorld()).getHandle().getChunkAt(pos);
         if (nmsChunk != null) {
-            return nmsChunk.getNoiseBiome(pos.getX(), 0, pos.getZ());
+            return nmsChunk.getNoiseBiome(pos.getX(), pos.getY(), pos.getZ());
         }
         return null;
     }
