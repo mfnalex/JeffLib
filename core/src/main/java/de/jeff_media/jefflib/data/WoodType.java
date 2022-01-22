@@ -56,6 +56,33 @@ public enum WoodType {
         pottedRoots = getMaterial("POTTED",this,"ROOTS");
     }
 
+    @Nullable
+    public static WoodType fromMaterial(Material type) {
+        for(WoodType wood : values()) {
+            if(wood.getBoat() == type) return wood;
+            if(wood.getButton() == type) return wood;
+            if(wood.getDoor() == type) return wood;
+            if(wood.getFence() == type) return wood;
+            if(wood.getFenceGate() == type) return wood;
+            if(wood.getLeaves() == type) return wood;
+            if(wood.getLog() == type) return wood;
+            if(wood.getPlanks() == type) return wood;
+            if(wood.getPressurePlate() == type) return wood;
+            if(wood.getSapling() == type) return wood;
+            if(wood.getSign() == type) return wood;
+            if(wood.getSlab() == type) return wood;
+            if(wood.getStairs() == type) return wood;
+            if(wood.getTrapdoor() == type) return wood;
+            if(wood.getWallSign() == type) return wood;
+            if(wood.getWood() == type) return wood;
+            if(wood.getPottedSapling() == type) return wood;
+            if(wood.getStrippedLog() == type) return wood;
+            if(wood.getStrippedWood() == type) return wood;
+            if(wood.getPottedRoots() == type) return wood;
+        }
+        return null;
+    }
+
     private Material getMaterial(WoodType woodType, String type) {
         return getMaterial(null, woodType, type);
     }
