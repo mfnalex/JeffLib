@@ -9,7 +9,14 @@ import org.jetbrains.annotations.Nullable;
 
 public enum WoodType {
 
-    OAK, JUNGLE, DARK_OAK, ACACIA, BIRCH, SPRUCE, CRIMSON, WARPED;
+    OAK("OAK"),
+    JUNGLE("JUNGLE"),
+    DARK_OAK("DARK_OAK"),
+    ACACIA("ACACIA"),
+    BIRCH("BIRCH"),
+    SPRUCE("SPRUCE"),
+    CRIMSON("CRIMSON"),
+    WARPED("WARPED");
 
     @Getter @NotNull private final Material button,
             door,
@@ -33,27 +40,30 @@ public enum WoodType {
     @Getter @Nullable private final Material boat,
             pottedRoots;
 
-    WoodType() {
-        boat = getMaterial(this, "BOAT");
-        button = getMaterial(this, "BUTTON");
-        door = getMaterial(this, "DOOR");
-        fence = getMaterial(this, "FENCE");
-        fenceGate = getMaterial(this, "FENCE_GATE");
-        leaves = getMaterial(this, "LEAVES");
-        log = getMaterial(this, "LOG");
-        planks = getMaterial(this, "PLANKS");
-        pressurePlate = getMaterial(this, "PRESSURE_PLATE");
-        sapling = getMaterial(this, "SAPLING");
-        sign = getMaterial(this, "SIGN");
-        slab = getMaterial(this, "SLAB");
-        stairs = getMaterial(this, "STAIRS");
-        trapdoor = getMaterial(this, "TRAPDOOR");
-        wallSign = getMaterial(this, "WALL_SIGN");
-        wood = getMaterial(this, "WOOD");
-        pottedSapling = getMaterial("POTTED",this,"SAPLING");
-        strippedLog = getMaterial("STRIPPED",this,"LOG");
-        strippedWood = getMaterial("STRIPPED",this,"WOOD");
-        pottedRoots = getMaterial("POTTED",this,"ROOTS");
+    WoodType(String type) {
+        //System.out.println("CREATING WOODTYPE: " + type);
+        boat = getMaterial(type, "BOAT");
+        button = getMaterial(type, "BUTTON");
+        door = getMaterial(type, "DOOR");
+        fence = getMaterial(type, "FENCE");
+        fenceGate = getMaterial(type, "FENCE_GATE");
+        leaves = getMaterial(type, "LEAVES");
+        log = getMaterial(type, "LOG");
+        planks = getMaterial(type, "PLANKS");
+        pressurePlate = getMaterial(type, "PRESSURE_PLATE");
+        sapling = getMaterial(type, "SAPLING");
+        sign = getMaterial(type, "SIGN");
+        slab = getMaterial(type, "SLAB");
+        stairs = getMaterial(type, "STAIRS");
+        trapdoor = getMaterial(type, "TRAPDOOR");
+        wallSign = getMaterial(type, "WALL_SIGN");
+        wood = getMaterial(type, "WOOD");
+        pottedSapling = getMaterial("POTTED",type,"SAPLING");
+        strippedLog = getMaterial("STRIPPED",type,"LOG");
+        strippedWood = getMaterial("STRIPPED",type,"WOOD");
+        pottedRoots = getMaterial("POTTED",type,"ROOTS");
+        //System.out.println(type + " -> log: " + log);
+        //System.out.println(type + " -> wood: " + wood);
     }
 
     @Nullable
@@ -83,30 +93,49 @@ public enum WoodType {
         return null;
     }
 
-    private Material getMaterial(WoodType woodType, String type) {
-        return getMaterial(null, woodType, type);
-    }
-
-    public boolean isFungus() {
-        switch (this) {
-            case CRIMSON:
-            case WARPED:
+    private boolean isFungus(String type) {
+        switch (type) {
+            case "CRIMSON":
+            case "WARPED":
                 return true;
-            default: return false;
+            default:
+                return false;
         }
     }
 
-    private Material getMaterial(String prefix, WoodType woodType, String type) {
-        if(isFungus()) {
+    public boolean isFungus(WoodType type) {
+        switch (type) {
+            case CRIMSON:
+            case WARPED:
+                return true;
+            default:
+                return false;
+        }
+    }
+
+    private Material getMaterial(String woodType, String type) {
+        return getMaterial(null, woodType, type);
+    }
+
+    private Material getMaterial(String prefix, String woodType, String type) {
+        if(isFungus(woodType)) {
             if(type.equals("LOG")) type = "STEM";
             if(type.equals("WOOD")) type = "HYPHAE";
             if(type.equals("SAPLING")) type = "FUNGUS";
         }
-        if(type.equals("LEAVES") && isFungus()) {
-            if(this == CRIMSON) return Material.NETHER_WART_BLOCK;
-            if(this == WARPED) return Material.WARPED_WART_BLOCK;
+        if(type.equals("LEAVES") && isFungus(woodType)) {
+            if(woodType.equals("CRIMSON")) return Material.NETHER_WART_BLOCK;
+            if(woodType.equals("WARPED")) return Material.WARPED_WART_BLOCK;
         }
-        return Enums.getIfPresent(Material.class, prefix + ((prefix == null || prefix.length() == 0) ? "" : "_") + woodType.name()+"_"+type).orNull();
+        String name = (prefix==null?"":prefix) + ((prefix == null || prefix.length() == 0) ? "" : "_") + woodType+"_"+type;
+        //System.out.println("\n\n=======================================");
+        //System.out.println(name);
+        Material mat = Enums.getIfPresent(Material.class, name).orNull();
+        //System.out.println("Prefix: " + prefix);
+        //System.out.println("WoodType: " + woodType);
+        //System.out.println("Type: " + type);
+        //System.out.println("Result: " + mat);
+        return mat;
     }
 
 }

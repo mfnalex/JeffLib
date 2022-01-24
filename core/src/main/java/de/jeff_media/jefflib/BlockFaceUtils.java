@@ -18,7 +18,10 @@ public final class BlockFaceUtils {
      *
      * @param face Original BlockFace
      * @return Opposite BlockFace
+     *
+     * @deprecated Already exists in BlockFace#getOppositeFace
      */
+    @Deprecated
     public static BlockFace getOpposite(final BlockFace face) {
         switch (face) {
             case UP:
@@ -80,7 +83,7 @@ public final class BlockFaceUtils {
      */
     public static Block getSupportingBlock(final Block directional) {
         if (directional.getBlockData() instanceof Directional) {
-            return directional.getRelative(getOpposite(((Directional) directional.getBlockData()).getFacing()));
+            return directional.getRelative(((Directional) directional.getBlockData()).getFacing().getOppositeFace());
         }
         throw new IllegalArgumentException("Provided Block's BlockData is no instanceof Directional");
     }

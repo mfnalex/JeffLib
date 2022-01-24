@@ -5,7 +5,7 @@
 
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>7.4.0-SNAPSHOT</version>
+    <version>7.5.0-SNAPSHOT</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 
@@ -67,19 +67,6 @@
         </resources>
         <plugins>
             <plugin>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>2.5</version>
-                <executions>
-                    <execution>
-                        <id>auto-clean</id>
-                        <phase>initialize</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
                 <version>3.0.0</version>
@@ -110,7 +97,9 @@
                 <version>3.0.0</version>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
+                <version>3.2.1</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -120,7 +109,9 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
+                <version>3.3.0</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -130,8 +121,9 @@
                 </executions>
             </plugin>
             <plugin>
-                <!-- explicitly define maven-deploy-plugin after other to force exec order -->
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-deploy-plugin</artifactId>
+                <version>2.8.2</version>
                 <executions>
                     <execution>
                         <id>deploy</id>

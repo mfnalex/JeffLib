@@ -14,9 +14,23 @@ import java.util.List;
 @UtilityClass
 public class ArrayUtils {
 
+    /**
+     * Returns a new array of the given class type with length 0
+     * @param componentType Class of the array's component type
+     * @param <T> Array's component type
+     * @return Array of the given class type with length 0
+     */
     public static <T> T[] createArray(@NotNull final Class<T> componentType) {
         return createArray(componentType, 0);
     }
+
+    /**
+     * Returns a new array of the given class type with the given length
+     * @param componentType Class of the array's component type
+     * @param <T> Array's component type
+     * @param length Array's length
+     * @return Array of the given class type with the given length
+     */
     public static <T> T[] createArray(@NotNull final Class<T> componentType, final int length) {
         //noinspection unchecked
         return (T[]) Array.newInstance(componentType, length);

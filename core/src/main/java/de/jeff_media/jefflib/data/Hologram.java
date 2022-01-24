@@ -131,10 +131,10 @@ public class Hologram implements ConfigurationSerializable {
     public void create() {
         Location current = location.clone();
         for(final String line : format()) {
-            System.out.println("Creating hologram line: " + line);
+            //System.out.println("Creating hologram line: " + line);
             final Object entity = JeffLib.getNMSHandler().createHologram(current, line, type);
             entities.add(entity);
-            System.out.println(entity.toString());
+            //System.out.println(entity.toString());
             current = current.add(0,lineOffset,0);
         }
         HologramManager.getHolograms().add(this);

@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>7.4.0-SNAPSHOT</version>
+        <version>7.5.0-SNAPSHOT</version>
     </parent>
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
@@ -62,6 +62,30 @@
                         <addMavenDescriptor>false</addMavenDescriptor>
                     </archive>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-sources</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
