@@ -47,12 +47,28 @@ public class MyPlugin extends JavaPlugin {
     <artifactId>maven-shade-plugin</artifactId>
     <version>3.1.0</version>
     <configuration>
+        <minimizeJar>true</minimizeJar>
         <relocations>
             <relocation>
                 <pattern>de.jeff_media.jefflib</pattern>
                 <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
             </relocation>
         </relocations>
+        <filters>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludeDefaults>false</excludeDefaults>
+                <includes>
+                    <include>de/jeff_media/jefflib/internal/nms/**</include>
+                </includes>
+            </filter>
+            <filter>
+                <artifact>*:*</artifact>
+                <excludes>
+                    <exclude>META-INF/**</exclude>
+                </excludes>
+            </filter>
+        </filters>
     </configuration>
 </plugin>
 ```

@@ -5,6 +5,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.ItemStack;
 
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -21,6 +22,14 @@ public class DebugUtils {
     public static void print(final Map<?,?> map) {
         for(final Map.Entry<?,?> entry : map.entrySet()) {
             System.out.println(entry.getKey()+" -> " + entry.getValue());
+        }
+    }
+
+    public static void print(ItemStack[] items) {
+        System.out.println("ItemStack[" + items.length + "]");
+        for(ItemStack item : items) {
+            if(item == null) continue;
+            System.out.println(" - " + item);
         }
     }
 
