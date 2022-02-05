@@ -45,7 +45,7 @@ public class MyPlugin extends JavaPlugin {
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>
-    <version>3.1.0</version>
+    <version>3.3.0-SNAPSHOT</version>
     <configuration>
         <minimizeJar>true</minimizeJar>
         <relocations>
@@ -70,6 +70,14 @@ public class MyPlugin extends JavaPlugin {
             </filter>
         </filters>
     </configuration>
+    <executions>
+        <execution>
+            <phase>package</phase>
+            <goals>
+                <goal>shade</goal>
+            </goals>
+        </execution>
+    </executions>
 </plugin>
 ```
 
