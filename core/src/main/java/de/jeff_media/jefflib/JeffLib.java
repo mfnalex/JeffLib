@@ -100,6 +100,16 @@ public final class JeffLib {
      * @param plugin      Plugin instance
      */
     public static void init(final Plugin plugin) {
+        init(plugin,true);
+    }
+
+    /**
+     * Initializes the library. Needed for some methods.
+     *
+     * @param plugin      Plugin instance
+     * @param nms         Whether or not to instantiate NMS classes
+     */
+    public static void init(final Plugin plugin, boolean nms) {
         main = plugin;
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"Hologram");
         ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT)+"WorldBoundingBox");
@@ -110,14 +120,16 @@ public final class JeffLib {
 
         }
 
-        try {
-            final String packageName = JeffLib.class.getPackage().getName();
-            final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            //abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
-            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
-        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
-            plugin.getLogger().severe("The included JeffLib version (" + version + ")does not fully support the Minecraft version you are currently running:");
-            exception.printStackTrace();
+        if(nms) {
+            try {
+                final String packageName = JeffLib.class.getPackage().getName();
+                final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+                //abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
+                abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
+            } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
+                plugin.getLogger().severe("The included JeffLib version (" + version + ")does not fully support the Minecraft version you are currently running:");
+                exception.printStackTrace();
+            }
         }
 
     }
