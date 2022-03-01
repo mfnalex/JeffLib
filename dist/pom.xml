@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>7.5.0-SNAPSHOT</version>
+        <version>7.6.0-SNAPSHOT</version>
     </parent>
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
@@ -70,7 +70,7 @@
                     <execution>
                         <id>attach-javadocs</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>aggregate-jar</goal>
                         </goals>
                     </execution>
                 </executions>
@@ -82,10 +82,15 @@
                     <execution>
                         <id>attach-sources</id>
                         <goals>
-                            <goal>jar</goal>
+                            <goal>aggregate</goal>
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>com.allatori.**</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -93,6 +98,11 @@
         <dependency>
             <groupId>de.jeff_media</groupId>
             <artifactId>JeffLib-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_18_R2</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
