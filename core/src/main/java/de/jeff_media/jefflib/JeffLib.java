@@ -115,19 +115,19 @@ public final class JeffLib {
         ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT)+"WorldBoundingBox");
 
         try {
-            version = FileUtils.readFileFromResources(plugin, "src/main/resources/jefflib.version").get(0);
+            version = FileUtils.readFileFromResources(plugin, "/jefflib.version").get(0);
         } catch (final Throwable ignored) {
 
         }
 
         if(nms) {
+            final String packageName = JeffLib.class.getPackage().getName();
+            final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
             try {
-                final String packageName = JeffLib.class.getPackage().getName();
-                final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
                 //abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").newInstance();
                 abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
             } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
-                plugin.getLogger().severe("The included JeffLib version (" + version + ")does not fully support the Minecraft version you are currently running:");
+                plugin.getLogger().warning("The included JeffLib version (" + version + ") does not fully support the Minecraft version you are currently running: " + internalsName);
                 exception.printStackTrace();
             }
         }
