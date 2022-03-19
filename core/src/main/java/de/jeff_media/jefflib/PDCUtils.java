@@ -11,8 +11,11 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.function.Function;
 
 /**
  * PersistentDataContainer related methods.
@@ -24,6 +27,7 @@ import java.util.Set;
 public class PDCUtils {
 
     private static final Plugin plugin = JeffLib.getPlugin();
+    private static final Map<String,NamespacedKey> KEYS = new HashMap<>();
 
     /**
      * Sets a value in the holder's PDC
@@ -60,7 +64,7 @@ public class PDCUtils {
     }
 
     /**
-     * Creates a NamespacedKey. <b>JeffLib has to be initialized first.</b>
+     * Creates a NamespacedKey or returns a cached one. <b>JeffLib has to be initialized first.</b>
      *
      * @param key Key name
      * @return NamespacedKey
@@ -69,7 +73,7 @@ public class PDCUtils {
         if (plugin == null) {
             throw new JeffLibNotInitializedException();
         }
-        return new NamespacedKey(JeffLib.getPlugin(), key);
+        return KEYS.computeIfAbsent(key, name -> new NamespacedKey(JeffLib.getPlugin(), name));
     }
 
     /**

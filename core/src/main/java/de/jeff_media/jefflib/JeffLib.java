@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import com.allatori.annotations.DoNotRename;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
@@ -56,6 +57,7 @@ public final class JeffLib {
      *
      * @return Plugin instance
      */
+    @DoNotRename
     public static Plugin getPlugin() {
         return main;
     }

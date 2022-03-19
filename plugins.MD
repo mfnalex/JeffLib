@@ -1,10 +1,14 @@
 Plugins using JeffLib:
 
-- LumberJack
 - ChestSort
-- RePlant
-- BetterLogStrip
+- AngelChest Plus
+- AngelChest Free
 - Drop2InventoryPlus
+- RePlant
+- LumberJack
+- BetterLogStrip
 - BetterTridents
 - AutoShulker
 - AutoComposter
+- InvUnload
+- FilteredHoppers

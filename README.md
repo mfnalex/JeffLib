@@ -51,7 +51,7 @@ public class MyPlugin extends JavaPlugin {
         <relocations>
             <relocation>
                 <pattern>de.jeff_media.jefflib</pattern>
-                <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
+                <shadedPattern>YOUR.PACKAGE</shadedPattern>
             </relocation>
         </relocations>
         <filters>
@@ -79,6 +79,16 @@ public class MyPlugin extends JavaPlugin {
         </execution>
     </executions>
 </plugin>
+```
+
+### Obfuscation settings
+
+If you're using allatori to obfuscate your plugin, you need the following additional settings:
+
+```xml
+<ignore-classes>
+  <class template="class **.nms.**" />
+</ignore-classes>
 ```
 
 ## JavaDocs

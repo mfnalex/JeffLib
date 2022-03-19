@@ -1,7 +1,9 @@
 package de.jeff_media.jefflib.exceptions;
 
+import com.allatori.annotations.DoNotRename;
 import de.jeff_media.jefflib.JeffLib;
 
+@DoNotRename
 public class NMSNotSupportedException extends RuntimeException {
 
     public static void check() throws NMSNotSupportedException {
