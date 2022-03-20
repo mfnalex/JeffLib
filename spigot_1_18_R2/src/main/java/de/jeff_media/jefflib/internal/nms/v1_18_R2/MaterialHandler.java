@@ -8,7 +8,7 @@ import org.bukkit.craftbukkit.v1_18_R2.util.CraftMagicNumbers;
 
 class MaterialHandler implements AbstractNMSMaterialHandler {
 
-    private static final String ITEM_MAXSTACKSIZE_FIELD = "c";
+    private static final String ITEM_MAXSTACKSIZE_FIELD = "d";
 
     @Override
     public void setMaxStackSize(final Material material, final int maxStackSize) {
