@@ -2,13 +2,13 @@
 <!--- Buttons start -->
 <p align="center">
   <a href="https://hub.jeff-media.com/javadocs/jefflib/">
-    <img src="https://static.jeff-media.com/img/button_javadocs.png" alt="Javadocs">
+    <img src="https://static.jeff-media.com/img/button_javadocs.png?3" alt="Javadocs">
   </a>
   <a href="https://discord.jeff-media.com/">
-    <img src="https://static.jeff-media.com/img/button_discord.png" alt="Discord">
+    <img src="https://static.jeff-media.com/img/button_discord.png?3" alt="Discord">
   </a>
   <a href="https://paypal.me/mfnalex">
-    <img src="https://static.jeff-media.com/img/button_donate.png">
+    <img src="https://static.jeff-media.com/img/button_donate.png?3" alt="Donate">
   </a>
 </p>
 <!--- Buttons end -->
