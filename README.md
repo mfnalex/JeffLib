@@ -1,4 +1,17 @@
 # JeffLib Spigot Library
+<!--- Buttons start -->
+<p align="center">
+  <a href="https://hub.jeff-media.com/javadocs/jefflib/">
+    <img src="https://static.jeff-media.com/img/button_javadocs.png" alt="Javadocs">
+  </a>
+  <a href="https://discord.jeff-media.com/">
+    <img src="https://static.jeff-media.com/img/button_discord.png" alt="Discord">
+  </a>
+  <a href="https://paypal.me/mfnalex">
+    <img src="https://static.jeff-media.com/img/button_donate.png">
+  </a>
+</p>
+<!--- Buttons end -->
 
 JeffLib includes a ton of useful methods that you would normally have to write yourself.
 
