@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>7.7.0-SNAPSHOT</version>
+        <version>7.8.0-SNAPSHOT</version>
     </parent>
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
