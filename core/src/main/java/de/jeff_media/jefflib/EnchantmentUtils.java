@@ -11,8 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Enchantment related methods
@@ -20,7 +19,13 @@ import java.util.List;
 @UtilityClass
 public final class EnchantmentUtils {
 
-
+    /**
+     * Registers a custom enchantment. You should not do that, but instead rely on PDC tags to identify your custom enchantments.
+     * The Enchantment class wasn't meant to be expanded by plugin enchantments, and your custom enchantment will also be lost
+     * when playes use an enchantment table on the item.
+     * @param enchantment Enchantment to register
+     */
+    @Deprecated
     public void registerEnchantment(final Enchantment enchantment) throws ConflictingEnchantmentException {
         try {
             final Field fieldAcceptingNew = Enchantment.class.getDeclaredField("acceptingNew");
@@ -53,6 +58,11 @@ public final class EnchantmentUtils {
         return 0;
     }
 
+    /**
+     * Gets an enchant by name (case-insensitive), e.g. "unbreaking" or "fortune".
+     * @param name Name of the enchantment (case-insensitive)
+     * @return The enchantment of the specified name
+     */
     @Nullable
     public static Enchantment getByName(@NotNull final String name) {
         for(final Enchantment enchant : Enchantment.values()) {
@@ -63,16 +73,26 @@ public final class EnchantmentUtils {
         return null;
     }
 
-    public static @NotNull List<Pair<Enchantment,Integer>> fromConfigurationSection(final ConfigurationSection section) {
-        final List<Pair<Enchantment,Integer>> list = new ArrayList<>();
+    /**
+     * Parses Enchantments including levels from a {@link ConfigurationSection}. The given ConfigurationSection should look like this:
+     * <pre>
+     * efficiency: 2 # Efficiency Level 2
+     * fortune: 1 # Fortune Level 1
+     * </pre>
+     *
+     * @param section ConfigurationSection to parse
+     * @return A Map&lt;Enchantment,Integer> containing the given enchantments mapped to their given levels
+     */
+    public static @NotNull Map<Enchantment,Integer> fromConfigurationSection(final ConfigurationSection section) {
+        final Map<Enchantment,Integer> map = new HashMap<>();
         for(final String enchantName : section.getKeys(false)) {
             final Enchantment enchant = getByName(enchantName);
             final int level = section.getInt(enchantName);
             if(enchant != null) {
-                list.add(new Pair<>(enchant, level));
+                map.put(enchant, level);
             }
         }
-        return list;
+        return map;
     }
 
 }

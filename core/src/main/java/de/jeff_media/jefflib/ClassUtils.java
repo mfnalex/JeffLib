@@ -9,6 +9,11 @@ import org.jetbrains.annotations.NotNull;
 @UtilityClass
 public final class ClassUtils {
 
+    /**
+     * Checks if a class exists
+     * @param name Fully qualified class name
+     * @return true if the class exists, otherwise false
+     */
     public static boolean exists(@NotNull final String name) {
         try {
             Class.forName(name);

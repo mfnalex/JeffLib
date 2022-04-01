@@ -72,6 +72,7 @@
                         <goals>
                             <goal>aggregate-jar</goal>
                         </goals>
+                        <phase>package</phase>
                     </execution>
                 </executions>
             </plugin>

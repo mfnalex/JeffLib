@@ -16,8 +16,11 @@ import java.util.logging.Logger;
 public class DebugUtils {
 
     /**
-     * Prints a Map's content to console
-     * @param map Map to print
+     * Prints a Map's content to console. Example:
+     * <pre>
+     * firstKey -> firstValue
+     * secondKey -> secondValue
+     * </pre>
      */
     public static void print(final Map<?,?> map) {
         for(final Map.Entry<?,?> entry : map.entrySet()) {

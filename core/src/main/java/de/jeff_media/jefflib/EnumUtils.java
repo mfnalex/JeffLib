@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
 import java.util.*;
@@ -7,10 +8,17 @@ import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
+/**
+ * Enum related methods
+ */
+@UtilityClass
 public class EnumUtils {
 
     private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
 
+    /**
+     * Gets an {@link Optional} of a given Enum by its name
+     */
     public static <E extends Enum<E>> Optional<E> getIfPresent(final Class<E> enumClazz, final String value) {
         final Set<String> enumSet = ENUM_CACHE.computeIfAbsent(enumClazz, EnumUtils::toStringSet);
         return Optional.ofNullable(enumSet.contains(value) ? Enum.valueOf(enumClazz, value) : null);
@@ -20,17 +28,20 @@ public class EnumUtils {
         return Arrays.stream(enumClazz.getEnumConstants()).map(Enum::toString).collect(Collectors.toSet());
     }
 
+    /**
+     * Gets a List of the given Enum constants by their names. Enums constants that aren't found will print a warning.
+     */
     public static <E extends Enum<E>> List<E> getEnumsFromList(final Class<E> enumClazz, final List<String> list) {
         return getEnumsFromList(enumClazz, list, Collectors.toList());
     }
 
-    public static <E extends Enum<E>> List<E> getEnumsFromRegexList(final Class<E> enumClazz, final List<String> list) {
-        List<E> result = new ArrayList<>();
-        for(String regex : list) {
-            Pattern pattern = Pattern.compile(regex);
-            for(E e : enumClazz.getEnumConstants()) {
+    public static <E extends Enum<E>> EnumSet<E> getEnumsFromRegexList(final Class<E> enumClazz, final List<String> list) {
+        final EnumSet<E> result = EnumSet.noneOf(enumClazz);
+        for(final String regex : list) {
+            final Pattern pattern = Pattern.compile(regex);
+            for(final E e : enumClazz.getEnumConstants()) {
                 if(result.contains(e)) continue;
-                String name = e.name();
+                final String name = e.name();
                 if(pattern.matcher(name).matches()) {
                     result.add(e);
                 }
@@ -39,6 +50,9 @@ public class EnumUtils {
         return result;
     }
 
+    /**
+     * Gets a Collection of the given Enum constants by their names. Enums constants that aren't found will print a warning.
+     */
     public static <E extends Enum<E>, C extends Collection<E>> C getEnumsFromList(final Class<E> enumClazz,
                                                                                   final List<String> list,
                                                                                   final Collector<? super E, ?, C> collector) {

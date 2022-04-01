@@ -23,15 +23,21 @@ import java.util.function.Predicate;
 @UtilityClass
 public final class BlockUtils {
 
+    /**
+     * Returns the lowest non-air block at a given position
+     */
     @Nullable
     public static Block getLowestBlockAt(@NotNull final  World world, final int x, final int z) {
-        for(int y = world.getMinHeight(); y < world.getMaxHeight(); y++) {
+        for(int y = getWorldMinHeight(world); y < world.getMaxHeight(); y++) {
             final Block current = world.getBlockAt(x,y,z);
             if(!current.getType().isAir()) return current;
         }
         return null;
     }
 
+    /**
+     * Returns the lowest non-air block at a given location
+     */
     @Nullable
     public static Block getLowestBlockAt(@NotNull final Location location) {
         return getLowestBlockAt(Objects.requireNonNull(location.getWorld()), location.getBlockX(), location.getBlockZ());
@@ -173,6 +179,9 @@ public final class BlockUtils {
         SPHERE
     }
 
+    /**
+     * Returns the lowest possible building height for a block. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
+     */
     public static int getWorldMinHeight(final World world) {
         if(McVersion.isAtLeast(1,16,5)) {
             return world.getMinHeight();
@@ -181,10 +190,22 @@ public final class BlockUtils {
         }
     }
 
-    private static BlockVector chunkToWorldCoordinates(BlockVector chunkVector, int chunkX, int y, int chunkZ) {
+    /**
+     * Turns a given {@link BlockVector} using chunk coordinates into a BlockVector using global coordinates
+     * @param chunkVector A BlockVector containing the coordinates inside the chunk (x and z between 0 (inclusive) and 16 (exclusive))
+     * @param chunkX X coordinate of the chunk
+     * @param y Y coordinate
+     * @param chunkZ Z coordinate of the chunk
+     * @return A BlockVector representing global coordinates
+     */
+    public static BlockVector chunkToWorldCoordinates(BlockVector chunkVector, int chunkX, int y, int chunkZ) {
         return new BlockVector(chunkVector.getBlockX() + (chunkX << 4), y, chunkVector.getBlockZ() + (chunkZ << 4));
     }
 
+    /**
+     * Gets all {@link ChunkSnapshot}s that are inside or intersect the given {@link BoundingBox}
+     * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks
+     */
     public static List<ChunkSnapshot> getChunkSnapshots(final World world, final BoundingBox box, final boolean onlyLoadedChunks) {
         final int minX = (int) box.getMinX() >> 4;
         final int maxX = (int) box.getMaxX() >> 4;
@@ -203,6 +224,10 @@ public final class BlockUtils {
         return chunks;
     }
 
+    /**
+     * Gets a list of all {@link BlockVector}s inside the given {@link BoundingBox} that match the given {@link Predicate}&lt;{@link BlockData}>
+     * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks
+     */
     public static List<BlockVector> getBlocks(final World world, final BoundingBox box, final boolean onlyLoadedChunks, final Predicate<BlockData> predicate) {
         final List<ChunkSnapshot> chunks = getChunkSnapshots(world, box, onlyLoadedChunks);
         final List<BlockVector> blocks = new ArrayList<>();
@@ -210,11 +235,13 @@ public final class BlockUtils {
         for(final ChunkSnapshot chunk : chunks) {
             for(int x = 0; x < 16; x++) {
                 for(int z = 0; z < 16; z++) {
-                    for(int y = minHeight; y < world.getMaxHeight(); y++) {
+                    for(int y = box.getMin().getBlockY(); y < box.getMax().getBlockY(); y++) {
                         if(y > chunk.getHighestBlockYAt(x,z)) break;
+                        BlockVector blockVector = new BlockVector(x,y,z);
+                        if(!box.contains(chunkToWorldCoordinates(blockVector,chunk.getX(),y,chunk.getZ()))) continue;
                         final BlockData data = chunk.getBlockData(x,y,z);
                         if(predicate.test(data)) {
-                            blocks.add(chunkToWorldCoordinates(new BlockVector(x,y,z),chunk.getX(), y, chunk.getZ()));
+                            blocks.add(chunkToWorldCoordinates(blockVector,chunk.getX(), y, chunk.getZ()));
                         }
                     }
                 }

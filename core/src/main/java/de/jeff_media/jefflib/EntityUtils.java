@@ -86,6 +86,9 @@ public final class EntityUtils {
         return newList;
     }
 
+    /**
+     * Returns a collection of all entities of the given class, from all worlds
+     */
     @NotNull
     public static <T extends Entity> Collection<T> getEntities(@NotNull final Class<T> entityClass) {
         final Collection<T> list = new ArrayList<>();
@@ -95,6 +98,9 @@ public final class EntityUtils {
         return list;
     }
 
+    /**
+     * Returns a collection of all entities from all worlds
+     */
     @NotNull
     public static Collection<Entity> getAllEntities() {
         final Collection<Entity> list = new ArrayList<>();
@@ -104,6 +110,9 @@ public final class EntityUtils {
         return list;
     }
 
+    /**
+     * Gets an entity by its Entity ID
+     */
     @Nullable
     public static Entity getEntityById(final int id) {
         for(final Entity entity : getAllEntities()) {

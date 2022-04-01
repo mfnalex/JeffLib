@@ -23,8 +23,40 @@ import java.util.Iterator;
 @UtilityClass
 public final class CommandUtils {
 
+    /**
+     * Represents the output style for {@link #sendHelpMessage(CommandSender, HelpStyle, String...)}
+     */
     public enum HelpStyle {
-        NEW_LINE, SAME_LINE_SPACED, SAME_LINE_COMPACT
+        /**
+         * Sends command name and command description on two separate lines, including a spacing line. Example:
+         * <pre>
+         * <b>/command1</b>
+         * Description for command1
+         *
+         * <b>/command2</b>
+         * Description for command2
+         * </pre>
+         */
+        NEW_LINE,
+
+        /**
+         * Sends command name and command description in one line, including a spacing line. Example:
+         * <pre>
+         * <b>/command1</b> Description for command1
+         *
+         * <b>/command2</b> Description for command2
+         * </pre>
+         */
+        SAME_LINE_SPACED,
+
+        /**
+         * Sends command name and command description in one line. Example:
+         * <pre>
+         * <b>/command1</b> Description for command1
+         * <b>/command2</b> Description for command2
+         * </pre>
+         */
+        SAME_LINE_COMPACT
     }
 
     /**
@@ -79,6 +111,13 @@ public final class CommandUtils {
         return commandMap;
     }
 
+    /**
+     * Sends a help message with the given commands and descriptions. The list of arguments should be in the following format:
+     * <pre>
+     * String[] help = {"command1", "Description for command1", "command2", "Description for command2", ...};
+     * </pre>
+     * @param sender CommandSender to send the help message to
+     */
     public static void sendHelpMessage(final CommandSender sender, HelpStyle style, final String... args) {
         switch (style) {
             case NEW_LINE:
