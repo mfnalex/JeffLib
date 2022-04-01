@@ -3,6 +3,7 @@ package de.jeff_media.jefflib;
 import org.bukkit.Material;
 
 import java.util.*;
+import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -21,6 +22,21 @@ public class EnumUtils {
 
     public static <E extends Enum<E>> List<E> getEnumsFromList(final Class<E> enumClazz, final List<String> list) {
         return getEnumsFromList(enumClazz, list, Collectors.toList());
+    }
+
+    public static <E extends Enum<E>> List<E> getEnumsFromRegexList(final Class<E> enumClazz, final List<String> list) {
+        List<E> result = new ArrayList<>();
+        for(String regex : list) {
+            Pattern pattern = Pattern.compile(regex);
+            for(E e : enumClazz.getEnumConstants()) {
+                if(result.contains(e)) continue;
+                String name = e.name();
+                if(pattern.matcher(name).matches()) {
+                    result.add(e);
+                }
+            }
+        }
+        return result;
     }
 
     public static <E extends Enum<E>, C extends Collection<E>> C getEnumsFromList(final Class<E> enumClazz,

@@ -1,15 +1,20 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.data.worldboundingbox.CuboidWorldBoundingBox;
+import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.experimental.UtilityClass;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
+import org.bukkit.block.BlockState;
+import org.bukkit.block.data.BlockData;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 /**
@@ -166,6 +171,56 @@ public final class BlockUtils {
          * A sphere radius, for example all blocks within a range of X*X*X blocks that are not further away from the center than the given distance
          */
         SPHERE
+    }
+
+    public static int getWorldMinHeight(final World world) {
+        if(McVersion.isAtLeast(1,16,5)) {
+            return world.getMinHeight();
+        } else {
+            return 0;
+        }
+    }
+
+    private static BlockVector chunkToWorldCoordinates(BlockVector chunkVector, int chunkX, int y, int chunkZ) {
+        return new BlockVector(chunkVector.getBlockX() + (chunkX << 4), y, chunkVector.getBlockZ() + (chunkZ << 4));
+    }
+
+    public static List<ChunkSnapshot> getChunkSnapshots(final World world, final BoundingBox box, final boolean onlyLoadedChunks) {
+        final int minX = (int) box.getMinX() >> 4;
+        final int maxX = (int) box.getMaxX() >> 4;
+        final int minZ = (int) box.getMinZ() >> 4;
+        final int maxZ = (int) box.getMaxZ() >> 4;
+
+        final List<ChunkSnapshot> chunks = new ArrayList<>();
+        for(int x = minX; x <= maxX; x++) {
+            for(int z = minZ; z <= maxZ; z++) {
+                if(!onlyLoadedChunks || world.isChunkLoaded(x,z)) {
+                    final Chunk chunk = world.getChunkAt(x,z);
+                    chunks.add(chunk.getChunkSnapshot(true, false, false));
+                }
+            }
+        }
+        return chunks;
+    }
+
+    public static List<BlockVector> getBlocks(final World world, final BoundingBox box, final boolean onlyLoadedChunks, final Predicate<BlockData> predicate) {
+        final List<ChunkSnapshot> chunks = getChunkSnapshots(world, box, onlyLoadedChunks);
+        final List<BlockVector> blocks = new ArrayList<>();
+        final int minHeight = getWorldMinHeight(world);
+        for(final ChunkSnapshot chunk : chunks) {
+            for(int x = 0; x < 16; x++) {
+                for(int z = 0; z < 16; z++) {
+                    for(int y = minHeight; y < world.getMaxHeight(); y++) {
+                        if(y > chunk.getHighestBlockYAt(x,z)) break;
+                        final BlockData data = chunk.getBlockData(x,y,z);
+                        if(predicate.test(data)) {
+                            blocks.add(chunkToWorldCoordinates(new BlockVector(x,y,z),chunk.getX(), y, chunk.getZ()));
+                        }
+                    }
+                }
+            }
+        }
+        return blocks;
     }
 
     /**

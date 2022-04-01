@@ -27,6 +27,16 @@ public class Tasks {
         return Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), runnable);
     }
 
+    public static BukkitTask sync(Runnable runnable) {
+        JeffLibNotInitializedException.check();
+        return Bukkit.getScheduler().runTask(JeffLib.getPlugin(), runnable);
+    }
+
+    public static BukkitTask async(Runnable runnable) {
+        JeffLibNotInitializedException.check();
+        return Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), runnable);
+    }
+
     public static BukkitTask later(Runnable runnable, long delay) {
         JeffLibNotInitializedException.check();
         return Bukkit.getScheduler().runTaskLater(JeffLib.getPlugin(),runnable, delay);
