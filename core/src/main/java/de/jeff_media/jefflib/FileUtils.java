@@ -103,6 +103,7 @@ public final class FileUtils {
                 inputBuffer.append(line);
                 inputBuffer.append(System.lineSeparator());
             }
+            bufferedReader.close();
             if (changed) {
                 try (final FileOutputStream fileOut = new FileOutputStream(file);) {
                     fileOut.write(inputBuffer.toString().getBytes());
