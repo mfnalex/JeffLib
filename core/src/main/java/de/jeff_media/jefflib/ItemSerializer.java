@@ -23,22 +23,6 @@ import java.util.Base64;
 public final class ItemSerializer {
 
     /**
-     * Turns an ItemStack into a byte array
-     *
-     * @param itemStack ItemStack
-     * @return ItemStack as byte array
-     * @throws IOException exception
-     */
-    public static byte[] toBytes(final ItemStack itemStack) throws IOException {
-        try (final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-             final ObjectOutput objectOutputStream = new BukkitObjectOutputStream(outputStream)
-        ) {
-            objectOutputStream.writeObject(itemStack);
-            return outputStream.toByteArray();
-        }
-    }
-
-    /**
      * Turns an ItemStack into a Base64 String
      *
      * @param itemStack ItemStack
@@ -50,17 +34,16 @@ public final class ItemSerializer {
     }
 
     /**
-     * Turns a byte array into an ItemStack
+     * Turns an ItemStack into a byte array
      *
-     * @param input byte array
-     * @return ItemStack
+     * @param itemStack ItemStack
+     * @return ItemStack as byte array
+     * @throws IOException exception
      */
-    @SneakyThrows
-    public static ItemStack fromBytes(final byte[] input) {
-        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(input);
-             final BukkitObjectInputStream objectInputStream = new BukkitObjectInputStream(inputStream)
-        ) {
-            return (ItemStack) objectInputStream.readObject();
+    public static byte[] toBytes(final ItemStack itemStack) throws IOException {
+        try (final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(); final ObjectOutput objectOutputStream = new BukkitObjectOutputStream(outputStream)) {
+            objectOutputStream.writeObject(itemStack);
+            return outputStream.toByteArray();
         }
     }
 
@@ -72,6 +55,19 @@ public final class ItemSerializer {
      */
     public static ItemStack fromBase64(final String input) {
         return fromBytes(Base64.getDecoder().decode(input));
+    }
+
+    /**
+     * Turns a byte array into an ItemStack
+     *
+     * @param input byte array
+     * @return ItemStack
+     */
+    @SneakyThrows
+    public static ItemStack fromBytes(final byte[] input) {
+        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(input); final BukkitObjectInputStream objectInputStream = new BukkitObjectInputStream(inputStream)) {
+            return (ItemStack) objectInputStream.readObject();
+        }
     }
 
     /**
@@ -90,38 +86,8 @@ public final class ItemSerializer {
     }
 
     /**
-     * A method to serialize an {@link ItemStack} array to Base64 String.
-     *
-     * Based off of {@link #toBase64(Inventory)}.
-     *
-     * @param items to turn into a Base64 String.
-     * @return Base64 string of the items.
-     * @throws IllegalStateException exception
-     */
-    public static String itemStackArrayToBase64(final ItemStack[] items) {
-        try {
-            final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            final ObjectOutput dataOutput = new BukkitObjectOutputStream(outputStream);
-
-            // Write the size of the inventory
-            dataOutput.writeInt(items.length);
-
-            // Save every element in the list
-            for (final ItemStack item : items) {
-                dataOutput.writeObject(item);
-            }
-
-            // Serialize that array
-            dataOutput.close();
-            return Base64Coder.encodeLines(outputStream.toByteArray());
-        } catch (final IOException e) {
-            throw new IllegalStateException("Unable to save item stacks.", e);
-        }
-    }
-
-    /**
      * A method to serialize an inventory to Base64 string.
-     *
+     * <p>
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
      *
@@ -132,9 +98,7 @@ public final class ItemSerializer {
      * @throws IllegalStateException exception
      */
     public static String toBase64(final Inventory inventory) {
-        try {
-            final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            final ObjectOutput dataOutput = new BukkitObjectOutputStream(outputStream);
+        try (final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(); final ObjectOutput dataOutput = new BukkitObjectOutputStream(outputStream);) {
 
             // Write the size of the inventory
             dataOutput.writeInt(inventory.getSize());
@@ -145,6 +109,38 @@ public final class ItemSerializer {
             }
 
             // Serialize that array
+            dataOutput.flush();
+            outputStream.flush();
+            dataOutput.close();
+            return Base64Coder.encodeLines(outputStream.toByteArray());
+        } catch (final IOException e) {
+            throw new IllegalStateException("Unable to save item stacks.", e);
+        }
+    }
+
+    /**
+     * A method to serialize an {@link ItemStack} array to Base64 String.
+     * <p>
+     * Based off of {@link #toBase64(Inventory)}.
+     *
+     * @param items to turn into a Base64 String.
+     * @return Base64 string of the items.
+     * @throws IllegalStateException exception
+     */
+    public static String itemStackArrayToBase64(final ItemStack[] items) {
+        try (final ByteArrayOutputStream outputStream = new ByteArrayOutputStream(); final ObjectOutput dataOutput = new BukkitObjectOutputStream(outputStream);) {
+
+            // Write the size of the inventory
+            dataOutput.writeInt(items.length);
+
+            // Save every element in the list
+            for (final ItemStack item : items) {
+                dataOutput.writeObject(item);
+            }
+
+            // Serialize that array
+            dataOutput.flush();
+            outputStream.flush();
             dataOutput.close();
             return Base64Coder.encodeLines(outputStream.toByteArray());
         } catch (final IOException e) {
@@ -154,7 +150,7 @@ public final class ItemSerializer {
 
     /**
      * A method to get an {@link Inventory} from an encoded, Base64, string.
-     *
+     * <p>
      * Special thanks to Comphenix in the Bukkit forums or also known
      * as aadnk on GitHub.
      *
@@ -165,16 +161,13 @@ public final class ItemSerializer {
      * @throws IOException exception
      */
     public static Inventory inventoryFromBase64(final String data) throws IOException {
-        try {
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-            final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data)); final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);) {
             final Inventory inventory = Bukkit.getServer().createInventory(null, dataInput.readInt());
 
             // Read the serialized inventory
             for (int i = 0; i < inventory.getSize(); i++) {
                 inventory.setItem(i, (ItemStack) dataInput.readObject());
             }
-
             dataInput.close();
             return inventory;
         } catch (final ClassNotFoundException e) {
@@ -192,9 +185,7 @@ public final class ItemSerializer {
      * @throws IOException exception
      */
     public static ItemStack[] itemStackArrayFromBase64(final String data) throws IOException {
-        try {
-            final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data));
-            final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);
+        try (final ByteArrayInputStream inputStream = new ByteArrayInputStream(Base64Coder.decodeLines(data)); final BukkitObjectInputStream dataInput = new BukkitObjectInputStream(inputStream);) {
             final ItemStack[] items = new ItemStack[dataInput.readInt()];
 
             // Read the serialized inventory
