@@ -29,12 +29,22 @@ public class EnumUtils {
     }
 
     /**
-     * Gets a List of the given Enum constants by their names. Enums constants that aren't found will print a warning.
+     * Gets an EnumSet of the given Enum constants by their names. Enum constants that aren't found will print a warning.
+     * Case is ignored for Bukkit enums.
      */
-    public static <E extends Enum<E>> List<E> getEnumsFromList(final Class<E> enumClazz, final List<String> list) {
-        return getEnumsFromList(enumClazz, list, Collectors.toList());
+    public static <E extends Enum<E>> EnumSet<E> getEnumsFromList(final Class<E> enumClazz, final List<String> list) {
+        return EnumSet.copyOf(getEnumsFromList(enumClazz, list, Collectors.toSet()));
     }
 
+    /**
+     * Gets an EnumSet of the given Enum constants by a list of regex patterns. Example:
+     * <pre>
+     * materials:
+     * - "^((.+)_)*CHEST$" # matches CHEST, TRAPPED_CHEST, etc
+     * - "^((.+)_)*SHULKER_BOX$" # matches SHULKER_BOX, RED_SHULKER_BOX, etc
+     * - "^BARREL$" # matches only BARREL
+     * </pre>
+     */
     public static <E extends Enum<E>> EnumSet<E> getEnumsFromRegexList(final Class<E> enumClazz, final List<String> list) {
         final EnumSet<E> result = EnumSet.noneOf(enumClazz);
         for(final String regex : list) {
@@ -52,6 +62,7 @@ public class EnumUtils {
 
     /**
      * Gets a Collection of the given Enum constants by their names. Enums constants that aren't found will print a warning.
+     * Case is ignored for Bukkit enums.
      */
     public static <E extends Enum<E>, C extends Collection<E>> C getEnumsFromList(final Class<E> enumClazz,
                                                                                   final List<String> list,
