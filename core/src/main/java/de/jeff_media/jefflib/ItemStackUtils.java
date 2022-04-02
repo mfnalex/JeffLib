@@ -24,29 +24,38 @@ import java.util.*;
 @UtilityClass
 public final class ItemStackUtils {
 
+    /**
+     * Checks if an ItemStack is null or empty (empty = amount of 0 or if the type is air)
+     */
     public static boolean isNullOrEmpty(final ItemStack itemStack) {
         return itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() == 0;
     }
 
+    /**
+     * Parses an ItemStack from a ConfigurationSection without applying any placeholder values. 
+     * @see #fromConfigurationSection(ConfigurationSection, HashMap) 
+     */
     public ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
         return fromConfigurationSection(config, new HashMap<>());
     }
 
-    private String replaceInString(String string, final Map<String,String> placeholders) {
-        for(final Map.Entry<String, String> entry : placeholders.entrySet()) {
-            if(entry.getKey()==null ||entry.getValue()==null) continue;
-            string = string.replace(entry.getKey(), entry.getValue());
-        }
-        return string;
-    }
-
-    private List<String> replaceInString(final List<String> strings, final HashMap<String,String> placeholders) {
-        for(int i = 0; i < strings.size(); i++) {
-            strings.set(i, replaceInString(strings.get(i),placeholders));
-        }
-        return strings;
-    }
-
+    /**
+     * Parses an ItemStack from a ConfigurationSection and applies placeholders. Example ConfigurationSection:
+     * <pre>
+     * material: PLAYER_HEAD
+     * base64: "someBase64String"
+     * amount: 1
+     * lore:
+     *   - "first line"
+     * display-name: "name"
+     * custom-model-data: 2
+     * damage: 100
+     * enchantments:
+     *   unbreaking: 1
+     *   efficiency: 5
+     * </pre>
+     * @see TextUtils#replaceInString(String, Map) 
+     */
     public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, final HashMap<String,String> placeholders) {
         final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
 
@@ -69,15 +78,15 @@ public final class ItemStackUtils {
         List<String> lore = new ArrayList<>();
         if(config.isSet("lore")) {
             if(config.isString("lore")) {
-                lore.add(TextUtils.format(replaceInString(config.getString("lore"),placeholders)));
+                lore.add(TextUtils.format(TextUtils.replaceInString(config.getString("lore"),placeholders)));
             } else {
-                lore = TextUtils.format(replaceInString(config.getStringList("lore"),placeholders),null);
+                lore = TextUtils.format(TextUtils.replaceInString(config.getStringList("lore"),placeholders),null);
             }
         }
 
         String name = null;
         if(config.isSet("display-name")) {
-            name = TextUtils.format(replaceInString(config.getString("display-name"),placeholders));
+            name = TextUtils.format(TextUtils.replaceInString(config.getString("display-name"),placeholders));
         }
 
         Integer modelData = null;
@@ -146,6 +155,9 @@ public final class ItemStackUtils {
         return nonNullItems.toArray(new ItemStack[0]);
     }
 
+    /**
+     * Applies a display name to the given item
+     */
     public static void setDisplayName(@NotNull final ItemStack item, @NotNull final String name) {
         final ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta).setDisplayName(name);

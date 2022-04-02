@@ -11,7 +11,9 @@ import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
@@ -185,6 +187,34 @@ public class TextUtils {
             text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
         }
         return text;
+    }
+
+    /**
+     * Replaces placeholders in a String. Example:
+     * <pre>
+     * Map&lt;String,String> placeholders = new HashMap&lt;>();
+     * placeholders.put("{player}",player.getName());
+     * placeholders.put("{killer}",killer.getName());
+     * String result = replaceInString("{player} was killed by {killer}.",placeholders);
+     * </pre>
+     */
+    public String replaceInString(String string, final Map<String,String> placeholders) {
+        for(final Map.Entry<String, String> entry : placeholders.entrySet()) {
+            if(entry.getKey()==null ||entry.getValue()==null) continue;
+            string = string.replace(entry.getKey(), entry.getValue());
+        }
+        return string;
+    }
+
+    /**
+     * Replaces placeholders in a list of Strings.
+     * @see #replaceInString(String, Map)
+     */
+    public List<String> replaceInString(final List<String> strings, final HashMap<String,String> placeholders) {
+        for(int i = 0; i < strings.size(); i++) {
+            strings.set(i, replaceInString(strings.get(i),placeholders));
+        }
+        return strings;
     }
 
 }

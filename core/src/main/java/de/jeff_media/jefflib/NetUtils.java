@@ -19,6 +19,9 @@ import java.util.stream.Stream;
 @UtilityClass
 public final class NetUtils {
 
+    /**
+     * Downloads a URL and returns the response as String list. Blocks the main thread.
+     */
     @NotNull
     public static List<String> downloadToStringList(final String url) throws IOException {
         if (JeffLib.getPlugin() == null) {
@@ -36,6 +39,9 @@ public final class NetUtils {
         }
     }
 
+    /**
+     * Downloads a URL and returns the response as String list asynchronously.
+     */
     @NotNull
     public static CompletableFuture<List<String>> downloadToStringListAsync(final String url) {
         if(JeffLib.getPlugin() == null) {
@@ -53,6 +59,9 @@ public final class NetUtils {
         return future;
     }
 
+    /**
+     * Returns the public IP address of the server, or null if it couldn't find it out. Blocks the main thread.
+     */
     @Nullable
     public static String getIp() {
         if (JeffLib.getPlugin()==null) {

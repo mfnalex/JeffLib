@@ -20,7 +20,7 @@ import java.util.function.Function;
 /**
  * PersistentDataContainer related methods.
  * <p>
- * ALL methods accepting Strings as Keys need JeffLib to be initialized first!
+ * All methods accepting Strings as Keys need JeffLib to be initialized first!
  */
 @UtilityClass
 @SuppressWarnings("unused")

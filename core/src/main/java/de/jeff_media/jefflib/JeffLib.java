@@ -33,10 +33,25 @@ public final class JeffLib {
     @Getter private static String version = "n/a";
     private static AbstractNMSHandler abstractNmsHandler;
 
-    public static void debug(String text) {
+    /**
+     * Prints debug text when debug mode is enabled
+     * @see #setDebug(boolean)
+     */
+    public static void debug(final String text) {
         if(debug && main != null) getPlugin().getLogger().info("[JeffLib] [Debug] " + text);
     }
 
+    /**
+     * Enables/disables debug mode.
+     * @see #debug(String)
+     */
+    public static void setDebug(final boolean debug) {
+        JeffLib.debug = debug;
+    }
+
+    /**
+     * Returns the {@link AbstractNMSHandler}. Should not be used by plugins.
+     */
     public static AbstractNMSHandler getNMSHandler() {
         return abstractNmsHandler;
     }
@@ -78,11 +93,7 @@ public final class JeffLib {
     }
 
     /**
-     * Registers the listeners needed to call the
-     */
-
-    /**
-     * Registers the listeners needed to track blocks using {@link BlockTracker}
+     * Registers the listeners needed to track blocks using {@link BlockTracker}. Requires MC version 1.16.3 or later.
      */
     public static void registerBlockTracker() {
         if (McVersion.isAtLeast(1, 16, 3)) {
@@ -94,6 +105,8 @@ public final class JeffLib {
 
     /**
      * Initializes the library. Needed for some methods.
+     *
+     * This is the same as calling <pre>JeffLib.init(plugin, true);</pre>
      *
      * @param plugin      Plugin instance
      */
@@ -107,7 +120,7 @@ public final class JeffLib {
      * @param plugin      Plugin instance
      * @param nms         Whether or not to instantiate NMS classes
      */
-    public static void init(final Plugin plugin, boolean nms) {
+    public static void init(final Plugin plugin, final boolean nms) {
         main = plugin;
         ConfigurationSerialization.registerClass(Hologram.class,plugin.getName().toLowerCase(Locale.ROOT)+"Hologram");
         ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT)+"WorldBoundingBox");
@@ -135,7 +148,7 @@ public final class JeffLib {
     /**
      * Checks whether Spigot or a fork is running
      *
-     * @return true when running at least Spigot
+     * @return true when running at least Spigot, false when it's only CraftBukkit
      */
     public static boolean isRunningSpigot() {
         try {

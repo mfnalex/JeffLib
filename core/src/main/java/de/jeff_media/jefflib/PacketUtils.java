@@ -8,6 +8,9 @@ import org.jetbrains.annotations.NotNull;
 @UtilityClass
 public class PacketUtils {
 
+    /**
+     * Sends the given NMS packet object to the player.
+     */
     public static void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
         NMSNotSupportedException.check();
         JeffLib.getNMSHandler().sendPacket(player, packet);

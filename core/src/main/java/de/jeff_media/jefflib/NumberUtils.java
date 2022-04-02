@@ -7,6 +7,9 @@ import javax.annotation.Nullable;
 @UtilityClass
 public class NumberUtils {
 
+    /**
+     * Checks if a given String is an Integer.
+     */
     public boolean isInteger(final String text) {
         try {
             Integer.parseInt(text);
@@ -16,6 +19,9 @@ public class NumberUtils {
         }
     }
 
+    /**
+     * Returns the given String as Integer, or null if it isn't an Integer.
+     */
     @Nullable
     public Integer parseInteger(final String text) {
         try {
