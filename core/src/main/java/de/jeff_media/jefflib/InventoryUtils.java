@@ -34,22 +34,31 @@ public final class InventoryUtils {
         return minSlot < event.getView().getTopInventory().getSize();
     }
 
-    public static int countItemStacks(@NotNull final ItemStack[] inventory, @NotNull final ItemStack item) {
+    /**
+     * Counts how many times the given ItemStack is present in the given array
+     */
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(inventory)
+        Arrays.stream(array)
                 .filter(itemStack -> itemStack.isSimilar(item))
                 .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
-    public static int countItemStacks(@NotNull final ItemStack[] inventory, @NotNull final Material material) {
+    /**
+     * Counts how many times the given Material is present in the given array
+     */
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(inventory)
+        Arrays.stream(array)
                 .filter(candidate -> candidate.getType() == material)
                 .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
+    /**
+     * Counts how many times the given ItemStack is present in the given inventory
+     */
     public static int countItemStacks(@NotNull final Inventory inventory, @NotNull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
         Arrays.stream(inventory.getContents())
@@ -58,6 +67,9 @@ public final class InventoryUtils {
         return amount.get();
     }
 
+    /**
+     * Counts how many times the given Material is present in the given inventory
+     */
     public static int countMaterials(@NotNull final Inventory inventory, @NotNull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
         inventory.all(material).values()
@@ -87,7 +99,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @NotNull Player player, final @NotNull Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@NotNull final Player player, @NotNull final Iterable<ItemStack> items) {
         return addOrDrop(player, player.getLocation(), items);
     }
 
@@ -112,29 +124,40 @@ public final class InventoryUtils {
         return addOrDrop(player, player.getLocation(), Arrays.asList(items));
     }
 
-    public static boolean removeX(final Inventory inventory, final Material toRemove, final int toRemoveRemaining) {
+    /**
+     * Removes the given number of ItemStacks that match the given material from the inventory
+     * @return the number of ItemStacks that couldn't be removed (because the inventory didn't contain enough)
+     */
+    public static int removeX(final Inventory inventory, final Material toRemove, final int amountToRemove) {
         final HashMap<Integer, ? extends ItemStack> matchingStacks = inventory.all(toRemove);
-        return removeItemStacks(toRemoveRemaining, matchingStacks);
+        return removeItemStacks(amountToRemove, matchingStacks);
     }
 
-    public static boolean removeX(final Inventory inventory, final ItemStack toRemove, final int toRemoveRemaining) {
+    /**
+     * Removes the given number of ItemStacks that match the given item from the inventory
+     * @return the number of ItemStacks that couldn't be removed (because the inventory didn't contain enough)
+     */
+    public static int removeX(final Inventory inventory, final ItemStack toRemove, final int amountToRemove) {
         HashMap<Integer, ? extends ItemStack> matchingStacks = getAll(inventory, toRemove);
-        return removeItemStacks(toRemoveRemaining, matchingStacks);
+        return removeItemStacks(amountToRemove, matchingStacks);
     }
 
-    private static boolean removeItemStacks(int toRemoveRemaining, final HashMap<Integer, ? extends ItemStack> matchingStacks) {
+    private static int removeItemStacks(int amountToRemove, final HashMap<Integer, ? extends ItemStack> matchingStacks) {
         for(final ItemStack item : matchingStacks.values()) {
-            if(item.getAmount() <= toRemoveRemaining) {
-                toRemoveRemaining -= item.getAmount();
+            if(item.getAmount() <= amountToRemove) {
+                amountToRemove -= item.getAmount();
                 item.setAmount(0);
             } else {
-                item.setAmount(item.getAmount() - toRemoveRemaining);
+                item.setAmount(item.getAmount() - amountToRemove);
             }
-            if(toRemoveRemaining == 0) return true;
+            if(amountToRemove == 0) return 0;
         }
-        return toRemoveRemaining == 0;
+        return amountToRemove;
     }
 
+    /**
+     * Returns a map of all items from this inventory that match the given item. The key is the slot number where the tack was found.
+     */
     public static HashMap<Integer, ? extends ItemStack> getAll(final Inventory inventory, final ItemStack item) {
         final HashMap<Integer, ItemStack> map = new HashMap<>();
         for(int i = 0; i < inventory.getSize(); i++) {
