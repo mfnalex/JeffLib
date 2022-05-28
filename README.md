@@ -58,7 +58,7 @@ public class MyPlugin extends JavaPlugin {
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>
-    <version>3.3.0-SNAPSHOT</version>
+    <version>3.3.0</version>
     <configuration>
         <minimizeJar>true</minimizeJar>
         <relocations>
@@ -103,6 +103,10 @@ If you're using allatori to obfuscate your plugin, you need the following additi
   <class template="class **.nms.**" />
 </ignore-classes>
 ```
+
+## How to build yourself
+
+Coming soon
 
 ## JavaDocs
 
