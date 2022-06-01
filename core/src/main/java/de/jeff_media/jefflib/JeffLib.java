@@ -52,6 +52,7 @@ public final class JeffLib {
     /**
      * Returns the {@link AbstractNMSHandler}. Should not be used by plugins.
      */
+    @DoNotRename
     public static AbstractNMSHandler getNMSHandler() {
         return abstractNmsHandler;
     }

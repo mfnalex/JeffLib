@@ -225,6 +225,28 @@ public final class BlockUtils {
     }
 
     /**
+     * Gets all {@link Chunk}s that are inside or intersect the given {@link BoundingBox}
+     * @param onlyLoadedChunks When true, only returns Chunks if the related chunk is already loaded. When false, this will force load chunks
+     */
+    public static List<Chunk> getChunks(final World world, final BoundingBox box, final boolean onlyLoadedChunks) {
+        final int minX = (int) box.getMinX() >> 4;
+        final int maxX = (int) box.getMaxX() >> 4;
+        final int minZ = (int) box.getMinZ() >> 4;
+        final int maxZ = (int) box.getMaxZ() >> 4;
+
+        final List<Chunk> chunks = new ArrayList<>();
+        for(int x = minX; x <= maxX; x++) {
+            for(int z = minZ; z <= maxZ; z++) {
+                if(!onlyLoadedChunks || world.isChunkLoaded(x,z)) {
+                    final Chunk chunk = world.getChunkAt(x,z);
+                    chunks.add(chunk);
+                }
+            }
+        }
+        return chunks;
+    }
+
+    /**
      * Gets a list of all {@link BlockVector}s inside the given {@link BoundingBox} that match the given {@link Predicate}&lt;{@link BlockData}>
      * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks
      */

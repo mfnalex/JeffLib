@@ -12,6 +12,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -87,8 +88,10 @@ public final class InventoryUtils {
     public static boolean addOrDrop(final @NotNull Player player, final @Nullable Location dropLocation, final @NotNull Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for(final ItemStack item : items) {
-            player.getInventory().addItem(item).values().forEach((leftover) -> dropLocation.getWorld().dropItemNaturally(dropLocation, leftover));
-            storedEverything = false;
+            for(ItemStack leftover : player.getInventory().addItem(item).values()) {
+                dropLocation.getWorld().dropItemNaturally(dropLocation, leftover);
+                storedEverything = false;
+            }
         }
         return storedEverything;
     }

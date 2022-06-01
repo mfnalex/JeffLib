@@ -7,6 +7,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
+import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
 
@@ -94,7 +95,7 @@ public final class CommandUtils {
         return command;
     }
 
-    private static CommandMap getCommandMap() {
+    public static CommandMap getCommandMap() {
         CommandMap commandMap = null;
 
         try {

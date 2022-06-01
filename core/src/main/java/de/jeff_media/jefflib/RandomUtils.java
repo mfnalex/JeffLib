@@ -47,6 +47,10 @@ public class RandomUtils {
      * @return int between {@param min} (inclusive) and {@param max} (exclusive)
      */
     public static int getInt(final int min, final int max) {
-        return JeffLib.getRandom().nextInt(max - min) + min;
+        return JeffLib.getThreadLocalRandom().nextInt(min,max);
+    }
+
+    public static <E extends Enum<E>> E getRandomEnumElement(Class<E> enumClazz) {
+        return EnumUtils.getRandomElement(enumClazz);
     }
 }

@@ -311,6 +311,7 @@ public class PDCUtils {
         final ItemMeta meta = holder.getItemMeta();
         Objects.requireNonNull(meta);
         remove(meta, getKey(key));
+        holder.setItemMeta(meta);
     }
 
     /**

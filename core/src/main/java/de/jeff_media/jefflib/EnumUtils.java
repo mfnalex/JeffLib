@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
 import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
@@ -78,6 +79,11 @@ public class EnumUtils {
                 })
                 .filter(Objects::nonNull)
                 .collect(collector);
+    }
+
+    public static <E extends Enum<E>> E getRandomElement(final Class<E> enumClazz) {
+        final E[] constants = enumClazz.getEnumConstants();
+        return constants[RandomUtils.getInt(0,constants.length)];
     }
 }
 
