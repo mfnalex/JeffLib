@@ -29,6 +29,17 @@ public final class CollectionUtils {
     }
 
     /**
+     * Creates a list from an iterator
+     */
+    public static <T> List<T> asList(final Iterator<T> iterator) {
+        List<T> list = new ArrayList<>();
+        while(iterator.hasNext()) {
+            list.add(iterator.next());
+        }
+        return list;
+    }
+
+    /**
      * Sorts a map by its values. The value type must implement {@link Comparable}
      *
      * @param map Map to sort
