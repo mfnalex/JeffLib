@@ -20,9 +20,9 @@ public final class ExpUtils {
      * @return Amount of XP required to reach the target level
      */
     public static int getTotalXPRequiredForLevel(final int targetLevel) {
-        if (targetLevel <= 16) return sqrt(targetLevel) + (6 * targetLevel);
-        if (targetLevel <= 31) return (int) ((2.5 * sqrt(targetLevel)) - (40.5 * targetLevel) + 360);
-        return (int) ((4.5 * sqrt(targetLevel)) - (162.5 * targetLevel) + 2220);
+        if (targetLevel <= 16) return squared(targetLevel) + (6 * targetLevel);
+        if (targetLevel <= 31) return (int) ((2.5 * squared(targetLevel)) - (40.5 * targetLevel) + 360);
+        return (int) ((4.5 * squared(targetLevel)) - (162.5 * targetLevel) + 2220);
     }
 
     /**
@@ -48,7 +48,7 @@ public final class ExpUtils {
         orb.setExperience(xp);
     }
 
-    private static int sqrt(final int a) {
+    private static int squared(final int a) {
         return a * a;
     }
 }

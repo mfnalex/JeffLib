@@ -3,7 +3,7 @@ package de.jeff_media.jefflib.internal.nms;
 import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
-import de.jeff_media.jefflib.internal.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;

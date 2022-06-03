@@ -80,6 +80,9 @@ public final class CommandUtils {
         getCommandMap().register(JeffLib.getPlugin().getDescription().getName(), command);
     }
 
+    /**
+     * Gets a PluginCommand by its name
+     */
     private static PluginCommand getCommand(final String name) {
         PluginCommand command = null;
 
@@ -95,6 +98,9 @@ public final class CommandUtils {
         return command;
     }
 
+    /**
+     * Gets the CommandMap
+     */
     public static CommandMap getCommandMap() {
         CommandMap commandMap = null;
 

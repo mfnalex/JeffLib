@@ -15,7 +15,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Manages holograms
+ * @deprecated Draft API
+ */
 @UtilityClass
+@Deprecated
 public class HologramManager {
 
     @Getter
@@ -53,6 +58,9 @@ public class HologramManager {
     };
     private static boolean IS_SCHEDULED = false;
 
+    /**
+     * Removes all holograms for all players
+     */
     public static void unloadAllHolograms() {
         for (final Hologram hologram : holograms) {
             for (final Player player : Bukkit.getOnlinePlayers()) {
@@ -70,6 +78,9 @@ public class HologramManager {
     }
 
 
+    /**
+     * Gets a Hologram from a ConfigurationSection
+     */
     public static Hologram loadHologram(final ConfigurationSection section) {
         return Hologram.deserialize(section.getValues(false));
     }

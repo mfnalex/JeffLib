@@ -9,7 +9,7 @@ import org.jetbrains.annotations.NotNull;
 public class PacketUtils {
 
     /**
-     * Sends the given NMS packet object to the player.
+     * Sends the given NeedsNMS packet object to the player.
      */
     public static void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
         NMSNotSupportedException.check();

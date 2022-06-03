@@ -1,5 +1,7 @@
-package de.jeff_media.jefflib;
+package de.jeff_media.jefflib.data;
 
+import de.jeff_media.jefflib.McVersion;
+import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
@@ -9,21 +11,37 @@ import java.lang.reflect.InvocationTargetException;
 /**
  * Taken from https://github.com/CroaBeast/AdvancementInfo with permission given by CroaBeast
  */
+
+/**
+ * Provides information about an advancement.
+ */
 public class AdvancementInfo {
 
+    private static final Class<?> CLASS_CRAFTADVANCEMENT;
+    private static final int MC_VERSION;
+
+
+    static {
+        Class<?> tmp = null;
+        try {
+            tmp = getNMSClass("org.bukkit.craftbukkit", "advancement.CraftAdvancement", true);
+        } catch (Exception ignored) { }
+        if(tmp == null) throw new NMSNotSupportedException();
+        CLASS_CRAFTADVANCEMENT = tmp;
+
+        MC_VERSION = McVersion.getMinor();
+    }
     private final Advancement adv;
 
     @Getter private String title;
     @Getter private String description;
     @Getter private String frameType;
 
+
     public AdvancementInfo(final Advancement adv) {
         this.adv = adv;
         registerKeys();
     }
-
-    private final int MAJOR_VERSION =
-            Integer.parseInt(Bukkit.getBukkitVersion().split("-")[0].split("\\.")[1]);
 
     private static Class<?> getNMSClass(final String start, final String name, final boolean hasVersion) {
         final String version = Bukkit.getServer().getClass().getPackage().
@@ -51,11 +69,9 @@ public class AdvancementInfo {
     }
 
     private void registerKeys() {
-        final Class<?> craftClass = getNMSClass("org.bukkit.craftbukkit", "advancement.CraftAdvancement", true);
-        if (craftClass == null) return;
 
-        final Object craftAdv = craftClass.cast(adv);
-        final Object advHandle = getObject(craftClass, craftAdv, "getHandle");
+        final Object craftAdv = CLASS_CRAFTADVANCEMENT.cast(adv);
+        final Object advHandle = getObject(CLASS_CRAFTADVANCEMENT, craftAdv, "getHandle");
         if (advHandle == null) return;
 
         final Object craftDisplay = getObject(advHandle, "c");
@@ -66,14 +82,13 @@ public class AdvancementInfo {
         final Object chatComponentDesc = getObject(craftDisplay, "b");
         if (frameType == null || chatComponentTitle == null || chatComponentDesc == null) return;
 
-        final Class<?> chatClass = MAJOR_VERSION >= 17 ?
+        final Class<?> chatClass = MC_VERSION >= 17 ?
                 getNMSClass("net.minecraft.network.chat", "IChatBaseComponent", false) :
                 getNMSClass(null, "IChatBaseComponent", true);
         if (chatClass == null) return;
 
-        final String method = MAJOR_VERSION < 13 ? "toPlainText" : "getString";
-        final Object title = getObject(chatClass, chatComponentTitle, method);
-        final Object description = getObject(chatClass, chatComponentDesc, method);
+        final Object title = getObject(chatClass, chatComponentTitle, "getString");
+        final Object description = getObject(chatClass, chatComponentDesc, "getString");
         if (title == null || description == null) return;
 
         this.frameType = frameType.toString();

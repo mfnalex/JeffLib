@@ -1,6 +1,7 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -18,6 +19,7 @@ public class AnimationUtils {
     /**
      * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
      */
+    @NeedsNMS
     public static void playTotemAnimation(@NotNull final Player player) {
         playTotemAnimation(player, null);
     }
@@ -26,6 +28,7 @@ public class AnimationUtils {
      * Plays the totem of undying animation to a given player using the provided custom model data.
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
+    @NeedsNMS
     public static void playTotemAnimation(@NotNull final Player player, @Nullable final Integer customModelData) {
         NMSNotSupportedException.check();
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);

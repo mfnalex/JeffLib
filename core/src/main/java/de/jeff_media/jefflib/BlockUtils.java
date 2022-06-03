@@ -3,6 +3,7 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.data.worldboundingbox.CuboidWorldBoundingBox;
 import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -157,6 +158,7 @@ public final class BlockUtils {
      * @param composter Composter block
      * @param success whether the composting chance succeeded
      */
+    @NeedsNMS
     public static void playComposterFillParticlesAndSound(final Block composter, final boolean success) {
         /*if(composter.getType() != Material.COMPOSTER) {
             throw new IllegalStateException("Given block is not a composter: " + composter.toString());

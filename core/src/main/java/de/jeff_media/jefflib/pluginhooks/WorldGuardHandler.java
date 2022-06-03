@@ -10,7 +10,7 @@
 //import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 //import com.sk89q.worldguard.protection.regions.RegionQuery;
 //import de.jeff_media.jefflib.ReflUtils;
-//import de.jeff_media.jefflib.internal.InternalOnly;
+//import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 //import lombok.experimental.UtilityClass;
 //import org.bukkit.Location;
 //import org.bukkit.entity.Player;
@@ -95,7 +95,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import de.jeff_media.jefflib.internal.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;

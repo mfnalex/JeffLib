@@ -119,7 +119,7 @@ public final class JeffLib {
      * Initializes the library. Needed for some methods.
      *
      * @param plugin      Plugin instance
-     * @param nms         Whether or not to instantiate NMS classes
+     * @param nms         Whether or not to instantiate NeedsNMS classes
      */
     public static void init(final Plugin plugin, final boolean nms) {
         main = plugin;

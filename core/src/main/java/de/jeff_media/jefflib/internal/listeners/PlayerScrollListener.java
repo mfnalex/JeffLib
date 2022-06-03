@@ -1,7 +1,7 @@
 package de.jeff_media.jefflib.internal.listeners;
 
 import de.jeff_media.jefflib.events.PlayerScrollEvent;
-import de.jeff_media.jefflib.internal.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;

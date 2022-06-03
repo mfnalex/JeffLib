@@ -2,7 +2,7 @@ package de.jeff_media.jefflib.pluginhooks;
 
 import de.jeff_media.jefflib.JeffLib;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
-import de.jeff_media.jefflib.internal.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;

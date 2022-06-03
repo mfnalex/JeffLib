@@ -2,7 +2,7 @@ package de.jeff_media.jefflib.internal.listeners;
 
 import de.jeff_media.jefflib.BlockTracker;
 import de.jeff_media.jefflib.JeffLib;
-import de.jeff_media.jefflib.internal.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;

@@ -16,7 +16,7 @@ public class NMSNotSupportedException extends RuntimeException {
     }
 
     public NMSNotSupportedException() {
-        super("Could not find an NMS handler for the current Minecraft version.");
+        super("Could not find an NeedsNMS handler for the current Minecraft version.");
     }
 
 }

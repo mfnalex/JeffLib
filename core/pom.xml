@@ -194,7 +194,7 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
-            <version>1.18-R0.1-SNAPSHOT</version>
+            <version>1.18.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 

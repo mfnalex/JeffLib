@@ -15,6 +15,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import java.lang.reflect.Field;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -117,6 +118,7 @@ public class SkullUtils {
         } catch (final NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
+        Map.ofEntries()
         return head;
     }
 

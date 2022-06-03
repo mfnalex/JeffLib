@@ -81,6 +81,9 @@ public class EnumUtils {
                 .collect(collector);
     }
 
+    /**
+     * Gets a random value of the given Enum class
+     */
     public static <E extends Enum<E>> E getRandomElement(final Class<E> enumClazz) {
         final E[] constants = enumClazz.getEnumConstants();
         return constants[RandomUtils.getInt(0,constants.length)];

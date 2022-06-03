@@ -2,6 +2,7 @@ package de.jeff_media.jefflib.internal;
 
 import com.allatori.annotations.DoNotRename;
 import de.jeff_media.jefflib.ReflUtils;
+import de.jeff_media.jefflib.internal.annotations.InternalOnly;
 
 @InternalOnly
 @DoNotRename
