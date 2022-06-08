@@ -3,6 +3,7 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
 import lombok.experimental.UtilityClass;
+import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -18,6 +19,7 @@ public class AnimationUtils {
 
     /**
      * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
      */
     @NeedsNMS
     public static void playTotemAnimation(@NotNull final Player player) {
@@ -26,6 +28,7 @@ public class AnimationUtils {
 
     /**
      * Plays the totem of undying animation to a given player using the provided custom model data.
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
     @NeedsNMS

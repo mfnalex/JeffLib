@@ -1,7 +1,6 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
-import org.bukkit.configuration.Configuration;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -21,10 +20,10 @@ public class ConfigUtils {
     /**
      * Turns a ConfigurationSection into a Map&lt;String,Object&gt; (just like SnakeYAML)
      */
-    public static Map<String,Object> asMap(final @NotNull ConfigurationSection section) {
-        final Map<String,Object> map = new HashMap<>();
+    public static Map<String, Object> asMap(final @NotNull ConfigurationSection section) {
+        final Map<String, Object> map = new HashMap<>();
         section.getKeys(false).forEach(key -> {
-            map.put(key,section.get(key));
+            map.put(key, section.get(key));
         });
         return map;
     }
@@ -36,19 +35,19 @@ public class ConfigUtils {
      * <li>Load the saved file</li>
      * <li>Adds all the default values from the included config</li>
      * </ol>
+     *
      * @param filename Filename (without leading /)
      */
     public static FileConfiguration getConfig(String filename) {
         JeffLibNotInitializedException.check();
         final File file = new File(JeffLib.getPlugin().getDataFolder(), filename);
-        if(!file.exists()) {
+        if (!file.exists()) {
             JeffLib.getPlugin().saveResource(filename, false);
         }
 
         final YamlConfiguration defaultConfig = new YamlConfiguration();
 
-        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename);
-             final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
+        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename); final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
             defaultConfig.load(reader);
         } catch (final IOException exception) {
             throw new IllegalArgumentException("Could not load resource " + filename);

@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>7.8.0-SNAPSHOT</version>
+        <version>8.0.0-SNAPSHOT</version>
     </parent>
     <properties>
         <maven.deploy.skip>false</maven.deploy.skip>
@@ -82,6 +82,11 @@
         <dependency>
             <groupId>de.jeff_media</groupId>
             <artifactId>JeffLib-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>de.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_19_R1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

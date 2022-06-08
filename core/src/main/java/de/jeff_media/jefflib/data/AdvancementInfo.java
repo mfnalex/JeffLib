@@ -5,8 +5,11 @@ import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
+import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.MemoryConfiguration;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 /**
  * Taken from https://github.com/CroaBeast/AdvancementInfo with permission given by CroaBeast
@@ -31,6 +34,15 @@ public class AdvancementInfo {
 
         MC_VERSION = McVersion.getMinor();
     }
+
+    public static ConfigurationSection fromMap(Map<String,Object> map) {
+        ConfigurationSection section = new MemoryConfiguration();
+        for(Map.Entry<String,Object> entry : map.entrySet()) {
+            section.set(entry.getKey(), entry.getValue());
+        }
+        return section;
+    }
+
     private final Advancement adv;
 
     @Getter private String title;

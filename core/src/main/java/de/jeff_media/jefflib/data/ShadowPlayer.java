@@ -26,6 +26,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.profile.PlayerProfile;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
@@ -414,6 +415,12 @@ public class ShadowPlayer implements Player {
         return player.getUniqueId();
     }
 
+    @NotNull
+    @Override
+    public PlayerProfile getPlayerProfile() {
+        return player.getPlayerProfile();
+    }
+
     @Override
     public int getTicksLived() {
         return player.getTicksLived();
@@ -543,6 +550,12 @@ public class ShadowPlayer implements Player {
     @Override
     public Pose getPose() {
         return player.getPose();
+    }
+
+    @NotNull
+    @Override
+    public SpawnCategory getSpawnCategory() {
+        return player.getSpawnCategory();
     }
 
     @Override
@@ -763,6 +776,16 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
+    public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch) {
+
+    }
+
+    @Override
+    public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch) {
+
+    }
+
+    @Override
     public void stopSound(@NotNull final Sound sound) {
 
     }
@@ -851,6 +874,12 @@ public class ShadowPlayer implements Player {
     @Override
     public void updateInventory() {
 
+    }
+
+    @Nullable
+    @Override
+    public GameMode getPreviousGameMode() {
+        return player.getPreviousGameMode();
     }
 
     @Override
@@ -979,16 +1008,16 @@ public class ShadowPlayer implements Player {
         return this.player.canSee(player);
     }
 
-    public void hideEntity(@NotNull Plugin plugin, @NotNull Entity entity) {
+    public void hideEntity(@NotNull final Plugin plugin, @NotNull Entity entity) {
 
     }
 
-    public void showEntity(@NotNull Plugin plugin, @NotNull Entity entity) {
+    public void showEntity(@NotNull final Plugin plugin, @NotNull Entity entity) {
 
     }
 
-    public boolean canSee(@NotNull Entity entity) {
-        return false;
+    public boolean canSee(@NotNull final Entity entity) {
+        return player.canSee(entity);
     }
 
     @Override
@@ -1033,6 +1062,21 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void setResourcePack(@NotNull final String s, final byte[] bytes) {
+
+    }
+
+    @Override
+    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt) {
+
+    }
+
+    @Override
+    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force) {
+
+    }
+
+    @Override
+    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
 
     }
 
@@ -1185,7 +1229,7 @@ public class ShadowPlayer implements Player {
 
     }
 
-    public void openSign(@NotNull Sign sign) {
+    public void openSign(@NotNull final Sign sign) {
 
     }
 

@@ -118,7 +118,6 @@ public class SkullUtils {
         } catch (final NoSuchFieldException | IllegalAccessException e) {
             e.printStackTrace();
         }
-        Map.ofEntries()
         return head;
     }
 
