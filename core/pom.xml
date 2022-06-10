@@ -179,28 +179,31 @@
     </repositories>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations-java5</artifactId>
-            <version>23.0.0</version>
-            <scope>provided</scope>
+        <dependency> <!-- Do not remove - otherwise MockBukkit breaks during creation of the DefaultServiceLocator -->
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.17.2</version>
+            <scope>test</scope>
         </dependency>
-
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.18</artifactId>
-            <version>1.24.1</version>
+            <version>1.26.1</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
-            <version>1.18.2-R0.1-SNAPSHOT</version>
+            <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>23.0.0</version>
+            <scope>provided</scope>
+        </dependency>
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>
@@ -218,7 +221,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
 
@@ -305,13 +308,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- MMOItems End -->
-
-        <dependency>
-            <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.18</artifactId>
-            <version>1.15.5</version>
-            <scope>test</scope>
-        </dependency>
     </dependencies>
 
     <distributionManagement>
