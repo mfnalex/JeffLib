@@ -73,7 +73,7 @@ public class PDCUtils {
         if (plugin == null) {
             throw new JeffLibNotInitializedException();
         }
-        return KEYS.computeIfAbsent(key, name -> new NamespacedKey(JeffLib.getPlugin(), name));
+        return KEYS.computeIfAbsent(key, __ -> new NamespacedKey(JeffLib.getPlugin(), key));
     }
 
     /**
