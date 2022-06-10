@@ -1091,6 +1091,17 @@ public class ShadowPlayer implements Player {
 
     }
 
+    @Nullable
+    @Override
+    public WorldBorder getWorldBorder() {
+        return player.getWorldBorder();
+    }
+
+    @Override
+    public void setWorldBorder(@Nullable WorldBorder worldBorder) {
+
+    }
+
     @Override
     public boolean isHealthScaled() {
         return player.isHealthScaled();
