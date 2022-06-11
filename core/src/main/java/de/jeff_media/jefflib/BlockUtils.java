@@ -1,21 +1,19 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.data.worldboundingbox.CuboidWorldBoundingBox;
-import de.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
-import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
+import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
-import org.bukkit.*;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.block.BlockState;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.annotation.Nullable;
 import java.util.*;
-import java.util.concurrent.CompletableFuture;
 import java.util.function.Predicate;
 
 /**
@@ -28,7 +26,7 @@ public final class BlockUtils {
      * Returns the lowest non-air block at a given position
      */
     @Nullable
-    public static Block getLowestBlockAt(@NotNull final  World world, final int x, final int z) {
+    public static Block getLowestBlockAt(@Nonnull final  World world, final int x, final int z) {
         for(int y = getWorldMinHeight(world); y < world.getMaxHeight(); y++) {
             final Block current = world.getBlockAt(x,y,z);
             if(!current.getType().isAir()) return current;
@@ -40,7 +38,7 @@ public final class BlockUtils {
      * Returns the lowest non-air block at a given location
      */
     @Nullable
-    public static Block getLowestBlockAt(@NotNull final Location location) {
+    public static Block getLowestBlockAt(@Nonnull final Location location) {
         return getLowestBlockAt(Objects.requireNonNull(location.getWorld()), location.getBlockX(), location.getBlockZ());
     }
 
@@ -158,12 +156,8 @@ public final class BlockUtils {
      * @param composter Composter block
      * @param success whether the composting chance succeeded
      */
-    @NeedsNMS
+    @RequiresNMS
     public static void playComposterFillParticlesAndSound(final Block composter, final boolean success) {
-        /*if(composter.getType() != Material.COMPOSTER) {
-            throw new IllegalStateException("Given block is not a composter: " + composter.toString());
-        }*/
-        NMSNotSupportedException.check();
         JeffLib.getNMSHandler().getBlockHandler().playComposterParticlesAndSound(composter, success);
     }
 
@@ -185,7 +179,7 @@ public final class BlockUtils {
      * Returns the lowest possible building height for a block. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
      */
     public static int getWorldMinHeight(final World world) {
-        if(McVersion.isAtLeast(1,16,5)) {
+        if(McVersion.current().isAtLeast(1,16,5)) {
             return world.getMinHeight();
         } else {
             return 0;

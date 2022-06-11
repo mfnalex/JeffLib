@@ -14,16 +14,16 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 @UtilityClass
 public class ProtectionUtils {
 
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Block block) {
+    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Block block) {
         return canBreak(player, block, false);
     }
 
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
             if(!WorldGuardUtils.canBreak(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {
@@ -34,11 +34,11 @@ public class ProtectionUtils {
         return !event.isCancelled();
     }
 
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Block block) {
+    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Block block) {
         return canPlace(player, block, false);
     }
 
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
             if(!WorldGuardUtils.canPlace(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {
@@ -49,11 +49,11 @@ public class ProtectionUtils {
         return !event.isCancelled();
     }
 
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Block block) {
+    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Block block) {
         return canInteract(player, block, false);
     }
 
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Block block, final boolean mute) {
+    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
             if(!WorldGuardUtils.canInteract(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {

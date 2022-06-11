@@ -8,7 +8,7 @@ import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.*;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.*;
 
@@ -222,7 +222,7 @@ public class RecipeUtils {
         return new StonecuttingRecipe(key, result, getRecipeChoice(section));
     }
 
-    @NotNull private static Map<Character,RecipeChoice> getRecipeChoices(final ConfigurationSection section) {
+    @Nonnull private static Map<Character,RecipeChoice> getRecipeChoices(final ConfigurationSection section) {
         final Map<Character,RecipeChoice> map = new HashMap<>();
         for(final String key : section.getKeys(false)) {
             if(key.length()!=1) {
@@ -247,7 +247,7 @@ public class RecipeUtils {
         return map;
     }
 
-    @NotNull private static List<RecipeChoice> getRecipeChoices(final List<?> ingredients) {
+    @Nonnull private static List<RecipeChoice> getRecipeChoices(final List<?> ingredients) {
         final List<RecipeChoice> list = new ArrayList<>();
 
         for(final Object item : ingredients) {
@@ -266,7 +266,7 @@ public class RecipeUtils {
         return list;
     }
 
-    @NotNull private static RecipeChoice getRecipeChoice(final ConfigurationSection section) {
+    @Nonnull private static RecipeChoice getRecipeChoice(final ConfigurationSection section) {
         if(section.isSet("ingredients")) {
             if(section.isConfigurationSection("ingredients")) {
                 final Map<Character, RecipeChoice> map = getRecipeChoices(section.getConfigurationSection("ingredients"));

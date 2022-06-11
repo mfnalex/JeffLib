@@ -32,7 +32,7 @@ public class AdvancementInfo {
         if(tmp == null) throw new NMSNotSupportedException();
         CLASS_CRAFTADVANCEMENT = tmp;
 
-        MC_VERSION = McVersion.getMinor();
+        MC_VERSION = McVersion.current().getMinor();
     }
 
     public static ConfigurationSection fromMap(Map<String,Object> map) {

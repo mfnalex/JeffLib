@@ -7,8 +7,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -43,7 +43,7 @@ public final class LocationUtils {
      * @param world Default world to use when to world is specified in the ConfigurationSection
      * @return Location parsed from the given configuration section
      */
-    @NotNull
+    @Nonnull
     public static Location getLocationFromSection(final ConfigurationSection config, @Nullable World world) {
         if (config.getBoolean("spawn")) {
             final World world2 = Bukkit.getWorld(Objects.requireNonNull(config.getString("world")));

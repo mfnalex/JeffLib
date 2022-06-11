@@ -1,13 +1,11 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandMap;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
-import org.bukkit.command.SimpleCommandMap;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.SimplePluginManager;
 
@@ -25,52 +23,12 @@ import java.util.Iterator;
 public final class CommandUtils {
 
     /**
-     * Represents the output style for {@link #sendHelpMessage(CommandSender, HelpStyle, String...)}
-     */
-    public enum HelpStyle {
-        /**
-         * Sends command name and command description on two separate lines, including a spacing line. Example:
-         * <pre>
-         * <b>/command1</b>
-         * Description for command1
-         *
-         * <b>/command2</b>
-         * Description for command2
-         * </pre>
-         */
-        NEW_LINE,
-
-        /**
-         * Sends command name and command description in one line, including a spacing line. Example:
-         * <pre>
-         * <b>/command1</b> Description for command1
-         *
-         * <b>/command2</b> Description for command2
-         * </pre>
-         */
-        SAME_LINE_SPACED,
-
-        /**
-         * Sends command name and command description in one line. Example:
-         * <pre>
-         * <b>/command1</b> Description for command1
-         * <b>/command2</b> Description for command2
-         * </pre>
-         */
-        SAME_LINE_COMPACT
-    }
-
-    /**
      * Registers a new command
      *
      * @param permission Required permission or null
      * @param aliases    Aliases of the command. First element is the "real" command name.
      */
     public static void registerCommand(@Nullable final String permission, final String... aliases) {
-
-        if (JeffLib.getPlugin() == null) {
-            throw new JeffLibNotInitializedException();
-        }
 
         final PluginCommand command = getCommand(aliases[0]);
 
@@ -123,6 +81,7 @@ public final class CommandUtils {
      * <pre>
      * String[] help = {"command1", "Description for command1", "command2", "Description for command2", ...};
      * </pre>
+     *
      * @param sender CommandSender to send the help message to
      */
     public static void sendHelpMessage(final CommandSender sender, HelpStyle style, final String... args) {
@@ -139,34 +98,70 @@ public final class CommandUtils {
         }
     }
 
+    private static void sendHelpMessageNewLine(final CommandSender sender, final String... args) {
+        final Iterator<String> iterator = Arrays.stream(args).iterator();
+        while (iterator.hasNext()) {
+            final String command = iterator.next();
+            sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + command);
+            if (iterator.hasNext()) {
+                final String message = iterator.next();
+                sender.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + message);
+                if (iterator.hasNext()) {
+                    sender.sendMessage("");
+                }
+            }
+        }
+    }
+
     private static void sendHelpMessageSameLine(final CommandSender sender, boolean newLine, final String... args) {
         final Iterator<String> iterator = Arrays.stream(args).iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             final String command = iterator.next();
             String line = ChatColor.GOLD + "" + ChatColor.BOLD + command + ChatColor.RESET;
-            if(iterator.hasNext()) {
+            if (iterator.hasNext()) {
                 final String description = iterator.next();
                 line += " " + ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + description;
                 sender.sendMessage(line);
-                if(iterator.hasNext() && newLine ) {
+                if (iterator.hasNext() && newLine) {
                     sender.sendMessage(" ");
                 }
             }
         }
     }
 
-    private static void sendHelpMessageNewLine(final CommandSender sender, final String... args) {
-        final Iterator<String> iterator = Arrays.stream(args).iterator();
-        while(iterator.hasNext()) {
-            final String command = iterator.next();
-            sender.sendMessage(ChatColor.GOLD + "" + ChatColor.BOLD + command);
-            if(iterator.hasNext()) {
-                final String message = iterator.next();
-                sender.sendMessage(ChatColor.DARK_GRAY + "" + ChatColor.ITALIC + message);
-                if(iterator.hasNext()) {
-                    sender.sendMessage("");
-                }
-            }
-        }
+    /**
+     * Represents the output style for {@link #sendHelpMessage(CommandSender, HelpStyle, String...)}
+     */
+    public enum HelpStyle {
+        /**
+         * Sends command name and command description on two separate lines, including a spacing line. Example:
+         * <pre>
+         * <b>/command1</b>
+         * Description for command1
+         *
+         * <b>/command2</b>
+         * Description for command2
+         * </pre>
+         */
+        NEW_LINE,
+
+        /**
+         * Sends command name and command description in one line, including a spacing line. Example:
+         * <pre>
+         * <b>/command1</b> Description for command1
+         *
+         * <b>/command2</b> Description for command2
+         * </pre>
+         */
+        SAME_LINE_SPACED,
+
+        /**
+         * Sends command name and command description in one line. Example:
+         * <pre>
+         * <b>/command1</b> Description for command1
+         * <b>/command2</b> Description for command2
+         * </pre>
+         */
+        SAME_LINE_COMPACT
     }
 }

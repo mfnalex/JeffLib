@@ -9,7 +9,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -107,7 +107,7 @@ public final class BlockTracker {
      * @param chunk Chunk to check
      * @return Collection of all blocks inside the chunk that have been placed by players
      */
-    public static @NotNull Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
+    public static @Nonnull Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
         final Collection<Block> blocks = new HashSet<>();
         final PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);
         for (final NamespacedKey key : pdc.getKeys()) {

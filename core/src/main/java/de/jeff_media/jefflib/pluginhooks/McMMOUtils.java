@@ -1,13 +1,15 @@
 package de.jeff_media.jefflib.pluginhooks;
 
 import de.jeff_media.jefflib.PDCUtils;
-import de.jeff_media.jefflib.internal.annotations.NeedsPlugin;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
+/**
+ * mcMMO related methods
+ */
 public class McMMOUtils {
 
     private static final NamespacedKey SUPER_ABILITY_KEY = NamespacedKey.fromString("mcmmo:super_ability_boosted");

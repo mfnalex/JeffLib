@@ -1,15 +1,16 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
+import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Animation related methods. Currently only contains methods to play custom Totem animations
@@ -21,8 +22,8 @@ public class AnimationUtils {
      * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
      * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
      */
-    @NeedsNMS
-    public static void playTotemAnimation(@NotNull final Player player) {
+    @RequiresNMS
+    public static void playTotemAnimation(@Nonnull final Player player) {
         playTotemAnimation(player, null);
     }
 
@@ -31,8 +32,8 @@ public class AnimationUtils {
      * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
-    @NeedsNMS
-    public static void playTotemAnimation(@NotNull final Player player, @Nullable final Integer customModelData) {
+    @RequiresNMS
+    public static void playTotemAnimation(@Nonnull final Player player, @Nullable final Integer customModelData) {
         NMSNotSupportedException.check();
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
         final ItemMeta meta = totem.getItemMeta();

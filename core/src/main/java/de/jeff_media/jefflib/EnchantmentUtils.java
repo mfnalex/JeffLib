@@ -1,17 +1,17 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enchantment related methods
@@ -64,7 +64,7 @@ public final class EnchantmentUtils {
      * @return The enchantment of the specified name
      */
     @Nullable
-    public static Enchantment getByName(@NotNull final String name) {
+    public static Enchantment getByName(@Nonnull final String name) {
         for(final Enchantment enchant : Enchantment.values()) {
             if(enchant.getKey().getKey().equalsIgnoreCase(name)) {
                 return enchant;
@@ -83,7 +83,7 @@ public final class EnchantmentUtils {
      * @param section ConfigurationSection to parse
      * @return A Map&lt;Enchantment,Integer> containing the given enchantments mapped to their given levels
      */
-    public static @NotNull Map<Enchantment,Integer> fromConfigurationSection(final ConfigurationSection section) {
+    public static @Nonnull Map<Enchantment,Integer> fromConfigurationSection(final ConfigurationSection section) {
         final Map<Enchantment,Integer> map = new HashMap<>();
         for(final String enchantName : section.getKeys(false)) {
             final Enchantment enchant = getByName(enchantName);

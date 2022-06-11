@@ -1,11 +1,10 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.*;
 import java.util.HashMap;
@@ -20,7 +19,7 @@ public class ConfigUtils {
     /**
      * Turns a ConfigurationSection into a Map&lt;String,Object&gt; (just like SnakeYAML)
      */
-    public static Map<String, Object> asMap(final @NotNull ConfigurationSection section) {
+    public static Map<String, Object> asMap(final @Nonnull ConfigurationSection section) {
         final Map<String, Object> map = new HashMap<>();
         section.getKeys(false).forEach(key -> {
             map.put(key, section.get(key));
@@ -39,7 +38,7 @@ public class ConfigUtils {
      * @param filename Filename (without leading /)
      */
     public static FileConfiguration getConfig(String filename) {
-        JeffLibNotInitializedException.check();
+        // JeffLibNotInitializedException.check();
         final File file = new File(JeffLib.getPlugin().getDataFolder(), filename);
         if (!file.exists()) {
             JeffLib.getPlugin().saveResource(filename, false);

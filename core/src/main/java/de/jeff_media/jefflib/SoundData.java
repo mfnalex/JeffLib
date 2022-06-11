@@ -10,8 +10,8 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Locale;
 import java.util.Objects;
@@ -34,7 +34,7 @@ public final class SoundData {
     private float pitchVariant;
     private SoundCategory soundCategory = SoundCategory.MASTER;
 
-    public static SoundData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) {
+    public static SoundData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) {
         if(prefix == null) prefix = "";
         final String soundName = config.getString(prefix + "effect");
         if(soundName == null || soundName.isEmpty()) {

@@ -1,7 +1,6 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.Hologram;
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
@@ -88,9 +87,10 @@ public class HologramManager {
 
     public static void init() {
 
-        if (JeffLib.getPlugin() == null) {
+
+        /*if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
-        }
+        }*/
         NMSNotSupportedException.check();
 
         if (!IS_SCHEDULED) {

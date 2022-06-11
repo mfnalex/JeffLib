@@ -13,8 +13,8 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 
@@ -35,7 +35,7 @@ public final class ItemStackUtils {
      * Parses an ItemStack from a ConfigurationSection without applying any placeholder values. 
      * @see #fromConfigurationSection(ConfigurationSection, HashMap) 
      */
-    public ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
+    public ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config) {
         return fromConfigurationSection(config, new HashMap<>());
     }
 
@@ -56,7 +56,7 @@ public final class ItemStackUtils {
      * </pre>
      * @see TextUtils#replaceInString(String, Map) 
      */
-    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, final HashMap<String,String> placeholders) {
+    public static ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config, final HashMap<String,String> placeholders) {
         final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;
@@ -158,7 +158,7 @@ public final class ItemStackUtils {
     /**
      * Applies a display name to the given item
      */
-    public static void setDisplayName(@NotNull final ItemStack item, @NotNull final String name) {
+    public static void setDisplayName(@Nonnull final ItemStack item, @Nonnull final String name) {
         final ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta).setDisplayName(name);
         item.setItemMeta(meta);

@@ -1,7 +1,6 @@
 package de.jeff_media.jefflib;
 
 
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.plugin.Plugin;
@@ -120,7 +119,7 @@ public final class FileUtils {
      * @return the File
      */
     public static File getFile(final String... path) {
-        JeffLibNotInitializedException.check();
+        // JeffLibNotInitializedException.check();
         File file = JeffLib.getPlugin().getDataFolder();
         for (final String s : path) {
             file = new File(file, s);

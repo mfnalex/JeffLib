@@ -8,7 +8,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;
@@ -23,7 +23,7 @@ import java.util.Objects;
 @UtilityClass
 public class NBTAPI {
 
-    public static @NotNull String getNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key, @NotNull final String defaultValue) {
+    public static @Nonnull String getNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key, @Nonnull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(holder, key)) {
@@ -32,7 +32,7 @@ public class NBTAPI {
         return defaultValue;
     }
 
-    public static @NotNull String getNBT(@NotNull final ItemStack item, @NotNull final String key, @NotNull final String defaultValue) {
+    public static @Nonnull String getNBT(@Nonnull final ItemStack item, @Nonnull final String key, @Nonnull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(item, key)) {
@@ -43,7 +43,7 @@ public class NBTAPI {
 
     @Nullable
     public static
-    String getNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
+    String getNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -57,7 +57,7 @@ public class NBTAPI {
 
     @Nullable
     public static
-    String getNBT(@NotNull final ItemStack item, @NotNull final String key) {
+    String getNBT(@Nonnull final ItemStack item, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -65,7 +65,7 @@ public class NBTAPI {
         return getNBT(item.getItemMeta(), key);
     }
 
-    public static void addNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key, @NotNull final String value) {
+    public static void addNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key, @Nonnull final String value) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -75,7 +75,7 @@ public class NBTAPI {
         pdc.set(namespacedKey, PersistentDataType.STRING, value);
     }
 
-    public static void addNBT(@NotNull final ItemStack item, @NotNull final String key, @NotNull final String value) {
+    public static void addNBT(@Nonnull final ItemStack item, @Nonnull final String key, @Nonnull final String value) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -85,7 +85,7 @@ public class NBTAPI {
         item.setItemMeta(meta);
     }
 
-    public static boolean hasNBT(@NotNull final ItemStack item, @NotNull final String key) {
+    public static boolean hasNBT(@Nonnull final ItemStack item, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -95,7 +95,7 @@ public class NBTAPI {
         return pdc.has(new NamespacedKey(JeffLib.getPlugin(), key), PersistentDataType.STRING);
     }
 
-    public static boolean hasNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
+    public static boolean hasNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -103,7 +103,7 @@ public class NBTAPI {
         return pdc.has(new NamespacedKey(JeffLib.getPlugin(), key), PersistentDataType.STRING);
     }
 
-    public static void removeNBT(@NotNull final ItemStack item, @NotNull final String key) {
+    public static void removeNBT(@Nonnull final ItemStack item, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -113,7 +113,7 @@ public class NBTAPI {
         item.setItemMeta(meta);
     }
 
-    public static void removeNBT(@NotNull final PersistentDataHolder holder, @NotNull final String key) {
+    public static void removeNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         Objects.requireNonNull(key, "Key must not be null");
@@ -121,7 +121,7 @@ public class NBTAPI {
         pdc.remove(new NamespacedKey(JeffLib.getPlugin(), key));
     }
 
-    public static HashMap<String, String> getAllValues(@NotNull final PersistentDataHolder holder) {
+    public static HashMap<String, String> getAllValues(@Nonnull final PersistentDataHolder holder) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(holder, "PersistentDataHolder must not be null");
         final HashMap<String, String> map = new HashMap<>();
@@ -132,7 +132,7 @@ public class NBTAPI {
         return map;
     }
 
-    public static HashMap<String, String> getAllValues(@NotNull final ItemStack item) {
+    public static HashMap<String, String> getAllValues(@Nonnull final ItemStack item) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(item, "ItemStack must not be null");
         final HashMap<String, String> map = new HashMap<>();

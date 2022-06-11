@@ -1,79 +1,106 @@
 package de.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import javax.annotation.Nonnull;
+
+import java.util.Objects;
 
 /**
  * Provides version comparing methods
  */
-@UtilityClass
-public final class McVersion {
 
-    private static Integer major, minor, patch;
+public class McVersion implements Comparable<McVersion> {
+
+    private static final McVersion CURRENT_VERSION;
+
+    static {
+        final int currentMajor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
+        final int currentMinor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1].split("-")[0]);
+        final int currentPatch = Bukkit.getBukkitVersion().chars().filter(ch -> ch == '.').count() == 2 ? 0 : Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]);
+
+        CURRENT_VERSION = new McVersion(currentMajor, currentMinor, currentPatch);
+    }
+
+    private final int major, minor, patch;
+
+    public McVersion(final int major, final int minor) {
+        this(major, minor, 0);
+    }
+
+    public McVersion(final int major, final int minor, final int patch) {
+        this.major = major;
+        this.minor = minor;
+        this.patch = patch;
+    }
 
     /**
-     * Returns the Major version of the MC version, e.g. 1 for 1.16.5
-     *
-     * @return Major version of the MC version
+     * Gets the currently running McVersion
      */
-    public static int getMajor() {
-        if (major != null) return major;
-        final String string = Bukkit.getBukkitVersion().split("\\.")[0];
-        major = Integer.parseInt(string);
+    public static McVersion current() {
+        return CURRENT_VERSION;
+    }
+
+    /**
+     * Gets the "major" part of this McVersion. For 1.16.5, this would be 1
+     */
+    public int getMajor() {
         return major;
     }
 
     /**
-     * Returns the Minor version of the MC version, e.g. 16 for 1.16.5
-     *
-     * @return Minor version of the MC version
+     * Gets the "minor" part of this McVersion. For 1.16.5, this would be 16
      */
-    public static int getMinor() {
-        if (minor != null) return minor;
-        final String string = Bukkit.getBukkitVersion().split("\\.")[1].split("-")[0];
-        minor = Integer.parseInt(string);
+    public int getMinor() {
         return minor;
     }
 
     /**
-     * Returns the Patch version of the MC version, e.g. 5 for 1.16.5
-     *
-     * @return Patch version of the MC version
+     * Gets the "patch" part of this McVersion. For 1.16.5, this would be 5.
      */
-    public static int getPatch() {
-        if (patch != null) return patch;
-        if (Bukkit.getBukkitVersion().chars().filter(ch -> ch == '.').count() == 2) {
-            patch = 0;
-        } else {
-            final String string = Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0];
-            patch = Integer.valueOf(string);
-        }
+    public int getPatch() {
         return patch;
     }
 
-    /**
-     * Checks whether the currently running MC version is at least the given version. For example, isAtLeast(1.16.4) will return true for all versions including and above 1.16.4
-     *
-     * @param major Major version
-     * @param minor Minor version
-     * @param patch Patch version
-     * @return true when the currently running MC version is at least the given version, otherwise false
-     */
-    public static boolean isAtLeast(final int major, final int minor, final int patch) {
-        if (major > getMajor()) {
-            return false;
-        }
-        if (getMajor() > major) {
-            return true;
-        }
-        if (minor > getMinor()) {
-            return false;
-        }
-        if (getMinor() > minor) {
-            return true;
-        }
-        return getPatch() >= patch;
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(major, minor, patch);
     }
 
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        final McVersion mcVersion = (McVersion) o;
+        return major == mcVersion.major && minor == mcVersion.minor && patch == mcVersion.patch;
+    }
+
+    @Override
+    public String toString() {
+        if (patch == 0) {
+            return major + "." + minor;
+        } else {
+            return major + "." + minor + "." + patch;
+        }
+    }
+
+    public boolean isAtLeast(final int major, final int minor, final int patch) {
+        return this.isAtLeast(new McVersion(major, minor, patch));
+    }
+
+    public boolean isAtLeast(final McVersion other) {
+        return this.compareTo(other) >= 0;
+    }
+
+    @Override
+    public int compareTo(final @Nonnull McVersion other) {
+        if (this.major > other.major) return 3;
+        if (other.major > this.major) return -3;
+        if (this.minor > other.minor) return 2;
+        if (other.minor > this.minor) return -2;
+        return Integer.compare(this.patch, other.patch);
+    }
+
+    public boolean isAtLeast(final int major, final int minor) {
+        return this.isAtLeast(new McVersion(major, minor));
+    }
 }

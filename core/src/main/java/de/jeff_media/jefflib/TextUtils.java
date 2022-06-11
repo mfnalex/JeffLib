@@ -1,14 +1,13 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.HexColor;
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import de.jeff_media.jefflib.internal.cherokee.StringUtils;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -46,9 +45,10 @@ public class TextUtils {
      * @param text text to be printed
      */
     public static void banner(final CharSequence text) {
-        if (JeffLib.getPlugin() == null) {
+
+        /*if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
-        }
+        }*/
         final int bannerWidth = Math.max(text.length() + 4, MIN_BANNER_WIDTH);
         StringUtils.leftPad(EMPTY, bannerWidth, BANNER_CHAR);
         JeffLib.getPlugin().getLogger().info(StringUtils.center(" " + text + " ", bannerWidth, BANNER_CHAR));

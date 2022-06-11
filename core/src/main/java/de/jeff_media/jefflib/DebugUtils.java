@@ -1,13 +1,10 @@
 package de.jeff_media.jefflib;
 
-import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
-import org.bukkit.event.Event;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.Map;
 import java.util.logging.Logger;

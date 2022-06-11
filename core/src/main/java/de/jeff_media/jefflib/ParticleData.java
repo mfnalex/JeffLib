@@ -9,8 +9,8 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Locale;
 
@@ -29,7 +29,7 @@ public final class ParticleData {
     private double offsetZ;
     private double speed;
 
-    public static ParticleData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) {
+    public static ParticleData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) {
 
         if(prefix == null) prefix = "";
         final String particleName = config.getString(prefix + "type");
@@ -66,11 +66,11 @@ public final class ParticleData {
         return new ParticleData(particle,amount,offsetX,offsetY,offsetZ,speed);
     }
 
-    public void playToPlayer(@NotNull final Player player, @NotNull final Location location) {
+    public void playToPlayer(@Nonnull final Player player, @Nonnull final Location location) {
         player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed);
     }
 
-    public void playToWorld(@NotNull final Location location) {
+    public void playToWorld(@Nonnull final Location location) {
         location.getWorld().spawnParticle(particle,location,amount, offsetX, offsetY, offsetZ, speed);
     }
 

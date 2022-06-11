@@ -14,9 +14,8 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftChatMessage;
-//import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -34,7 +33,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
+    public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
         for(final Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new PacketPlayOutEntityMetadata(((Entity)entity).getId(),((Entity)entity).getDataWatcher(),true));
@@ -42,7 +41,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public Object createHologram(@NotNull final Location location, final @NotNull String line, @NotNull final Hologram.Type type) {
+    public Object createHologram(@Nonnull final Location location, final @Nonnull String line, @Nonnull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final World world = craftWorld.getHandle();
         final IChatBaseComponent baseComponent = CraftChatMessage.fromString(line)[0];
@@ -73,7 +72,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
+    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
         final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
         PacketUtils.sendPacket(player, packetSpawn);
 
@@ -82,23 +81,23 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
+    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
         final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
         PacketUtils.sendPacket(player, packetDestroy);
     }
 
     @Override
-    public void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
+    public void sendPacket(@Nonnull final Player player, @Nonnull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
     @Override
-    public Pair<String, String> getBiomeName(@NotNull final Location location) {
+    public Pair<String, String> getBiomeName(@Nonnull final Location location) {
         return NMSBiomeUtils.getBiomeName(location);
     }
 
     @Override
-    public void playTotemAnimation(final @NotNull Player player) {
+    public void playTotemAnimation(final @Nonnull Player player) {
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<PacketListenerPlayOut> packet = new PacketPlayOutEntityStatus(entityPlayer, (byte) 35);
         final PlayerConnection playerConnection = entityPlayer.playerConnection;
@@ -106,7 +105,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void setHeadTexture(final Block block, final @NotNull GameProfile gameProfile) {
+    public void setHeadTexture(final Block block, final @Nonnull GameProfile gameProfile) {
         final World world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPosition blockPosition = new BlockPosition(block.getX(), block.getY(), block.getZ());
         final TileEntitySkull skull = (TileEntitySkull) world.getTileEntity(blockPosition);

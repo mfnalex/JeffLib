@@ -4,7 +4,7 @@ import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.io.File;
 import java.io.IOException;
@@ -16,14 +16,11 @@ public final class PlayerCache {
     private static final YamlConfiguration cache;
 
     static {
-        if(JeffLib.getPlugin()==null) {
-            throw new JeffLibNotInitializedException();
-        }
         cacheFile = new File(JeffLib.getPlugin().getDataFolder(), "playercache.yml");
         cache = YamlConfiguration.loadConfiguration(cacheFile);
     }
 
-    @NotNull
+    @Nonnull
     public static String getName(final OfflinePlayer player) {
         final String name = player.getName();
         if(name!=null) {

@@ -3,8 +3,8 @@ package de.jeff_media.jefflib;
 import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,11 +22,12 @@ public final class NetUtils {
     /**
      * Downloads a URL and returns the response as String list. Blocks the main thread.
      */
-    @NotNull
+    @Nonnull
     public static List<String> downloadToStringList(final String url) throws IOException {
-        if (JeffLib.getPlugin() == null) {
+
+        /*if (JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
-        }
+        }*/
         final HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
         //noinspection HardcodedFileSeparator
         httpConnection.addRequestProperty("User-Agent", JeffLib.getPlugin().getName() + "/" + JeffLib.getPlugin().getDescription().getVersion());
@@ -42,11 +43,11 @@ public final class NetUtils {
     /**
      * Downloads a URL and returns the response as String list asynchronously.
      */
-    @NotNull
+    @Nonnull
     public static CompletableFuture<List<String>> downloadToStringListAsync(final String url) {
-        if(JeffLib.getPlugin() == null) {
+/*        if(JeffLib.getPlugin() == null) {
             throw new JeffLibNotInitializedException();
-        }
+        }*/
         final CompletableFuture<List<String>> future = new CompletableFuture<>();
         Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), () -> {
             try {
@@ -64,9 +65,9 @@ public final class NetUtils {
      */
     @Nullable
     public static String getIp() {
-        if (JeffLib.getPlugin()==null) {
+/*        if (JeffLib.getPlugin()==null) {
             throw new JeffLibNotInitializedException();
-        }
+        }*/
         try {
             final List<String> answer = downloadToStringList("https://ifconfig.me/ip");
             if(answer.isEmpty()) return null;

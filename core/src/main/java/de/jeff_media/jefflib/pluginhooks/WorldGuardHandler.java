@@ -10,17 +10,17 @@
 //import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 //import com.sk89q.worldguard.protection.regions.RegionQuery;
 //import de.jeff_media.jefflib.ReflUtils;
-//import de.jeff_media.jefflib.internal.annotations.InternalOnly;
+//import de.jeff_media.jefflib.internal.annotations.Internal;
 //import lombok.experimental.UtilityClass;
 //import org.bukkit.Location;
 //import org.bukkit.entity.Player;
-//import org.jetbrains.annotations.NotNull;
+//import javax.annotation.Nonnull;
 //
 //import java.lang.reflect.Method;
 //import java.util.ArrayList;
 //import java.util.List;
 //
-//@InternalOnly
+//@Internal
 //@UtilityClass
 //public final class WorldGuardHandler {
 //
@@ -40,7 +40,7 @@
 //        }
 //    }
 //
-//    private static ApplicableRegionSet getRegionSet(@NotNull final Location location) {
+//    private static ApplicableRegionSet getRegionSet(@Nonnull final Location location) {
 //        try {
 //            ReflUtils.getMethodCached(Class.forName("com.sk89q.worldguard.WorldGuard"),"getInstance");
 //            WorldGuard.getInstance().getPlatform().getRegionContainer();
@@ -52,8 +52,8 @@
 //        }
 //    }
 //
-//    @NotNull
-//    public static List<String> getRegionsAtLocation(@NotNull final Location location) {
+//    @Nonnull
+//    public static List<String> getRegionsAtLocation(@Nonnull final Location location) {
 //        final List<String> regionList = new ArrayList<>();
 //        final ApplicableRegionSet set = getRegionSet(location);
 //        for (final ProtectedRegion region : set.getRegions()) {
@@ -62,21 +62,21 @@
 //        return regionList;
 //    }
 //
-//    public static boolean testStateFlag(@NotNull final Player player, @NotNull final Location location, @NotNull final StateFlag flag) {
+//    public static boolean testStateFlag(@Nonnull final Player player, @Nonnull final Location location, @Nonnull final StateFlag flag) {
 //        final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
 //        final ApplicableRegionSet set = getRegionSet(location);
 //        return set.testState(localPlayer, flag);
 //    }
 //
-//    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) {
+//    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) {
 //        return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_PLACE);
 //    }
 //
-//    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) {
+//    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) {
 //        return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_BREAK);
 //    }
 //
-//    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) {
+//    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) {
 //        return testStateFlag(player, location, Flags.INTERACT);
 //    }
 //
@@ -95,27 +95,27 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import de.jeff_media.jefflib.internal.annotations.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.Internal;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@InternalOnly
+@Internal
 @UtilityClass
 final class WorldGuardHandler {
 
-    private static ApplicableRegionSet getRegionSet(@NotNull final Location location) {
+    private static ApplicableRegionSet getRegionSet(@Nonnull final Location location) {
         final RegionContainer container = WorldGuard.getInstance().getPlatform().getRegionContainer();
         final RegionQuery query = container.createQuery();
         return query.getApplicableRegions(BukkitAdapter.adapt(location));
     }
 
-    @NotNull
-    public static List<String> getRegionsAtLocation(@NotNull final Location location) {
+    @Nonnull
+    public static List<String> getRegionsAtLocation(@Nonnull final Location location) {
         final List<String> regionList = new ArrayList<>();
         final ApplicableRegionSet set = getRegionSet(location);
         for (final ProtectedRegion region : set.getRegions()) {
@@ -124,21 +124,21 @@ final class WorldGuardHandler {
         return regionList;
     }
 
-    public static boolean testStateFlag(@NotNull final Player player, @NotNull final Location location, @NotNull final StateFlag flag) {
+    public static boolean testStateFlag(@Nonnull final Player player, @Nonnull final Location location, @Nonnull final StateFlag flag) {
         final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
         final ApplicableRegionSet set = getRegionSet(location);
         return set.testState(localPlayer, flag);
     }
 
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) {
+    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) {
         return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_PLACE);
     }
 
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) {
+    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) {
         return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_BREAK);
     }
 
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) {
+    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) {
         return testStateFlag(player, location, Flags.INTERACT);
     }
 

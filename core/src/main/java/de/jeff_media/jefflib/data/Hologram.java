@@ -1,8 +1,8 @@
 package de.jeff_media.jefflib.data;
 
 import com.google.common.base.Enums;
-import de.jeff_media.jefflib.JeffLib;
 import de.jeff_media.jefflib.HologramManager;
+import de.jeff_media.jefflib.JeffLib;
 import de.jeff_media.jefflib.TextUtils;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +12,8 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -64,7 +64,7 @@ public class Hologram implements ConfigurationSerializable {
 
     @Getter
     @Setter
-    @NotNull
+    @Nonnull
     private Location location;
 
     @Getter
@@ -73,7 +73,7 @@ public class Hologram implements ConfigurationSerializable {
 
     @Getter
     @Setter
-    @NotNull
+    @Nonnull
     private List<String> lines = new ArrayList<>();
 
     @Getter
@@ -85,11 +85,11 @@ public class Hologram implements ConfigurationSerializable {
     private double visibilityRadius = VISIBILITY_RADIUS_DEFAULT;
 
     @Getter
-    @NotNull
+    @Nonnull
     private final List<OfflinePlayer> players = new ArrayList<>();
 
     @Getter
-    @NotNull
+    @Nonnull
     private final List<Object> entities = new ArrayList<>();
 
     @Override
@@ -140,7 +140,7 @@ public class Hologram implements ConfigurationSerializable {
         HologramManager.getHolograms().add(this);
     }
 
-    public static Hologram deserialize(@NotNull final Map<String,Object> map) {
+    public static Hologram deserialize(@Nonnull final Map<String,Object> map) {
         final Type type = Enums.getIfPresent(Type.class,(String) map.getOrDefault(Keys.TYPE,"ARMORSTAND")).or(Type.ARMORSTAND);
         final Hologram hologram = new Hologram(type);
         hologram.setLineOffset((double) map.getOrDefault(Keys.LINE_OFFSET,LINE_OFFSET_DEFAULT));
@@ -161,7 +161,7 @@ public class Hologram implements ConfigurationSerializable {
         return hologram;
     }
 
-    public @NotNull Map<String,Object> serialize() {
+    public @Nonnull Map<String,Object> serialize() {
         final Map<String,Object> map = new HashMap<>();
         map.put(Keys.LINE_OFFSET,lineOffset);
         map.put(Keys.LINES,lines);

@@ -3,7 +3,7 @@ package de.jeff_media.jefflib;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Arrays;
 import java.util.Iterator;
@@ -38,7 +38,7 @@ public class WordUtils {
      * @param key NamespacedKey
      * @return Human readable key name
      */
-    public static String getNiceName(@NotNull final NamespacedKey key) {
+    public static String getNiceName(@Nonnull final NamespacedKey key) {
         final String[] split = key.getKey().split("_");
         final Iterator<String> iterator = Arrays.stream(split).iterator();
         final StringBuilder builder = new StringBuilder();

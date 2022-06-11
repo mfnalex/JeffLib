@@ -6,9 +6,11 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Represents a {@link BoundingBox} linked to a {@link World}
@@ -16,15 +18,15 @@ import java.util.*;
 public class CuboidWorldBoundingBox extends WorldBoundingBox {
     @Getter
     @Setter
-    @NotNull
+    @Nonnull
     private World world;
 
     @Getter
     @Setter
-    @NotNull
+    @Nonnull
     private BoundingBox boundingBox;
 
-    public CuboidWorldBoundingBox(final @NotNull World world, final @NotNull BoundingBox boundingBox) {
+    public CuboidWorldBoundingBox(final @Nonnull World world, final @Nonnull BoundingBox boundingBox) {
         this.world = world;
         this.boundingBox = boundingBox;
     }

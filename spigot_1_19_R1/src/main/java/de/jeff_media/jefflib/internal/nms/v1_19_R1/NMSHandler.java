@@ -5,13 +5,16 @@ import de.jeff_media.jefflib.PacketUtils;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
-import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
+import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
+import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
+import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.AreaEffectCloud;
@@ -24,7 +27,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -42,18 +45,18 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
+    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final org.bukkit.entity.Player player) {
         PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
         PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(), ((Entity)entity).getEntityData(), true));
     }
 
     @Override
-    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
+    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final org.bukkit.entity.Player player) {
         PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
     }
 
     @Override
-    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
+    public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
         for(final org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(),((Entity)entity).getEntityData(),true));
@@ -61,7 +64,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public Object createHologram(@NotNull final Location location, final @NotNull String line, @NotNull final Hologram.Type type) {
+    public Object createHologram(@Nonnull final Location location, final @Nonnull String line, @Nonnull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final ServerLevel world = craftWorld.getHandle();
         final Component baseComponent = CraftChatMessage.fromString(line)[0];
@@ -92,17 +95,17 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void sendPacket(@NotNull final org.bukkit.entity.Player player, @NotNull final Object packet) {
+    public void sendPacket(@Nonnull final org.bukkit.entity.Player player, @Nonnull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
     @Override
-    public Pair<String, String> getBiomeName(@NotNull final Location location) {
+    public Pair<String, String> getBiomeName(@Nonnull final Location location) {
         return NMSBiomeUtils.getBiomeName(location);
     }
 
     @Override
-    public void playTotemAnimation(final @NotNull org.bukkit.entity.Player player) {
+    public void playTotemAnimation(final @Nonnull org.bukkit.entity.Player player) {
         final ServerPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<?> packet = new ClientboundEntityEventPacket(entityPlayer, (byte) 35);
         final Connection playerConnection = entityPlayer.connection.connection;
@@ -110,7 +113,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void setHeadTexture(final @NotNull Block block, final @NotNull GameProfile gameProfile) {
+    public void setHeadTexture(final @Nonnull Block block, final @Nonnull GameProfile gameProfile) {
         final ServerLevel world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPos blockPosition = new BlockPos(block.getX(), block.getY(), block.getZ());
         final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition,false);

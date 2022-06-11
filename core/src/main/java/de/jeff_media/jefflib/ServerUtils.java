@@ -14,6 +14,21 @@ import java.lang.reflect.Method;
 public class ServerUtils {
 
     /**
+     * Gets whether this server is running MockBukkit
+     */
+    public static boolean isRunningMockBukkit() {
+        return Bukkit.getServer().getClass().getName().equals("be.seeseemelk.mockbukkit.ServerMock");
+    }
+
+    /**
+     * Gets whether this server is running is Spigot or a fork of Spigot.
+     * @return True when running Spigot or a fork of Spigot, false if it's only CraftBukkit
+     */
+    public static boolean isRunningSpigot() {
+        return ClassUtils.exists("net.md_5.bungee.api.ChatColor");
+    }
+
+    /**
      * Represents the server's current life phase
      */
     public enum ServerLifePhase {

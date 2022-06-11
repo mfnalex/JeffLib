@@ -1,12 +1,11 @@
 package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.data.tuples.Pair;
-import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import de.jeff_media.jefflib.internal.annotations.NeedsNMS;
+import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 /**
  * Biome related methods
@@ -19,9 +18,8 @@ public class BiomeUtils {
      * @param location Location to check
      * @return NamespacedKey containing the proper biome name
      */
-    @NeedsNMS
-    public NamespacedKey getBiomeNamespacedKey(@NotNull final Location location) {
-        NMSNotSupportedException.check();
+    @RequiresNMS
+    public NamespacedKey getBiomeNamespacedKey(@Nonnull final Location location) {
         final Pair<String,String> keyPair = JeffLib.getNMSHandler().getBiomeName(location);
         return NamespacedKey.fromString(keyPair.getFirst()+":"+keyPair.getSecond());
     }

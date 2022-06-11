@@ -1,40 +1,42 @@
 package de.jeff_media.jefflib.pluginhooks;
 
 import de.jeff_media.jefflib.JeffLib;
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
-import de.jeff_media.jefflib.internal.annotations.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.Internal;
+import de.jeff_media.jefflib.internal.annotations.RequiresPlugin;
 import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+/**
+ * PlaceholderAPI related methods
+ * @plugin PlaceholderAPI
+ * @internal
+ */
 @UtilityClass
-@InternalOnly
+@Internal
+@RequiresPlugin("PlaceholderAPI")
 public final class PlaceholderAPIHandler {
 
     private static AnonymousPlaceholderExpansion expansion;
 
     private static void init() {
-        if(JeffLib.getPlugin()==null) {
-            throw new JeffLibNotInitializedException();
-        }
-
         if(expansion == null) {
             expansion = new AnonymousPlaceholderExpansion();
             expansion.register();
         }
     }
 
-    public static void register(@NotNull final BiFunction<OfflinePlayer, String, String> function) {
+    public static void register(@Nonnull final BiFunction<OfflinePlayer, String, String> function) {
         init();
         expansion.biFunctions.add(function);
     }
 
-    public static void register(@NotNull final String placeholder, @NotNull final Function<OfflinePlayer, String> function) {
+    public static void register(@Nonnull final String placeholder, @Nonnull final Function<OfflinePlayer, String> function) {
         init();
         expansion.functions.put(placeholder, function);
     }
@@ -50,17 +52,17 @@ public final class PlaceholderAPIHandler {
         private final Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
-        public @NotNull String getIdentifier() {
+        public @Nonnull String getIdentifier() {
             return JeffLib.getPlugin().getName().toLowerCase(Locale.ROOT);
         }
 
         @Override
-        public @NotNull String getAuthor() {
+        public @Nonnull String getAuthor() {
             return JeffLib.getPlugin().getDescription().getAuthors().isEmpty() ? "" : JeffLib.getPlugin().getDescription().getAuthors().get(0);
         }
 
         @Override
-        public String onRequest(final OfflinePlayer player, @NotNull final String params) {
+        public String onRequest(final OfflinePlayer player, @Nonnull final String params) {
             final Function<OfflinePlayer, String> function = functions.get(params);
             if(function != null) {
                 return function.apply(player);
@@ -73,7 +75,7 @@ public final class PlaceholderAPIHandler {
         }
 
         @Override
-        public @NotNull String getVersion() {
+        public @Nonnull String getVersion() {
             return JeffLib.getPlugin().getDescription().getVersion();
         }
     }

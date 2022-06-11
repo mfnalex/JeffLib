@@ -1,11 +1,11 @@
 package de.jeff_media.jefflib.pluginhooks;
 
-import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import de.jeff_media.jefflib.PluginUtils;
+import de.jeff_media.jefflib.exceptions.MissingPluginException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 import java.util.Collection;
 
@@ -31,7 +31,7 @@ public class WorldGuardUtils {
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
      */
-    public static @NotNull Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
+    public static @Nonnull Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.getRegionsAtLocation(location);
         } catch (final Throwable t) {
@@ -63,7 +63,7 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canPlace(player, location);
         } catch (final Throwable t) {
@@ -71,7 +71,7 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canInteract(player, location);
         } catch (final Throwable t) {
@@ -79,7 +79,7 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
+    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canBreak(player, location);
         } catch (final Throwable t) {

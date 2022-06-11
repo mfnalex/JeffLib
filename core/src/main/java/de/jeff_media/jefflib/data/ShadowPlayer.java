@@ -31,8 +31,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.net.InetSocketAddress;
 import java.util.*;
@@ -44,11 +44,11 @@ public class ShadowPlayer implements Player {
 
     private final Player player;
 
-    public ShadowPlayer(@NotNull final Player player) {
+    public ShadowPlayer(@Nonnull final Player player) {
         this.player = player;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getDisplayName() {
         return player.getDisplayName();
@@ -59,7 +59,7 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getPlayerListName() {
         return player.getPlayerListName();
@@ -98,11 +98,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setCompassTarget(@NotNull final Location location) {
+    public void setCompassTarget(@Nonnull final Location location) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Location getCompassTarget() {
         return player.getCompassTarget();
@@ -120,32 +120,32 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void acceptConversationInput(@NotNull final String s) {
+    public void acceptConversationInput(@Nonnull final String s) {
 
     }
 
     @Override
-    public boolean beginConversation(@NotNull final Conversation conversation) {
+    public boolean beginConversation(@Nonnull final Conversation conversation) {
         return false;
     }
 
     @Override
-    public void abandonConversation(@NotNull final Conversation conversation) {
+    public void abandonConversation(@Nonnull final Conversation conversation) {
 
     }
 
     @Override
-    public void abandonConversation(@NotNull final Conversation conversation, @NotNull final ConversationAbandonedEvent conversationAbandonedEvent) {
+    public void abandonConversation(@Nonnull final Conversation conversation, @Nonnull final ConversationAbandonedEvent conversationAbandonedEvent) {
 
     }
 
     @Override
-    public void sendRawMessage(@NotNull final String s) {
+    public void sendRawMessage(@Nonnull final String s) {
 
     }
 
     @Override
-    public void sendRawMessage(@Nullable final UUID uuid, @NotNull final String s) {
+    public void sendRawMessage(@Nullable final UUID uuid, @Nonnull final String s) {
 
     }
 
@@ -155,16 +155,16 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void chat(@NotNull final String s) {
+    public void chat(@Nonnull final String s) {
 
     }
 
     @Override
-    public boolean performCommand(@NotNull final String s) {
+    public boolean performCommand(@Nonnull final String s) {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Location getLocation() {
         return player.getLocation();
@@ -177,11 +177,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setVelocity(@NotNull final Vector vector) {
+    public void setVelocity(@Nonnull final Vector vector) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Vector getVelocity() {
         return player.getVelocity();
@@ -197,7 +197,7 @@ public class ShadowPlayer implements Player {
         return player.getWidth();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public BoundingBox getBoundingBox() {
         return player.getBoundingBox();
@@ -213,7 +213,7 @@ public class ShadowPlayer implements Player {
         return player.isInWater();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public World getWorld() {
         return player.getWorld();
@@ -225,26 +225,26 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean teleport(@NotNull final Location location) {
+    public boolean teleport(@Nonnull final Location location) {
         return false;
     }
 
     @Override
-    public boolean teleport(@NotNull final Location location, @NotNull final PlayerTeleportEvent.TeleportCause teleportCause) {
+    public boolean teleport(@Nonnull final Location location, @Nonnull final PlayerTeleportEvent.TeleportCause teleportCause) {
         return false;
     }
 
     @Override
-    public boolean teleport(@NotNull final Entity entity) {
+    public boolean teleport(@Nonnull final Entity entity) {
         return false;
     }
 
     @Override
-    public boolean teleport(@NotNull final Entity entity, @NotNull final PlayerTeleportEvent.TeleportCause teleportCause) {
+    public boolean teleport(@Nonnull final Entity entity, @Nonnull final PlayerTeleportEvent.TeleportCause teleportCause) {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public List<Entity> getNearbyEntities(final double v, final double v1, final double v2) {
         return player.getNearbyEntities(v,v1,v2);
@@ -316,26 +316,26 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void sendMessage(@NotNull final String s) {
+    public void sendMessage(@Nonnull final String s) {
 
     }
 
     @Override
-    public void sendMessage(@NotNull final String[] strings) {
+    public void sendMessage(@Nonnull final String[] strings) {
 
     }
 
     @Override
-    public void sendMessage(@Nullable final UUID uuid, @NotNull final String s) {
+    public void sendMessage(@Nullable final UUID uuid, @Nonnull final String s) {
 
     }
 
     @Override
-    public void sendMessage(@Nullable final UUID uuid, @NotNull final String[] strings) {
+    public void sendMessage(@Nullable final UUID uuid, @Nonnull final String[] strings) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Server getServer() {
         return player.getServer();
@@ -358,23 +358,23 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean setPassenger(@NotNull final Entity entity) {
+    public boolean setPassenger(@Nonnull final Entity entity) {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public List<Entity> getPassengers() {
         return player.getPassengers();
     }
 
     @Override
-    public boolean addPassenger(@NotNull final Entity entity) {
+    public boolean addPassenger(@Nonnull final Entity entity) {
         return false;
     }
 
     @Override
-    public boolean removePassenger(@NotNull final Entity entity) {
+    public boolean removePassenger(@Nonnull final Entity entity) {
         return false;
     }
 
@@ -409,13 +409,13 @@ public class ShadowPlayer implements Player {
         return player.getLastDamageCause();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public UUID getUniqueId() {
         return player.getUniqueId();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PlayerProfile getPlayerProfile() {
         return player.getPlayerProfile();
@@ -432,11 +432,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void playEffect(@NotNull final EntityEffect entityEffect) {
+    public void playEffect(@Nonnull final EntityEffect entityEffect) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public EntityType getType() {
         return player.getType();
@@ -518,41 +518,41 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Set<String> getScoreboardTags() {
         return player.getScoreboardTags();
     }
 
     @Override
-    public boolean addScoreboardTag(@NotNull final String s) {
+    public boolean addScoreboardTag(@Nonnull final String s) {
         return false;
     }
 
     @Override
-    public boolean removeScoreboardTag(@NotNull final String s) {
+    public boolean removeScoreboardTag(@Nonnull final String s) {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PistonMoveReaction getPistonMoveReaction() {
         return player.getPistonMoveReaction();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public BlockFace getFacing() {
         return player.getFacing();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Pose getPose() {
         return player.getPose();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public SpawnCategory getSpawnCategory() {
         return player.getSpawnCategory();
@@ -646,92 +646,92 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic) throws IllegalArgumentException {
+    public void decrementStatistic(@Nonnull final Statistic statistic) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic, final int i) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic, final int i) throws IllegalArgumentException {
+    public void decrementStatistic(@Nonnull final Statistic statistic, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void setStatistic(@NotNull final Statistic statistic, final int i) throws IllegalArgumentException {
+    public void setStatistic(@Nonnull final Statistic statistic, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public int getStatistic(@NotNull final Statistic statistic) throws IllegalArgumentException {
+    public int getStatistic(@Nonnull final Statistic statistic) throws IllegalArgumentException {
         return player.getStatistic(statistic);
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic, @NotNull final Material material) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic, @NotNull final Material material) throws IllegalArgumentException {
+    public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
 
     }
 
     @Override
-    public int getStatistic(@NotNull final Statistic statistic, @NotNull final Material material) throws IllegalArgumentException {
+    public int getStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
         return player.getStatistic(statistic, material);
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic, @NotNull final Material material, final int i) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic, @NotNull final Material material, final int i) throws IllegalArgumentException {
+    public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void setStatistic(@NotNull final Statistic statistic, @NotNull final Material material, final int i) throws IllegalArgumentException {
+    public void setStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType) throws IllegalArgumentException {
+    public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
 
     }
 
     @Override
-    public int getStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType) throws IllegalArgumentException {
+    public int getStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
         return player.getStatistic(statistic, entityType);
     }
 
     @Override
-    public void incrementStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType, final int i) throws IllegalArgumentException {
+    public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void decrementStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType, final int i) {
+    public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) {
 
     }
 
     @Override
-    public void setStatistic(@NotNull final Statistic statistic, @NotNull final EntityType entityType, final int i) {
+    public void setStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) {
 
     }
 
@@ -746,62 +746,62 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void playNote(@NotNull final Location location, final byte b, final byte b1) {
+    public void playNote(@Nonnull final Location location, final byte b, final byte b1) {
 
     }
 
     @Override
-    public void playNote(@NotNull final Location location, @NotNull final Instrument instrument, @NotNull final Note note) {
+    public void playNote(@Nonnull final Location location, @Nonnull final Instrument instrument, @Nonnull final Note note) {
 
     }
 
     @Override
-    public void playSound(@NotNull final Location location, @NotNull final Sound sound, final float v, final float v1) {
+    public void playSound(@Nonnull final Location location, @Nonnull final Sound sound, final float v, final float v1) {
 
     }
 
     @Override
-    public void playSound(@NotNull final Location location, @NotNull final String s, final float v, final float v1) {
+    public void playSound(@Nonnull final Location location, @Nonnull final String s, final float v, final float v1) {
 
     }
 
     @Override
-    public void playSound(@NotNull final Location location, @NotNull final Sound sound, @NotNull final SoundCategory soundCategory, final float v, final float v1) {
+    public void playSound(@Nonnull final Location location, @Nonnull final Sound sound, @Nonnull final SoundCategory soundCategory, final float v, final float v1) {
 
     }
 
     @Override
-    public void playSound(@NotNull final Location location, @NotNull final String s, @NotNull final SoundCategory soundCategory, final float v, final float v1) {
+    public void playSound(@Nonnull final Location location, @Nonnull final String s, @Nonnull final SoundCategory soundCategory, final float v, final float v1) {
 
     }
 
     @Override
-    public void playSound(@NotNull Entity entity, @NotNull Sound sound, float volume, float pitch) {
+    public void playSound(@Nonnull Entity entity, @Nonnull Sound sound, float volume, float pitch) {
 
     }
 
     @Override
-    public void playSound(@NotNull Entity entity, @NotNull Sound sound, @NotNull SoundCategory category, float volume, float pitch) {
+    public void playSound(@Nonnull Entity entity, @Nonnull Sound sound, @Nonnull SoundCategory category, float volume, float pitch) {
 
     }
 
     @Override
-    public void stopSound(@NotNull final Sound sound) {
+    public void stopSound(@Nonnull final Sound sound) {
 
     }
 
     @Override
-    public void stopSound(@NotNull final String s) {
+    public void stopSound(@Nonnull final String s) {
 
     }
 
     @Override
-    public void stopSound(@NotNull final Sound sound, @Nullable final SoundCategory soundCategory) {
+    public void stopSound(@Nonnull final Sound sound, @Nullable final SoundCategory soundCategory) {
 
     }
 
     @Override
-    public void stopSound(@NotNull final String s, @Nullable final SoundCategory soundCategory) {
+    public void stopSound(@Nonnull final String s, @Nullable final SoundCategory soundCategory) {
 
     }
 
@@ -811,63 +811,63 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void playEffect(@NotNull final Location location, @NotNull final Effect effect, final int i) {
+    public void playEffect(@Nonnull final Location location, @Nonnull final Effect effect, final int i) {
 
     }
 
     @Override
-    public <T> void playEffect(@NotNull final Location location, @NotNull final Effect effect, @Nullable final T t) {
+    public <T> void playEffect(@Nonnull final Location location, @Nonnull final Effect effect, @Nullable final T t) {
 
     }
 
     @Override
-    public boolean breakBlock(@NotNull final Block block) {
+    public boolean breakBlock(@Nonnull final Block block) {
         return false;
     }
 
     @Override
-    public void sendBlockChange(@NotNull final Location location, @NotNull final Material material, final byte b) {
+    public void sendBlockChange(@Nonnull final Location location, @Nonnull final Material material, final byte b) {
 
     }
 
     @Override
-    public void sendBlockChange(@NotNull final Location location, @NotNull final BlockData blockData) {
+    public void sendBlockChange(@Nonnull final Location location, @Nonnull final BlockData blockData) {
 
     }
 
     @Override
-    public void sendBlockDamage(@NotNull final Location location, final float v) {
+    public void sendBlockDamage(@Nonnull final Location location, final float v) {
 
     }
 
     @Override
-    public void sendEquipmentChange(@NotNull final LivingEntity livingEntity, @NotNull final EquipmentSlot equipmentSlot, @NotNull final ItemStack itemStack) {
+    public void sendEquipmentChange(@Nonnull final LivingEntity livingEntity, @Nonnull final EquipmentSlot equipmentSlot, @Nonnull final ItemStack itemStack) {
 
     }
 
     // No Override, was removed in 1.18
     @SuppressWarnings("MethodMayBeStatic")
-    public boolean sendChunkChange(@NotNull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
+    public boolean sendChunkChange(@Nonnull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
         return false;
     }
 
     @Override
-    public void sendSignChange(@NotNull final Location location, @Nullable final String[] strings) throws IllegalArgumentException {
+    public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void sendSignChange(@NotNull final Location location, @Nullable final String[] strings, @NotNull final DyeColor dyeColor) throws IllegalArgumentException {
+    public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings, @Nonnull final DyeColor dyeColor) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void sendSignChange(@NotNull final Location location, @Nullable final String[] strings, @NotNull final DyeColor dyeColor, final boolean b) throws IllegalArgumentException {
+    public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings, @Nonnull final DyeColor dyeColor, final boolean b) throws IllegalArgumentException {
 
     }
 
     @Override
-    public void sendMap(@NotNull final MapView mapView) {
+    public void sendMap(@Nonnull final MapView mapView) {
 
     }
 
@@ -908,7 +908,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setPlayerWeather(@NotNull final WeatherType weatherType) {
+    public void setPlayerWeather(@Nonnull final WeatherType weatherType) {
 
     }
 
@@ -984,39 +984,39 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void hidePlayer(@NotNull final Player player) {
+    public void hidePlayer(@Nonnull final Player player) {
 
     }
 
     @Override
-    public void hidePlayer(@NotNull final Plugin plugin, @NotNull final Player player) {
+    public void hidePlayer(@Nonnull final Plugin plugin, @Nonnull final Player player) {
 
     }
 
     @Override
-    public void showPlayer(@NotNull final Player player) {
+    public void showPlayer(@Nonnull final Player player) {
 
     }
 
     @Override
-    public void showPlayer(@NotNull final Plugin plugin, @NotNull final Player player) {
+    public void showPlayer(@Nonnull final Plugin plugin, @Nonnull final Player player) {
 
     }
 
     @Override
-    public boolean canSee(@NotNull final Player player) {
+    public boolean canSee(@Nonnull final Player player) {
         return this.player.canSee(player);
     }
 
-    public void hideEntity(@NotNull final Plugin plugin, @NotNull Entity entity) {
+    public void hideEntity(@Nonnull final Plugin plugin, @Nonnull Entity entity) {
 
     }
 
-    public void showEntity(@NotNull final Plugin plugin, @NotNull Entity entity) {
+    public void showEntity(@Nonnull final Plugin plugin, @Nonnull Entity entity) {
 
     }
 
-    public boolean canSee(@NotNull final Entity entity) {
+    public boolean canSee(@Nonnull final Entity entity) {
         return player.canSee(entity);
     }
 
@@ -1051,43 +1051,43 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setTexturePack(@NotNull final String s) {
+    public void setTexturePack(@Nonnull final String s) {
 
     }
 
     @Override
-    public void setResourcePack(@NotNull final String s) {
+    public void setResourcePack(@Nonnull final String s) {
 
     }
 
     @Override
-    public void setResourcePack(@NotNull final String s, final byte[] bytes) {
+    public void setResourcePack(@Nonnull final String s, final byte[] bytes) {
 
     }
 
     @Override
-    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt) {
+    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, @Nullable String prompt) {
 
     }
 
     @Override
-    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, boolean force) {
+    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, boolean force) {
 
     }
 
     @Override
-    public void setResourcePack(@NotNull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
+    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Scoreboard getScoreboard() {
         return player.getScoreboard();
     }
 
     @Override
-    public void setScoreboard(@NotNull final Scoreboard scoreboard) throws IllegalArgumentException, IllegalStateException {
+    public void setScoreboard(@Nonnull final Scoreboard scoreboard) throws IllegalArgumentException, IllegalStateException {
 
     }
 
@@ -1149,68 +1149,68 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i) {
+    public void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i) {
 
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i) {
+    public void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i, @Nullable final T t) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i, @Nullable final T t) {
 
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i, final double v, final double v1, final double v2) {
+    public void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i, final double v, final double v1, final double v2) {
 
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5) {
+    public void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i, final double v, final double v1, final double v2, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i, final double v, final double v1, final double v2, @Nullable final T t) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, @Nullable final T t) {
 
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i, final double v, final double v1, final double v2, final double v3) {
+    public void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i, final double v, final double v1, final double v2, final double v3) {
 
     }
 
     @Override
-    public void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, final double v6) {
+    public void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, final double v6) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, @NotNull final Location location, final int i, final double v, final double v1, final double v2, final double v3, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, @Nonnull final Location location, final int i, final double v, final double v1, final double v2, final double v3, @Nullable final T t) {
 
     }
 
     @Override
-    public <T> void spawnParticle(@NotNull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, final double v6, @Nullable final T t) {
+    public <T> void spawnParticle(@Nonnull final Particle particle, final double v, final double v1, final double v2, final int i, final double v3, final double v4, final double v5, final double v6, @Nullable final T t) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public AdvancementProgress getAdvancementProgress(@NotNull final Advancement advancement) {
+    public AdvancementProgress getAdvancementProgress(@Nonnull final Advancement advancement) {
         return player.getAdvancementProgress(advancement);
     }
 
@@ -1224,7 +1224,7 @@ public class ShadowPlayer implements Player {
         return player.getPing();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getLocale() {
         return player.getLocale();
@@ -1236,11 +1236,11 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void openBook(@NotNull final ItemStack itemStack) {
+    public void openBook(@Nonnull final ItemStack itemStack) {
 
     }
 
-    public void openSign(@NotNull final Sign sign) {
+    public void openSign(@Nonnull final Sign sign) {
 
     }
 
@@ -1254,48 +1254,48 @@ public class ShadowPlayer implements Player {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Spigot spigot() {
         return player.spigot();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Map<String, Object> serialize() {
         return player.serialize();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public String getName() {
         return player.getName();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PlayerInventory getInventory() {
         return player.getInventory();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Inventory getEnderChest() {
         return player.getEnderChest();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public MainHand getMainHand() {
         return player.getMainHand();
     }
 
     @Override
-    public boolean setWindowProperty(@NotNull final InventoryView.Property property, final int i) {
+    public boolean setWindowProperty(@Nonnull final InventoryView.Property property, final int i) {
         return false;
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public InventoryView getOpenInventory() {
         return player.getOpenInventory();
@@ -1303,7 +1303,7 @@ public class ShadowPlayer implements Player {
 
     @Nullable
     @Override
-    public InventoryView openInventory(@NotNull final Inventory inventory) {
+    public InventoryView openInventory(@Nonnull final Inventory inventory) {
         return null;
     }
 
@@ -1320,19 +1320,19 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void openInventory(@NotNull final InventoryView inventoryView) {
+    public void openInventory(@Nonnull final InventoryView inventoryView) {
 
     }
 
     @Nullable
     @Override
-    public InventoryView openMerchant(@NotNull final Villager villager, final boolean b) {
+    public InventoryView openMerchant(@Nonnull final Villager villager, final boolean b) {
         return null;
     }
 
     @Nullable
     @Override
-    public InventoryView openMerchant(@NotNull final Merchant merchant, final boolean b) {
+    public InventoryView openMerchant(@Nonnull final Merchant merchant, final boolean b) {
         return null;
     }
 
@@ -1341,7 +1341,7 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public ItemStack getItemInHand() {
         return player.getItemInHand();
@@ -1352,7 +1352,7 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public ItemStack getItemOnCursor() {
         return player.getItemOnCursor();
@@ -1364,17 +1364,17 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean hasCooldown(@NotNull final Material material) {
+    public boolean hasCooldown(@Nonnull final Material material) {
         return player.hasCooldown(material);
     }
 
     @Override
-    public int getCooldown(@NotNull final Material material) {
+    public int getCooldown(@Nonnull final Material material) {
         return player.getCooldown(material);
     }
 
     @Override
-    public void setCooldown(@NotNull final Material material, final int i) {
+    public void setCooldown(@Nonnull final Material material, final int i) {
 
     }
 
@@ -1384,7 +1384,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean sleep(@NotNull final Location location, final boolean b) {
+    public boolean sleep(@Nonnull final Location location, final boolean b) {
         return false;
     }
 
@@ -1393,20 +1393,20 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Location getBedLocation() {
         return player.getBedLocation();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public GameMode getGameMode() {
         return player.getGameMode();
     }
 
     @Override
-    public void setGameMode(@NotNull final GameMode gameMode) {
+    public void setGameMode(@Nonnull final GameMode gameMode) {
 
     }
 
@@ -1437,31 +1437,31 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean discoverRecipe(@NotNull final NamespacedKey namespacedKey) {
+    public boolean discoverRecipe(@Nonnull final NamespacedKey namespacedKey) {
         return false;
     }
 
     @Override
-    public int discoverRecipes(@NotNull final Collection<NamespacedKey> collection) {
+    public int discoverRecipes(@Nonnull final Collection<NamespacedKey> collection) {
         return 0;
     }
 
     @Override
-    public boolean undiscoverRecipe(@NotNull final NamespacedKey namespacedKey) {
+    public boolean undiscoverRecipe(@Nonnull final NamespacedKey namespacedKey) {
         return false;
     }
 
     @Override
-    public int undiscoverRecipes(@NotNull final Collection<NamespacedKey> collection) {
+    public int undiscoverRecipes(@Nonnull final Collection<NamespacedKey> collection) {
         return 0;
     }
 
     @Override
-    public boolean hasDiscoveredRecipe(@NotNull final NamespacedKey namespacedKey) {
+    public boolean hasDiscoveredRecipe(@Nonnull final NamespacedKey namespacedKey) {
         return player.hasDiscoveredRecipe(namespacedKey);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Set<NamespacedKey> getDiscoveredRecipes() {
         return player.getDiscoveredRecipes();
@@ -1554,6 +1554,17 @@ public class ShadowPlayer implements Player {
 
     }
 
+    @Nullable
+    @Override
+    public Location getLastDeathLocation() {
+        return player.getLastDeathLocation();
+    }
+
+    @Override
+    public void setLastDeathLocation(@Nullable Location location) {
+
+    }
+
     @Override
     public double getEyeHeight() {
         return player.getEyeHeight();
@@ -1564,25 +1575,25 @@ public class ShadowPlayer implements Player {
         return player.getEyeHeight(b);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Location getEyeLocation() {
         return player.getEyeLocation();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public List<Block> getLineOfSight(@Nullable final Set<Material> set, final int i) {
         return player.getLineOfSight(set, i);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Block getTargetBlock(@Nullable final Set<Material> set, final int i) {
         return player.getTargetBlock(set, i);
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public List<Block> getLastTwoTargetBlocks(@Nullable final Set<Material> set, final int i) {
         return player.getLastTwoTargetBlocks(set, i);
@@ -1596,7 +1607,7 @@ public class ShadowPlayer implements Player {
 
     @Nullable
     @Override
-    public Block getTargetBlockExact(final int i, @NotNull final FluidCollisionMode fluidCollisionMode) {
+    public Block getTargetBlockExact(final int i, @Nonnull final FluidCollisionMode fluidCollisionMode) {
         return player.getTargetBlockExact(i, fluidCollisionMode);
     }
 
@@ -1608,7 +1619,7 @@ public class ShadowPlayer implements Player {
 
     @Nullable
     @Override
-    public RayTraceResult rayTraceBlocks(final double v, @NotNull final FluidCollisionMode fluidCollisionMode) {
+    public RayTraceResult rayTraceBlocks(final double v, @Nonnull final FluidCollisionMode fluidCollisionMode) {
         return player.rayTraceBlocks(v, fluidCollisionMode);
     }
 
@@ -1689,44 +1700,44 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public boolean addPotionEffect(@NotNull final PotionEffect potionEffect) {
+    public boolean addPotionEffect(@Nonnull final PotionEffect potionEffect) {
         return false;
     }
 
     @Override
-    public boolean addPotionEffect(@NotNull final PotionEffect potionEffect, final boolean b) {
+    public boolean addPotionEffect(@Nonnull final PotionEffect potionEffect, final boolean b) {
         return false;
     }
 
     @Override
-    public boolean addPotionEffects(@NotNull final Collection<PotionEffect> collection) {
+    public boolean addPotionEffects(@Nonnull final Collection<PotionEffect> collection) {
         return false;
     }
 
     @Override
-    public boolean hasPotionEffect(@NotNull final PotionEffectType potionEffectType) {
+    public boolean hasPotionEffect(@Nonnull final PotionEffectType potionEffectType) {
         return player.hasPotionEffect(potionEffectType);
     }
 
     @Nullable
     @Override
-    public PotionEffect getPotionEffect(@NotNull final PotionEffectType potionEffectType) {
+    public PotionEffect getPotionEffect(@Nonnull final PotionEffectType potionEffectType) {
         return player.getPotionEffect(potionEffectType);
     }
 
     @Override
-    public void removePotionEffect(@NotNull final PotionEffectType potionEffectType) {
+    public void removePotionEffect(@Nonnull final PotionEffectType potionEffectType) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         return player.getActivePotionEffects();
     }
 
     @Override
-    public boolean hasLineOfSight(@NotNull final Entity entity) {
+    public boolean hasLineOfSight(@Nonnull final Entity entity) {
         return player.hasLineOfSight(entity);
     }
 
@@ -1761,7 +1772,7 @@ public class ShadowPlayer implements Player {
         return player.isLeashed();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Entity getLeashHolder() throws IllegalStateException {
         return player.getLeashHolder();
@@ -1818,7 +1829,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void attack(@NotNull final Entity entity) {
+    public void attack(@Nonnull final Entity entity) {
 
     }
 
@@ -1842,7 +1853,7 @@ public class ShadowPlayer implements Player {
         return player.isCollidable();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Set<UUID> getCollidableExemptions() {
         return player.getCollidableExemptions();
@@ -1850,16 +1861,16 @@ public class ShadowPlayer implements Player {
 
     @Nullable
     @Override
-    public <T> T getMemory(@NotNull final MemoryKey<T> memoryKey) {
+    public <T> T getMemory(@Nonnull final MemoryKey<T> memoryKey) {
         return player.getMemory(memoryKey);
     }
 
     @Override
-    public <T> void setMemory(@NotNull final MemoryKey<T> memoryKey, @Nullable final T t) {
+    public <T> void setMemory(@Nonnull final MemoryKey<T> memoryKey, @Nullable final T t) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public EntityCategory getCategory() {
         return player.getCategory();
@@ -1877,7 +1888,7 @@ public class ShadowPlayer implements Player {
 
     @Nullable
     @Override
-    public AttributeInstance getAttribute(@NotNull final Attribute attribute) {
+    public AttributeInstance getAttribute(@Nonnull final Attribute attribute) {
         return player.getAttribute(attribute);
     }
 
@@ -1938,72 +1949,72 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setMetadata(@NotNull final String s, @NotNull final MetadataValue metadataValue) {
+    public void setMetadata(@Nonnull final String s, @Nonnull final MetadataValue metadataValue) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public List<MetadataValue> getMetadata(@NotNull final String s) {
+    public List<MetadataValue> getMetadata(@Nonnull final String s) {
         return player.getMetadata(s);
     }
 
     @Override
-    public boolean hasMetadata(@NotNull final String s) {
+    public boolean hasMetadata(@Nonnull final String s) {
         return player.hasMetadata(s);
     }
 
     @Override
-    public void removeMetadata(@NotNull final String s, @NotNull final Plugin plugin) {
+    public void removeMetadata(@Nonnull final String s, @Nonnull final Plugin plugin) {
 
     }
 
     @Override
-    public boolean isPermissionSet(@NotNull final String s) {
+    public boolean isPermissionSet(@Nonnull final String s) {
         return player.isPermissionSet(s);
     }
 
     @Override
-    public boolean isPermissionSet(@NotNull final Permission permission) {
+    public boolean isPermissionSet(@Nonnull final Permission permission) {
         return player.isPermissionSet(permission);
     }
 
     @Override
-    public boolean hasPermission(@NotNull final String s) {
+    public boolean hasPermission(@Nonnull final String s) {
         return player.hasPermission(s);
     }
 
     @Override
-    public boolean hasPermission(@NotNull final Permission permission) {
+    public boolean hasPermission(@Nonnull final Permission permission) {
         return player.hasPermission(permission);
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PermissionAttachment addAttachment(@NotNull final Plugin plugin, @NotNull final String s, final boolean b) {
+    public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, @Nonnull final String s, final boolean b) {
         return player.addAttachment(plugin, s, b);
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public PermissionAttachment addAttachment(@NotNull final Plugin plugin) {
+    public PermissionAttachment addAttachment(@Nonnull final Plugin plugin) {
         return player.addAttachment(plugin);
     }
 
     @Nullable
     @Override
-    public PermissionAttachment addAttachment(@NotNull final Plugin plugin, @NotNull final String s, final boolean b, final int i) {
+    public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, @Nonnull final String s, final boolean b, final int i) {
         return null;
     }
 
     @Nullable
     @Override
-    public PermissionAttachment addAttachment(@NotNull final Plugin plugin, final int i) {
+    public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, final int i) {
         return null;
     }
 
     @Override
-    public void removeAttachment(@NotNull final PermissionAttachment permissionAttachment) {
+    public void removeAttachment(@Nonnull final PermissionAttachment permissionAttachment) {
 
     }
 
@@ -2012,7 +2023,7 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return player.getEffectivePermissions();
@@ -2028,32 +2039,32 @@ public class ShadowPlayer implements Player {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public PersistentDataContainer getPersistentDataContainer() {
         return player.getPersistentDataContainer();
     }
 
     @Override
-    public void sendPluginMessage(@NotNull final Plugin plugin, @NotNull final String s, final byte[] bytes) {
+    public void sendPluginMessage(@Nonnull final Plugin plugin, @Nonnull final String s, final byte[] bytes) {
 
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Set<String> getListeningPluginChannels() {
         return player.getListeningPluginChannels();
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public <T extends Projectile> T launchProjectile(@NotNull final Class<? extends T> aClass) {
+    public <T extends Projectile> T launchProjectile(@Nonnull final Class<? extends T> aClass) {
         return player.launchProjectile(aClass);
     }
 
-    @NotNull
+    @Nonnull
     @Override
-    public <T extends Projectile> T launchProjectile(@NotNull final Class<? extends T> aClass, @Nullable final Vector vector) {
+    public <T extends Projectile> T launchProjectile(@Nonnull final Class<? extends T> aClass, @Nullable final Vector vector) {
         return player.launchProjectile(aClass, vector);
     }
 }

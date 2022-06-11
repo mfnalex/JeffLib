@@ -7,12 +7,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
@@ -38,7 +37,7 @@ public final class InventoryUtils {
     /**
      * Counts how many times the given ItemStack is present in the given array
      */
-    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final ItemStack item) {
+    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
         Arrays.stream(array)
                 .filter(itemStack -> itemStack.isSimilar(item))
@@ -49,7 +48,7 @@ public final class InventoryUtils {
     /**
      * Counts how many times the given Material is present in the given array
      */
-    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final Material material) {
+    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
         Arrays.stream(array)
                 .filter(candidate -> candidate.getType() == material)
@@ -60,7 +59,7 @@ public final class InventoryUtils {
     /**
      * Counts how many times the given ItemStack is present in the given inventory
      */
-    public static int countItemStacks(@NotNull final Inventory inventory, @NotNull final ItemStack item) {
+    public static int countItemStacks(@Nonnull final Inventory inventory, @Nonnull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
         Arrays.stream(inventory.getContents())
                 .filter(itemStack -> itemStack.isSimilar(item))
@@ -71,7 +70,7 @@ public final class InventoryUtils {
     /**
      * Counts how many times the given Material is present in the given inventory
      */
-    public static int countMaterials(@NotNull final Inventory inventory, @NotNull final Material material) {
+    public static int countMaterials(@Nonnull final Inventory inventory, @Nonnull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
         inventory.all(material).values()
                 .forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
@@ -85,7 +84,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @NotNull Player player, final @Nullable Location dropLocation, final @NotNull Iterable<ItemStack> items) {
+    public static boolean addOrDrop(final @Nonnull Player player, final @Nullable Location dropLocation, final @Nonnull Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for(final ItemStack item : items) {
             for(ItemStack leftover : player.getInventory().addItem(item).values()) {
@@ -102,7 +101,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@NotNull final Player player, @NotNull final Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final Iterable<ItemStack> items) {
         return addOrDrop(player, player.getLocation(), items);
     }
 
@@ -113,7 +112,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @NotNull Player player, final @Nullable Location dropLocation, final @NotNull ItemStack... items) {
+    public static boolean addOrDrop(final @Nonnull Player player, final @Nullable Location dropLocation, final @Nonnull ItemStack... items) {
         return addOrDrop(player, dropLocation, Arrays.asList(items));
     }
 
@@ -123,7 +122,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @NotNull Player player, final @NotNull ItemStack... items) {
+    public static boolean addOrDrop(final @Nonnull Player player, final @Nonnull ItemStack... items) {
         return addOrDrop(player, player.getLocation(), Arrays.asList(items));
     }
 

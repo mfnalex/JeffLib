@@ -2,7 +2,6 @@ package de.jeff_media.jefflib.data.worldboundingbox;
 
 import de.jeff_media.jefflib.LocationUtils;
 import de.jeff_media.jefflib.exceptions.InvalidRegionDefinitionException;
-import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -10,8 +9,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -21,13 +20,13 @@ import java.util.Map;
 
 public abstract class WorldBoundingBox implements ConfigurationSerializable {
 
-    @NotNull abstract World getWorld();
+    @Nonnull abstract World getWorld();
 
     abstract boolean contains(Location location);
 
     abstract List<Vector> getPoints();
 
-    static WorldBoundingBox fromConfigurationSection(final @NotNull ConfigurationSection section, final @Nullable String path) {
+    static WorldBoundingBox fromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nullable String path) {
 
         final String worldPath = path == null ? "world" : path + ".world";
         final String pointsPath = path == null ? "points" : path + ".points";
@@ -48,7 +47,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return getCuboidWorldBoundingBoxFromConfigurationSection(section, path, world);
     }
 
-    private static @NotNull WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(final @NotNull ConfigurationSection section, final @NotNull List<?> points, final @NotNull World world) {
+    private static @Nonnull WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nonnull List<?> points, final @Nonnull World world) {
         final List<Vector> vectors = new ArrayList<>();
         for(final Object point : points) {
             if(!(point instanceof Vector)) {
@@ -65,7 +64,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return PolygonWorldBoundingBox.fromVectors(world, vectors);
     }
 
-    private static @NotNull CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(final @NotNull ConfigurationSection section, final @Nullable String path, final @NotNull World world) {
+    private static @Nonnull CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nullable String path, final @Nonnull World world) {
         final String minPath = path == null ? "min" : path + ".min";
         final String maxPath = path == null ? "max" : path + ".max";
 
@@ -79,7 +78,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return new CuboidWorldBoundingBox(world, BoundingBox.of(min,max));
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Map<String, Object> serialize() {
         final HashMap<String, Object> map = new HashMap<>();

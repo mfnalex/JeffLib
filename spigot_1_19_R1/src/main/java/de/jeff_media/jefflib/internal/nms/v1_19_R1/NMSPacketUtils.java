@@ -3,7 +3,6 @@ package de.jeff_media.jefflib.internal.nms.v1_19_R1;
 import lombok.experimental.UtilityClass;
 import net.minecraft.network.Connection;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.handshake.ClientIntentionPacket;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 

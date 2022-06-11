@@ -3,35 +3,35 @@ package de.jeff_media.jefflib.internal.nms;
 import com.mojang.authlib.GameProfile;
 import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
-import de.jeff_media.jefflib.internal.annotations.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.Internal;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
-@InternalOnly
+@Internal
 public interface AbstractNMSHandler {
 
-    //void updateMap(@NotNull final MapView map);
+    //void updateMap(@Nonnull final MapView map);
 
     AbstractNMSMaterialHandler getMaterialHandler();
 
     AbstractNMSBlockHandler getBlockHandler();
 
-    void changeNMSEntityName(@NotNull Object entity, @NotNull String name);
+    void changeNMSEntityName(@Nonnull Object entity, @Nonnull String name);
 
-    Object createHologram(@NotNull Location location, @NotNull String line, @NotNull Hologram.Type type);
+    Object createHologram(@Nonnull Location location, @Nonnull String line, @Nonnull Hologram.Type type);
 
-    void showEntityToPlayer(@NotNull Object entity, @NotNull Player player);
+    void showEntityToPlayer(@Nonnull Object entity, @Nonnull Player player);
 
-    void hideEntityFromPlayer(@NotNull Object entity, @NotNull Player player);
+    void hideEntityFromPlayer(@Nonnull Object entity, @Nonnull Player player);
 
-    void sendPacket(@NotNull final Player player, @NotNull final Object packet);
+    void sendPacket(@Nonnull final Player player, @Nonnull final Object packet);
 
-    Pair<String,String> getBiomeName(@NotNull final Location location);
+    Pair<String,String> getBiomeName(@Nonnull final Location location);
 
-    void playTotemAnimation(@NotNull final Player player);
+    void playTotemAnimation(@Nonnull final Player player);
 
-    void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile);
+    void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile);
 
 }

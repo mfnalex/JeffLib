@@ -9,17 +9,17 @@ import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.SessionManager;
 import com.sk89q.worldedit.world.World;
 import de.jeff_media.jefflib.data.worldboundingbox.CuboidWorldBoundingBox;
-import de.jeff_media.jefflib.internal.annotations.InternalOnly;
+import de.jeff_media.jefflib.internal.annotations.Internal;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@InternalOnly
+@Internal
 @UtilityClass
 final class WorldEditHandler {
 

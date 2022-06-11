@@ -6,12 +6,12 @@ import de.jeff_media.jefflib.RandomUtils;
 import lombok.Data;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
+import javax.annotation.Nonnull;
 
 @Data
 public class VariableItemStack {
 
-    @NotNull private final ItemStack itemStack;
+    @Nonnull private final ItemStack itemStack;
     private final int minAmount;
     private final int maxAmount;
     private final double chance;

@@ -3,9 +3,8 @@ package de.jeff_media.jefflib.data;
 import com.google.common.base.Enums;
 import lombok.Getter;
 import org.bukkit.Material;
-import org.checkerframework.checker.nullness.qual.AssertNonNullIfNonNull;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 public enum WoodType {
 
@@ -18,7 +17,7 @@ public enum WoodType {
     CRIMSON("CRIMSON"),
     WARPED("WARPED");
 
-    @Getter @NotNull private final Material button,
+    @Getter @Nonnull private final Material button,
             door,
             fence,
             fenceGate,

@@ -6,8 +6,10 @@ import org.bukkit.plugin.Plugin;
 
 /**
  * Gets thrown when a plugin attempts to use an API method that needs initialization first, without having called {@link JeffLib#init(Plugin)} first.
+ * @deprecated JeffLib 9.0.0+ automatically gets the plugin's instance
  */
 @DoNotRename
+@Deprecated
 public final class JeffLibNotInitializedException extends IllegalStateException {
 
     public static void check() throws JeffLibNotInitializedException {

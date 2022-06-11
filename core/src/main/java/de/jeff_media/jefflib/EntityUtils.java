@@ -7,8 +7,9 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -89,8 +90,8 @@ public final class EntityUtils {
     /**
      * Returns a collection of all entities of the given class, from all worlds
      */
-    @NotNull
-    public static <T extends Entity> Collection<T> getEntities(@NotNull final Class<T> entityClass) {
+    @Nonnull
+    public static <T extends Entity> Collection<T> getEntities(@Nonnull final Class<T> entityClass) {
         final Collection<T> list = new ArrayList<>();
         for(final World world : Bukkit.getWorlds()) {
             list.addAll(world.getEntitiesByClass(entityClass));
@@ -101,7 +102,7 @@ public final class EntityUtils {
     /**
      * Returns a collection of all entities from all worlds
      */
-    @NotNull
+    @Nonnull
     public static Collection<Entity> getAllEntities() {
         final Collection<Entity> list = new ArrayList<>();
         for(final World world : Bukkit.getWorlds()) {
