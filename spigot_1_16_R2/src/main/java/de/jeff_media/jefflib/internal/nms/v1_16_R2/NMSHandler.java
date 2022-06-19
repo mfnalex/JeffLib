@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
@@ -112,5 +113,26 @@ public class NMSHandler implements AbstractNMSHandler {
         skull.setGameProfile(gameProfile);
     }
 
+    @Override
+    public String itemStackToJson(@Nonnull org.bukkit.inventory.ItemStack itemStack) {
+        final ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
+        final NBTTagCompound compoundTag = new NBTTagCompound();
+        nmsItemStack.save(compoundTag);
+        return compoundTag.asString();
+    }
+
+    @Override
+    public void setFullTimeWithoutTimeSkipEvent(@Nonnull final org.bukkit.World world, final long time, final boolean notifyPlayers) {
+        final WorldServer level = ((CraftWorld)world).getHandle();
+        level.setDayTime(time);
+        if(notifyPlayers) {
+            for (final Player player : world.getPlayers()) {
+                final EntityPlayer serverPlayer = ((CraftPlayer) player).getHandle();
+                if (serverPlayer.playerConnection != null) {
+                    serverPlayer.playerConnection.sendPacket(new PacketPlayOutUpdateTime(serverPlayer.world.getTime(), serverPlayer.getPlayerTime(), serverPlayer.world.getGameRules().getBoolean(GameRules.DO_DAYLIGHT_CYCLE)));
+                }
+            }
+        }
+    }
 
 }

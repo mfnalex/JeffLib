@@ -8,25 +8,29 @@ import de.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import de.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import net.minecraft.core.BlockPos;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
-import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
-import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
+import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage;
+import org.bukkit.entity.Player;
+
 import javax.annotation.Nonnull;
 
 public class NMSHandler implements AbstractNMSHandler {
@@ -121,6 +125,27 @@ public class NMSHandler implements AbstractNMSHandler {
         skull.setOwner(gameProfile);
     }
 
+    @Override
+    public String itemStackToJson(@Nonnull org.bukkit.inventory.ItemStack itemStack) {
+        final ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
+        final CompoundTag compoundTag = new CompoundTag();
+        nmsItemStack.save(compoundTag);
+        return compoundTag.getAsString();
+    }
+
+    @Override
+    public void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers) {
+        final ServerLevel level = ((CraftWorld)world).getHandle();
+        level.setDayTime(time);
+        if(notifyPlayers) {
+            for (final Player player : world.getPlayers()) {
+                final ServerPlayer serverPlayer = ((CraftPlayer) player).getHandle();
+                if (serverPlayer.connection != null) {
+                    serverPlayer.connection.send(new ClientboundSetTimePacket(serverPlayer.level.getGameTime(), serverPlayer.getPlayerTime(), serverPlayer.level.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)));
+                }
+            }
+        }
+    }
 
 
 }

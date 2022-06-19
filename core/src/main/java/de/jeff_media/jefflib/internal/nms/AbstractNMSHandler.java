@@ -5,8 +5,11 @@ import de.jeff_media.jefflib.data.Hologram;
 import de.jeff_media.jefflib.data.tuples.Pair;
 import de.jeff_media.jefflib.internal.annotations.Internal;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+
 import javax.annotation.Nonnull;
 
 @Internal
@@ -33,5 +36,9 @@ public interface AbstractNMSHandler {
     void playTotemAnimation(@Nonnull final Player player);
 
     void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile);
+
+    String itemStackToJson(@Nonnull final ItemStack itemStack);
+
+    void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
 }

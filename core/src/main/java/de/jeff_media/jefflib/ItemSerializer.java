@@ -1,5 +1,6 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -198,5 +199,14 @@ public final class ItemSerializer {
         } catch (final ClassNotFoundException e) {
             throw new IOException("Unable to decode class type.", e);
         }
+    }
+
+    /**
+     * Turns an ItemStack into a json-formatted String
+     * @nms
+     */
+    @RequiresNMS
+    public static String toJson(ItemStack itemStack) {
+        return JeffLib.getNMSHandler().itemStackToJson(itemStack);
     }
 }
