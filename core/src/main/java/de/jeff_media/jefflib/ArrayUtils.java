@@ -15,6 +15,23 @@ import java.util.List;
 public class ArrayUtils {
 
     /**
+     * Combines the given arrays into a new array
+     */
+    public static <T> T[] combine(final T[]... array) {
+        int totalSize = 0;
+        for(T[] part : array) {
+            totalSize += part.length;
+        }
+        T[] combined = (T[]) Array.newInstance(array.getClass().getComponentType().getComponentType(), totalSize);
+        int index = 0;
+        for(T[] part : array) {
+            System.arraycopy(part,0,combined,index,part.length);
+            index += part.length;
+        }
+        return combined;
+    }
+
+    /**
      * Returns a new array of the given class type with length 0
      * @param componentType Class of the array's component type
      * @param <T> Array's component type

@@ -10,6 +10,7 @@ public class TestArrayUtils extends UnitTest {
     String[] first = {"0","1","2","3","4"};
     String[] second = {"0","1","3","4"};
     String[] third = {"0","1","2","3","4","hello"};
+    String[] combined = {"0","1","2","3","4","0","1","3","4","0","1","2","3","4"};
 
    @Test
    public void testRemoveAtIndex() {
@@ -19,5 +20,10 @@ public class TestArrayUtils extends UnitTest {
    @Test
     public void testAddAfter() {
        Assertions.assertArrayEquals(ArrayUtils.addAfter(first,"hello"), third);
+   }
+
+   @Test
+    public void testCombine() {
+       Assertions.assertArrayEquals(combined,ArrayUtils.combine(first,second,first));
    }
 }
