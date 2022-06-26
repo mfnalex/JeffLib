@@ -63,7 +63,8 @@ public final class JeffLib {
         if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
             final String authors = getPlugin().getDescription().getAuthors().stream().collect(Collectors.joining(", "));
             final String plugin = getPlugin().getName() + " " + getPlugin().getDescription().getVersion();
-            throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+            //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+            getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
         }
     }
 
@@ -165,18 +166,12 @@ public final class JeffLib {
         }
     }
 
+
     /**
-     * Initializes the library. Needed for some methods.
-     * <p>
-     * This is the same as calling <pre>JeffLib.init(plugin, true);</pre>
-     *
-     * @param plugin Plugin instance
-     * @deprecated Initializing isn't needed anymore since JeffLib 9.0.0 unless you want to explicitly enable NMS features.
-     * @see #enableNMS()
+     * Initializes JeffLib. Only required if you call methods requiring your plugin's instance before the plugin has been enabled
      */
-    @Deprecated
     public static void init(final Plugin plugin) {
-        init(plugin, true);
+        JeffLib.plugin = plugin;
     }
 
     /**

@@ -15,7 +15,8 @@ public enum WoodType {
     BIRCH("BIRCH"),
     SPRUCE("SPRUCE"),
     CRIMSON("CRIMSON"),
-    WARPED("WARPED");
+    WARPED("WARPED"),
+    MANGROVE("MANGROVE");
 
     @Getter @Nonnull private final Material button,
             door,
@@ -117,6 +118,12 @@ public enum WoodType {
     }
 
     private Material getMaterial(String prefix, String woodType, String type) {
+        if(this == MANGROVE) {
+            switch (type) {
+                case "LEAVES": return Enums.getIfPresent(Material.class,"MANGROVE_ROOTS").orNull();
+                case "SAPLING": return Enums.getIfPresent(Material.class,"MANGROVE_PROPAGULE").orNull();
+            }
+        }
         if(isFungus(woodType)) {
             if(type.equals("LOG")) type = "STEM";
             if(type.equals("WOOD")) type = "HYPHAE";

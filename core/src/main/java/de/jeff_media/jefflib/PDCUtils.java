@@ -8,6 +8,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Contract;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -188,11 +190,12 @@ public class PDCUtils {
      * @param <T>          Primitive data type
      * @param <Z>          Complex data type
      */
-    @Nonnull
+    @Nullable
+    @Contract("_, _, _, !null -> !null")
     public static <T, Z> Z getOrDefault(@Nonnull final ItemStack holder,
                                         @Nonnull final String key,
                                         @Nonnull final PersistentDataType<T, Z> type,
-                                        @Nonnull final Z defaultValue) {
+                                        final Z defaultValue) {
         Objects.requireNonNull(holder.getItemMeta());
         return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
     }
@@ -207,11 +210,12 @@ public class PDCUtils {
      * @param <T>          Primitive data type
      * @param <Z>          Complex data type
      */
-    @Nonnull
+    @Nullable
+    @Contract("_, _, _, !null -> !null")
     public static <T, Z> Z getOrDefault(@Nonnull final PersistentDataHolder holder,
                                         @Nonnull final String key,
                                         @Nonnull final PersistentDataType<T, Z> type,
-                                        @Nonnull final Z defaultValue) {
+                                        final Z defaultValue) {
         return getOrDefault(holder, getKey(key), type, defaultValue);
     }
 
@@ -225,11 +229,12 @@ public class PDCUtils {
      * @param <T>          Primitive data type
      * @param <Z>          Complex data type
      */
-    @Nonnull
+    @Nullable
+    @Contract("_, _, _, !null -> !null")
     public static <T, Z> Z getOrDefault(@Nonnull final PersistentDataHolder holder,
                                         @Nonnull final NamespacedKey key,
                                         @Nonnull final PersistentDataType<T, Z> type,
-                                        @Nonnull final Z defaultValue) {
+                                        final Z defaultValue) {
         return holder.getPersistentDataContainer().getOrDefault(key, type, defaultValue);
     }
 
@@ -243,11 +248,12 @@ public class PDCUtils {
      * @param <T>          Primitive data type
      * @param <Z>          Complex data type
      */
-    @Nonnull
+    @Nullable
+    @Contract("_, _, _, !null -> !null")
     public static <T, Z> Z getOrDefault(@Nonnull final ItemStack holder,
                                         @Nonnull final NamespacedKey key,
                                         @Nonnull final PersistentDataType<T, Z> type,
-                                        @Nonnull final Z defaultValue) {
+                                        final Z defaultValue) {
         Objects.requireNonNull(holder.getItemMeta());
         return getOrDefault(holder.getItemMeta(), key, type, defaultValue);
     }

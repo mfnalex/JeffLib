@@ -19,12 +19,13 @@ public class ArrayUtils {
      */
     public static <T> T[] combine(final T[]... array) {
         int totalSize = 0;
-        for(T[] part : array) {
+        for(final T[] part : array) {
             totalSize += part.length;
         }
-        T[] combined = (T[]) Array.newInstance(array.getClass().getComponentType().getComponentType(), totalSize);
+        //noinspection unchecked
+        final T[] combined = (T[]) Array.newInstance(array.getClass().getComponentType().getComponentType(), totalSize);
         int index = 0;
-        for(T[] part : array) {
+        for(final T[] part : array) {
             System.arraycopy(part,0,combined,index,part.length);
             index += part.length;
         }
