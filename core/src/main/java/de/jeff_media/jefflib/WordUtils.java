@@ -39,7 +39,11 @@ public class WordUtils {
      * @return Human readable key name
      */
     public static String getNiceName(@Nonnull final NamespacedKey key) {
-        final String[] split = key.getKey().split("_");
+        return getNiceName(key.getKey());
+    }
+
+    public static String getNiceName(@Nonnull final String string) {
+        final String[] split = string.split("_");
         final Iterator<String> iterator = Arrays.stream(split).iterator();
         final StringBuilder builder = new StringBuilder();
         while (iterator.hasNext()) {
