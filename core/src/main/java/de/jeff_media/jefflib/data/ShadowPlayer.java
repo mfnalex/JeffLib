@@ -776,12 +776,12 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void playSound(@Nonnull Entity entity, @Nonnull Sound sound, float volume, float pitch) {
+    public void playSound(@Nonnull final Entity entity, @Nonnull final Sound sound, final float volume, final float pitch) {
 
     }
 
     @Override
-    public void playSound(@Nonnull Entity entity, @Nonnull Sound sound, @Nonnull SoundCategory category, float volume, float pitch) {
+    public void playSound(@Nonnull final Entity entity, @Nonnull final Sound sound, @Nonnull final SoundCategory category, final float volume, final float pitch) {
 
     }
 
@@ -1008,11 +1008,11 @@ public class ShadowPlayer implements Player {
         return this.player.canSee(player);
     }
 
-    public void hideEntity(@Nonnull final Plugin plugin, @Nonnull Entity entity) {
+    public void hideEntity(@Nonnull final Plugin plugin, @Nonnull final Entity entity) {
 
     }
 
-    public void showEntity(@Nonnull final Plugin plugin, @Nonnull Entity entity) {
+    public void showEntity(@Nonnull final Plugin plugin, @Nonnull final Entity entity) {
 
     }
 
@@ -1066,17 +1066,17 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, @Nullable String prompt) {
+    public void setResourcePack(@Nonnull final String url, @Nullable final byte[] hash, @Nullable final String prompt) {
 
     }
 
     @Override
-    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, boolean force) {
+    public void setResourcePack(@Nonnull final String url, @Nullable final byte[] hash, final boolean force) {
 
     }
 
     @Override
-    public void setResourcePack(@Nonnull String url, @Nullable byte[] hash, @Nullable String prompt, boolean force) {
+    public void setResourcePack(@Nonnull final String url, @Nullable final byte[] hash, @Nullable final String prompt, final boolean force) {
 
     }
 
@@ -1098,7 +1098,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setWorldBorder(@Nullable WorldBorder worldBorder) {
+    public void setWorldBorder(@Nullable final WorldBorder worldBorder) {
 
     }
 
@@ -1561,7 +1561,7 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setLastDeathLocation(@Nullable Location location) {
+    public void setLastDeathLocation(@Nullable final Location location) {
 
     }
 

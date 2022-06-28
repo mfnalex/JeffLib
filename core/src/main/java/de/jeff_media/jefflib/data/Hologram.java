@@ -161,7 +161,8 @@ public class Hologram implements ConfigurationSerializable {
         return hologram;
     }
 
-    public @Nonnull Map<String,Object> serialize() {
+    @Nonnull
+    public Map<String,Object> serialize() {
         final Map<String,Object> map = new HashMap<>();
         map.put(Keys.LINE_OFFSET,lineOffset);
         map.put(Keys.LINES,lines);

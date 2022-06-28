@@ -25,9 +25,9 @@ public class DebugUtils {
         }
     }
 
-    public static void print(ItemStack[] items) {
+    public static void print(final ItemStack[] items) {
         System.out.println("ItemStack[" + items.length + "]");
-        for(ItemStack item : items) {
+        for(final ItemStack item : items) {
             if(item == null) continue;
             System.out.println(" - " + item);
         }
@@ -37,11 +37,11 @@ public class DebugUtils {
         collection.forEach(System.out::println);
     }
 
-    public static class Events {
-        private static Logger logger = JeffLib.getPlugin().getLogger();
-        public static void debug(InventoryClickEvent event) {
-            Inventory top = event.getView().getTopInventory();
-            Inventory bottom = event.getView().getBottomInventory();
+    public static final class Events {
+        private static final Logger logger = JeffLib.getPlugin().getLogger();
+        public static void debug(final InventoryClickEvent event) {
+            final Inventory top = event.getView().getTopInventory();
+            final Inventory bottom = event.getView().getBottomInventory();
             logger.warning("============================================================");
             logger.warning("Top inventory holder: " + (top.getHolder() == null ? null : top.getHolder().getClass().getName()));
             logger.warning("Bottom inventory holder: " + (bottom.getHolder() == null ? null : bottom.getHolder().getClass().getName()));

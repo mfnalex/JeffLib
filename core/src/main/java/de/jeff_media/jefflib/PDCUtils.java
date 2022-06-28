@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.JeffLibNotInitializedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
@@ -71,9 +70,6 @@ public class PDCUtils {
      * @return NamespacedKey
      */
     public static NamespacedKey getKey(final String key) {
-/*        if (plugin == null) {
-            throw new JeffLibNotInitializedException();
-        }*/
         return KEYS.computeIfAbsent(key, __ -> new NamespacedKey(JeffLib.getPlugin(), key));
     }
 

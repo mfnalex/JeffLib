@@ -1,7 +1,7 @@
 package de.jeff_media.jefflib.exceptions;
 
 public class JeffLibNotRelocatedException extends RuntimeException {
-    public JeffLibNotRelocatedException(String message) {
+    public JeffLibNotRelocatedException(final String message) {
         super(message);
     }
 }

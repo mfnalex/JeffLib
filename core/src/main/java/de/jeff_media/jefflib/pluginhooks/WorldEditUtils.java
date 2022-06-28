@@ -47,7 +47,7 @@ public class WorldEditUtils {
      * @return {@link WorldBoundingBox} containing the player's WorldEdit selection, or null if the player doesn't have any or only an incomplete selection.
      * @throws MissingPluginException Exception thrown when WorldEdit is not installed
      */
-    public static WorldBoundingBox getSelection(final @Nonnull Player player) throws MissingPluginException {
+    public static WorldBoundingBox getSelection(@Nonnull final Player player) throws MissingPluginException {
         try {
             return WorldEditHandler.getCuboidSelection(player);
         } catch (final Throwable throwable) {
@@ -55,7 +55,7 @@ public class WorldEditUtils {
         }
     }
 
-    public static List<Location> getPolygonSelection(final @Nonnull Player player) throws MissingPluginException {
+    public static List<Location> getPolygonSelection(@Nonnull final Player player) throws MissingPluginException {
         try {
             return WorldEditHandler.getPolygonSelection(player);
         } catch (final Throwable throwable) {

@@ -6,7 +6,7 @@ import de.jeff_media.jefflib.internal.annotations.Internal;
 
 @Internal
 @DoNotRename
-public class NMSReflUtils {
+public final class NMSReflUtils {
 
     @DoNotRename
     public static void setField(final Class<?> clazz, final Object object, final String fieldName, final Object value) {

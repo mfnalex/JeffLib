@@ -2,11 +2,9 @@ package de.jeff_media.jefflib;
 
 import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
-import net.minecraft.world.level.block.Blocks;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
-import org.bukkit.craftbukkit.v1_19_R1.block.CraftEnchantingTable;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
 
@@ -209,7 +207,7 @@ public final class BlockUtils {
                 for (int z = 0; z < 16; z++) {
                     for (int y = box.getMin().getBlockY(); y < box.getMax().getBlockY(); y++) {
                         if (y > chunk.getHighestBlockYAt(x, z)) break;
-                        BlockVector blockVector = new BlockVector(x, y, z);
+                        final BlockVector blockVector = new BlockVector(x, y, z);
                         if (!box.contains(chunkToWorldCoordinates(blockVector, chunk.getX(), y, chunk.getZ())))
                             continue;
                         final BlockData data = chunk.getBlockData(x, y, z);
@@ -255,7 +253,7 @@ public final class BlockUtils {
      * @param chunkZ      Z coordinate of the chunk
      * @return A BlockVector representing global coordinates
      */
-    public static BlockVector chunkToWorldCoordinates(BlockVector chunkVector, int chunkX, int y, int chunkZ) {
+    public static BlockVector chunkToWorldCoordinates(final BlockVector chunkVector, final int chunkX, final int y, final int chunkZ) {
         return new BlockVector(chunkVector.getBlockX() + (chunkX << 4), y, chunkVector.getBlockZ() + (chunkZ << 4));
     }
 
@@ -289,7 +287,7 @@ public final class BlockUtils {
             {-2, 1,  2}, {-1, 1,  2}, {0, 1,  2}, {1, 1,  2}, {2, 1,  2},
     };
 
-    private static boolean isValidBookShelf(Block enchantmentTable, int[] offset) {
+    private static boolean isValidBookShelf(final Block enchantmentTable, final int[] offset) {
         return enchantmentTable.getRelative(offset[0], offset[1], offset[2]).getType() == Material.BOOKSHELF
                 && enchantmentTable.getRelative(offset[0] / 2, offset[1], offset[2] / 2).getType().isAir();
     }
@@ -297,7 +295,7 @@ public final class BlockUtils {
     /**
      * Returns the number of valid (usable) bookshelves around the given enchantment table position.
      */
-    public static int getNumberOfEnchantmentTableBookShelves(Block enchantmentTable) {
+    public static int getNumberOfEnchantmentTableBookShelves(final Block enchantmentTable) {
         return (int) Arrays.stream(BOOKSHELF_OFFSETS).filter(offset -> isValidBookShelf(enchantmentTable,offset)).count();
     }
 

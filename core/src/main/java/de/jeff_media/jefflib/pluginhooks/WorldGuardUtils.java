@@ -31,7 +31,8 @@ public class WorldGuardUtils {
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
      */
-    public static @Nonnull Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
+    @Nonnull
+    public static Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.getRegionsAtLocation(location);
         } catch (final Throwable t) {

@@ -42,15 +42,15 @@ public final class VectorUtils {
         return location;
     }
 
-    private static EulerAngle convertVectorToEulerAngle(Vector vec) {
+    private static EulerAngle convertVectorToEulerAngle(final Vector vec) {
 
-        double x = vec.getX();
-        double y = vec.getY();
-        double z = vec.getZ();
+        final double x = vec.getX();
+        final double y = vec.getY();
+        final double z = vec.getZ();
 
-        double xz = Math.sqrt(x*x + z*z);
+        final double xz = Math.sqrt(x*x + z*z);
 
-        double eulX;
+        final double eulX;
         if(x < 0) {
             if(y == 0) {
                 eulX = Math.PI*0.5;
@@ -61,7 +61,7 @@ public final class VectorUtils {
             eulX = Math.atan(y/xz)+Math.PI*0.5;
         }
 
-        double eulY;
+        final double eulY;
         if(x == 0) {
             if(z > 0) {
                 eulY = Math.PI;
@@ -76,13 +76,13 @@ public final class VectorUtils {
 
     }
 
-    public static Vector getCenter(Vector vector1, Vector vector2) {
-        double x1 = vector1.getX();
-        double y1 = vector1.getY();
-        double z1 = vector1.getZ();
-        double x2 = vector2.getX();
-        double y2 = vector2.getY();
-        double z2 = vector2.getZ();
+    public static Vector getCenter(final Vector vector1, final Vector vector2) {
+        final double x1 = vector1.getX();
+        final double y1 = vector1.getY();
+        final double z1 = vector1.getZ();
+        final double x2 = vector2.getX();
+        final double y2 = vector2.getY();
+        final double z2 = vector2.getZ();
         return new Vector(x1+x2/2, y1+y2/2, z1+z2/2);
     }
 

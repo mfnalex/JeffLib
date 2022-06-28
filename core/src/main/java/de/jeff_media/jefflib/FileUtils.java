@@ -25,7 +25,7 @@ public final class FileUtils {
      * @param lines lines to write
      */
     public static void writeToFile(final File file, final Iterable<String> lines) throws IOException {
-        try (final Writer output = new OutputStreamWriter(new FileOutputStream(file, false), StandardCharsets.UTF_8);) {
+        try (final Writer output = new OutputStreamWriter(new FileOutputStream(file, false), StandardCharsets.UTF_8)) {
             for (final String line : lines) {
                 output.append(line).append(System.lineSeparator());
             }
@@ -49,7 +49,7 @@ public final class FileUtils {
      * @param lines lines to append
      */
     public static void appendLines(final File file, final String[] lines) throws IOException {
-        try (final Writer output = new OutputStreamWriter(new FileOutputStream(file, true), StandardCharsets.UTF_8);) {
+        try (final Writer output = new OutputStreamWriter(new FileOutputStream(file, true), StandardCharsets.UTF_8)) {
             for (final String line : lines) {
                 output.append(line).append(System.lineSeparator());
             }
@@ -104,7 +104,7 @@ public final class FileUtils {
             }
             bufferedReader.close();
             if (changed) {
-                try (final FileOutputStream fileOut = new FileOutputStream(file);) {
+                try (final FileOutputStream fileOut = new FileOutputStream(file)) {
                     fileOut.write(inputBuffer.toString().getBytes());
                 }
             }

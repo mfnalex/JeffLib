@@ -52,12 +52,14 @@ public final class PlaceholderAPIHandler {
         private final Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
-        public @Nonnull String getIdentifier() {
+        @Nonnull
+        public String getIdentifier() {
             return JeffLib.getPlugin().getName().toLowerCase(Locale.ROOT);
         }
 
         @Override
-        public @Nonnull String getAuthor() {
+        @Nonnull
+        public String getAuthor() {
             return JeffLib.getPlugin().getDescription().getAuthors().isEmpty() ? "" : JeffLib.getPlugin().getDescription().getAuthors().get(0);
         }
 
@@ -75,7 +77,8 @@ public final class PlaceholderAPIHandler {
         }
 
         @Override
-        public @Nonnull String getVersion() {
+        @Nonnull
+        public String getVersion() {
             return JeffLib.getPlugin().getDescription().getVersion();
         }
     }

@@ -23,7 +23,8 @@ import java.util.Objects;
 @UtilityClass
 public class NBTAPI {
 
-    public static @Nonnull String getNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key, @Nonnull final String defaultValue) {
+    @Nonnull
+    public static String getNBT(@Nonnull final PersistentDataHolder holder, @Nonnull final String key, @Nonnull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(holder, key)) {
@@ -32,7 +33,8 @@ public class NBTAPI {
         return defaultValue;
     }
 
-    public static @Nonnull String getNBT(@Nonnull final ItemStack item, @Nonnull final String key, @Nonnull final String defaultValue) {
+    @Nonnull
+    public static String getNBT(@Nonnull final ItemStack item, @Nonnull final String key, @Nonnull final String defaultValue) {
         Objects.requireNonNull(JeffLib.getPlugin(), "JeffLib hasn't been initialized.");
         Objects.requireNonNull(key, "DefaultValue must not be null");
         if (hasNBT(item, key)) {

@@ -50,7 +50,7 @@ public class RandomUtils {
         return JeffLib.getThreadLocalRandom().nextInt(min,max);
     }
 
-    public static <E extends Enum<E>> E getRandomEnumElement(Class<E> enumClazz) {
+    public static <E extends Enum<E>> E getRandomEnumElement(final Class<E> enumClazz) {
         return EnumUtils.getRandomElement(enumClazz);
     }
 }

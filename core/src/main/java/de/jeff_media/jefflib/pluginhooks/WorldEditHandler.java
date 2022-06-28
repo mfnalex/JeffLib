@@ -47,7 +47,7 @@ final class WorldEditHandler {
     public static List<Location> getPolygonSelection(final org.bukkit.entity.Player player) {
         try {
             final Region region = getSelectedRegion(player);
-            List<Location> points = new ArrayList<>();
+            final List<Location> points = new ArrayList<>();
             region.forEach((blockVector3) -> points.add(BukkitAdapter.adapt(player.getWorld(),blockVector3)));
             return points;
         } catch (final IncompleteRegionException exception) {

@@ -46,9 +46,6 @@ public class TextUtils {
      */
     public static void banner(final CharSequence text) {
 
-        /*if (JeffLib.getPlugin() == null) {
-            throw new JeffLibNotInitializedException();
-        }*/
         final int bannerWidth = Math.max(text.length() + 4, MIN_BANNER_WIDTH);
         StringUtils.leftPad(EMPTY, bannerWidth, BANNER_CHAR);
         JeffLib.getPlugin().getLogger().info(StringUtils.center(" " + text + " ", bannerWidth, BANNER_CHAR));
@@ -211,9 +208,7 @@ public class TextUtils {
      * @see #replaceInString(String, Map)
      */
     public List<String> replaceInString(final List<String> strings, final HashMap<String,String> placeholders) {
-        for(int i = 0; i < strings.size(); i++) {
-            strings.set(i, replaceInString(strings.get(i),placeholders));
-        }
+        strings.replaceAll(string -> replaceInString(string, placeholders));
         return strings;
     }
 

@@ -84,7 +84,7 @@ public final class CommandUtils {
      *
      * @param sender CommandSender to send the help message to
      */
-    public static void sendHelpMessage(final CommandSender sender, HelpStyle style, final String... args) {
+    public static void sendHelpMessage(final CommandSender sender, final HelpStyle style, final String... args) {
         switch (style) {
             case NEW_LINE:
                 sendHelpMessageNewLine(sender, args);
@@ -113,7 +113,7 @@ public final class CommandUtils {
         }
     }
 
-    private static void sendHelpMessageSameLine(final CommandSender sender, boolean newLine, final String... args) {
+    private static void sendHelpMessageSameLine(final CommandSender sender, final boolean newLine, final String... args) {
         final Iterator<String> iterator = Arrays.stream(args).iterator();
         while (iterator.hasNext()) {
             final String command = iterator.next();

@@ -7,7 +7,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_19_R1.block.CraftBlock;
 
-public class NMSInternals {
+public final class NMSInternals {
 
     public static Level getLevel(final World world) {
         return ((CraftWorld)world).getHandle();

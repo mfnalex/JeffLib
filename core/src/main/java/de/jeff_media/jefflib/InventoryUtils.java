@@ -84,10 +84,10 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @Nonnull Player player, final @Nullable Location dropLocation, final @Nonnull Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for(final ItemStack item : items) {
-            for(ItemStack leftover : player.getInventory().addItem(item).values()) {
+            for(final ItemStack leftover : player.getInventory().addItem(item).values()) {
                 dropLocation.getWorld().dropItemNaturally(dropLocation, leftover);
                 storedEverything = false;
             }
@@ -112,7 +112,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @Nonnull Player player, final @Nullable Location dropLocation, final @Nonnull ItemStack... items) {
+    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final ItemStack... items) {
         return addOrDrop(player, dropLocation, Arrays.asList(items));
     }
 
@@ -122,7 +122,7 @@ public final class InventoryUtils {
      * @param items ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(final @Nonnull Player player, final @Nonnull ItemStack... items) {
+    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final ItemStack... items) {
         return addOrDrop(player, player.getLocation(), Arrays.asList(items));
     }
 
@@ -140,7 +140,7 @@ public final class InventoryUtils {
      * @return the number of ItemStacks that couldn't be removed (because the inventory didn't contain enough)
      */
     public static int removeX(final Inventory inventory, final ItemStack toRemove, final int amountToRemove) {
-        HashMap<Integer, ? extends ItemStack> matchingStacks = getAll(inventory, toRemove);
+        final HashMap<Integer, ? extends ItemStack> matchingStacks = getAll(inventory, toRemove);
         return removeItemStacks(amountToRemove, matchingStacks);
     }
 

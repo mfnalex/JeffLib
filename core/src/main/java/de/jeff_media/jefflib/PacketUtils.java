@@ -12,7 +12,6 @@ public class PacketUtils {
      * Sends the given RequiresNMS packet object to the player.
      */
     public static void sendPacket(@Nonnull final Player player, @Nonnull final Object packet) {
-        NMSNotSupportedException.check();
         JeffLib.getNMSHandler().sendPacket(player, packet);
     }
 }

@@ -28,16 +28,16 @@ public class AdvancementInfo {
         Class<?> tmp = null;
         try {
             tmp = getNMSClass("org.bukkit.craftbukkit", "advancement.CraftAdvancement", true);
-        } catch (Exception ignored) { }
+        } catch (final Exception ignored) { }
         if(tmp == null) throw new NMSNotSupportedException();
         CLASS_CRAFTADVANCEMENT = tmp;
 
         MC_VERSION = McVersion.current().getMinor();
     }
 
-    public static ConfigurationSection fromMap(Map<String,Object> map) {
-        ConfigurationSection section = new MemoryConfiguration();
-        for(Map.Entry<String,Object> entry : map.entrySet()) {
+    public static ConfigurationSection fromMap(final Map<String,Object> map) {
+        final ConfigurationSection section = new MemoryConfiguration();
+        for(final Map.Entry<String,Object> entry : map.entrySet()) {
             section.set(entry.getKey(), entry.getValue());
         }
         return section;

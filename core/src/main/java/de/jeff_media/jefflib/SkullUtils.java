@@ -58,7 +58,6 @@ public class SkullUtils {
      */
     @RequiresNMS
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
-        NMSNotSupportedException.check();
         checkIfIsSkull(block);
         JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
     }

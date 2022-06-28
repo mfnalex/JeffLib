@@ -48,7 +48,7 @@ public final class ClassUtils {
     public static Class<?> getCurrentClass(final int offset) {
         try {
             return Class.forName(Thread.currentThread().getStackTrace()[2 + offset].getClassName());
-        } catch (ClassNotFoundException e) {
+        } catch (final ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
     }

@@ -21,11 +21,11 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     @Nullable
     private E fifth;
 
-    public Quintet(final @Nullable A first,
-                   final @Nullable B second,
-                   final @Nullable C third,
-                   final @Nullable D fourth,
-                   final @Nullable E fifth) {
+    public Quintet(@Nullable final A first,
+                   @Nullable final B second,
+                   @Nullable final C third,
+                   @Nullable final D fourth,
+                   @Nullable final E fifth) {
         super(first, second, third, fourth);
         this.fifth = fifth;
     }

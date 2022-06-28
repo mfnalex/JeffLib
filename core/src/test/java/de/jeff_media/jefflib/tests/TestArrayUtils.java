@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 
 public class TestArrayUtils extends UnitTest {
 
-    String[] first = {"0","1","2","3","4"};
-    String[] second = {"0","1","3","4"};
-    String[] third = {"0","1","2","3","4","hello"};
-    String[] combined = {"0","1","2","3","4","0","1","3","4","0","1","2","3","4"};
+    final String[] first = {"0","1","2","3","4"};
+    final String[] second = {"0","1","3","4"};
+    final String[] third = {"0","1","2","3","4","hello"};
+    final String[] combined = {"0","1","2","3","4","0","1","3","4","0","1","2","3","4"};
 
    @Test
    public void testRemoveAtIndex() {

@@ -34,7 +34,6 @@ public class AnimationUtils {
      */
     @RequiresNMS
     public static void playTotemAnimation(@Nonnull final Player player, @Nullable final Integer customModelData) {
-        NMSNotSupportedException.check();
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
         final ItemMeta meta = totem.getItemMeta();
         assert meta != null;

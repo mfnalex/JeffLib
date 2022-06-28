@@ -83,7 +83,8 @@ public final class EnchantmentUtils {
      * @param section ConfigurationSection to parse
      * @return A Map&lt;Enchantment,Integer> containing the given enchantments mapped to their given levels
      */
-    public static @Nonnull Map<Enchantment,Integer> fromConfigurationSection(final ConfigurationSection section) {
+    @Nonnull
+    public static Map<Enchantment,Integer> fromConfigurationSection(final ConfigurationSection section) {
         final Map<Enchantment,Integer> map = new HashMap<>();
         for(final String enchantName : section.getKeys(false)) {
             final Enchantment enchant = getByName(enchantName);

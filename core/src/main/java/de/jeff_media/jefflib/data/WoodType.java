@@ -40,7 +40,7 @@ public enum WoodType {
     @Getter @Nullable private final Material boat,
             pottedRoots;
 
-    WoodType(String type) {
+    WoodType(final String type) {
         //System.out.println("CREATING WOODTYPE: " + type);
         boat = getMaterial(type, "BOAT");
         button = getMaterial(type, "BUTTON");
@@ -62,13 +62,11 @@ public enum WoodType {
         strippedLog = getMaterial("STRIPPED",type,"LOG");
         strippedWood = getMaterial("STRIPPED",type,"WOOD");
         pottedRoots = getMaterial("POTTED",type,"ROOTS");
-        //System.out.println(type + " -> log: " + log);
-        //System.out.println(type + " -> wood: " + wood);
     }
 
     @Nullable
-    public static WoodType fromMaterial(Material type) {
-        for(WoodType wood : values()) {
+    public static WoodType fromMaterial(final Material type) {
+        for(final WoodType wood : values()) {
             if(wood.getBoat() == type) return wood;
             if(wood.getButton() == type) return wood;
             if(wood.getDoor() == type) return wood;
@@ -93,7 +91,7 @@ public enum WoodType {
         return null;
     }
 
-    private boolean isFungus(String type) {
+    private boolean isFungus(final String type) {
         switch (type) {
             case "CRIMSON":
             case "WARPED":
@@ -103,7 +101,7 @@ public enum WoodType {
         }
     }
 
-    public boolean isFungus(WoodType type) {
+    public boolean isFungus(final WoodType type) {
         switch (type) {
             case CRIMSON:
             case WARPED:
@@ -113,11 +111,11 @@ public enum WoodType {
         }
     }
 
-    private Material getMaterial(String woodType, String type) {
+    private Material getMaterial(final String woodType, final String type) {
         return getMaterial(null, woodType, type);
     }
 
-    private Material getMaterial(String prefix, String woodType, String type) {
+    private Material getMaterial(final String prefix, final String woodType, String type) {
         if(this == MANGROVE) {
             switch (type) {
                 case "LEAVES": return Enums.getIfPresent(Material.class,"MANGROVE_ROOTS").orNull();
@@ -133,15 +131,8 @@ public enum WoodType {
             if(woodType.equals("CRIMSON")) return Material.NETHER_WART_BLOCK;
             if(woodType.equals("WARPED")) return Material.WARPED_WART_BLOCK;
         }
-        String name = (prefix==null?"":prefix) + ((prefix == null || prefix.length() == 0) ? "" : "_") + woodType+"_"+type;
-        //System.out.println("\n\n=======================================");
-        //System.out.println(name);
-        Material mat = Enums.getIfPresent(Material.class, name).orNull();
-        //System.out.println("Prefix: " + prefix);
-        //System.out.println("WoodType: " + woodType);
-        //System.out.println("Type: " + type);
-        //System.out.println("Result: " + mat);
-        return mat;
+        final String name = (prefix==null?"":prefix) + ((prefix == null || prefix.length() == 0) ? "" : "_") + woodType+"_"+type;
+        return Enums.getIfPresent(Material.class, name).orNull();
     }
 
 }

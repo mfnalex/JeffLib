@@ -5,7 +5,8 @@ import java.util.Arrays;
 /**
  * Some methods from Apache Commons Lang3 StringUtils
  */
-public class StringUtils {
+@SuppressWarnings("DuplicatedCode")
+public final class StringUtils {
 
     /**
      * <p>The maximum size to which the padding constant(s) can expand.</p>

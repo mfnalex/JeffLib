@@ -17,6 +17,7 @@ public class ArrayUtils {
     /**
      * Combines the given arrays into a new array
      */
+    @SafeVarargs
     public static <T> T[] combine(final T[]... array) {
         int totalSize = 0;
         for(final T[] part : array) {

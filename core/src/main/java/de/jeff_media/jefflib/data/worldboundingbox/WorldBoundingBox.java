@@ -26,7 +26,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
 
     abstract List<Vector> getPoints();
 
-    static WorldBoundingBox fromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nullable String path) {
+    static WorldBoundingBox fromConfigurationSection(@Nonnull final ConfigurationSection section, @Nullable final String path) {
 
         final String worldPath = path == null ? "world" : path + ".world";
         final String pointsPath = path == null ? "points" : path + ".points";
@@ -47,7 +47,8 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return getCuboidWorldBoundingBoxFromConfigurationSection(section, path, world);
     }
 
-    private static @Nonnull WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nonnull List<?> points, final @Nonnull World world) {
+    @Nonnull
+    private static WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(@Nonnull final ConfigurationSection section, @Nonnull final List<?> points, @Nonnull final World world) {
         final List<Vector> vectors = new ArrayList<>();
         for(final Object point : points) {
             if(!(point instanceof Vector)) {
@@ -64,7 +65,8 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return PolygonWorldBoundingBox.fromVectors(world, vectors);
     }
 
-    private static @Nonnull CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(final @Nonnull ConfigurationSection section, final @Nullable String path, final @Nonnull World world) {
+    @Nonnull
+    private static CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(@Nonnull final ConfigurationSection section, @Nullable final String path, @Nonnull final World world) {
         final String minPath = path == null ? "min" : path + ".min";
         final String maxPath = path == null ? "max" : path + ".max";
 
@@ -83,7 +85,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("world",getWorld());
-        List<Vector> points = new ArrayList<>();
+        final List<Vector> points = new ArrayList<>();
         points.addAll(getPoints());
         return map;
     }

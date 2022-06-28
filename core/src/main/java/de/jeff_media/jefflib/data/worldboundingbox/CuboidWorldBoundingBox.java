@@ -26,12 +26,12 @@ public class CuboidWorldBoundingBox extends WorldBoundingBox {
     @Nonnull
     private BoundingBox boundingBox;
 
-    public CuboidWorldBoundingBox(final @Nonnull World world, final @Nonnull BoundingBox boundingBox) {
+    public CuboidWorldBoundingBox(@Nonnull final World world, @Nonnull final BoundingBox boundingBox) {
         this.world = world;
         this.boundingBox = boundingBox;
     }
 
-    public boolean contains(Location location) {
+    public boolean contains(final Location location) {
         return boundingBox.contains(location.toVector());
     }
 

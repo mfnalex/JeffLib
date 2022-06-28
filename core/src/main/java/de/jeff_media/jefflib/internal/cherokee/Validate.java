@@ -2,7 +2,7 @@ package de.jeff_media.jefflib.internal.cherokee;
 
 import java.util.regex.Pattern;
 
-public class Validate {
+public final class Validate {
 
     private static final String DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE =
             "The value %s is not in the specified inclusive range of %s to %s";

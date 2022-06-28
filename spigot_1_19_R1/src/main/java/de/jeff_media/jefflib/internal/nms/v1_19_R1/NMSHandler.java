@@ -32,7 +32,6 @@ import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
-import java.util.Iterator;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -69,7 +68,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public Object createHologram(@Nonnull final Location location, final @Nonnull String line, @Nonnull final Hologram.Type type) {
+    public Object createHologram(@Nonnull final Location location, @Nonnull final String line, @Nonnull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final ServerLevel world = craftWorld.getHandle();
         final Component baseComponent = CraftChatMessage.fromString(line)[0];
@@ -110,7 +109,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void playTotemAnimation(final @Nonnull org.bukkit.entity.Player player) {
+    public void playTotemAnimation(@Nonnull final org.bukkit.entity.Player player) {
         final ServerPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<?> packet = new ClientboundEntityEventPacket(entityPlayer, (byte) 35);
         final Connection playerConnection = entityPlayer.connection.connection;
@@ -118,7 +117,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void setHeadTexture(final @Nonnull Block block, final @Nonnull GameProfile gameProfile) {
+    public void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
         final ServerLevel world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPos blockPosition = new BlockPos(block.getX(), block.getY(), block.getZ());
         final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition,false);

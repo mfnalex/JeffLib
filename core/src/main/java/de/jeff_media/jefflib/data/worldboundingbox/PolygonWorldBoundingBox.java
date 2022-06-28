@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class PolygonWorldBoundingBox extends WorldBoundingBox {
+public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
     @Getter
     @Setter
@@ -26,43 +26,43 @@ public class PolygonWorldBoundingBox extends WorldBoundingBox {
     private final double minY;
     private final double maxY;
 
-    private PolygonWorldBoundingBox(final @Nonnull World world, final @Nonnull List<Vector> points) {
+    private PolygonWorldBoundingBox(@Nonnull final World world, @Nonnull final List<Vector> points) {
         this.world = world;
         this.points = Collections.unmodifiableList(points);
         this.minY = points.stream().mapToDouble(Vector::getY).min().getAsDouble();
         this.maxY = points.stream().mapToDouble(Vector::getY).max().getAsDouble();
     }
 
-    public static PolygonWorldBoundingBox fromLocations(final @Nonnull World world, final @Nonnull List<Location> points) {
+    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final List<Location> points) {
         return new PolygonWorldBoundingBox(world, points.stream().map(Location::toVector).collect(Collectors.toList()));
     }
 
-    public static PolygonWorldBoundingBox fromLocations(final @Nonnull World world, final @Nonnull Location... points) {
+    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final Location... points) {
         return fromLocations(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(final @Nonnull World world, final @Nonnull Vector... points) {
+    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final Vector... points) {
         return fromVectors(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(final @Nonnull World world, final @Nonnull List<Vector> points) {
+    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final List<Vector> points) {
         return new PolygonWorldBoundingBox(world, points);
     }
 
-    public boolean contains(Location location) {
+    public boolean contains(final Location location) {
         if (points.size() < 3) {
             return false;
         }
-        int targetX = location.getBlockX(); //wide
-        int targetY = location.getBlockY(); //height
-        int targetZ = location.getBlockZ(); //depth
+        final int targetX = location.getBlockX(); //wide
+        final int targetY = location.getBlockY(); //height
+        final int targetZ = location.getBlockZ(); //depth
 
         if (targetY < minY || targetY > maxY) {
             return false;
         }
 
         boolean inside = false;
-        int npoints = points.size();
+        final int npoints = points.size();
         int xNew;
         int zNew;
         int x1;
@@ -112,7 +112,8 @@ public class PolygonWorldBoundingBox extends WorldBoundingBox {
     }
 
     @Override
-    public @Nonnull World getWorld() {
+    @Nonnull
+    public World getWorld() {
         return null;
     }
 

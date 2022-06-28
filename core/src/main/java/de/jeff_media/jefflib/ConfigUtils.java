@@ -14,16 +14,14 @@ import java.util.Objects;
 /**
  * Configuration file related methods
  */
-public class ConfigUtils {
+public final class ConfigUtils {
 
     /**
      * Turns a ConfigurationSection into a Map&lt;String,Object&gt; (just like SnakeYAML)
      */
-    public static Map<String, Object> asMap(final @Nonnull ConfigurationSection section) {
+    public static Map<String, Object> asMap(@Nonnull final ConfigurationSection section) {
         final Map<String, Object> map = new HashMap<>();
-        section.getKeys(false).forEach(key -> {
-            map.put(key, section.get(key));
-        });
+        section.getKeys(false).forEach(key -> map.put(key, section.get(key)));
         return map;
     }
 
@@ -37,7 +35,7 @@ public class ConfigUtils {
      *
      * @param filename Filename (without leading /)
      */
-    public static FileConfiguration getConfig(String filename) {
+    public static FileConfiguration getConfig(final String filename) {
         // JeffLibNotInitializedException.check();
         final File file = new File(JeffLib.getPlugin().getDataFolder(), filename);
         if (!file.exists()) {
@@ -58,9 +56,9 @@ public class ConfigUtils {
         config.setDefaults(defaultConfig);
         try {
             config.load(file);
-        } catch (IOException exception) {
+        } catch (final IOException exception) {
             throw new IllegalArgumentException("Could not file " + filename);
-        } catch (InvalidConfigurationException exception) {
+        } catch (final InvalidConfigurationException exception) {
             exception.printStackTrace();
         }
 

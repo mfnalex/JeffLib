@@ -42,7 +42,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public Object createHologram(@Nonnull final Location location, final @Nonnull String line, @Nonnull final Hologram.Type type) {
+    public Object createHologram(@Nonnull final Location location, @Nonnull final String line, @Nonnull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final World world = craftWorld.getHandle();
         final IChatBaseComponent baseComponent = CraftChatMessage.fromString(line)[0];
@@ -98,7 +98,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void playTotemAnimation(final @Nonnull Player player) {
+    public void playTotemAnimation(@Nonnull final Player player) {
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<PacketListenerPlayOut> packet = new PacketPlayOutEntityStatus(entityPlayer, (byte) 35);
         final PlayerConnection playerConnection = entityPlayer.playerConnection;
@@ -106,7 +106,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void setHeadTexture(final Block block, final @Nonnull GameProfile gameProfile) {
+    public void setHeadTexture(final Block block, @Nonnull final GameProfile gameProfile) {
         final World world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPosition blockPosition = new BlockPosition(block.getX(), block.getY(), block.getZ());
         final TileEntitySkull skull = (TileEntitySkull) world.getTileEntity(blockPosition);
@@ -114,7 +114,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public String itemStackToJson(@Nonnull org.bukkit.inventory.ItemStack itemStack) {
+    public String itemStackToJson(@Nonnull final org.bukkit.inventory.ItemStack itemStack) {
         final ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
         final NBTTagCompound compoundTag = new NBTTagCompound();
         nmsItemStack.save(compoundTag);

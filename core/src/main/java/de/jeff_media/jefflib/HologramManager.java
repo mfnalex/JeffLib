@@ -88,9 +88,6 @@ public class HologramManager {
     public static void init() {
 
 
-        /*if (JeffLib.getPlugin() == null) {
-            throw new JeffLibNotInitializedException();
-        }*/
         NMSNotSupportedException.check();
 
         if (!IS_SCHEDULED) {

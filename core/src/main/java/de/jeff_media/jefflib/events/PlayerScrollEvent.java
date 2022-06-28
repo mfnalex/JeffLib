@@ -33,7 +33,8 @@ public final class PlayerScrollEvent extends Event implements Cancellable {
 
     @Override
     @DoNotRename
-    public @Nonnull HandlerList getHandlers() {
+    @Nonnull
+    public HandlerList getHandlers() {
         return HANDLERS;
     }
 

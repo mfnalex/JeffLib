@@ -29,7 +29,7 @@ public final class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(final Block min, final Block max, final Player player, final Particle particleType, final int particleCount, final @Nullable Object data) {
+    public static BukkitRunnable drawHollowCube(final Block min, final Block max, final Player player, final Particle particleType, final int particleCount, @Nullable final Object data) {
         final World world = min.getWorld();
         if (!world.equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world");
@@ -47,7 +47,7 @@ public final class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(final Location min, final Location max, final Player player, final Particle particleType, final int particleCount, final @Nullable Object data) {
+    public static BukkitRunnable drawHollowCube(final Location min, final Location max, final Player player, final Particle particleType, final int particleCount, @Nullable final Object data) {
         final World world = min.getWorld();
         if (!Objects.requireNonNull(world).equals(max.getWorld())) {
             throw new IllegalArgumentException("Both locations must share the same world");
@@ -65,7 +65,7 @@ public final class ParticleUtils {
      * @param particleCount particle count
      * @return Runnable that shows the particles to the player
      */
-    public static BukkitRunnable drawHollowCube(final World world, final BoundingBox boundingBox, final Player player, final Particle particleType, final int particleCount, final @Nullable Object data) {
+    public static BukkitRunnable drawHollowCube(final World world, final BoundingBox boundingBox, final Player player, final Particle particleType, final int particleCount, @Nullable final Object data) {
         final Set<Location> points = GeometryUtils.getHollowCube(boundingBox.getMin().toLocation(world), boundingBox.getMax().toLocation(world), 0.5);
         return new BukkitRunnable() {
             int count;

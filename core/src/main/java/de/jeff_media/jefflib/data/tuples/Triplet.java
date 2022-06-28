@@ -19,7 +19,7 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     @Nullable
     private C third;
 
-    public Triplet(final @Nullable A first, final @Nullable B second, final @Nullable C third) {
+    public Triplet(@Nullable final A first, @Nullable final B second, @Nullable final C third) {
         super(first, second);
         this.third = third;
     }

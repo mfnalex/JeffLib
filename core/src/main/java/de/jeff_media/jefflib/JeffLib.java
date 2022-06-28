@@ -1,7 +1,6 @@
 package de.jeff_media.jefflib;
 
 import com.allatori.annotations.DoNotRename;
-import de.jeff_media.jefflib.exceptions.JeffLibNotRelocatedException;
 import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import de.jeff_media.jefflib.internal.annotations.Internal;
 import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
@@ -90,7 +89,7 @@ public final class JeffLib {
         if (plugin == null) {
             try {
                 plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
-            } catch (IllegalArgumentException exception) {
+            } catch (final IllegalArgumentException exception) {
                 throw new IllegalStateException("JeffLib: Could not get instance of the providing plugin",exception);
             }
         }

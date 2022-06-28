@@ -20,7 +20,7 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
     @Nullable
     private D fourth;
 
-    public Quartet(final @Nullable A first, final @Nullable B second, final @Nullable C third, final @Nullable D fourth) {
+    public Quartet(@Nullable final A first, @Nullable final B second, @Nullable final C third, @Nullable final D fourth) {
         super(first, second, third);
         this.fourth = fourth;
     }

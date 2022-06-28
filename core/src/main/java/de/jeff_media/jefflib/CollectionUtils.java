@@ -30,7 +30,7 @@ public final class CollectionUtils {
      * Creates a list from an iterator
      */
     public static <T> List<T> asList(final Iterator<T> iterator) {
-        List<T> list = new ArrayList<>();
+        final List<T> list = new ArrayList<>();
         while(iterator.hasNext()) {
             list.add(iterator.next());
         }

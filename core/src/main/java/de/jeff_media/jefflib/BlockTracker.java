@@ -107,7 +107,8 @@ public final class BlockTracker {
      * @param chunk Chunk to check
      * @return Collection of all blocks inside the chunk that have been placed by players
      */
-    public static @Nonnull Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
+    @Nonnull
+    public static Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
         final Collection<Block> blocks = new HashSet<>();
         final PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);
         for (final NamespacedKey key : pdc.getKeys()) {
