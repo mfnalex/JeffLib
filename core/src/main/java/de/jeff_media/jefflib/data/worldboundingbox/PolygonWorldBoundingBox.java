@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 
 public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
-    @Getter
     @Setter
     @Nonnull
     private World world;

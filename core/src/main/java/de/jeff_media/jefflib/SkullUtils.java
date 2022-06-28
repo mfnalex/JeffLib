@@ -2,7 +2,6 @@ package de.jeff_media.jefflib;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;

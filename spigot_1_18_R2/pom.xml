@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>9.0.2-SNAPSHOT</version>
+        <version>9.0.3-SNAPSHOT</version>
     </parent>
     <build>
         <plugins>
@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.22</version>
+            <version>1.18.24</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

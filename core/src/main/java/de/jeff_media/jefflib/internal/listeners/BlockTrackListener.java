@@ -17,6 +17,7 @@ import org.bukkit.plugin.Plugin;
 /**
  * Keeps track of player placed blocks
  */
+@SuppressWarnings("MethodMayBeStatic")
 @Internal
 public final class BlockTrackListener implements Listener {
 

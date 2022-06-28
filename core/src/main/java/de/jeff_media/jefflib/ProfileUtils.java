@@ -8,8 +8,6 @@ public final class ProfileUtils {
 
     /**
      * Turns a String into a UUID, whether it contains dashes or not.
-     * @param string
-     * @return
      */
     public static UUID getUUIDFromString(@Nonnull final String string) {
         if(string.length()==36) return UUID.fromString(string);

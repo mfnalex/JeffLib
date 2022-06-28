@@ -91,7 +91,7 @@ public enum WoodType {
         return null;
     }
 
-    private boolean isFungus(final String type) {
+    private static boolean isFungus(final String type) {
         switch (type) {
             case "CRIMSON":
             case "WARPED":

@@ -17,7 +17,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Reflection related methods, stolen from EssentialsX: https://github.com/EssentialsX/Essentials
+ * Reflection related methods
  */
 @SuppressWarnings("NonThreadSafeLazyInitialization")
 @UtilityClass

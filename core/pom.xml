@@ -16,7 +16,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>9.0.2-SNAPSHOT</version>
+        <version>9.0.3-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -211,7 +211,7 @@
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.18</artifactId>
-            <version>2.22.2</version>
+            <version>2.26.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>

@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;

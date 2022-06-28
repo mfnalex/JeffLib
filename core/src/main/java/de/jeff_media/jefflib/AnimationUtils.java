@@ -1,6 +1,5 @@
 package de.jeff_media.jefflib;
 
-import de.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import de.jeff_media.jefflib.internal.annotations.RequiresNMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.EntityEffect;

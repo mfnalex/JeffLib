@@ -12,10 +12,6 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
 
 /**
- * Taken from https://github.com/CroaBeast/AdvancementInfo with permission given by CroaBeast
- */
-
-/**
  * Provides information about an advancement.
  */
 public class AdvancementInfo {

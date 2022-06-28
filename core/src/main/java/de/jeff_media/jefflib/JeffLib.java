@@ -60,7 +60,7 @@ public final class JeffLib {
         final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
         final String packageName = JeffLib.class.getPackage().getName();
         if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
-            final String authors = getPlugin().getDescription().getAuthors().stream().collect(Collectors.joining(", "));
+            final String authors = String.join(", ", getPlugin().getDescription().getAuthors());
             final String plugin = getPlugin().getName() + " " + getPlugin().getDescription().getVersion();
             //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
             getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");

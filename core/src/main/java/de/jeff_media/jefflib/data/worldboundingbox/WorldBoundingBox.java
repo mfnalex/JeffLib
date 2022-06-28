@@ -85,8 +85,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
     public Map<String, Object> serialize() {
         final HashMap<String, Object> map = new HashMap<>();
         map.put("world",getWorld());
-        final List<Vector> points = new ArrayList<>();
-        points.addAll(getPoints());
+        final List<Vector> points = new ArrayList<>(getPoints());
         return map;
     }
 }

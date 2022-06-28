@@ -27,9 +27,9 @@ public class TextUtils {
     private static final int MIN_BANNER_WIDTH = 30;
     private static final char BANNER_CHAR = '#';
     private static final String EMPTY = "";
-    private static final String REGEX_HEX = "[0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F]";
+    private static final String REGEX_HEX = "[\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F]";
 
-    private static final String REGEX_HEX_GRADIENT = "<#([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>(.*?)<#/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>";
+    private static final String REGEX_HEX_GRADIENT = "<#([\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F])>(.*?)<#/([\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F])>";
     private static final Pattern PATTERN_HEX_GRADIENT = Pattern.compile(REGEX_HEX_GRADIENT);
 
     private static final String REGEX_AMPERSAND_HASH = "&#(" + REGEX_HEX + ")";
@@ -111,7 +111,7 @@ public class TextUtils {
 
     private static String replaceGradients(String text) {
 
-        text = text.replaceAll("<#/([0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F][0-9a-fA-F])>", "<#/$1><#$1>");
+        text = text.replaceAll("<#/([\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F][\\da-fA-F])>", "<#/$1><#$1>");
 
         final Matcher matcher = PATTERN_HEX_GRADIENT.matcher(text);
         final StringBuffer sb = new StringBuffer();
@@ -123,7 +123,7 @@ public class TextUtils {
         }
         matcher.appendTail(sb);
         String result = sb.toString();
-        while (result.matches(".*&x&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]&[0-9a-zA-Z]$")) {
+        while (result.matches(".*&x&[\\da-zA-Z]&[\\da-zA-Z]&[\\da-zA-Z]&[\\da-zA-Z]&[\\da-zA-Z]&[\\da-zA-Z]$")) {
             result = result.substring(0, result.length() - 14);
         }
         return result;
