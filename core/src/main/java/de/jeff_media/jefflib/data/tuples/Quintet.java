@@ -19,7 +19,7 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     @Getter
     @Setter
     @Nullable
-    private E fifth;
+    E fifth;
 
     public Quintet(@Nullable final A first,
                    @Nullable final B second,
@@ -42,5 +42,10 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fifth);
+    }
+
+    @Override
+    public String toString() {
+        return "Quintet{" + "first=" + first + ", second=" + second + ", third=" + third + ", fourth=" + fourth + ", fifth=" + fifth + '}';
     }
 }

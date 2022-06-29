@@ -18,7 +18,7 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
     @Getter
     @Setter
     @Nullable
-    private D fourth;
+    D fourth;
 
     public Quartet(@Nullable final A first, @Nullable final B second, @Nullable final C third, @Nullable final D fourth) {
         super(first, second, third);
@@ -37,5 +37,10 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), fourth);
+    }
+
+    @Override
+    public String toString() {
+        return "{Quartet: first=" + first + ", second=" + second + ", third=" + third + ", fourth=" + fourth + '}';
     }
 }

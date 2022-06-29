@@ -17,7 +17,7 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     @Getter
     @Setter
     @Nullable
-    private C third;
+    C third;
 
     public Triplet(@Nullable final A first, @Nullable final B second, @Nullable final C third) {
         super(first, second);
@@ -36,5 +36,10 @@ public class Triplet<A, B, C> extends Pair<A, B> {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), third);
+    }
+
+    @Override
+    public String toString() {
+        return "Triplet{" + "first=" + first + ", second=" + second + ", third=" + third + '}';
     }
 }

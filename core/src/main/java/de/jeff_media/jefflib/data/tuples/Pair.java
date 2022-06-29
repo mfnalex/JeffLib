@@ -15,15 +15,20 @@ public class Pair<A, B> {
     @Getter
     @Setter
     @Nullable
-    private A first;
+    A first;
     @Getter
     @Setter
     @Nullable
-    private B second;
+    B second;
 
     public Pair(@Nullable final A first, @Nullable final B second) {
         this.first = first;
         this.second = second;
+    }
+
+    @Override
+    public String toString() {
+        return "Pair{" + "first=" + first + ", second=" + second + '}';
     }
 
     @Override
