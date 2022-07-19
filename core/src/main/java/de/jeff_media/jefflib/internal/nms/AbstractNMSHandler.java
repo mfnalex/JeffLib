@@ -41,4 +41,5 @@ public interface AbstractNMSHandler {
 
     void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
+	double[] getTps();
 }

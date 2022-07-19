@@ -15,6 +15,9 @@ import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Internet and network related methodds
+ */
 @UtilityClass
 public final class NetUtils {
 
@@ -54,12 +57,13 @@ public final class NetUtils {
     }
 
     /**
-     * Returns the public IP address of the server, or null if it couldn't find it out. Blocks the main thread.
+     * Returns the public IP address of the server, or null if it couldn't find it out. This method uses a blocking
+     * request to <a href="http://checkip.amazonaws.com">http://checkip.amazonaws.com</a>
      */
     @Nullable
     public static String getIp() {
         try {
-            final List<String> answer = downloadToStringList("https://ifconfig.me/ip");
+            final List<String> answer = downloadToStringList("http://checkip.amazonaws.com");
             if(answer.isEmpty()) return null;
             return answer.get(0);
         } catch (final IOException e) {

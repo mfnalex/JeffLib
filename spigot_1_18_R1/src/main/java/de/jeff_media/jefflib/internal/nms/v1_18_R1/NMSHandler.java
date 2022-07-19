@@ -25,6 +25,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack;
@@ -145,6 +146,11 @@ public class NMSHandler implements AbstractNMSHandler {
                 }
             }
         }
+    }
+
+    @Override
+    public double[] getTps() {
+        return ((CraftServer)Bukkit.getServer()).getHandle().getServer().recentTps;
     }
 
 

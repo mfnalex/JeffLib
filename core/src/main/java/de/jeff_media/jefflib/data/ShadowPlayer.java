@@ -31,6 +31,8 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
@@ -802,6 +804,11 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void stopSound(@Nonnull final String s, @Nullable final SoundCategory soundCategory) {
+
+    }
+
+    @Override
+    public void stopSound(@NotNull SoundCategory soundCategory) {
 
     }
 

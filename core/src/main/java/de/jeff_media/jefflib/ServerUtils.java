@@ -1,7 +1,9 @@
 package de.jeff_media.jefflib;
 
+import de.jeff_media.jefflib.data.TPS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -54,6 +56,13 @@ public class ServerUtils {
         } catch (final NoSuchFieldException | IllegalAccessException | NoSuchMethodException | InvocationTargetException exception) {
             return ServerLifePhase.UNKNOWN;
         }
+    }
+
+    /**
+     * Gets the server's last {@link de.jeff_media.jefflib.data.TPS}
+     */
+    public static TPS getTps() {
+        return new TPS(JeffLib.getNMSHandler().getTps());
     }
 
 }

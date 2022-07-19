@@ -9,6 +9,12 @@ import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
 
+/**
+ * Caches player names, UUIDs, Skins, etc.
+ *
+ * @deprecated Draft API. Will be using async loading / saving and maybe SQLite
+ */
+@Deprecated
 public final class PlayerCache {
 
     private static final File cacheFile;

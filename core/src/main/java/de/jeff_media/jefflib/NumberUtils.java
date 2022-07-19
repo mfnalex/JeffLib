@@ -4,6 +4,9 @@ import lombok.experimental.UtilityClass;
 
 import javax.annotation.Nullable;
 
+/**
+ * Number parsing related methods
+ */
 @UtilityClass
 public class NumberUtils {
 
