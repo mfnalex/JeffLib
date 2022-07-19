@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a polygon region linked to a {@link World}
+ */
 public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
     @Setter

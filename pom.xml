@@ -5,12 +5,12 @@
 
     <groupId>de.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>${revision}</version>
+    <version>9.3.2-SNAPSHOT</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 
     <properties>
-        <revision>9.2.0-SNAPSHOT</revision>
+        <revision>9.3.2-SNAPSHOT</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>

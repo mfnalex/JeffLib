@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>${revision}</version>
+        <version>9.3.2-SNAPSHOT</version>
     </parent>
     <build>
         <plugins>

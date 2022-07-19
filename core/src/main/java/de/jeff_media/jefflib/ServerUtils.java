@@ -15,6 +15,19 @@ import java.lang.reflect.Method;
 @UtilityClass
 public class ServerUtils {
 
+    private static final Field CURRENT_TICK_FIELD;
+
+    static {
+        Field tmpCurrentTickField;
+        try {
+            tmpCurrentTickField = Bukkit.getScheduler().getClass().getDeclaredField("currentTick");
+            tmpCurrentTickField.setAccessible(true);
+        } catch (Exception ignored) {
+            tmpCurrentTickField = null;
+        }
+        CURRENT_TICK_FIELD = tmpCurrentTickField;
+    }
+
     /**
      * Gets whether this server is running MockBukkit
      */

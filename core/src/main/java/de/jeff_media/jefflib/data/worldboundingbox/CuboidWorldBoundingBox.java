@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Represents a {@link BoundingBox} linked to a {@link World}
+ * Represents a cuboid region linked to a {@link World}
  */
 public class CuboidWorldBoundingBox extends WorldBoundingBox {
     @Getter

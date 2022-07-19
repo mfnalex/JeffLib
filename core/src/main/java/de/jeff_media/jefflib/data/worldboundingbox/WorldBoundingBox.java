@@ -18,6 +18,9 @@ import java.util.List;
 import java.util.Map;
 
 
+/**
+ * Represents a region inside a {@link World}
+ */
 public abstract class WorldBoundingBox implements ConfigurationSerializable {
 
     @Nonnull abstract World getWorld();

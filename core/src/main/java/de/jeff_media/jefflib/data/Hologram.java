@@ -18,6 +18,9 @@ import javax.annotation.Nullable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a Hologram
+ */
 public class Hologram implements ConfigurationSerializable {
 
     private static final double LINE_OFFSET_DEFAULT = -0.25;
