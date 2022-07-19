@@ -19,11 +19,23 @@ JeffLib includes a ton of useful methods that you would normally have to write y
 
 Just include JeffLib as dependency in your pom.xml.
 
+**Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
+
+```java
+public class MyPlugin extends JavaPlugin {
+    {
+        // Only needed if you access JeffLib before your onEnable() gets called
+        JeffLib.init();
+    }
+}
+```
+
 **Note:** If you use methods annotated with "@RequiresNMS", you have to enable NMS support:
 
 ```java
 public class MyPlugin extends JavaPlugin {
     {
+        // Only needed if you use methods annotated with @RequiresNMS
         JeffLib.enableNMS();
     }
 }
