@@ -19,12 +19,12 @@ JeffLib includes a ton of useful methods that you would normally have to write y
 
 Just include JeffLib as dependency in your pom.xml.
 
-**Note:** JeffLib has to be initialized for some methods to work. The best way to do this is in your plugin's Instance Initialization Block:
+**Note:** If you use methods annotated with "@RequiresNMS", you have to enable NMS support:
 
 ```java
 public class MyPlugin extends JavaPlugin {
     {
-        JeffLib.init(this);
+        JeffLib.enableNMS();
     }
 }
 ```
