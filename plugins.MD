@@ -1,4 +1,4 @@
-Plugins using JeffLib:
+List of my own plugins using JeffLib:
 
 - ChestSort
 - AngelChest Plus
