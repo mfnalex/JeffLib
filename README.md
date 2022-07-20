@@ -56,7 +56,7 @@ public class MyPlugin extends JavaPlugin {
 
 ```xml
 <dependency>
-    <groupId>de.jeff_media</groupId>
+    <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
     <version><!-- Check latest verion in pom.xml --></version>
     <scope>compile</scope>
@@ -75,7 +75,7 @@ public class MyPlugin extends JavaPlugin {
         <minimizeJar>true</minimizeJar>
         <relocations>
             <relocation>
-                <pattern>de.jeff_media.jefflib</pattern>
+                <pattern>com.jeff_media.jefflib</pattern>
                 <shadedPattern>YOUR.PACKAGE</shadedPattern>
             </relocation>
         </relocations>

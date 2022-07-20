@@ -3,7 +3,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>JeffLib-core</artifactId>
-    <!--<version>${project.parent.version}</version>-->
+
     <packaging>jar</packaging>
 
     <properties>
@@ -14,19 +14,12 @@
     </properties>
 
     <parent>
-        <groupId>de.jeff_media</groupId>
+        <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>9.3.2-SNAPSHOT</version>
+        <version>TEST2-SNAPSHOT</version>
     </parent>
 
     <build>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav</artifactId>
-                <version>1.0-beta-2</version>
-            </extension>
-        </extensions>
         <resources>
             <resource>
                 <directory>core/src/main/resources</directory>
@@ -34,15 +27,6 @@
             </resource>
         </resources>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
-                <configuration>
-                    <source>${java.version}</source>
-                    <target>${java.version}</target>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -53,22 +37,10 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.1</version>
-                <executions>
-                    <execution>
-                        <id>attach-sources</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.2</version>
                 <configuration> <!-- add this to disable checking -->
+                    <source>${java.version}</source>
                     <failOnError>true</failOnError>
                     <failOnWarnings>false</failOnWarnings>
                     <links>
@@ -110,47 +82,11 @@
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-shade-plugin</artifactId>
-                <version>3.3.0</version>
-                <configuration>
-                    <minimizeJar>true</minimizeJar>
-                </configuration>
-                <executions>
-                    <execution>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>shade</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.0.0-M5</version>
                 <configuration>
                     <trimStackTrace>false</trimStackTrace>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-enforcer-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>enforce-maven</id>
-                        <goals>
-                            <goal>enforce</goal>
-                        </goals>
-                        <configuration>
-                            <rules>
-                                <requireMavenVersion>
-                                    <version>3.1.1</version>
-                                </requireMavenVersion>
-                            </rules>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>
@@ -165,7 +101,7 @@
             <url>https://papermc.io/repo/repository/maven-public/</url>
         </repository>
         <repository>
-            <id>jeff-media-gbr</id>
+            <id>jeff-media-public</id>
             <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
         </repository>
         <repository>
@@ -234,12 +170,7 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.24</version>
-            <scope>provided</scope>
-        </dependency>
+
 
         <dependency>
             <groupId>me.clip</groupId>
@@ -283,20 +214,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!--<dependency>
-            <groupId>com.Th0rgal</groupId>
-            <artifactId>Oraxen</artifactId>
-            <version>1.116.1</version>
-            <scope>provided</scope>
-        </dependency>-->
-
-        <!--<dependency>
-            <groupId>io.papermc</groupId>
-            <artifactId>paperlib</artifactId>
-            <version>1.0.4</version>
-            <scope>compile</scope>
-        </dependency>-->
-
         <dependency>
             <groupId>com.github.LoneDev6</groupId>
             <artifactId>api-itemsadder</artifactId>
@@ -326,25 +243,5 @@
         <!-- MMOItems End -->
     </dependencies>
 
-    <distributionManagement>
-        <site>
-            <id>jeff-media-javadocs</id>
-            <url>dav:https://hub.jeff-media.com/nexus/repository/jeff-media-javadocs/</url>
-        </site>
-    </distributionManagement>
-
-    <!--    <reporting>-->
-    <!--        <plugins>-->
-    <!--            <plugin>-->
-    <!--                <groupId>org.apache.maven.plugins</groupId>-->
-    <!--                <artifactId>maven-javadoc-plugin</artifactId>-->
-    <!--                <configuration>-->
-    <!--                    <links>-->
-    <!--                        <link>https://hub.spigotmc.org/javadocs/bukkit/</link>-->
-    <!--                    </links>-->
-    <!--                </configuration>-->
-    <!--            </plugin>-->
-    <!--        </plugins>-->
-    <!--    </reporting>-->
 
 </project>
