@@ -58,6 +58,10 @@ public class Cooldown {
         this.timeSupplier = timeSupplier;
     }
 
+    public void removeCooldown(final Object object) {
+        cooldowns.remove(getUid(object));
+    }
+
     private void clearOldEntries() {
         final long now = getTime();
         cooldowns.entrySet().removeIf(entry -> now >= entry.getValue());
