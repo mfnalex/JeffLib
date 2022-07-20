@@ -13,33 +13,7 @@
 </p>
 <!--- Buttons end -->
 
-JeffLib includes a ton of useful methods that you would normally have to write yourself.
-
-## Usage
-
-Just include JeffLib as dependency in your pom.xml.
-
-**Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
-
-```java
-public class MyPlugin extends JavaPlugin {
-    {
-        // Only needed if you access JeffLib before your onEnable() gets called
-        JeffLib.init();
-    }
-}
-```
-
-**Note:** If you use methods annotated with "@RequiresNMS", you have to enable NMS support:
-
-```java
-public class MyPlugin extends JavaPlugin {
-    {
-        // Only needed if you use methods annotated with @RequiresNMS
-        JeffLib.enableNMS();
-    }
-}
-```
+JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an overview.
 
 ## Maven
 
@@ -84,7 +58,7 @@ public class MyPlugin extends JavaPlugin {
                 <artifact>*:*</artifact>
                 <excludeDefaults>false</excludeDefaults>
                 <includes>
-                    <include>de/jeff_media/jefflib/internal/nms/**</include>
+                    <include>com/jeff_media/jefflib/internal/nms/**</include>
                 </includes>
             </filter>
             <filter>
@@ -106,6 +80,32 @@ public class MyPlugin extends JavaPlugin {
 </plugin>
 ```
 
+## Usage
+
+Just include JeffLib as dependency in your pom.xml.
+
+**Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
+
+```java
+public class MyPlugin extends JavaPlugin {
+    {
+        // Only needed if you access JeffLib before your onEnable() gets called
+        JeffLib.init();
+    }
+}
+```
+
+**Note:** If you use methods annotated with "@RequiresNMS", you have to enable NMS support:
+
+```java
+public class MyPlugin extends JavaPlugin {
+    {
+        // Only needed if you use methods annotated with @RequiresNMS
+        JeffLib.enableNMS();
+    }
+}
+```
+
 ### Obfuscation settings
 
 If you're using allatori to obfuscate your plugin, you need the following additional settings:
@@ -115,10 +115,6 @@ If you're using allatori to obfuscate your plugin, you need the following additi
   <class template="class **.nms.**" />
 </ignore-classes>
 ```
-
-## How to build yourself
-
-Coming soon
 
 ## JavaDocs
 
