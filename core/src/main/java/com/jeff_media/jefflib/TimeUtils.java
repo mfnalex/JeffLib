@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 @UtilityClass
 public class TimeUtils {
 
-    private static final int milliSecondsPerTick = 50;
+    public static final int MILLISECONDS_PER_TICK = 50;
     private static final HashMap<String, Long> measurements = new HashMap<>();
 
     /**
@@ -45,7 +45,7 @@ public class TimeUtils {
      * @return percentage of tick
      */
     public static double milliSecondsToTickPercentage(final long milliSeconds) {
-        return (double) (milliSeconds / milliSecondsPerTick * 100);
+        return (double) (milliSeconds / MILLISECONDS_PER_TICK * 100);
     }
 
     /**

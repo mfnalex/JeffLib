@@ -30,6 +30,14 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
         this.fifth = fifth;
     }
 
+    public static <A, B, C, D, E> Quintet<A, B, C, D, E> of(@Nullable final A first,
+                                                               @Nullable final B second,
+                                                               @Nullable final C third,
+                                                               @Nullable final D fourth,
+                                                               @Nullable final E fifth) {
+        return new Quintet<>(first, second, third, fourth, fifth);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

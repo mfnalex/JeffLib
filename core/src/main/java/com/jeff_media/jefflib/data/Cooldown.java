@@ -1,4 +1,4 @@
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.data;
 
 import org.bukkit.entity.Entity;
 
@@ -62,7 +62,10 @@ public class Cooldown {
         cooldowns.remove(getUid(object));
     }
 
-    private void clearOldEntries() {
+    /**
+     * Clears expired cooldown entries
+     */
+    public void clearOldEntries() {
         final long now = getTime();
         cooldowns.entrySet().removeIf(entry -> now >= entry.getValue());
     }
@@ -78,7 +81,6 @@ public class Cooldown {
      * Sets the cooldown for this object
      */
     public void setCooldown(final Object object, final long duration, final TimeUnit timeUnit) {
-        clearOldEntries();
         cooldowns.put(getUid(object),getTime() + precision.convert(duration, timeUnit));
     }
 
@@ -86,7 +88,6 @@ public class Cooldown {
      * Gets when the cooldown for this object expires, or 0 if there is no cooldown or if it has expired.
      */
     public long getCooldownEnd(final Object object) {
-        clearOldEntries();
         final Object uid = getUid(object);
         final long end = cooldowns.getOrDefault(uid,0L);
         if(end == 0) return 0;
@@ -100,7 +101,6 @@ public class Cooldown {
      * Gets whether this object is on cooldown
      */
     public boolean hasCooldown(final Object object) {
-        clearOldEntries();
         final Object uid = getUid(object);
         final long end = getCooldownEnd(uid);
         return end > getTime();
@@ -110,7 +110,6 @@ public class Cooldown {
      * Gets the remaining duration until the cooldown for this object requires, in the given {@link TimeUnit}, or 0 if there is no cooldown for this object or if it has exipred.
      */
     public long getCooldownRemaining(final Object object, final TimeUnit timeUnit) {
-        clearOldEntries();
         final long endTime = getCooldownEnd(object);
         if(endTime == 0) return 0;
         return timeUnit.convert(endTime - getTime(),precision);

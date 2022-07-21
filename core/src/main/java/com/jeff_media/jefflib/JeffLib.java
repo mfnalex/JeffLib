@@ -12,17 +12,30 @@ import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
+import java.net.URLClassLoader;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.logging.Logger;
 
 /**
  * Main class of the library, has to be initialized for certain methods to work.
  */
 @UtilityClass
 public final class JeffLib {
+
+    private static boolean checkedRelocation = false;
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
@@ -44,39 +57,60 @@ public final class JeffLib {
         //ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT) + "WorldBoundingBox");
 
         try {
-            version = FileUtils.readFileFromResources(plugin, "/jefflib.version").get(0);
-        } catch (final Throwable ignored) {
-
+            try(final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(JeffLib.class.getResourceAsStream("/jefflib.version")), StandardCharsets.UTF_8))) {
+                version = reader.readLine();
+            }
+        } catch (final Throwable ex) {
+            //ex.printStackTrace();
         }
+    }
+
+    public static Logger getLogger() {
+        if (getPlugin() != null) return getPlugin().getLogger();
+        return Bukkit.getLogger();
     }
 
     /**
      * Checks for proper relocation
      */
     private static void checkRelocation() {
-        if (ServerUtils.isRunningMockBukkit()) return;
-        final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-        final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-        final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
-        final String packageName = JeffLib.class.getPackage().getName();
-        if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
-            final String authors = String.join(", ", getPlugin().getDescription().getAuthors());
-            final String plugin = getPlugin().getName() + " " + getPlugin().getDescription().getVersion();
-            //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-            getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+        if(checkedRelocation) return;
+        try {
+            if (ServerUtils.isRunningMockBukkit()) return;
+            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
+            final String packageName = JeffLib.class.getPackage().getName();
+            if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
+                final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
+                final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
+                //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+            }
+        } catch (final Throwable ignored) {
+            return;
         }
+        checkedRelocation = true;
     }
 
     /**
      * Only for Unit Tests
+     *
      * @internal
      */
     @Internal
     static void setPluginMock(final Plugin plugin) throws IllegalAccessException {
-        if(!ServerUtils.isRunningMockBukkit()) {
+        if (!ServerUtils.isRunningMockBukkit()) {
             throw new IllegalAccessException();
         }
         JeffLib.plugin = plugin;
+    }
+
+    private static Plugin getPlugin0() {
+        if (plugin == null) {
+            plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
+        }
+        return plugin;
     }
 
     /**
@@ -87,13 +121,61 @@ public final class JeffLib {
     @DoNotRename
     public static Plugin getPlugin() {
         if (plugin == null) {
+            checkRelocation();
             try {
                 plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
-            } catch (final IllegalArgumentException exception) {
-                throw new IllegalStateException("JeffLib: Could not get instance of the providing plugin",exception);
+            } catch (final IllegalArgumentException | IllegalStateException exception) {
+                List<String> errorLocation = new ArrayList<>();
+                String errorLocation2 = "";
+                try {
+                    final StackTraceElement[] elements = Thread.currentThread().getStackTrace();
+                    final PluginDescriptionFile description = getPluginDescriptionFile();
+                    final String main = description.getMain();
+                    StackTraceElement firstFoundElement = null;
+                    for (final StackTraceElement element : elements) {
+                        if (element.getClassName().equals(main)) {
+                            if (firstFoundElement == null) firstFoundElement = element;
+                            final String lineNumber = element.getLineNumber() <= 0 ? "?" : String.valueOf(element.getLineNumber());
+                            errorLocation.add(element.getClassName() + "." + element.getMethodName() + "(" + element.getFileName() + ":" + lineNumber + ")");
+                        }
+                    }
+                    if (firstFoundElement != null) {
+                        final String lineNumber = firstFoundElement.getLineNumber() <= 0 ? "?" : String.valueOf(firstFoundElement.getLineNumber());
+                        errorLocation2 = firstFoundElement.getFileName() + " at line " + lineNumber;
+                    }
+                } catch (final Throwable ignored) {
+
+                }
+                Logger logger = Bukkit.getLogger();
+                if (errorLocation.isEmpty()) {
+                    logger.severe("[JeffLib] Oh no! I couldn't find the instance of your plugin!");
+                    logger.severe("[JeffLib] It seems like you're trying to use JeffLib before your plugin was enabled by the PluginManager.");
+                    logger.severe("[JeffLib]");
+                    logger.severe("[JeffLib] Please either wait until your plugin's onLoad() or onEnable() method was called, or call");
+                    logger.severe("[JeffLib] \"JeffLib.init(this)\" in your plugin's constructor or init block.");
+                } else {
+                    logger.severe("[JeffLib] Oh no! You're trying to access one of JeffLib's methods before your plugin was enabled at the following location:");
+                    logger.severe("[JeffLib]");
+                    for (String element : errorLocation) {
+                        logger.severe("[JeffLib]   " + element);
+                    }
+                    logger.severe("[JeffLib]");
+                    logger.severe("[JeffLib] Please call \"JeffLib.init(this)\" before doing whatever you do in " + errorLocation2 + ", or wait until your plugin's onLoad() or onEnable() method was called.");
+                }
+
+                throw new IllegalStateException();
             }
         }
+
         return plugin;
+    }
+
+    private static PluginDescriptionFile getPluginDescriptionFile() throws NoSuchFieldException, IllegalAccessException {
+        URLClassLoader loader = (URLClassLoader) JeffLib.class.getClassLoader();
+        Field descriptionField = loader.getClass().getDeclaredField("description");
+        descriptionField.setAccessible(true);
+        PluginDescriptionFile description = (PluginDescriptionFile) descriptionField.get(loader);
+        return description;
     }
 
     /**
@@ -116,6 +198,7 @@ public final class JeffLib {
 
     /**
      * Returns the {@link AbstractNMSHandler}.
+     *
      * @nms
      * @internal
      */
@@ -123,7 +206,7 @@ public final class JeffLib {
     @Internal
     @RequiresNMS
     public static AbstractNMSHandler getNMSHandler() {
-        if(abstractNmsHandler == null) {
+        if (abstractNmsHandler == null) {
             throw new NMSNotSupportedException();
         }
         return abstractNmsHandler;
@@ -171,10 +254,12 @@ public final class JeffLib {
      */
     public static void init(final Plugin plugin) {
         JeffLib.plugin = plugin;
+        checkRelocation();
     }
 
     /**
      * Initializes NMS features. This needs to be called for all methods annotated with {@link RequiresNMS}
+     *
      * @throws NMSNotSupportedException when the currently NMS version is not supported by this version of JeffLib
      * @nms
      */
@@ -184,8 +269,9 @@ public final class JeffLib {
         final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         try {
             abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
-        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException | NoSuchMethodException | InvocationTargetException exception) {
-            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().toString());
+        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException |
+                       NoSuchMethodException | InvocationTargetException exception) {
+            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName());
         }
     }
 

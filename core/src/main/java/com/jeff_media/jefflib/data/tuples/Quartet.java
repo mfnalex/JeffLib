@@ -25,6 +25,10 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
         this.fourth = fourth;
     }
 
+    public static <A, B, C, D> Quartet<A, B, C, D> of(@Nullable final A first, @Nullable final B second, @Nullable final C third, @Nullable final D fourth) {
+        return new Quartet<>(first, second, third, fourth);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -41,6 +45,6 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
     @Override
     public String toString() {
-        return "{Quartet: first=" + first + ", second=" + second + ", third=" + third + ", fourth=" + fourth + '}';
+        return "Quartet{first=" + first + ", second=" + second + ", third=" + third + ", fourth=" + fourth + '}';
     }
 }

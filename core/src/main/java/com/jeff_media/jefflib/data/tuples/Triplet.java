@@ -24,6 +24,10 @@ public class Triplet<A, B, C> extends Pair<A, B> {
         this.third = third;
     }
 
+    public static <A, B, C> Triplet<A, B, C> of(@Nullable final A first, @Nullable final B second, @Nullable final C third) {
+        return new Triplet<>(first, second, third);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;

@@ -58,6 +58,27 @@ public class NumberUtils {
     }
 
     /**
+     * Checks if the given number is close to or lower than zero
+     */
+    public static boolean isZeroOrNegative(final double number) {
+        return isZero(number) || number <= EPSILON_D;
+    }
+
+    /**
+     * Checks if the given number is close to or lower than zero
+     */
+    public static boolean isZeroOrNegative(final float number) {
+        return isZero(number) || number <= EPSILON_F;
+    }
+
+    /**
+     * Checks if the given number is close to or lower than zero
+     */
+    public static boolean isZeroOrNegative(@Nullable final Number number) {
+        return isZero(number) || number.doubleValue() <= EPSILON_D;
+    }
+
+    /**
      * Checks if a given String is an Integer.
      */
     public boolean isInteger(final String text) {

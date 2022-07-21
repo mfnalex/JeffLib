@@ -76,6 +76,10 @@ public class McVersion implements Comparable<McVersion> {
 
     @Override
     public String toString() {
+        return getName();
+    }
+
+    public String getName() {
         if (patch == 0) {
             return major + "." + minor;
         } else {

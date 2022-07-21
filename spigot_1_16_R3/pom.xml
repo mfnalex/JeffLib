@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>TEST2-SNAPSHOT</version>
+        <version>10.0.0</version>
     </parent>
     <dependencies>
         <dependency>

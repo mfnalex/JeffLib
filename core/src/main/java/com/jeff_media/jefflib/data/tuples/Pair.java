@@ -26,6 +26,10 @@ public class Pair<A, B> {
         this.second = second;
     }
 
+    public static <A, B> Pair<A, B> of(@Nullable final A first, @Nullable final B second) {
+        return new Pair<>(first, second);
+    }
+
     @Override
     public String toString() {
         return "Pair{" + "first=" + first + ", second=" + second + '}';

@@ -37,8 +37,12 @@ public final class ClassUtils {
     /**
      * Returns the current class name from which this method was called from
      */
+    public static String getCurrentClassName(int offset) {
+        return Thread.currentThread().getStackTrace()[2 + offset].getClassName();
+    }
+
     public static String getCurrentClassName() {
-        return Thread.currentThread().getStackTrace()[2].getClassName();
+        return getCurrentClassName(1);
     }
 
     public static Class<?> getCurrentClass() {
@@ -57,13 +61,21 @@ public final class ClassUtils {
      * Returns the current class file name from which this method was called from
      */
     public static String getCurrentClassFileName() {
-        return Thread.currentThread().getStackTrace()[2].getFileName();
+        return getCurrentClassFileName(1);
+    }
+
+    public static String getCurrentClassFileName(int offset) {
+        return Thread.currentThread().getStackTrace()[2 + offset].getFileName();
     }
 
     /**
      * Returns the current method name from which this method was called from
      */
+    public static String getCurrentMethodName(int offset) {
+        return Thread.currentThread().getStackTrace()[2 + offset].getMethodName();
+    }
+
     public static String getCurrentMethodName() {
-        return Thread.currentThread().getStackTrace()[2].getMethodName();
+        return getCurrentMethodName(1);
     }
 }

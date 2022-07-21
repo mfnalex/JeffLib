@@ -1,5 +1,6 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.data.Config;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -35,34 +36,8 @@ public final class ConfigUtils {
      *
      * @param filename Filename (without leading /)
      */
-    public static FileConfiguration getConfig(final String filename) {
-        // JeffLibNotInitializedException.check();
-        final File file = new File(JeffLib.getPlugin().getDataFolder(), filename);
-        if (!file.exists()) {
-            JeffLib.getPlugin().saveResource(filename, false);
-        }
-
-        final YamlConfiguration defaultConfig = new YamlConfiguration();
-
-        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename); final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
-            defaultConfig.load(reader);
-        } catch (final IOException exception) {
-            throw new IllegalArgumentException("Could not load resource " + filename);
-        } catch (final InvalidConfigurationException exception) {
-            throw new IllegalArgumentException("Invalid default config for " + filename, exception);
-        }
-
-        final YamlConfiguration config = new YamlConfiguration();
-        config.setDefaults(defaultConfig);
-        try {
-            config.load(file);
-        } catch (final IOException exception) {
-            throw new IllegalArgumentException("Could not file " + filename);
-        } catch (final InvalidConfigurationException exception) {
-            exception.printStackTrace();
-        }
-
-        return config;
+    public static Config getConfig(final String filename) {
+        return new Config(filename);
     }
 
 }

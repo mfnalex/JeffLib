@@ -35,7 +35,6 @@ public class TestMcVersion extends UnitTest {
 
     @Test
     public void testComparable() {
-
         final McVersion v1_8_8 = new McVersion(1,8,8);
         final McVersion v1_18 = new McVersion(1,18);
         final McVersion v1_18_2 = new McVersion(1,18,2);
@@ -44,5 +43,12 @@ public class TestMcVersion extends UnitTest {
         final List<McVersion> unsorted = Arrays.asList(v1_18, v1_8_8, v1_19, v1_18_2);
         final McVersion[] sorted = new ArrayList<>(unsorted).stream().sorted().toArray(McVersion[]::new);
         Assertions.assertArrayEquals(sorted, new McVersion[] {v1_8_8, v1_18, v1_18_2, v1_19});
+    }
+
+    @Test
+    public void testToString() {
+        Assertions.assertEquals("1.19.1", new McVersion(1,19,1).toString());
+        Assertions.assertEquals("1.17", new McVersion(1,17).toString());
+        Assertions.assertEquals("1.17", new McVersion(1,17,0).getName());
     }
 }

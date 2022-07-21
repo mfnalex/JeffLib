@@ -207,7 +207,36 @@ public class TextUtils {
      * Replaces placeholders in a list of Strings.
      * @see #replaceInString(String, Map)
      */
-    public List<String> replaceInString(final List<String> strings, final HashMap<String,String> placeholders) {
+    public List<String> replaceInString(final List<String> strings, final Map<String,String> placeholders) {
+        strings.replaceAll(string -> replaceInString(string, placeholders));
+        return strings;
+    }
+
+    /**
+     * Replaces placeholders in a String. Example:
+     * <pre>
+     * String result = replaceInString("{name} is {age} years old.",
+     *      "{name}", "mfnalex",
+     *      "{age}","27"
+     * );
+     * </pre>
+     */
+    public String replaceInString(String string, final String... placeholders) {
+        if(placeholders.length % 2 != 0) {
+            throw new IllegalArgumentException("placeholders must have an even length");
+        }
+        for(int i = 0; i < placeholders.length; i += 2) {
+            if(placeholders[i]==null || placeholders[i+1]==null) continue;
+            string = string.replace(placeholders[i], placeholders[i+1]);
+        }
+        return string;
+    }
+
+    /**
+     * Replaces placeholders in a list of Strings.
+     * @see #replaceInString(String, String...) 
+     */
+    public List<String> replaceInString(final List<String> strings, final String... placeholders) {
         strings.replaceAll(string -> replaceInString(string, placeholders));
         return strings;
     }
