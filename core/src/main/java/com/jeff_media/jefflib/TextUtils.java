@@ -10,7 +10,6 @@ import org.bukkit.plugin.Plugin;
 import javax.annotation.Nullable;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
@@ -37,7 +36,7 @@ public class TextUtils {
     private static final String REGEX_XML_LIKE_HASH = "<#(" + REGEX_HEX + ")>";
     private static final Pattern PATTERN_XML_LIKE_HASH = Pattern.compile(REGEX_XML_LIKE_HASH);
     private static AtomicReference<Plugin> itemsAdderPlugin;
-    private static AtomicReference<Plugin> placerholderApiPlugin;
+    private static AtomicReference<Plugin> placeholderApiPlugin;
 
     /**
      * Prints a banner / headline to console
@@ -177,10 +176,10 @@ public class TextUtils {
     @SuppressWarnings("NonThreadSafeLazyInitialization")
     public static String replacePlaceholders(String text, @Nullable final OfflinePlayer player) {
         //System.out.println("Replacing placeholders");
-        if (placerholderApiPlugin == null) {
-            placerholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
+        if (placeholderApiPlugin == null) {
+            placeholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
         }
-        if (placerholderApiPlugin.get() != null) {
+        if (placeholderApiPlugin.get() != null) {
             text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
         }
         return text;
@@ -234,7 +233,7 @@ public class TextUtils {
 
     /**
      * Replaces placeholders in a list of Strings.
-     * @see #replaceInString(String, String...) 
+     * @see #replaceInString(String, String...)
      */
     public List<String> replaceInString(final List<String> strings, final String... placeholders) {
         strings.replaceAll(string -> replaceInString(string, placeholders));
