@@ -17,7 +17,7 @@ public final class GeometryUtils {
      * Gets a set of all Locations in a specific distance describing a hollow cube around two locations
      *
      * @param min      First location
-     * @param max      Sedond location
+     * @param max      Second location
      * @param distance Distance between locations
      * @return Set of all locations describing a hollow cube around both locations
      */
