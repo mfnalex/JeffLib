@@ -1,8 +1,9 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
+import com.jeff_media.jefflib.ItemStackUtils;
+import com.jeff_media.jefflib.data.*;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.PacketUtils;
-import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -27,12 +28,14 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import java.io.IOException;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -153,5 +156,23 @@ public class NMSHandler implements AbstractNMSHandler {
         return ((CraftServer)Bukkit.getServer()).getHandle().getServer().recentTps;
     }
 
+    @Override
+    public int getItemStackSizeInBytes(org.bukkit.inventory.ItemStack itemStack) throws IOException {
+        ByteCounter counter = new ByteCounter();
+        CompoundTag tag = CraftItemStack.asNMSCopy(itemStack).getTag();
+        if(tag == null) return ItemStackUtils.NO_DATA;
+        tag.write(counter);
+        return counter.getBytes();
+    }
+
+    @Override
+    public NBTItemStack getNBTItemStack(org.bukkit.inventory.ItemStack itemStack) {
+        return new HatchedNBTItemStack(itemStack);
+    }
+
+    @Override
+    public NBTEntity getNBTEntity(org.bukkit.entity.Entity entity) {
+        return new HatchedNBTEntity(entity);
+    }
 
 }

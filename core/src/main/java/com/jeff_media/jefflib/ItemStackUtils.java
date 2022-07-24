@@ -1,6 +1,8 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
+import com.jeff_media.jefflib.data.NBTItemStack;
+import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.meta.ItemMeta;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -25,9 +28,40 @@ import java.util.*;
 public final class ItemStackUtils {
 
     /**
+     * Magic value to identify "no NBT data"
+     * @see #getSizeInBytes(ItemStack)
+     */
+    public static final int NO_DATA = -1;
+    /**
+     * Magic value to identify "could not parse NBT data"
+     * @see #getSizeInBytes(ItemStack)
+     */
+    public static final int ERROR_READING_DATA = -2;
+
+    /**
+     * Gets the size of an ItemStack's NBT data, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
+     * @return NBT data size in byteds, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
+     */
+    public static int getSizeInBytes(@NonNull final ItemStack itemStack) {
+        try {
+            return JeffLib.getNMSHandler().getItemStackSizeInBytes(itemStack);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ERROR_READING_DATA;
+        }
+    }
+
+    /**
+     * Gets an {@link com.jeff_media.jefflib.data.NBTItemStack} from the given ItemStack
+     */
+    public static NBTItemStack getNBTItemStack(@NonNull final ItemStack itemStack) {
+        return JeffLib.getNMSHandler().getNBTItemStack(itemStack);
+    }
+
+    /**
      * Checks if an ItemStack is null or empty (empty = amount of 0 or if the type is air)
      */
-    public static boolean isNullOrEmpty(final ItemStack itemStack) {
+    public static boolean isNullOrEmpty(@Nullable final ItemStack itemStack) {
         return itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() == 0;
     }
 
@@ -170,7 +204,7 @@ public final class ItemStackUtils {
      * @param item ItemStack to be damaged
      * @param player Player who damaged the item
      */
-    public static void damageItem(int amount, final ItemStack item, @Nullable final Player player){
+    public static void damageItem(int amount, final @Nonnull ItemStack item, @Nullable final Player player){
         final ItemMeta meta = item.getItemMeta();
         if(!(meta instanceof Damageable) || amount < 0) return;
         final int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);

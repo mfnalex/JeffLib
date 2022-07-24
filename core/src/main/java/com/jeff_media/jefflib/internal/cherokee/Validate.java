@@ -1,5 +1,7 @@
 package com.jeff_media.jefflib.internal.cherokee;
 
+import org.jetbrains.annotations.Contract;
+
 import java.util.regex.Pattern;
 
 public final class Validate {
@@ -74,6 +76,20 @@ public final class Validate {
         // TODO when breaking BC, consider returning input
         if (!Pattern.matches(pattern, input)) {
             throw new IllegalArgumentException(String.format(message, values));
+        }
+    }
+
+    @Contract(value = "null -> fail", pure = true)
+    public static void notNull(final Object object) {
+        if (object == null) {
+            throw new IllegalArgumentException("Object cannot be null");
+        }
+    }
+
+    @Contract(value = "null, _ -> fail", pure = true)
+    public static void notNull(final Object object, final String message) {
+        if (object == null) {
+            throw new IllegalArgumentException(message);
         }
     }
 
