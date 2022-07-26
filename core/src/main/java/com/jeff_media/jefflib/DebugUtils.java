@@ -36,9 +36,9 @@ public class DebugUtils {
     }
 
     public enum ShellType {
-        NAUTILUS(Material.NAUTILUS_SHELL),
-        TURTLE(Material.TURTLE_HELMET),
-        SHULKER(Material.SHULKER_SHELL);
+        NAUTILUS_SHELL(Material.NAUTILUS_SHELL),
+        TURTLE_SHELL(Material.TURTLE_HELMET),
+        SHULKER_SHELL(Material.SHULKER_SHELL);
 
         @Getter private final Material material;
         private final ItemStack itemstack;
