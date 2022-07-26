@@ -1,6 +1,7 @@
 package com.jeff_media.jefflib;
 
 import com.allatori.annotations.DoNotRename;
+import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.Internal;
@@ -235,6 +236,13 @@ public final class JeffLib {
      */
     public static void registerPlayerScrollEvent() {
         Bukkit.getPluginManager().registerEvents(new PlayerScrollListener(), getPlugin());
+    }
+
+    /**
+     * Registers the listener needed to call the {@link PlayerJumpEvent}
+     */
+    public static void registerPlayerJumpEvent() {
+        PlayerJumpEvent.registerListener();
     }
 
     /**

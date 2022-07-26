@@ -50,11 +50,19 @@ public class ServerUtils {
     }
 
     /**
-     * Gets whether this server is running is Spigot or a fork of Spigot.
+     * Gets whether this server is running Spigot or a fork of Spigot.
      * @return True when running Spigot or a fork of Spigot, false if it's only CraftBukkit
      */
     public static boolean isRunningSpigot() {
         return ClassUtils.exists("net.md_5.bungee.api.ChatColor");
+    }
+
+    /**
+     * Gets whether this server is running Paper or a fork of Paper.
+     * @return True when running Paper or a fork of Paper, false otherwise
+     */
+    public static boolean isRunningPaper() {
+        return ClassUtils.exists("com.destroystokyo.paper.PaperConfig");
     }
 
     /**

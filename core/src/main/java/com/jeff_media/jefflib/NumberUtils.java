@@ -15,6 +15,14 @@ public class NumberUtils {
 
     public static final float EPSILON_F = 1e-6f;
 
+    public static boolean isEqual(final double number1, final double number2) {
+        return isZero(number1 - number2);
+    }
+
+    public static boolean isEqual(final float number1, final float number2) {
+        return isZero(number1 - number2);
+    }
+
     /**
      * Checks if the given number is close to zero
      */
