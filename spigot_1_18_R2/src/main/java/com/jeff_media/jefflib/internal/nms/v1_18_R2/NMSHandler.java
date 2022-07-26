@@ -164,15 +164,9 @@ public class NMSHandler implements AbstractNMSHandler {
         return counter.getBytes();
     }
 
-    @Override
-    public NBTItemStack getNBTItemStack(org.bukkit.inventory.ItemStack itemStack) {
-        return new HatchedNBTItem(itemStack);
-    }
 
-    @Override
-    public NBTEntity getNBTEntity(org.bukkit.entity.Entity entity) {
-        return new HatchedNBTEntity(entity);
-    }
+
+    
 
 
 }

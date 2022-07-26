@@ -1,6 +1,8 @@
 package com.jeff_media.jefflib;
 
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Material;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -31,6 +33,27 @@ public class DebugUtils {
             if(item == null) continue;
             System.out.println(" - " + item);
         }
+    }
+
+    public enum ShellType {
+        NAUTILUS(Material.NAUTILUS_SHELL),
+        TURTLE(Material.TURTLE_HELMET),
+        SHULKER(Material.SHULKER_SHELL);
+
+        @Getter private final Material material;
+        private final ItemStack itemstack;
+
+        ShellType(Material material) {
+            this.material = material;
+            this.itemstack = new ItemStack(material);
+        }
+
+        public ItemStack getItemstack() {
+            return itemstack;
+        }
+    }
+    public static ItemStack getShell(ShellType type) {
+        return type.getItemstack().clone();
     }
 
     public static void print(final Collection<?> collection) {

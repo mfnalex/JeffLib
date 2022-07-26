@@ -1,7 +1,6 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
-import com.jeff_media.jefflib.data.NBTItemStack;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -49,13 +48,6 @@ public final class ItemStackUtils {
             e.printStackTrace();
             return ERROR_READING_DATA;
         }
-    }
-
-    /**
-     * Gets an {@link com.jeff_media.jefflib.data.NBTItemStack} from the given ItemStack
-     */
-    public static NBTItemStack getNBTItemStack(@NonNull final ItemStack itemStack) {
-        return JeffLib.getNMSHandler().getNBTItemStack(itemStack);
     }
 
     /**

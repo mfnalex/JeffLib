@@ -1,7 +1,5 @@
 package com.jeff_media.jefflib.internal.nms;
 
-import com.jeff_media.jefflib.data.NBTEntity;
-import com.jeff_media.jefflib.data.NBTItemStack;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -48,7 +46,4 @@ public interface AbstractNMSHandler {
 
 	int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
 
-    NBTItemStack getNBTItemStack(ItemStack itemStack);
-
-    NBTEntity getNBTEntity(org.bukkit.entity.Entity entity);
 }

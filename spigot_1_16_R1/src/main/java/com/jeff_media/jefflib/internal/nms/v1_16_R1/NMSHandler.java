@@ -2,11 +2,8 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
-import com.jeff_media.jefflib.data.ByteCounter;
-import com.jeff_media.jefflib.data.NBTDataHolder;
-import com.jeff_media.jefflib.data.NBTItemStack;
+import com.jeff_media.jefflib.data.*;
 import com.mojang.authlib.GameProfile;
-import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -155,9 +152,8 @@ public class NMSHandler implements AbstractNMSHandler {
         return counter.getBytes();
     }
 
-    @Override
-    public NBTItemStack getNBTItemStack(org.bukkit.inventory.ItemStack itemStack) {
-        return new HatchedNBTItem(itemStack);
-    }
+
+
+    
 
 }

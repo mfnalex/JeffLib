@@ -16,7 +16,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>10.1.0</version>
+        <version>10.2.0-SNAPSHOT</version>
     </parent>
 
     <build>
@@ -155,6 +155,7 @@
             <artifactId>spigot</artifactId><!-- Using spigot instead of spigot-api to access GameProfile class -->
             <version>1.19-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+            <classifier>remapped-mojang</classifier>
         </dependency>
         <dependency>
             <groupId>com.mojang</groupId>

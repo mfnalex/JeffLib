@@ -28,7 +28,6 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
@@ -165,14 +164,8 @@ public class NMSHandler implements AbstractNMSHandler {
         return counter.getBytes();
     }
 
-    @Override
-    public NBTItemStack getNBTItemStack(org.bukkit.inventory.ItemStack itemStack) {
-        return new HatchedNBTItemStack(itemStack);
-    }
 
-    @Override
-    public NBTEntity getNBTEntity(org.bukkit.entity.Entity entity) {
-        return new HatchedNBTEntity(entity);
-    }
+
+    
 
 }
