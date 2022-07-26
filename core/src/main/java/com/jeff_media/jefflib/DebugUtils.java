@@ -49,7 +49,7 @@ public class DebugUtils {
         }
 
         public ItemStack getItemstack() {
-            return itemstack;
+            return itemstack.clone();
         }
     }
     public static ItemStack getShell(ShellType type) {
