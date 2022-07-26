@@ -5,7 +5,6 @@ import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.NumberUtils;
 import com.jeff_media.jefflib.ServerUtils;
 import lombok.Getter;
-import lombok.NonNull;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -18,7 +17,6 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -89,7 +87,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
     }
 
     public static class SpigotListener implements Listener {
-        private Set<UUID> prevPlayersOnGround = Sets.newHashSet();
+        private final Set<UUID> playersOnGround = Sets.newHashSet();
 
         @EventHandler
         public void onMove(PlayerMoveEvent spigotEvent) {
@@ -99,7 +97,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
                 if (player.hasPotionEffect(PotionEffectType.JUMP)) {
                     jumpVelocity += (player.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1) * 0.1F;
                 }
-                if (spigotEvent.getPlayer().getLocation().getBlock().getType() != Material.LADDER && prevPlayersOnGround.contains(player.getUniqueId())) {
+                if (spigotEvent.getPlayer().getLocation().getBlock().getType() != Material.LADDER && playersOnGround.contains(player.getUniqueId())) {
                     if (!player.isOnGround() && NumberUtils.isEqual(player.getVelocity().getY(), jumpVelocity)) {
                         final PlayerJumpEvent ownEvent = new PlayerJumpEvent(player, spigotEvent.getFrom(), spigotEvent.getTo());
                         Bukkit.getPluginManager().callEvent(ownEvent);
@@ -110,9 +108,9 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
                 }
             }
             if (player.isOnGround()) {
-                prevPlayersOnGround.add(player.getUniqueId());
+                playersOnGround.add(player.getUniqueId());
             } else {
-                prevPlayersOnGround.remove(player.getUniqueId());
+                playersOnGround.remove(player.getUniqueId());
             }
         }
     }
