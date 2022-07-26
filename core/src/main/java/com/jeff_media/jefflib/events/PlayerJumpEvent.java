@@ -8,6 +8,7 @@ import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.Statistic;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.EventHandler;
@@ -15,8 +16,10 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
+import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import java.util.Set;
@@ -87,7 +90,21 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
     }
 
     public static class SpigotListener implements Listener {
-        private final Set<UUID> playersOnGround = Sets.newHashSet();
+
+        @EventHandler
+        public void onJump(PlayerStatisticIncrementEvent statsEvent) {
+            if(statsEvent.getStatistic() != Statistic.JUMP) return;
+            Player player = statsEvent.getPlayer();
+            Location from = player.getLocation();
+            Location to = player.getLocation().add(player.getVelocity().add(new Vector(0, 0.42, 0)));
+            PlayerJumpEvent ownEvent = new PlayerJumpEvent(statsEvent.getPlayer(), from, to);
+            Bukkit.getPluginManager().callEvent(ownEvent);
+            if(ownEvent.isCancelled()) {
+                statsEvent.setCancelled(true);
+                player.teleport(from);
+            }
+        }
+/*        private final Set<UUID> playersOnGround = Sets.newHashSet();
 
         @EventHandler
         public void onMove(PlayerMoveEvent spigotEvent) {
@@ -112,7 +129,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
             } else {
                 playersOnGround.remove(player.getUniqueId());
             }
-        }
+        }*/
     }
 
 
