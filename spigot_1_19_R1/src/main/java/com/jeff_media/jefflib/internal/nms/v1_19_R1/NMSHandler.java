@@ -1,6 +1,7 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
+import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.data.*;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.PacketUtils;
@@ -14,6 +15,7 @@ import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
+import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.item.ItemStack;
@@ -164,8 +166,10 @@ public class NMSHandler implements AbstractNMSHandler {
         return counter.getBytes();
     }
 
+    @Override
+    public String getDefaultWorldName() {
+        return ( (CraftServer) Bukkit.getServer() ).getServer().getProperties().levelName;
+    }
 
-
-    
 
 }

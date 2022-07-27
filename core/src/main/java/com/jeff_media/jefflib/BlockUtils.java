@@ -32,7 +32,7 @@ public final class BlockUtils {
      */
     @Nullable
     public static Block getLowestBlockAt(@Nonnull final World world, final int x, final int z) {
-        for (int y = getWorldMinHeight(world); y < world.getMaxHeight(); y++) {
+        for (int y = WorldUtils.getWorldMinHeight(world); y < world.getMaxHeight(); y++) {
             final Block current = world.getBlockAt(x, y, z);
             if (!current.getType().isAir()) return current;
         }
@@ -40,15 +40,14 @@ public final class BlockUtils {
     }
 
     /**
-     * Returns the lowest possible building height for a block. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
+     * Gets the lowest possible building height for a world. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
+     * @deprecated Use {@link WorldUtils#getWorldMinHeight(World)}
      */
-    public static int getWorldMinHeight(final World world) {
-        if (McVersion.current().isAtLeast(1, 16, 5)) {
-            return world.getMinHeight();
-        } else {
-            return 0;
-        }
+    @Deprecated
+    private static int getWorldMinHeight(final @Nonnull World world) {
+        return WorldUtils.getWorldMinHeight(world);
     }
+
 
     /**
      * Returns a list of entries containing all BlockData from a given block
@@ -201,7 +200,7 @@ public final class BlockUtils {
     public static List<BlockVector> getBlocks(final World world, final BoundingBox box, final boolean onlyLoadedChunks, final Predicate<BlockData> predicate) {
         final List<ChunkSnapshot> chunks = getChunkSnapshots(world, box, onlyLoadedChunks);
         final List<BlockVector> blocks = new ArrayList<>();
-        final int minHeight = getWorldMinHeight(world);
+        final int minHeight = WorldUtils.getWorldMinHeight(world);
         for (final ChunkSnapshot chunk : chunks) {
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>10.3.0-SNAPSHOT</version>
+        <version>10.3.0</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <properties>

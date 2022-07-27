@@ -46,4 +46,5 @@ public interface AbstractNMSHandler {
 
 	int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
 
+	String getDefaultWorldName();
 }

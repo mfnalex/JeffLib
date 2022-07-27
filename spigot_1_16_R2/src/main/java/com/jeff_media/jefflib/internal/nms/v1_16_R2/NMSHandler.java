@@ -152,7 +152,13 @@ public class NMSHandler implements AbstractNMSHandler {
         return counter.getBytes();
     }
 
+    @Override
+    public String getDefaultWorldName() {
+        return ( (CraftServer) Bukkit.getServer() ).getServer().propertyManager.getProperties().levelName;
+    }
 
 
-    
+
+
+
 }
