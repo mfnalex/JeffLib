@@ -1,12 +1,13 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R3.ai;
 
+import com.jeff_media.jefflib.ai.PathfinderGoal;
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.PathfinderGoalTempt;
 import net.minecraft.server.v1_16_R3.RecipeItemStack;
 import org.bukkit.entity.LivingEntity;
 
 
-public class HatchedTemptGoal extends PathfinderGoalTempt implements com.jeff_media.jefflib.ai.TemptGoal {
+public class HatchedTemptGoal extends PathfinderGoalTempt implements PathfinderGoal {
 
     private final LivingEntity bukkitEntity;
 

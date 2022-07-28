@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.internal.annotations.RequiresNMS;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import lombok.experimental.UtilityClass;
@@ -55,7 +55,7 @@ public class SkullUtils {
      * @throws IllegalArgumentException when the block is not a skull
      * @nms
      */
-    @RequiresNMS
+    @NMS
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
         checkIfIsSkull(block);
         JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
@@ -66,7 +66,7 @@ public class SkullUtils {
      * @throws IllegalArgumentException when the block is not a skull
      * @nms
      */
-    @RequiresNMS
+    @NMS
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final String base64) {
         final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", base64));
@@ -79,7 +79,7 @@ public class SkullUtils {
      * @nms
      */
     @Deprecated
-    @RequiresNMS
+    @NMS
     public static void setBase64Texture(@Nonnull final Block block, @Nonnull final String base64) {
         setHeadTexture(block, base64);
     }

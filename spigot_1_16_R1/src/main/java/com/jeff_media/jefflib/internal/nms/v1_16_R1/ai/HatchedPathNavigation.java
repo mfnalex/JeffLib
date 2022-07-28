@@ -1,10 +1,10 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R1.ai;
 
 import com.jeff_media.jefflib.ai.PathNavigation;
-import com.jeff_media.jefflib.data.BlockPos;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS;
 import net.minecraft.server.v1_16_R1.NavigationAbstract;
+import org.bukkit.util.BlockVector;
 
 public class HatchedPathNavigation implements PathNavigation {
 
@@ -20,7 +20,7 @@ public class HatchedPathNavigation implements PathNavigation {
     }
 
     @Override
-    public boolean isStableDestination(BlockPos pos) {
+    public boolean isStableDestination(BlockVector pos) {
         return navigation.a(NMS.toNms(pos));
     }
 
@@ -30,7 +30,7 @@ public class HatchedPathNavigation implements PathNavigation {
     }
 
     @Override
-    public boolean shouldRecomputePath(BlockPos pos) {
+    public boolean shouldRecomputePath(BlockVector pos) {
         throw new NMSNotSupportedException("PathNavigation.shouldRecomputePath() is not supported below 1.18");
     }
 
@@ -50,8 +50,8 @@ public class HatchedPathNavigation implements PathNavigation {
     }
 
     @Override
-    public BlockPos getTargetPos() {
-        return NMS.toJeff(navigation.h());
+    public BlockVector getTargetPos() {
+        return NMS.toBukkit(navigation.h());
     }
 
     @Override

@@ -5,9 +5,11 @@ import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.util.RandomPos;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.Vec3;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -18,11 +20,11 @@ import org.bukkit.craftbukkit.v1_19_R1.block.CraftBlock;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
+import org.bukkit.util.BlockVector;
+import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public final class NMS {
@@ -77,11 +79,20 @@ public final class NMS {
         return ((CraftServer) Bukkit.getServer()).getServer();
     }
 
-    public static BlockPos toNms(com.jeff_media.jefflib.data.BlockPos pos) {
+    public static BlockPos toNms(BlockVector pos) {
         return new BlockPos(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static com.jeff_media.jefflib.data.BlockPos toJeff(BlockPos targetPos) {
-        return new com.jeff_media.jefflib.data.BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+    public static BlockVector toBukkit(BlockPos targetPos) {
+        return new BlockVector(targetPos.getX(), targetPos.getY(), targetPos.getZ());
     }
+
+    public static Vec3 toNms(Vector vector) {
+        return new Vec3(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public static Vector toBukkit(Vec3 vec) {
+        return new Vector(vec.x, vec.y, vec.z);
+    }
+
 }

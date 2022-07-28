@@ -5,7 +5,7 @@ import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.Internal;
-import com.jeff_media.jefflib.internal.annotations.RequiresNMS;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import com.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -15,7 +15,6 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -226,7 +225,7 @@ public final class JeffLib {
      */
     @DoNotRename
     @Internal
-    @RequiresNMS
+    @NMS
     public static AbstractNMSHandler getNMSHandler() {
         if (abstractNmsHandler == null) {
             throw new NMSNotSupportedException();
@@ -287,12 +286,12 @@ public final class JeffLib {
     }
 
     /**
-     * Initializes NMS features. This needs to be called for all methods annotated with {@link RequiresNMS}
+     * Initializes NMS features. This needs to be called for all methods annotated with {@link NMS}
      *
      * @throws NMSNotSupportedException when the currently NMS version is not supported by this version of JeffLib
      * @nms
      */
-    @RequiresNMS
+    @NMS
     public static void enableNMS() throws NMSNotSupportedException {
         final String packageName = JeffLib.class.getPackage().getName();
         final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];

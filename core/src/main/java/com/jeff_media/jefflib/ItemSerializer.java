@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.internal.annotations.RequiresNMS;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -205,7 +205,7 @@ public final class ItemSerializer {
      * Turns an ItemStack into a json-formatted String
      * @nms
      */
-    @RequiresNMS
+    @NMS
     public static String toJson(final ItemStack itemStack) {
         return JeffLib.getNMSHandler().itemStackToJson(itemStack);
     }

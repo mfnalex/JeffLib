@@ -4,7 +4,9 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 /**
- * Represents an NMS pathfinder goal
+ * Represents an NMS pathfinder goal. <b>This is not meant to be implemented by plugins.</b> For custom pathfinder goals,
+ * extend {@link CustomGoal}.
+ * @see CustomGoal
  */
 public interface PathfinderGoal {
 

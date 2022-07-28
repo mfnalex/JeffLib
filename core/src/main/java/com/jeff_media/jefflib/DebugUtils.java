@@ -1,13 +1,13 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.Pathfinders;
-import com.jeff_media.jefflib.ai.TemptGoal;
+import com.jeff_media.jefflib.ai.PathfinderGoals;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
-import net.minecraft.world.item.ItemUtils;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Llama;
+import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -22,54 +22,124 @@ import java.util.stream.Stream;
 @UtilityClass
 public class DebugUtils {
 
-    public static void testNms(Player player) {
-        JeffLib.enableNMS();
+    public static class NMSTest {
 
-        // NMS version
-        String nmsVersion = McVersion.current().getNmsVersion();
-        if(nmsVersion == null) throw new IllegalArgumentException("No NMS version defined in mcversions.csv");
-        player.sendMessage("NMS Version: " + nmsVersion);
+        private final Player player;
 
-        // Default world name
-        String defaultWorldName = WorldUtils.getDefaultWorldName();
-        if(defaultWorldName == null) throw new IllegalArgumentException("Could not get default world name");
-        player.sendMessage("Default world name: " + defaultWorldName);
+        public NMSTest(final Player player) {
+            this.player = player;
+        }
 
-        // ItemStack as JSON
-        player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
+        public void testNms() {
+            try {
+                JeffLib.enableNMS();
 
-        // Totem animation
-        player.sendMessage("§dYou should see the totem animation now.");
-        AnimationUtils.playTotemAnimation(player);
+                // NMS version
+                testNMSVersion();
 
-        // Tempt goal
-        player.sendMessage("§bA villager should be following you now when you have an emerald in your hand.");
-        player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
-        Villager villager = player.getWorld().spawn(player.getLocation().add(5,0,5), Villager.class);
-        villager.setCustomName("Emerald Seeker");
-        EntityUtils.addPathfinderGoal(villager, Pathfinders.createTemptGoal(villager, Stream.of(Material.EMERALD)),0);
+                // Default world name
+                testDefaultWorldName();
 
+                // ItemStack as JSON
+                testItemStackToJson();
 
-        player.sendMessage("§dA llama should be following you now all the time");
-        Llama llama = player.getWorld().spawn(player.getLocation().add(-5, 0, -5), Llama.class);
-        llama.setCustomName("Player Seeker");
-        EntityUtils.addPathfinderGoal(llama, new CustomGoal(llama) {
-            @Override
-            public boolean canUse() {
-                return true;
-            }
+                // Totem animation
+                testTotemAnimation();
 
-            @Override
-            public void tick() {
-                Player closest = EntityUtils.getClosestPlayer(getBukkitEntity());
-                if(closest != null) {
-                    getNavigation().moveTo(closest.getLocation(), 1);
+                // Tempt goal
+                testTemptGoal();
+
+                // Custom goal (follow Player)
+                testCustomGoalFollowPlayer();
+
+                // Avoid entity goal
+                testAvoidEntityGoal();
+
+                // Current biome name
+                if(McVersion.current().isAtLeast(1,16,2)) {
+                    testBiomeName();
                 }
+
+                player.sendMessage("§aSeems to be working!");
+            } catch (Throwable t) {
+                player.sendMessage("Error!");
+                player.sendMessage(t.getMessage());
+                t.printStackTrace();
             }
-        }, 0);
 
-        player.sendMessage("§aSeems to be working!");
+        }
 
+        private void testBiomeName() {
+            NamespacedKey key = BiomeUtils.getBiomeNamespacedKey(player.getLocation());
+            player.sendMessage("Biome: " + key.toString());
+        }
+
+        private void testAvoidEntityGoal() {
+            player.sendMessage("§eA pig that's afraid by emeralds should be nearby you now");
+            Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
+            pig.setCustomName("Emerald hater");
+            pig.setCustomNameVisible(true);
+            EntityUtils.addPathfinderGoal(pig, PathfinderGoals.avoidEntity(pig, ent -> {
+                if(ent instanceof Player) {
+                    ItemStack hand = ((Player)ent).getInventory().getItemInMainHand();
+                    if(hand == null) return false;
+                    return hand.getType() == Material.EMERALD;
+                }
+                return false;
+            }, 30, 1, 2), 0);
+        }
+
+        private void testCustomGoalFollowPlayer() {
+            player.sendMessage("§dA llama should be following you now all the time");
+            Llama llama = player.getWorld().spawn(player.getLocation().add(-5, 0, -5), Llama.class);
+            llama.setCustomName("Player Seeker");
+            llama.setCustomNameVisible(true);
+            EntityUtils.addPathfinderGoal(llama, new CustomGoal(llama) {
+                @Override
+                public boolean canUse() {
+                    return true;
+                }
+
+                @Override
+                public void tick() {
+                    Player closest = EntityUtils.getClosestPlayer(getBukkitEntity());
+                    if (closest != null) {
+                        getNavigation().moveTo(closest.getLocation(), 2.5);
+                    }
+                }
+            }, 0);
+        }
+
+        private void testTemptGoal() {
+            player.sendMessage("§bA villager should be following you now when you have an emerald in your hand.");
+            player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
+            Villager villager = player.getWorld().spawn(player.getLocation().add(5, 0, 5), Villager.class);
+            villager.setCustomName("Emerald Seeker");
+            villager.setCustomNameVisible(true);
+            EntityUtils.addPathfinderGoal(villager, PathfinderGoals.temptGoal(villager, Stream.of(Material.EMERALD), 1D, false), 0);
+        }
+
+        private void testTotemAnimation() {
+            player.sendMessage("§dYou should see the totem animation now.");
+            AnimationUtils.playTotemAnimation(player);
+        }
+
+        private void testItemStackToJson() {
+            player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
+        }
+
+        private void testDefaultWorldName() {
+            String defaultWorldName = WorldUtils.getDefaultWorldName();
+            if (defaultWorldName == null) throw new IllegalArgumentException("Could not get default world name");
+            player.sendMessage("Default world name: " + defaultWorldName);
+        }
+
+        private void testNMSVersion() {
+            McVersion version = McVersion.current();
+            String nmsVersion = version.getNmsVersion();
+            if (nmsVersion == null) throw new IllegalArgumentException("Could not get NMS version");
+            player.sendMessage("NMS version: " + nmsVersion);
+        }
     }
 
     /**

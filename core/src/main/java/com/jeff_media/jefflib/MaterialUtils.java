@@ -1,7 +1,7 @@
 package com.jeff_media.jefflib;
 
 import com.google.gson.Gson;
-import com.jeff_media.jefflib.internal.annotations.RequiresNMS;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 
@@ -75,7 +75,7 @@ public final class MaterialUtils {
      * @param maxStackSize new max stack size
      * @nms
      */
-    @RequiresNMS
+    @NMS
     public static void setMaxStackSize(final Material material, final int maxStackSize) {
         if(!material.isItem()) return; // Can't set the amount for unobtainable items like WATER
         ReflUtils.setField(Material.class, material, "maxStack",maxStackSize);

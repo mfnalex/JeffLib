@@ -13,5 +13,9 @@ import java.lang.annotation.RetentionPolicy;
 @Documented
 @TypeQualifierNickname
 @Retention(RetentionPolicy.RUNTIME)
-public @interface RequiresNMS {
+public @interface NMS {
+    /**
+     * The minimum version of Minecraft that this feature is supported on
+     */
+    String value() default "";
 }

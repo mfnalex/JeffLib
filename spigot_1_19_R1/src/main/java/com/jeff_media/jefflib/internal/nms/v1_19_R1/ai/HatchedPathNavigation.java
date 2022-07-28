@@ -1,8 +1,9 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1.ai;
 
-import com.jeff_media.jefflib.data.BlockPos;
 import com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
+import org.bukkit.util.BlockVector;
 
 public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavigation {
 
@@ -18,7 +19,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean isStableDestination(BlockPos pos) {
+    public boolean isStableDestination(BlockVector pos) {
         return navigation.isStableDestination(NMS.toNms(pos));
     }
 
@@ -28,7 +29,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean shouldRecomputePath(BlockPos pos) {
+    public boolean shouldRecomputePath(BlockVector pos) {
         return navigation.shouldRecomputePath(NMS.toNms(pos));
     }
 
@@ -48,8 +49,8 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public BlockPos getTargetPos() {
-        return NMS.toJeff(navigation.getTargetPos());
+    public BlockVector getTargetPos() {
+        return NMS.toBukkit(navigation.getTargetPos());
     }
 
     @Override

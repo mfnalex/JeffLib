@@ -13,9 +13,13 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 @Internal
@@ -53,7 +57,13 @@ public interface AbstractNMSHandler {
 
 	String getDefaultWorldName();
 
-    TemptGoal createTemptGoal(LivingEntity entity, Stream<Material> materials, double speed, boolean canScare);
+    PathfinderGoal createTemptGoal(LivingEntity entity, Stream<Material> materials, double speed, boolean canScare);
+
+    PathfinderGoal createAvoidEntityGoal(LivingEntity entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier);
+
+    PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange);
+
+    PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange);
 
     boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority);
 
@@ -65,5 +75,11 @@ public interface AbstractNMSHandler {
 
     CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity);
 
-    PathNavigation getPathNavigation(LivingEntity entity);
+    @Nullable PathNavigation getPathNavigation(LivingEntity entity);
+
+    @Nullable Vector getRandomPos(LivingEntity entity, int var1, int var2);
+
+    @Nullable Vector getRandomPosAway(LivingEntity entity, int var1, int var2, Vector var3);
+
+    @Nullable Vector getRandomPosTowards(LivingEntity entity, int var1, int var2, Vector var3, double var4);
 }

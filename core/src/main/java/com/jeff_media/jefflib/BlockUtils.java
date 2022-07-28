@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.internal.annotations.RequiresNMS;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -164,7 +164,7 @@ public final class BlockUtils {
      * @param composter Composter block
      * @param success   whether the composting chance succeeded
      */
-    @RequiresNMS
+    @NMS
     public static void playComposterFillParticlesAndSound(final Block composter, final boolean success) {
         JeffLib.getNMSHandler().getBlockHandler().playComposterParticlesAndSound(composter, success);
     }

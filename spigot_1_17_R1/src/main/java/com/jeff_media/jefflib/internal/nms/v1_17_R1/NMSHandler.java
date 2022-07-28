@@ -5,12 +5,8 @@ import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ai.CustomGoal;
 import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
-import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
-import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.CustomGoalExecutor;
-import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.HatchedPathNavigation;
-import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.HatchedTemptGoal;
+import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.*;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
@@ -28,10 +24,12 @@ import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
+import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
+import net.minecraft.world.phys.Vec3;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -44,9 +42,13 @@ import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
+import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Set;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import static com.jeff_media.jefflib.internal.nms.v1_17_R1.NMS.*;
@@ -185,9 +187,24 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public TemptGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<Material> materials, double speed, boolean canScare) {
+    public PathfinderGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<Material> materials, double speed, boolean canScare) {
         final PathfinderMob pmob = asPathfinder(entity);
         return new HatchedTemptGoal(entity, pmob,ingredient(materials), speed, canScare);
+    }
+
+    @Override
+    public PathfinderGoal createAvoidEntityGoal(LivingEntity entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier) {
+        return new HatchedAvoidEntityGoal(entity, asPathfinderOrThrow(entity), predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
+    }
+
+    @Override
+    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByMaterialSet(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blocks);
+    }
+
+    @Override
+    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByBlockPredicate(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blockPredicate);
     }
 
     @Override
@@ -201,7 +218,7 @@ public class NMSHandler implements AbstractNMSHandler {
         } else {
             throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
         }
-        return false;
+        return true;
     }
 
     @Override
@@ -226,9 +243,35 @@ public class NMSHandler implements AbstractNMSHandler {
         return new CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
     }
 
+    @Nullable
     @Override
-    public PathNavigation getPathNavigation(LivingEntity entity) {
-        return new HatchedPathNavigation(NMS.asPathfinderOrThrow(entity).getNavigation());
+    public PathNavigation getPathNavigation(org.bukkit.entity.LivingEntity entity) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        return pmob == null ? null : new HatchedPathNavigation(pmob.getNavigation());
+    }
+
+    @Nullable
+    @Override
+    public Vector getRandomPos(LivingEntity entity, int var1, int var2) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPos(pmob, var1, var2);
+        return vec == null ? null : new Vector(vec.x, vec.y, vec.z);
+    }
+
+    @Nullable
+    @Override
+    public Vector getRandomPosAway(LivingEntity entity, int var1, int var2, Vector var3) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPosAway(pmob, var1, var2, toNms(var3));
+        return vec == null ? null : toBukkit(vec);
+    }
+
+    @Nullable
+    @Override
+    public Vector getRandomPosTowards(LivingEntity entity, int var1, int var2, Vector var3, double var4) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPosTowards(pmob, var1, var2, toNms(var3), var4);
+        return vec == null ? null : toBukkit(vec);
     }
 
 }

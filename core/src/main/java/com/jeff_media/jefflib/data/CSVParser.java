@@ -3,6 +3,7 @@ package com.jeff_media.jefflib.data;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +21,7 @@ public class CSVParser {
                 list.add(line.split(REGEX));
             });
         } catch (IOException exception) {
-            exception.printStackTrace();
+            throw new UncheckedIOException(exception);
         }
     }
 

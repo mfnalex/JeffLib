@@ -1,7 +1,9 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -183,23 +185,32 @@ public final class EntityUtils {
         return JeffLib.getNMSHandler().moveTo(entity, x, y, z, speed);
     }
 
-    public static boolean walkTo(final @Nonnull LivingEntity entity, final double x, final double y, final double z) {
-        return walkTo(entity, x, y, z, getMovementSpeed(entity));
-    }
-
     public static boolean walkTo(final @Nonnull LivingEntity entity, final @Nonnull Location location, final double speed) {
         return walkTo(entity, location.getX(), location.getY(), location.getZ(), speed);
-    }
-
-    public static boolean walkTo(final @Nonnull LivingEntity entity, final @Nonnull Location location) {
-        return walkTo(entity, location.getX(), location.getY(), location.getZ());
     }
 
     public static boolean isPathfinderMob(Entity entity) {
         return JeffLib.getNMSHandler().isPathfinderMob(entity);
     }
 
+    /**
+     * Adds a {@link PathfinderGoal} to an entity
+     * @param entity Entity to add the goal to
+     * @param goal Goal to add
+     * @param priority Priority of the goal
+     * @return true if the goal was added successfully, false if the given entity is not a pathfinding mob (e.g. Bats)
+     * @throws UnsupportedOperationException If the given PathfinderGoal is not supposed
+     */
     public static boolean addPathfinderGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
         return JeffLib.getNMSHandler().addGoal(entity, goal, priority);
+    }
+
+    /**
+     * Returns the {@link PathNavigation} for this entity, or null if it's not a pathfinding mob (e.g. Bats)
+     * @return PathNavigation or null or not a pathfinding mob (e.g. Bats)
+     */
+    @NMS
+    @Nullable public static PathNavigation getNavigation(@Nonnull LivingEntity entity) {
+        return JeffLib.getNMSHandler().getPathNavigation(entity);
     }
 }

@@ -34,6 +34,7 @@ public class McVersion implements Comparable<McVersion> {
     }
 
     static void loadVersions(InputStream stream) {
+        try {
             CSVParser parser = new CSVParser(stream);
             parser.getContents().forEach(line -> {
                 final int major = Integer.parseInt(line[0]);
@@ -42,6 +43,9 @@ public class McVersion implements Comparable<McVersion> {
                 final McVersion version = new McVersion(major, minor, patch);
                 NMS_VERSIONS.put(version, major + "_" + minor + "_R" + line[3]);
             });
+        } catch (Throwable ignored) {
+
+        }
     }
 
     private final int major, minor, patch;

@@ -1,6 +1,5 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R2;
 
-import com.jeff_media.jefflib.data.BlockPos;
 import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -12,6 +11,7 @@ import org.bukkit.craftbukkit.v1_16_R2.block.CraftBlock;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftMagicNumbers;
+import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -69,11 +69,19 @@ public final class NMS {
         return ((CraftServer) Bukkit.getServer()).getServer();
     }
 
-    public static BlockPosition toNms(com.jeff_media.jefflib.data.BlockPos pos) {
+    public static BlockPosition toNms(org.bukkit.util.BlockVector pos) {
         return new BlockPosition(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static com.jeff_media.jefflib.data.BlockPos toJeff(BlockPosition targetPos) {
-        return new com.jeff_media.jefflib.data.BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+    public static org.bukkit.util.BlockVector toBukkit(BlockPosition targetPos) {
+        return new org.bukkit.util.BlockVector(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+    }
+
+    public static Vector toBukkit(Vec3D vec) {
+        return new Vector(vec.x, vec.y, vec.z);
+    }
+
+    public static Vec3D toNms(Vector vec) {
+        return new Vec3D(vec.getX(), vec.getY(), vec.getZ());
     }
 }

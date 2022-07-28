@@ -1,8 +1,8 @@
 package com.jeff_media.jefflib.ai;
 
-import com.jeff_media.jefflib.data.BlockPos;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
+import org.bukkit.util.BlockVector;
 
 import javax.annotation.Nonnull;
 
@@ -26,7 +26,7 @@ public interface PathNavigation {
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final BlockPos pos, final double speedModifier) {
+    default boolean moveTo(@Nonnull final BlockVector pos, final double speedModifier) {
         return moveTo(pos.getX(), pos.getY(), pos.getZ(), speedModifier);
     };
 
@@ -40,7 +40,7 @@ public interface PathNavigation {
     /**
      * Returns the entity's current target location
      */
-    BlockPos getTargetPos();
+    BlockVector getTargetPos();
 
     /**
      * Sets the entity's current speed modifier
@@ -71,7 +71,7 @@ public interface PathNavigation {
     /**
      * Checks whether the given location is a "stable destination"
      */
-    boolean isStableDestination(BlockPos pos);
+    boolean isStableDestination(BlockVector pos);
 
     /**
      * Sets whether this entity can float
@@ -82,7 +82,7 @@ public interface PathNavigation {
      * Only available in 1.18 and later
      * @throws com.jeff_media.jefflib.exceptions.NMSNotSupportedException on versions prior to 1.18
      */
-    boolean shouldRecomputePath(BlockPos pos);
+    boolean shouldRecomputePath(BlockVector pos);
 
     /**
      * Only available in 1.17 and later
