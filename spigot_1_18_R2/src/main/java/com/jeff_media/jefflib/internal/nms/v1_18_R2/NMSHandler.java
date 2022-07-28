@@ -2,7 +2,12 @@ package com.jeff_media.jefflib.internal.nms.v1_18_R2;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
+import com.jeff_media.jefflib.internal.nms.v1_18_R2.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.internal.nms.v1_18_R2.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
@@ -16,6 +21,8 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
@@ -24,6 +31,7 @@ import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_18_R2.CraftServer;
@@ -31,10 +39,14 @@ import org.bukkit.craftbukkit.v1_18_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.stream.Stream;
+
+import static com.jeff_media.jefflib.internal.nms.v1_18_R2.NMS.*;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -169,9 +181,42 @@ public class NMSHandler implements AbstractNMSHandler {
         return ( (CraftServer) Bukkit.getServer() ).getServer().getProperties().levelName;
     }
 
+    @Override
+    public TemptGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<Material> materials, double speed, boolean canScare) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        return new HatchedTemptGoal(entity, pmob,ingredient(materials), speed, canScare);
+    }
 
+    @Override
+    public boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        if(pmob == null) return false;
+        if(goal instanceof Goal) {
+            pmob.targetSelector.addGoal(priority, (Goal) goal);
+        } else if(goal instanceof CustomGoal) {
+            pmob.targetSelector.addGoal(priority, new CustomGoalExecutor((CustomGoal)goal));
+        } else {
+            throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
+        }
+        return false;
+    }
 
-    
+    @Override
+    public boolean moveTo(org.bukkit.entity.LivingEntity entity, double x, double y, double z, double speed) {
+        final PathfinderMob pmob = asPathfinder(entity);
+        if(pmob == null) return false;
+        return pmob.getNavigation().moveTo(x, y, z, speed);
+    }
+
+    @Override
+    public boolean isPathfinderMob(org.bukkit.entity.Entity entity) {
+        return toNms(entity) instanceof PathfinderMob;
+    }
+
+    @Override
+    public boolean isServerRunnning() {
+        return getDedicatedServer().isRunning();
+    }
 
 
 }

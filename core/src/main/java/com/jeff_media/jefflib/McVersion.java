@@ -1,8 +1,17 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.data.CSVParser;
+import io.th0rgal.oraxen.shaded.commandapi.nms.NMS;
 import org.bukkit.Bukkit;
+
 import javax.annotation.Nonnull;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.LinkedHashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -12,6 +21,8 @@ import java.util.Objects;
 public class McVersion implements Comparable<McVersion> {
 
     private static final McVersion CURRENT_VERSION;
+    private static final McVersion v1_17 = new McVersion(1, 17);
+    private static final Map<McVersion, String> NMS_VERSIONS = new LinkedHashMap<>();
 
     static {
         final int currentMajor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
@@ -19,9 +30,25 @@ public class McVersion implements Comparable<McVersion> {
         final int currentPatch = Bukkit.getBukkitVersion().chars().filter(ch -> ch == '.').count() == 2 ? 0 : Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]);
 
         CURRENT_VERSION = new McVersion(currentMajor, currentMinor, currentPatch);
+
+    }
+
+    static void loadVersions(InputStream stream) {
+            CSVParser parser = new CSVParser(stream);
+            parser.getContents().forEach(line -> {
+                final int major = Integer.parseInt(line[0]);
+                final int minor = Integer.parseInt(line[1]);
+                final int patch = Integer.parseInt(line[2]);
+                final McVersion version = new McVersion(major, minor, patch);
+                NMS_VERSIONS.put(version, major + "_" + minor + "_R" + line[3]);
+            });
     }
 
     private final int major, minor, patch;
+
+    public boolean hasVersionInNmsPackageName() {
+        return !this.isAtLeast(v1_17);
+    }
 
     public McVersion(final int major, final int minor) {
         this(major, minor, 0);
@@ -107,4 +134,15 @@ public class McVersion implements Comparable<McVersion> {
     public boolean isAtLeast(final int major, final int minor) {
         return this.isAtLeast(new McVersion(major, minor));
     }
+
+    /**
+     * Returns the NMS version of this MC version, e.g. "1_18_R2", or null if it couldn't be determined
+     *
+     * @return the NMS version of this MC version, e.g. "1_18_R2", or null if it couldn't be determined
+     */
+    public String getNmsVersion() {
+        return NMS_VERSIONS.get(this);
+    }
+
+
 }

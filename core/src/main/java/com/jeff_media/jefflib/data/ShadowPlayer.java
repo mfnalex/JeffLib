@@ -1,5 +1,6 @@
 package com.jeff_media.jefflib.data;
 
+import io.papermc.paper.entity.LookAnchor;
 import org.bukkit.*;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;

@@ -1,12 +1,20 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathfinderGoal;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
+import org.bukkit.attribute.Attribute;
+import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -21,6 +29,52 @@ import java.util.function.Predicate;
  */
 @UtilityClass
 public final class EntityUtils {
+
+    private static final double DEFAULT_GENERIC_MOVEMENT_SPEED = 0.25D; // default speed of a generic entity
+
+    /**
+     * Gets the closest other player in this world, or null if there is no other player
+     */
+    public static @Nullable Player getClosestOtherPlayer(final @Nonnull Player player) {
+        return player.getWorld().getPlayers().stream()
+                .filter(other -> other != player)
+                .min(new Comparators.EntityByDistanceComparator(player))
+                .orElse(null);
+    }
+
+    /**
+     * Gets the generic movement speed of an entity
+     */
+    public static double getMovementSpeed(final @Nonnull LivingEntity entity) {
+        AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        if(attribute != null) {
+            return attribute.getValue();
+        }
+        return DEFAULT_GENERIC_MOVEMENT_SPEED;
+    }
+
+    /**
+     * Gets the closest player in this world, or null if there is no player
+     */
+    public static @Nullable Player getClosestPlayer(final @Nonnull Location location) {
+        return location.getWorld().getPlayers().stream()
+                .min(new Comparators.EntityByDistanceComparator(location))
+                .orElse(null);
+    }
+
+    /**
+     * Gets the closest player in this world, or null if there is no player
+     */
+    public static @Nullable Player getClosestPlayer(final @Nonnull Entity entity) {
+        return getClosestPlayer(entity.getLocation());
+    }
+
+    /**
+     * Gets the closest player in this world, or null if there is no player
+     */
+    public static @Nullable Player getClosestPlayer(final @Nonnull Block block) {
+        return getClosestPlayer(BlockUtils.getCenter(block));
+    }
 
     /**
      * Gets all entities inside {@param min} and {@param max}
@@ -120,5 +174,32 @@ public final class EntityUtils {
             if(entity.getEntityId()==id) return entity;
         }
         return null;
+    }
+
+    /**
+     * Lets an Entity walk to a certain location
+     */
+    public static boolean walkTo(final @Nonnull LivingEntity entity, final double x, final double y, final double z, final double speed) {
+        return JeffLib.getNMSHandler().moveTo(entity, x, y, z, speed);
+    }
+
+    public static boolean walkTo(final @Nonnull LivingEntity entity, final double x, final double y, final double z) {
+        return walkTo(entity, x, y, z, getMovementSpeed(entity));
+    }
+
+    public static boolean walkTo(final @Nonnull LivingEntity entity, final @Nonnull Location location, final double speed) {
+        return walkTo(entity, location.getX(), location.getY(), location.getZ(), speed);
+    }
+
+    public static boolean walkTo(final @Nonnull LivingEntity entity, final @Nonnull Location location) {
+        return walkTo(entity, location.getX(), location.getY(), location.getZ());
+    }
+
+    public static boolean isPathfinderMob(Entity entity) {
+        return JeffLib.getNMSHandler().isPathfinderMob(entity);
+    }
+
+    public static boolean addPathfinderGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
+        return JeffLib.getNMSHandler().addGoal(entity, goal, priority);
     }
 }

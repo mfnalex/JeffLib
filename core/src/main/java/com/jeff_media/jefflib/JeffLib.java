@@ -18,6 +18,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -53,21 +55,41 @@ public final class JeffLib {
     }
 
     private static void initialize() {
+
         // TODO: Tell people to do this themselves in their onLoad()
         //ConfigurationSerialization.registerClass(Hologram.class, plugin.getName().toLowerCase(Locale.ROOT) + "Hologram");
         //ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT) + "WorldBoundingBox");
 
-        try {
-            try(final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(JeffLib.class.getResourceAsStream("/jefflib.version")), StandardCharsets.UTF_8))) {
-                version = reader.readLine();
+        if (!ServerUtils.isRunningMockBukkit()) {
+            try {
+                try (final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(JeffLib.class.getResourceAsStream("/jefflib.version")), StandardCharsets.UTF_8))) {
+                    version = reader.readLine();
+                }
+            } catch (final Throwable ex) {
+                ex.printStackTrace();
             }
-        } catch (final Throwable ex) {
-            //ex.printStackTrace();
+
+            try (InputStream stream = JeffLib.class.getResourceAsStream("/mcversions.csv")) {
+                if (stream == null) {
+                    throw new IOException("Could not load mcversions.csv");
+                }
+                McVersion.loadVersions(stream);
+            } catch (IOException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+            version = "MOCK";
         }
     }
 
+    /**
+     * Gets a logger, if possible the plugin's logger, otherwise the Bukkit logger.
+     *
+     * @return Plugin's logger if possible, otherwise Bukkit's logger
+     */
     public static Logger getLogger() {
-        if (getPlugin() != null) return getPlugin().getLogger();
+        Plugin plugin = getPlugin();
+        if (plugin != null) return plugin.getLogger();
         return Bukkit.getLogger();
     }
 
@@ -75,18 +97,18 @@ public final class JeffLib {
      * Checks for proper relocation
      */
     private static void checkRelocation() {
-        if(checkedRelocation) return;
+        if (checkedRelocation) return;
         try {
             if (ServerUtils.isRunningMockBukkit()) return;
-            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
+            final String defaultPackageDe = new String(new byte[] {'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String defaultPackageCom = new String(new byte[] {'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String examplePackage = new String(new byte[] {'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             final String packageName = JeffLib.class.getPackage().getName();
             if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
                 final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
                 final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
                 //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+                getPlugin().getLogger().severe("Nag author(s) " + authors + ( authors.length() == 0 ? "" : " " ) + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
             }
         } catch (final Throwable ignored) {
             return;
@@ -175,8 +197,7 @@ public final class JeffLib {
         URLClassLoader loader = (URLClassLoader) JeffLib.class.getClassLoader();
         Field descriptionField = loader.getClass().getDeclaredField("description");
         descriptionField.setAccessible(true);
-        PluginDescriptionFile description = (PluginDescriptionFile) descriptionField.get(loader);
-        return description;
+        return (PluginDescriptionFile) descriptionField.get(loader);
     }
 
     /**
@@ -185,7 +206,7 @@ public final class JeffLib {
      * @see #setDebug(boolean)
      */
     public static void debug(final String text) {
-        if (debug) getPlugin().getLogger().info("[JeffLib] [Debug] " + text);
+        if (debug) getLogger().info("[JeffLib] [Debug] " + text);
     }
 
     /**

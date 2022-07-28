@@ -3,6 +3,8 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.TPS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -15,10 +17,6 @@ public class ServerUtils {
 
     private static final Field CURRENT_TICK_FIELD;
 
-    private static final Object NMS_SERVER_OBJECT;
-
-    private static final Method IS_RUNNING_METHOD;
-
     static {
         Field tmpCurrentTickField;
         try {
@@ -28,18 +26,6 @@ public class ServerUtils {
             tmpCurrentTickField = null;
         }
         CURRENT_TICK_FIELD = tmpCurrentTickField;
-        Object tmpNmsServerObject;
-        Method tmpIsRunningMethod;
-        try {
-            final Method getServerMethod = Bukkit.getServer().getClass().getMethod("getServer");
-            tmpNmsServerObject = getServerMethod.invoke(Bukkit.getServer());
-            tmpIsRunningMethod = tmpNmsServerObject.getClass().getMethod("isRunning");
-        } catch (final Exception ignored) {
-            tmpNmsServerObject = null;
-            tmpIsRunningMethod = null;
-        }
-        NMS_SERVER_OBJECT = tmpNmsServerObject;
-        IS_RUNNING_METHOD = tmpIsRunningMethod;
     }
 
     /**
@@ -90,18 +76,14 @@ public class ServerUtils {
      * @return Server's life phase
      */
     public ServerLifePhase getLifePhase() {
-        try {
+        //try {
             int currentTicket = getCurrentTick();
             if(currentTicket==-1) {
                 return ServerLifePhase.STARTUP;
             } else if(currentTicket==-2) {
                 return ServerLifePhase.UNKNOWN;
             }
-            if(IS_RUNNING_METHOD == null || NMS_SERVER_OBJECT == null) return ServerLifePhase.UNKNOWN;
-            return ((boolean) IS_RUNNING_METHOD.invoke(NMS_SERVER_OBJECT)) ? ServerLifePhase.RUNNING : ServerLifePhase.SHUTDOWN;
-        } catch (final IllegalAccessException | InvocationTargetException exception) {
-            return ServerLifePhase.UNKNOWN;
-        }
+            return JeffLib.getNMSHandler().isServerRunnning() ? ServerLifePhase.RUNNING : ServerLifePhase.SHUTDOWN;
     }
 
     /**

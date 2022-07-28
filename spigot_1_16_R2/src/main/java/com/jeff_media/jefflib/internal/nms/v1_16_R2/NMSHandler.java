@@ -2,7 +2,12 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R2;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
+import com.jeff_media.jefflib.internal.nms.v1_16_R2.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.internal.nms.v1_16_R2.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
@@ -17,9 +22,13 @@ import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftChatMessage;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.stream.Stream;
+
+import static com.jeff_media.jefflib.internal.nms.v1_16_R2.NMS.*;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -157,8 +166,41 @@ public class NMSHandler implements AbstractNMSHandler {
         return ( (CraftServer) Bukkit.getServer() ).getServer().propertyManager.getProperties().levelName;
     }
 
+    @Override
+    public TemptGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<org.bukkit.Material> materials, double speed, boolean canScare) {
+        final EntityCreature pmob = asPathfinder(entity);
+        return new HatchedTemptGoal(entity, pmob,ingredient(materials), speed, canScare);
+    }
 
+    @Override
+    public boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
+        final EntityCreature pmob = asPathfinder(entity);
+        if(pmob == null) return false;
+        if(goal instanceof net.minecraft.server.v1_16_R2.PathfinderGoal) {
+            pmob.targetSelector.a(priority, (net.minecraft.server.v1_16_R2.PathfinderGoal) goal);
+        } else if(goal instanceof CustomGoal) {
+            pmob.targetSelector.a(priority, new CustomGoalExecutor((CustomGoal)goal));
+        } else {
+            throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
+        }
+        return false;
+    }
 
+    @Override
+    public boolean moveTo(org.bukkit.entity.LivingEntity entity, double x, double y, double z, double speed) {
+        final EntityCreature pmob = asPathfinder(entity);
+        if(pmob == null) return false;
+        return pmob.getNavigation().a(x, y, z, speed);
+    }
 
+    @Override
+    public boolean isPathfinderMob(org.bukkit.entity.Entity entity) {
+        return toNms(entity) instanceof EntityCreature;
+    }
+
+    @Override
+    public boolean isServerRunnning() {
+        return getDedicatedServer().isRunning();
+    }
 
 }

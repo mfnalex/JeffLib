@@ -1,20 +1,19 @@
 package com.jeff_media.jefflib;
 
-import com.google.common.base.Objects;
-import com.google.common.base.Preconditions;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import java.util.Objects;
 
 /**
  * Reflection related methods
@@ -22,93 +21,133 @@ import java.util.regex.Pattern;
 @SuppressWarnings("NonThreadSafeLazyInitialization")
 @UtilityClass
 public final class ReflUtils {
-    public static final NMSVersion V1_12_R1 = NMSVersion.fromString("v1_12_R1");
-    public static final NMSVersion V1_9_R1 = NMSVersion.fromString("v1_9_R1");
-    public static final NMSVersion V1_11_R1 = NMSVersion.fromString("v1_11_R1");
-    private static final Map<String, Class<?>> classCache = new HashMap<>();
-    private static final Table<Class<?>, String, Method> methodCache = HashBasedTable.create();
-    private static final Table<Class<?>, MethodParams, Method> methodParamCache = HashBasedTable.create();
-    private static final Table<Class<?>, String, Field> fieldCache = HashBasedTable.create();
-    private static final Map<Class<?>, Constructor<?>> constructorCache = new HashMap<>();
-    private static final Table<Class<?>, ConstructorParams, Constructor<?>> constructorParamCache = HashBasedTable.create();
-    private static NMSVersion nmsVersionObject;
+
+    private static final Map<String, Class<?>> CLASSES = new HashMap<>();
+    private static final Table<Class<?>, String, Method> METHODS_NO_ARGS = HashBasedTable.create();
+    private static final Table<Class<?>, MethodParameters, Method> METHODS_WITH_ARGS = HashBasedTable.create();
+    private static final Table<Class<?>, String, Field> FIELDS = HashBasedTable.create();
+    private static final Map<Class<?>, Constructor<?>> CONSTRUCTORS_NO_ARGS = new HashMap<>();
+    private static final Table<Class<?>, Parameters, Constructor<?>> CONSTRUCTOR_WITH_ARGS = HashBasedTable.create();
     private static String nmsVersion;
 
+    /**
+     * Gets the NMS version String as used in the package name, e.g. "v1_19_R1"
+     */
     public static String getNMSVersion() {
         if (nmsVersion == null) {
-            final String name = Bukkit.getServer().getClass().getName();
-            final String[] parts = name.split("\\.");
-            if (parts.length > 3) {
-                return nmsVersion = parts[3];
-            }
-            // We're not on craftbukkit, return an empty string so we can silently fail
-            return nmsVersion = "";
+            return nmsVersion = "v" + McVersion.current().getNmsVersion();
         }
         return nmsVersion;
     }
 
-    public static NMSVersion getNmsVersionObject() {
-        if (nmsVersionObject == null) {
-            nmsVersionObject = NMSVersion.fromString(getNMSVersion());
-        }
-        return nmsVersionObject;
-    }
-
+    /**
+     * @deprecated Doesn't work on 1.17+
+     */
+    @Deprecated
     public static Class<?> getNMSClass(final String className) {
         return getClassCached("net.minecraft.server." + getNMSVersion() + "." + className);
     }
 
+    /**
+     * Gets a class from org.bukkit.craftbukkit
+     */
     public static Class<?> getOBCClass(final String className) {
         return getClassCached("org.bukkit.craftbukkit." + getNMSVersion() + "." + className);
     }
 
-    public static Class<?> getClassCached(final String className) {
-        if (classCache.containsKey(className)) {
-            return classCache.get(className);
+    /**
+     * Gets whether a class is already cached
+     */
+    public static boolean isClassCached(final String className) {
+        return CLASSES.containsKey(className);
+    }
+
+    /**
+     * Gets a class
+     * @return The class, or null if not found
+     */
+    public static @Nullable Class<?> getClassCached(final @Nonnull String className) {
+        if (CLASSES.containsKey(className)) {
+            return CLASSES.get(className);
         }
         try {
             final Class<?> classForName = Class.forName(className);
-            classCache.put(className, classForName);
+            CLASSES.put(className, classForName);
             return classForName;
         } catch (final ClassNotFoundException e) {
             return null;
         }
     }
 
-    public static Method getMethodCached(final Class<?> clazz, final String methodName) {
-        if (methodCache.contains(clazz, methodName)) {
-            return methodCache.get(clazz, methodName);
+    /**
+     * Gets whether a method is already cached
+     */
+    public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
+        return METHODS_NO_ARGS.contains(clazz, methodName);
+    }
+
+    /**
+     * Gets a method without parameters
+     * @return The method, or null if not found
+     */
+    public static @Nullable Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
+        if (METHODS_NO_ARGS.contains(clazz, methodName)) {
+            return METHODS_NO_ARGS.get(clazz, methodName);
         }
         try {
             final Method method = clazz.getDeclaredMethod(methodName);
             method.setAccessible(true);
-            methodCache.put(clazz, methodName, method);
+            METHODS_NO_ARGS.put(clazz, methodName, method);
             return method;
         } catch (final NoSuchMethodException e) {
             return null;
         }
     }
 
-    public static Method getMethodCached(final Class<?> clazz, final String methodName, final Class<?>... params) {
-        final MethodParams methodParams = new MethodParams(methodName, params);
-        if (methodParamCache.contains(clazz, methodParams)) {
-            return methodParamCache.get(clazz, methodParams);
+    /**
+     * Gets whether a method with parameters is already cached
+     */
+    public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
+        return METHODS_WITH_ARGS.contains(clazz, new MethodParameters(methodName, params));
+    }
+
+    /**
+     * Gets a method with parameters, or null if not found
+     * @return The method, or null if not found
+     */
+    public static Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
+        final MethodParameters methodParameters = new MethodParameters(methodName, params);
+        if (METHODS_WITH_ARGS.contains(clazz, methodParameters)) {
+            return METHODS_WITH_ARGS.get(clazz, methodParameters);
         }
         try {
             final Method method = clazz.getDeclaredMethod(methodName, params);
             method.setAccessible(true);
-            methodParamCache.put(clazz, methodParams, method);
+            METHODS_WITH_ARGS.put(clazz, methodParameters, method);
             return method;
         } catch (final NoSuchMethodException e) {
             return null;
         }
     }
 
-    public static void setField(final Object object, final String fieldName, final Object value) {
+    /**
+     * Sets an object's field to the given value
+     */
+    public static void setField(final @Nonnull Object object, final @Nonnull String fieldName, final @Nullable Object value) {
         setField(object.getClass(), object, fieldName, value);
     }
 
-    public static void setField(final Class<?> clazz, final Object object, final String fieldName, final Object value) {
+    /**
+     * Sets an object's field to the given value.
+     * @param clazz Class where this field is declared
+     * @param object Object to set the field on, or null for static fields
+     * @param fieldName Name of the field to set
+     * @param value Value to set the field to
+     */
+    public static void setField(final @Nonnull Class<?> clazz,
+                                final @Nullable Object object,
+                                final @Nonnull String fieldName,
+                                final @Nullable Object value) {
         try {
             final Field field = getFieldCached(clazz, fieldName);
             java.util.Objects.requireNonNull(field).set(object, value);
@@ -117,219 +156,125 @@ public final class ReflUtils {
         }
     }
 
-    public static Field getFieldCached(final Class<?> clazz, final String fieldName) {
-        if (fieldCache.contains(clazz, fieldName)) {
-            return fieldCache.get(clazz, fieldName);
+    /**
+     * Gets whether a field is already cached
+     */
+    public static boolean isFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+        return FIELDS.contains(clazz, fieldName);
+    }
+
+    /**
+     * Gets an object's field, or null if not found
+     * @return The field, or null if not found
+     */
+    public static Field getFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+        if (FIELDS.contains(clazz, fieldName)) {
+            return FIELDS.get(clazz, fieldName);
         }
         try {
             final Field field = clazz.getDeclaredField(fieldName);
             field.setAccessible(true);
-            fieldCache.put(clazz, fieldName, field);
+            FIELDS.put(clazz, fieldName, field);
             return field;
         } catch (final NoSuchFieldException e) {
             return null;
         }
     }
 
-    public static Constructor<?> getConstructorCached(final Class<?> clazz) {
-        if (constructorCache.containsKey(clazz)) {
-            return constructorCache.get(clazz);
+    /**
+     * Gets if the no-args constructor is already cached
+     */
+    public static boolean isConstructorCached(final @Nonnull Class<?> clazz) {
+        return CONSTRUCTORS_NO_ARGS.containsKey(clazz);
+    }
+
+    /**
+     * Gets if the constructor with parameters is already cached
+     */
+    public static boolean isConstructorCached(final @Nonnull Class<?> clazz, final @Nonnull Class<?>... params) {
+        return CONSTRUCTOR_WITH_ARGS.contains(clazz, new Parameters(params));
+    }
+
+    /**
+     * Gets a no-args constructor of a class, or null if not found
+     * @return The constructor, or null if not found
+     */
+    public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz) {
+        if (CONSTRUCTORS_NO_ARGS.containsKey(clazz)) {
+            return CONSTRUCTORS_NO_ARGS.get(clazz);
         }
         try {
             final Constructor<?> constructor = clazz.getDeclaredConstructor();
             constructor.setAccessible(true);
-            constructorCache.put(clazz, constructor);
+            CONSTRUCTORS_NO_ARGS.put(clazz, constructor);
             return constructor;
         } catch (final NoSuchMethodException e) {
             return null;
-        }
-    }
-
-    public static Constructor<?> getConstructorCached(final Class<?> clazz, final Class<?>... params) {
-        final ConstructorParams constructorParams = new ConstructorParams(params);
-        if (constructorParamCache.contains(clazz, constructorParams)) {
-            return constructorParamCache.get(clazz, constructorParams);
-        }
-        try {
-            final Constructor<?> constructor = clazz.getDeclaredConstructor(params);
-            constructor.setAccessible(true);
-            constructorParamCache.put(clazz, constructorParams, constructor);
-            return constructor;
-        } catch (final NoSuchMethodException e) {
-            return null;
-        }
-    }
-
-    // Adapted from @minecrafter
-    private static final class MethodParams {
-        private final String name;
-        private final Class<?>[] params;
-
-        MethodParams(final String name, final Class<?>[] params) {
-            this.name = name;
-            this.params = params;
-        }
-
-        // Ugly autogenned Lombok code
-        @Override
-        public boolean equals(final Object o) {
-            if (o == this) {
-                return true;
-            }
-            if (!(o instanceof MethodParams)) {
-                return false;
-            }
-            final MethodParams that = (MethodParams) o;
-            if (!that.canEqual(this)) {
-                return false;
-            }
-            final Object thisName = this.name;
-            final Object thatName = that.name;
-            if (thisName == null) {
-                if (thatName == null) {
-                    return Arrays.deepEquals(this.params, that.params);
-                }
-            } else if (thisName.equals(thatName)) {
-                return Arrays.deepEquals(this.params, that.params);
-            }
-            return false;
-        }
-
-        boolean canEqual(final Object that) {
-            return that instanceof MethodParams;
-        }
-
-        @Override
-        public int hashCode() {
-            int result = 1;
-            final Object thisName = this.name;
-            result = result * 31 + ((thisName == null) ? 0 : thisName.hashCode());
-            result = result * 31 + Arrays.deepHashCode(this.params);
-            return result;
-        }
-    }
-
-    // Necessary for deepequals
-    private static final class ConstructorParams {
-        private final Class<?>[] params;
-
-        ConstructorParams(final Class<?>[] params) {
-            this.params = params;
-        }
-
-        @Override
-        public boolean equals(final Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            final ConstructorParams that = (ConstructorParams) o;
-
-            return Arrays.deepEquals(params, that.params);
-        }
-
-        @Override
-        public int hashCode() {
-            return Arrays.deepHashCode(params);
         }
     }
 
     /**
-     * https://gist.github.com/SupaHam/dad1db6406596c5f8e4b221ff473831c
-     *
-     * @author SupaHam (<a href="https://github.com/SupaHam">https://github.com/SupaHam</a>)
+     * Gets a constructor with parameters, or null if not found
+     * @return The constructor, or null if not found
      */
-    public static final class NMSVersion implements Comparable<NMSVersion> {
-        private static final Pattern VERSION_PATTERN = Pattern.compile("^v(\\d+)_(\\d+)_R(\\d+)");
-        private final int major;
-        private final int minor;
-        private final int release;
-
-        private NMSVersion(final int major, final int minor, final int release) {
-            this.major = major;
-            this.minor = minor;
-            this.release = release;
+    public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz, final @Nullable Class<?>... params) {
+        final Parameters constructorParams = new Parameters(params);
+        if (CONSTRUCTOR_WITH_ARGS.contains(clazz, constructorParams)) {
+            return CONSTRUCTOR_WITH_ARGS.get(clazz, constructorParams);
         }
-
-        public static NMSVersion fromString(final String string) {
-            Preconditions.checkNotNull(string, "string cannot be null.");
-            Matcher matcher = VERSION_PATTERN.matcher(string);
-            if (!matcher.matches()) {
-                if (!"Essentials Fake Server".equals(Bukkit.getName())) {
-                    throw new IllegalArgumentException(string + " is not in valid version format. e.g. v1_10_R1");
-                }
-                matcher = VERSION_PATTERN.matcher(V1_12_R1.toString());
-                Preconditions.checkArgument(matcher.matches(), string + " is not in valid version format. e.g. v1_10_R1");
-            }
-            return new NMSVersion(Integer.parseInt(matcher.group(1)), Integer.parseInt(matcher.group(2)), Integer.parseInt(matcher.group(3)));
+        try {
+            final Constructor<?> constructor = clazz.getDeclaredConstructor(params);
+            constructor.setAccessible(true);
+            CONSTRUCTOR_WITH_ARGS.put(clazz, constructorParams, constructor);
+            return constructor;
+        } catch (final NoSuchMethodException e) {
+            return null;
         }
+    }
 
-        public boolean isHigherThan(final NMSVersion o) {
-            return compareTo(o) > 0;
-        }
-
-        public boolean isHigherThanOrEqualTo(final NMSVersion o) {
-            return compareTo(o) >= 0;
-        }
-
-        public boolean isLowerThan(final NMSVersion o) {
-            return compareTo(o) < 0;
-        }
-
-        public boolean isLowerThanOrEqualTo(final NMSVersion o) {
-            return compareTo(o) <= 0;
-        }
-
-        public int getMajor() {
-            return major;
-        }
-
-        public int getMinor() {
-            return minor;
-        }
-
-        public int getRelease() {
-            return release;
-        }
+    private static class Parameters {
+        @Nonnull private final Class<?>[] parameterClazzes;
 
         @Override
-        public boolean equals(final Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            final NMSVersion that = (NMSVersion) o;
-            return major == that.major &&
-                    minor == that.minor &&
-                    release == that.release;
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Parameters that = (Parameters) o;
+            return Arrays.equals(parameterClazzes, that.parameterClazzes);
         }
 
         @Override
         public int hashCode() {
-            return Objects.hashCode(major, minor, release);
+            return Arrays.hashCode(parameterClazzes);
+        }
+
+        private Parameters(@Nonnull Class<?>... parameterClazzes) {
+            this.parameterClazzes = parameterClazzes;
+        }
+    }
+    private static final class MethodParameters extends Parameters {
+
+        @Nonnull private final String name;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            if (!super.equals(o)) return false;
+            MethodParameters that = (MethodParameters) o;
+            return name.equals(that.name);
         }
 
         @Override
-        public String toString() {
-            return "v" + major + "_" + minor + "_R" + release;
+        public int hashCode() {
+            return Objects.hash(super.hashCode(), name);
         }
 
-        @Override
-        public int compareTo(final NMSVersion o) {
-            if (major < o.major) {
-                return -1;
-            } else if (major > o.major) {
-                return 1;
-            } else { // equal major
-                if (minor < o.minor) {
-                    return -1;
-                } else if (minor > o.minor) {
-                    return 1;
-                } else {
-                    return Integer.compare(release, o.release);
-                }
-            }
+        MethodParameters(final @Nonnull String name, final @Nonnull Class<?>... params) {
+            super(params);
+            this.name = name;
         }
+
+
     }
 }

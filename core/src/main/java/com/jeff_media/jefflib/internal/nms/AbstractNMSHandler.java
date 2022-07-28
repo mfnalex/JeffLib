@@ -1,17 +1,24 @@
 package com.jeff_media.jefflib.internal.nms;
 
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.TemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 @Internal
 public interface AbstractNMSHandler {
@@ -47,4 +54,14 @@ public interface AbstractNMSHandler {
 	int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
 
 	String getDefaultWorldName();
+
+    TemptGoal createTemptGoal(LivingEntity entity, Stream<Material> materials, double speed, boolean canScare);
+
+    boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority);
+
+    boolean moveTo(LivingEntity entity, double x, double y, double z, double speed);
+
+    boolean isPathfinderMob(Entity entity);
+
+    boolean isServerRunnning();
 }
