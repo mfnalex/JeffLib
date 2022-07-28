@@ -1,7 +1,9 @@
 package com.jeff_media.jefflib.ai;
 
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 
 /**
  * Represents an NMS pathfinder goal. <b>This is not meant to be implemented by plugins.</b> For custom pathfinder goals,
@@ -19,7 +21,7 @@ public interface PathfinderGoal {
      * Gets the Bukkit entity associated with this goal
      * @return
      */
-    LivingEntity getBukkitEntity();
+    Mob getBukkitEntity();
 
     /**
      * Gets called when this goal gets activated

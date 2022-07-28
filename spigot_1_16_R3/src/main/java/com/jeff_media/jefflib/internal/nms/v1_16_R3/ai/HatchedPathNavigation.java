@@ -9,7 +9,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
 
     private final NavigationAbstract navigation;
 
-    public HatchedPathNavigation(NavigationAbstract navigation) {
+    public HatchedPathNavigation(final NavigationAbstract navigation) {
         this.navigation = navigation;
     }
 
@@ -19,23 +19,23 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean isStableDestination(BlockVector pos) {
+    public boolean isStableDestination(final BlockVector pos) {
         return navigation.a(NMS.toNms(pos));
     }
 
     @Override
-    public void setCanFloat(boolean canFloat) {
+    public void setCanFloat(final boolean canFloat) {
         navigation.d(canFloat);
     }
 
     @Override
-    public boolean shouldRecomputePath(BlockVector pos) {
-        throw new NMSNotSupportedException("PathNavigation.shouldRecomputePath() is not supported below 1.18");
+    public boolean shouldRecomputePath(final BlockVector pos) {
+        throw new NMSNotSupportedException("1_17_R1 and older does not support this method");
     }
 
     @Override
     public float getMaxDistanceToWaypoint() {
-        throw new NMSNotSupportedException("PathNavigation.getMaxDistanceToWaypoint() is not supported below 1.17");
+        throw new NMSNotSupportedException("1_16_R3 and older does not support this method");
     }
 
     @Override
@@ -44,7 +44,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean moveTo(double x, double y, double z, double speedModifier) {
+    public boolean moveTo(final double x, final double y, final double z, final double speedModifier) {
         return navigation.a(x,y,z,speedModifier);
     }
 
@@ -54,7 +54,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public void setSpeedModifier(double speedModifier) {
+    public void setSpeedModifier(final double speedModifier) {
         navigation.a(speedModifier);
     }
 

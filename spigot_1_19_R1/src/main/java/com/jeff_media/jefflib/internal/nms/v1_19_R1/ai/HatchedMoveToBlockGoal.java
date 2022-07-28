@@ -6,10 +6,9 @@ import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.material.Fluid;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Creature;
 
 import java.util.Set;
 import java.util.function.Predicate;
@@ -17,15 +16,15 @@ import java.util.stream.Collectors;
 
 public abstract class HatchedMoveToBlockGoal extends MoveToBlockGoal implements PathfinderGoal {
 
-    protected final LivingEntity bukkitEntity;
+    protected final Creature bukkitEntity;
 
-    public HatchedMoveToBlockGoal(LivingEntity bukkitEntity, PathfinderMob pmob, double speed, int searchRange, int verticalSearchRange) {
+    public HatchedMoveToBlockGoal(final Creature bukkitEntity, final PathfinderMob pmob, final double speed, final int searchRange, final int verticalSearchRange) {
         super(pmob, speed, searchRange, verticalSearchRange);
         this.bukkitEntity = bukkitEntity;
     }
 
     @Override
-    public LivingEntity getBukkitEntity() {
+    public Creature getBukkitEntity() {
         return bukkitEntity;
     }
 
@@ -33,17 +32,17 @@ public abstract class HatchedMoveToBlockGoal extends MoveToBlockGoal implements 
 
         private final Set<Block> validBlockTypes;
 
-        public ByMaterialSet(LivingEntity bukkitEntity, PathfinderMob pMob, double speed, int searchRange, int verticalSearchRange, Set<Material> validBlockTypes) {
+        public ByMaterialSet(final Creature bukkitEntity, final PathfinderMob pMob, final double speed, final int searchRange, final int verticalSearchRange, final Set<Material> validBlockTypes) {
             super(bukkitEntity, pMob, speed, searchRange, verticalSearchRange);
             this.validBlockTypes = getBlockTypes(validBlockTypes);
         }
 
         @Override
-        protected boolean isValidTarget(LevelReader levelReader, BlockPos blockPos) {
+        protected boolean isValidTarget(final LevelReader levelReader, final BlockPos blockPos) {
             return validBlockTypes.contains(levelReader.getBlockState(blockPos).getBlock());
         }
 
-        private static Set<net.minecraft.world.level.block.Block> getBlockTypes(Set<Material> validMaterials) {
+        private static Set<net.minecraft.world.level.block.Block> getBlockTypes(final Set<Material> validMaterials) {
             return validMaterials.stream().map(CraftMagicNumbers::getBlock).collect(Collectors.toSet());
         }
     }
@@ -52,13 +51,13 @@ public abstract class HatchedMoveToBlockGoal extends MoveToBlockGoal implements 
 
         private final Predicate<org.bukkit.block.Block> predicate;
 
-        public ByBlockPredicate(LivingEntity bukkitEntity, PathfinderMob pMob, double speed, int searchRange, int verticalSearchRange, Predicate<org.bukkit.block.Block> predicate) {
+        public ByBlockPredicate(final Creature bukkitEntity, final PathfinderMob pMob, final double speed, final int searchRange, final int verticalSearchRange, final Predicate<org.bukkit.block.Block> predicate) {
             super(bukkitEntity, pMob, speed, searchRange, verticalSearchRange);
             this.predicate = predicate;
         }
 
         @Override
-        protected boolean isValidTarget(LevelReader levelReader, BlockPos blockPos) {
+        protected boolean isValidTarget(final LevelReader levelReader, final BlockPos blockPos) {
             return predicate.test(bukkitEntity.getWorld().getBlockAt(blockPos.getX(), blockPos.getY(), blockPos.getZ()));
         }
     }

@@ -10,9 +10,9 @@ import java.util.function.Predicate;
 
 public  class HatchedAvoidEntityGoal extends AvoidEntityGoal<LivingEntity> implements PathfinderGoal {
 
-    private final org.bukkit.entity.LivingEntity bukkitEntity;
+    private final org.bukkit.entity.Creature bukkitEntity;
 
-    public HatchedAvoidEntityGoal(final org.bukkit.entity.LivingEntity bukkitEntity,
+    public HatchedAvoidEntityGoal(final org.bukkit.entity.Creature bukkitEntity,
                                   final PathfinderMob mob,
                                   final Predicate<org.bukkit.entity.LivingEntity> bukkitPredicate,
                                   final float maxDistance,
@@ -23,7 +23,7 @@ public  class HatchedAvoidEntityGoal extends AvoidEntityGoal<LivingEntity> imple
     }
 
     @Override
-    public org.bukkit.entity.LivingEntity getBukkitEntity() {
+    public org.bukkit.entity.Creature getBukkitEntity() {
         return bukkitEntity;
     }
 }

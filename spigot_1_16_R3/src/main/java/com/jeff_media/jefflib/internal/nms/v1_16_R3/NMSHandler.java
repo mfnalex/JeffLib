@@ -3,15 +3,17 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R3;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.MoveController;
 import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
-import com.jeff_media.jefflib.data.*;
-import com.jeff_media.jefflib.internal.nms.v1_16_R3.ai.*;
-import com.mojang.authlib.GameProfile;
+import com.jeff_media.jefflib.data.ByteCounter;
+import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
+import com.jeff_media.jefflib.internal.nms.v1_16_R3.ai.*;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -21,7 +23,9 @@ import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftChatMessage;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
@@ -52,8 +56,8 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
-        for(final Player player : Bukkit.getOnlinePlayers()) {
-            sendPacket(player, new PacketPlayOutEntityMetadata(((Entity)entity).getId(),((Entity)entity).getDataWatcher(),true));
+        for (final Player player : Bukkit.getOnlinePlayers()) {
+            sendPacket(player, new PacketPlayOutEntityMetadata(((Entity) entity).getId(), ((Entity) entity).getDataWatcher(), true));
         }
     }
 
@@ -93,7 +97,7 @@ public class NMSHandler implements AbstractNMSHandler {
         final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
         PacketUtils.sendPacket(player, packetSpawn);
 
-        final PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity)entity).getId(), ((Entity)entity).getDataWatcher(), true);
+        final PacketPlayOutEntityMetadata packetMeta = new PacketPlayOutEntityMetadata(((Entity) entity).getId(), ((Entity) entity).getDataWatcher(), true);
         PacketUtils.sendPacket(player, packetMeta);
     }
 
@@ -139,9 +143,9 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void setFullTimeWithoutTimeSkipEvent(@Nonnull final org.bukkit.World world, final long time, final boolean notifyPlayers) {
-        final WorldServer level = ((CraftWorld)world).getHandle();
+        final WorldServer level = ((CraftWorld) world).getHandle();
         level.setDayTime(time);
-        if(notifyPlayers) {
+        if (notifyPlayers) {
             for (final Player player : world.getPlayers()) {
                 final EntityPlayer serverPlayer = ((CraftPlayer) player).getHandle();
                 if (serverPlayer.playerConnection != null) {
@@ -153,52 +157,51 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public double[] getTps() {
-        return ((CraftServer)Bukkit.getServer()).getHandle().getServer().recentTps;
+        return ((CraftServer) Bukkit.getServer()).getHandle().getServer().recentTps;
     }
 
     @Override
-    public int getItemStackSizeInBytes(org.bukkit.inventory.ItemStack itemStack) throws IOException {
-        ByteCounter counter = new ByteCounter();
-        NBTTagCompound tag = CraftItemStack.asNMSCopy(itemStack).getTag();
-        if(tag == null) return ItemStackUtils.NO_DATA;
+    public int getItemStackSizeInBytes(final org.bukkit.inventory.ItemStack itemStack) throws IOException {
+        final ByteCounter counter = new ByteCounter();
+        final NBTTagCompound tag = CraftItemStack.asNMSCopy(itemStack).getTag();
+        if (tag == null) return ItemStackUtils.NO_DATA;
         tag.write(counter);
         return counter.getBytes();
     }
 
     @Override
     public String getDefaultWorldName() {
-        return ( (CraftServer) Bukkit.getServer() ).getServer().propertyManager.getProperties().levelName;
+        return ((CraftServer) Bukkit.getServer()).getServer().propertyManager.getProperties().levelName;
     }
 
     @Override
-    public PathfinderGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<org.bukkit.Material> materials, double speed, boolean canScare) {
-        final EntityCreature pmob = asPathfinder(entity);
-        return new HatchedTemptGoal(entity, pmob,ingredient(materials), speed, canScare);
+    public PathfinderGoal createTemptGoal(final org.bukkit.entity.Creature entity, final Stream<org.bukkit.Material> materials, final double speed, final boolean canScare) {
+        final EntityCreature pathfinderMob = asPathfinder(entity);
+        return new HatchedTemptGoal(entity, pathfinderMob, ingredient(materials), speed, canScare);
     }
 
     @Override
-    public PathfinderGoal createAvoidEntityGoal(LivingEntity entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier) {
-        return new HatchedAvoidEntityGoal(entity, asPathfinderOrThrow(entity), predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
+    public PathfinderGoal createAvoidEntityGoal(final Creature entity, final Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
+        return new HatchedAvoidEntityGoal(entity, asPathfinder(entity), predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
     }
 
     @Override
-    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Set<org.bukkit.Material> blocks, double speed, int searchRange, int verticalSearchRange) {
-        return new HatchedMoveToBlockGoal.ByMaterialSet(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blocks);
+    public PathfinderGoal createMoveToBlockGoal(final Creature entity, final Set<org.bukkit.Material> blocks, final double speed, final int searchRange, final int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByMaterialSet(entity, asPathfinder(entity), speed, searchRange, verticalSearchRange, blocks);
     }
 
     @Override
-    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange) {
-        return new HatchedMoveToBlockGoal.ByBlockPredicate(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blockPredicate);
+    public PathfinderGoal createMoveToBlockGoal(final Creature entity, final Predicate<Block> blockPredicate, final double speed, final int searchRange, final int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByBlockPredicate(entity, asPathfinder(entity), speed, searchRange, verticalSearchRange, blockPredicate);
     }
 
     @Override
-    public boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
-        final EntityCreature pmob = asPathfinder(entity);
-        if(pmob == null) return false;
-        if(goal instanceof net.minecraft.server.v1_16_R3.PathfinderGoal) {
-            pmob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) goal);
-        } else if(goal instanceof CustomGoal) {
-            pmob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) ((CustomGoal)goal).getExecutor());
+    public boolean addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        final EntityInsentient pathfinderMob = asMob(entity);
+        if (goal instanceof net.minecraft.server.v1_16_R3.PathfinderGoal) {
+            pathfinderMob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) goal);
+        } else if (goal instanceof CustomGoal) {
+            pathfinderMob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) ((CustomGoal) goal).getExecutor());
         } else {
             throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
         }
@@ -206,55 +209,56 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public boolean moveTo(org.bukkit.entity.LivingEntity entity, double x, double y, double z, double speed) {
-        final EntityCreature pmob = asPathfinder(entity);
-        if(pmob == null) return false;
-        return pmob.getNavigation().a(x, y, z, speed);
-    }
-
-    @Override
-    public boolean isPathfinderMob(org.bukkit.entity.Entity entity) {
-        return toNms(entity) instanceof EntityCreature;
+    public boolean moveTo(final org.bukkit.entity.Mob entity, final double x, final double y, final double z, final double speed) {
+        final EntityInsentient pathfinderMob = asMob(entity);
+        return pathfinderMob.getNavigation().a(x, y, z, speed);
     }
 
     @Override
     public boolean isServerRunnning() {
         return getDedicatedServer().isRunning();
     }
+
     @Override
-    public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
-        return new CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
+    public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
+        return new CustomGoalExecutor(customGoal, asMob(entity));
     }
 
     @Nullable
     @Override
-    public PathNavigation getPathNavigation(org.bukkit.entity.LivingEntity entity) {
-        final EntityCreature pmob = asPathfinder(entity);
-        return pmob == null ? null : new HatchedPathNavigation(pmob.getNavigation());
+    public PathNavigation getPathNavigation(final org.bukkit.entity.Mob entity) {
+        final EntityInsentient pathfinderMob = asMob(entity);
+        return new HatchedPathNavigation(pathfinderMob.getNavigation());
     }
 
     @Nullable
     @Override
-    public Vector getRandomPos(LivingEntity entity, int var1, int var2) {
-        final EntityCreature pmob = asPathfinder(entity);
-        final Vec3D vec = pmob == null ? null : RandomPositionGenerator.a(pmob, var1, var2); // could be .a or .b
+    public Vector getRandomPos(final Creature entity, final int var1, final int var2) {
+        final EntityCreature pathfinderMob = asPathfinder(entity);
+        final Vec3D vec = RandomPositionGenerator.a(pathfinderMob, var1, var2); // could be .a or .b
         return vec == null ? null : new Vector(vec.x, vec.y, vec.z);
     }
 
     @Nullable
     @Override
-    public Vector getRandomPosAway(LivingEntity entity, int var1, int var2, Vector var3) {
-        final EntityCreature pmob = asPathfinder(entity);
-        final Vec3D vec = pmob == null ? null : RandomPositionGenerator.c(pmob, var1, var2, toNms(var3)); // definitely c
+    public Vector getRandomPosAway(final Creature entity, final int var1, final int var2, final Vector var3) {
+        final EntityCreature pathfinderMob = asPathfinder(entity);
+        final Vec3D vec = RandomPositionGenerator.c(pathfinderMob, var1, var2, toNms(var3)); // definitely c
         return vec == null ? null : toBukkit(vec);
     }
 
     @Nullable
     @Override
-    public Vector getRandomPosTowards(LivingEntity entity, int var1, int var2, Vector var3, double var4) {
-        final EntityCreature pmob = asPathfinder(entity);
-        final Vec3D vec = pmob == null ? null : RandomPositionGenerator.a(pmob, var1, var2, toNms(var3), var4); // a is the only that matches
+    public Vector getRandomPosTowards(final Creature entity, final int var1, final int var2, final Vector var3, final double var4) {
+        final EntityCreature pathfinderMob = asPathfinder(entity);
+        final Vec3D vec = RandomPositionGenerator.a(pathfinderMob, var1, var2, toNms(var3), var4); // a is the only that matches
         return vec == null ? null : toBukkit(vec);
+    }
+
+    @Nullable
+    @Override
+    public MoveController getMoveControl(final Mob entity) {
+        return new HatchedMoveController(asMob(entity).getControllerMove());
     }
 
 

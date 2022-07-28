@@ -1,16 +1,17 @@
 package com.jeff_media.jefflib.internal.nms;
 
 import com.jeff_media.jefflib.ai.*;
-import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
+import com.mojang.authlib.GameProfile;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.Vector;
@@ -41,7 +42,7 @@ public interface AbstractNMSHandler {
 
     void sendPacket(@Nonnull final Player player, @Nonnull final Object packet);
 
-    Pair<String,String> getBiomeName(@Nonnull final Location location);
+    Pair<String, String> getBiomeName(@Nonnull final Location location);
 
     void playTotemAnimation(@Nonnull final Player player);
 
@@ -51,35 +52,40 @@ public interface AbstractNMSHandler {
 
     void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
-	double[] getTps();
+    double[] getTps();
 
-	int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
+    int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
 
-	String getDefaultWorldName();
+    String getDefaultWorldName();
 
-    PathfinderGoal createTemptGoal(LivingEntity entity, Stream<Material> materials, double speed, boolean canScare);
+    PathfinderGoal createTemptGoal(Creature entity, Stream<Material> materials, double speed, boolean canScare);
 
-    PathfinderGoal createAvoidEntityGoal(LivingEntity entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier);
+    PathfinderGoal createAvoidEntityGoal(Creature entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier);
 
-    PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange);
+    PathfinderGoal createMoveToBlockGoal(Creature entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange);
 
-    PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange);
+    PathfinderGoal createMoveToBlockGoal(Creature entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange);
 
-    boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority);
+    boolean addGoal(Mob entity, PathfinderGoal goal, int priority);
 
-    boolean moveTo(LivingEntity entity, double x, double y, double z, double speed);
-
-    boolean isPathfinderMob(Entity entity);
+    boolean moveTo(Mob entity, double x, double y, double z, double speed);
 
     boolean isServerRunnning();
 
-    CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity);
+    CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, Mob entity);
 
-    @Nullable PathNavigation getPathNavigation(LivingEntity entity);
+    @Nullable
+    Vector getRandomPos(Creature entity, int var1, int var2);
 
-    @Nullable Vector getRandomPos(LivingEntity entity, int var1, int var2);
+    @Nullable
+    Vector getRandomPosAway(Creature entity, int var1, int var2, Vector var3);
 
-    @Nullable Vector getRandomPosAway(LivingEntity entity, int var1, int var2, Vector var3);
+    @Nullable
+    Vector getRandomPosTowards(Creature entity, int var1, int var2, Vector var3, double var4);
 
-    @Nullable Vector getRandomPosTowards(LivingEntity entity, int var1, int var2, Vector var3, double var4);
+    @Nonnull
+    MoveController getMoveControl(Mob entity);
+
+    @Nonnull
+    PathNavigation getPathNavigation(Mob entity);
 }

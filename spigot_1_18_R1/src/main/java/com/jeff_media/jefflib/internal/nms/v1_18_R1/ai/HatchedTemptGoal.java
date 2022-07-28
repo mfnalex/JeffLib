@@ -4,22 +4,21 @@ import com.jeff_media.jefflib.ai.PathfinderGoal;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.crafting.Ingredient;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Creature;
 
 
 public class HatchedTemptGoal extends TemptGoal implements PathfinderGoal {
 
-    private final LivingEntity bukkitEntity;
+    private final Creature bukkitEntity;
 
-    public HatchedTemptGoal(LivingEntity entity, PathfinderMob entitycreature, Ingredient recipeitemstack, double speed, boolean canScare) {
-        super(entitycreature, speed, recipeitemstack, canScare);
+    public HatchedTemptGoal(final Creature entity, final PathfinderMob pathfinderMob, final Ingredient ingredient, final double speed, final boolean canScare) {
+        super(pathfinderMob, speed, ingredient, canScare);
         this.bukkitEntity = entity;
     }
 
     @Override
-    public LivingEntity getBukkitEntity() {
+    public Creature getBukkitEntity() {
         return bukkitEntity;
     }
-
 
 }

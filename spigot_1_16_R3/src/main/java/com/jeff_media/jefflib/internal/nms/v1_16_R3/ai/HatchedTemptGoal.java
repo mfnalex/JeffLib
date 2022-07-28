@@ -4,15 +4,15 @@ import com.jeff_media.jefflib.ai.PathfinderGoal;
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.PathfinderGoalTempt;
 import net.minecraft.server.v1_16_R3.RecipeItemStack;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Creature;
 
 
 public class HatchedTemptGoal extends PathfinderGoalTempt implements PathfinderGoal {
 
-    private final LivingEntity bukkitEntity;
+    private final Creature bukkitEntity;
 
-    public HatchedTemptGoal(LivingEntity entity, EntityCreature entitycreature, RecipeItemStack recipeitemstack, double speed, boolean canScare) {
-        super(entitycreature, speed, recipeitemstack, canScare);
+    public HatchedTemptGoal(final Creature entity, final EntityCreature pathfinderMob, final RecipeItemStack ingredient, final double speed, final boolean canScare) {
+        super(pathfinderMob, speed, ingredient, canScare);
         this.bukkitEntity = entity;
     }
 
@@ -22,9 +22,8 @@ public class HatchedTemptGoal extends PathfinderGoalTempt implements PathfinderG
     }
 
     @Override
-    public LivingEntity getBukkitEntity() {
+    public Creature getBukkitEntity() {
         return bukkitEntity;
     }
-
 
 }

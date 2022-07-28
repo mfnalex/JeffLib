@@ -8,7 +8,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
 
     private final PathNavigation navigation;
 
-    public HatchedPathNavigation(PathNavigation navigation) {
+    public HatchedPathNavigation(final PathNavigation navigation) {
         this.navigation = navigation;
     }
 
@@ -18,17 +18,17 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean isStableDestination(BlockVector pos) {
+    public boolean isStableDestination(final BlockVector pos) {
         return navigation.isStableDestination(NMS.toNms(pos));
     }
 
     @Override
-    public void setCanFloat(boolean canFloat) {
+    public void setCanFloat(final boolean canFloat) {
         navigation.setCanFloat(canFloat);
     }
 
     @Override
-    public boolean shouldRecomputePath(BlockVector pos) {
+    public boolean shouldRecomputePath(final BlockVector pos) {
         return navigation.shouldRecomputePath(NMS.toNms(pos));
     }
 
@@ -43,7 +43,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public boolean moveTo(double x, double y, double z, double speedModifier) {
+    public boolean moveTo(final double x, final double y, final double z, final double speedModifier) {
         return navigation.moveTo(x,y,z,speedModifier);
     }
 
@@ -53,7 +53,7 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
-    public void setSpeedModifier(double speedModifier) {
+    public void setSpeedModifier(final double speedModifier) {
         navigation.setSpeedModifier(speedModifier);
     }
 

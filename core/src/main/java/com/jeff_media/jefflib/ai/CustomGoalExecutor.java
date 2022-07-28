@@ -1,7 +1,5 @@
 package com.jeff_media.jefflib.ai;
 
-import org.bukkit.entity.Entity;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.EnumSet;
@@ -25,6 +23,9 @@ public interface CustomGoalExecutor {
      * Returns the {@link PathNavigation} associated with this goal's entity
      */
     @Nonnull PathNavigation getNavigation();
+
+    @Nonnull
+    MoveController getMoveControl();
 
     //@Nonnull CustomGoal getGoal();
 

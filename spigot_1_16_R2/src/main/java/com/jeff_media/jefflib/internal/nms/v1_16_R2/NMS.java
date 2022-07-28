@@ -8,9 +8,12 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.block.CraftBlock;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftCreature;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_16_R2.entity.CraftMob;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftMagicNumbers;
+import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
@@ -27,61 +30,57 @@ public final class NMS {
         return ((CraftBlock)block).getPosition();
     }
 
-    public static Entity toNms(org.bukkit.entity.Entity entity) {
+    public static Entity toNms(final org.bukkit.entity.Entity entity) {
         return ((CraftEntity)entity).getHandle();
     }
 
-    public static org.bukkit.entity.Entity toBukkit(Entity entity) {
+    public static org.bukkit.entity.Entity toBukkit(final Entity entity) {
         return entity.getBukkitEntity();
     }
 
-    public static EntityLiving toNms(org.bukkit.entity.LivingEntity entity) {
+    public static EntityLiving toNms(final org.bukkit.entity.LivingEntity entity) {
         return ((CraftLivingEntity)entity).getHandle();
     }
 
-    public static org.bukkit.entity.LivingEntity toBukkit(EntityLiving entity) {
+    public static org.bukkit.entity.LivingEntity toBukkit(final EntityLiving entity) {
         return (org.bukkit.entity.LivingEntity) entity.getBukkitEntity();
     }
 
-    public static RecipeItemStack ingredient(Stream<Material> set) {
+    public static RecipeItemStack ingredient(final Stream<Material> set) {
         return RecipeItemStack.a(set.map(mat -> new ItemStack(CraftMagicNumbers.getItem(mat))));
     }
 
-    public static @Nullable EntityCreature asPathfinder(final org.bukkit.entity.Entity bukkitEntity) {
-        final Entity nmsEntity = NMS.toNms(bukkitEntity);
-        if(nmsEntity instanceof EntityCreature) {
-            return (EntityCreature) nmsEntity;
-        } else {
-            return null;
-        }
+    @Nonnull
+    public static EntityCreature asPathfinder(final org.bukkit.entity.Creature bukkitEntity) {
+        return ((CraftCreature)bukkitEntity).getHandle();
     }
 
-    public static @Nonnull EntityCreature asPathfinderOrThrow(final org.bukkit.entity.Entity bukkitEntity) {
-        final Entity nmsEntity = NMS.toNms(bukkitEntity);
-        if(nmsEntity instanceof EntityCreature) {
-            return (EntityCreature) nmsEntity;
-        } else {
-            throw new IllegalArgumentException("Given entity is not a PathfinderMob/EntityCreature: " + nmsEntity.getClass().getName() + " (" + bukkitEntity.getClass().getName() + ")");
-        }
+    @Nonnull
+    public static EntityInsentient asMob(final org.bukkit.entity.Mob bukkitEntity) {
+        return ((CraftMob)bukkitEntity).getHandle();
     }
 
     public static DedicatedServer getDedicatedServer() {
         return ((CraftServer) Bukkit.getServer()).getServer();
     }
 
-    public static BlockPosition toNms(org.bukkit.util.BlockVector pos) {
+    public static BlockPosition toNms(final BlockVector pos) {
         return new BlockPosition(pos.getX(), pos.getY(), pos.getZ());
     }
 
-    public static org.bukkit.util.BlockVector toBukkit(BlockPosition targetPos) {
-        return new org.bukkit.util.BlockVector(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+    public static BlockVector toBukkit(@Nullable final BlockPosition targetPos) {
+        if(targetPos == null) {
+            return null;
+        }
+        return new BlockVector(targetPos.getX(), targetPos.getY(), targetPos.getZ());
     }
 
-    public static Vector toBukkit(Vec3D vec) {
+    public static Vec3D toNms(final Vector vector) {
+        return new Vec3D(vector.getX(), vector.getY(), vector.getZ());
+    }
+
+    public static Vector toBukkit(final Vec3D vec) {
         return new Vector(vec.x, vec.y, vec.z);
     }
 
-    public static Vec3D toNms(Vector vec) {
-        return new Vec3D(vec.getX(), vec.getY(), vec.getZ());
-    }
 }

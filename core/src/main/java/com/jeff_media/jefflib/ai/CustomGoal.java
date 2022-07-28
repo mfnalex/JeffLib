@@ -1,10 +1,8 @@
 package com.jeff_media.jefflib.ai;
 
-import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.JeffLib;
-import org.bukkit.Location;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.Mob;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -15,10 +13,10 @@ import java.util.EnumSet;
  */
 public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
 
-    private final LivingEntity bukkitEntity;
+    private final Mob bukkitEntity;
     private final CustomGoalExecutor executor;
 
-    protected CustomGoal(final LivingEntity bukkitEntity) {
+    protected CustomGoal(final Creature bukkitEntity) {
         this.bukkitEntity = bukkitEntity;
         this.executor = JeffLib.getNMSHandler().getCustomGoalExecutor(this, bukkitEntity);
     }
@@ -35,7 +33,7 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
     public abstract boolean canUse();
 
     @Override
-    public LivingEntity getBukkitEntity() {
+    public Mob getBukkitEntity() {
         return bukkitEntity;
     }
 
@@ -43,6 +41,12 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
     @Override
     public PathNavigation getNavigation() {
         return executor.getNavigation();
+    }
+
+    @Nonnull
+    @Override
+    public MoveController getMoveControl() {
+        return executor.getMoveControl();
     }
 
     @Override

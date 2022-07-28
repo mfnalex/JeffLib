@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.MoveController;
 import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
 import com.jeff_media.jefflib.internal.annotations.NMS;
@@ -11,12 +11,9 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftBat;
+import org.bukkit.entity.*;
 import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -37,7 +34,8 @@ public final class EntityUtils {
     /**
      * Gets the closest other player in this world, or null if there is no other player
      */
-    public static @Nullable Player getClosestOtherPlayer(final @Nonnull Player player) {
+    @Nullable
+    public static Player getClosestOtherPlayer(@Nonnull final Player player) {
         return player.getWorld().getPlayers().stream()
                 .filter(other -> other != player)
                 .min(new Comparators.EntityByDistanceComparator(player))
@@ -47,8 +45,8 @@ public final class EntityUtils {
     /**
      * Gets the generic movement speed of an entity
      */
-    public static double getMovementSpeed(final @Nonnull LivingEntity entity) {
-        AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+    public static double getMovementSpeed(@Nonnull final LivingEntity entity) {
+        final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
         if(attribute != null) {
             return attribute.getValue();
         }
@@ -58,7 +56,8 @@ public final class EntityUtils {
     /**
      * Gets the closest player in this world, or null if there is no player
      */
-    public static @Nullable Player getClosestPlayer(final @Nonnull Location location) {
+    @Nullable
+    public static Player getClosestPlayer(@Nonnull final Location location) {
         return location.getWorld().getPlayers().stream()
                 .min(new Comparators.EntityByDistanceComparator(location))
                 .orElse(null);
@@ -67,14 +66,16 @@ public final class EntityUtils {
     /**
      * Gets the closest player in this world, or null if there is no player
      */
-    public static @Nullable Player getClosestPlayer(final @Nonnull Entity entity) {
+    @Nullable
+    public static Player getClosestPlayer(@Nonnull final Entity entity) {
         return getClosestPlayer(entity.getLocation());
     }
 
     /**
      * Gets the closest player in this world, or null if there is no player
      */
-    public static @Nullable Player getClosestPlayer(final @Nonnull Block block) {
+    @Nullable
+    public static Player getClosestPlayer(@Nonnull final Block block) {
         return getClosestPlayer(BlockUtils.getCenter(block));
     }
 
@@ -179,21 +180,6 @@ public final class EntityUtils {
     }
 
     /**
-     * Lets an Entity walk to a certain location
-     */
-    public static boolean walkTo(final @Nonnull LivingEntity entity, final double x, final double y, final double z, final double speed) {
-        return JeffLib.getNMSHandler().moveTo(entity, x, y, z, speed);
-    }
-
-    public static boolean walkTo(final @Nonnull LivingEntity entity, final @Nonnull Location location, final double speed) {
-        return walkTo(entity, location.getX(), location.getY(), location.getZ(), speed);
-    }
-
-    public static boolean isPathfinderMob(Entity entity) {
-        return JeffLib.getNMSHandler().isPathfinderMob(entity);
-    }
-
-    /**
      * Adds a {@link PathfinderGoal} to an entity
      * @param entity Entity to add the goal to
      * @param goal Goal to add
@@ -201,16 +187,23 @@ public final class EntityUtils {
      * @return true if the goal was added successfully, false if the given entity is not a pathfinding mob (e.g. Bats)
      * @throws UnsupportedOperationException If the given PathfinderGoal is not supposed
      */
-    public static boolean addPathfinderGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
+    public static boolean addPathfinderGoal(@Nonnull final Mob entity, @Nonnull final PathfinderGoal goal, final int priority) {
         return JeffLib.getNMSHandler().addGoal(entity, goal, priority);
     }
 
     /**
-     * Returns the {@link PathNavigation} for this entity, or null if it's not a pathfinding mob (e.g. Bats)
-     * @return PathNavigation or null or not a pathfinding mob (e.g. Bats)
+     * Returns the {@link PathNavigation} for this entity
      */
     @NMS
-    @Nullable public static PathNavigation getNavigation(@Nonnull LivingEntity entity) {
+    @Nonnull public static PathNavigation getNavigation(@Nonnull final Mob entity) {
         return JeffLib.getNMSHandler().getPathNavigation(entity);
+    }
+
+    /**
+     * Returns the {@link MoveController} for this entity
+     */
+    @NMS
+    @Nonnull public static MoveController getMoveController(@Nonnull final Mob entity) {
+        return JeffLib.getNMSHandler().getMoveControl(entity);
     }
 }

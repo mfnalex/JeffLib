@@ -2,16 +2,16 @@ package com.jeff_media.jefflib.internal.nms.v1_17_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.PathNavigation;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
-import com.jeff_media.jefflib.data.*;
-import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.*;
-import com.mojang.authlib.GameProfile;
+import com.jeff_media.jefflib.ai.*;
+import com.jeff_media.jefflib.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.data.ByteCounter;
+import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
+import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.*;
+import com.mojang.authlib.GameProfile;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
@@ -40,13 +40,16 @@ import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
+import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -69,28 +72,17 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final org.bukkit.entity.Player player) {
-        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
-        PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(), ((Entity)entity).getEntityData(), true));
-    }
-
-    @Override
-    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final org.bukkit.entity.Player player) {
-        PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
-    }
-
-    @Override
     public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
-        for(final org.bukkit.entity.Player player : Bukkit.getOnlinePlayers()) {
-            sendPacket(player, new ClientboundSetEntityDataPacket(((Entity)entity).getId(),((Entity)entity).getEntityData(),true));
+        for (final Player player : Bukkit.getOnlinePlayers()) {
+            sendPacket(player, new ClientboundSetEntityDataPacket(((Entity) entity).getId(), ((Entity) entity).getEntityData(), true));
         }
     }
 
     @Override
     public Object createHologram(@Nonnull final Location location, @Nonnull final String line, @Nonnull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
-        final ServerLevel world = craftWorld.getHandle();
+        final ServerLevel world = Objects.requireNonNull(craftWorld).getHandle();
         final Component baseComponent = CraftChatMessage.fromString(line)[0];
         final Entity entity;
         switch (type) {
@@ -119,7 +111,18 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void sendPacket(@Nonnull final org.bukkit.entity.Player player, @Nonnull final Object packet) {
+    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
+        PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity) entity).getId(), ((Entity) entity).getEntityData(), true));
+    }
+
+    @Override
+    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+        PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
+    }
+
+    @Override
+    public void sendPacket(@Nonnull final Player player, @Nonnull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
@@ -129,7 +132,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public void playTotemAnimation(@Nonnull final org.bukkit.entity.Player player) {
+    public void playTotemAnimation(@Nonnull final Player player) {
         final ServerPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<?> packet = new ClientboundEntityEventPacket(entityPlayer, (byte) 35);
         final Connection playerConnection = entityPlayer.connection.connection;
@@ -155,9 +158,9 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers) {
-        final ServerLevel level = ((CraftWorld)world).getHandle();
+        final ServerLevel level = ((CraftWorld) world).getHandle();
         level.setDayTime(time);
-        if(notifyPlayers) {
+        if (notifyPlayers) {
             for (final Player player : world.getPlayers()) {
                 final ServerPlayer serverPlayer = ((CraftPlayer) player).getHandle();
                 if (serverPlayer.connection != null) {
@@ -169,52 +172,50 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public double[] getTps() {
-        return ((CraftServer)Bukkit.getServer()).getHandle().getServer().recentTps;
+        return ((CraftServer) Bukkit.getServer()).getHandle().getServer().recentTps;
     }
 
     @Override
-    public int getItemStackSizeInBytes(org.bukkit.inventory.ItemStack itemStack) throws IOException {
-        ByteCounter counter = new ByteCounter();
-        CompoundTag tag = CraftItemStack.asNMSCopy(itemStack).getTag();
-        if(tag == null) return ItemStackUtils.NO_DATA;
+    public int getItemStackSizeInBytes(final org.bukkit.inventory.ItemStack itemStack) throws IOException {
+        final ByteCounter counter = new ByteCounter();
+        final CompoundTag tag = CraftItemStack.asNMSCopy(itemStack).getTag();
+        if (tag == null) return ItemStackUtils.NO_DATA;
         tag.write(counter);
         return counter.getBytes();
     }
 
     @Override
     public String getDefaultWorldName() {
-        return ( (CraftServer) Bukkit.getServer() ).getServer().getProperties().levelName;
+        return ((CraftServer) Bukkit.getServer()).getServer().getProperties().levelName;
     }
 
     @Override
-    public PathfinderGoal createTemptGoal(org.bukkit.entity.LivingEntity entity, Stream<Material> materials, double speed, boolean canScare) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        return new HatchedTemptGoal(entity, pmob,ingredient(materials), speed, canScare);
+    public PathfinderGoal createTemptGoal(final Creature entity, final Stream<Material> materials, final double speed, final boolean canScare) {
+        return new HatchedTemptGoal(entity, asPathfinder(entity), ingredient(materials), speed, canScare);
     }
 
     @Override
-    public PathfinderGoal createAvoidEntityGoal(LivingEntity entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier) {
-        return new HatchedAvoidEntityGoal(entity, asPathfinderOrThrow(entity), predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
+    public PathfinderGoal createAvoidEntityGoal(final Creature entity, final Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
+        return new HatchedAvoidEntityGoal(entity, asPathfinder(entity), predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
     }
 
     @Override
-    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange) {
-        return new HatchedMoveToBlockGoal.ByMaterialSet(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blocks);
+    public PathfinderGoal createMoveToBlockGoal(final Creature entity, final Set<Material> blocks, final double speed, final int searchRange, final int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByMaterialSet(entity, asPathfinder(entity), speed, searchRange, verticalSearchRange, blocks);
     }
 
     @Override
-    public PathfinderGoal createMoveToBlockGoal(LivingEntity entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange) {
-        return new HatchedMoveToBlockGoal.ByBlockPredicate(entity, asPathfinderOrThrow(entity), speed, searchRange, verticalSearchRange, blockPredicate);
+    public PathfinderGoal createMoveToBlockGoal(final Creature entity, final Predicate<Block> blockPredicate, final double speed, final int searchRange, final int verticalSearchRange) {
+        return new HatchedMoveToBlockGoal.ByBlockPredicate(entity, asPathfinder(entity), speed, searchRange, verticalSearchRange, blockPredicate);
     }
 
     @Override
-    public boolean addGoal(LivingEntity entity, PathfinderGoal goal, int priority) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        if(pmob == null) return false;
-        if(goal instanceof Goal) {
-            pmob.targetSelector.addGoal(priority, (Goal) goal);
-        } else if(goal instanceof CustomGoal) {
-            pmob.targetSelector.addGoal(priority, (Goal) ((CustomGoal)goal).getExecutor());
+    public boolean addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
+        if (goal instanceof Goal) {
+            pathfinderMob.targetSelector.addGoal(priority, (Goal) goal);
+        } else if (goal instanceof CustomGoal) {
+            pathfinderMob.targetSelector.addGoal(priority, (Goal) ((CustomGoal) goal).getExecutor());
         } else {
             throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
         }
@@ -222,15 +223,9 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public boolean moveTo(org.bukkit.entity.LivingEntity entity, double x, double y, double z, double speed) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        if(pmob == null) return false;
-        return pmob.getNavigation().moveTo(x, y, z, speed);
-    }
-
-    @Override
-    public boolean isPathfinderMob(org.bukkit.entity.Entity entity) {
-        return toNms(entity) instanceof PathfinderMob;
+    public boolean moveTo(final Mob entity, final double x, final double y, final double z, final double speed) {
+        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
+        return pathfinderMob.getNavigation().moveTo(x, y, z, speed);
     }
 
     @Override
@@ -239,39 +234,45 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
-        return new CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
+    public CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
+        return new com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.CustomGoalExecutor(customGoal, asMob(entity));
     }
 
     @Nullable
     @Override
-    public PathNavigation getPathNavigation(org.bukkit.entity.LivingEntity entity) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        return pmob == null ? null : new HatchedPathNavigation(pmob.getNavigation());
+    public PathNavigation getPathNavigation(final Mob entity) {
+        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
+        return new HatchedPathNavigation(pathfinderMob.getNavigation());
     }
 
     @Nullable
     @Override
-    public Vector getRandomPos(LivingEntity entity, int var1, int var2) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPos(pmob, var1, var2);
+    public Vector getRandomPos(final Creature entity, final int var1, final int var2) {
+        final PathfinderMob pathfinderMob = asPathfinder(entity);
+        final Vec3 vec = DefaultRandomPos.getPos(pathfinderMob, var1, var2);
         return vec == null ? null : new Vector(vec.x, vec.y, vec.z);
     }
 
     @Nullable
     @Override
-    public Vector getRandomPosAway(LivingEntity entity, int var1, int var2, Vector var3) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPosAway(pmob, var1, var2, toNms(var3));
+    public Vector getRandomPosAway(final Creature entity, final int var1, final int var2, final Vector var3) {
+        final PathfinderMob pathfinderMob = asPathfinder(entity);
+        final Vec3 vec = DefaultRandomPos.getPosAway(pathfinderMob, var1, var2, toNms(var3));
         return vec == null ? null : toBukkit(vec);
     }
 
     @Nullable
     @Override
-    public Vector getRandomPosTowards(LivingEntity entity, int var1, int var2, Vector var3, double var4) {
-        final PathfinderMob pmob = asPathfinder(entity);
-        final Vec3 vec = pmob == null ? null : DefaultRandomPos.getPosTowards(pmob, var1, var2, toNms(var3), var4);
+    public Vector getRandomPosTowards(final Creature entity, final int var1, final int var2, final Vector var3, final double var4) {
+        final PathfinderMob pathfinderMob = asPathfinder(entity);
+        final Vec3 vec = DefaultRandomPos.getPosTowards(pathfinderMob, var1, var2, toNms(var3), var4);
         return vec == null ? null : toBukkit(vec);
+    }
+
+    @Nullable
+    @Override
+    public MoveController getMoveControl(final Mob entity) {
+        return new HatchedMoveController(asMob(entity).getMoveControl());
     }
 
 }

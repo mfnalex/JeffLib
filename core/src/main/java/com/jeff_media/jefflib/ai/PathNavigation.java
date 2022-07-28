@@ -5,6 +5,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.util.BlockVector;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Represents the NMS PathNavigation of an entity
@@ -40,7 +41,7 @@ public interface PathNavigation {
     /**
      * Returns the entity's current target location
      */
-    BlockVector getTargetPos();
+    @Nullable BlockVector getTargetPos();
 
     /**
      * Sets the entity's current speed modifier
