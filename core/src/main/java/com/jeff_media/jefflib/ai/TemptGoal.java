@@ -10,27 +10,15 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Stream;
 
+/**
+ * A {@link PathfinderGoal} that makes entities follow players who hold a certain item, similar to cows following wheat.
+ * @see {@link Pathfinders#createTemptGoal(LivingEntity, Stream)}
+ * @see {@link Pathfinders#createTemptGoal(LivingEntity, Collection)}
+ * @see {@link Pathfinders#createTemptGoal(LivingEntity, Stream, double, boolean)}
+ * @see {@link Pathfinders#createTemptGoal(LivingEntity, Collection, double, boolean)}
+ */
 public interface TemptGoal extends PathfinderGoal {
 
-    static TemptGoal create(LivingEntity entity, Collection<Material> materials, double speed, boolean canScare) {
-        return create(entity, materials.stream(), speed, canScare);
-    }
 
-    static TemptGoal create(LivingEntity entity, Stream<Material> materials, double speed, boolean canScare) {
-        return JeffLib.getNMSHandler().createTemptGoal(entity, materials, speed, canScare);
-    }
-
-    static TemptGoal create(LivingEntity entity, Collection<Material> materials) {
-        return create(entity, materials.stream());
-    }
-
-    static TemptGoal create(LivingEntity entity, Stream<Material> materials) {
-        final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-        double speed = 1.0D;
-        if(attribute == null) {
-            speed = attribute.getValue();
-        }
-        return create(entity, materials, speed, false);
-    }
 
 }

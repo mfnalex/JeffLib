@@ -1,8 +1,14 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.TemptGoal;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import net.minecraft.world.item.ItemUtils;
 import org.bukkit.Material;
+import org.bukkit.entity.Llama;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -10,9 +16,60 @@ import org.bukkit.inventory.ItemStack;
 import java.util.Collection;
 import java.util.Map;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 
 @UtilityClass
 public class DebugUtils {
+
+    public static void testNms(Player player) {
+        JeffLib.enableNMS();
+
+        // NMS version
+        String nmsVersion = McVersion.current().getNmsVersion();
+        if(nmsVersion == null) throw new IllegalArgumentException("No NMS version defined in mcversions.csv");
+        player.sendMessage("NMS Version: " + nmsVersion);
+
+        // Default world name
+        String defaultWorldName = WorldUtils.getDefaultWorldName();
+        if(defaultWorldName == null) throw new IllegalArgumentException("Could not get default world name");
+        player.sendMessage("Default world name: " + defaultWorldName);
+
+        // ItemStack as JSON
+        player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
+
+        // Totem animation
+        player.sendMessage("§dYou should see the totem animation now.");
+        AnimationUtils.playTotemAnimation(player);
+
+        // Tempt goal
+        player.sendMessage("§bA villager should be following you now when you have an emerald in your hand.");
+        player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
+        Villager villager = player.getWorld().spawn(player.getLocation().add(5,0,5), Villager.class);
+        villager.setCustomName("Emerald Seeker");
+        EntityUtils.addPathfinderGoal(villager, TemptGoal.create(villager, Stream.of(Material.EMERALD)),0);
+
+
+        player.sendMessage("§dA llama should be following you now all the time");
+        Llama llama = player.getWorld().spawn(player.getLocation().add(-5, 0, -5), Llama.class);
+        llama.setCustomName("Player Seeker");
+        EntityUtils.addPathfinderGoal(llama, new CustomGoal(llama) {
+            @Override
+            public boolean canUse() {
+                return true;
+            }
+
+            @Override
+            public void tick() {
+                Player closest = EntityUtils.getClosestPlayer(getBukkitEntity());
+                if(closest != null) {
+                    moveTo(closest.getLocation(), 1);
+                }
+            }
+        }, 0);
+
+        player.sendMessage("§aSeems to be working!");
+
+    }
 
     /**
      * Prints a Map's content to console. Example:

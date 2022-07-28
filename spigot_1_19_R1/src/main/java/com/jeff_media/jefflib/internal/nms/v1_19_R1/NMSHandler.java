@@ -2,10 +2,10 @@ package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.CustomGoalExecutor;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
 import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
-import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.CustomGoalExecutor;
 import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.PacketUtils;
@@ -194,7 +194,7 @@ public class NMSHandler implements AbstractNMSHandler {
         if(goal instanceof Goal) {
             pmob.targetSelector.addGoal(priority, (Goal) goal);
         } else if(goal instanceof CustomGoal) {
-            pmob.targetSelector.addGoal(priority, new CustomGoalExecutor((CustomGoal)goal));
+            pmob.targetSelector.addGoal(priority, (Goal) ((CustomGoal)goal).getExecutor());
         } else {
             throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
         }
@@ -204,7 +204,9 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public boolean moveTo(org.bukkit.entity.LivingEntity entity, double x, double y, double z, double speed) {
         final PathfinderMob pmob = asPathfinder(entity);
-        if(pmob == null) return false;
+        if(pmob == null) {
+            return false;
+        }
         return pmob.getNavigation().moveTo(x, y, z, speed);
     }
 
@@ -216,6 +218,11 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public boolean isServerRunnning() {
         return getDedicatedServer().isRunning();
+    }
+
+    @Override
+    public CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
+        return new com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
     }
 
 }

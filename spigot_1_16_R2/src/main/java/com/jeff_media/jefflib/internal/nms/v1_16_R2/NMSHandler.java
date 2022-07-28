@@ -6,6 +6,7 @@ import com.jeff_media.jefflib.ai.CustomGoal;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
 import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.nms.v1_16_R2.ai.CustomGoalExecutor;
 import com.jeff_media.jefflib.internal.nms.v1_16_R2.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
@@ -201,6 +202,11 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public boolean isServerRunnning() {
         return getDedicatedServer().isRunning();
+    }
+
+    @Override
+    public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
+        throw new NMSNotSupportedException();
     }
 
 }

@@ -19,6 +19,7 @@ import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_19_R1.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -60,6 +61,15 @@ public final class NMS {
             return (PathfinderMob) nmsEntity;
         } else {
             return null;
+        }
+    }
+
+    public static @Nonnull PathfinderMob asPathfinderOrThrow(final org.bukkit.entity.Entity bukkitEntity) {
+        final Entity nmsEntity = NMS.toNms(bukkitEntity);
+        if(nmsEntity instanceof PathfinderMob) {
+            return (PathfinderMob) nmsEntity;
+        } else {
+            throw new IllegalArgumentException("Given entity is not a PathfinderMob: " + nmsEntity.getClass().getName() + " (" + bukkitEntity.getClass().getName() + ")");
         }
     }
 
