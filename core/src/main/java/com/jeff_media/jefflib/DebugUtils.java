@@ -1,6 +1,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.Pathfinders;
 import com.jeff_media.jefflib.ai.TemptGoal;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
@@ -46,7 +47,7 @@ public class DebugUtils {
         player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
         Villager villager = player.getWorld().spawn(player.getLocation().add(5,0,5), Villager.class);
         villager.setCustomName("Emerald Seeker");
-        EntityUtils.addPathfinderGoal(villager, TemptGoal.create(villager, Stream.of(Material.EMERALD)),0);
+        EntityUtils.addPathfinderGoal(villager, Pathfinders.createTemptGoal(villager, Stream.of(Material.EMERALD)),0);
 
 
         player.sendMessage("§dA llama should be following you now all the time");
@@ -62,7 +63,7 @@ public class DebugUtils {
             public void tick() {
                 Player closest = EntityUtils.getClosestPlayer(getBukkitEntity());
                 if(closest != null) {
-                    moveTo(closest.getLocation(), 1);
+                    getNavigation().moveTo(closest.getLocation(), 1);
                 }
             }
         }, 0);

@@ -3,11 +3,13 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.ai.PathfinderGoal;
 import com.jeff_media.jefflib.ai.TemptGoal;
 import com.jeff_media.jefflib.data.*;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.HatchedPathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -180,7 +182,7 @@ public class NMSHandler implements AbstractNMSHandler {
         if(goal instanceof net.minecraft.server.v1_16_R1.PathfinderGoal) {
             pmob.targetSelector.a(priority, (net.minecraft.server.v1_16_R1.PathfinderGoal) goal);
         } else if(goal instanceof CustomGoal) {
-            pmob.targetSelector.a(priority, new CustomGoalExecutor((CustomGoal)goal));
+            pmob.targetSelector.a(priority, (net.minecraft.server.v1_16_R1.PathfinderGoal) ((CustomGoal)goal).getExecutor());
         } else {
             throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
         }
@@ -206,7 +208,12 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
-        throw new NMSNotSupportedException();
+        return new CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
+    }
+
+    @Override
+    public PathNavigation getPathNavigation(LivingEntity entity) {
+        return new HatchedPathNavigation(NMS.asPathfinderOrThrow(entity).getNavigation());
     }
 
 }

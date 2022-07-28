@@ -1,7 +1,7 @@
-package com.jeff_media.jefflib.internal.nms.v1_19_R1.ai;
+package com.jeff_media.jefflib.internal.nms.v1_18_R2.ai;
 
 import com.jeff_media.jefflib.data.BlockPos;
-import com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS;
+import com.jeff_media.jefflib.internal.nms.v1_18_R2.NMS;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 
 public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavigation {

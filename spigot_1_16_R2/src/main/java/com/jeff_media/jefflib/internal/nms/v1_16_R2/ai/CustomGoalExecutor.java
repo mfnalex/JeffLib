@@ -1,13 +1,22 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R2.ai;
 
 import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.GoalFlag;
+import com.jeff_media.jefflib.ai.PathNavigation;
+import net.minecraft.server.v1_16_R2.EntityCreature;
 import net.minecraft.server.v1_16_R2.PathfinderGoal;
 
-public class CustomGoalExecutor extends PathfinderGoal {
+import javax.annotation.Nonnull;
+import java.util.EnumSet;
+import java.util.stream.Collectors;
+
+public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media.jefflib.ai.CustomGoalExecutor {
 
     private final CustomGoal goal;
+    private final EntityCreature pmob;
 
-    public CustomGoalExecutor(CustomGoal goal) {
+    public CustomGoalExecutor(CustomGoal goal, EntityCreature pmob) {
+        this.pmob = pmob;
         this.goal = goal;
     }
 
@@ -41,4 +50,30 @@ public class CustomGoalExecutor extends PathfinderGoal {
         goal.tick();
     }
 
+
+    @Override
+    public void setGoalFlags(EnumSet<GoalFlag> flags) {
+        this.a(translateGoalFlags(flags));
+    }
+
+    @Nonnull
+    @Override
+    public EnumSet<GoalFlag> getGoalFlags() {
+        return translateFlags(this.i());
+    }
+
+    @Nonnull
+    @Override
+    public PathNavigation getNavigation() {
+        return new HatchedPathNavigation(pmob.getNavigation());
+    }
+
+    private EnumSet<Type> translateGoalFlags(EnumSet<GoalFlag> flags) {
+        if(flags == null) return EnumSet.noneOf(Type.class);
+        return flags.stream().map(flag -> Type.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Type.class)));
+    }
+
+    private EnumSet<GoalFlag> translateFlags(EnumSet<Type> flags) {
+        return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
+    }
 }

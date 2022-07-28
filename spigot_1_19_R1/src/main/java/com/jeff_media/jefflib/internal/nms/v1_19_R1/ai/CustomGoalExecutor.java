@@ -2,11 +2,13 @@ package com.jeff_media.jefflib.internal.nms.v1_19_R1.ai;
 
 import com.jeff_media.jefflib.ai.CustomGoal;
 import com.jeff_media.jefflib.ai.GoalFlag;
+import com.jeff_media.jefflib.ai.PathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.Goal;
 import org.bukkit.entity.Entity;
 
+import javax.annotation.Nonnull;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
 
@@ -18,7 +20,7 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
     public CustomGoalExecutor(CustomGoal goal, PathfinderMob pmob) {
         this.pmob = pmob;
         this.goal = goal;
-        this.setFlags(EnumSet.of(Flag.MOVE, Flag.LOOK, Flag.JUMP, Flag.TARGET));
+        
     }
 
     @Override
@@ -58,26 +60,24 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
 
 
     @Override
-    public void setGoalFlags(EnumSet<GoalFlag> flags) {
+    public void setGoalFlags(final EnumSet<GoalFlag> flags) {
         this.setFlags(translateGoalFlags(flags));
     }
 
+    @Nonnull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return translateFlags(this.getFlags());
     }
 
+    @Nonnull
     @Override
-    public boolean moveTo(double x, double y, double z, double speedModifier) {
-        return pmob.getNavigation().moveTo(x,y,z,speedModifier);
-    }
-
-    @Override
-    public boolean moveTo(Entity entity, double speedModifier) {
-        return pmob.getNavigation().moveTo(NMS.toNms(entity),speedModifier);
+    public PathNavigation getNavigation() {
+        return new HatchedPathNavigation(pmob.getNavigation());
     }
 
     private EnumSet<Flag> translateGoalFlags(EnumSet<GoalFlag> flags) {
+        if(flags == null) return EnumSet.noneOf(Flag.class);
         return flags.stream().map(flag -> Flag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Flag.class)));
     }
 

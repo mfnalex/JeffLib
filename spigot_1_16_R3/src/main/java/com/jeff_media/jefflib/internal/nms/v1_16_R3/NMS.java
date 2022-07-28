@@ -12,6 +12,7 @@ import org.bukkit.craftbukkit.v1_16_R3.entity.CraftEntity;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftLivingEntity;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftMagicNumbers;
 
+import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.stream.Stream;
 
@@ -47,15 +48,33 @@ public final class NMS {
 
     public static @Nullable EntityCreature asPathfinder(final org.bukkit.entity.Entity bukkitEntity) {
         final Entity nmsEntity = NMS.toNms(bukkitEntity);
-        if(nmsEntity instanceof EntityCreature) {
+        if(nmsEntity instanceof EntityInsentient) {
             return (EntityCreature) nmsEntity;
         } else {
             return null;
         }
     }
 
+    @Nonnull
+    public static EntityCreature asPathfinderOrThrow(final org.bukkit.entity.Entity bukkitEntity) {
+        final Entity nmsEntity = NMS.toNms(bukkitEntity);
+        if(nmsEntity instanceof EntityCreature) {
+            return (EntityCreature) nmsEntity;
+        } else {
+            throw new IllegalArgumentException("Given entity is not a PathfinderMob/EntityCreature: " + nmsEntity.getClass().getName() + " (" + bukkitEntity.getClass().getName() + ")");
+        }
+    }
+
     public static DedicatedServer getDedicatedServer() {
         return ((CraftServer) Bukkit.getServer()).getServer();
+    }
+
+    public static BlockPosition toNms(com.jeff_media.jefflib.data.BlockPos pos) {
+        return new BlockPosition(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public static com.jeff_media.jefflib.data.BlockPos toJeff(BlockPosition targetPos) {
+        return new com.jeff_media.jefflib.data.BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
     }
 
 }

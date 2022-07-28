@@ -7,6 +7,7 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.EnumSet;
 
 /**
@@ -22,6 +23,10 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         this.executor = JeffLib.getNMSHandler().getCustomGoalExecutor(this, bukkitEntity);
     }
 
+    /**
+     * Returns the {@link CustomGoalExecutor} associated with this goal
+     * @return
+     */
     public CustomGoalExecutor getExecutor() {
         return executor;
     }
@@ -34,25 +39,18 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         return bukkitEntity;
     }
 
+    @Nonnull
     @Override
-    public boolean moveTo(final double x, final double y, final double z, final double speed) {
-        return executor.moveTo(x,y,z,speed);
-    }
-
-    public boolean moveTo(@Nonnull final Location location, final double speed) {
-        return executor.moveTo(location.getX(),location.getY(),location.getZ(),speed);
+    public PathNavigation getNavigation() {
+        return executor.getNavigation();
     }
 
     @Override
-    public boolean moveTo(@Nonnull final Entity entity, final double speed) {
-        return executor.moveTo(entity,speed);
-    }
-
-    @Override
-    public void setGoalFlags(EnumSet<GoalFlag> flags) {
+    public void setGoalFlags(final @Nullable EnumSet<GoalFlag> flags) {
         executor.setGoalFlags(flags);
     }
 
+    @Nonnull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return executor.getGoalFlags();

@@ -1,11 +1,9 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.CustomGoalExecutor;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
-import com.jeff_media.jefflib.ai.TemptGoal;
+import com.jeff_media.jefflib.ai.*;
 import com.jeff_media.jefflib.data.*;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedPathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.PacketUtils;
@@ -223,6 +221,11 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity) {
         return new com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.CustomGoalExecutor(customGoal, asPathfinderOrThrow(entity));
+    }
+
+    @Override
+    public PathNavigation getPathNavigation(org.bukkit.entity.LivingEntity entity) {
+        return new HatchedPathNavigation(asPathfinderOrThrow(entity).getNavigation());
     }
 
 }

@@ -2,16 +2,30 @@ package com.jeff_media.jefflib.ai;
 
 import org.bukkit.entity.Entity;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.EnumSet;
 
+/**
+ * Represents an NMS pathfinder Goal that's used to execute a {@link CustomGoal}
+ */
 public interface CustomGoalExecutor {
 
-    void setGoalFlags(EnumSet<GoalFlag> flags);
+    /**
+     * Sets the goal flags for this goal's executor
+     */
+    void setGoalFlags(@Nullable final EnumSet<GoalFlag> flags);
 
-    EnumSet<GoalFlag> getGoalFlags();
+    /**
+     * Gets the goal flags of this goal's executor
+     */
+    @Nonnull EnumSet<GoalFlag> getGoalFlags();
 
-    boolean moveTo(double x, double y, double z, double speedModifier);
+    /**
+     * Returns the {@link PathNavigation} associated with this goal's entity
+     */
+    @Nonnull PathNavigation getNavigation();
 
-    boolean moveTo(Entity entity, double speedModifier);
+    //@Nonnull CustomGoal getGoal();
 
 }

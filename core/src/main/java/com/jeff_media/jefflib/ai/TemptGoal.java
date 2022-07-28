@@ -12,13 +12,11 @@ import java.util.stream.Stream;
 
 /**
  * A {@link PathfinderGoal} that makes entities follow players who hold a certain item, similar to cows following wheat.
- * @see {@link Pathfinders#createTemptGoal(LivingEntity, Stream)}
- * @see {@link Pathfinders#createTemptGoal(LivingEntity, Collection)}
- * @see {@link Pathfinders#createTemptGoal(LivingEntity, Stream, double, boolean)}
- * @see {@link Pathfinders#createTemptGoal(LivingEntity, Collection, double, boolean)}
+ * @see Pathfinders#createTemptGoal(LivingEntity, Stream)
+ * @see Pathfinders#createTemptGoal(LivingEntity, Collection)
+ * @see Pathfinders#createTemptGoal(LivingEntity, Stream, double, boolean)
+ * @see Pathfinders#createTemptGoal(LivingEntity, Collection, double, boolean)
  */
 public interface TemptGoal extends PathfinderGoal {
-
-
 
 }

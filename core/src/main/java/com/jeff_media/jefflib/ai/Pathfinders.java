@@ -11,6 +11,9 @@ import org.bukkit.entity.Player;
 import java.util.Collection;
 import java.util.stream.Stream;
 
+/**
+ * Utility methods to create some custom {@link PathfinderGoal}s
+ */
 public interface Pathfinders {
 
     static TemptGoal createTemptGoal(LivingEntity entity, Collection<Material> materials, double speed, boolean canScare) {

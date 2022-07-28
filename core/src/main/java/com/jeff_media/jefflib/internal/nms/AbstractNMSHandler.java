@@ -1,9 +1,6 @@
 package com.jeff_media.jefflib.internal.nms;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.CustomGoalExecutor;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
-import com.jeff_media.jefflib.ai.TemptGoal;
+import com.jeff_media.jefflib.ai.*;
 import com.mojang.authlib.GameProfile;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -67,4 +64,6 @@ public interface AbstractNMSHandler {
     boolean isServerRunnning();
 
     CustomGoalExecutor getCustomGoalExecutor(CustomGoal customGoal, LivingEntity entity);
+
+    PathNavigation getPathNavigation(LivingEntity entity);
 }

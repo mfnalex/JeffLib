@@ -77,4 +77,11 @@ public final class NMS {
         return ((CraftServer) Bukkit.getServer()).getServer();
     }
 
+    public static BlockPos toNms(com.jeff_media.jefflib.data.BlockPos pos) {
+        return new BlockPos(pos.getX(), pos.getY(), pos.getZ());
+    }
+
+    public static com.jeff_media.jefflib.data.BlockPos toJeff(BlockPos targetPos) {
+        return new com.jeff_media.jefflib.data.BlockPos(targetPos.getX(), targetPos.getY(), targetPos.getZ());
+    }
 }
