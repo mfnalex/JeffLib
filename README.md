@@ -1,4 +1,5 @@
 # JeffLib Spigot Library
+
 <!--- Buttons start -->
 <p align="center">
   <a href="https://hub.jeff-media.com/javadocs/jefflib/">
@@ -13,7 +14,8 @@
 </p>
 <!--- Buttons end -->
 
-JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an overview.
+JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an
+overview.
 
 ## Maven
 
@@ -84,7 +86,9 @@ JeffLib includes a ton of useful methods that you would normally have to write y
 
 Just include JeffLib as dependency in your pom.xml.
 
-**Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
+**Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only
+works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for
+example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
 
 ```java
 public class MyPlugin extends JavaPlugin {

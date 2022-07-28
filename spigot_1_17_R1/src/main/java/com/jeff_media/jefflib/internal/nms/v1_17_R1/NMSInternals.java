@@ -10,11 +10,11 @@ import org.bukkit.craftbukkit.v1_17_R1.block.CraftBlock;
 public final class NMSInternals {
 
     public static Level getLevel(final World world) {
-        return ((CraftWorld)world).getHandle();
+        return ((CraftWorld) world).getHandle();
     }
 
     public static BlockPos getBlockPos(final Block block) {
-        return ((CraftBlock)block).getPosition();
+        return ((CraftBlock) block).getPosition();
     }
 
 }

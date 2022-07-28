@@ -1,15 +1,10 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.CSVParser;
-import io.th0rgal.oraxen.shaded.commandapi.nms.NMS;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
-
-import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -33,6 +28,18 @@ public class McVersion implements Comparable<McVersion> {
 
     }
 
+    private final int major, minor, patch;
+
+    public McVersion(final int major, final int minor) {
+        this(major, minor, 0);
+    }
+
+    public McVersion(final int major, final int minor, final int patch) {
+        this.major = major;
+        this.minor = minor;
+        this.patch = patch;
+    }
+
     static void loadVersions(InputStream stream) {
         try {
             CSVParser parser = new CSVParser(stream);
@@ -48,27 +55,28 @@ public class McVersion implements Comparable<McVersion> {
         }
     }
 
-    private final int major, minor, patch;
-
-    public boolean hasVersionInNmsPackageName() {
-        return !this.isAtLeast(v1_17);
-    }
-
-    public McVersion(final int major, final int minor) {
-        this(major, minor, 0);
-    }
-
-    public McVersion(final int major, final int minor, final int patch) {
-        this.major = major;
-        this.minor = minor;
-        this.patch = patch;
-    }
-
     /**
      * Gets the currently running McVersion
      */
     public static McVersion current() {
         return CURRENT_VERSION;
+    }
+
+    public boolean hasVersionInNmsPackageName() {
+        return !this.isAtLeast(v1_17);
+    }
+
+    public boolean isAtLeast(final McVersion other) {
+        return this.compareTo(other) >= 0;
+    }
+
+    @Override
+    public int compareTo(@Nonnull final McVersion other) {
+        if (this.major > other.major) return 3;
+        if (other.major > this.major) return -3;
+        if (this.minor > other.minor) return 2;
+        if (other.minor > this.minor) return -2;
+        return Integer.compare(this.patch, other.patch);
     }
 
     /**
@@ -120,19 +128,6 @@ public class McVersion implements Comparable<McVersion> {
 
     public boolean isAtLeast(final int major, final int minor, final int patch) {
         return this.isAtLeast(new McVersion(major, minor, patch));
-    }
-
-    public boolean isAtLeast(final McVersion other) {
-        return this.compareTo(other) >= 0;
-    }
-
-    @Override
-    public int compareTo(@Nonnull final McVersion other) {
-        if (this.major > other.major) return 3;
-        if (other.major > this.major) return -3;
-        if (this.minor > other.minor) return 2;
-        if (other.minor > this.minor) return -2;
-        return Integer.compare(this.patch, other.patch);
     }
 
     public boolean isAtLeast(final int major, final int minor) {

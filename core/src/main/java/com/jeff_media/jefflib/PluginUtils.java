@@ -8,15 +8,6 @@ import java.util.function.Supplier;
 @UtilityClass
 public final class PluginUtils {
 
-    /**
-     * Checks whether a plugin is installed and enabled
-     *
-     * @return true when the plugin is installed and enabled, otherwise false
-     */
-    public static boolean isInstalledAndEnabled(final String name) {
-        return Bukkit.getPluginManager().getPlugin(name) != null && Bukkit.getPluginManager().isPluginEnabled(name);
-    }
-
     public static <T> T whenInstalled(final String plugin, final Supplier<T> supplier, final T defaultValue) {
         try {
             if (isInstalledAndEnabled(plugin)) {
@@ -30,6 +21,15 @@ public final class PluginUtils {
         } catch (final Exception | Error e) {
             return defaultValue;
         }
+    }
+
+    /**
+     * Checks whether a plugin is installed and enabled
+     *
+     * @return true when the plugin is installed and enabled, otherwise false
+     */
+    public static boolean isInstalledAndEnabled(final String name) {
+        return Bukkit.getPluginManager().getPlugin(name) != null && Bukkit.getPluginManager().isPluginEnabled(name);
     }
 
 }

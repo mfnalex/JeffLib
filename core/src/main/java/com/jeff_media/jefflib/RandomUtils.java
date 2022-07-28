@@ -19,16 +19,6 @@ public class RandomUtils {
     }
 
     /**
-     * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 100 (always true)
-     *
-     * @param chance chance to return true (0-100)
-     * @return true when the chance succeeds, otherwise false
-     */
-    public static boolean chance100(final double chance) {
-        return getDouble(0, 100) <= chance;
-    }
-
-    /**
      * Returns a double between {@param min} (inclusive) and {@param max} (exclusive)
      *
      * @param min min
@@ -40,6 +30,16 @@ public class RandomUtils {
     }
 
     /**
+     * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 100 (always true)
+     *
+     * @param chance chance to return true (0-100)
+     * @return true when the chance succeeds, otherwise false
+     */
+    public static boolean chance100(final double chance) {
+        return getDouble(0, 100) <= chance;
+    }
+
+    /**
      * Returns an int between {@param min} (inclusive) and {@param max} (exclusive)
      *
      * @param min min
@@ -47,7 +47,7 @@ public class RandomUtils {
      * @return int between {@param min} (inclusive) and {@param max} (exclusive)
      */
     public static int getInt(final int min, final int max) {
-        return JeffLib.getThreadLocalRandom().nextInt(min,max);
+        return JeffLib.getThreadLocalRandom().nextInt(min, max);
     }
 
     public static <E extends Enum<E>> E getRandomEnumElement(final Class<E> enumClazz) {

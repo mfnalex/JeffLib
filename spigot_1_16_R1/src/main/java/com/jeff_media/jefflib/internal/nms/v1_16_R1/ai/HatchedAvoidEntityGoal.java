@@ -8,27 +8,22 @@ import net.minecraft.server.v1_16_R1.PathfinderGoalAvoidTarget;
 
 import java.util.function.Predicate;
 
-public  class HatchedAvoidEntityGoal extends PathfinderGoalAvoidTarget<EntityLiving> implements PathfinderGoal {
+public class HatchedAvoidEntityGoal extends PathfinderGoalAvoidTarget<EntityLiving> implements PathfinderGoal {
 
     private final org.bukkit.entity.Creature bukkitEntity;
 
-    public HatchedAvoidEntityGoal(final org.bukkit.entity.Creature bukkitEntity,
-                                  final EntityCreature mob,
-                                  final Predicate<org.bukkit.entity.LivingEntity> bukkitPredicate,
-                                  final float maxDistance,
-                                  final double walkSpeedModifier,
-                                  final double sprintSpeedModifier) {
+    public HatchedAvoidEntityGoal(final org.bukkit.entity.Creature bukkitEntity, final EntityCreature mob, final Predicate<org.bukkit.entity.LivingEntity> bukkitPredicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
         super(mob, EntityLiving.class, maxDistance, walkSpeedModifier, sprintSpeedModifier, livingEntity -> bukkitPredicate.test(NMS.toBukkit(livingEntity)));
         this.bukkitEntity = bukkitEntity;
     }
 
     @Override
-    public boolean canUse() {
-        return a();
+    public org.bukkit.entity.Creature getBukkitEntity() {
+        return bukkitEntity;
     }
 
     @Override
-    public org.bukkit.entity.Creature getBukkitEntity() {
-        return bukkitEntity;
+    public boolean canUse() {
+        return a();
     }
 }

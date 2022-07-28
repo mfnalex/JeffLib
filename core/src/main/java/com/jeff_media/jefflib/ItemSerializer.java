@@ -203,6 +203,7 @@ public final class ItemSerializer {
 
     /**
      * Turns an ItemStack into a json-formatted String
+     *
      * @nms
      */
     @NMS

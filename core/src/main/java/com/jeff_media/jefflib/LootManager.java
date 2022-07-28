@@ -15,8 +15,26 @@ public class LootManager {
 
     final Map<Enum<?>, List<VariableItemStack>> map = new HashMap<>();
 
+    public static LootManager fromConfigurationSection(final ConfigurationSection config) {
+        final LootManager lootManager = new LootManager();
+        for (final String key : config.getKeys(false)) {
+            final ConfigurationSection section = config.getConfigurationSection(key);
+            final VariableItemStack itemStack = VariableItemStack.fromConfigurationSection(section);
+
+            final Material matKey = Enums.getIfPresent(Material.class, key.toUpperCase(Locale.ROOT)).orNull();
+            final EntityType entityKey = Enums.getIfPresent(EntityType.class, key.toUpperCase(Locale.ROOT)).orNull();
+
+            if (matKey != null) {
+                lootManager.add(matKey, itemStack);
+            } else if (entityKey != null) {
+                lootManager.add(entityKey, itemStack);
+            }
+        }
+        return lootManager;
+    }
+
     private void add(final Enum<?> key, final VariableItemStack item) {
-        if(map.containsKey(key)) {
+        if (map.containsKey(key)) {
             map.get(key).add(item);
         } else {
             final List<VariableItemStack> list = new ArrayList<>();
@@ -25,38 +43,20 @@ public class LootManager {
         }
     }
 
-    public static LootManager fromConfigurationSection(final ConfigurationSection config) {
-        final LootManager lootManager = new LootManager();
-        for(final String key : config.getKeys(false)) {
-            final ConfigurationSection section = config.getConfigurationSection(key);
-            final VariableItemStack itemStack = VariableItemStack.fromConfigurationSection(section);
-
-            final Material matKey = Enums.getIfPresent(Material.class,key.toUpperCase(Locale.ROOT)).orNull();
-            final EntityType entityKey = Enums.getIfPresent(EntityType.class, key.toUpperCase(Locale.ROOT)).orNull();
-
-            if(matKey != null) {
-                lootManager.add(matKey, itemStack);
-            } else if(entityKey != null) {
-                lootManager.add(entityKey, itemStack);
-            }
-        }
-        return lootManager;
+    public List<ItemStack> getDrops(final Entity entity) {
+        return getDrops(entity.getType());
     }
 
     public List<ItemStack> getDrops(final Enum<?> key) {
         final List<ItemStack> drops = new ArrayList<>();
-        if(map.containsKey(key)) {
-            for(final VariableItemStack drop : map.get(key)) {
-                if(drop.getChance()>=100 || RandomUtils.getDouble(0,100) <= drop.getChance()) {
+        if (map.containsKey(key)) {
+            for (final VariableItemStack drop : map.get(key)) {
+                if (drop.getChance() >= 100 || RandomUtils.getDouble(0, 100) <= drop.getChance()) {
                     drops.add(drop.getItemStack());
                 }
             }
         }
         return drops;
-    }
-
-    public List<ItemStack> getDrops(final Entity entity) {
-        return getDrops(entity.getType());
     }
 
     public List<ItemStack> getDrops(final Material mat) {

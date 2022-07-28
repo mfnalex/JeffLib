@@ -1,6 +1,7 @@
 package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
+
 import javax.annotation.Nonnull;
 
 /**
@@ -11,6 +12,7 @@ public final class ClassUtils {
 
     /**
      * Checks if a class exists
+     *
      * @param name Fully qualified class name
      * @return true if the class exists, otherwise false
      */
@@ -23,6 +25,10 @@ public final class ClassUtils {
         }
     }
 
+    public static int getCurrentLineNumber() {
+        return getCurrentLineNumber(1);
+    }
+
     /**
      * Returns the current line number from which this method was called from
      */
@@ -30,8 +36,8 @@ public final class ClassUtils {
         return Thread.currentThread().getStackTrace()[2 + offset].getLineNumber();
     }
 
-    public static int getCurrentLineNumber() {
-        return getCurrentLineNumber(1);
+    public static String getCurrentClassName() {
+        return getCurrentClassName(1);
     }
 
     /**
@@ -39,10 +45,6 @@ public final class ClassUtils {
      */
     public static String getCurrentClassName(int offset) {
         return Thread.currentThread().getStackTrace()[2 + offset].getClassName();
-    }
-
-    public static String getCurrentClassName() {
-        return getCurrentClassName(1);
     }
 
     public static Class<?> getCurrentClass() {
@@ -68,14 +70,14 @@ public final class ClassUtils {
         return Thread.currentThread().getStackTrace()[2 + offset].getFileName();
     }
 
+    public static String getCurrentMethodName() {
+        return getCurrentMethodName(1);
+    }
+
     /**
      * Returns the current method name from which this method was called from
      */
     public static String getCurrentMethodName(int offset) {
         return Thread.currentThread().getStackTrace()[2 + offset].getMethodName();
-    }
-
-    public static String getCurrentMethodName() {
-        return getCurrentMethodName(1);
     }
 }

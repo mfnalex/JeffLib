@@ -25,6 +25,10 @@ public final class ExpUtils {
         return (int) ((4.5 * squared(targetLevel)) - (162.5 * targetLevel) + 2220);
     }
 
+    private static int squared(final int a) {
+        return a * a;
+    }
+
     /**
      * Gets the total amount of XP required to reach currentLevel+1 from currentLevel
      *
@@ -46,9 +50,5 @@ public final class ExpUtils {
     public static void dropExp(final Location location, final int xp) {
         final ExperienceOrb orb = (ExperienceOrb) Objects.requireNonNull(location.getWorld()).spawnEntity(location, EntityType.EXPERIENCE_ORB);
         orb.setExperience(xp);
-    }
-
-    private static int squared(final int a) {
-        return a * a;
     }
 }

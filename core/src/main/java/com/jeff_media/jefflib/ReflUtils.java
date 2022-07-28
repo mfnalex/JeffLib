@@ -3,7 +3,6 @@ package com.jeff_media.jefflib;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
 import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -31,6 +30,32 @@ public final class ReflUtils {
     private static String nmsVersion;
 
     /**
+     * @deprecated Doesn't work on 1.17+
+     */
+    @Deprecated
+    public static Class<?> getNMSClass(final String className) {
+        return getClassCached("net.minecraft.server." + getNMSVersion() + "." + className);
+    }
+
+    /**
+     * Gets a class
+     *
+     * @return The class, or null if not found
+     */
+    public static @Nullable Class<?> getClassCached(final @Nonnull String className) {
+        if (CLASSES.containsKey(className)) {
+            return CLASSES.get(className);
+        }
+        try {
+            final Class<?> classForName = Class.forName(className);
+            CLASSES.put(className, classForName);
+            return classForName;
+        } catch (final ClassNotFoundException e) {
+            return null;
+        }
+    }
+
+    /**
      * Gets the NMS version String as used in the package name, e.g. "v1_19_R1"
      */
     public static String getNMSVersion() {
@@ -38,14 +63,6 @@ public final class ReflUtils {
             return nmsVersion = "v" + McVersion.current().getNmsVersion();
         }
         return nmsVersion;
-    }
-
-    /**
-     * @deprecated Doesn't work on 1.17+
-     */
-    @Deprecated
-    public static Class<?> getNMSClass(final String className) {
-        return getClassCached("net.minecraft.server." + getNMSVersion() + "." + className);
     }
 
     /**
@@ -63,23 +80,6 @@ public final class ReflUtils {
     }
 
     /**
-     * Gets a class
-     * @return The class, or null if not found
-     */
-    public static @Nullable Class<?> getClassCached(final @Nonnull String className) {
-        if (CLASSES.containsKey(className)) {
-            return CLASSES.get(className);
-        }
-        try {
-            final Class<?> classForName = Class.forName(className);
-            CLASSES.put(className, classForName);
-            return classForName;
-        } catch (final ClassNotFoundException e) {
-            return null;
-        }
-    }
-
-    /**
      * Gets whether a method is already cached
      */
     public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
@@ -88,6 +88,7 @@ public final class ReflUtils {
 
     /**
      * Gets a method without parameters
+     *
      * @return The method, or null if not found
      */
     public static @Nullable Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
@@ -113,6 +114,7 @@ public final class ReflUtils {
 
     /**
      * Gets a method with parameters, or null if not found
+     *
      * @return The method, or null if not found
      */
     public static Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
@@ -139,15 +141,13 @@ public final class ReflUtils {
 
     /**
      * Sets an object's field to the given value.
-     * @param clazz Class where this field is declared
-     * @param object Object to set the field on, or null for static fields
+     *
+     * @param clazz     Class where this field is declared
+     * @param object    Object to set the field on, or null for static fields
      * @param fieldName Name of the field to set
-     * @param value Value to set the field to
+     * @param value     Value to set the field to
      */
-    public static void setField(final @Nonnull Class<?> clazz,
-                                final @Nullable Object object,
-                                final @Nonnull String fieldName,
-                                final @Nullable Object value) {
+    public static void setField(final @Nonnull Class<?> clazz, final @Nullable Object object, final @Nonnull String fieldName, final @Nullable Object value) {
         try {
             final Field field = getFieldCached(clazz, fieldName);
             java.util.Objects.requireNonNull(field).set(object, value);
@@ -157,14 +157,8 @@ public final class ReflUtils {
     }
 
     /**
-     * Gets whether a field is already cached
-     */
-    public static boolean isFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
-        return FIELDS.contains(clazz, fieldName);
-    }
-
-    /**
      * Gets an object's field, or null if not found
+     *
      * @return The field, or null if not found
      */
     public static Field getFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
@@ -179,6 +173,13 @@ public final class ReflUtils {
         } catch (final NoSuchFieldException e) {
             return null;
         }
+    }
+
+    /**
+     * Gets whether a field is already cached
+     */
+    public static boolean isFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+        return FIELDS.contains(clazz, fieldName);
     }
 
     /**
@@ -197,6 +198,7 @@ public final class ReflUtils {
 
     /**
      * Gets a no-args constructor of a class, or null if not found
+     *
      * @return The constructor, or null if not found
      */
     public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz) {
@@ -215,6 +217,7 @@ public final class ReflUtils {
 
     /**
      * Gets a constructor with parameters, or null if not found
+     *
      * @return The constructor, or null if not found
      */
     public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz, final @Nullable Class<?>... params) {
@@ -233,7 +236,17 @@ public final class ReflUtils {
     }
 
     private static class Parameters {
-        @Nonnull private final Class<?>[] parameterClazzes;
+        @Nonnull
+        private final Class<?>[] parameterClazzes;
+
+        private Parameters(@Nonnull Class<?>... parameterClazzes) {
+            this.parameterClazzes = parameterClazzes;
+        }
+
+        @Override
+        public int hashCode() {
+            return Arrays.hashCode(parameterClazzes);
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -242,19 +255,17 @@ public final class ReflUtils {
             Parameters that = (Parameters) o;
             return Arrays.equals(parameterClazzes, that.parameterClazzes);
         }
-
-        @Override
-        public int hashCode() {
-            return Arrays.hashCode(parameterClazzes);
-        }
-
-        private Parameters(@Nonnull Class<?>... parameterClazzes) {
-            this.parameterClazzes = parameterClazzes;
-        }
     }
+
     private static final class MethodParameters extends Parameters {
 
-        @Nonnull private final String name;
+        @Nonnull
+        private final String name;
+
+        MethodParameters(final @Nonnull String name, final @Nonnull Class<?>... params) {
+            super(params);
+            this.name = name;
+        }
 
         @Override
         public boolean equals(Object o) {
@@ -268,11 +279,6 @@ public final class ReflUtils {
         @Override
         public int hashCode() {
             return Objects.hash(super.hashCode(), name);
-        }
-
-        MethodParameters(final @Nonnull String name, final @Nonnull Class<?>... params) {
-            super(params);
-            this.name = name;
         }
 
 

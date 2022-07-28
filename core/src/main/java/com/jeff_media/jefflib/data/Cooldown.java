@@ -39,18 +39,6 @@ public class Cooldown {
     }
 
     /**
-     * Creates a new cooldown tracker with the given precision
-     */
-    public Cooldown(final TimeUnit precision) {
-        final LongSupplier supplier = DEFAULT_TIMEUNIT_SUPPLIERS.get(precision);
-        if(supplier == null) {
-            throw new IllegalArgumentException("Unsupported TimeUnit: " + precision.name() + ". Must be one of " + DEFAULT_TIMEUNIT_SUPPLIERS.keySet().stream().map(Enum::name).collect(Collectors.joining(", ")));
-        }
-        this.precision = precision;
-        this.timeSupplier = supplier;
-    }
-
-    /**
      * Creates a new cooldown tracker with the given precision and time supplier
      */
     public Cooldown(final TimeUnit precision, final LongSupplier timeSupplier) {
@@ -58,8 +46,27 @@ public class Cooldown {
         this.timeSupplier = timeSupplier;
     }
 
+    /**
+     * Creates a new cooldown tracker with the given precision
+     */
+    public Cooldown(final TimeUnit precision) {
+        final LongSupplier supplier = DEFAULT_TIMEUNIT_SUPPLIERS.get(precision);
+        if (supplier == null) {
+            throw new IllegalArgumentException("Unsupported TimeUnit: " + precision.name() + ". Must be one of " + DEFAULT_TIMEUNIT_SUPPLIERS.keySet().stream().map(Enum::name).collect(Collectors.joining(", ")));
+        }
+        this.precision = precision;
+        this.timeSupplier = supplier;
+    }
+
     public void removeCooldown(final Object object) {
         cooldowns.remove(getUid(object));
+    }
+
+    private static Object getUid(final Object object) {
+        if (object instanceof Entity) {
+            return ((Entity) object).getUniqueId();
+        }
+        return object;
     }
 
     /**
@@ -68,6 +75,10 @@ public class Cooldown {
     public void clearOldEntries() {
         final long now = getTime();
         cooldowns.entrySet().removeIf(entry -> now >= entry.getValue());
+    }
+
+    private long getTime() {
+        return timeSupplier.getAsLong();
     }
 
     /**
@@ -81,20 +92,7 @@ public class Cooldown {
      * Sets the cooldown for this object
      */
     public void setCooldown(final Object object, final long duration, final TimeUnit timeUnit) {
-        cooldowns.put(getUid(object),getTime() + precision.convert(duration, timeUnit));
-    }
-
-    /**
-     * Gets when the cooldown for this object expires, or 0 if there is no cooldown or if it has expired.
-     */
-    public long getCooldownEnd(final Object object) {
-        final Object uid = getUid(object);
-        final long end = cooldowns.getOrDefault(uid,0L);
-        if(end == 0) return 0;
-        if(getTime() > end) {
-            return 0;
-        }
-        return end;
+        cooldowns.put(getUid(object), getTime() + precision.convert(duration, timeUnit));
     }
 
     /**
@@ -107,23 +105,25 @@ public class Cooldown {
     }
 
     /**
+     * Gets when the cooldown for this object expires, or 0 if there is no cooldown or if it has expired.
+     */
+    public long getCooldownEnd(final Object object) {
+        final Object uid = getUid(object);
+        final long end = cooldowns.getOrDefault(uid, 0L);
+        if (end == 0) return 0;
+        if (getTime() > end) {
+            return 0;
+        }
+        return end;
+    }
+
+    /**
      * Gets the remaining duration until the cooldown for this object requires, in the given {@link TimeUnit}, or 0 if there is no cooldown for this object or if it has exipred.
      */
     public long getCooldownRemaining(final Object object, final TimeUnit timeUnit) {
         final long endTime = getCooldownEnd(object);
-        if(endTime == 0) return 0;
-        return timeUnit.convert(endTime - getTime(),precision);
-    }
-
-    private long getTime() {
-        return timeSupplier.getAsLong();
-    }
-
-    private static Object getUid(final Object object) {
-        if(object instanceof Entity) {
-            return ( (Entity) object ).getUniqueId();
-        }
-        return object;
+        if (endTime == 0) return 0;
+        return timeUnit.convert(endTime - getTime(), precision);
     }
 
 }

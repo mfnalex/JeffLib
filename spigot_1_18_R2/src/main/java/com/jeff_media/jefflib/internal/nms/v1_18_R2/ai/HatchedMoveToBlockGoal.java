@@ -37,13 +37,13 @@ public abstract class HatchedMoveToBlockGoal extends MoveToBlockGoal implements 
             this.validBlockTypes = getBlockTypes(validBlockTypes);
         }
 
+        private static Set<Block> getBlockTypes(final Set<Material> validMaterials) {
+            return validMaterials.stream().map(CraftMagicNumbers::getBlock).collect(Collectors.toSet());
+        }
+
         @Override
         protected boolean isValidTarget(final LevelReader levelReader, final BlockPos blockPos) {
             return validBlockTypes.contains(levelReader.getBlockState(blockPos).getBlock());
-        }
-
-        private static Set<Block> getBlockTypes(final Set<Material> validMaterials) {
-            return validMaterials.stream().map(CraftMagicNumbers::getBlock).collect(Collectors.toSet());
         }
     }
 

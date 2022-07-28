@@ -11,13 +11,11 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_19_R1.entity.CraftBat;
 import org.bukkit.entity.*;
 import org.bukkit.util.BoundingBox;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,10 +34,7 @@ public final class EntityUtils {
      */
     @Nullable
     public static Player getClosestOtherPlayer(@Nonnull final Player player) {
-        return player.getWorld().getPlayers().stream()
-                .filter(other -> other != player)
-                .min(new Comparators.EntityByDistanceComparator(player))
-                .orElse(null);
+        return player.getWorld().getPlayers().stream().filter(other -> other != player).min(new Comparators.EntityByDistanceComparator(player)).orElse(null);
     }
 
     /**
@@ -47,7 +42,7 @@ public final class EntityUtils {
      */
     public static double getMovementSpeed(@Nonnull final LivingEntity entity) {
         final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
-        if(attribute != null) {
+        if (attribute != null) {
             return attribute.getValue();
         }
         return DEFAULT_GENERIC_MOVEMENT_SPEED;
@@ -57,18 +52,16 @@ public final class EntityUtils {
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Location location) {
-        return location.getWorld().getPlayers().stream()
-                .min(new Comparators.EntityByDistanceComparator(location))
-                .orElse(null);
+    public static Player getClosestPlayer(@Nonnull final Entity entity) {
+        return getClosestPlayer(entity.getLocation());
     }
 
     /**
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Entity entity) {
-        return getClosestPlayer(entity.getLocation());
+    public static Player getClosestPlayer(@Nonnull final Location location) {
+        return location.getWorld().getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
     }
 
     /**
@@ -96,6 +89,18 @@ public final class EntityUtils {
     }
 
     /**
+     * Gets all entities inside min and max that belong to the given EntityType
+     *
+     * @param min        first corner
+     * @param max        second corner
+     * @param entityType desired EntityType
+     * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
+     */
+    public static Collection<? extends Entity> getEntities(final Block min, final Block max, final EntityType entityType) {
+        return getEntities(min, max, entityType.getEntityClass());
+    }
+
+    /**
      * Gets all entities inside {@param min} and {@param max} that extend {@param entityClass}
      *
      * @param min         first corner
@@ -112,18 +117,6 @@ public final class EntityUtils {
         final Collection<? extends Entity> entities = world.getEntitiesByClass(entityClass);
         entities.removeIf((Predicate<Entity>) entity -> !box.contains(entity.getLocation().toVector()));
         return entities;
-    }
-
-    /**
-     * Gets all entities inside min and max that belong to the given EntityType
-     *
-     * @param min        first corner
-     * @param max        second corner
-     * @param entityType desired EntityType
-     * @return Collection of all entities inside {@param min} and {@param max} that extend {@param entityClass}
-     */
-    public static Collection<? extends Entity> getEntities(final Block min, final Block max, final EntityType entityType) {
-        return getEntities(min, max, entityType.getEntityClass());
     }
 
     /**
@@ -150,20 +143,8 @@ public final class EntityUtils {
     @Nonnull
     public static <T extends Entity> Collection<T> getEntities(@Nonnull final Class<T> entityClass) {
         final Collection<T> list = new ArrayList<>();
-        for(final World world : Bukkit.getWorlds()) {
+        for (final World world : Bukkit.getWorlds()) {
             list.addAll(world.getEntitiesByClass(entityClass));
-        }
-        return list;
-    }
-
-    /**
-     * Returns a collection of all entities from all worlds
-     */
-    @Nonnull
-    public static Collection<Entity> getAllEntities() {
-        final Collection<Entity> list = new ArrayList<>();
-        for(final World world : Bukkit.getWorlds()) {
-            list.addAll(world.getEntities());
         }
         return list;
     }
@@ -173,16 +154,29 @@ public final class EntityUtils {
      */
     @Nullable
     public static Entity getEntityById(final int id) {
-        for(final Entity entity : getAllEntities()) {
-            if(entity.getEntityId()==id) return entity;
+        for (final Entity entity : getAllEntities()) {
+            if (entity.getEntityId() == id) return entity;
         }
         return null;
     }
 
     /**
+     * Returns a collection of all entities from all worlds
+     */
+    @Nonnull
+    public static Collection<Entity> getAllEntities() {
+        final Collection<Entity> list = new ArrayList<>();
+        for (final World world : Bukkit.getWorlds()) {
+            list.addAll(world.getEntities());
+        }
+        return list;
+    }
+
+    /**
      * Adds a {@link PathfinderGoal} to an entity
-     * @param entity Entity to add the goal to
-     * @param goal Goal to add
+     *
+     * @param entity   Entity to add the goal to
+     * @param goal     Goal to add
      * @param priority Priority of the goal
      * @return true if the goal was added successfully, false if the given entity is not a pathfinding mob (e.g. Bats)
      * @throws UnsupportedOperationException If the given PathfinderGoal is not supposed
@@ -195,7 +189,8 @@ public final class EntityUtils {
      * Returns the {@link PathNavigation} for this entity
      */
     @NMS
-    @Nonnull public static PathNavigation getNavigation(@Nonnull final Mob entity) {
+    @Nonnull
+    public static PathNavigation getNavigation(@Nonnull final Mob entity) {
         return JeffLib.getNMSHandler().getPathNavigation(entity);
     }
 
@@ -203,7 +198,8 @@ public final class EntityUtils {
      * Returns the {@link MoveController} for this entity
      */
     @NMS
-    @Nonnull public static MoveController getMoveController(@Nonnull final Mob entity) {
+    @Nonnull
+    public static MoveController getMoveController(@Nonnull final Mob entity) {
         return JeffLib.getNMSHandler().getMoveControl(entity);
     }
 }

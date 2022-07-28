@@ -9,7 +9,8 @@ import org.junit.jupiter.api.BeforeEach;
 
 public class UnitTest {
 
-    @Getter ServerMock server;
+    @Getter
+    ServerMock server;
     MockPlugin plugin;
 
     @BeforeEach

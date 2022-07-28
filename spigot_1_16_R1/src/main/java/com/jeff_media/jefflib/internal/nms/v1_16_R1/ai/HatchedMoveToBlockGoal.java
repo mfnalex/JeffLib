@@ -34,7 +34,6 @@ public abstract class HatchedMoveToBlockGoal extends PathfinderGoalGotoTarget im
         }
 
 
-
         private static Set<Block> getBlockTypes(final Set<Material> validMaterials) {
             return validMaterials.stream().map(CraftMagicNumbers::getBlock).collect(Collectors.toSet());
         }

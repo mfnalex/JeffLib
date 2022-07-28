@@ -9,8 +9,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -40,15 +40,6 @@ public final class BlockTracker {
     }
 
     /**
-     * Adds new materials to the block tracker
-     *
-     * @param types materials to track
-     */
-    public static void addTrackedBlockTypes(final Collection<Material> types) {
-        TRACKED_TYPES.addAll(types);
-    }
-
-    /**
      * Gets a collection containing all tracked materials
      *
      * @return Collection containing all tracked materials
@@ -62,6 +53,15 @@ public final class BlockTracker {
      */
     public static void trackAllBlockTypes() {
         addTrackedBlockTypes(Arrays.asList(Material.values()));
+    }
+
+    /**
+     * Adds new materials to the block tracker
+     *
+     * @param types materials to track
+     */
+    public static void addTrackedBlockTypes(final Collection<Material> types) {
+        TRACKED_TYPES.addAll(types);
     }
 
     /**
@@ -101,6 +101,20 @@ public final class BlockTracker {
         return playerPlacedPDC.has(getKey(block), PersistentDataType.BYTE);
     }
 
+    private static PersistentDataContainer getPlayerPlacedPDC(final PersistentDataHolder chunk) {
+        final PersistentDataContainer pdc = chunk.getPersistentDataContainer();
+        return pdc.getOrDefault(PLAYER_PLACED_TAG, PersistentDataType.TAG_CONTAINER, pdc.getAdapterContext().newPersistentDataContainer());
+    }
+
+    private static NamespacedKey getKey(final Block block) {
+        final int x = block.getX() & 0x000F;
+        final int y = block.getY();
+        final int z = block.getZ() & 0x000F;
+
+        //noinspection HardcodedFileSeparator
+        return new NamespacedKey(plugin, String.format("%d/%d/%d", x, y, z));
+    }
+
     /**
      * Gets a collection of all blocks that have been placed by players inside a chunk
      *
@@ -138,20 +152,6 @@ public final class BlockTracker {
             playerPlacedPDC.remove(key);
         }
         pdc.set(PLAYER_PLACED_TAG, PersistentDataType.TAG_CONTAINER, playerPlacedPDC);
-    }
-
-    private static PersistentDataContainer getPlayerPlacedPDC(final PersistentDataHolder chunk) {
-        final PersistentDataContainer pdc = chunk.getPersistentDataContainer();
-        return pdc.getOrDefault(PLAYER_PLACED_TAG, PersistentDataType.TAG_CONTAINER, pdc.getAdapterContext().newPersistentDataContainer());
-    }
-
-    private static NamespacedKey getKey(final Block block) {
-        final int x = block.getX() & 0x000F;
-        final int y = block.getY();
-        final int z = block.getZ() & 0x000F;
-
-        //noinspection HardcodedFileSeparator
-        return new NamespacedKey(plugin, String.format("%d/%d/%d", x, y, z));
     }
 
 }

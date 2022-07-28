@@ -5,8 +5,8 @@ import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -17,16 +17,14 @@ import java.util.stream.Collectors;
  */
 public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
-    @Setter
-    @Nonnull
-    private World world;
-
     @Nonnull
     @Getter
     private final List<Vector> points;
-
     private final double minY;
     private final double maxY;
+    @Setter
+    @Nonnull
+    private World world;
 
     private PolygonWorldBoundingBox(@Nonnull final World world, @Nonnull final List<Vector> points) {
         this.world = world;
@@ -35,12 +33,12 @@ public final class PolygonWorldBoundingBox extends WorldBoundingBox {
         this.maxY = points.stream().mapToDouble(Vector::getY).max().getAsDouble();
     }
 
-    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final List<Location> points) {
-        return new PolygonWorldBoundingBox(world, points.stream().map(Location::toVector).collect(Collectors.toList()));
-    }
-
     public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final Location... points) {
         return fromLocations(world, Arrays.asList(points));
+    }
+
+    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final List<Location> points) {
+        return new PolygonWorldBoundingBox(world, points.stream().map(Location::toVector).collect(Collectors.toList()));
     }
 
     public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final Vector... points) {
@@ -96,8 +94,7 @@ public final class PolygonWorldBoundingBox extends WorldBoundingBox {
                 z2 = zOld;
             }
             if (x1 <= targetX && targetX <= x2) {
-                crossproduct = ((long) targetZ - (long) z1) * (long) (x2 - x1)
-                        - ((long) z2 - (long) z1) * (long) (targetX - x1);
+                crossproduct = ((long) targetZ - (long) z1) * (long) (x2 - x1) - ((long) z2 - (long) z1) * (long) (targetX - x1);
                 if (crossproduct == 0) {
                     if ((z1 <= targetZ) == (targetZ <= z2)) {
                         return true; //on edge

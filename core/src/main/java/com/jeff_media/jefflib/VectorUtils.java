@@ -10,9 +10,10 @@ public final class VectorUtils {
 
     /**
      * Returns a location at the same coordinates as origin, looking exactly towards the given destination
-     * @param origin        Origin location
-     * @param destination   Location to look at
-     * @return              Origin location with adjusted yaw and pitch to look exactly towards the given destination
+     *
+     * @param origin      Origin location
+     * @param destination Location to look at
+     * @return Origin location with adjusted yaw and pitch to look exactly towards the given destination
      */
     public static Location lookAt(final Location origin, final Location destination) {
         final Location location = origin.clone();
@@ -48,28 +49,28 @@ public final class VectorUtils {
         final double y = vec.getY();
         final double z = vec.getZ();
 
-        final double xz = Math.sqrt(x*x + z*z);
+        final double xz = Math.sqrt(x * x + z * z);
 
         final double eulX;
-        if(x < 0) {
-            if(y == 0) {
-                eulX = Math.PI*0.5;
+        if (x < 0) {
+            if (y == 0) {
+                eulX = Math.PI * 0.5;
             } else {
-                eulX = Math.atan(xz/y)+Math.PI;
+                eulX = Math.atan(xz / y) + Math.PI;
             }
         } else {
-            eulX = Math.atan(y/xz)+Math.PI*0.5;
+            eulX = Math.atan(y / xz) + Math.PI * 0.5;
         }
 
         final double eulY;
-        if(x == 0) {
-            if(z > 0) {
+        if (x == 0) {
+            if (z > 0) {
                 eulY = Math.PI;
             } else {
                 eulY = 0;
             }
         } else {
-            eulY = Math.atan(z/x)+Math.PI*0.5;
+            eulY = Math.atan(z / x) + Math.PI * 0.5;
         }
 
         return new EulerAngle(eulX, eulY, 0);
@@ -83,7 +84,7 @@ public final class VectorUtils {
         final double x2 = vector2.getX();
         final double y2 = vector2.getY();
         final double z2 = vector2.getZ();
-        return new Vector(x1+x2/2, y1+y2/2, z1+z2/2);
+        return new Vector(x1 + x2 / 2, y1 + y2 / 2, z1 + z2 / 2);
     }
 
 }

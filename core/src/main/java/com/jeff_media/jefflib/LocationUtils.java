@@ -7,9 +7,9 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.Locale;
 import java.util.Objects;
 import java.util.UUID;
@@ -110,18 +110,6 @@ public final class LocationUtils {
     }
 
     /**
-     * Returns a {@link ChunkCoordinates} object for the given location
-     *
-     * @param location Location
-     * @return ChunkCoordinates for the given Location
-     */
-    public static ChunkCoordinates getChunkCoordinates(final Location location) {
-        final int cx = location.getBlockX() >> 4;
-        final int cz = location.getBlockZ() >> 4;
-        return new ChunkCoordinates(cx, cz);
-    }
-
-    /**
      * Returns a {@link ChunkCoordinates} object for the given x and z coordinates
      *
      * @param x X coordinate
@@ -143,6 +131,18 @@ public final class LocationUtils {
         final int cx = chunkCoordinates.getX();
         final int cz = chunkCoordinates.getZ();
         return Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx, cz);
+    }
+
+    /**
+     * Returns a {@link ChunkCoordinates} object for the given location
+     *
+     * @param location Location
+     * @return ChunkCoordinates for the given Location
+     */
+    public static ChunkCoordinates getChunkCoordinates(final Location location) {
+        final int cx = location.getBlockX() >> 4;
+        final int cz = location.getBlockZ() >> 4;
+        return new ChunkCoordinates(cx, cz);
     }
 
     /**
@@ -197,10 +197,7 @@ public final class LocationUtils {
 
         @Override
         public String toString() {
-            return "ChunkCoordinates{" +
-                    "x=" + x +
-                    ", z=" + z +
-                    '}';
+            return "ChunkCoordinates{" + "x=" + x + ", z=" + z + '}';
         }
 
         public int getX() {

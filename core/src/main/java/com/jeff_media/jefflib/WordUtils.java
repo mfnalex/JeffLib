@@ -3,8 +3,8 @@ package com.jeff_media.jefflib;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
@@ -34,26 +34,6 @@ public class WordUtils {
     }
 
     /**
-     * Converts a NamespacedKey into a human readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
-     * @param key NamespacedKey
-     * @return Human readable key name
-     */
-    public static String getNiceName(@Nonnull final NamespacedKey key) {
-        return getNiceName(key.getKey());
-    }
-
-    public static String getNiceName(@Nonnull final String string) {
-        final String[] split = string.split("_");
-        final Iterator<String> iterator = Arrays.stream(split).iterator();
-        final StringBuilder builder = new StringBuilder();
-        while (iterator.hasNext()) {
-            builder.append(upperCaseFirstLetterOnly(iterator.next().toLowerCase(Locale.ROOT)));
-            if(iterator.hasNext()) builder.append(" ");
-        }
-        return builder.toString();
-    }
-
-    /**
      * Turns the first letter of a String to uppercase, while making the rest lowercase
      *
      * @param word String to change
@@ -71,6 +51,27 @@ public class WordUtils {
         if (word.length() < 1) return word;
         if (word.length() == 1) return word.toUpperCase(Locale.ROOT);
         return word.substring(0, 1).toUpperCase(Locale.ROOT) + word.substring(1);
+    }
+
+    /**
+     * Converts a NamespacedKey into a human readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
+     *
+     * @param key NamespacedKey
+     * @return Human readable key name
+     */
+    public static String getNiceName(@Nonnull final NamespacedKey key) {
+        return getNiceName(key.getKey());
+    }
+
+    public static String getNiceName(@Nonnull final String string) {
+        final String[] split = string.split("_");
+        final Iterator<String> iterator = Arrays.stream(split).iterator();
+        final StringBuilder builder = new StringBuilder();
+        while (iterator.hasNext()) {
+            builder.append(upperCaseFirstLetterOnly(iterator.next().toLowerCase(Locale.ROOT)));
+            if (iterator.hasNext()) builder.append(" ");
+        }
+        return builder.toString();
     }
 
 

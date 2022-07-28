@@ -49,7 +49,8 @@ public final class CommandUtils {
             constructor.setAccessible(true);
 
             command = constructor.newInstance(name, JeffLib.getPlugin());
-        } catch (final SecurityException | NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException | IllegalArgumentException e) {
+        } catch (final SecurityException | NoSuchMethodException | InvocationTargetException | InstantiationException |
+                       IllegalAccessException | IllegalArgumentException e) {
             e.printStackTrace();
         }
 

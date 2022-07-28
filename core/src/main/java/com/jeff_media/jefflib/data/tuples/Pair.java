@@ -2,12 +2,13 @@ package com.jeff_media.jefflib.data.tuples;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
  * Tuple of two values
+ *
  * @param <A> Type of first element
  * @param <B> Type of second element
  */
@@ -31,8 +32,8 @@ public class Pair<A, B> {
     }
 
     @Override
-    public String toString() {
-        return "Pair{" + "first=" + first + ", second=" + second + '}';
+    public int hashCode() {
+        return Objects.hash(first, second);
     }
 
     @Override
@@ -44,8 +45,8 @@ public class Pair<A, B> {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(first, second);
+    public String toString() {
+        return "Pair{" + "first=" + first + ", second=" + second + '}';
     }
 
 }

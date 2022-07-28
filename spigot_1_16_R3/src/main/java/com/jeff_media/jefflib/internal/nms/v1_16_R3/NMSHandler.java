@@ -226,13 +226,6 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Nullable
     @Override
-    public PathNavigation getPathNavigation(final org.bukkit.entity.Mob entity) {
-        final EntityInsentient pathfinderMob = asMob(entity);
-        return new HatchedPathNavigation(pathfinderMob.getNavigation());
-    }
-
-    @Nullable
-    @Override
     public Vector getRandomPos(final Creature entity, final int var1, final int var2) {
         final EntityCreature pathfinderMob = asPathfinder(entity);
         final Vec3D vec = RandomPositionGenerator.a(pathfinderMob, var1, var2); // could be .a or .b
@@ -259,6 +252,13 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getControllerMove());
+    }
+
+    @Nullable
+    @Override
+    public PathNavigation getPathNavigation(final org.bukkit.entity.Mob entity) {
+        final EntityInsentient pathfinderMob = asMob(entity);
+        return new HatchedPathNavigation(pathfinderMob.getNavigation());
     }
 
 

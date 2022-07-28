@@ -10,13 +10,14 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.Locale;
 import java.util.Objects;
 
 // TODO: Test whether something broke after switching from Sound to String
+
 /**
  * Data class to wrap all information needed to play a sound
  */
@@ -57,30 +58,26 @@ public final class SoundData {
      * @param prefix Prefix to use when looking up values in the ConfigurationSection. If non-null, this prefix is prefixed to all keys. For example, if this is set to "foo-", then the keys to look up are "foo-sound", "foo-volume", etc.
      * @throws IllegalArgumentException When no sound is defined, or if the sound category is not valid.
      */
-    public static SoundData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException{
-        if(prefix == null) prefix = "";
+    public static SoundData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException {
+        if (prefix == null) prefix = "";
         String soundName = config.getString(prefix + "effect");
-        if(soundName == null || soundName.isEmpty()) {
+        if (soundName == null || soundName.isEmpty()) {
             throw new IllegalArgumentException("No sound effect defined");
         }
         final Sound sound = Enums.getIfPresent(Sound.class, soundName.toUpperCase(Locale.ROOT)).orNull();
-        if(sound != null) {
+        if (sound != null) {
             soundName = sound.name();
         }
         final float volume = (float) config.getDouble(prefix + "volume", 1.0D);
         final float pitch = (float) config.getDouble(prefix + "pitch", 1.0D);
         final float pitchVariant = (float) config.getDouble(prefix + "pitch-variant", 1.0D);
-        final String soundCategoryName = config.getString(prefix + "sound-category",SoundCategory.MASTER.name()).toUpperCase(Locale.ROOT);
+        final String soundCategoryName = config.getString(prefix + "sound-category", SoundCategory.MASTER.name()).toUpperCase(Locale.ROOT);
         final SoundCategory soundCategory = Enums.getIfPresent(SoundCategory.class, soundCategoryName.toUpperCase()).orNull();
-        if(soundCategory == null) {
+        if (soundCategory == null) {
             throw new IllegalArgumentException("Unknown sound category: " + soundCategoryName);
         }
 
         return new SoundData(soundName, volume, pitch, pitchVariant, soundCategory);
-    }
-
-    private float getFinalPitch() {
-        return (float) (pitch - (pitchVariant / 2) + JeffLib.getThreadLocalRandom().nextDouble(0, pitchVariant));
     }
 
     /**
@@ -90,6 +87,10 @@ public final class SoundData {
      */
     public void playToPlayer(final Player player) {
         player.playSound(player.getLocation(), sound, soundCategory, volume, getFinalPitch());
+    }
+
+    private float getFinalPitch() {
+        return (float) (pitch - (pitchVariant / 2) + JeffLib.getThreadLocalRandom().nextDouble(0, pitchVariant));
     }
 
     /**

@@ -3,8 +3,8 @@ package com.jeff_media.jefflib.pluginhooks;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.lang.reflect.Method;
 
 @UtilityClass
@@ -40,7 +40,7 @@ public class SlimefunUtils {
 
     public static boolean isSlimefunBackpack(@Nonnull final ItemStack item) {
 
-        if(Bukkit.getPluginManager().getPlugin("Slimefun") == null) {
+        if (Bukkit.getPluginManager().getPlugin("Slimefun") == null) {
             return false;
         }
 

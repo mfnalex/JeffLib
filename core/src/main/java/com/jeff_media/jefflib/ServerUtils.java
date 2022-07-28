@@ -3,11 +3,8 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.TPS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * Server related methods
@@ -37,6 +34,7 @@ public class ServerUtils {
 
     /**
      * Gets whether this server is running Spigot or a fork of Spigot.
+     *
      * @return True when running Spigot or a fork of Spigot, false if it's only CraftBukkit
      */
     public static boolean isRunningSpigot() {
@@ -45,6 +43,7 @@ public class ServerUtils {
 
     /**
      * Gets whether this server is running Paper or a fork of Paper.
+     *
      * @return True when running Paper or a fork of Paper, false otherwise
      */
     public static boolean isRunningPaper() {
@@ -52,14 +51,24 @@ public class ServerUtils {
     }
 
     /**
-     * Represents the server's current life phase
+     * Returns the server's current life phase - when you call this in onEnable or onDisable, and it returns RUNNING, it means the server is reloading.
+     *
+     * @return Server's life phase
      */
-    public enum ServerLifePhase {
-        STARTUP, RUNNING, SHUTDOWN, UNKNOWN
+    public ServerLifePhase getLifePhase() {
+        //try {
+        int currentTicket = getCurrentTick();
+        if (currentTicket == -1) {
+            return ServerLifePhase.STARTUP;
+        } else if (currentTicket == -2) {
+            return ServerLifePhase.UNKNOWN;
+        }
+        return JeffLib.getNMSHandler().isServerRunnning() ? ServerLifePhase.RUNNING : ServerLifePhase.SHUTDOWN;
     }
 
     /**
      * Returns the current tick count, or -1 if the server is still starting up, or -2 if we couldn't get the current tick count.
+     *
      * @return current tick count, or -1 if the server is still starting up, or -2 if we couldn't get the current tick count.
      */
     public int getCurrentTick() {
@@ -72,25 +81,17 @@ public class ServerUtils {
     }
 
     /**
-     * Returns the server's current life phase - when you call this in onEnable or onDisable, and it returns RUNNING, it means the server is reloading.
-     * @return Server's life phase
-     */
-    public ServerLifePhase getLifePhase() {
-        //try {
-            int currentTicket = getCurrentTick();
-            if(currentTicket==-1) {
-                return ServerLifePhase.STARTUP;
-            } else if(currentTicket==-2) {
-                return ServerLifePhase.UNKNOWN;
-            }
-            return JeffLib.getNMSHandler().isServerRunnning() ? ServerLifePhase.RUNNING : ServerLifePhase.SHUTDOWN;
-    }
-
-    /**
      * Gets the server's last {@link TPS}
      */
     public static TPS getTps() {
         return new TPS(JeffLib.getNMSHandler().getTps());
+    }
+
+    /**
+     * Represents the server's current life phase
+     */
+    public enum ServerLifePhase {
+        STARTUP, RUNNING, SHUTDOWN, UNKNOWN
     }
 
 }

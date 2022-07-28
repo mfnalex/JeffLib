@@ -22,6 +22,52 @@ import java.util.stream.Stream;
 @UtilityClass
 public class DebugUtils {
 
+    /**
+     * Prints a Map's content to console. Example:
+     * <pre>
+     * firstKey -> firstValue
+     * secondKey -> secondValue
+     * </pre>
+     */
+    public static void print(final Map<?, ?> map) {
+        for (final Map.Entry<?, ?> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " -> " + entry.getValue());
+        }
+    }
+
+    public static void print(final ItemStack[] items) {
+        System.out.println("ItemStack[" + items.length + "]");
+        for (final ItemStack item : items) {
+            if (item == null) continue;
+            System.out.println(" - " + item);
+        }
+    }
+
+    public static ItemStack getShell(ShellType type) {
+        return type.getItemstack().clone();
+    }
+
+    public static void print(final Collection<?> collection) {
+        collection.forEach(System.out::println);
+    }
+
+    public enum ShellType {
+        NAUTILUS_SHELL(Material.NAUTILUS_SHELL), TURTLE_SHELL(Material.TURTLE_HELMET), SHULKER_SHELL(Material.SHULKER_SHELL);
+
+        @Getter
+        private final Material material;
+        private final ItemStack itemstack;
+
+        ShellType(Material material) {
+            this.material = material;
+            this.itemstack = new ItemStack(material);
+        }
+
+        public ItemStack getItemstack() {
+            return itemstack.clone();
+        }
+    }
+
     public static class NMSTest {
 
         private final Player player;
@@ -56,7 +102,7 @@ public class DebugUtils {
                 testAvoidEntityGoal();
 
                 // Current biome name
-                if(McVersion.current().isAtLeast(1,16,2)) {
+                if (McVersion.current().isAtLeast(1, 16, 2)) {
                     testBiomeName();
                 }
 
@@ -69,24 +115,35 @@ public class DebugUtils {
 
         }
 
-        private void testBiomeName() {
-            NamespacedKey key = BiomeUtils.getBiomeNamespacedKey(player.getLocation());
-            player.sendMessage("Biome: " + key.toString());
+        private void testNMSVersion() {
+            McVersion version = McVersion.current();
+            String nmsVersion = version.getNmsVersion();
+            if (nmsVersion == null) throw new IllegalArgumentException("Could not get NMS version");
+            player.sendMessage("NMS version: " + nmsVersion);
         }
 
-        private void testAvoidEntityGoal() {
-            player.sendMessage("§eA pig that's afraid by emeralds should be nearby you now");
-            Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
-            pig.setCustomName("Emerald hater");
-            pig.setCustomNameVisible(true);
-            EntityUtils.addPathfinderGoal(pig, PathfinderGoals.avoidEntity(pig, ent -> {
-                if(ent instanceof Player) {
-                    ItemStack hand = ((Player)ent).getInventory().getItemInMainHand();
-                    if(hand == null) return false;
-                    return hand.getType() == Material.EMERALD;
-                }
-                return false;
-            }, 30, 1, 2), 0);
+        private void testDefaultWorldName() {
+            String defaultWorldName = WorldUtils.getDefaultWorldName();
+            if (defaultWorldName == null) throw new IllegalArgumentException("Could not get default world name");
+            player.sendMessage("Default world name: " + defaultWorldName);
+        }
+
+        private void testItemStackToJson() {
+            player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
+        }
+
+        private void testTotemAnimation() {
+            player.sendMessage("§dYou should see the totem animation now.");
+            AnimationUtils.playTotemAnimation(player);
+        }
+
+        private void testTemptGoal() {
+            player.sendMessage("§bA villager should be following you now when you have an emerald in your hand.");
+            player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
+            Villager villager = player.getWorld().spawn(player.getLocation().add(5, 0, 5), Villager.class);
+            villager.setCustomName("Emerald Seeker");
+            villager.setCustomNameVisible(true);
+            EntityUtils.addPathfinderGoal(villager, PathfinderGoals.temptGoal(villager, Stream.of(Material.EMERALD), 1D, false), 0);
         }
 
         private void testCustomGoalFollowPlayer() {
@@ -110,86 +167,30 @@ public class DebugUtils {
             }, 0);
         }
 
-        private void testTemptGoal() {
-            player.sendMessage("§bA villager should be following you now when you have an emerald in your hand.");
-            player.getInventory().setItemInMainHand(new ItemStack(Material.EMERALD));
-            Villager villager = player.getWorld().spawn(player.getLocation().add(5, 0, 5), Villager.class);
-            villager.setCustomName("Emerald Seeker");
-            villager.setCustomNameVisible(true);
-            EntityUtils.addPathfinderGoal(villager, PathfinderGoals.temptGoal(villager, Stream.of(Material.EMERALD), 1D, false), 0);
+        private void testAvoidEntityGoal() {
+            player.sendMessage("§eA pig that's afraid by emeralds should be nearby you now");
+            Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
+            pig.setCustomName("Emerald hater");
+            pig.setCustomNameVisible(true);
+            EntityUtils.addPathfinderGoal(pig, PathfinderGoals.avoidEntity(pig, ent -> {
+                if (ent instanceof Player) {
+                    ItemStack hand = ((Player) ent).getInventory().getItemInMainHand();
+                    if (hand == null) return false;
+                    return hand.getType() == Material.EMERALD;
+                }
+                return false;
+            }, 30, 1, 2), 0);
         }
 
-        private void testTotemAnimation() {
-            player.sendMessage("§dYou should see the totem animation now.");
-            AnimationUtils.playTotemAnimation(player);
+        private void testBiomeName() {
+            NamespacedKey key = BiomeUtils.getBiomeNamespacedKey(player.getLocation());
+            player.sendMessage("Biome: " + key.toString());
         }
-
-        private void testItemStackToJson() {
-            player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
-        }
-
-        private void testDefaultWorldName() {
-            String defaultWorldName = WorldUtils.getDefaultWorldName();
-            if (defaultWorldName == null) throw new IllegalArgumentException("Could not get default world name");
-            player.sendMessage("Default world name: " + defaultWorldName);
-        }
-
-        private void testNMSVersion() {
-            McVersion version = McVersion.current();
-            String nmsVersion = version.getNmsVersion();
-            if (nmsVersion == null) throw new IllegalArgumentException("Could not get NMS version");
-            player.sendMessage("NMS version: " + nmsVersion);
-        }
-    }
-
-    /**
-     * Prints a Map's content to console. Example:
-     * <pre>
-     * firstKey -> firstValue
-     * secondKey -> secondValue
-     * </pre>
-     */
-    public static void print(final Map<?,?> map) {
-        for(final Map.Entry<?,?> entry : map.entrySet()) {
-            System.out.println(entry.getKey()+" -> " + entry.getValue());
-        }
-    }
-
-    public static void print(final ItemStack[] items) {
-        System.out.println("ItemStack[" + items.length + "]");
-        for(final ItemStack item : items) {
-            if(item == null) continue;
-            System.out.println(" - " + item);
-        }
-    }
-
-    public enum ShellType {
-        NAUTILUS_SHELL(Material.NAUTILUS_SHELL),
-        TURTLE_SHELL(Material.TURTLE_HELMET),
-        SHULKER_SHELL(Material.SHULKER_SHELL);
-
-        @Getter private final Material material;
-        private final ItemStack itemstack;
-
-        ShellType(Material material) {
-            this.material = material;
-            this.itemstack = new ItemStack(material);
-        }
-
-        public ItemStack getItemstack() {
-            return itemstack.clone();
-        }
-    }
-    public static ItemStack getShell(ShellType type) {
-        return type.getItemstack().clone();
-    }
-
-    public static void print(final Collection<?> collection) {
-        collection.forEach(System.out::println);
     }
 
     public static final class Events {
         private static final Logger logger = JeffLib.getPlugin().getLogger();
+
         public static void debug(final InventoryClickEvent event) {
             final Inventory top = event.getView().getTopInventory();
             final Inventory bottom = event.getView().getBottomInventory();

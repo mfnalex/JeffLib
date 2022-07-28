@@ -23,6 +23,7 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
 
     /**
      * Returns the {@link CustomGoalExecutor} associated with this goal
+     *
      * @return
      */
     public CustomGoalExecutor getExecutor() {

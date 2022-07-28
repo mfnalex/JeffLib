@@ -9,9 +9,9 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.util.Locale;
 
 /**
@@ -31,39 +31,39 @@ public final class ParticleData {
 
     public static ParticleData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) {
 
-        if(prefix == null) prefix = "";
+        if (prefix == null) prefix = "";
         final String particleName = config.getString(prefix + "type");
-        if(particleName == null || particleName.isEmpty()) {
+        if (particleName == null || particleName.isEmpty()) {
             throw new IllegalArgumentException("No particle type defined");
         }
 
         final Particle particle = Enums.getIfPresent(Particle.class, particleName.toUpperCase(Locale.ROOT)).orNull();
-        if(particle == null) {
+        if (particle == null) {
             throw new IllegalArgumentException("Unknown particle type: " + particleName);
         }
 
         int amount = 1;
-        if(config.isInt(prefix + "amount")) {
-            amount = config.getInt(prefix+"amount");
+        if (config.isInt(prefix + "amount")) {
+            amount = config.getInt(prefix + "amount");
         }
         double offsetX = 0;
-        if(config.isDouble(prefix + "offset-x")) {
-            offsetX = config.getDouble(prefix+"offset-x");
+        if (config.isDouble(prefix + "offset-x")) {
+            offsetX = config.getDouble(prefix + "offset-x");
         }
         double offsetY = 0;
-        if(config.isDouble(prefix + "offset-y")) {
-            offsetY = config.getDouble(prefix+"offset-y");
+        if (config.isDouble(prefix + "offset-y")) {
+            offsetY = config.getDouble(prefix + "offset-y");
         }
         double offsetZ = 0;
-        if(config.isDouble(prefix + "offset-z")) {
-            offsetZ = config.getDouble(prefix+"offset-z");
+        if (config.isDouble(prefix + "offset-z")) {
+            offsetZ = config.getDouble(prefix + "offset-z");
         }
         double speed = 0;
-        if(config.isDouble(prefix +  "speed")) {
+        if (config.isDouble(prefix + "speed")) {
             speed = config.getDouble(prefix + speed);
         }
 
-        return new ParticleData(particle,amount,offsetX,offsetY,offsetZ,speed);
+        return new ParticleData(particle, amount, offsetX, offsetY, offsetZ, speed);
     }
 
     public void playToPlayer(@Nonnull final Player player, @Nonnull final Location location) {
@@ -71,7 +71,7 @@ public final class ParticleData {
     }
 
     public void playToWorld(@Nonnull final Location location) {
-        location.getWorld().spawnParticle(particle,location,amount, offsetX, offsetY, offsetZ, speed);
+        location.getWorld().spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed);
     }
 
 }

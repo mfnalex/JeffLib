@@ -4,8 +4,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,6 +17,15 @@ public final class ItemBuilder {
     private final ItemMeta meta;
 
     /**
+     * Creates a new ItemBuilder with the given material and an amount of 1
+     *
+     * @param mat Material
+     */
+    public ItemBuilder(final Material mat) {
+        this(mat, 1);
+    }
+
+    /**
      * Creates a new ItemBuilder with the given material and amount
      *
      * @param mat    Material
@@ -25,15 +34,6 @@ public final class ItemBuilder {
     public ItemBuilder(final Material mat, final int amount) {
         item = new ItemStack(mat, amount);
         meta = item.hasItemMeta() ? item.getItemMeta() : Bukkit.getItemFactory().getItemMeta(mat);
-    }
-
-    /**
-     * Creates a new ItemBuilder with the given material and an amount of 1
-     *
-     * @param mat Material
-     */
-    public ItemBuilder(final Material mat) {
-        this(mat, 1);
     }
 
     /**

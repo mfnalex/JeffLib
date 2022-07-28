@@ -7,7 +7,9 @@ import org.bukkit.inventory.ItemStack;
 @Data
 public class LootEntry {
 
-    @Getter private ItemStack itemStack;
-    @Getter private double chance;
+    @Getter
+    private ItemStack itemStack;
+    @Getter
+    private double chance;
 
 }

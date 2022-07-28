@@ -20,9 +20,9 @@ public final class HexColor {
     /**
      * Creates a HexColor with the given RGB value
      *
-     * @param red Red (0-255)
+     * @param red   Red (0-255)
      * @param green Green (0-255)
-     * @param blue Blue (0-255)
+     * @param blue  Blue (0-255)
      */
     @SneakyThrows
     public HexColor(final int red, final int green, final int blue) {
@@ -46,9 +46,9 @@ public final class HexColor {
     /**
      * Creates a HexColor from three separate hex color Strings
      *
-     * @param red Red (00-ff)
+     * @param red   Red (00-ff)
      * @param green Green (00-ff)
-     * @param blue Blue (00-ff)
+     * @param blue  Blue (00-ff)
      */
     public HexColor(final String red, final String green, final String blue) {
         Validate.matchesPattern(red, REGEX_COLOR_COMPONENT);
@@ -57,44 +57,6 @@ public final class HexColor {
         this.setRed(Integer.parseInt(red, 16));
         this.setGreen(Integer.parseInt(green, 16));
         this.setBlue(Integer.parseInt(blue, 16));
-    }
-
-    /**
-     * Returns the value for a specific color component at a given location inside a gradient
-     *
-     * @param start        Color component value at the gradient's start
-     * @param end          Color component value at the gradient's end
-     * @param colorsNeeded The amount of different colors needed for this gradient. This is usually the text length - 1
-     * @param position     Position to get the color component value for
-     * @return Color component value at the given position (0-255)
-     */
-    private static int getSingleValueAtPositionInGradient(final int start, final int end, final int colorsNeeded, final int position) {
-        if (position == 0) return start;
-        if (position == colorsNeeded) return end;
-        if (start == end) return start;
-        final int diff = start - end;
-        return start - (diff / colorsNeeded) * position;
-    }
-
-    /**
-     * Returns the HexColor for a given gradient at the given position
-     *
-     * @param start     Starting color
-     * @param end       End color
-     * @param textLengh Text lengh
-     * @param position  Position inside the text
-     * @return HexColor needed at this position
-     */
-    public static HexColor getHexAtPositionInGradient(final HexColor start, final HexColor end, final int textLengh, final int position) {
-        //System.out.println("Position " + position);
-        if (position == 0) return start;
-        if (position == textLengh - 1) return end;
-        final int colorsNeeded = textLengh - 1;
-        final int r = getSingleValueAtPositionInGradient(start.getRed(), end.getRed(), colorsNeeded, position);
-        final int g = getSingleValueAtPositionInGradient(start.getGreen(), end.getGreen(), colorsNeeded, position);
-        final int b = getSingleValueAtPositionInGradient(start.getBlue(), end.getBlue(), colorsNeeded, position);
-        //System.out.println(result.toHex());
-        return new HexColor(r, g, b);
     }
 
     /**
@@ -135,17 +97,6 @@ public final class HexColor {
     }
 
     /**
-     * Returns the HexColor as a String in the format rrggbb (e.g. 00ff00)
-     *
-     * @return HexColor as String
-     */
-    public String toHex() {
-        return String.format("%02x", getRed())
-                + String.format("%02x", getGreen())
-                + String.format("%02x", getBlue());
-    }
-
-    /**
      * Converts the HexColor into color codes readable by {@link ChatColor#translateAlternateColorCodes(char, String)}, using the ampersand (&amp;) as alternate color character
      *
      * @return HexColor as color code, e.g. "&amp;x&amp;0&amp;0&amp;f&amp;f&amp;0&amp;0"
@@ -157,6 +108,53 @@ public final class HexColor {
             sb.append('&').append(aChar);
         }
         return sb.toString();
+    }
+
+    /**
+     * Returns the HexColor for a given gradient at the given position
+     *
+     * @param start     Starting color
+     * @param end       End color
+     * @param textLengh Text lengh
+     * @param position  Position inside the text
+     * @return HexColor needed at this position
+     */
+    public static HexColor getHexAtPositionInGradient(final HexColor start, final HexColor end, final int textLengh, final int position) {
+        //System.out.println("Position " + position);
+        if (position == 0) return start;
+        if (position == textLengh - 1) return end;
+        final int colorsNeeded = textLengh - 1;
+        final int r = getSingleValueAtPositionInGradient(start.getRed(), end.getRed(), colorsNeeded, position);
+        final int g = getSingleValueAtPositionInGradient(start.getGreen(), end.getGreen(), colorsNeeded, position);
+        final int b = getSingleValueAtPositionInGradient(start.getBlue(), end.getBlue(), colorsNeeded, position);
+        //System.out.println(result.toHex());
+        return new HexColor(r, g, b);
+    }
+
+    /**
+     * Returns the HexColor as a String in the format rrggbb (e.g. 00ff00)
+     *
+     * @return HexColor as String
+     */
+    public String toHex() {
+        return String.format("%02x", getRed()) + String.format("%02x", getGreen()) + String.format("%02x", getBlue());
+    }
+
+    /**
+     * Returns the value for a specific color component at a given location inside a gradient
+     *
+     * @param start        Color component value at the gradient's start
+     * @param end          Color component value at the gradient's end
+     * @param colorsNeeded The amount of different colors needed for this gradient. This is usually the text length - 1
+     * @param position     Position to get the color component value for
+     * @return Color component value at the given position (0-255)
+     */
+    private static int getSingleValueAtPositionInGradient(final int start, final int end, final int colorsNeeded, final int position) {
+        if (position == 0) return start;
+        if (position == colorsNeeded) return end;
+        if (start == end) return start;
+        final int diff = start - end;
+        return start - (diff / colorsNeeded) * position;
     }
 
     /**
@@ -218,12 +216,8 @@ public final class HexColor {
     }
 
     @Override
-    public String toString() {
-        return "HexColor{" +
-                "r=" + red +
-                ", g=" + green +
-                ", b=" + blue +
-                '}';
+    public int hashCode() {
+        return Objects.hash(red, green, blue);
     }
 
     @Override
@@ -235,7 +229,7 @@ public final class HexColor {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(red, green, blue);
+    public String toString() {
+        return "HexColor{" + "r=" + red + ", g=" + green + ", b=" + blue + '}';
     }
 }

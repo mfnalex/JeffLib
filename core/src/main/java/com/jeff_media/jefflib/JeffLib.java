@@ -37,10 +37,9 @@ import java.util.logging.Logger;
 @UtilityClass
 public final class JeffLib {
 
-    private static boolean checkedRelocation = false;
-
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
+    private static boolean checkedRelocation = false;
     private static Plugin plugin;
     @Getter
     private static boolean debug = false;
@@ -99,15 +98,15 @@ public final class JeffLib {
         if (checkedRelocation) return;
         try {
             if (ServerUtils.isRunningMockBukkit()) return;
-            final String defaultPackageDe = new String(new byte[] {'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String defaultPackageCom = new String(new byte[] {'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String examplePackage = new String(new byte[] {'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
+            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
             final String packageName = JeffLib.class.getPackage().getName();
             if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
                 final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
                 final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
                 //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-                getPlugin().getLogger().severe("Nag author(s) " + authors + ( authors.length() == 0 ? "" : " " ) + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
             }
         } catch (final Throwable ignored) {
             return;

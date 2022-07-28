@@ -8,16 +8,11 @@ import net.minecraft.world.entity.ai.goal.AvoidEntityGoal;
 
 import java.util.function.Predicate;
 
-public  class HatchedAvoidEntityGoal extends AvoidEntityGoal<LivingEntity> implements PathfinderGoal {
+public class HatchedAvoidEntityGoal extends AvoidEntityGoal<LivingEntity> implements PathfinderGoal {
 
     private final org.bukkit.entity.Creature bukkitEntity;
 
-    public HatchedAvoidEntityGoal(final org.bukkit.entity.Creature bukkitEntity,
-                                  final PathfinderMob mob,
-                                  final Predicate<org.bukkit.entity.LivingEntity> bukkitPredicate,
-                                  final float maxDistance,
-                                  final double walkSpeedModifier,
-                                  final double sprintSpeedModifier) {
+    public HatchedAvoidEntityGoal(final org.bukkit.entity.Creature bukkitEntity, final PathfinderMob mob, final Predicate<org.bukkit.entity.LivingEntity> bukkitPredicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
         super(mob, LivingEntity.class, maxDistance, walkSpeedModifier, sprintSpeedModifier, livingEntity -> bukkitPredicate.test(NMS.toBukkit(livingEntity)));
         this.bukkitEntity = bukkitEntity;
     }

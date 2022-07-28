@@ -1,7 +1,7 @@
 package com.jeff_media.jefflib.tests;
 
-import com.jeff_media.jefflib.UnitTest;
 import com.jeff_media.jefflib.ClassUtils;
+import com.jeff_media.jefflib.UnitTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

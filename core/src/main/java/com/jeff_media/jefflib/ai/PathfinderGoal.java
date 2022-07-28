@@ -1,24 +1,18 @@
 package com.jeff_media.jefflib.ai;
 
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 
 /**
  * Represents an NMS pathfinder goal. <b>This is not meant to be implemented by plugins.</b> For custom pathfinder goals,
  * extend {@link CustomGoal}.
+ *
  * @see CustomGoal
  */
 public interface PathfinderGoal {
 
     /**
-     * Returns whether the goal can be used right now
-     */
-    boolean canUse();
-
-    /**
      * Gets the Bukkit entity associated with this goal
+     *
      * @return
      */
     Mob getBukkitEntity();
@@ -50,6 +44,11 @@ public interface PathfinderGoal {
     default boolean canContinueToUse() {
         return canUse();
     }
+
+    /**
+     * Returns whether the goal can be used right now
+     */
+    boolean canUse();
 
     /**
      * Returns whether this goal is interruptable.

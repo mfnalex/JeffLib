@@ -2,8 +2,8 @@ package com.jeff_media.jefflib.internal.nms.v1_18_R2;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
-import com.jeff_media.jefflib.ai.*;
 import com.jeff_media.jefflib.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.*;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -240,13 +240,6 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Nullable
     @Override
-    public PathNavigation getPathNavigation(final Mob entity) {
-        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
-        return new HatchedPathNavigation(pathfinderMob.getNavigation());
-    }
-
-    @Nullable
-    @Override
     public Vector getRandomPos(final Creature entity, final int var1, final int var2) {
         final PathfinderMob pathfinderMob = asPathfinder(entity);
         final Vec3 vec = DefaultRandomPos.getPos(pathfinderMob, var1, var2);
@@ -273,6 +266,13 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getMoveControl());
+    }
+
+    @Nullable
+    @Override
+    public PathNavigation getPathNavigation(final Mob entity) {
+        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
+        return new HatchedPathNavigation(pathfinderMob.getNavigation());
     }
 
 }

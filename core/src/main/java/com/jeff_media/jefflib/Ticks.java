@@ -9,13 +9,13 @@ import lombok.experimental.UtilityClass;
 public class Ticks {
 
     /**
-     * Converts seconds to ticks
+     * Converts hours to ticks
      *
-     * @param seconds Duration
+     * @param hours Duration
      * @return Duration in ticks
      */
-    public static long fromSeconds(final double seconds) {
-        return (long) (seconds * 20);
+    public static long fromHours(final double hours) {
+        return fromMinutes(hours * 60);
     }
 
     /**
@@ -29,12 +29,12 @@ public class Ticks {
     }
 
     /**
-     * Converts hours to ticks
+     * Converts seconds to ticks
      *
-     * @param hours Duration
+     * @param seconds Duration
      * @return Duration in ticks
      */
-    public static long fromHours(final double hours) {
-        return fromMinutes(hours * 60);
+    public static long fromSeconds(final double seconds) {
+        return (long) (seconds * 20);
     }
 }

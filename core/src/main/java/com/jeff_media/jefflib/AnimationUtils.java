@@ -29,6 +29,7 @@ public class AnimationUtils {
     /**
      * Plays the totem of undying animation to a given player using the provided custom model data.
      * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
     @NMS

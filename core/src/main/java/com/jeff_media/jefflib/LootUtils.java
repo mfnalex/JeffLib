@@ -24,22 +24,39 @@ public class LootUtils {
         return getRandomLoot(player, lootTable, null);
     }
 
-    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull String lootTable) {
-        return getRandomLoot(player, lootTable, null);
-    }
-
-    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull NamespacedKey lootTable) {
-        return getRandomLoot(player, lootTable, null);
-    }
-
-    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTable lootTable) {
-        return getRandomLoot(player, lootTable, null);
-    }
-
-
-
     public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTables lootTable, @Nullable LootContext context) {
         return getRandomLoot(player, lootTable.getLootTable(), context);
+    }
+
+    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTable lootTable, @Nullable LootContext context) {
+        Validate.notNull(lootTable, "LootTable must not be null");
+        Collection<ItemStack> result = lootTable.populateLoot(JeffLib.getRandom(), context != null ? context : getLootContext(player));
+        if (result.isEmpty()) return null;
+        return result.iterator().next();
+    }
+
+    public static LootContext getLootContext(@Nonnull Player player) {
+        return getLootContext(player, null, null, null);
+    }
+
+    public static LootContext getLootContext(@Nonnull Player player, @Nullable Entity killed, @Nullable Float luck, @Nullable Integer lootModifier) {
+        LootContext.Builder builder = new LootContext.Builder(player.getLocation());
+        builder.killer(player);
+        if (killed != null) {
+            builder.lootedEntity(killed);
+        }
+        if (luck != null) {
+            builder.luck(luck);
+        }
+        if (lootModifier != null) {
+            builder.lootingModifier(lootModifier);
+        }
+        return builder.build();
+
+    }
+
+    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull String lootTable) {
+        return getRandomLoot(player, lootTable, null);
     }
 
     public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull String lootTable, @Nullable LootContext context) {
@@ -55,31 +72,12 @@ public class LootUtils {
         return getRandomLoot(player, table, context);
     }
 
-    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTable lootTable, @Nullable LootContext context) {
-        Validate.notNull(lootTable, "LootTable must not be null");
-        Collection<ItemStack> result = lootTable.populateLoot(JeffLib.getRandom(), context != null ? context : getLootContext(player));
-        if(result.isEmpty()) return null;
-        return result.iterator().next();
+    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull NamespacedKey lootTable) {
+        return getRandomLoot(player, lootTable, null);
     }
 
-    public static LootContext getLootContext(@Nonnull Player player) {
-        return getLootContext(player, null, null, null);
-    }
-
-    public static LootContext getLootContext(@Nonnull Player player, @Nullable Entity killed, @Nullable Float luck, @Nullable Integer lootModifier) {
-        LootContext.Builder builder = new LootContext.Builder(player.getLocation());
-        builder.killer(player);
-        if(killed != null) {
-            builder.lootedEntity(killed);
-        }
-        if(luck != null) {
-            builder.luck(luck);
-        }
-        if(lootModifier != null) {
-            builder.lootingModifier(lootModifier);
-        }
-        return builder.build();
-
+    public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTable lootTable) {
+        return getRandomLoot(player, lootTable, null);
     }
 
 }

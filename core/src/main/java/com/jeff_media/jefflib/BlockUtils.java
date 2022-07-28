@@ -20,6 +20,11 @@ import java.util.function.Predicate;
 public final class BlockUtils {
 
     /**
+     * Offsets of valid bookshelf locations from an enchantment table
+     */
+    public static final int[][] BOOKSHELF_OFFSETS = {{-2, 0, -2}, {-1, 0, -2}, {0, 0, -2}, {1, 0, -2}, {2, 0, -2}, {-2, 0, -1}, {2, 0, -1}, {-2, 0, 0}, {2, 0, 0}, {-2, 0, 1}, {2, 0, 1}, {-2, 0, 2}, {-1, 0, 2}, {0, 0, 2}, {1, 0, 2}, {2, 0, 2}, {-2, 1, -2}, {-1, 1, -2}, {0, 1, -2}, {1, 1, -2}, {2, 1, -2}, {-2, 1, -1}, {2, 1, -1}, {-2, 1, 0}, {2, 1, 0}, {-2, 1, 1}, {2, 1, 1}, {-2, 1, 2}, {-1, 1, 2}, {0, 1, 2}, {1, 1, 2}, {2, 1, 2},};
+
+    /**
      * Returns the lowest non-air block at a given location
      */
     @Nullable
@@ -41,13 +46,13 @@ public final class BlockUtils {
 
     /**
      * Gets the lowest possible building height for a world. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
+     *
      * @deprecated Use {@link WorldUtils#getWorldMinHeight(World)}
      */
     @Deprecated
     private static int getWorldMinHeight(final @Nonnull World world) {
         return WorldUtils.getWorldMinHeight(world);
     }
-
 
     /**
      * Returns a list of entries containing all BlockData from a given block
@@ -257,6 +262,17 @@ public final class BlockUtils {
     }
 
     /**
+     * Returns the number of valid (usable) bookshelves around the given enchantment table position.
+     */
+    public static int getNumberOfEnchantmentTableBookShelves(final Block enchantmentTable) {
+        return (int) Arrays.stream(BOOKSHELF_OFFSETS).filter(offset -> isValidBookShelf(enchantmentTable, offset)).count();
+    }
+
+    private static boolean isValidBookShelf(final Block enchantmentTable, final int[] offset) {
+        return enchantmentTable.getRelative(offset[0], offset[1], offset[2]).getType() == Material.BOOKSHELF && enchantmentTable.getRelative(offset[0] / 2, offset[1], offset[2] / 2).getType().isAir();
+    }
+
+    /**
      * Represents the type of radius
      */
     public enum RadiusType {
@@ -268,34 +284,6 @@ public final class BlockUtils {
          * A sphere radius, for example all blocks within a range of X*X*X blocks that are not further away from the center than the given distance
          */
         SPHERE
-    }
-
-    /**
-     * Offsets of valid bookshelf locations from an enchantment table
-     */
-    public static final int[][] BOOKSHELF_OFFSETS = {
-            {-2, 0, -2}, {-1, 0, -2}, {0, 0, -2}, {1, 0, -2}, {2, 0, -2},
-            {-2, 0, -1},                                      {2, 0, -1},
-            {-2, 0,  0},                                      {2, 0,  0},
-            {-2, 0,  1},                                      {2, 0,  1},
-            {-2, 0,  2}, {-1, 0,  2}, {0, 0,  2}, {1, 0,  2}, {2, 0,  2},
-            {-2, 1, -2}, {-1, 1, -2}, {0, 1, -2}, {1, 1, -2}, {2, 1, -2},
-            {-2, 1, -1},                                      {2, 1, -1},
-            {-2, 1,  0},                                      {2, 1,  0},
-            {-2, 1,  1},                                      {2, 1,  1},
-            {-2, 1,  2}, {-1, 1,  2}, {0, 1,  2}, {1, 1,  2}, {2, 1,  2},
-    };
-
-    private static boolean isValidBookShelf(final Block enchantmentTable, final int[] offset) {
-        return enchantmentTable.getRelative(offset[0], offset[1], offset[2]).getType() == Material.BOOKSHELF
-                && enchantmentTable.getRelative(offset[0] / 2, offset[1], offset[2] / 2).getType().isAir();
-    }
-
-    /**
-     * Returns the number of valid (usable) bookshelves around the given enchantment table position.
-     */
-    public static int getNumberOfEnchantmentTableBookShelves(final Block enchantmentTable) {
-        return (int) Arrays.stream(BOOKSHELF_OFFSETS).filter(offset -> isValidBookShelf(enchantmentTable,offset)).count();
     }
 
     /**

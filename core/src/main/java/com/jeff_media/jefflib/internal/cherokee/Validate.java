@@ -6,8 +6,7 @@ import java.util.regex.Pattern;
 
 public final class Validate {
 
-    private static final String DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE =
-            "The value %s is not in the specified inclusive range of %s to %s";
+    private static final String DEFAULT_INCLUSIVE_BETWEEN_EX_MESSAGE = "The value %s is not in the specified inclusive range of %s to %s";
 
     private static final String DEFAULT_MATCHES_PATTERN_EX = "The string %s does not match the pattern %s";
 
@@ -18,12 +17,11 @@ public final class Validate {
      *
      * <pre>Validate.inclusiveBetween(0, 2, 1);</pre>
      *
-     * @param <T> the type of the argument object
-     * @param start  the inclusive start value, not null
-     * @param end  the inclusive end value, not null
-     * @param value  the object to validate, not null
+     * @param <T>   the type of the argument object
+     * @param start the inclusive start value, not null
+     * @param end   the inclusive end value, not null
+     * @param value the object to validate, not null
      * @throws IllegalArgumentException if the value falls outside the boundaries
-     *
      * @since 3.0
      */
     public static <T> void inclusiveBetween(final T start, final T end, final Comparable<T> value) {
@@ -41,11 +39,10 @@ public final class Validate {
      *
      * <p>The syntax of the pattern is the one used in the {@link Pattern} class.</p>
      *
-     * @param input  the character sequence to validate, not null
-     * @param pattern  the regular expression pattern, not null
+     * @param input   the character sequence to validate, not null
+     * @param pattern the regular expression pattern, not null
      * @throws IllegalArgumentException if the character sequence does not match the pattern
      * @see #matchesPattern(CharSequence, String, String, Object...)
-     *
      * @since 3.0
      */
     public static void matchesPattern(final CharSequence input, final String pattern) {
@@ -63,13 +60,12 @@ public final class Validate {
      *
      * <p>The syntax of the pattern is the one used in the {@link Pattern} class.</p>
      *
-     * @param input  the character sequence to validate, not null
-     * @param pattern  the regular expression pattern, not null
-     * @param message  the {@link String#format(String, Object...)} exception message if invalid, not null
+     * @param input   the character sequence to validate, not null
+     * @param pattern the regular expression pattern, not null
+     * @param message the {@link String#format(String, Object...)} exception message if invalid, not null
      * @param values  the optional values for the formatted exception message, null array not recommended
      * @throws IllegalArgumentException if the character sequence does not match the pattern
      * @see #matchesPattern(CharSequence, String)
-     *
      * @since 3.0
      */
     public static void matchesPattern(final CharSequence input, final String pattern, final String message, final Object... values) {

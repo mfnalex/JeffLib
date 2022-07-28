@@ -14,9 +14,9 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.io.IOException;
 import java.util.*;
 
@@ -28,17 +28,20 @@ public final class ItemStackUtils {
 
     /**
      * Magic value to identify "no NBT data"
+     *
      * @see #getSizeInBytes(ItemStack)
      */
     public static final int NO_DATA = -1;
     /**
      * Magic value to identify "could not parse NBT data"
+     *
      * @see #getSizeInBytes(ItemStack)
      */
     public static final int ERROR_READING_DATA = -2;
 
     /**
      * Gets the size of an ItemStack's NBT data, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
+     *
      * @return NBT data size in byteds, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
      */
     public static int getSizeInBytes(@NonNull final ItemStack itemStack) {
@@ -51,15 +54,9 @@ public final class ItemStackUtils {
     }
 
     /**
-     * Checks if an ItemStack is null or empty (empty = amount of 0 or if the type is air)
-     */
-    public static boolean isNullOrEmpty(@Nullable final ItemStack itemStack) {
-        return itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() == 0;
-    }
-
-    /**
-     * Parses an ItemStack from a ConfigurationSection without applying any placeholder values. 
-     * @see #fromConfigurationSection(ConfigurationSection, HashMap) 
+     * Parses an ItemStack from a ConfigurationSection without applying any placeholder values.
+     *
+     * @see #fromConfigurationSection(ConfigurationSection, HashMap)
      */
     public ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config) {
         return fromConfigurationSection(config, new HashMap<>());
@@ -80,21 +77,22 @@ public final class ItemStackUtils {
      *   unbreaking: 1
      *   efficiency: 5
      * </pre>
-     * @see TextUtils#replaceInString(String, Map) 
+     *
+     * @see TextUtils#replaceInString(String, Map)
      */
-    public static ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config, final HashMap<String,String> placeholders) {
-        final String materialName = config.getString("material","BARRIER").toUpperCase(Locale.ROOT);
+    public static ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config, final HashMap<String, String> placeholders) {
+        final String materialName = config.getString("material", "BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;
-        if(config.isSet("amount")) {
-            if(config.isInt("amount")) {
+        if (config.isSet("amount")) {
+            if (config.isInt("amount")) {
                 amount = config.getInt("amount");
             }
         }
 
         final ItemStack item;
 
-        if(materialName.equalsIgnoreCase("PLAYER_HEAD") && config.isSet("base64") && config.isString("base64")) {
+        if (materialName.equalsIgnoreCase("PLAYER_HEAD") && config.isSet("base64") && config.isString("base64")) {
             item = SkullUtils.getHead(Objects.requireNonNull(config.getString("base64")));
             //System.out.println("Creating custom head with base64" + config.getString("base64"));
         } else {
@@ -102,44 +100,44 @@ public final class ItemStackUtils {
         }
 
         List<String> lore = new ArrayList<>();
-        if(config.isSet("lore")) {
-            if(config.isString("lore")) {
-                lore.add(TextUtils.format(TextUtils.replaceInString(config.getString("lore"),placeholders)));
+        if (config.isSet("lore")) {
+            if (config.isString("lore")) {
+                lore.add(TextUtils.format(TextUtils.replaceInString(config.getString("lore"), placeholders)));
             } else {
-                lore = TextUtils.format(TextUtils.replaceInString(config.getStringList("lore"),placeholders),null);
+                lore = TextUtils.format(TextUtils.replaceInString(config.getStringList("lore"), placeholders), null);
             }
         }
 
         String name = null;
-        if(config.isSet("display-name")) {
-            name = TextUtils.format(TextUtils.replaceInString(config.getString("display-name"),placeholders));
+        if (config.isSet("display-name")) {
+            name = TextUtils.format(TextUtils.replaceInString(config.getString("display-name"), placeholders));
         }
 
         Integer modelData = null;
-        if(config.isInt("custom-model-data")) {
+        if (config.isInt("custom-model-data")) {
             modelData = config.getInt("custom-model-data");
         }
 
-        final int damage = config.getInt("damage",0);
+        final int damage = config.getInt("damage", 0);
 
         final ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta).setLore(lore);
         meta.setDisplayName(name);
         meta.setCustomModelData(modelData);
 
-        if(config.isConfigurationSection("enchantments")) {
-            for(final String key : Objects.requireNonNull(config.getConfigurationSection("enchantments")).getKeys(false)) {
+        if (config.isConfigurationSection("enchantments")) {
+            for (final String key : Objects.requireNonNull(config.getConfigurationSection("enchantments")).getKeys(false)) {
                 final Enchantment enchantment = Enchantment.getByKey(NamespacedKey.minecraft(key));
-                if(enchantment == null) {
+                if (enchantment == null) {
                     throw new IllegalArgumentException("Unknown enchantment: " + key);
                 }
-                final int level = Objects.requireNonNull(config.getConfigurationSection("enchantments")).getInt(key,1);
-                meta.addEnchant(enchantment, level,true);
+                final int level = Objects.requireNonNull(config.getConfigurationSection("enchantments")).getInt(key, 1);
+                meta.addEnchant(enchantment, level, true);
             }
         }
 
-        if(meta instanceof Damageable) {
-            ((Damageable)meta).setDamage(damage);
+        if (meta instanceof Damageable) {
+            ((Damageable) meta).setDamage(damage);
         }
 
         item.setItemMeta(meta);
@@ -182,6 +180,13 @@ public final class ItemStackUtils {
     }
 
     /**
+     * Checks if an ItemStack is null or empty (empty = amount of 0 or if the type is air)
+     */
+    public static boolean isNullOrEmpty(@Nullable final ItemStack itemStack) {
+        return itemStack == null || itemStack.getType().isAir() || itemStack.getAmount() == 0;
+    }
+
+    /**
      * Applies a display name to the given item
      */
     public static void setDisplayName(@Nonnull final ItemStack item, @Nonnull final String name) {
@@ -192,39 +197,38 @@ public final class ItemStackUtils {
 
     /**
      * Damages given ItemStack by specified amount
+     *
      * @param amount damage amount to be applied
-     * @param item ItemStack to be damaged
+     * @param item   ItemStack to be damaged
      * @param player Player who damaged the item
      */
-    public static void damageItem(int amount, final @Nonnull ItemStack item, @Nullable final Player player){
+    public static void damageItem(int amount, final @Nonnull ItemStack item, @Nullable final Player player) {
         final ItemMeta meta = item.getItemMeta();
-        if(!(meta instanceof Damageable) || amount < 0) return;
+        if (!(meta instanceof Damageable) || amount < 0) return;
         final int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);
         int k = 0;
         for (int l = 0; durability > 0 && l < amount; l++) {
-            if (JeffLib.getRandom().nextInt(durability +1) > 0){
-                k++; 
+            if (JeffLib.getRandom().nextInt(durability + 1) > 0) {
+                k++;
             }
-        }  
+        }
         amount -= k;
-        if(player != null){
+        if (player != null) {
             final PlayerItemDamageEvent damageEvent = new PlayerItemDamageEvent(player, item, amount);
             Bukkit.getServer().getPluginManager().callEvent(damageEvent);
-            if(amount != damageEvent.getDamage() || damageEvent.isCancelled()){
+            if (amount != damageEvent.getDamage() || damageEvent.isCancelled()) {
                 damageEvent.getPlayer().updateInventory();
-            }
-            else if(damageEvent.isCancelled()){
+            } else if (damageEvent.isCancelled()) {
                 return;
             }
             amount = damageEvent.getDamage();
 
         }
-        if (amount <= 0)
-            return; 
-        
+        if (amount <= 0) return;
+
         final Damageable damageable = (Damageable) meta;
-        damageable.setDamage(damageable.getDamage()+amount);
-        item.setItemMeta(meta); 
+        damageable.setDamage(damageable.getDamage() + amount);
+        item.setItemMeta(meta);
     }
 
 }

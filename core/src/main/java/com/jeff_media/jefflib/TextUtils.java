@@ -7,8 +7,8 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.plugin.Plugin;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -50,27 +50,28 @@ public class TextUtils {
         JeffLib.getPlugin().getLogger().info(StringUtils.center(" " + text + " ", bannerWidth, BANNER_CHAR));
     }
 
-    private static String addAmpersandsToHex(final String hex) {
-        if (hex.length() != 6) {
-            throw new IllegalArgumentException("Hex-Codes must always have 6 letters.");
-        }
-        final char[] chars = hex.toCharArray();
-        final StringBuilder sb = new StringBuilder("&x");
-        for (final char aChar : chars) {
-            sb.append("&").append(aChar);
-        }
-        return sb.toString();
+    /**
+     * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
+     *
+     * @param text Text to translate
+     * @return Translated text
+     */
+    public static String format(final String text) {
+        return format(text, null);
     }
 
-    @SuppressWarnings("SameParameterValue")
-    private static String replaceRegexWithGroup(final CharSequence text, final Pattern pattern, final int group, final Function<String, String> function) {
-        final Matcher matcher = pattern.matcher(text);
-        final StringBuffer sb = new StringBuffer();
-        while (matcher.find()) {
-            matcher.appendReplacement(sb, function.apply(matcher.group(group)));
-        }
-        matcher.appendTail(sb);
-        return sb.toString();
+    /**
+     * Replaces Emojis, PlacedeholderAPI placeholders and colors (see {@link #color(String)})
+     *
+     * @param text   Text to translate
+     * @param player Player to apply placeholders for, or null
+     * @return Translated text
+     */
+    public static String format(String text, @Nullable final OfflinePlayer player) {
+        text = replaceEmojis(text);
+        text = replacePlaceholders(text, player);
+        text = color(text);
+        return text;
     }
 
     /**
@@ -86,6 +87,25 @@ public class TextUtils {
         }
         if (itemsAdderPlugin.get() != null) {
             text = dev.lone.itemsadder.api.FontImages.FontImageWrapper.replaceFontImages(text);
+        }
+        return text;
+    }
+
+    /**
+     * Replaces PlacerholderAPI placeholders inside the given text, when PlaceholderAPI is installed
+     *
+     * @param text   Text to translate
+     * @param player Player to translate placeholders for, or null
+     * @return Translated text
+     */
+    @SuppressWarnings("NonThreadSafeLazyInitialization")
+    public static String replacePlaceholders(String text, @Nullable final OfflinePlayer player) {
+        //System.out.println("Replacing placeholders");
+        if (placeholderApiPlugin == null) {
+            placeholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
+        }
+        if (placeholderApiPlugin.get() != null) {
+            text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
         }
         return text;
     }
@@ -128,35 +148,35 @@ public class TextUtils {
         return result;
     }
 
-    /**
-     * Replaces Emojis, PlacederholderAPI placeholders and colors (see {@link #color(String)})
-     *
-     * @param text Text to translate
-     * @return Translated text
-     */
-    public static String format(final String text) {
-        return format(text, null);
+    @SuppressWarnings("SameParameterValue")
+    private static String replaceRegexWithGroup(final CharSequence text, final Pattern pattern, final int group, final Function<String, String> function) {
+        final Matcher matcher = pattern.matcher(text);
+        final StringBuffer sb = new StringBuffer();
+        while (matcher.find()) {
+            matcher.appendReplacement(sb, function.apply(matcher.group(group)));
+        }
+        matcher.appendTail(sb);
+        return sb.toString();
     }
 
-    /**
-     * Replaces Emojis, PlacedeholderAPI placeholders and colors (see {@link #color(String)})
-     *
-     * @param text   Text to translate
-     * @param player Player to apply placeholders for, or null
-     * @return Translated text
-     */
-    public static String format(String text, @Nullable final OfflinePlayer player) {
-        text = replaceEmojis(text);
-        text = replacePlaceholders(text, player);
-        text = color(text);
-        return text;
+    private static String addAmpersandsToHex(final String hex) {
+        if (hex.length() != 6) {
+            throw new IllegalArgumentException("Hex-Codes must always have 6 letters.");
+        }
+        final char[] chars = hex.toCharArray();
+        final StringBuilder sb = new StringBuilder("&x");
+        for (final char aChar : chars) {
+            sb.append("&").append(aChar);
+        }
+        return sb.toString();
     }
 
     /**
      * Replaces Emojis, PlaceholderAPI placeholders and colors ({see {@link #color(String)})
-     * @param text      Text to translate
-     * @param player    Player to apply placeholders for, or null
-     * @return          Translated text
+     *
+     * @param text   Text to translate
+     * @param player Player to apply placeholders for, or null
+     * @return Translated text
      */
     public static List<String> format(List<String> text, @Nullable final OfflinePlayer player) {
         text = new ArrayList<>(text);
@@ -167,22 +187,13 @@ public class TextUtils {
     }
 
     /**
-     * Replaces PlacerholderAPI placeholders inside the given text, when PlaceholderAPI is installed
+     * Replaces placeholders in a list of Strings.
      *
-     * @param text   Text to translate
-     * @param player Player to translate placeholders for, or null
-     * @return Translated text
+     * @see #replaceInString(String, Map)
      */
-    @SuppressWarnings("NonThreadSafeLazyInitialization")
-    public static String replacePlaceholders(String text, @Nullable final OfflinePlayer player) {
-        //System.out.println("Replacing placeholders");
-        if (placeholderApiPlugin == null) {
-            placeholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
-        }
-        if (placeholderApiPlugin.get() != null) {
-            text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
-        }
-        return text;
+    public List<String> replaceInString(final List<String> strings, final Map<String, String> placeholders) {
+        strings.replaceAll(string -> replaceInString(string, placeholders));
+        return strings;
     }
 
     /**
@@ -194,9 +205,9 @@ public class TextUtils {
      * String result = replaceInString("{player} was killed by {killer}.",placeholders);
      * </pre>
      */
-    public String replaceInString(String string, final Map<String,String> placeholders) {
-        for(final Map.Entry<String, String> entry : placeholders.entrySet()) {
-            if(entry.getKey()==null ||entry.getValue()==null) continue;
+    public String replaceInString(String string, final Map<String, String> placeholders) {
+        for (final Map.Entry<String, String> entry : placeholders.entrySet()) {
+            if (entry.getKey() == null || entry.getValue() == null) continue;
             string = string.replace(entry.getKey(), entry.getValue());
         }
         return string;
@@ -204,9 +215,10 @@ public class TextUtils {
 
     /**
      * Replaces placeholders in a list of Strings.
-     * @see #replaceInString(String, Map)
+     *
+     * @see #replaceInString(String, String...)
      */
-    public List<String> replaceInString(final List<String> strings, final Map<String,String> placeholders) {
+    public List<String> replaceInString(final List<String> strings, final String... placeholders) {
         strings.replaceAll(string -> replaceInString(string, placeholders));
         return strings;
     }
@@ -221,23 +233,14 @@ public class TextUtils {
      * </pre>
      */
     public String replaceInString(String string, final String... placeholders) {
-        if(placeholders.length % 2 != 0) {
+        if (placeholders.length % 2 != 0) {
             throw new IllegalArgumentException("placeholders must have an even length");
         }
-        for(int i = 0; i < placeholders.length; i += 2) {
-            if(placeholders[i]==null || placeholders[i+1]==null) continue;
-            string = string.replace(placeholders[i], placeholders[i+1]);
+        for (int i = 0; i < placeholders.length; i += 2) {
+            if (placeholders[i] == null || placeholders[i + 1] == null) continue;
+            string = string.replace(placeholders[i], placeholders[i + 1]);
         }
         return string;
-    }
-
-    /**
-     * Replaces placeholders in a list of Strings.
-     * @see #replaceInString(String, String...)
-     */
-    public List<String> replaceInString(final List<String> strings, final String... placeholders) {
-        strings.replaceAll(string -> replaceInString(string, placeholders));
-        return strings;
     }
 
 }

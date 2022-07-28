@@ -32,15 +32,15 @@ import java.util.stream.Stream;
 public final class NMS {
 
     public static Level getLevel(final World world) {
-        return ((CraftWorld)world).getHandle();
+        return ((CraftWorld) world).getHandle();
     }
 
     public static BlockPos getBlockPos(final Block block) {
-        return ((CraftBlock)block).getPosition();
+        return ((CraftBlock) block).getPosition();
     }
 
     public static Entity toNms(final org.bukkit.entity.Entity entity) {
-        return ((CraftEntity)entity).getHandle();
+        return ((CraftEntity) entity).getHandle();
     }
 
     public static org.bukkit.entity.Entity toBukkit(final Entity entity) {
@@ -48,7 +48,7 @@ public final class NMS {
     }
 
     public static LivingEntity toNms(final org.bukkit.entity.LivingEntity entity) {
-        return ((CraftLivingEntity)entity).getHandle();
+        return ((CraftLivingEntity) entity).getHandle();
     }
 
     public static org.bukkit.entity.LivingEntity toBukkit(final LivingEntity entity) {
@@ -61,12 +61,12 @@ public final class NMS {
 
     @Nonnull
     public static PathfinderMob asPathfinder(final org.bukkit.entity.Creature bukkitEntity) {
-        return ((CraftCreature)bukkitEntity).getHandle();
+        return ((CraftCreature) bukkitEntity).getHandle();
     }
 
     @Nonnull
     public static Mob asMob(final org.bukkit.entity.Mob bukkitEntity) {
-        return ((CraftMob)bukkitEntity).getHandle();
+        return ((CraftMob) bukkitEntity).getHandle();
     }
 
     public static DedicatedServer getDedicatedServer() {
@@ -78,7 +78,7 @@ public final class NMS {
     }
 
     public static BlockVector toBukkit(@Nullable final BlockPos targetPos) {
-        if(targetPos == null) {
+        if (targetPos == null) {
             return null;
         }
         return new BlockVector(targetPos.getX(), targetPos.getY(), targetPos.getZ());

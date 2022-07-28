@@ -75,8 +75,7 @@ public final class FileUtils {
      */
     @SneakyThrows
     public static List<String> readFileFromResources(final Plugin plugin, final String fileName) {
-        try (final InputStream input = plugin.getResource(fileName);
-             final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(input)))) {
+        try (final InputStream input = plugin.getResource(fileName); final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(input)))) {
             return reader.lines().collect(Collectors.toList());
         }
     }

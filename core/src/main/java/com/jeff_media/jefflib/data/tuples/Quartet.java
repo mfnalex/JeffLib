@@ -2,12 +2,13 @@ package com.jeff_media.jefflib.data.tuples;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
  * Tuple of four values
+ *
  * @param <A> Type of first element
  * @param <B> Type of second element
  * @param <C> Type of third element

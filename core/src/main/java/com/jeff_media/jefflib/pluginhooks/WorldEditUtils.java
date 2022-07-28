@@ -6,8 +6,8 @@ import com.jeff_media.jefflib.exceptions.MissingPluginException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.util.List;
 
 /**

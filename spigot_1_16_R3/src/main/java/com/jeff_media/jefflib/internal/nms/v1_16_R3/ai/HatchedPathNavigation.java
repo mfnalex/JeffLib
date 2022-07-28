@@ -14,6 +14,36 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     }
 
     @Override
+    public boolean moveTo(final double x, final double y, final double z, final double speedModifier) {
+        return navigation.a(x, y, z, speedModifier);
+    }
+
+    @Override
+    public BlockVector getTargetPos() {
+        return NMS.toBukkit(navigation.h());
+    }
+
+    @Override
+    public void setSpeedModifier(final double speedModifier) {
+        navigation.a(speedModifier);
+    }
+
+    @Override
+    public void recomputePath() {
+        navigation.j();
+    }
+
+    @Override
+    public boolean isDone() {
+        return navigation.m();
+    }
+
+    @Override
+    public boolean isInProgress() {
+        return navigation.n();
+    }
+
+    @Override
     public void stop() {
         navigation.o();
     }
@@ -41,35 +71,5 @@ public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavi
     @Override
     public boolean isStuck() {
         return navigation.t();
-    }
-
-    @Override
-    public boolean moveTo(final double x, final double y, final double z, final double speedModifier) {
-        return navigation.a(x,y,z,speedModifier);
-    }
-
-    @Override
-    public BlockVector getTargetPos() {
-        return NMS.toBukkit(navigation.h());
-    }
-
-    @Override
-    public void setSpeedModifier(final double speedModifier) {
-        navigation.a(speedModifier);
-    }
-
-    @Override
-    public void recomputePath() {
-        navigation.j();
-    }
-
-    @Override
-    public boolean isDone() {
-        return navigation.m();
-    }
-
-    @Override
-    public boolean isInProgress() {
-        return navigation.n();
     }
 }

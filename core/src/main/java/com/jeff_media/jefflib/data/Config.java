@@ -16,11 +16,25 @@ public class Config extends YamlConfiguration {
     private final String filename;
     private final File file;
 
-    public Config(@Nonnull final  String filename) {
+    public Config(@Nonnull final String filename) {
         this.filename = filename;
         file = new File(JeffLib.getPlugin().getDataFolder(), filename);
         loadDefaults();
         reload();
+    }
+
+    private void loadDefaults() {
+        final YamlConfiguration defaultConfig = new YamlConfiguration();
+
+        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename); final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
+            defaultConfig.load(reader);
+        } catch (final IOException exception) {
+            throw new IllegalArgumentException("Could not load included config file " + filename, exception);
+        } catch (final InvalidConfigurationException exception) {
+            throw new IllegalArgumentException("Invalid default config for " + filename, exception);
+        }
+
+        setDefaults(defaultConfig);
     }
 
     /**
@@ -41,25 +55,11 @@ public class Config extends YamlConfiguration {
     private void saveDefaultConfig() {
         if (!file.exists()) {
             File parent = file.getParentFile();
-            if(parent != null) {
+            if (parent != null) {
                 parent.mkdirs();
             }
             JeffLib.getPlugin().saveResource(filename, false);
         }
-    }
-
-    private void loadDefaults() {
-        final YamlConfiguration defaultConfig = new YamlConfiguration();
-
-        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename); final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
-            defaultConfig.load(reader);
-        } catch (final IOException exception) {
-            throw new IllegalArgumentException("Could not load included config file " + filename, exception);
-        } catch (final InvalidConfigurationException exception) {
-            throw new IllegalArgumentException("Invalid default config for " + filename, exception);
-        }
-
-        setDefaults(defaultConfig);
     }
 
 }

@@ -13,10 +13,7 @@ public class CSVParser {
     private final List<String[]> list = new ArrayList<>();
 
     public CSVParser(java.io.InputStream inputStream) {
-        try (
-                InputStreamReader reader = new InputStreamReader(inputStream);
-                BufferedReader bufferedReader = new BufferedReader(reader)
-        ) {
+        try (InputStreamReader reader = new InputStreamReader(inputStream); BufferedReader bufferedReader = new BufferedReader(reader)) {
             bufferedReader.lines().forEachOrdered(line -> {
                 list.add(line.split(REGEX));
             });

@@ -2,9 +2,9 @@ package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -20,24 +20,6 @@ import java.util.stream.Stream;
  */
 @UtilityClass
 public final class NetUtils {
-
-    /**
-     * Downloads a URL and returns the response as String list. Blocks the main thread.
-     */
-    @Nonnull
-    public static List<String> downloadToStringList(final String url) throws IOException {
-
-        final HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
-        //noinspection HardcodedFileSeparator
-        httpConnection.addRequestProperty("User-Agent", JeffLib.getPlugin().getName() + "/" + JeffLib.getPlugin().getDescription().getVersion());
-        try (
-                final InputStreamReader input = new InputStreamReader(httpConnection.getInputStream());
-                final BufferedReader reader = new BufferedReader(input)
-        ) {
-            final Stream<String> result = reader.lines();
-            return result.collect(Collectors.toList());
-        }
-    }
 
     /**
      * Downloads a URL and returns the response as String list asynchronously.
@@ -57,6 +39,21 @@ public final class NetUtils {
     }
 
     /**
+     * Downloads a URL and returns the response as String list. Blocks the main thread.
+     */
+    @Nonnull
+    public static List<String> downloadToStringList(final String url) throws IOException {
+
+        final HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();
+        //noinspection HardcodedFileSeparator
+        httpConnection.addRequestProperty("User-Agent", JeffLib.getPlugin().getName() + "/" + JeffLib.getPlugin().getDescription().getVersion());
+        try (final InputStreamReader input = new InputStreamReader(httpConnection.getInputStream()); final BufferedReader reader = new BufferedReader(input)) {
+            final Stream<String> result = reader.lines();
+            return result.collect(Collectors.toList());
+        }
+    }
+
+    /**
      * Returns the public IP address of the server, or null if it couldn't find it out. This method uses a blocking
      * request to <a href="http://checkip.amazonaws.com">http://checkip.amazonaws.com</a>
      */
@@ -64,7 +61,7 @@ public final class NetUtils {
     public static String getIp() {
         try {
             final List<String> answer = downloadToStringList("http://checkip.amazonaws.com");
-            if(answer.isEmpty()) return null;
+            if (answer.isEmpty()) return null;
             return answer.get(0);
         } catch (final IOException e) {
             return null;

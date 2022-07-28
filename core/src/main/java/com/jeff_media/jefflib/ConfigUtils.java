@@ -2,15 +2,10 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.Config;
 import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.InvalidConfigurationException;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
-import javax.annotation.Nonnull;
 
-import java.io.*;
+import javax.annotation.Nonnull;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  * Configuration file related methods

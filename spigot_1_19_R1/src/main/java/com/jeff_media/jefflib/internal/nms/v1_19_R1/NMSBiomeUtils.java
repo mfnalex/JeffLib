@@ -21,14 +21,9 @@ class NMSBiomeUtils {
 
     private final ResourceKey<Registry<Biome>> BIOME_REGISTRY_RESOURCE_KEY = Registry.BIOME_REGISTRY;
 
-    Pair<String,String> getBiomeName(final Location location) {
+    Pair<String, String> getBiomeName(final Location location) {
         final ResourceLocation key = getBiomeKey(location);
-        return new Pair<>(key.getNamespace(),key.getPath());
-    }
-
-    Registry<Biome> getBiomeRegistry() {
-        final DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
-        return dedicatedServer.registryAccess().registry(BIOME_REGISTRY_RESOURCE_KEY).get();
+        return new Pair<>(key.getNamespace(), key.getPath());
     }
 
     ResourceLocation getBiomeKey(final Location location) {
@@ -36,9 +31,14 @@ class NMSBiomeUtils {
         return registry.getKey(getBiomeBase(location).value());
     }
 
+    Registry<Biome> getBiomeRegistry() {
+        final DedicatedServer dedicatedServer = ((CraftServer) Bukkit.getServer()).getServer();
+        return dedicatedServer.registryAccess().registry(BIOME_REGISTRY_RESOURCE_KEY).get();
+    }
+
     Holder<Biome> getBiomeBase(final Location location) {
         final BlockPos pos = new BlockPos(location.getBlockX(), location.getBlockY(), location.getBlockZ());
-        final LevelChunk nmsChunk = ((CraftWorld)location.getWorld()).getHandle().getChunkAt(pos);
+        final LevelChunk nmsChunk = ((CraftWorld) location.getWorld()).getHandle().getChunkAt(pos);
         if (nmsChunk != null) {
             return nmsChunk.getNoiseBiome(pos.getX(), pos.getY(), pos.getZ());
         }

@@ -9,20 +9,17 @@ import java.util.Arrays;
 public final class StringUtils {
 
     /**
-     * <p>The maximum size to which the padding constant(s) can expand.</p>
-     */
-    private static final int PAD_LIMIT = 8192;
-
-    /**
      * A String for a space character.
      */
     public static final String SPACE = " ";
-
     /**
      * The empty String {@code ""}.
      */
     public static final String EMPTY = "";
-
+    /**
+     * <p>The maximum size to which the padding constant(s) can expand.</p>
+     */
+    private static final int PAD_LIMIT = 8192;
 
     /**
      * <p>Left pad a String with spaces (' ').</p>
@@ -39,9 +36,9 @@ public final class StringUtils {
      * </pre>
      *
      * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
+     * @param size the size to pad to
      * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String leftPad(final String str, final int size) {
         return leftPad(str, size, ' ');
@@ -61,11 +58,11 @@ public final class StringUtils {
      * StringUtils.leftPad("bat", -1, 'z') = "bat"
      * </pre>
      *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padChar  the character to pad with
+     * @param str     the String to pad out, may be null
+     * @param size    the size to pad to
+     * @param padChar the character to pad with
      * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String leftPad(final String str, final int size, final char padChar) {
         if (str == null) {
@@ -98,11 +95,11 @@ public final class StringUtils {
      * StringUtils.leftPad("bat", 5, "")    = "  bat"
      * </pre>
      *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padStr  the String to pad with, null or empty treated as single space
+     * @param str    the String to pad out, may be null
+     * @param size   the size to pad to
+     * @param padStr the String to pad with, null or empty treated as single space
      * @return left padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String leftPad(final String str, final int size, String padStr) {
         if (str == null) {
@@ -136,34 +133,31 @@ public final class StringUtils {
     }
 
     /**
-     * <p>Returns padding using the specified delimiter repeated
-     * to a given length.</p>
+     * <p>Repeat a String {@code repeat} times to form a
+     * new String, with a String separator injected each time. </p>
      *
      * <pre>
-     * StringUtils.repeat('e', 0)  = ""
-     * StringUtils.repeat('e', 3)  = "eee"
-     * StringUtils.repeat('e', -2) = ""
+     * StringUtils.repeat(null, null, 2) = null
+     * StringUtils.repeat(null, "x", 2)  = null
+     * StringUtils.repeat("", null, 0)   = ""
+     * StringUtils.repeat("", "", 2)     = ""
+     * StringUtils.repeat("", "x", 3)    = "xxx"
+     * StringUtils.repeat("?", ", ", 3)  = "?, ?, ?"
      * </pre>
      *
-     * <p>Note: this method does not support padding with
-     * <a href="http://www.unicode.org/glossary/#supplementary_character">Unicode Supplementary Characters</a>
-     * as they require a pair of {@code char}s to be represented.
-     * If you are needing to support full I18N of your applications
-     * consider using {@link #repeat(String, int)} instead.
-     * </p>
-     *
-     * @param ch  character to repeat
-     * @param repeat  number of times to repeat char, negative treated as zero
-     * @return String with repeated character
-     * @see #repeat(String, int)
+     * @param str       the String to repeat, may be null
+     * @param separator the String to inject, may be null
+     * @param repeat    number of times to repeat str, negative treated as zero
+     * @return a new String consisting of the original String repeated,
+     * {@code null} if null String input
      */
-    public static String repeat(final char ch, final int repeat) {
-        if (repeat <= 0) {
-            return EMPTY;
+    public static String repeat(final String str, final String separator, final int repeat) {
+        if (str == null || separator == null) {
+            return repeat(str, repeat);
         }
-        final char[] buf = new char[repeat];
-        Arrays.fill(buf, ch);
-        return new String(buf);
+        // given that repeat(String, int) is quite optimized, better to rely on it than try and splice this into it
+        final String result = repeat(str + separator, repeat);
+        return removeEnd(result, separator);
     }
 
     /**
@@ -179,10 +173,10 @@ public final class StringUtils {
      * StringUtils.repeat("a", -2) = ""
      * </pre>
      *
-     * @param str  the String to repeat, may be null
-     * @param repeat  number of times to repeat str, negative treated as zero
+     * @param str    the String to repeat, may be null
+     * @param repeat number of times to repeat str, negative treated as zero
      * @return a new String consisting of the original String repeated,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String repeat(final String str, final int repeat) {
         // Performance tuned for 2.0 (JDK1.4)
@@ -202,9 +196,9 @@ public final class StringUtils {
 
         final int outputLength = inputLength * repeat;
         switch (inputLength) {
-            case 1 :
+            case 1:
                 return repeat(str.charAt(0), repeat);
-            case 2 :
+            case 2:
                 final char ch0 = str.charAt(0);
                 final char ch1 = str.charAt(1);
                 final char[] output2 = new char[outputLength];
@@ -213,41 +207,13 @@ public final class StringUtils {
                     output2[i + 1] = ch1;
                 }
                 return new String(output2);
-            default :
+            default:
                 final StringBuilder buf = new StringBuilder(outputLength);
                 for (int i = 0; i < repeat; i++) {
                     buf.append(str);
                 }
                 return buf.toString();
         }
-    }
-
-    /**
-     * <p>Repeat a String {@code repeat} times to form a
-     * new String, with a String separator injected each time. </p>
-     *
-     * <pre>
-     * StringUtils.repeat(null, null, 2) = null
-     * StringUtils.repeat(null, "x", 2)  = null
-     * StringUtils.repeat("", null, 0)   = ""
-     * StringUtils.repeat("", "", 2)     = ""
-     * StringUtils.repeat("", "x", 3)    = "xxx"
-     * StringUtils.repeat("?", ", ", 3)  = "?, ?, ?"
-     * </pre>
-     *
-     * @param str        the String to repeat, may be null
-     * @param separator  the String to inject, may be null
-     * @param repeat     number of times to repeat str, negative treated as zero
-     * @return a new String consisting of the original String repeated,
-     *  {@code null} if null String input
-     */
-    public static String repeat(final String str, final String separator, final int repeat) {
-        if (str == null || separator == null) {
-            return repeat(str, repeat);
-        }
-        // given that repeat(String, int) is quite optimized, better to rely on it than try and splice this into it
-        final String result = repeat(str + separator, repeat);
-        return removeEnd(result, separator);
     }
 
     public static String removeEnd(final String str, final String remove) {
@@ -258,6 +224,37 @@ public final class StringUtils {
             return str.substring(0, str.length() - remove.length());
         }
         return str;
+    }
+
+    /**
+     * <p>Returns padding using the specified delimiter repeated
+     * to a given length.</p>
+     *
+     * <pre>
+     * StringUtils.repeat('e', 0)  = ""
+     * StringUtils.repeat('e', 3)  = "eee"
+     * StringUtils.repeat('e', -2) = ""
+     * </pre>
+     *
+     * <p>Note: this method does not support padding with
+     * <a href="http://www.unicode.org/glossary/#supplementary_character">Unicode Supplementary Characters</a>
+     * as they require a pair of {@code char}s to be represented.
+     * If you are needing to support full I18N of your applications
+     * consider using {@link #repeat(String, int)} instead.
+     * </p>
+     *
+     * @param ch     character to repeat
+     * @param repeat number of times to repeat char, negative treated as zero
+     * @return String with repeated character
+     * @see #repeat(String, int)
+     */
+    public static String repeat(final char ch, final int repeat) {
+        if (repeat <= 0) {
+            return EMPTY;
+        }
+        final char[] buf = new char[repeat];
+        Arrays.fill(buf, ch);
+        return new String(buf);
     }
 
     /**
@@ -275,7 +272,7 @@ public final class StringUtils {
      * It no longer trims the CharSequence.
      * That functionality is available in isBlank().</p>
      *
-     * @param cs  the CharSequence to check, may be null
+     * @param cs the CharSequence to check, may be null
      * @return {@code true} if the CharSequence is empty or null
      */
     public static boolean isEmpty(final CharSequence cs) {
@@ -302,7 +299,7 @@ public final class StringUtils {
      * </pre>
      *
      * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
+     * @param size the int size of new String, negative treated as zero
      * @return centered String, {@code null} if null String input
      */
     public static String center(final String str, final int size) {
@@ -327,9 +324,9 @@ public final class StringUtils {
      * StringUtils.center("a", 4, 'y')    = "yayy"
      * </pre>
      *
-     * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
-     * @param padChar  the character to pad the new String with
+     * @param str     the String to center, may be null
+     * @param size    the int size of new String, negative treated as zero
+     * @param padChar the character to pad the new String with
      * @return centered String, {@code null} if null String input
      * @since 2.0
      */
@@ -367,9 +364,9 @@ public final class StringUtils {
      * StringUtils.center("abc", 7, "")   = "  abc  "
      * </pre>
      *
-     * @param str  the String to center, may be null
-     * @param size  the int size of new String, negative treated as zero
-     * @param padStr  the String to pad the new String with, must not be null or empty
+     * @param str    the String to center, may be null
+     * @param size   the int size of new String, negative treated as zero
+     * @param padStr the String to pad the new String with, must not be null or empty
      * @return centered String, {@code null} if null String input
      * @throws IllegalArgumentException if padStr is {@code null} or empty
      */
@@ -405,9 +402,9 @@ public final class StringUtils {
      * </pre>
      *
      * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
+     * @param size the size to pad to
      * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String rightPad(final String str, final int size) {
         return rightPad(str, size, ' ');
@@ -427,11 +424,11 @@ public final class StringUtils {
      * StringUtils.rightPad("bat", -1, 'z') = "bat"
      * </pre>
      *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padChar  the character to pad with
+     * @param str     the String to pad out, may be null
+     * @param size    the size to pad to
+     * @param padChar the character to pad with
      * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      * @since 2.0
      */
     public static String rightPad(final String str, final int size, final char padChar) {
@@ -465,11 +462,11 @@ public final class StringUtils {
      * StringUtils.rightPad("bat", 5, "")    = "bat  "
      * </pre>
      *
-     * @param str  the String to pad out, may be null
-     * @param size  the size to pad to
-     * @param padStr  the String to pad with, null or empty treated as single space
+     * @param str    the String to pad out, may be null
+     * @param size   the size to pad to
+     * @param padStr the String to pad with, null or empty treated as single space
      * @return right padded String or original String if no padding is necessary,
-     *  {@code null} if null String input
+     * {@code null} if null String input
      */
     public static String rightPad(final String str, final int size, String padStr) {
         if (str == null) {

@@ -17,20 +17,6 @@ import java.util.*;
 public final class MaterialUtils {
 
     /**
-     * Returns the "vanilla namespaced" name for this material, e.g. "block.minecraft.dirt" or "item.minecraft.diamond_hoe"
-     *
-     * @param mat Material
-     * @return "Vanilla namespaced" name
-     */
-    public static String getMinecraftNamespacedName(final Material mat) {
-        if (mat.isBlock()) {
-            return "block.minecraft." + mat.name().toLowerCase(Locale.ROOT);
-        } else {
-            return "item.minecraft." + mat.name().toLowerCase(Locale.ROOT);
-        }
-    }
-
-    /**
      * Reads Minecraft's client translation files into a map
      *
      * @param minecraftTranslationFile Minecraft's client translation file
@@ -43,7 +29,7 @@ public final class MaterialUtils {
             map.put(mat, getNiceMaterialName(mat));
         }
         try {
-            final Map<?,?> tmpMap = gson.fromJson(new FileReader(minecraftTranslationFile), Map.class);
+            final Map<?, ?> tmpMap = gson.fromJson(new FileReader(minecraftTranslationFile), Map.class);
             for (final Material mat : Material.values()) {
                 map.put(mat, (String) tmpMap.get(getMinecraftNamespacedName(mat)));
             }
@@ -70,15 +56,30 @@ public final class MaterialUtils {
     }
 
     /**
+     * Returns the "vanilla namespaced" name for this material, e.g. "block.minecraft.dirt" or "item.minecraft.diamond_hoe"
+     *
+     * @param mat Material
+     * @return "Vanilla namespaced" name
+     */
+    public static String getMinecraftNamespacedName(final Material mat) {
+        if (mat.isBlock()) {
+            return "block.minecraft." + mat.name().toLowerCase(Locale.ROOT);
+        } else {
+            return "item.minecraft." + mat.name().toLowerCase(Locale.ROOT);
+        }
+    }
+
+    /**
      * Sets this material's max stack size
-     * @param material Material to change
+     *
+     * @param material     Material to change
      * @param maxStackSize new max stack size
      * @nms
      */
     @NMS
     public static void setMaxStackSize(final Material material, final int maxStackSize) {
-        if(!material.isItem()) return; // Can't set the amount for unobtainable items like WATER
-        ReflUtils.setField(Material.class, material, "maxStack",maxStackSize);
+        if (!material.isItem()) return; // Can't set the amount for unobtainable items like WATER
+        ReflUtils.setField(Material.class, material, "maxStack", maxStackSize);
         JeffLib.getNMSHandler().getMaterialHandler().setMaxStackSize(material, maxStackSize);
     }
 

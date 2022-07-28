@@ -16,6 +16,7 @@ import java.util.Map;
 
 /**
  * Manages holograms
+ *
  * @deprecated Draft API
  */
 @UtilityClass

@@ -52,6 +52,11 @@ public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media
         goal.tick();
     }
 
+    @Nonnull
+    @Override
+    public EnumSet<GoalFlag> getGoalFlags() {
+        return translateFlags(this.i());
+    }
 
     @Override
     public void setGoalFlags(final EnumSet<GoalFlag> flags) {
@@ -60,29 +65,25 @@ public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media
 
     @Nonnull
     @Override
-    public EnumSet<GoalFlag> getGoalFlags() {
-        return translateFlags(this.i());
-    }
-
-    @Nonnull
-    @Override
     public PathNavigation getNavigation() {
         return new HatchedPathNavigation(pmob.getNavigation());
-    }
-
-    @Nonnull private static EnumSet<Type> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
-        if(flags == null) return EnumSet.noneOf(Type.class);
-        return flags.stream().map(flag -> Type.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Type.class)));
-    }
-
-    @Nonnull private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Type> flags) {
-        if(flags == null) return EnumSet.noneOf(GoalFlag.class);
-        return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
     }
 
     @Nonnull
     @Override
     public MoveController getMoveControl() {
         return new HatchedMoveController(pmob.getControllerMove());
+    }
+
+    @Nonnull
+    private static EnumSet<Type> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
+        if (flags == null) return EnumSet.noneOf(Type.class);
+        return flags.stream().map(flag -> Type.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Type.class)));
+    }
+
+    @Nonnull
+    private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Type> flags) {
+        if (flags == null) return EnumSet.noneOf(GoalFlag.class);
+        return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
     }
 }

@@ -11,9 +11,9 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-
 import java.lang.reflect.Field;
 import java.util.UUID;
 
@@ -23,14 +23,9 @@ import java.util.UUID;
 @UtilityClass
 public class SkullUtils {
 
-    private static void checkIfIsSkull(@Nonnull final Block block) throws IllegalArgumentException {
-        if(!(block.getState() instanceof Skull)) {
-            throw new IllegalArgumentException("BlockState is not a Skull but " + block.getState().getClass().getSimpleName());
-        }
-    }
-
     /**
      * Sets the texture of a placed head to the skin of the given UUID
+     *
      * @throws IllegalArgumentException when the block is not a head
      */
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final UUID uuid) {
@@ -39,8 +34,15 @@ public class SkullUtils {
         setHeadTexture(block, player);
     }
 
+    private static void checkIfIsSkull(@Nonnull final Block block) throws IllegalArgumentException {
+        if (!(block.getState() instanceof Skull)) {
+            throw new IllegalArgumentException("BlockState is not a Skull but " + block.getState().getClass().getSimpleName());
+        }
+    }
+
     /**
      * Sets the texture of a placed head to the skin of the given OfflinePlayer
+     *
      * @throws IllegalArgumentException when the block is not a skull
      */
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final OfflinePlayer player) {
@@ -51,18 +53,19 @@ public class SkullUtils {
     }
 
     /**
-     * Sets the texture of a placed head to the skin of the given GameProfile
      * @throws IllegalArgumentException when the block is not a skull
      * @nms
+     * @deprecated see {@link #setHeadTexture(Block, String)}
      */
+    @Deprecated
     @NMS
-    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
-        checkIfIsSkull(block);
-        JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
+    public static void setBase64Texture(@Nonnull final Block block, @Nonnull final String base64) {
+        setHeadTexture(block, base64);
     }
 
     /**
      * Sets the texture of a placed head to the given base64 skin
+     *
      * @throws IllegalArgumentException when the block is not a skull
      * @nms
      */
@@ -74,14 +77,15 @@ public class SkullUtils {
     }
 
     /**
-     * @deprecated see {@link #setHeadTexture(Block, String)}
+     * Sets the texture of a placed head to the skin of the given GameProfile
+     *
      * @throws IllegalArgumentException when the block is not a skull
      * @nms
      */
-    @Deprecated
     @NMS
-    public static void setBase64Texture(@Nonnull final Block block, @Nonnull final String base64) {
-        setHeadTexture(block, base64);
+    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
+        checkIfIsSkull(block);
+        JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
     }
 
     /**

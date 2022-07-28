@@ -2,12 +2,13 @@ package com.jeff_media.jefflib.data.tuples;
 
 import lombok.Getter;
 import lombok.Setter;
-import javax.annotation.Nullable;
 
+import javax.annotation.Nullable;
 import java.util.Objects;
 
 /**
  * Tuple of five values. If you ever need more, <b>just create your own data class</b> (sigh)
+ *
  * @param <A> Type of first element
  * @param <B> Type of second element
  * @param <C> Type of third element
@@ -21,20 +22,12 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
     @Nullable
     E fifth;
 
-    public Quintet(@Nullable final A first,
-                   @Nullable final B second,
-                   @Nullable final C third,
-                   @Nullable final D fourth,
-                   @Nullable final E fifth) {
+    public Quintet(@Nullable final A first, @Nullable final B second, @Nullable final C third, @Nullable final D fourth, @Nullable final E fifth) {
         super(first, second, third, fourth);
         this.fifth = fifth;
     }
 
-    public static <A, B, C, D, E> Quintet<A, B, C, D, E> of(@Nullable final A first,
-                                                               @Nullable final B second,
-                                                               @Nullable final C third,
-                                                               @Nullable final D fourth,
-                                                               @Nullable final E fifth) {
+    public static <A, B, C, D, E> Quintet<A, B, C, D, E> of(@Nullable final A first, @Nullable final B second, @Nullable final C third, @Nullable final D fourth, @Nullable final E fifth) {
         return new Quintet<>(first, second, third, fourth, fifth);
     }
 

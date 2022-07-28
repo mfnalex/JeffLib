@@ -20,7 +20,7 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
     public CustomGoalExecutor(final CustomGoal goal, final Mob pmob) {
         this.pmob = pmob;
         this.goal = goal;
-        
+
     }
 
     @Override
@@ -53,16 +53,15 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
         goal.tick();
     }
 
-
-    @Override
-    public void setGoalFlags(final EnumSet<GoalFlag> flags) {
-        this.setFlags(translateGoalFlags(flags));
-    }
-
     @Nonnull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return translateFlags(this.getFlags());
+    }
+
+    @Override
+    public void setGoalFlags(final EnumSet<GoalFlag> flags) {
+        this.setFlags(translateGoalFlags(flags));
     }
 
     @Nonnull
@@ -77,13 +76,15 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
         return new HatchedMoveController(pmob.getMoveControl());
     }
 
-    @Nonnull private static EnumSet<Flag> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
-        if(flags == null) return EnumSet.noneOf(Flag.class);
+    @Nonnull
+    private static EnumSet<Flag> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
+        if (flags == null) return EnumSet.noneOf(Flag.class);
         return flags.stream().map(flag -> Flag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Flag.class)));
     }
 
-    @Nonnull private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Flag> flags) {
-        if(flags == null) return EnumSet.noneOf(GoalFlag.class);
+    @Nonnull
+    private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Flag> flags) {
+        if (flags == null) return EnumSet.noneOf(GoalFlag.class);
         return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
     }
 }

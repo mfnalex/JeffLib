@@ -1,10 +1,8 @@
 package com.jeff_media.jefflib;
 
-import lombok.NonNull;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
 import java.util.Comparator;

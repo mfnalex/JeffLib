@@ -43,15 +43,6 @@ public class PlayerData extends YamlConfiguration {
     }
 
     /**
-     * Saves the data to file
-     *
-     * @throws IOException exception
-     */
-    public final void save() throws IOException {
-        save(file);
-    }
-
-    /**
      * Saves the data to file asynchronously
      */
     public void saveAsync() {
@@ -62,5 +53,14 @@ public class PlayerData extends YamlConfiguration {
                 exception.printStackTrace();
             }
         });
+    }
+
+    /**
+     * Saves the data to file
+     *
+     * @throws IOException exception
+     */
+    public final void save() throws IOException {
+        save(file);
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.world.level.block.ComposterBlock;
 public class BlockHandler implements AbstractNMSBlockHandler {
     @Override
     public void playComposterParticlesAndSound(final org.bukkit.block.Block block, final boolean success) {
-        ComposterBlock.handleFill(NMSInternals.getLevel(block.getWorld()),NMSInternals.getBlockPos(block),success);
+        ComposterBlock.handleFill(NMSInternals.getLevel(block.getWorld()), NMSInternals.getBlockPos(block), success);
     }
 }
 

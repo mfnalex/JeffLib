@@ -17,13 +17,13 @@ public class HatchedTemptGoal extends PathfinderGoalTempt implements PathfinderG
     }
 
     @Override
-    public boolean canUse() {
-        return a();
+    public Creature getBukkitEntity() {
+        return bukkitEntity;
     }
 
     @Override
-    public Creature getBukkitEntity() {
-        return bukkitEntity;
+    public boolean canUse() {
+        return a();
     }
 
 }

@@ -31,7 +31,7 @@ public final class CollectionUtils {
      */
     public static <T> List<T> asList(final Iterator<T> iterator) {
         final List<T> list = new ArrayList<>();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             list.add(iterator.next());
         }
         return list;
@@ -46,9 +46,7 @@ public final class CollectionUtils {
      * @return Copy of the given list, sorted by value
      */
     public static <K, V extends Comparable<V>> Map<K, V> sortByEntry(final Map<K, V> map) {
-        return map.entrySet().stream()
-                .sorted((e1, e2) -> -e1.getValue().compareTo(e2.getValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return map.entrySet().stream().sorted((e1, e2) -> -e1.getValue().compareTo(e2.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
     /**
@@ -61,9 +59,7 @@ public final class CollectionUtils {
      * @return Copy of the given list, sorted by value
      */
     public static <K, V> Map<K, V> sortByEntry(final Map<K, V> map, final Comparator<V> comparator) {
-        return map.entrySet().stream()
-                .sorted((e1, e2) -> comparator.compare(e1.getValue(), e2.getValue()))
-                .collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+        return map.entrySet().stream().sorted((e1, e2) -> comparator.compare(e1.getValue(), e2.getValue())).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
     }
 
     /**

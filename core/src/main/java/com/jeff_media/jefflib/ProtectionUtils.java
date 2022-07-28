@@ -14,6 +14,7 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.EquipmentSlot;
+
 import javax.annotation.Nonnull;
 
 @UtilityClass
@@ -25,7 +26,7 @@ public class ProtectionUtils {
 
     public static boolean canBreak(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
-            if(!WorldGuardUtils.canBreak(player, block.getLocation())) return false;
+            if (!WorldGuardUtils.canBreak(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {
 
         }
@@ -40,11 +41,11 @@ public class ProtectionUtils {
 
     public static boolean canPlace(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
-            if(!WorldGuardUtils.canPlace(player, block.getLocation())) return false;
+            if (!WorldGuardUtils.canPlace(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {
 
         }
-        final BlockPlaceEvent event = new BlockPlaceEvent(block,block.getState(),block.getRelative(BlockFace.DOWN),player.getInventory().getItemInMainHand(),mute ? new ShadowPlayer(player) : player,true,EquipmentSlot.HAND);
+        final BlockPlaceEvent event = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.DOWN), player.getInventory().getItemInMainHand(), mute ? new ShadowPlayer(player) : player, true, EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         return !event.isCancelled();
     }
@@ -55,11 +56,11 @@ public class ProtectionUtils {
 
     public static boolean canInteract(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
         try {
-            if(!WorldGuardUtils.canInteract(player, block.getLocation())) return false;
+            if (!WorldGuardUtils.canInteract(player, block.getLocation())) return false;
         } catch (final MissingPluginException ignored) {
 
         }
-        final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP,EquipmentSlot.HAND);
+        final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP, EquipmentSlot.HAND);
         Bukkit.getPluginManager().callEvent(event);
         //noinspection deprecation
         return !event.isCancelled() && event.useInteractedBlock() != Event.Result.DENY;

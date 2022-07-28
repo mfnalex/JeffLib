@@ -11,6 +11,6 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
 
     @Override
     public void setMaxStackSize(final Material material, final int maxStackSize) {
-        NMSReflUtils.setField(Item.class, CraftMagicNumbers.getItem(material),ITEM_MAXSTACKSIZE_FIELD, maxStackSize);
+        NMSReflUtils.setField(Item.class, CraftMagicNumbers.getItem(material), ITEM_MAXSTACKSIZE_FIELD, maxStackSize);
     }
 }

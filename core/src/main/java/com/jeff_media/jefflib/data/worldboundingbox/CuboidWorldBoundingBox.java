@@ -6,8 +6,8 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
-import javax.annotation.Nonnull;
 
+import javax.annotation.Nonnull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -41,11 +41,8 @@ public class CuboidWorldBoundingBox extends WorldBoundingBox {
     }
 
     @Override
-    public String toString() {
-        return "CuboidWorldBoundingBox{" +
-                "world=" + world +
-                ", boundingBox=" + boundingBox +
-                '}';
+    public int hashCode() {
+        return Objects.hash(world, boundingBox);
     }
 
     @Override
@@ -57,7 +54,7 @@ public class CuboidWorldBoundingBox extends WorldBoundingBox {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(world, boundingBox);
+    public String toString() {
+        return "CuboidWorldBoundingBox{" + "world=" + world + ", boundingBox=" + boundingBox + '}';
     }
 }

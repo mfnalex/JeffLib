@@ -19,10 +19,6 @@ public class NumberUtils {
         return isZero(number1 - number2);
     }
 
-    public static boolean isEqual(final float number1, final float number2) {
-        return isZero(number1 - number2);
-    }
-
     /**
      * Checks if the given number is close to zero
      */
@@ -30,18 +26,15 @@ public class NumberUtils {
         return Math.abs(number) < EPSILON_D;
     }
 
-    /**
-     * Checks if the given number is close to zero
-     */
-    public static boolean isZero(final float number) {
-        return Math.abs(number) < EPSILON_F;
+    public static boolean isEqual(final float number1, final float number2) {
+        return isZero(number1 - number2);
     }
 
     /**
      * Checks if the given number is close to zero
      */
-    public static boolean isZero(@Nullable final Number number) {
-        return number == null || isZero(number.doubleValue());
+    public static boolean isZero(final float number) {
+        return Math.abs(number) < EPSILON_F;
     }
 
     /**
@@ -63,6 +56,13 @@ public class NumberUtils {
      */
     public static boolean isZeroOrPositive(@Nullable final Number number) {
         return isZero(number) || number.doubleValue() >= EPSILON_D;
+    }
+
+    /**
+     * Checks if the given number is close to zero
+     */
+    public static boolean isZero(@Nullable final Number number) {
+        return number == null || isZero(number.doubleValue());
     }
 
     /**

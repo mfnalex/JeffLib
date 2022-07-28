@@ -18,7 +18,6 @@ public final class BlockFaceUtils {
      *
      * @param face Original BlockFace
      * @return Opposite BlockFace
-     *
      * @deprecated Already exists in BlockFace#getOppositeFace
      */
     @Deprecated

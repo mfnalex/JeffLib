@@ -19,11 +19,9 @@ public class TestEnumUtils extends UnitTest {
 
     @Test
     void testGetEnumsFromList() {
-        final List<Material> materials = EnumUtils.getEnumsFromList(Material.class, Arrays.asList(
-                "DIRT", "DIAMOND_PICKAXE", "yo mama", "NETHERITE_SHOVEL"
-        ), Collectors.toList());
+        final List<Material> materials = EnumUtils.getEnumsFromList(Material.class, Arrays.asList("DIRT", "DIAMOND_PICKAXE", "yo mama", "NETHERITE_SHOVEL"), Collectors.toList());
         Assertions.assertSame(materials.get(0), Material.DIRT);
-        Assertions.assertSame(materials.get(1),Material.DIAMOND_PICKAXE);
-        Assertions.assertSame(materials.get(2),Material.NETHERITE_SHOVEL);
+        Assertions.assertSame(materials.get(1), Material.DIAMOND_PICKAXE);
+        Assertions.assertSame(materials.get(2), Material.NETHERITE_SHOVEL);
     }
 }
