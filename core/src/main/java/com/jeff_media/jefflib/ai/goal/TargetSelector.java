@@ -12,7 +12,7 @@ import javax.annotation.Nonnull;
  */
 public class TargetSelector extends GoalSelector{
 
-    private TargetSelector(@NotNull final Mob mob) {
+    private TargetSelector(@Nonnull final Mob mob) {
         super(mob);
     }
 
@@ -30,7 +30,7 @@ public class TargetSelector extends GoalSelector{
      */
     @NMS
     @Override
-    public void addGoal(@NotNull final PathfinderGoal goal, final int priority) {
+    public void addGoal(@Nonnull final PathfinderGoal goal, final int priority) {
         JeffLib.getNMSHandler().addTargetGoal(mob, goal, priority);
     }
 
@@ -40,7 +40,7 @@ public class TargetSelector extends GoalSelector{
      */
     @NMS
     @Override
-    public void removeGoal(@NotNull final PathfinderGoal goal) {
+    public void removeGoal(@Nonnull final PathfinderGoal goal) {
         JeffLib.getNMSHandler().removeTargetGoal(mob, goal);
     }
 

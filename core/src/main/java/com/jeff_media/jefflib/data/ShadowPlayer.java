@@ -1138,7 +1138,7 @@ public class ShadowPlayer implements Player {
     public void setHealth(final double v) {
 
     }    @Override
-    public void stopSound(@NotNull SoundCategory soundCategory) {
+    public void stopSound(@Nonnull SoundCategory soundCategory) {
 
     }
 
