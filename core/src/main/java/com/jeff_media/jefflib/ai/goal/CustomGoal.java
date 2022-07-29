@@ -63,7 +63,7 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         return executor.getJumpController();
     }
 
-    @NotNull
+    @Nonnull
     @Override
     public Controls getControls() {
         return CustomGoalExecutor.super.getControls();
