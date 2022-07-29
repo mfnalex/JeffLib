@@ -1,6 +1,12 @@
 package com.jeff_media.jefflib.internal.nms;
 
-import com.jeff_media.jefflib.ai.*;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
@@ -95,6 +101,12 @@ public interface AbstractNMSHandler {
 
     @Nonnull
     MoveController getMoveControl(Mob entity);
+
+    @Nonnull
+    JumpController getJumpControl(Mob entity);
+
+    @Nonnull
+    LookController getLookControl(Mob entity);
 
     @Nonnull
     PathNavigation getPathNavigation(Mob entity);

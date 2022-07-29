@@ -1,4 +1,4 @@
-package com.jeff_media.jefflib.ai;
+package com.jeff_media.jefflib.ai.goal;
 
 import com.jeff_media.jefflib.JeffLib;
 import org.bukkit.GameMode;

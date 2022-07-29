@@ -2,8 +2,13 @@ package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
-import com.jeff_media.jefflib.ai.CustomGoalExecutor;
-import com.jeff_media.jefflib.ai.*;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -23,8 +28,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.Goal;
-import net.minecraft.world.entity.ai.goal.GoalSelector;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ItemStack;
@@ -285,6 +288,18 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getMoveControl());
+    }
+
+    @Nonnull
+    @Override
+    public JumpController getJumpControl(final Mob entity) {
+        return new HatchedJumpController(asMob(entity).getJumpControl());
+    }
+
+    @Nonnull
+    @Override
+    public LookController getLookControl(final Mob entity) {
+        return new HatchedLookController(asMob(entity).getLookControl());
     }
 
     @Nonnull

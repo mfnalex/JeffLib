@@ -1,7 +1,7 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
 import net.minecraft.server.v1_16_R1.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -85,7 +85,7 @@ public final class NMS {
         return new Vector(vec.x, vec.y, vec.z);
     }
 
-    public static PathfinderGoal toNms(final com.jeff_media.jefflib.ai.PathfinderGoal pathfinderGoal) {
+    public static PathfinderGoal toNms(final com.jeff_media.jefflib.ai.goal.PathfinderGoal pathfinderGoal) {
         if(pathfinderGoal instanceof PathfinderGoal) {
             return (PathfinderGoal) pathfinderGoal;
         } else if(pathfinderGoal instanceof CustomGoal) {

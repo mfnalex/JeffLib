@@ -1,7 +1,7 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.PathfinderGoals;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoals;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;

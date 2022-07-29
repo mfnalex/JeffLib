@@ -1,9 +1,11 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R1.ai;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.GoalFlag;
-import com.jeff_media.jefflib.ai.MoveController;
-import com.jeff_media.jefflib.ai.PathNavigation;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.GoalFlag;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import net.minecraft.server.v1_16_R1.EntityInsentient;
 import net.minecraft.server.v1_16_R1.PathfinderGoal;
 
@@ -12,7 +14,7 @@ import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
 
-public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media.jefflib.ai.CustomGoalExecutor {
+public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media.jefflib.ai.goal.CustomGoalExecutor {
 
     private final CustomGoal goal;
     private final EntityInsentient pmob;
@@ -66,8 +68,20 @@ public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media
 
     @Nonnull
     @Override
-    public MoveController getMoveControl() {
+    public MoveController getMoveController() {
         return new HatchedMoveController(pmob.getControllerMove());
+    }
+
+    @Nonnull
+    @Override
+    public LookController getLookController() {
+        return new HatchedLookController(pmob.getControllerLook());
+    }
+
+    @Nonnull
+    @Override
+    public JumpController getJumpController() {
+        return new HatchedJumpController(pmob.getControllerJump());
     }
 
     @Nonnull
@@ -80,5 +94,10 @@ public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media
     private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Type> flags) {
         if (flags == null) return EnumSet.noneOf(GoalFlag.class);
         return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
+    }
+
+    @Override
+    public boolean D_() {
+        return goal.isInterruptable();
     }
 }

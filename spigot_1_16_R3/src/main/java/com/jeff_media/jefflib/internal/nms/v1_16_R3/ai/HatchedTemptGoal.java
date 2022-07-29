@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R3.ai;
 
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.server.v1_16_R3.EntityCreature;
 import net.minecraft.server.v1_16_R3.PathfinderGoalTempt;
 import net.minecraft.server.v1_16_R3.RecipeItemStack;

@@ -1,4 +1,4 @@
-package com.jeff_media.jefflib.ai;
+package com.jeff_media.jefflib.ai.navigation;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;

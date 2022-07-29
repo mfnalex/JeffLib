@@ -3,10 +3,12 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ReflUtils;
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.MoveController;
-import com.jeff_media.jefflib.ai.PathNavigation;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
@@ -15,6 +17,7 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.*;
+import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.CustomGoalExecutor;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.server.v1_16_R1.*;
 import org.bukkit.Bukkit;
@@ -240,7 +243,7 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public com.jeff_media.jefflib.ai.CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
+    public com.jeff_media.jefflib.ai.goal.CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
         return new CustomGoalExecutor(customGoal, asMob(entity));
     }
 
@@ -272,6 +275,18 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getControllerMove());
+    }
+
+    @Nonnull
+    @Override
+    public JumpController getJumpControl(final Mob entity) {
+        return new HatchedJumpController(asMob(entity).getControllerJump());
+    }
+
+    @Nonnull
+    @Override
+    public LookController getLookControl(final Mob entity) {
+        return new HatchedLookController(asMob(entity).getControllerLook());
     }
 
     @Nonnull

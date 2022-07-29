@@ -1,6 +1,8 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.ai.*;
+import com.jeff_media.jefflib.ai.goal.GoalSelector;
+import com.jeff_media.jefflib.ai.goal.TargetSelector;
+import com.jeff_media.jefflib.ai.navigation.*;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -11,7 +13,6 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.util.BoundingBox;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -203,5 +204,32 @@ public final class EntityUtils {
     @Nonnull
     public static MoveController getMoveController(@Nonnull final Mob entity) {
         return JeffLib.getNMSHandler().getMoveControl(entity);
+    }
+
+    /**
+     * Gets this mob's {@link JumpController}
+     */
+    @NMS
+    @Nonnull
+    public static JumpController getJumpController(@Nonnull final Mob entity) {
+        return JeffLib.getNMSHandler().getJumpControl(entity);
+    }
+
+    /**
+     * Gets this mob's {@link LookController}
+     */
+    @NMS
+    @Nonnull
+    public static LookController getLookController(@Nonnull final Mob entity) {
+        return JeffLib.getNMSHandler().getLookControl(entity);
+    }
+
+    /**
+     * Gets this mob's {@link com.jeff_media.jefflib.ai.navigation.Controls}
+     */
+    @NMS
+    @Nonnull
+    public static Controls getControls(@Nonnull final Mob entity) {
+        return Controls.of(entity);
     }
 }

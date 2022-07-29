@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R2.ai;
 
-import com.jeff_media.jefflib.ai.PathNavigation;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.nms.v1_16_R2.NMS;
 import net.minecraft.server.v1_16_R2.NavigationAbstract;

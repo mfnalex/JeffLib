@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R1.ai;
 
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.server.v1_16_R1.*;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;

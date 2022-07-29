@@ -4,7 +4,7 @@ import com.jeff_media.jefflib.internal.nms.v1_18_R2.NMS;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import org.bukkit.util.BlockVector;
 
-public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavigation {
+public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.navigation.PathNavigation {
 
     private final PathNavigation navigation;
 

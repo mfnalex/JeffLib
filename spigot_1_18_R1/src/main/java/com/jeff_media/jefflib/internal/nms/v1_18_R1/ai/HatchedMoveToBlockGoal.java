@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_18_R1.ai;
 
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;

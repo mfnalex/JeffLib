@@ -1,8 +1,8 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
-import com.jeff_media.jefflib.ai.CustomGoal;
-import com.jeff_media.jefflib.ai.CustomGoalExecutor;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoal;
+import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.world.entity.Entity;

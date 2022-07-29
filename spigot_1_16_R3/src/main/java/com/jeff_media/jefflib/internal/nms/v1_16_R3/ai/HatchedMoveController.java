@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R3.ai;
 
-import com.jeff_media.jefflib.ai.MoveController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
 import net.minecraft.server.v1_16_R3.ControllerMove;
 
 public class HatchedMoveController implements MoveController {

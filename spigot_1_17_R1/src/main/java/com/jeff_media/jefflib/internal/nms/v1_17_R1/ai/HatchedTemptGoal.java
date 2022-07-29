@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_17_R1.ai;
 
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.goal.TemptGoal;
 import net.minecraft.world.item.crafting.Ingredient;

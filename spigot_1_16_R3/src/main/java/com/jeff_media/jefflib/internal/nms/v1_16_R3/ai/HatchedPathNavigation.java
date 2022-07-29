@@ -1,11 +1,12 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R3.ai;
 
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS;
 import net.minecraft.server.v1_16_R3.NavigationAbstract;
 import org.bukkit.util.BlockVector;
 
-public class HatchedPathNavigation implements com.jeff_media.jefflib.ai.PathNavigation {
+public class HatchedPathNavigation implements PathNavigation {
 
     private final NavigationAbstract navigation;
 

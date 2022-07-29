@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1.ai;
 
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.PathfinderMob;

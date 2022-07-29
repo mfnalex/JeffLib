@@ -1,6 +1,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_18_R2.ai;
 
-import com.jeff_media.jefflib.ai.MoveController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
 
 public class HatchedMoveController implements MoveController {
 
