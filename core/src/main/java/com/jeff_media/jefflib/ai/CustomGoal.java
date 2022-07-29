@@ -16,7 +16,7 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
     private final Mob bukkitEntity;
     private final CustomGoalExecutor executor;
 
-    protected CustomGoal(final Creature bukkitEntity) {
+    protected CustomGoal(final Mob bukkitEntity) {
         this.bukkitEntity = bukkitEntity;
         this.executor = JeffLib.getNMSHandler().getCustomGoalExecutor(this, bukkitEntity);
     }

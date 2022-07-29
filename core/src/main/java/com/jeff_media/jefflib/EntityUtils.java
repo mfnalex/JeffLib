@@ -1,8 +1,6 @@
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.ai.MoveController;
-import com.jeff_media.jefflib.ai.PathNavigation;
-import com.jeff_media.jefflib.ai.PathfinderGoal;
+import com.jeff_media.jefflib.ai.*;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -13,6 +11,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -173,20 +172,23 @@ public final class EntityUtils {
     }
 
     /**
-     * Adds a {@link PathfinderGoal} to an entity
-     *
-     * @param entity   Entity to add the goal to
-     * @param goal     Goal to add
-     * @param priority Priority of the goal
-     * @return true if the goal was added successfully, false if the given entity is not a pathfinding mob (e.g. Bats)
-     * @throws UnsupportedOperationException If the given PathfinderGoal is not supposed
+     * Gets this mob's {@link GoalSelector}
      */
-    public static boolean addPathfinderGoal(@Nonnull final Mob entity, @Nonnull final PathfinderGoal goal, final int priority) {
-        return JeffLib.getNMSHandler().addGoal(entity, goal, priority);
+    @Nonnull
+    public static GoalSelector getGoalSelector(@Nonnull final Mob mob) {
+        return GoalSelector.of(mob);
     }
 
     /**
-     * Returns the {@link PathNavigation} for this entity
+     * Gets this mob's {@link TargetSelector}
+     */
+    @Nonnull
+    public static TargetSelector getTargetSelector(@Nonnull final Mob mob) {
+        return TargetSelector.of(mob);
+    }
+
+    /**
+     * Get this mob's {@link PathNavigation}
      */
     @NMS
     @Nonnull
@@ -195,7 +197,7 @@ public final class EntityUtils {
     }
 
     /**
-     * Returns the {@link MoveController} for this entity
+     * Gets this mob's {@link MoveController}
      */
     @NMS
     @Nonnull

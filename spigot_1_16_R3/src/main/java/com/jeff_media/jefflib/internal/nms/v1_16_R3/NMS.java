@@ -1,5 +1,7 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R3;
 
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.CustomGoalExecutor;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -81,6 +83,18 @@ public final class NMS {
 
     public static Vector toBukkit(final Vec3D vec) {
         return new Vector(vec.x, vec.y, vec.z);
+    }
+
+    public static PathfinderGoal toNms(final com.jeff_media.jefflib.ai.PathfinderGoal pathfinderGoal) {
+        if(pathfinderGoal instanceof PathfinderGoal) {
+            return (PathfinderGoal) pathfinderGoal;
+        } else if(pathfinderGoal instanceof CustomGoal) {
+            final CustomGoalExecutor customGoalExecutor = ((CustomGoal)pathfinderGoal).getExecutor();
+            if(customGoalExecutor instanceof PathfinderGoal) {
+                return (PathfinderGoal) customGoalExecutor;
+            }
+        }
+        throw new IllegalArgumentException("Not a valid Goal: " + pathfinderGoal.getClass().getName() + ". For custom goals, extend " + CustomGoal.class.getName());
     }
 
 }

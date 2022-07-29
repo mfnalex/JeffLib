@@ -23,7 +23,6 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
-import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
 import net.minecraft.world.item.ItemStack;
@@ -210,16 +209,34 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public boolean addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
-        final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
-        if (goal instanceof Goal) {
-            pathfinderMob.targetSelector.addGoal(priority, (Goal) goal);
-        } else if (goal instanceof CustomGoal) {
-            pathfinderMob.targetSelector.addGoal(priority, (Goal) ((CustomGoal) goal).getExecutor());
-        } else {
-            throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
-        }
-        return true;
+    public void addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        asMob(entity).goalSelector.addGoal(priority, NMS.toNms(goal));
+    }
+
+
+    @Override
+    public void removeGoal(final Mob entity, final PathfinderGoal goal) {
+        asMob(entity).goalSelector.removeGoal(NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeAllGoals(final Mob entity) {
+        asMob(entity).goalSelector.removeAllGoals();
+    }
+
+    @Override
+    public void addTargetGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        asMob(entity).targetSelector.addGoal(priority, NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeTargetGoal(final Mob entity, final PathfinderGoal goal) {
+        asMob(entity).targetSelector.removeGoal(NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeAllTargetGoals(final Mob entity) {
+        asMob(entity).targetSelector.removeAllGoals();
     }
 
     @Override
@@ -262,13 +279,13 @@ public class NMSHandler implements AbstractNMSHandler {
         return vec == null ? null : toBukkit(vec);
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getMoveControl());
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public PathNavigation getPathNavigation(final Mob entity) {
         final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);

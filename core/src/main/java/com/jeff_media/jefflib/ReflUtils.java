@@ -34,7 +34,7 @@ public final class ReflUtils {
      */
     @Deprecated
     public static Class<?> getNMSClass(final String className) {
-        return getClassCached("net.minecraft.server." + getNMSVersion() + "." + className);
+        return getClass("net.minecraft.server." + getNMSVersion() + "." + className);
     }
 
     /**
@@ -42,7 +42,7 @@ public final class ReflUtils {
      *
      * @return The class, or null if not found
      */
-    public static @Nullable Class<?> getClassCached(final @Nonnull String className) {
+    public static @Nullable Class<?> getClass(final @Nonnull String className) {
         if (CLASSES.containsKey(className)) {
             return CLASSES.get(className);
         }
@@ -69,7 +69,7 @@ public final class ReflUtils {
      * Gets a class from org.bukkit.craftbukkit
      */
     public static Class<?> getOBCClass(final String className) {
-        return getClassCached("org.bukkit.craftbukkit." + getNMSVersion() + "." + className);
+        return getClass("org.bukkit.craftbukkit." + getNMSVersion() + "." + className);
     }
 
     /**
@@ -91,7 +91,7 @@ public final class ReflUtils {
      *
      * @return The method, or null if not found
      */
-    public static @Nullable Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
+    public static @Nullable Method getMethod(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
         if (METHODS_NO_ARGS.contains(clazz, methodName)) {
             return METHODS_NO_ARGS.get(clazz, methodName);
         }
@@ -117,7 +117,7 @@ public final class ReflUtils {
      *
      * @return The method, or null if not found
      */
-    public static Method getMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
+    public static Method getMethod(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
         final MethodParameters methodParameters = new MethodParameters(methodName, params);
         if (METHODS_WITH_ARGS.contains(clazz, methodParameters)) {
             return METHODS_WITH_ARGS.get(clazz, methodParameters);
@@ -135,8 +135,8 @@ public final class ReflUtils {
     /**
      * Sets an object's field to the given value
      */
-    public static void setField(final @Nonnull Object object, final @Nonnull String fieldName, final @Nullable Object value) {
-        setField(object.getClass(), object, fieldName, value);
+    public static void setFieldValue(final @Nonnull Object object, final @Nonnull String fieldName, final @Nullable Object value) {
+        setFieldValue(object.getClass(), object, fieldName, value);
     }
 
     /**
@@ -147,9 +147,9 @@ public final class ReflUtils {
      * @param fieldName Name of the field to set
      * @param value     Value to set the field to
      */
-    public static void setField(final @Nonnull Class<?> clazz, final @Nullable Object object, final @Nonnull String fieldName, final @Nullable Object value) {
+    public static void setFieldValue(final @Nonnull Class<?> clazz, final @Nullable Object object, final @Nonnull String fieldName, final @Nullable Object value) {
         try {
-            final Field field = getFieldCached(clazz, fieldName);
+            final Field field = getField(clazz, fieldName);
             java.util.Objects.requireNonNull(field).set(object, value);
         } catch (final IllegalAccessException e) {
             e.printStackTrace();
@@ -161,7 +161,7 @@ public final class ReflUtils {
      *
      * @return The field, or null if not found
      */
-    public static Field getFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+    public static Field getField(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
         if (FIELDS.contains(clazz, fieldName)) {
             return FIELDS.get(clazz, fieldName);
         }
@@ -172,6 +172,20 @@ public final class ReflUtils {
             return field;
         } catch (final NoSuchFieldException e) {
             return null;
+        }
+    }
+
+    /**
+     * Gets a field's value
+     * @param object Object to get the field value from, or null if it's a static field
+     * @throws RuntimeException if an IllegalAccessException is thrown
+     */
+    public static Object getFieldValue(final @Nonnull Class<?> clazz, final @Nonnull String fieldName, final @Nullable Object object) {
+        Field field = getField(clazz, fieldName);
+        try {
+            return field.get(object);
+        } catch (IllegalAccessException exception) {
+            throw new RuntimeException(exception);
         }
     }
 
@@ -201,7 +215,7 @@ public final class ReflUtils {
      *
      * @return The constructor, or null if not found
      */
-    public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz) {
+    public static Constructor<?> getConstructor(final @Nonnull Class<?> clazz) {
         if (CONSTRUCTORS_NO_ARGS.containsKey(clazz)) {
             return CONSTRUCTORS_NO_ARGS.get(clazz);
         }
@@ -220,7 +234,7 @@ public final class ReflUtils {
      *
      * @return The constructor, or null if not found
      */
-    public static Constructor<?> getConstructorCached(final @Nonnull Class<?> clazz, final @Nullable Class<?>... params) {
+    public static Constructor<?> getConstructor(final @Nonnull Class<?> clazz, final @Nullable Class<?>... params) {
         final Parameters constructorParams = new Parameters(params);
         if (CONSTRUCTOR_WITH_ARGS.contains(clazz, constructorParams)) {
             return CONSTRUCTOR_WITH_ARGS.get(clazz, constructorParams);

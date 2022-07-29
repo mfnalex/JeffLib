@@ -1,11 +1,15 @@
 package com.jeff_media.jefflib.internal.nms.v1_17_R1;
 
+import com.jeff_media.jefflib.ai.CustomGoal;
+import com.jeff_media.jefflib.ai.CustomGoalExecutor;
+import com.jeff_media.jefflib.ai.PathfinderGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.PathfinderMob;
+import net.minecraft.world.entity.ai.goal.Goal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -90,6 +94,18 @@ public final class NMS {
 
     public static Vector toBukkit(final Vec3 vec) {
         return new Vector(vec.x, vec.y, vec.z);
+    }
+
+    public static Goal toNms(final PathfinderGoal pathfinderGoal) {
+        if(pathfinderGoal instanceof Goal) {
+            return (Goal) pathfinderGoal;
+        } else if(pathfinderGoal instanceof CustomGoal) {
+            final CustomGoalExecutor customGoalExecutor = ((CustomGoal)pathfinderGoal).getExecutor();
+            if(customGoalExecutor instanceof Goal) {
+                return (Goal) customGoalExecutor;
+            }
+        }
+        throw new IllegalArgumentException("Not a valid Goal: " + pathfinderGoal.getClass().getName() + ". For custom goals, extend " + CustomGoal.class.getName());
     }
 
 }

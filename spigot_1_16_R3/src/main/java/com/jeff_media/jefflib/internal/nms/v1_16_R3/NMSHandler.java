@@ -2,6 +2,7 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R3;
 
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
+import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.ai.CustomGoal;
 import com.jeff_media.jefflib.ai.MoveController;
 import com.jeff_media.jefflib.ai.PathNavigation;
@@ -196,16 +197,34 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public boolean addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
-        final EntityInsentient pathfinderMob = asMob(entity);
-        if (goal instanceof net.minecraft.server.v1_16_R3.PathfinderGoal) {
-            pathfinderMob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) goal);
-        } else if (goal instanceof CustomGoal) {
-            pathfinderMob.targetSelector.a(priority, (net.minecraft.server.v1_16_R3.PathfinderGoal) ((CustomGoal) goal).getExecutor());
-        } else {
-            throw new UnsupportedOperationException("Unsupported goal type: " + goal.getClass().getName());
-        }
-        return true;
+    public void addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        asMob(entity).goalSelector.a(priority, NMS.toNms(goal));
+    }
+
+
+    @Override
+    public void removeGoal(final Mob entity, final PathfinderGoal goal) {
+        asMob(entity).goalSelector.a(NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeAllGoals(final Mob entity) {
+        ((Set<?>)ReflUtils.getFieldValue(PathfinderGoalSelector.class,"d", asMob(entity).goalSelector)).clear();
+    }
+
+    @Override
+    public void addTargetGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
+        asMob(entity).targetSelector.a(priority, NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeTargetGoal(final Mob entity, final PathfinderGoal goal) {
+        asMob(entity).targetSelector.a(NMS.toNms(goal));
+    }
+
+    @Override
+    public void removeAllTargetGoals(final Mob entity) {
+        ((Set<?>)ReflUtils.getFieldValue(PathfinderGoalSelector.class,"d", asMob(entity).targetSelector)).clear();
     }
 
     @Override
@@ -248,13 +267,13 @@ public class NMSHandler implements AbstractNMSHandler {
         return vec == null ? null : toBukkit(vec);
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getControllerMove());
     }
 
-    @Nullable
+    @Nonnull
     @Override
     public PathNavigation getPathNavigation(final org.bukkit.entity.Mob entity) {
         final EntityInsentient pathfinderMob = asMob(entity);

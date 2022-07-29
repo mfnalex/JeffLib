@@ -10,6 +10,6 @@ public final class NMSReflUtils {
 
     @DoNotRename
     public static void setField(final Class<?> clazz, final Object object, final String fieldName, final Object value) {
-        ReflUtils.setField(clazz, object, fieldName, value);
+        ReflUtils.setFieldValue(clazz, object, fieldName, value);
     }
 }

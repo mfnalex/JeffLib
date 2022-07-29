@@ -143,7 +143,7 @@ public class DebugUtils {
             Villager villager = player.getWorld().spawn(player.getLocation().add(5, 0, 5), Villager.class);
             villager.setCustomName("Emerald Seeker");
             villager.setCustomNameVisible(true);
-            EntityUtils.addPathfinderGoal(villager, PathfinderGoals.temptGoal(villager, Stream.of(Material.EMERALD), 1D, false), 0);
+            EntityUtils.getGoalSelector(villager).addGoal(PathfinderGoals.temptGoal(villager, Stream.of(Material.EMERALD), 1D, false), 0);
         }
 
         private void testCustomGoalFollowPlayer() {
@@ -151,7 +151,7 @@ public class DebugUtils {
             Llama llama = player.getWorld().spawn(player.getLocation().add(-5, 0, -5), Llama.class);
             llama.setCustomName("Player Seeker");
             llama.setCustomNameVisible(true);
-            EntityUtils.addPathfinderGoal(llama, new CustomGoal(llama) {
+            EntityUtils.getGoalSelector(llama).addGoal(new CustomGoal(llama) {
                 @Override
                 public boolean canUse() {
                     return true;
@@ -172,7 +172,7 @@ public class DebugUtils {
             Pig pig = player.getWorld().spawn(player.getLocation(), Pig.class);
             pig.setCustomName("Emerald hater");
             pig.setCustomNameVisible(true);
-            EntityUtils.addPathfinderGoal(pig, PathfinderGoals.avoidEntity(pig, ent -> {
+            EntityUtils.getGoalSelector(pig).addGoal(PathfinderGoals.avoidEntity(pig, ent -> {
                 if (ent instanceof Player) {
                     ItemStack hand = ((Player) ent).getInventory().getItemInMainHand();
                     if (hand == null) return false;

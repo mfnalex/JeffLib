@@ -66,7 +66,17 @@ public interface AbstractNMSHandler {
 
     PathfinderGoal createMoveToBlockGoal(Creature entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange);
 
-    boolean addGoal(Mob entity, PathfinderGoal goal, int priority);
+    void addGoal(Mob entity, PathfinderGoal goal, int priority);
+
+    void removeGoal(Mob entity, PathfinderGoal goal);
+
+    void removeAllGoals(Mob entity);
+
+    void addTargetGoal(Mob entity, PathfinderGoal goal, int priority);
+
+    void removeTargetGoal(Mob entity, PathfinderGoal goal);
+
+    void removeAllTargetGoals(Mob entity);
 
     boolean moveTo(Mob entity, double x, double y, double z, double speed);
 
