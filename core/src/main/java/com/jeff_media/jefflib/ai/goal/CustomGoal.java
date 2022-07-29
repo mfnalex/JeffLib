@@ -1,11 +1,9 @@
 package com.jeff_media.jefflib.ai.goal;
 
 import com.jeff_media.jefflib.JeffLib;
-import com.jeff_media.jefflib.ai.navigation.JumpController;
-import com.jeff_media.jefflib.ai.navigation.LookController;
-import com.jeff_media.jefflib.ai.navigation.MoveController;
-import com.jeff_media.jefflib.ai.navigation.PathNavigation;
+import com.jeff_media.jefflib.ai.navigation.*;
 import org.bukkit.entity.Mob;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -63,6 +61,12 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
     @Override
     public JumpController getJumpController() {
         return executor.getJumpController();
+    }
+
+    @NotNull
+    @Override
+    public Controls getControls() {
+        return CustomGoalExecutor.super.getControls();
     }
 
     @Override
