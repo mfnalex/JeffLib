@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
  * Enum related methods
  */
 @UtilityClass
-public class EnumUtils {
+public final class EnumUtils {
 
     private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
 
