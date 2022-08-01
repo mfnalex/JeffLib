@@ -12,7 +12,7 @@ import java.util.List;
  * Array manipulation related methods
  */
 @UtilityClass
-public class ArrayUtils {
+public final class ArrayUtils {
 
     /**
      * Combines the given arrays into a new array
