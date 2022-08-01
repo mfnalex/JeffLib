@@ -133,7 +133,7 @@ public final class CommandUtils {
     /**
      * Represents the output style for {@link #sendHelpMessage(CommandSender, HelpStyle, String...)}
      */
-    public enum HelpStyle {
+    public static enum HelpStyle {
         /**
          * Sends command name and command description on two separate lines, including a spacing line. Example:
          * <pre>
