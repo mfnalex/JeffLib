@@ -17,7 +17,7 @@ import java.util.Collection;
 /**
  * {@link LootTable} related methods
  */
-public class LootUtils {
+public final class LootUtils {
 
 
     public static @Nullable ItemStack getRandomLoot(@Nonnull Player player, @Nonnull LootTables lootTable) {
