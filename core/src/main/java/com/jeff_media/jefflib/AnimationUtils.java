@@ -15,7 +15,7 @@ import javax.annotation.Nullable;
  * Animation related methods. Currently only contains methods to play custom Totem animations
  */
 @UtilityClass
-public class AnimationUtils {
+public final class AnimationUtils {
 
     /**
      * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
