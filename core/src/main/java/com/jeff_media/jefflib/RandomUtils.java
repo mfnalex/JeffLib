@@ -6,7 +6,7 @@ import lombok.experimental.UtilityClass;
  * Random number related methods
  */
 @UtilityClass
-public class RandomUtils {
+public final class RandomUtils {
 
     /**
      * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 1 (always true)
