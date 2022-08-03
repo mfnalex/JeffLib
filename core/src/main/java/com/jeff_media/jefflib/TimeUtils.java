@@ -109,4 +109,37 @@ public class TimeUtils {
         return nanoseconds;
     }
 
+        /**
+     * Converts a Unix Timestamp to a String
+     *
+     * @param long unix A Unix timestamp
+     * @return String The resulted String
+     */
+    public static String dateToString(long unix) {
+        Date date = new Date(unix);
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
+        format.setTimeZone(TimeZone.getTimeZone("GMT-4"));
+        return format.format(date);
+    }
+    
+    /**
+     * Converts seconds to Days, Hours, Minutes, Seconds
+     *
+     * @param long seconds The given amount of seconds
+     * @return String The resulted String
+     */
+    public static String secondsToDDHHMMSS(long seconds) {
+        return String.format("%02dd %02dh %02dm %02ds", seconds / 86400, (seconds / 3600 % 24), (seconds / 60) % 60, seconds % 60);
+    }
+
+    /**
+     * Converts seconds to Hours, Minutes, Seconds
+     *
+     * @param long seconds The given amount of seconds
+     * @return String The resulted String
+     */
+    public static String secondsToHHMMSS(long seconds) {
+        return String.format("%02dh %02dm %02ds", seconds / 3600, (seconds / 60) % 60, seconds % 60);
+    }
 }
