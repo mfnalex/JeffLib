@@ -24,6 +24,7 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -110,4 +111,5 @@ public interface AbstractNMSHandler {
 
     @Nonnull
     PathNavigation getPathNavigation(Mob entity);
+
 }

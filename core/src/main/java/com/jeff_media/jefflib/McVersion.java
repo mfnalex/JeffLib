@@ -2,6 +2,7 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.CSVParser;
 import org.bukkit.Bukkit;
+import org.bukkit.block.data.Snowable;
 
 import javax.annotation.Nonnull;
 import java.io.InputStream;
@@ -43,13 +44,14 @@ public class McVersion implements Comparable<McVersion> {
     static void loadVersions(InputStream stream) {
         try {
             CSVParser parser = new CSVParser(stream);
-            parser.getContents().forEach(line -> {
+            // TODO: Fix
+            /*parser.getContents().forEach(line -> {
                 final int major = Integer.parseInt(line[0]);
                 final int minor = Integer.parseInt(line[1]);
                 final int patch = Integer.parseInt(line[2]);
                 final McVersion version = new McVersion(major, minor, patch);
                 NMS_VERSIONS.put(version, major + "_" + minor + "_R" + line[3]);
-            });
+            });*/
         } catch (Throwable ignored) {
 
         }
