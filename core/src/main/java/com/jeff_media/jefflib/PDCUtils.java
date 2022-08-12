@@ -1,9 +1,11 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
@@ -11,10 +13,8 @@ import org.jetbrains.annotations.Contract;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * PersistentDataContainer related methods.
@@ -25,8 +25,30 @@ import java.util.Set;
 @SuppressWarnings("unused")
 public class PDCUtils {
 
-    private static final Plugin plugin = JeffLib.getPlugin();
     private static final Map<String, NamespacedKey> KEYS = new HashMap<>();
+    /**
+     * An array of all primitive {@link PersistentDataType}s builtin to Bukkit.
+     */
+    public static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES = new PersistentDataType<?, ?>[]{
+            PersistentDataType.BYTE,
+            PersistentDataType.SHORT,
+            PersistentDataType.INTEGER,
+            PersistentDataType.LONG,
+            PersistentDataType.FLOAT,
+            PersistentDataType.DOUBLE,
+            PersistentDataType.STRING,
+            PersistentDataType.BYTE_ARRAY,
+            PersistentDataType.INTEGER_ARRAY,
+            PersistentDataType.LONG_ARRAY,
+            PersistentDataType.TAG_CONTAINER_ARRAY,
+            PersistentDataType.TAG_CONTAINER};
+
+    /**
+     * Generates a random NamespacedKey
+     */
+    public static NamespacedKey getRandomKey() {
+        return new NamespacedKey(JeffLib.getPlugin(), UUID.randomUUID().toString());
+    }
 
     /**
      * Sets a value in the holder's PDC
@@ -367,6 +389,34 @@ public class PDCUtils {
      */
     public static boolean isEmpty(@Nonnull final PersistentDataHolder holder) {
         return holder.getPersistentDataContainer().isEmpty();
+    }
+
+    /**
+     * Copies the all data from the source PDC to the destination PDC. If the destination PDC already contains a key, the key will be overwritten.
+     * @param source
+     * @param target
+     */
+    public static void copy(@Nonnull final PersistentDataContainer source, @Nonnull final PersistentDataContainer target) {
+        for(final NamespacedKey key : source.getKeys()) {
+            final PersistentDataType<Object,Object> type = (PersistentDataType<Object, Object>) getDataType(source, key);
+            Validate.notNull(type, "Could not find data type for key " + key);
+            final Object value = source.get(key, type);
+            if(value != null) {
+                target.set(key, type, value);
+            }
+        }
+    }
+
+    /**
+     * Gets the proper primitive {@link PersistentDataType} for the given {@link NamespacedKey} in the given {@link PersistentDataContainer}
+     *
+     * @return The primitive PersistentDataType for the given key, or null if the key doesn't exist
+     */
+    public static PersistentDataType<?, ?> getDataType(@Nonnull final PersistentDataContainer pdc, @Nonnull final NamespacedKey key) {
+        for (PersistentDataType<?, ?> dataType : PRIMITIVE_DATA_TYPES) {
+            if (pdc.has(key, dataType)) return dataType;
+        }
+        return null;
     }
 
 }

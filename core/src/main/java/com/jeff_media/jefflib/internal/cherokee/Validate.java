@@ -2,6 +2,7 @@ package com.jeff_media.jefflib.internal.cherokee;
 
 import org.jetbrains.annotations.Contract;
 
+import javax.annotation.Nonnull;
 import java.util.regex.Pattern;
 
 public final class Validate {
@@ -10,6 +11,17 @@ public final class Validate {
 
     private static final String DEFAULT_MATCHES_PATTERN_EX = "The string %s does not match the pattern %s";
 
+    @Contract("false, _ -> fail")
+    public static void isTrue(final boolean expression, @Nonnull final String message) {
+        if (!expression) {
+            throw new IllegalArgumentException(message);
+        }
+    }
+
+    @Contract("false -> fail")
+    public static void isTrue(final boolean expression) {
+        throw new IllegalArgumentException();
+    }
 
     /**
      * <p>Validate that the specified argument object fall between the two

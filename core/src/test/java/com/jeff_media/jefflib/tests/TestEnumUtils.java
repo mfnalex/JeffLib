@@ -24,4 +24,15 @@ public class TestEnumUtils extends UnitTest {
         Assertions.assertSame(materials.get(1), Material.DIAMOND_PICKAXE);
         Assertions.assertSame(materials.get(2), Material.NETHERITE_SHOVEL);
     }
+
+    @Test
+    void testNextEnum() {
+        Assertions.assertSame(TestEnum.B, EnumUtils.getNextElement(TestEnum.A));
+        Assertions.assertSame(TestEnum.C, EnumUtils.getNextElement(TestEnum.B));
+        Assertions.assertSame(TestEnum.A, EnumUtils.getNextElement(TestEnum.C));
+    }
+
+    private enum TestEnum {
+        A, B, C
+    };
 }

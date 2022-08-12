@@ -13,7 +13,9 @@ import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.mojang.authlib.GameProfile;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
 import org.bukkit.World;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
@@ -24,7 +26,6 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -112,4 +113,9 @@ public interface AbstractNMSHandler {
     @Nonnull
     PathNavigation getPathNavigation(Mob entity);
 
+    @Nullable
+    Advancement loadVolatileAdvancement(NamespacedKey key, String advancement);
+
+    @Nonnull
+    BukkitUnsafe getUnsafe();
 }

@@ -97,4 +97,8 @@ public final class NMS {
         throw new IllegalArgumentException("Not a valid Goal: " + pathfinderGoal.getClass().getName() + ". For custom goals, extend " + CustomGoal.class.getName());
     }
 
+    public static MinecraftServer getServer() {
+        return ((CraftServer) Bukkit.getServer()).getServer();
+    }
+
 }

@@ -14,6 +14,8 @@ import java.util.stream.Collectors;
 public class EnumUtils {
 
     private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
+    private static final Map<Class<? extends Enum<?>>, List<? extends Enum<?>>> ENUM_ARRAY_CACHE = new HashMap<>();
+    private static final Map<Class<? extends Enum<?>>, EnumMap<?,?>> NEXT_ENUMS = new HashMap<>();
 
     /**
      * Gets an EnumSet of the given Enum constants by their names. Enum constants that aren't found will print a warning.
@@ -75,11 +77,49 @@ public class EnumUtils {
     }
 
     /**
-     * Gets a random value of the given Enum class
+     * Gets a random value of the given Enum class. Values are cached, so it doesn't have to call values() all the time.
      */
     public static <E extends Enum<E>> E getRandomElement(final Class<E> enumClazz) {
-        final E[] constants = enumClazz.getEnumConstants();
-        return constants[RandomUtils.getInt(0, constants.length)];
+        final List<E> values = getValues(enumClazz);
+        return values.get(JeffLib.getThreadLocalRandom().nextInt(values.size()));
     }
+
+    /**
+     * Returns all elements of the given enum class. Unlike calling values() on an element instance,
+     * or calling getEnumConstants() on an enum class, this will cache the delivered array and
+     * doesn't have to create a new one everytime.
+     * The returned list is unmodifiable.
+     */
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<E>> List<E> getValues(final Class<E> enumClazz) {
+        List<E> values = (List<E>) ENUM_ARRAY_CACHE.get(enumClazz);
+        if(values == null) {
+            values = Collections.unmodifiableList(Arrays.asList(enumClazz.getEnumConstants()));
+            ENUM_ARRAY_CACHE.put(enumClazz, values);
+        }
+        return values;
+    }
+
+    /**
+     * Gets the next element of the given enum class by its ordinal.
+     * For example, if your enum class has three declared values A, B and C, then calling this method with A will return B,
+     * calling it with B will return C, and calling it with C will return A.
+     * The next element of each element is cached and does not require to call values() all the time.
+     */
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<E>> E getNextElement(final E e) {
+        final Class<E> enumClazz = (Class<E>) e.getClass();
+        final EnumMap<E, E> nextEnums = (EnumMap<E, E>) NEXT_ENUMS.computeIfAbsent(enumClazz, __ -> new EnumMap<E,E>(enumClazz));
+        E next = nextEnums.get(e);
+        if(next == null) {
+            final int ordinal = e.ordinal();
+            final List<E> values = getValues(enumClazz);
+            next = values.get((ordinal + 1) % values.size());
+            nextEnums.put(e, next);
+        }
+        return next;
+    }
+
+
 }
 

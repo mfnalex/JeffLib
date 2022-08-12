@@ -1,6 +1,7 @@
 package com.jeff_media.jefflib;
 
 import com.allatori.annotations.DoNotRename;
+import com.jeff_media.jefflib.data.ToastMessage;
 import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
@@ -300,6 +301,7 @@ public final class JeffLib {
                        NoSuchMethodException | InvocationTargetException exception) {
             throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName());
         }
+        //Tasks.nextTickAsync(ToastMessage::removeLeftoverToastFiles);
     }
 
     /**

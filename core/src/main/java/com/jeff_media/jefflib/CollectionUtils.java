@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
+import javax.annotation.Nonnull;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,7 +23,8 @@ public final class CollectionUtils {
      * @return List of all given elements
      */
     @SafeVarargs
-    public static <T> List<T> createList(final T... elements) {
+    @Nonnull
+    public static <T> List<T> asList(final T... elements) {
         return new ArrayList<>(Arrays.asList(elements));
     }
 
@@ -36,6 +38,15 @@ public final class CollectionUtils {
         }
         return list;
     }
+
+    @SafeVarargs
+    @Nonnull
+    public static <T> Set<T> asSet(final T... elements) {
+        final HashSet<T> set = new HashSet<>();
+        Collections.addAll(set, elements);
+        return set;
+    }
+
 
     /**
      * Sorts a map by its values. The value type must implement {@link Comparable}
@@ -103,5 +114,6 @@ public final class CollectionUtils {
         }
         return list;
     }
+
 
 }

@@ -4,6 +4,7 @@ import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.core.BlockPos;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -106,6 +107,10 @@ public final class NMS {
             }
         }
         throw new IllegalArgumentException("Not a valid Goal: " + pathfinderGoal.getClass().getName() + ". For custom goals, extend " + CustomGoal.class.getName());
+    }
+
+    public static MinecraftServer getServer() {
+        return ((CraftServer) Bukkit.getServer()).getServer();
     }
 
 }

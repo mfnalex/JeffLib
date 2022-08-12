@@ -1,5 +1,8 @@
 package com.jeff_media.jefflib.internal.nms.v1_17_R1;
 
+import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
@@ -12,19 +15,24 @@ import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
+import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.v1_17_R1.ai.*;
 import com.mojang.authlib.GameProfile;
+import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.util.GsonHelper;
 import net.minecraft.world.entity.AreaEffectCloud;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -34,16 +42,15 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.phys.Vec3;
-import org.bukkit.Bukkit;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_17_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_17_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -53,6 +60,7 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -307,6 +315,23 @@ public class NMSHandler implements AbstractNMSHandler {
     public PathNavigation getPathNavigation(final Mob entity) {
         final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
         return new HatchedPathNavigation(pathfinderMob.getNavigation());
+    }
+
+    @Nullable
+    @Override
+    public Advancement loadVolatileAdvancement(final NamespacedKey key, final String advancement) {
+        final ResourceLocation resourceLocation = CraftNamespacedKey.toMinecraft(key);
+        final JsonElement jsonelement = ServerAdvancementManager.GSON.fromJson(advancement, JsonElement.class);
+        final JsonObject jsonobject = GsonHelper.convertToJsonObject(jsonelement, "advancement");
+        net.minecraft.advancements.Advancement.Builder nms = net.minecraft.advancements.Advancement.Builder.fromJson(jsonobject, new DeserializationContext(resourceLocation, NMS.getServer().getPredicateManager()));
+        NMS.getServer().getAdvancements().advancements.add(Maps.newHashMap(Collections.singletonMap(resourceLocation, nms)));
+        return Bukkit.getAdvancement(key);
+    }
+
+    @Nonnull
+    @Override
+    public BukkitUnsafe getUnsafe() {
+        return com.jeff_media.jefflib.internal.nms.v1_17_R1.BukkitUnsafe.INSTANCE;
     }
 
 }

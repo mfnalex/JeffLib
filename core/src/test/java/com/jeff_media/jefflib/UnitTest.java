@@ -11,6 +11,7 @@ public class UnitTest {
 
     @Getter
     ServerMock server;
+    @Getter
     MockPlugin plugin;
 
     @BeforeEach

@@ -1,5 +1,8 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R2;
 
+import com.google.common.collect.Maps;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ReflUtils;
@@ -12,6 +15,7 @@ import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
+import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
@@ -21,12 +25,15 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.NamespacedKey;
+import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R2.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R2.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R2.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_16_R2.util.CraftNamespacedKey;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -36,6 +43,7 @@ import org.bukkit.util.Vector;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
@@ -293,6 +301,23 @@ public class NMSHandler implements AbstractNMSHandler {
     public PathNavigation getPathNavigation(final Mob entity) {
         final EntityInsentient pathfinderMob = asMob(entity);
         return new HatchedPathNavigation(pathfinderMob.getNavigation());
+    }
+
+    @Nullable
+    @Override
+    public Advancement loadVolatileAdvancement(final NamespacedKey key, final String advancement) {
+        final MinecraftKey resourceLocation = CraftNamespacedKey.toMinecraft(key);
+        final JsonElement jsonelement = AdvancementDataWorld.DESERIALIZER.fromJson(advancement, JsonElement.class);
+        final JsonObject jsonobject = ChatDeserializer.m(jsonelement, "advancement");
+        net.minecraft.server.v1_16_R2.Advancement.SerializedAdvancement nms = net.minecraft.server.v1_16_R2.Advancement.SerializedAdvancement.a(jsonobject, new LootDeserializationContext(resourceLocation, NMS.getServer().getLootPredicateManager()));
+        getServer().getAdvancementData().REGISTRY.a(Maps.newHashMap(Collections.singletonMap(resourceLocation, nms)));
+        return Bukkit.getAdvancement(key);
+    }
+
+    @Nonnull
+    @Override
+    public BukkitUnsafe getUnsafe() {
+        return com.jeff_media.jefflib.internal.nms.v1_16_R2.BukkitUnsafe.INSTANCE;
     }
 
 
