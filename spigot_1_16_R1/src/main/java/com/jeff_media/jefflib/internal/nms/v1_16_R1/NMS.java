@@ -10,10 +10,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R1.block.CraftBlock;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftCreature;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_16_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_16_R1.entity.*;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
@@ -99,6 +96,10 @@ public final class NMS {
 
     public static MinecraftServer getServer() {
         return ((CraftServer) Bukkit.getServer()).getServer();
+    }
+
+    public static EntityPlayer toNms(final org.bukkit.entity.Player player) {
+        return ((CraftPlayer)player).getHandle();
     }
 
 }

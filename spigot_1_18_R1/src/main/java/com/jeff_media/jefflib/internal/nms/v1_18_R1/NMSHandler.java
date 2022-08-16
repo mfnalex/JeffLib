@@ -348,4 +348,9 @@ public class NMSHandler implements AbstractNMSHandler {
         ((CraftPersistentDataContainer)target).putAll(tag);
     }
 
+    @Override
+    public void respawnPlayer(Player player) {
+        NMS.getServer().getPlayerList().respawn(NMS.toNms(player),true);
+    }
+
 }

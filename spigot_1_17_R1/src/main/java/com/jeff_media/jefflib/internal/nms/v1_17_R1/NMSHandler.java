@@ -350,6 +350,6 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void respawnPlayer(Player player) {
-        ((CraftPlayer)player).getHandle().server.getPlayerList().respawn(((CraftPlayer)player).getHandle(), true);
+        NMS.getServer().getPlayerList().respawn(NMS.toNms(player),true);
     }
 }

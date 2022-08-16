@@ -6,6 +6,7 @@ import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.Mob;
@@ -22,10 +23,7 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_17_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_17_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_17_R1.block.CraftBlock;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftCreature;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftEntity;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftLivingEntity;
-import org.bukkit.craftbukkit.v1_17_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_17_R1.entity.*;
 import org.bukkit.craftbukkit.v1_17_R1.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
@@ -111,6 +109,10 @@ public final class NMS {
 
     public static MinecraftServer getServer() {
         return ((CraftServer) Bukkit.getServer()).getServer();
+    }
+
+    public static ServerPlayer toNms(final org.bukkit.entity.Player player) {
+        return ((CraftPlayer)player).getHandle();
     }
 
 }
