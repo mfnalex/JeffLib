@@ -24,6 +24,7 @@ import com.mojang.authlib.GameProfile;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.TagParser;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
@@ -49,12 +50,14 @@ import org.bukkit.craftbukkit.v1_18_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_18_R1.persistence.CraftPersistentDataContainer;
 import org.bukkit.craftbukkit.v1_18_R1.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_18_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
@@ -332,6 +335,17 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public BukkitUnsafe getUnsafe() {
         return com.jeff_media.jefflib.internal.nms.v1_18_R1.BukkitUnsafe.INSTANCE;
+    }
+
+    @Override
+    public String serializePdc(PersistentDataContainer pdc) {
+        return ((CraftPersistentDataContainer)pdc).toTagCompound().getAsString();
+    }
+
+    @Override
+    public void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception {
+        CompoundTag tag = TagParser.parseTag(serializedPdc);
+        ((CraftPersistentDataContainer)target).putAll(tag);
     }
 
 }

@@ -1,10 +1,15 @@
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_19_R1.persistence.CraftPersistentDataAdapterContext;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
@@ -15,6 +20,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * PersistentDataContainer related methods.
@@ -392,10 +398,9 @@ public class PDCUtils {
     }
 
     /**
-     * Copies the all data from the source PDC to the destination PDC. If the destination PDC already contains a key, the key will be overwritten.
-     * @param source
-     * @param target
+     * Copies all the data from the source PDC to the destination PDC. If the destination PDC already contains a key, the key will be overwritten.
      */
+    @SuppressWarnings("unchecked")
     public static void copy(@Nonnull final PersistentDataContainer source, @Nonnull final PersistentDataContainer target) {
         for(final NamespacedKey key : source.getKeys()) {
             final PersistentDataType<Object,Object> type = (PersistentDataType<Object, Object>) getDataType(source, key);
@@ -417,6 +422,28 @@ public class PDCUtils {
             if (pdc.has(key, dataType)) return dataType;
         }
         return null;
+    }
+
+    /**
+     * Turns a PersistentDataContainer into String
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static String serialize(@Nonnull final PersistentDataContainer pdc) {
+        return JeffLib.getNMSHandler().serializePdc(pdc);
+    }
+
+    /**
+     * Loads a String from {@link PDCUtils#serialize(PersistentDataContainer)} into a PersistentDataContainer, overwriting already existing keys of the same name
+     * @throws IOException When the String cannot be deserialized
+     */
+    public static void deserialize(@Nonnull final String serializedPdc, @Nonnull final PersistentDataContainer target) throws IOException {
+        try {
+            JeffLib.getNMSHandler().deserializePdc(serializedPdc, target);
+        } catch (Exception e) {
+            throw new IOException("Could not deserialize PDC", e);
+        }
     }
 
 }

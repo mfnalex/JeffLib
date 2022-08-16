@@ -11,6 +11,7 @@ import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.mojang.authlib.GameProfile;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -22,6 +23,7 @@ import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
@@ -118,4 +120,10 @@ public interface AbstractNMSHandler {
 
     @Nonnull
     BukkitUnsafe getUnsafe();
+
+	String serializePdc(PersistentDataContainer pdc);
+
+    void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception;
+
+    void respawnPlayer(Player player);
 }

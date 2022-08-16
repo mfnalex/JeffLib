@@ -32,12 +32,14 @@ import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R3.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_16_R3.persistence.CraftPersistentDataContainer;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_16_R3.util.CraftNamespacedKey;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
@@ -320,5 +322,19 @@ public class NMSHandler implements AbstractNMSHandler {
         return com.jeff_media.jefflib.internal.nms.v1_16_R3.BukkitUnsafe.INSTANCE;
     }
 
+    @Override
+    public String serializePdc(PersistentDataContainer pdc) {
+        return ((CraftPersistentDataContainer)pdc).toTagCompound().asString();
+    }
 
+    @Override
+    public void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception {
+        NBTTagCompound tag = MojangsonParser.parse(serializedPdc);
+        ((CraftPersistentDataContainer)target).putAll(tag);
+    }
+
+    @Override
+    public void respawnPlayer(Player player) {
+        ((CraftPlayer)player).getHandle().server.getPlayerList().moveToWorld(((CraftPlayer)player).getHandle(), true);
+    }
 }

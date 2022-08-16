@@ -23,7 +23,6 @@ import org.bukkit.plugin.java.PluginClassLoaderUtils;
 public final class NMS {
 
     {
-        ServerLevel
     }
 
 }
