@@ -228,7 +228,10 @@ public final class JeffLib {
     @NMS
     public static AbstractNMSHandler getNMSHandler() {
         if (abstractNmsHandler == null) {
-            throw new NMSNotSupportedException();
+            enableNMS();
+            if(abstractNmsHandler == null) {
+                throw new NMSNotSupportedException();
+            }
         }
         return abstractNmsHandler;
     }

@@ -13,6 +13,7 @@ import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.entity.*;
 import org.bukkit.util.BoundingBox;
+import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -231,5 +232,13 @@ public final class EntityUtils {
     @Nonnull
     public static Controls getControls(@Nonnull final Mob entity) {
         return Controls.of(entity);
+    }
+
+    /**
+     * Respawns a player. This does the same thing as {@link Player.Spigot#respawn()} but also works for living players
+     */
+    @NMS
+    public static void respawnPlayer(@Nonnull final Player player) {
+        JeffLib.getNMSHandler().respawnPlayer(player);
     }
 }
