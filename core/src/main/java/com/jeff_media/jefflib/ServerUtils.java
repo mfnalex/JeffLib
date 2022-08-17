@@ -4,8 +4,10 @@ import com.jeff_media.jefflib.data.TPS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.nio.file.Paths;
 
 /**
  * Server related methods
@@ -93,6 +95,14 @@ public class ServerUtils {
      */
     public enum ServerLifePhase {
         STARTUP, RUNNING, SHUTDOWN, UNKNOWN
+    }
+
+    /**
+     * Gets the server's working directory
+     */
+    @Nonnull
+    public File getServerFolder() {
+        return Paths.get("").toAbsolutePath().toFile();
     }
 
 
