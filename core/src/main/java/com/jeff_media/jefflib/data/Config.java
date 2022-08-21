@@ -1,3 +1,21 @@
+/*
+ *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.JeffLib;
@@ -9,13 +27,18 @@ import java.io.*;
 import java.util.Objects;
 
 /**
- * Represents a configuration that automatically loads the default values from the plugin's resources.
+ * Represents a configuration that automatically loads the default values from the plugin's resources, if it exists.
+ * If no matching resource is found, the default configuration is empty. Automatically creates the file in the
+ * plugin's datafolder if it doesn't exist, otherwise it loads the already saved file.
  */
 public class Config extends YamlConfiguration {
 
     private final String filename;
     private final File file;
 
+    /**
+     * Creates a new config with the given filename.
+     */
     public Config(@Nonnull final String filename) {
         this.filename = filename;
         file = new File(JeffLib.getPlugin().getDataFolder(), filename);
@@ -26,8 +49,12 @@ public class Config extends YamlConfiguration {
     private void loadDefaults() {
         final YamlConfiguration defaultConfig = new YamlConfiguration();
 
-        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename); final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
-            defaultConfig.load(reader);
+        try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename)) {
+            if(inputStream != null) {
+                try (final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
+                    defaultConfig.load(reader);
+                }
+            }
         } catch (final IOException exception) {
             throw new IllegalArgumentException("Could not load included config file " + filename, exception);
         } catch (final InvalidConfigurationException exception) {
@@ -56,10 +83,20 @@ public class Config extends YamlConfiguration {
         if (!file.exists()) {
             File parent = file.getParentFile();
             if (parent != null) {
-                parent.mkdirs();
+                if(!parent.exists() && !parent.mkdirs()) {
+                    throw new UncheckedIOException(new IOException("Could not create directory " + parent.getAbsolutePath()));
+                }
             }
             JeffLib.getPlugin().saveResource(filename, false);
         }
+    }
+
+    /**
+     * Saves the configuration under its original file name
+     * @throws IOException if the underlying YamlConfiguration throws it
+     */
+    public void save() throws IOException {
+        this.save(file);
     }
 
 }

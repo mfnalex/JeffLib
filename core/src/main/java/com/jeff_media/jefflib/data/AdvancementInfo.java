@@ -1,7 +1,26 @@
+/*
+ *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.McVersion;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
@@ -13,7 +32,11 @@ import java.util.Map;
 
 /**
  * Provides information about an advancement.
+ * @nms
+ * @author CroaBeast
+ * @see <a href="https://www.spigotmc.org/threads/getting-advancement-info-1-12-1-18.537707/">SpigotMC Thread</a>
  */
+@NMS
 public class AdvancementInfo {
 
     private static final Class<?> CLASS_CRAFTADVANCEMENT;

@@ -1,7 +1,24 @@
+/*
+ *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 package com.jeff_media.jefflib;
 
 import com.allatori.annotations.DoNotRename;
-import com.jeff_media.jefflib.data.ToastMessage;
 import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
@@ -22,7 +39,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URLClassLoader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -229,11 +245,38 @@ public final class JeffLib {
     public static AbstractNMSHandler getNMSHandler() {
         if (abstractNmsHandler == null) {
             enableNMS();
-            if(abstractNmsHandler == null) {
+            if (abstractNmsHandler == null) {
                 throw new NMSNotSupportedException();
             }
         }
         return abstractNmsHandler;
+    }
+
+    /**
+     * Initializes NMS features. This needs to be called for all methods annotated with {@link NMS}
+     *
+     * @throws NMSNotSupportedException when the currently NMS version is not supported by this version of JeffLib
+     * @nms
+     */
+    @NMS
+    public static void enableNMS() throws NMSNotSupportedException {
+        final String packageName = JeffLib.class.getPackage().getName();
+        final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        try {
+            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
+        } catch (final ReflectiveOperationException exception) {
+            final String className = ClassUtils.listAllClasses().stream().filter(name -> name.endsWith(internalsName + ".NMSHandler")).findFirst().orElse(null);
+            if (className != null) {
+                try {
+                    abstractNmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
+                } catch (final ReflectiveOperationException ignored) {
+
+                }
+            }
+        }
+        if (abstractNmsHandler == null) {
+            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName());
+        }
     }
 
     /**
@@ -279,32 +322,12 @@ public final class JeffLib {
         }
     }
 
-
     /**
      * Initializes JeffLib. Only required if you call methods requiring your plugin's instance before the plugin has been enabled
      */
     public static void init(final Plugin plugin) {
         JeffLib.plugin = plugin;
         checkRelocation();
-    }
-
-    /**
-     * Initializes NMS features. This needs to be called for all methods annotated with {@link NMS}
-     *
-     * @throws NMSNotSupportedException when the currently NMS version is not supported by this version of JeffLib
-     * @nms
-     */
-    @NMS
-    public static void enableNMS() throws NMSNotSupportedException {
-        final String packageName = JeffLib.class.getPackage().getName();
-        final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-        try {
-            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
-        } catch (final ClassNotFoundException | InstantiationException | IllegalAccessException | ClassCastException |
-                       NoSuchMethodException | InvocationTargetException exception) {
-            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName());
-        }
-        //Tasks.nextTickAsync(ToastMessage::removeLeftoverToastFiles);
     }
 
     /**

@@ -1,3 +1,21 @@
+/*
+ *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 package com.jeff_media.jefflib;
 
 
@@ -124,5 +142,18 @@ public final class FileUtils {
             file = new File(file, s);
         }
         return file;
+    }
+
+    /**
+     * Saves a resource to the data folder if it doesn't already exist.
+     * @return true if the file has been created, otherwise false
+     */
+    public static boolean saveResourceIfNotExists(final String filename) {
+        final File file = new File(JeffLib.getPlugin().getDataFolder(), filename);
+        if (!file.exists()) {
+            JeffLib.getPlugin().saveResource(filename, false);
+            return true;
+        }
+        return false;
     }
 }

@@ -1,5 +1,24 @@
+/*
+ *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ *
+ *     This program is free software: you can redistribute it and/or modify
+ *     it under the terms of the GNU General Public License as published by
+ *     the Free Software Foundation, either version 3 of the License, or
+ *     (at your option) any later version.
+ *
+ *     This program is distributed in the hope that it will be useful,
+ *     but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *     GNU General Public License for more details.
+ *
+ *     You should have received a copy of the GNU General Public License
+ *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ *
+ */
+
 package com.jeff_media.jefflib.ai.goal;
 
+import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
@@ -16,6 +35,7 @@ import java.util.stream.Stream;
 /**
  * Utility methods to create some custom {@link PathfinderGoal}s. For a custom goal, extend {@link CustomGoal}
  */
+@DoNotRename
 public interface PathfinderGoals {
     /**
      * Creates a <b>Tempt goal</b>, that will tempt animals using a certain set of items. This behaves like the vanilla

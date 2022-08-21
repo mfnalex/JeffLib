@@ -52,7 +52,7 @@ overview.
         <relocations>
             <relocation>
                 <pattern>com.jeff_media.jefflib</pattern>
-                <shadedPattern>YOUR.PACKAGE</shadedPattern>
+                <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
             </relocation>
         </relocations>
         <filters>
@@ -62,12 +62,6 @@ overview.
                 <includes>
                     <include>com/jeff_media/jefflib/internal/nms/**</include>
                 </includes>
-            </filter>
-            <filter>
-                <artifact>*:*</artifact>
-                <excludes>
-                    <exclude>META-INF/**</exclude>
-                </excludes>
             </filter>
         </filters>
     </configuration>
