@@ -31,7 +31,7 @@ import java.util.Locale;
  * Word related methods, like capitalization
  */
 @UtilityClass
-public class WordUtils {
+public final class WordUtils {
 
     /**
      * Turns Material names into a nicer name. E.g. DIAMOND_PICKAXE will return "Diamond Pickaxe"
@@ -91,6 +91,19 @@ public class WordUtils {
         }
         return builder.toString();
     }
-
-
+    
+    /**
+     * Builds a String from the given args and starting point
+     *
+     * @param String[] args String Array
+     * @param int start Starting index to append strings together with
+     * @return String The final String
+     */
+    public static String buildString(String[] args, int start) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for(int i = start; i < args.length; i++) {
+            stringBuilder.append(args[i]).append(" ");
+        }
+        return stringBuilder.substring(0, stringBuilder.toString().length()-1);
+    }
 }
