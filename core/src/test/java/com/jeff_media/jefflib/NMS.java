@@ -26,7 +26,6 @@ public final class NMS {
 
     {
         CraftServer server;
-        Blaze
     }
 
 }

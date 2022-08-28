@@ -100,9 +100,6 @@ public class DebugUtils {
             try {
                 JeffLib.enableNMS();
 
-                // NMS version
-                testNMSVersion();
-
                 // Default world name
                 testDefaultWorldName();
 
@@ -133,13 +130,6 @@ public class DebugUtils {
                 t.printStackTrace();
             }
 
-        }
-
-        private void testNMSVersion() {
-            McVersion version = McVersion.current();
-            String nmsVersion = version.getNmsVersion();
-            if (nmsVersion == null) throw new IllegalArgumentException("Could not get NMS version");
-            player.sendMessage("NMS version: " + nmsVersion);
         }
 
         private void testDefaultWorldName() {

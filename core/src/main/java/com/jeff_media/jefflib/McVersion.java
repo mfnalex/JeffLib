@@ -18,9 +18,7 @@
 
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.data.CSVParser;
 import org.bukkit.Bukkit;
-import org.bukkit.block.data.Snowable;
 
 import javax.annotation.Nonnull;
 import java.io.InputStream;
@@ -36,15 +34,14 @@ public class McVersion implements Comparable<McVersion> {
 
     private static final McVersion CURRENT_VERSION;
     private static final McVersion v1_17 = new McVersion(1, 17);
-    private static final Map<McVersion, String> NMS_VERSIONS = new LinkedHashMap<>();
 
     static {
         final int currentMajor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
         final int currentMinor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1].split("-")[0]);
-        final int currentPatch = Bukkit.getBukkitVersion().chars().filter(ch -> ch == '.').count() == 2 ? 0 : Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]);
+        boolean hasPatch = WordUtils.countChar(Bukkit.getBukkitVersion(), '.') == 2;
+        final int currentPatch = hasPatch ? Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]) : 0;
 
         CURRENT_VERSION = new McVersion(currentMajor, currentMinor, currentPatch);
-
     }
 
     private final int major, minor, patch;
@@ -57,22 +54,6 @@ public class McVersion implements Comparable<McVersion> {
         this.major = major;
         this.minor = minor;
         this.patch = patch;
-    }
-
-    static void loadVersions(InputStream stream) {
-        try {
-            CSVParser parser = new CSVParser(stream);
-            // TODO: Fix
-            /*parser.getContents().forEach(line -> {
-                final int major = Integer.parseInt(line[0]);
-                final int minor = Integer.parseInt(line[1]);
-                final int patch = Integer.parseInt(line[2]);
-                final McVersion version = new McVersion(major, minor, patch);
-                NMS_VERSIONS.put(version, major + "_" + minor + "_R" + line[3]);
-            });*/
-        } catch (Throwable ignored) {
-
-        }
     }
 
     /**
@@ -153,15 +134,5 @@ public class McVersion implements Comparable<McVersion> {
     public boolean isAtLeast(final int major, final int minor) {
         return this.isAtLeast(new McVersion(major, minor));
     }
-
-    /**
-     * Returns the NMS version of this MC version, e.g. "1_18_R2", or null if it couldn't be determined
-     *
-     * @return the NMS version of this MC version, e.g. "1_18_R2", or null if it couldn't be determined
-     */
-    public String getNmsVersion() {
-        return NMS_VERSIONS.get(this);
-    }
-
 
 }

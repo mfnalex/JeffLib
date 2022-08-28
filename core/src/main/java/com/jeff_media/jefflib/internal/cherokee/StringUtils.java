@@ -119,31 +119,32 @@ public final class StringUtils {
      * @return left padded String or original String if no padding is necessary,
      * {@code null} if null String input
      */
-    public static String leftPad(final String str, final int size, String padStr) {
+    public static String leftPad(final String str, final int size, final String padStr) {
         if (str == null) {
             return null;
         }
+        String padStr2 = padStr;
         if (isEmpty(padStr)) {
-            padStr = SPACE;
+            padStr2 = SPACE;
         }
-        final int padLen = padStr.length();
+        final int padLen = padStr2.length();
         final int strLen = str.length();
         final int pads = size - strLen;
         if (pads <= 0) {
             return str; // returns original String when possible
         }
         if (padLen == 1 && pads <= PAD_LIMIT) {
-            return leftPad(str, size, padStr.charAt(0));
+            return leftPad(str, size, padStr2.charAt(0));
         }
 
         if (pads == padLen) {
-            return padStr.concat(str);
+            return padStr2.concat(str);
         }
         if (pads < padLen) {
-            return padStr.substring(0, pads).concat(str);
+            return padStr2.substring(0, pads).concat(str);
         }
         final char[] padding = new char[pads];
-        final char[] padChars = padStr.toCharArray();
+        final char[] padChars = padStr2.toCharArray();
         for (int i = 0; i < pads; i++) {
             padding[i] = padChars[i % padLen];
         }

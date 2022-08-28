@@ -20,7 +20,9 @@ package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import com.sun.org.apache.bcel.internal.classfile.MethodParameters;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -76,10 +78,11 @@ public final class ReflUtils {
     /**
      * Gets the NMS version String as used in the package name, e.g. "v1_19_R1"
      */
-    public static String getNMSVersion() {
+    public static @Nonnull String getNMSVersion() {
         if (nmsVersion == null) {
-            return nmsVersion = "v" + McVersion.current().getNmsVersion();
+            nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }
+
         return nmsVersion;
     }
 

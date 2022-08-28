@@ -23,8 +23,11 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 
 import javax.annotation.Nullable;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.TimeZone;
 import java.util.logging.Logger;
 
 /**
@@ -130,8 +133,8 @@ public class TimeUtils {
         /**
      * Converts a Unix Timestamp to a String
      *
-     * @param long unix A Unix timestamp
-     * @return String The resulted String
+     * @param unix A Unix timestamp
+     * @return The resulted String
      */
     public static String dateToString(long unix) {
         Date date = new Date(unix);
@@ -144,8 +147,8 @@ public class TimeUtils {
     /**
      * Converts seconds to Days, Hours, Minutes, Seconds
      *
-     * @param long seconds The given amount of seconds
-     * @return String The resulted String
+     * @param seconds The given amount of seconds
+     * @return The resulted String
      */
     public static String secondsToDDHHMMSS(long seconds) {
         return String.format("%02dd %02dh %02dm %02ds", seconds / 86400, (seconds / 3600 % 24), (seconds / 60) % 60, seconds % 60);
@@ -154,8 +157,8 @@ public class TimeUtils {
     /**
      * Converts seconds to Hours, Minutes, Seconds
      *
-     * @param long seconds The given amount of seconds
-     * @return String The resulted String
+     * @param seconds The given amount of seconds
+     * @return The resulted String
      */
     public static String secondsToHHMMSS(long seconds) {
         return String.format("%02dh %02dm %02ds", seconds / 3600, (seconds / 60) % 60, seconds % 60);

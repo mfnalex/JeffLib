@@ -27,11 +27,17 @@ public class Replacer {
 
     private final Map<String,String> map = new java.util.HashMap<>();
 
+    /**
+     * Adds a new placeholder
+     */
     public Replacer put(final String key, final String value) {
         map.put(key, value);
         return this;
     }
 
+    /**
+     * Applies all given placeholders
+     */
     public String apply(String input) {
         for(final Map.Entry<String,String> entry : map.entrySet()) {
             input = input.replace(entry.getKey(), entry.getValue());

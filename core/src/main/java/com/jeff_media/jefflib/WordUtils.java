@@ -95,8 +95,8 @@ public final class WordUtils {
     /**
      * Builds a String from the given args and starting point
      *
-     * @param String[] args String Array
-     * @param int start Starting index to append strings together with
+     * @param args args String Array
+     * @param start Starting index to append strings together with
      * @return String The final String
      */
     public static String buildString(String[] args, int start) {
@@ -105,5 +105,16 @@ public final class WordUtils {
             stringBuilder.append(args[i]).append(" ");
         }
         return stringBuilder.substring(0, stringBuilder.toString().length()-1);
+    }
+
+    public static int countChar(String string, char aChar) {
+        int count = 0;
+        char[] arr = string.toCharArray();
+        for (int i = 0; i < string.length(); i++) {
+            if(arr[i] == aChar) {
+                count++;
+            }
+        }
+        return count;
     }
 }

@@ -62,7 +62,7 @@ public final class LocationUtils {
      * @return Location parsed from the given configuration section
      */
     @Nonnull
-    public static Location getLocationFromSection(final ConfigurationSection config, @Nullable World world) {
+    public static Location getLocationFromSection(final ConfigurationSection config, final @Nullable World world) {
         if (config.getBoolean("spawn")) {
             final World world2 = Bukkit.getWorld(Objects.requireNonNull(config.getString("world")));
             if (world2 == null) {
@@ -85,28 +85,29 @@ public final class LocationUtils {
         }
         final double z = config.getDouble("z");
 
+        World world2 = null;
         if (config.isSet("world")) {
             final String worldName = config.getString("world");
             assert worldName != null;
             if (Bukkit.getWorld(worldName) != null) {
-                world = Bukkit.getWorld(worldName);
+                world2 = Bukkit.getWorld(worldName);
             } else {
                 try {
                     final UUID uuid = UUID.fromString(worldName);
-                    world = Bukkit.getWorld(uuid);
+                    world2 = Bukkit.getWorld(uuid);
                 } catch (final IllegalArgumentException ignored) {
 
                 }
             }
-            if (world == null) {
+            if (world2 == null) {
                 throw new InvalidLocationDefinitionException("World \"" + worldName + "\" not found.");
             }
         }
-        if (world == null) {
+        if (world2 == null) {
             throw new InvalidLocationDefinitionException("\"world\" not defined");
         }
         if (!config.isSet("pitch") && !config.isSet("yaw")) {
-            return new Location(world, x, y, z);
+            return new Location(world2, x, y, z);
         }
         if (config.isSet("pitch") && !config.isSet("yaw")) {
             throw new InvalidLocationDefinitionException("When \"pitch\" is defined, \"yaw\" must also be defined");
@@ -124,7 +125,7 @@ public final class LocationUtils {
         }
         final double yaw = config.getDouble("yaw");
 
-        return new Location(world, x, y, z, (float) yaw, (float) pitch);
+        return new Location(world2, x, y, z, (float) yaw, (float) pitch);
     }
 
     /**

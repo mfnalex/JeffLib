@@ -61,7 +61,7 @@ public final class VectorUtils {
         return location;
     }
 
-    private static EulerAngle convertVectorToEulerAngle(final Vector vec) {
+    public static EulerAngle convertVectorToEulerAngle(final Vector vec) {
         final double x = vec.getX();
         final double y = vec.getY();
         final double z = vec.getZ();

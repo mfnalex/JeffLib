@@ -84,14 +84,6 @@ public final class JeffLib {
                 ex.printStackTrace();
             }
 
-            try (InputStream stream = JeffLib.class.getResourceAsStream("/mcversions.csv")) {
-                if (stream == null) {
-                    throw new IOException("Could not load mcversions.csv");
-                }
-                McVersion.loadVersions(stream);
-            } catch (IOException ex) {
-                throw new RuntimeException(ex);
-            }
         } else {
             version = "MOCK";
         }

@@ -82,15 +82,14 @@ public class HologramManager {
     public static void unloadAllHolograms() {
         for (final Hologram hologram : holograms) {
             for (final Player player : Bukkit.getOnlinePlayers()) {
-                if (SHOWN_HOLOGRAMS.containsKey(player)) {
-                    if (SHOWN_HOLOGRAMS.get(player).contains(hologram)) {
-                        SHOWN_HOLOGRAMS.get(player).remove(hologram);
-                        for (final Object entity : hologram.getEntities()) {
-                            JeffLib.getNMSHandler().hideEntityFromPlayer(entity, player);
-                        }
+                if (SHOWN_HOLOGRAMS.containsKey(player) && SHOWN_HOLOGRAMS.get(player).contains(hologram)) {
+                    SHOWN_HOLOGRAMS.get(player).remove(hologram);
+                    for (final Object entity : hologram.getEntities()) {
+                        JeffLib.getNMSHandler().hideEntityFromPlayer(entity, player);
                     }
                 }
             }
+
         }
         holograms.clear();
     }

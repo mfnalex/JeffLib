@@ -14,6 +14,12 @@
 </p>
 <!--- Buttons end -->
 
+<p align="center">
+<a href="https://hub.jeff-media.com/nexus/#browse/browse:jeff-media-public:com%2Fjeff_media%2FJeffLib">
+  <img src="https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml" alt="Maven" /></a>
+<img src="https://img.shields.io/github/last-commit/jeff-media-gbr/jefflib" />
+</p>
+
 JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an
 overview.
 
@@ -38,6 +44,8 @@ overview.
     <scope>compile</scope>
 </dependency>
 ```
+
+Latest version: ![Latest Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml) 
 
 ### Relocation
 
@@ -117,13 +125,13 @@ If you're using allatori to obfuscate your plugin, you need the following additi
 ### Building from source
 To build JeffLib from source, you need the following Spigot versions installed in your local repository:
 
-- 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-- 1.18.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-- 1.18.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-- 1.17.1-R0.1-SNAPSHOT:remapped-mojang (Java 16+)
-- 1.16.5-R0.1-SNAPSHOT (Java 8 - Java 16)
-- 1.16.3-R0.1-SNAPSHOT (Java 8 - Java 16)
-- 1.16.1-R0.1-SNAPSHOT (Java 8 - Java 16)
+  - 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
+  - 1.18.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
+  - 1.18.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
+  - 1.17.1-R0.1-SNAPSHOT:remapped-mojang (Java 16+)
+  - 1.16.5-R0.1-SNAPSHOT (Java 8 - Java 16)
+  - 1.16.3-R0.1-SNAPSHOT (Java 8 - Java 16)
+  - 1.16.1-R0.1-SNAPSHOT (Java 8 - Java 16)
 
 You can use this tiny bash script to compile them all at once. Please adjust the JAVA17_PATH and JAVA_PATH.
 
