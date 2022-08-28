@@ -22,7 +22,6 @@ import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Mob;
-import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nonnull;
 

@@ -29,7 +29,6 @@ import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.mojang.authlib.GameProfile;
-import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;

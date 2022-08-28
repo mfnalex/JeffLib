@@ -124,7 +124,7 @@ public final class StringUtils {
             return null;
         }
         String padStr2 = padStr;
-        if (isEmpty(padStr)) {
+        if (isEmpty(padStr2)) {
             padStr2 = SPACE;
         }
         final int padLen = padStr2.length();
@@ -389,20 +389,21 @@ public final class StringUtils {
      * @return centered String, {@code null} if null String input
      * @throws IllegalArgumentException if padStr is {@code null} or empty
      */
-    public static String center(String str, final int size, String padStr) {
+    public static String center(String str, final int size, final String padStr) {
+        String padStr2 = padStr;
         if (str == null || size <= 0) {
             return str;
         }
-        if (isEmpty(padStr)) {
-            padStr = SPACE;
+        if (isEmpty(padStr2)) {
+            padStr2 = SPACE;
         }
         final int strLen = str.length();
         final int pads = size - strLen;
         if (pads <= 0) {
             return str;
         }
-        str = leftPad(str, strLen + pads / 2, padStr);
-        str = rightPad(str, size, padStr);
+        str = leftPad(str, strLen + pads / 2, padStr2);
+        str = rightPad(str, size, padStr2);
         return str;
     }
 
@@ -487,31 +488,32 @@ public final class StringUtils {
      * @return right padded String or original String if no padding is necessary,
      * {@code null} if null String input
      */
-    public static String rightPad(final String str, final int size, String padStr) {
+    public static String rightPad(final String str, final int size, final String padStr) {
+        String padStr2 = padStr;
         if (str == null) {
             return null;
         }
-        if (isEmpty(padStr)) {
-            padStr = SPACE;
+        if (isEmpty(padStr2)) {
+            padStr2 = SPACE;
         }
-        final int padLen = padStr.length();
+        final int padLen = padStr2.length();
         final int strLen = str.length();
         final int pads = size - strLen;
         if (pads <= 0) {
             return str; // returns original String when possible
         }
         if (padLen == 1 && pads <= PAD_LIMIT) {
-            return rightPad(str, size, padStr.charAt(0));
+            return rightPad(str, size, padStr2.charAt(0));
         }
 
         if (pads == padLen) {
-            return str.concat(padStr);
+            return str.concat(padStr2);
         }
         if (pads < padLen) {
-            return str.concat(padStr.substring(0, pads));
+            return str.concat(padStr2.substring(0, pads));
         }
         final char[] padding = new char[pads];
-        final char[] padChars = padStr.toCharArray();
+        final char[] padChars = padStr2.toCharArray();
         for (int i = 0; i < pads; i++) {
             padding[i] = padChars[i % padLen];
         }

@@ -21,9 +21,6 @@ package com.jeff_media.jefflib;
 import org.bukkit.Bukkit;
 
 import javax.annotation.Nonnull;
-import java.io.InputStream;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -44,7 +41,9 @@ public class McVersion implements Comparable<McVersion> {
         CURRENT_VERSION = new McVersion(currentMajor, currentMinor, currentPatch);
     }
 
-    private final int major, minor, patch;
+    private final int major;
+    private final int minor;
+    private final int patch;
 
     public McVersion(final int major, final int minor) {
         this(major, minor, 0);

@@ -18,9 +18,6 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.annotation.Nullable;
 import java.util.Objects;
 

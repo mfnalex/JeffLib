@@ -104,7 +104,7 @@ public final class WordUtils {
         for(int i = start; i < args.length; i++) {
             stringBuilder.append(args[i]).append(" ");
         }
-        return stringBuilder.substring(0, stringBuilder.toString().length()-1);
+        return stringBuilder.substring(0, stringBuilder.length()-1);
     }
 
     public static int countChar(String string, char aChar) {

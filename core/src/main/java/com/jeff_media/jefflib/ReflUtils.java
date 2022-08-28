@@ -20,7 +20,6 @@ package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import com.sun.org.apache.bcel.internal.classfile.MethodParameters;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 

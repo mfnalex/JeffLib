@@ -207,7 +207,8 @@ public final class LocationUtils {
      * Represents a pair of X,Z chunk coordinates
      */
     public static final class ChunkCoordinates {
-        private final int x, z;
+        private final int x;
+        private final int z;
 
         public ChunkCoordinates(final int x, final int z) {
             this.x = x;

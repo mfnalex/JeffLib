@@ -38,11 +38,12 @@ public class Replacer {
     /**
      * Applies all given placeholders
      */
-    public String apply(String input) {
+    public String apply(final String input) {
+        String output = input;
         for(final Map.Entry<String,String> entry : map.entrySet()) {
-            input = input.replace(entry.getKey(), entry.getValue());
+            output = output.replace(entry.getKey(), entry.getValue());
         }
-        return input;
+        return output;
     }
 
 }

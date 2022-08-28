@@ -33,10 +33,10 @@ import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.tuples.Pair;
-import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
+import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.v1_18_R2.ai.*;
 import com.mojang.authlib.GameProfile;
 import net.minecraft.advancements.critereon.DeserializationContext;
@@ -244,13 +244,13 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
-        asMob(entity).goalSelector.addGoal(priority, NMS.toNms(goal));
+        asMob(entity).goalSelector.addGoal(priority, toNms(goal));
     }
 
 
     @Override
     public void removeGoal(final Mob entity, final PathfinderGoal goal) {
-        asMob(entity).goalSelector.removeGoal(NMS.toNms(goal));
+        asMob(entity).goalSelector.removeGoal(toNms(goal));
     }
 
     @Override
@@ -344,7 +344,7 @@ public class NMSHandler implements AbstractNMSHandler {
         final ResourceLocation resourceLocation = CraftNamespacedKey.toMinecraft(key);
         final JsonElement jsonelement = ServerAdvancementManager.GSON.fromJson(advancement, JsonElement.class);
         final JsonObject jsonobject = GsonHelper.convertToJsonObject(jsonelement, "advancement");
-        net.minecraft.advancements.Advancement.Builder nms = net.minecraft.advancements.Advancement.Builder.fromJson(jsonobject, new DeserializationContext(resourceLocation, NMS.getServer().getPredicateManager()));
+        net.minecraft.advancements.Advancement.Builder nms = net.minecraft.advancements.Advancement.Builder.fromJson(jsonobject, new DeserializationContext(resourceLocation, getServer().getPredicateManager()));
         NMS.getServer().getAdvancements().advancements.add(Maps.newHashMap(Collections.singletonMap(resourceLocation, nms)));
         return Bukkit.getAdvancement(key);
     }
