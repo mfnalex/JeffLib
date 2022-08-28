@@ -22,6 +22,8 @@ import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoals;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
+import org.bukkit.ChatColor;
+import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Llama;

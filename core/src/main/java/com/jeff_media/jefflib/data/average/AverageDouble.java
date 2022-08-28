@@ -26,7 +26,7 @@ import java.util.Objects;
 /**
  * Represents an average double value consisting of a given number of previous values
  */
-public class AverageDouble {
+public final class AverageDouble {
 
     @Getter private final int maxSamples;
     @Getter private final double[] data;

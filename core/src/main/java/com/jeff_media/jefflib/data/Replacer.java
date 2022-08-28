@@ -16,17 +16,27 @@
  *
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.data;
 
+import java.util.Map;
 
-import net.minecraft.world.entity.monster.Blaze;
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+/**
+ * Replaces placeholders in a string
+ */
+public class Replacer {
 
-public final class NMS {
+    private final Map<String,String> map = new java.util.HashMap<>();
 
-    {
-        CraftServer server;
-        Blaze
+    public Replacer put(final String key, final String value) {
+        map.put(key, value);
+        return this;
+    }
+
+    public String apply(String input) {
+        for(final Map.Entry<String,String> entry : map.entrySet()) {
+            input = input.replace(entry.getKey(), entry.getValue());
+        }
+        return input;
     }
 
 }

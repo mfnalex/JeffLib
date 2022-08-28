@@ -34,8 +34,6 @@ import java.util.Objects;
  */
 public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
 
-    @Getter
-    @Setter
     @Nullable
     D fourth;
 
@@ -48,6 +46,20 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
         return new Quartet<>(first, second, third, fourth);
     }
 
+    @Nullable
+    public D getFourth() {
+        return fourth;
+    }
+
+    public void setFourth(@Nullable D fourth) {
+        this.fourth = fourth;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fourth);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -55,11 +67,6 @@ public class Quartet<A, B, C, D> extends Triplet<A, B, C> {
         if (!super.equals(o)) return false;
         final Quartet<?, ?, ?, ?> quartet = (Quartet<?, ?, ?, ?>) o;
         return Objects.equals(fourth, quartet.fourth);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), fourth);
     }
 
     @Override

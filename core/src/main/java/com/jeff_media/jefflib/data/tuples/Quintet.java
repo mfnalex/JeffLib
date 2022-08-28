@@ -18,9 +18,6 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.annotation.Nullable;
 import java.util.Objects;
 
@@ -35,8 +32,6 @@ import java.util.Objects;
  */
 public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
 
-    @Getter
-    @Setter
     @Nullable
     E fifth;
 
@@ -49,6 +44,20 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
         return new Quintet<>(first, second, third, fourth, fifth);
     }
 
+    @Nullable
+    public E getFifth() {
+        return fifth;
+    }
+
+    public void setFifth(@Nullable E fifth) {
+        this.fifth = fifth;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), fifth);
+    }
+
     @Override
     public boolean equals(final Object o) {
         if (this == o) return true;
@@ -56,11 +65,6 @@ public class Quintet<A, B, C, D, E> extends Quartet<A, B, C, D> {
         if (!super.equals(o)) return false;
         final Quintet<?, ?, ?, ?, ?> quintet = (Quintet<?, ?, ?, ?, ?>) o;
         return Objects.equals(fifth, quintet.fifth);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), fifth);
     }
 
     @Override

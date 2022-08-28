@@ -18,9 +18,6 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.annotation.Nullable;
 import java.util.Objects;
 
@@ -31,12 +28,9 @@ import java.util.Objects;
  * @param <B> Type of second element
  */
 public class Pair<A, B> {
-    @Getter
-    @Setter
+
     @Nullable
     A first;
-    @Getter
-    @Setter
     @Nullable
     B second;
 
@@ -47,6 +41,24 @@ public class Pair<A, B> {
 
     public static <A, B> Pair<A, B> of(@Nullable final A first, @Nullable final B second) {
         return new Pair<>(first, second);
+    }
+
+    @Nullable
+    public A getFirst() {
+        return first;
+    }
+
+    public void setFirst(@Nullable A first) {
+        this.first = first;
+    }
+
+    @Nullable
+    public B getSecond() {
+        return second;
+    }
+
+    public void setSecond(@Nullable B second) {
+        this.second = second;
     }
 
     @Override

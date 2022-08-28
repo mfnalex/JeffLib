@@ -18,9 +18,6 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.annotation.Nullable;
 import java.util.Objects;
 
@@ -33,8 +30,6 @@ import java.util.Objects;
  */
 public class Triplet<A, B, C> extends Pair<A, B> {
 
-    @Getter
-    @Setter
     @Nullable
     C third;
 
@@ -45,6 +40,15 @@ public class Triplet<A, B, C> extends Pair<A, B> {
 
     public static <A, B, C> Triplet<A, B, C> of(@Nullable final A first, @Nullable final B second, @Nullable final C third) {
         return new Triplet<>(first, second, third);
+    }
+
+    @Nullable
+    public C getThird() {
+        return third;
+    }
+
+    public void setThird(@Nullable C third) {
+        this.third = third;
     }
 
     @Override

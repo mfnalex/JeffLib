@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
  * Represents an entity's navigation, movement, jump and look controls
  */
 @DoNotRename
-public class Controls {
+public final class Controls {
 
     private final MoveController moveController;
     private final JumpController jumpController;
