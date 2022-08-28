@@ -62,7 +62,6 @@ public final class VectorUtils {
     }
 
     private static EulerAngle convertVectorToEulerAngle(final Vector vec) {
-
         final double x = vec.getX();
         final double y = vec.getY();
         final double z = vec.getZ();
@@ -92,7 +91,6 @@ public final class VectorUtils {
         }
 
         return new EulerAngle(eulX, eulY, 0);
-
     }
 
     public static Vector getCenter(final Vector vector1, final Vector vector2) {
