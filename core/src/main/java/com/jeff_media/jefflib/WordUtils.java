@@ -99,7 +99,7 @@ public final class WordUtils {
      * @param start Starting index to append strings together with
      * @return String The final String
      */
-    public static String buildString(String[] args, int start) {
+    public static String buildString(final String[] args, final int start) {
         StringBuilder stringBuilder = new StringBuilder();
         for(int i = start; i < args.length; i++) {
             stringBuilder.append(args[i]).append(" ");
@@ -107,7 +107,7 @@ public final class WordUtils {
         return stringBuilder.substring(0, stringBuilder.length()-1);
     }
 
-    public static int countChar(String string, char aChar) {
+    public static int countChar(final String string, final char aChar) {
         int count = 0;
         char[] arr = string.toCharArray();
         for (int i = 0; i < string.length(); i++) {

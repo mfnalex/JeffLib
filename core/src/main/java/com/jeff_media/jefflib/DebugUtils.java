@@ -61,30 +61,11 @@ public class DebugUtils {
         }
     }
 
-    public static ItemStack getShell(ShellType type) {
-        return type.getItemstack().clone();
-    }
-
     public static void print(final Collection<?> collection) {
         collection.forEach(System.out::println);
     }
 
-    public enum ShellType {
-        NAUTILUS_SHELL(Material.NAUTILUS_SHELL), TURTLE_SHELL(Material.TURTLE_HELMET), SHULKER_SHELL(Material.SHULKER_SHELL);
 
-        @Getter
-        private final Material material;
-        private final ItemStack itemstack;
-
-        ShellType(Material material) {
-            this.material = material;
-            this.itemstack = new ItemStack(material);
-        }
-
-        public ItemStack getItemstack() {
-            return itemstack.clone();
-        }
-    }
 
     public static class NMSTest {
 
@@ -197,26 +178,26 @@ public class DebugUtils {
     }
 
     public static final class Events {
-        private static final Logger logger = JeffLib.getPlugin().getLogger();
+        private static final Logger LOGGER = JeffLib.getPlugin().getLogger();
 
         public static void debug(final InventoryClickEvent event) {
             final Inventory top = event.getView().getTopInventory();
             final Inventory bottom = event.getView().getBottomInventory();
-            logger.warning("============================================================");
-            logger.warning("Top inventory holder: " + (top.getHolder() == null ? null : top.getHolder().getClass().getName()));
-            logger.warning("Bottom inventory holder: " + (bottom.getHolder() == null ? null : bottom.getHolder().getClass().getName()));
-            logger.warning("InventoryAction: " + event.getAction().name());
-            logger.warning("Clicked inventory holder: " + (event.getClickedInventory() == null ? null : (event.getClickedInventory().getHolder() == null ? null : event.getClickedInventory().getHolder().getClass().getName())));
-            logger.warning("Current Item: " + event.getCurrentItem());
-            logger.warning("Cursor: " + event.getCursor());
-            logger.warning("Hotbar Button: " + event.getHotbarButton());
-            logger.warning("Raw Slot: " + event.getRawSlot());
-            logger.warning("Slot: " + event.getSlot());
-            logger.warning("Slot Type: " + event.getSlotType().name());
-            logger.warning("Left Click: " + event.isLeftClick());
-            logger.warning("Right Click: " + event.isRightClick());
-            logger.warning("Shift Click: " + event.isShiftClick());
-            logger.warning("============================================================");
+            LOGGER.warning("============================================================");
+            LOGGER.warning("Top inventory holder: " + (top.getHolder() == null ? null : top.getHolder().getClass().getName()));
+            LOGGER.warning("Bottom inventory holder: " + (bottom.getHolder() == null ? null : bottom.getHolder().getClass().getName()));
+            LOGGER.warning("InventoryAction: " + event.getAction().name());
+            LOGGER.warning("Clicked inventory holder: " + (event.getClickedInventory() == null ? null : (event.getClickedInventory().getHolder() == null ? null : event.getClickedInventory().getHolder().getClass().getName())));
+            LOGGER.warning("Current Item: " + event.getCurrentItem());
+            LOGGER.warning("Cursor: " + event.getCursor());
+            LOGGER.warning("Hotbar Button: " + event.getHotbarButton());
+            LOGGER.warning("Raw Slot: " + event.getRawSlot());
+            LOGGER.warning("Slot: " + event.getSlot());
+            LOGGER.warning("Slot Type: " + event.getSlotType().name());
+            LOGGER.warning("Left Click: " + event.isLeftClick());
+            LOGGER.warning("Right Click: " + event.isRightClick());
+            LOGGER.warning("Shift Click: " + event.isShiftClick());
+            LOGGER.warning("============================================================");
         }
 
     }

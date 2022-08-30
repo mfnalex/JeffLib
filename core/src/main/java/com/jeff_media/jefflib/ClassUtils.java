@@ -124,8 +124,7 @@ public final class ClassUtils {
         if(source == null) return Collections.emptyList();
         final URL url = source.getLocation();
         try (
-                final ZipInputStream zip = new ZipInputStream(url.openStream());
-        ) {
+                final ZipInputStream zip = new ZipInputStream(url.openStream())) {
             final List<String> classes = new ArrayList<>();
             while(true) {
                 final ZipEntry entry = zip.getNextEntry();

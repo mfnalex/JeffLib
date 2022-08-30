@@ -44,16 +44,12 @@ public interface PathNavigation {
      */
     boolean moveTo(final double x, final double y, final double z, final double speedModifier);
 
-    ;
-
     /**
      * Makes the entity move to the specified location
      */
     default boolean moveTo(@Nonnull final Entity entity, final double speedModifier) {
         return moveTo(entity.getLocation(), speedModifier);
     }
-
-    ;
 
     /**
      * Makes the entity move to the specified location

@@ -29,7 +29,7 @@ import javax.annotation.Nonnull;
  * Represents an entity's target selector
  */
 @DoNotRename
-public class TargetSelector extends GoalSelector{
+public final class TargetSelector extends GoalSelector{
 
     private TargetSelector(@Nonnull final Mob mob) {
         super(mob);

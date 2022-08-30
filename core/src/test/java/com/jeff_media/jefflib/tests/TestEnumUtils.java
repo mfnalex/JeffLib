@@ -52,5 +52,5 @@ public class TestEnumUtils extends UnitTest {
 
     private enum TestEnum {
         A, B, C
-    };
+    }
 }

@@ -68,11 +68,6 @@ public final class JeffLib {
     }
 
     private static void initialize() {
-
-        // TODO: Tell people to do this themselves in their onLoad()
-        //ConfigurationSerialization.registerClass(Hologram.class, plugin.getName().toLowerCase(Locale.ROOT) + "Hologram");
-        //ConfigurationSerialization.registerClass(WorldBoundingBox.class, plugin.getName().toLowerCase(Locale.ROOT) + "WorldBoundingBox");
-
         if (!ServerUtils.isRunningMockBukkit()) {
             try {
                 try (final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(JeffLib.class.getResourceAsStream("/jefflib.version")), StandardCharsets.UTF_8))) {

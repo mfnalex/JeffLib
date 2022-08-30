@@ -69,9 +69,4 @@ public class TestMcVersion extends UnitTest {
         Assertions.assertEquals("1.17", new McVersion(1, 17).toString());
         Assertions.assertEquals("1.17", new McVersion(1, 17, 0).getName());
     }
-
-    @Test
-    public void testNmsVersion() {
-        //Assertions.assertEquals("1_18_R2", new McVersion(1, 18, 2).getNmsVersion());
-    }
 }

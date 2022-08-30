@@ -32,6 +32,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
+import org.bukkit.persistence.PersistentDataType;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -91,6 +92,7 @@ public final class ItemStackUtils {
      * display-name: "name"
      * custom-model-data: 2
      * damage: 100
+     * prevent-stacking: false
      * enchantments:
      *   unbreaking: 1
      *   efficiency: 5
@@ -156,6 +158,10 @@ public final class ItemStackUtils {
 
         if (meta instanceof Damageable) {
             ((Damageable) meta).setDamage(damage);
+        }
+
+        if(config.getBoolean("prevent-stacking", false)) {
+            meta.getPersistentDataContainer().set(PDCUtils.getKey("prevent-stacking"), PersistentDataType.STRING, UUID.randomUUID().toString());
         }
 
         item.setItemMeta(meta);

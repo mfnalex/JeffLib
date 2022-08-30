@@ -74,6 +74,7 @@ public interface PathfinderGoal {
      * Returns whether this goal is interruptable.
      * Only used in 1.16.2 and later
      */
+    @SuppressWarnings("SameReturnValue")
     default boolean isInterruptable() {
         return true;
     }
@@ -82,6 +83,7 @@ public interface PathfinderGoal {
      * Returns whether this goal requires updates every tick.
      * Only used in 1.18 and later
      */
+    @SuppressWarnings("SameReturnValue")
     default boolean requiresUpdateEveryTick() {
         return false;
     }

@@ -42,11 +42,11 @@ import java.util.Map;
 public class HologramManager {
 
     @Getter
-    private static final List<Hologram> holograms = new ArrayList<>();
+    private static final List<Hologram> HOLOGRAMS = new ArrayList<>();
     private static final Map<OfflinePlayer, List<Hologram>> SHOWN_HOLOGRAMS = new HashMap<>();
     private static final Runnable RUNNABLE = () -> {
         for (final Player player : Bukkit.getOnlinePlayers()) {
-            for (final Hologram hologram : holograms) {
+            for (final Hologram hologram : HOLOGRAMS) {
                 if (!SHOWN_HOLOGRAMS.containsKey(player)) {
                     SHOWN_HOLOGRAMS.put(player, new ArrayList<>());
                 }
@@ -80,7 +80,7 @@ public class HologramManager {
      * Removes all holograms for all players
      */
     public static void unloadAllHolograms() {
-        for (final Hologram hologram : holograms) {
+        for (final Hologram hologram : HOLOGRAMS) {
             for (final Player player : Bukkit.getOnlinePlayers()) {
                 if (SHOWN_HOLOGRAMS.containsKey(player) && SHOWN_HOLOGRAMS.get(player).contains(hologram)) {
                     SHOWN_HOLOGRAMS.get(player).remove(hologram);
@@ -91,7 +91,7 @@ public class HologramManager {
             }
 
         }
-        holograms.clear();
+        HOLOGRAMS.clear();
     }
 
 

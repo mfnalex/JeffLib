@@ -47,7 +47,9 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList HANDLERS = new HandlerList();
     @Getter
-    private final @Nonnull Location from, to;
+    private final @Nonnull Location from;
+    @Getter
+    private final @Nonnull Location to;
     private boolean cancelled;
 
     public PlayerJumpEvent(@Nonnull Player who, @Nonnull Location from, @Nonnull Location to) {
@@ -115,33 +117,5 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
                 player.teleport(from);
             }
         }
-/*        private final Set<UUID> playersOnGround = Sets.newHashSet();
-
-        @EventHandler
-        public void onMove(PlayerMoveEvent spigotEvent) {
-            final Player player = spigotEvent.getPlayer();
-            if (player.getVelocity().getY() > 0) {
-                double jumpVelocity = 0.42D;
-                if (player.hasPotionEffect(PotionEffectType.JUMP)) {
-                    jumpVelocity += (player.getPotionEffect(PotionEffectType.JUMP).getAmplifier() + 1) * 0.1F;
-                }
-                if (spigotEvent.getPlayer().getLocation().getBlock().getType() != Material.LADDER && playersOnGround.contains(player.getUniqueId())) {
-                    if (!player.isOnGround() && NumberUtils.isEqual(player.getVelocity().getY(), jumpVelocity)) {
-                        final PlayerJumpEvent ownEvent = new PlayerJumpEvent(player, spigotEvent.getFrom(), spigotEvent.getTo());
-                        Bukkit.getPluginManager().callEvent(ownEvent);
-                        if(ownEvent.isCancelled()) {
-                            spigotEvent.setCancelled(true);
-                        }
-                    }
-                }
-            }
-            if (player.isOnGround()) {
-                playersOnGround.add(player.getUniqueId());
-            } else {
-                playersOnGround.remove(player.getUniqueId());
-            }
-        }*/
     }
-
-
 }

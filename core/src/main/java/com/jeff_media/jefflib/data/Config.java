@@ -50,7 +50,7 @@ public class Config extends YamlConfiguration {
         final YamlConfiguration defaultConfig = new YamlConfiguration();
 
         try (final InputStream inputStream = JeffLib.getPlugin().getResource(filename)) {
-            if(inputStream != null) {
+            if (inputStream != null) {
                 try (final Reader reader = new InputStreamReader(Objects.requireNonNull(inputStream))) {
                     defaultConfig.load(reader);
                 }
@@ -82,10 +82,9 @@ public class Config extends YamlConfiguration {
     private void saveDefaultConfig() {
         if (!file.exists()) {
             File parent = file.getParentFile();
-            if (parent != null) {
-                if(!parent.exists() && !parent.mkdirs()) {
-                    throw new UncheckedIOException(new IOException("Could not create directory " + parent.getAbsolutePath()));
-                }
+            if (parent != null && !parent.exists() && !parent.mkdirs()) {
+                throw new UncheckedIOException(new IOException("Could not create directory " + parent.getAbsolutePath()));
+
             }
             JeffLib.getPlugin().saveResource(filename, false);
         }
@@ -93,6 +92,7 @@ public class Config extends YamlConfiguration {
 
     /**
      * Saves the configuration under its original file name
+     *
      * @throws IOException if the underlying YamlConfiguration throws it
      */
     public void save() throws IOException {

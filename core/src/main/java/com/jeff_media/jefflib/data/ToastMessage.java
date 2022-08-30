@@ -48,7 +48,7 @@ public class ToastMessage {
     private final Material icon;
     private final NamespacedKey key = PDCUtils.getRandomKey();
 
-    public ToastMessage(@Nonnull final String title, @Nullable final String description, @Nonnull final Material icon, @Nonnull final FrameType frameType, boolean announceToChat) {
+    public ToastMessage(@Nonnull final String title, @Nullable final String description, @Nonnull final Material icon, @Nonnull final FrameType frameType, final boolean announceToChat) {
         this.title = title;
         this.frameType = frameType;
         this.icon = icon;

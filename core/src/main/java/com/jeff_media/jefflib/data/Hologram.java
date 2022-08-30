@@ -158,7 +158,7 @@ public class Hologram implements ConfigurationSerializable {
             //System.out.println(entity.toString());
             current = current.add(0, lineOffset, 0);
         }
-        HologramManager.getHolograms().add(this);
+        HologramManager.getHOLOGRAMS().add(this);
     }
 
     @Nonnull

@@ -31,7 +31,9 @@ import org.bukkit.World;
 @AllArgsConstructor
 public class SimpleLocation {
     private World world;
-    private int x, y, z;
+    private int x;
+    private int y;
+    private int z;
 
     /**
      * Creates a SimpleLocation from a given {@link Location}
