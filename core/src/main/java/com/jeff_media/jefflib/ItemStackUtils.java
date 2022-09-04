@@ -255,4 +255,11 @@ public final class ItemStackUtils {
         item.setItemMeta(meta);
     }
 
+    /**
+     * Makes an item unstackable by adding a random UUID to the item's "prevent-stacking" PDC tag
+     */
+    public static void makeUnstackable(ItemStack item) {
+        PDCUtils.set(item, "prevent-stacking", PersistentDataType.STRING, UUID.randomUUID().toString());
+    }
+
 }

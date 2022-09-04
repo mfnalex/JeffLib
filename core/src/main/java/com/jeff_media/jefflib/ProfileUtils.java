@@ -18,6 +18,8 @@
 
 package com.jeff_media.jefflib;
 
+import com.google.common.collect.ImmutableMap;
+
 import javax.annotation.Nonnull;
 import java.util.UUID;
 

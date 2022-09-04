@@ -19,12 +19,20 @@
 package com.jeff_media.jefflib;
 
 
+import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
+import org.bukkit.entity.Player;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.Plugin;
 
 public final class NMS {
 
     {
-        CraftServer server;
+        Plugin myPlugin = Bukkit.getPluginManager().getPlugin("MyPlugin");
+        Player myPlayer = Bukkit.getPlayer("MyPlayer");
+        myPlayer.getPersistentDataContainer().get(new NamespacedKey(myPlugin, "MyKey"), PersistentDataType.STRING);
+
     }
 
 }

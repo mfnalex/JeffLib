@@ -65,7 +65,7 @@ public final class SoundData {
      * <b>Example YAML:</b>
      * <pre>
      * my_sound:
-     *  sound: AMBIENT_CAVE    # case insensitive for builtin sounds, CaSe SeNsItIvE for custom sounds
+     *  effect: AMBIENT_CAVE    # case insensitive for builtin sounds, CaSe SeNsItIvE for custom sounds
      *  volume: 0.5            # optional, default 1
      *  pitch: 1.5             # optional, default 1
      *  pitch-variant: 0.5     # optional, default 0. If this is set to 0.5, and pitch is set to 1.5, the sound will play with a pitch between 1 and 2
@@ -94,8 +94,13 @@ public final class SoundData {
         if (soundCategory == null) {
             throw new IllegalArgumentException("Unknown sound category: " + soundCategoryName);
         }
-
-        return new SoundData(soundName, volume, pitch, pitchVariant, soundCategory);
+        try {
+            Sound tmpSound = Sound.valueOf(soundName);
+            soundName = tmpSound.getKey().getKey();
+        } catch (IllegalArgumentException ignored) {
+            //throw new IllegalArgumentException("Unknown sound: " + soundName);
+        }
+        return new SoundData(soundName.toLowerCase(Locale.ROOT), volume, pitch, pitchVariant, soundCategory);
     }
 
     /**
