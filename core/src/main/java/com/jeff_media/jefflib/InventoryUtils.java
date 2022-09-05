@@ -30,7 +30,9 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.Predicate;
 
 /**
  * Inventory related methods
@@ -57,7 +59,7 @@ public final class InventoryUtils {
      */
     public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(array).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        Arrays.stream(array).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
@@ -66,7 +68,7 @@ public final class InventoryUtils {
      */
     public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(array).filter(candidate -> candidate.getType() == material).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        Arrays.stream(array).filter(Objects::nonNull).filter(candidate -> candidate.getType() == material).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
@@ -75,7 +77,7 @@ public final class InventoryUtils {
      */
     public static int countItemStacks(@Nonnull final Inventory inventory, @Nonnull final ItemStack item) {
         final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(inventory.getContents()).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        Arrays.stream(inventory.getContents()).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
@@ -84,7 +86,7 @@ public final class InventoryUtils {
      */
     public static int countMaterials(@Nonnull final Inventory inventory, @Nonnull final Material material) {
         final AtomicInteger amount = new AtomicInteger(0);
-        inventory.all(material).values().forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
+        inventory.all(material).values().stream().filter(Objects::nonNull).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
         return amount.get();
     }
 
