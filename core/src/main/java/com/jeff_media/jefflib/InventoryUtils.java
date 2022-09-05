@@ -18,6 +18,7 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.data.nuclear.NuclearInteger;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -58,36 +59,28 @@ public final class InventoryUtils {
      * Counts how many times the given ItemStack is present in the given array
      */
     public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final ItemStack item) {
-        final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(array).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
-        return amount.get();
+        return Arrays.stream(array).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given array
      */
     public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final Material material) {
-        final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(array).filter(Objects::nonNull).filter(candidate -> candidate.getType() == material).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
-        return amount.get();
+        return Arrays.stream(array).filter(Objects::nonNull).filter(candidate -> candidate.getType() == material).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given ItemStack is present in the given inventory
      */
     public static int countItemStacks(@Nonnull final Inventory inventory, @Nonnull final ItemStack item) {
-        final AtomicInteger amount = new AtomicInteger(0);
-        Arrays.stream(inventory.getContents()).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
-        return amount.get();
+        return Arrays.stream(inventory.getContents()).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given inventory
      */
     public static int countMaterials(@Nonnull final Inventory inventory, @Nonnull final Material material) {
-        final AtomicInteger amount = new AtomicInteger(0);
-        inventory.all(material).values().stream().filter(Objects::nonNull).forEach(itemStack -> amount.addAndGet(itemStack.getAmount()));
-        return amount.get();
+        return inventory.all(material).values().stream().filter(Objects::nonNull).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
