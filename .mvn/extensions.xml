@@ -17,9 +17,9 @@
   -->
 
 <extensions>
-    <extension>
-        <groupId>com.gradle</groupId>
-        <artifactId>gradle-enterprise-maven-extension</artifactId>
-        <version>1.15.2</version>
-    </extension>
+<!--    <extension>-->
+<!--        <groupId>com.gradle</groupId>-->
+<!--        <artifactId>gradle-enterprise-maven-extension</artifactId>-->
+<!--        <version>1.15.2</version>-->
+<!--    </extension>-->
 </extensions>

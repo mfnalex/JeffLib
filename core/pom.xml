@@ -34,7 +34,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>11.1.3</version>
+        <version>11.1.5</version>
     </parent>
 
     <build>

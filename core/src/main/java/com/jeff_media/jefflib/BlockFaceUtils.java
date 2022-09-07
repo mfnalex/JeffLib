@@ -21,6 +21,8 @@ package com.jeff_media.jefflib;
 import lombok.experimental.UtilityClass;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.data.Bisected;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
 
 import static org.bukkit.block.BlockFace.*;
@@ -117,5 +119,18 @@ public final class BlockFaceUtils {
             if (existing.getRelative(blockFace).equals(newBlock)) return blockFace;
         }
         throw new IllegalArgumentException("No BlockFace found");
+    }
+
+    /**
+     * Gets the "other side" of this block. E.g. if the block is a top door part, this will return the bottom door part.
+     * @throws IllegalArgumentException if the block is not a bisected block
+     */
+    public static Block getOppositeOfBisected(final Block block) {
+        BlockData data = block.getBlockData();
+        if(!(data instanceof Bisected)) {
+            throw new IllegalArgumentException("Given block's data must be instanceof Bisected");
+        }
+        Bisected bisected = (Bisected) block.getBlockData();
+        return bisected.getHalf() == Bisected.Half.TOP ? block.getRelative(DOWN) : block.getRelative(UP);
     }
 }

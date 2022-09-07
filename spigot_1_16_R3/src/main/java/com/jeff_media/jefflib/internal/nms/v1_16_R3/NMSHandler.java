@@ -32,6 +32,7 @@ import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
+import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -353,5 +354,12 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public void respawnPlayer(Player player) {
         NMS.getServer().getPlayerList().moveToWorld(NMS.toNms(player),true);
+    }
+
+    @Override
+    public SerializedEntity serialize(org.bukkit.entity.Entity entity) {
+        NBTTagCompound tag = new NBTTagCompound();
+        toNms(entity).save(tag);
+        return new SerializedEntity(entity.getType(), tag.toString());
     }
 }

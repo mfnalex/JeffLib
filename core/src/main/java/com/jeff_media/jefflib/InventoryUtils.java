@@ -18,7 +18,6 @@
 
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.data.nuclear.NuclearInteger;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
