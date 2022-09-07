@@ -1,16 +1,31 @@
 package com.jeff_media.jefflib.data;
 
+import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Represents a serialized entity that can be respawned later, keeping ALL NBT data
+ * @nms
+ */
+@NMS
 public class SerializedEntity implements ConfigurationSerializable {
 
     private final EntityType entityType;
     private final String nbtData;
+
+    /**
+     * Creates a new SerializedEntity from the given entity
+     */
+    public static SerializedEntity of(Entity entity) {
+        return JeffLib.getNMSHandler().serialize(entity);
+    }
 
     public SerializedEntity(EntityType entityType, String nbtData) {
         this.entityType = entityType;
@@ -22,12 +37,28 @@ public class SerializedEntity implements ConfigurationSerializable {
         this.nbtData = (String) map.get("nbtData");
     }
 
+    /**
+     * Returns the original entity's {@link EntityType}
+     */
     public EntityType getEntityType() {
         return entityType;
     }
 
+    /**
+     * Returns the original entity's NBT data as String
+     */
     public String getNbtData() {
         return nbtData;
+    }
+
+    /**
+     * Spawns the entity at the given location
+     * @return The spawned entity
+     */
+    public Entity spawn(@NotNull org.bukkit.Location location) {
+        Entity entity = location.getWorld().spawnEntity(location, entityType);
+        JeffLib.getNMSHandler().applyNbt(entity, nbtData);
+        return entity;
     }
 
     @NotNull

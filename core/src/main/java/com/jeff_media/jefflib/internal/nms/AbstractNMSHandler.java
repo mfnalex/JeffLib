@@ -143,4 +143,6 @@ public interface AbstractNMSHandler {
     void respawnPlayer(Player player);
 
     SerializedEntity serialize(Entity entity);
+
+    void applyNbt(Entity entity, String nbtData);
 }

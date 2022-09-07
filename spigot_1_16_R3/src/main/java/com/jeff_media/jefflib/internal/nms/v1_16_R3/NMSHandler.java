@@ -40,6 +40,7 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.v1_16_R3.ai.*;
 import com.mojang.authlib.GameProfile;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.server.v1_16_R3.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -361,5 +362,16 @@ public class NMSHandler implements AbstractNMSHandler {
         NBTTagCompound tag = new NBTTagCompound();
         toNms(entity).save(tag);
         return new SerializedEntity(entity.getType(), tag.toString());
+    }
+
+    @Override
+    public void applyNbt(org.bukkit.entity.Entity entity, String nbtData) {
+        NBTTagCompound tag = null;
+        try {
+            tag = MojangsonParser.parse(nbtData);
+        } catch (CommandSyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
+        toNms(entity).load(tag);
     }
 }

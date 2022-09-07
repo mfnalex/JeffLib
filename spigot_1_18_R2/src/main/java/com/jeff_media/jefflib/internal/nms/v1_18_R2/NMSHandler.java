@@ -40,6 +40,7 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
 import com.jeff_media.jefflib.internal.nms.v1_18_R2.ai.*;
 import com.mojang.authlib.GameProfile;
+import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -377,6 +378,17 @@ public class NMSHandler implements AbstractNMSHandler {
         CompoundTag tag = new CompoundTag();
         toNms(entity).saveWithoutId(tag);
         return new SerializedEntity(entity.getType(), tag.getAsString());
+    }
+
+    @Override
+    public void applyNbt(org.bukkit.entity.Entity entity, String nbtData) {
+        CompoundTag tag = null;
+        try {
+            tag = TagParser.parseTag(nbtData);
+        } catch (CommandSyntaxException e) {
+            throw new IllegalArgumentException(e);
+        }
+        toNms(entity).load(tag);
     }
 
 }
