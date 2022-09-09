@@ -38,7 +38,7 @@ import java.util.function.Predicate;
  * Inventory related methods
  */
 @UtilityClass
-public final class InventoryUtils {
+public class InventoryUtils {
 
     /**
      * Checks whether the given InventoryDragEvent also affects the top Inventory.

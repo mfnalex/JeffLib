@@ -155,6 +155,11 @@
             <id>lumine-repo</id>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
+        <!-- PlotSquared 6 -->
+        <repository>
+            <id>intellectual-sites</id>
+            <url>https://mvn.intellectualsites.com/content/repositories/snapshots/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -273,6 +278,28 @@
             <scope>provided</scope>
         </dependency>
         <!-- MMOItems End -->
+
+        <!-- PlotSquared 6 Start -->
+        <dependency>
+            <groupId>com.plotsquared</groupId>
+            <artifactId>PlotSquared-Core</artifactId>
+            <version>6.6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.plotsquared</groupId>
+            <artifactId>PlotSquared-Bukkit</artifactId>
+            <version>6.6.0</version>
+            <scope>provided</scope>
+        </dependency>
+        <!-- PlotSquared 6 End -->
+
+        <dependency>
+            <groupId>com.github.angeschossen</groupId>
+            <artifactId>LandsAPI</artifactId>
+            <version>6.14.4</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
 

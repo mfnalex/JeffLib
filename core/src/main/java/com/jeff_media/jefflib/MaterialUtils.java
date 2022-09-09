@@ -32,7 +32,7 @@ import java.util.*;
  * Material related methods
  */
 @UtilityClass
-public final class MaterialUtils {
+public class MaterialUtils {
 
     /**
      * Reads Minecraft's client translation files into a map

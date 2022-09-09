@@ -29,7 +29,7 @@ import java.util.Objects;
  * Experience related methods
  */
 @UtilityClass
-public final class ExpUtils {
+public class ExpUtils {
 
     /**
      * Gets the total amount of XP required to achieve a certain level when starting from 0 levels

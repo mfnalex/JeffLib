@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  * Enum related methods
  */
 @UtilityClass
-public final class EnumUtils {
+public class EnumUtils {
 
     private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
     private static final Map<Class<? extends Enum<?>>, List<? extends Enum<?>>> ENUM_ARRAY_CACHE = new HashMap<>();

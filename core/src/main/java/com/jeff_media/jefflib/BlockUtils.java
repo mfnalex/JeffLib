@@ -35,7 +35,7 @@ import java.util.function.Predicate;
  * Block related methods
  */
 @UtilityClass
-public final class BlockUtils {
+public class BlockUtils {
 
     /**
      * Offsets of valid bookshelf locations from an enchantment table
@@ -308,7 +308,7 @@ public final class BlockUtils {
      * Some predefined Block Predicates
      */
     @UtilityClass
-    public static final class Predicates {
+public class Predicates {
         /**
          * Represents AIR and CAVE_AIR
          */

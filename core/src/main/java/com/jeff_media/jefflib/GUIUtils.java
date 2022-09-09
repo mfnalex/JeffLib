@@ -26,7 +26,7 @@ import lombok.experimental.UtilityClass;
  * GUI related methods
  */
 @UtilityClass
-public final class GUIUtils {
+public class GUIUtils {
 
     /**
      * Converts a slot number to a {@link MenuPosition}

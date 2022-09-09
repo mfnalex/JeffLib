@@ -43,7 +43,7 @@ import java.util.*;
  * ItemStack related methods
  */
 @UtilityClass
-public final class ItemStackUtils {
+public class ItemStackUtils {
 
     /**
      * Magic value to identify "no NBT data"

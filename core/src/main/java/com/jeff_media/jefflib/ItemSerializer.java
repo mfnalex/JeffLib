@@ -39,7 +39,7 @@ import java.util.Base64;
  * Provides methods to serialize and deserialize ItemStacks, ItemStack arrays and Inventories to/from byte arrays and/or base64
  */
 @UtilityClass
-public final class ItemSerializer {
+public class ItemSerializer {
 
     /**
      * Turns an ItemStack into a Base64 String

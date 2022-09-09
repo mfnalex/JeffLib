@@ -24,7 +24,7 @@ import org.bukkit.util.EulerAngle;
 import org.bukkit.util.Vector;
 
 @UtilityClass
-public final class VectorUtils {
+public class VectorUtils {
 
     /**
      * Returns a location at the same coordinates as origin, looking exactly towards the given destination

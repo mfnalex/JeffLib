@@ -36,7 +36,7 @@ import java.util.UUID;
  * Location related methods
  */
 @UtilityClass
-public final class LocationUtils {
+public class LocationUtils {
 
     /**
      * Converts a location to a Vector containing the location's coordinates inside the chunk (rounded to int values)

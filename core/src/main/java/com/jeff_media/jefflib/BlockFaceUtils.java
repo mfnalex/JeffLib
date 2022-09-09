@@ -31,7 +31,7 @@ import static org.bukkit.block.BlockFace.*;
  * BlockFace related methods
  */
 @UtilityClass
-public final class BlockFaceUtils {
+public class class BlockFaceUtils {
 
     /**
      * Returns the opposite BlockFace for a given BlockFace. E.g. EAST_NORTH_EAST will return WEST_SOUTH_WEST. SELF will return SELF.

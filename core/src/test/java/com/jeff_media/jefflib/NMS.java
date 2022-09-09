@@ -23,16 +23,25 @@ import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
+
+import javax.sql.rowset.CachedRowSet;
+import java.io.UncheckedIOException;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
 
 public final class NMS {
 
     {
-        Plugin myPlugin = Bukkit.getPluginManager().getPlugin("MyPlugin");
-        Player myPlayer = Bukkit.getPlayer("MyPlayer");
-        myPlayer.getPersistentDataContainer().get(new NamespacedKey(myPlugin, "MyKey"), PersistentDataType.STRING);
-
     }
-
 }

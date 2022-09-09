@@ -35,7 +35,7 @@ import java.util.Set;
  * Particle related methods
  */
 @UtilityClass
-public final class ParticleUtils {
+public class ParticleUtils {
 
     /**
      * Returns a runnable that creates cube-formed particles

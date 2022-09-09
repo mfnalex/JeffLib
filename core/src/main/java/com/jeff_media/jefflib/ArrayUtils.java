@@ -30,7 +30,7 @@ import java.util.List;
  * Array manipulation related methods
  */
 @UtilityClass
-public final class ArrayUtils {
+public class ArrayUtils {
 
     /**
      * Combines the given arrays into a new array

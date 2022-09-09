@@ -34,7 +34,7 @@ import java.util.zip.ZipInputStream;
  * Class related methods that do not have something to do with Reflection (see {@link ReflUtils} for that)
  */
 @UtilityClass
-public final class ClassUtils {
+public class ClassUtils {
 
     /**
      * Checks if a class exists

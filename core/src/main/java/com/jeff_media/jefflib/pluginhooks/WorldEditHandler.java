@@ -39,7 +39,7 @@ import java.util.List;
 
 @Internal
 @UtilityClass
-final class WorldEditHandler {
+public class WorldEditHandler {
 
     @Nullable
     public static CuboidWorldBoundingBox getCuboidSelection(final org.bukkit.entity.Player player) {

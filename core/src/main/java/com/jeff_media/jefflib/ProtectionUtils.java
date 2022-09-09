@@ -18,69 +18,65 @@
 
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.data.ShadowPlayer;
-import com.jeff_media.jefflib.exceptions.MissingPluginException;
-import com.jeff_media.jefflib.pluginhooks.WorldGuardUtils;
+import com.jeff_media.jefflib.internal.protection.PlotSquared6Protection;
+import com.jeff_media.jefflib.internal.protection.PluginProtection;
+import com.jeff_media.jefflib.internal.protection.LandsProtection;
+import com.jeff_media.jefflib.internal.protection.WorldGuardProtection;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
-import org.bukkit.block.Block;
-import org.bukkit.block.BlockFace;
+import org.bukkit.Location;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Event;
-import org.bukkit.event.block.Action;
-import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 
+/**
+ * Utility class for common protection checks.
+ */
 @UtilityClass
 public class ProtectionUtils {
 
-    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Block block) {
-        return canBreak(player, block, false);
+    private final List<PluginProtection> PLUGIN_PROTECTIONS = new ArrayList<>();
+    private static boolean initialized = false;
+
+    void loadPluginProtections() {
+        PLUGIN_PROTECTIONS.clear();
+        register("WorldGuard", WorldGuardProtection::new);
+        register("Lands", LandsProtection::new);
+        register("PlotSquared", PlotSquared6Protection::new);
+        initialized = true;
     }
 
-    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
-        try {
-            if (!WorldGuardUtils.canBreak(player, block.getLocation())) return false;
-        } catch (final MissingPluginException ignored) {
-
+    private void register(String pluginName, Supplier<PluginProtection> supplier) {
+        Plugin protectionPlugin = Bukkit.getPluginManager().getPlugin(pluginName);
+        if (protectionPlugin != null) {
+            try {
+                PLUGIN_PROTECTIONS.add(supplier.get());
+                if(!initialized) JeffLib.getLogger().info("Hooked into " + protectionPlugin.getName() + " " + protectionPlugin.getDescription().getVersion());
+            } catch (Exception exception) {
+                if(!initialized) JeffLib.getLogger().warning("Could not hook into " + protectionPlugin.getName() + " " + protectionPlugin.getDescription().getVersion());
+            }
         }
-        final BlockBreakEvent event = new BlockBreakEvent(block, mute ? new ShadowPlayer(player) : player);
-        Bukkit.getPluginManager().callEvent(event);
-        return !event.isCancelled();
     }
 
-    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Block block) {
-        return canPlace(player, block, false);
-    }
-
-    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
-        try {
-            if (!WorldGuardUtils.canPlace(player, block.getLocation())) return false;
-        } catch (final MissingPluginException ignored) {
-
+    public boolean canBuild(@NotNull Player player, @NotNull Location location) {
+        for(PluginProtection pluginProtection : PLUGIN_PROTECTIONS) {
+            if(!pluginProtection.canBuild(player, location)) {
+                return false;
+            }
         }
-        final BlockPlaceEvent event = new BlockPlaceEvent(block, block.getState(), block.getRelative(BlockFace.DOWN), player.getInventory().getItemInMainHand(), mute ? new ShadowPlayer(player) : player, true, EquipmentSlot.HAND);
-        Bukkit.getPluginManager().callEvent(event);
-        return !event.isCancelled();
+        return true;
     }
 
-    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Block block) {
-        return canInteract(player, block, false);
-    }
-
-    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Block block, final boolean mute) {
-        try {
-            if (!WorldGuardUtils.canInteract(player, block.getLocation())) return false;
-        } catch (final MissingPluginException ignored) {
-
+    public boolean canBreak(@NotNull Player player, @NotNull Location location) {
+        for(PluginProtection pluginProtection : PLUGIN_PROTECTIONS) {
+            if(!pluginProtection.canBreak(player, location)) {
+                return false;
+            }
         }
-        final PlayerInteractEvent event = new PlayerInteractEvent(mute ? new ShadowPlayer(player) : player, Action.RIGHT_CLICK_BLOCK, player.getInventory().getItemInMainHand(), block, BlockFace.UP, EquipmentSlot.HAND);
-        Bukkit.getPluginManager().callEvent(event);
-        //noinspection deprecation
-        return !event.isCancelled() && event.useInteractedBlock() != Event.Result.DENY;
+        return true;
     }
 }

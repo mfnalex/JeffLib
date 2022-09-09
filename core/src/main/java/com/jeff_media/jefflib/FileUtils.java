@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * File related methods
  */
 @UtilityClass
-public final class FileUtils {
+public class FileUtils {
 
     /**
      * Replaces or creates a file with the given content

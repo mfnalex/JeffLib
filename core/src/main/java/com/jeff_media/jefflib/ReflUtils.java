@@ -38,7 +38,7 @@ import java.util.Objects;
  */
 @SuppressWarnings("NonThreadSafeLazyInitialization")
 @UtilityClass
-public final class ReflUtils {
+public class ReflUtils {
 
     private static final Map<String, Class<?>> CLASSES = new HashMap<>();
     private static final Table<Class<?>, String, Method> METHODS_NO_ARGS = HashBasedTable.create();

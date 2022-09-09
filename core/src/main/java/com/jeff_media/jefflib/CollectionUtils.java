@@ -31,7 +31,7 @@ import java.util.stream.Collectors;
  * Collection related methods. Also contains specific methods for concrete collection types.
  */
 @UtilityClass
-public final class CollectionUtils {
+public class CollectionUtils {
 
     /**
      * Creates a List of all given elements

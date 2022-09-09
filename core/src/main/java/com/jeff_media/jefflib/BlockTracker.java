@@ -42,7 +42,7 @@ import java.util.HashSet;
  * <b>Important: Tracking blocks requires registering the listener using {@link JeffLib#registerBlockTracker()}</b>
  */
 @UtilityClass
-public final class BlockTracker {
+public class BlockTracker {
 
     private static final Plugin plugin = JeffLib.getPlugin();
     private static final NamespacedKey PLAYER_PLACED_TAG = new NamespacedKey(plugin, "playerplaced");

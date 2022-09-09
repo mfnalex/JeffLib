@@ -35,7 +35,7 @@ import java.util.Map;
  * Enchantment related methods
  */
 @UtilityClass
-public final class EnchantmentUtils {
+public class EnchantmentUtils {
 
     /**
      * Registers a custom enchantment. You should not do that, but instead rely on PDC tags to identify your custom enchantments.

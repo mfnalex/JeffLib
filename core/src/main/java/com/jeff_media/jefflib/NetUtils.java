@@ -37,7 +37,7 @@ import java.util.stream.Stream;
  * Internet and network related methodds
  */
 @UtilityClass
-public final class NetUtils {
+public class NetUtils {
 
     /**
      * Downloads a URL and returns the response as String list asynchronously.

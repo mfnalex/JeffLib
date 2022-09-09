@@ -16,7 +16,7 @@
  *
  */
 
-package com.jeff_media.jefflib.pluginhooks;
+package com.jeff_media.jefflib.pluginhooks.worldguard;
 
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
@@ -34,12 +34,13 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Internal
 @UtilityClass
-final class WorldGuardHandler {
+public class WorldGuardHandler {
 
     @Nonnull
     public static List<String> getRegionsAtLocation(@Nonnull final Location location) {
@@ -58,21 +59,33 @@ final class WorldGuardHandler {
     }
 
     public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) {
-        return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_PLACE);
+        return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_PLACE);
     }
 
-    public static boolean testStateFlag(@Nonnull final Player player, @Nonnull final Location location, @Nonnull final StateFlag flag) {
-        final LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+    public static boolean testBuiltInStateFlag(@Nullable final Player player, @Nonnull final Location location, @Nonnull final StateFlag flag) {
+        final LocalPlayer localPlayer = player == null ? null : WorldGuardPlugin.inst().wrapPlayer(player);
         final ApplicableRegionSet set = getRegionSet(location);
         return set.testState(localPlayer, flag);
     }
 
+    public static boolean testStateFlag(@Nullable final Player player, @Nonnull final Location location, @Nonnull final com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag flag) {
+        if(flag instanceof WorldGuardStateFlag) {
+            return testBuiltInStateFlag(player, location, ((WorldGuardStateFlag)flag).getWorldGuardStateFlag());
+        } else {
+            throw new IllegalArgumentException("Given flag is not a WorldGuardStateFlag");
+        }
+    }
+
     public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) {
-        return testStateFlag(player, location, Flags.BUILD) && testStateFlag(player, location, Flags.BLOCK_BREAK);
+        return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_BREAK);
     }
 
     public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) {
-        return testStateFlag(player, location, Flags.INTERACT);
+        return testBuiltInStateFlag(player, location, Flags.INTERACT);
+    }
+
+    public static com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag registerStateFlag(String name, com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag.State defaultValue) {
+        return new WorldGuardStateFlag(name, defaultValue);
     }
 
 }

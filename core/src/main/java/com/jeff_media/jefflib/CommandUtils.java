@@ -38,7 +38,7 @@ import java.util.Iterator;
  * Command registration related methods
  */
 @UtilityClass
-public final class CommandUtils {
+public class CommandUtils {
 
     /**
      * Registers a new command

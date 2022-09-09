@@ -24,7 +24,7 @@ import lombok.experimental.UtilityClass;
  * Converts seconds, minutes or hours to their correseponding amount of ticks
  */
 @UtilityClass
-public final class Ticks {
+public class Ticks {
 
     /**
      * Converts hours to ticks

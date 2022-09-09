@@ -29,7 +29,7 @@ import javax.annotation.Nullable;
  * Sends messages to CommandSenders while applying color codes, gradients, placeholders and emojis
  */
 @UtilityClass
-public final class Msg {
+public class Msg {
 
     /**
      * Sends a message to the given CommandSender, translating all placeholders / color codes

@@ -30,6 +30,11 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
+import org.bukkit.event.Listener;
+import org.bukkit.event.server.PluginDisableEvent;
+import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -50,7 +55,7 @@ import java.util.logging.Logger;
  * Main class of the library, has to be initialized for certain methods to work.
  */
 @UtilityClass
-public final class JeffLib {
+public class JeffLib {
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
@@ -61,13 +66,11 @@ public final class JeffLib {
     @Getter
     private static String version = "N/A";
     private static AbstractNMSHandler abstractNmsHandler;
+    private static boolean initDone = false;
 
     static {
         checkRelocation();
-        initialize();
-    }
 
-    private static void initialize() {
         if (!ServerUtils.isRunningMockBukkit()) {
             try {
                 try (final BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(JeffLib.class.getResourceAsStream("/jefflib.version")), StandardCharsets.UTF_8))) {
@@ -129,6 +132,11 @@ public final class JeffLib {
         JeffLib.plugin = plugin;
     }
 
+    /**
+     * Only used for mock messages before getting an instance
+     */
+    @Internal
+    @Deprecated
     private static Plugin getPlugin0() {
         if (plugin == null) {
             plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
@@ -147,6 +155,7 @@ public final class JeffLib {
             checkRelocation();
             try {
                 plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
+                init(plugin);
             } catch (final IllegalArgumentException | IllegalStateException exception) {
                 List<String> errorLocation = new ArrayList<>();
                 String errorLocation2 = "";
@@ -313,14 +322,37 @@ public final class JeffLib {
     public static void init(final Plugin plugin) {
         JeffLib.plugin = plugin;
         checkRelocation();
+        if (!initDone) {
+            registerInternalListeners();
+            ProtectionUtils.loadPluginProtections();
+        }
+        initDone = true;
+    }
+
+    private static void registerInternalListeners() {
+        Bukkit.getPluginManager().registerEvents(new Listener() {
+            @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+            public void onPluginEnable(final PluginEnableEvent event) {
+                handlePluginChange(event.getPlugin());
+            }
+            @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
+            public void onPluginDisable(final PluginDisableEvent event) {
+                handlePluginChange(event.getPlugin());
+            }
+            public void handlePluginChange(Plugin plugin) {
+                ProtectionUtils.loadPluginProtections();
+            }
+        }, getPlugin());
     }
 
     /**
      * @see #enableNMS()
+     * @deprecated Use {@link #init(Plugin)} and {@link #enableNMS()} instead
      */
     @Deprecated
     public static void init(final Plugin plugin, final boolean nms) {
-        throw new UnsupportedOperationException();
+        init(plugin);
+        if (nms) enableNMS();
     }
 
 }

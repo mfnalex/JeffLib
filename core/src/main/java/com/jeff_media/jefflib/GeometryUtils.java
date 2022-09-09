@@ -29,7 +29,7 @@ import java.util.Set;
  * Geometry related methods
  */
 @UtilityClass
-public final class GeometryUtils {
+public class GeometryUtils {
 
     /**
      * Gets a set of all Locations in a specific distance describing a hollow cube around two locations

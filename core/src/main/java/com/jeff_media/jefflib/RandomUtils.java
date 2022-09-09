@@ -24,7 +24,7 @@ import lombok.experimental.UtilityClass;
  * Random number related methods
  */
 @UtilityClass
-public final class RandomUtils {
+public class RandomUtils {
 
     /**
      * Returns true with a specific chance, otherwise false, with a range between 0 (always false) and 1 (always true)

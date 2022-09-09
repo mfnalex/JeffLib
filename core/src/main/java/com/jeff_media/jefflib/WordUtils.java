@@ -31,7 +31,7 @@ import java.util.Locale;
  * Word related methods, like capitalization
  */
 @UtilityClass
-public final class WordUtils {
+public class WordUtils {
 
     /**
      * Turns Material names into a nicer name. E.g. DIAMOND_PICKAXE will return "Diamond Pickaxe"

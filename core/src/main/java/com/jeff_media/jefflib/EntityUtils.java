@@ -43,7 +43,7 @@ import java.util.function.Predicate;
  * Entity related methods
  */
 @UtilityClass
-public final class EntityUtils {
+public class EntityUtils {
 
     private static final double DEFAULT_GENERIC_MOVEMENT_SPEED = 0.25D; // default speed of a generic entity
 

@@ -16,15 +16,17 @@
  *
  */
 
-package com.jeff_media.jefflib.pluginhooks;
+package com.jeff_media.jefflib.pluginhooks.worldguard;
 
 import com.jeff_media.jefflib.PluginUtils;
 import com.jeff_media.jefflib.exceptions.MissingPluginException;
+import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.util.Collection;
 
 /**
@@ -58,6 +60,7 @@ public class WorldGuardUtils {
      * @return true when the location is inside the given region, otherwise false
      * @throws MissingPluginException exception
      */
+    @RequiresPlugin("WorldGuard")
     public static boolean isInsideRegion(final Location location, final String regionName) throws MissingPluginException {
         try {
             return getRegionsAtLocation(location).contains(regionName);
@@ -74,6 +77,7 @@ public class WorldGuardUtils {
      * @throws MissingPluginException exception
      */
     @Nonnull
+    @RequiresPlugin("WorldGuard")
     public static Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.getRegionsAtLocation(location);
@@ -83,13 +87,13 @@ public class WorldGuardUtils {
     }
 
     public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
-        try {
+        if(isWorldGuardInstalled()) {
             return WorldGuardHandler.canPlace(player, location);
-        } catch (final Throwable t) {
-            throw new MissingPluginException("WorldGuard");
         }
+        return true;
     }
 
+    @RequiresPlugin("WorldGuard")
     public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canInteract(player, location);
@@ -98,6 +102,7 @@ public class WorldGuardUtils {
         }
     }
 
+    @RequiresPlugin("WorldGuard")
     public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canBreak(player, location);
@@ -105,4 +110,24 @@ public class WorldGuardUtils {
             throw new MissingPluginException("WorldGuard");
         }
     }
+
+    @Nonnull
+    public static StateFlag registerStateFlag(@Nonnull String name, @Nonnull StateFlag.State defaultValue) {
+        if(isWorldGuardInstalled()) {
+            return WorldGuardHandler.registerStateFlag(name, defaultValue);
+        }
+        return new StateFlag(name, StateFlag.State.DENY);
+    }
+
+    @Nonnull
+    public static StateFlag.State testStateFlag(@Nullable Player player, @Nonnull Location location, @Nonnull StateFlag flag) {
+        if(isWorldGuardInstalled()) {
+            return StateFlag.State.fromBoolean(WorldGuardHandler.testStateFlag(player, location, flag));
+        }
+        return flag.getDefaultValue();
+    }
+
+
+
+
 }

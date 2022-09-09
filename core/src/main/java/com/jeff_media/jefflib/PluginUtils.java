@@ -24,7 +24,7 @@ import org.bukkit.Bukkit;
 import java.util.function.Supplier;
 
 @UtilityClass
-public final class PluginUtils {
+public class PluginUtils {
 
     public static <T> T whenInstalled(final String plugin, final Supplier<T> supplier, final T defaultValue) {
         try {
