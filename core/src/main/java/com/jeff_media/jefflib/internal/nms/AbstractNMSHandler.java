@@ -145,4 +145,12 @@ public interface AbstractNMSHandler {
     SerializedEntity serialize(Entity entity);
 
     void applyNbt(Entity entity, String nbtData);
+
+    String getTranslationKey(Material mat);
+
+    String getTranslationKey(Block block);
+
+    String getTranslationKey(EntityType entityType);
+
+    String getTranslationKey(ItemStack itemStack);
 }

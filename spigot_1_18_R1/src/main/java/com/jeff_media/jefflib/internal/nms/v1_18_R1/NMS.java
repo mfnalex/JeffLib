@@ -133,4 +133,8 @@ public final class NMS {
         return ((CraftPlayer)player).getHandle();
     }
 
+    public static net.minecraft.world.level.block.Block toNms(final Block block) {
+        return ((CraftBlock)block).getNMS().getBlock();
+    }
+
 }

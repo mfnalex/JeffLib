@@ -73,10 +73,7 @@ import org.bukkit.craftbukkit.v1_18_R2.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_18_R2.persistence.CraftPersistentDataContainer;
 import org.bukkit.craftbukkit.v1_18_R2.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_18_R2.util.CraftNamespacedKey;
-import org.bukkit.entity.Creature;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Mob;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
@@ -95,6 +92,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
     private final BlockHandler blockHandler = new BlockHandler();
+    private final com.jeff_media.jefflib.internal.nms.v1_18_R2.BukkitUnsafe unsafe = com.jeff_media.jefflib.internal.nms.v1_18_R2.BukkitUnsafe.INSTANCE;
 
     @Override
     public AbstractNMSMaterialHandler getMaterialHandler() {
@@ -391,4 +389,30 @@ public class NMSHandler implements AbstractNMSHandler {
         toNms(entity).load(tag);
     }
 
+    @Override
+    public String getTranslationKey(Material mat) {
+        if(mat.isBlock()) {
+            return unsafe.getNMSBlockFromMaterial(mat).getDescriptionId();
+        } else {
+            return unsafe.getNMSItemFromMaterial(mat).getDescriptionId();
+        }
+    }
+
+    @Override
+    public String getTranslationKey(Block block) {
+        return toNms(block).getDescriptionId();
+    }
+
+    @Override
+    public String getTranslationKey(EntityType entityType) {
+        return net.minecraft.world.entity.EntityType.byString(entityType.getName())
+                .map(net.minecraft.world.entity.EntityType::getDescriptionId)
+                .orElse(null);
+    }
+
+    @Override
+    public String getTranslationKey(org.bukkit.inventory.ItemStack itemStack) {
+        ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
+        return nmsItemStack.getItem().getDescriptionId(nmsItemStack);
+    }
 }

@@ -19,6 +19,7 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ReflUtils;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
@@ -33,10 +34,10 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitUnsafe {
-    public static final com.jeff_media.jefflib.internal.nms.BukkitUnsafe INSTANCE = new BukkitUnsafe();
+    public static final BukkitUnsafe INSTANCE = new BukkitUnsafe();
 
     @Override
-    public Object getNMSBlockState(final Material material, final byte data) {
+    public BlockState getNMSBlockState(final Material material, final byte data) {
         return CraftMagicNumbers.getBlock(material, data);
     }
 
@@ -46,7 +47,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getNMSItem(final Material material, final short data) {
+    public Item getNMSItem(final Material material, final short data) {
         return CraftMagicNumbers.getItem(material, data);
     }
 
@@ -71,22 +72,22 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getNMSItemFromMaterial(final Material material) {
+    public Item getNMSItemFromMaterial(final Material material) {
         return CraftMagicNumbers.getItem(material);
     }
 
     @Override
-    public Object getNMSBlockFromMaterial(final Material material) {
+    public Block getNMSBlockFromMaterial(final Material material) {
         return CraftMagicNumbers.getBlock(material);
     }
 
     @Override
-    public Object getNMSFluid(final Object fluid) {
+    public net.minecraft.world.level.material.Fluid getNMSFluid(final Object fluid) {
         return CraftMagicNumbers.getFluid((Fluid) fluid);
     }
 
     @Override
-    public Object getNMSResourceLocation(final Material material) {
+    public ResourceLocation getNMSResourceLocation(final Material material) {
         return CraftMagicNumbers.key(material);
     }
 
