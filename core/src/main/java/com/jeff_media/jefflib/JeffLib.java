@@ -255,7 +255,15 @@ public class JeffLib {
     @NMS
     public static void enableNMS() throws NMSNotSupportedException {
         final String packageName = JeffLib.class.getPackage().getName();
-        final String internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+        final String internalsName;
+        if (McVersion.current().isAtLeast(1, 19)) {
+            internalsName = "v" + McVersion.current().getMajor() + "_" + McVersion.current().getMinor() + ((McVersion.current().getPatch() > 0) ? ("_" + McVersion.current().getPatch()) : "") + "_R1";
+            System.out.println("Using the new names");
+        }
+        else {
+            internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            System.out.println("Using the old names");
+        }
         try {
             abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
         } catch (final ReflectiveOperationException exception) {

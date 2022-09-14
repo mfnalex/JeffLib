@@ -262,4 +262,8 @@ public class ItemStackUtils {
         PDCUtils.set(item, "prevent-stacking", PersistentDataType.STRING, UUID.randomUUID().toString());
     }
 
+    public static void reduceItem(ItemStack item) {
+        item.setAmount(item.getAmount()-1);
+    }
+
 }

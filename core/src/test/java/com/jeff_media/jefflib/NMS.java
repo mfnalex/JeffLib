@@ -19,6 +19,8 @@
 package com.jeff_media.jefflib;
 
 
+import net.minecraft.server.level.ServerPlayerGameMode;
+import net.minecraft.world.item.ItemStack;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
@@ -43,6 +45,5 @@ import java.util.stream.Collectors;
 public final class NMS {
 
     {
-
     }
 }

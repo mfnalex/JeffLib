@@ -126,6 +126,8 @@ If you're using allatori to obfuscate your plugin, you need the following additi
 To build JeffLib from source, you need the following Spigot versions installed in your local repository:
 
   - 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
+  - 1.19.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
+  - 1.19-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.18.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.18.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.17.1-R0.1-SNAPSHOT:remapped-mojang (Java 16+)
@@ -153,7 +155,7 @@ curl -o buildtools.jar $BT_URL || wget -O buildtools.jar $BT_URL || {
   exit 1
 } 
 
-for VERSION in 1.19.2 1.18.2 1.18.1 1.17.1; do
+for VERSION in 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1; do
   $JAVA17_PATH -jar buildtools.jar --rev $VERSION --remapped
 done
 

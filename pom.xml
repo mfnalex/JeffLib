@@ -23,7 +23,7 @@
 
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>11.1.5</version>
+    <version>11.2.0</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 
@@ -36,8 +36,11 @@
     </properties>
 
     <modules>
+
         <module>core</module>
-        <module>spigot_1_19_R1</module> <!-- 1.19 -->
+        <module>spigot_1_19_2_R1</module> <!-- 1.19.2 -->
+        <module>spigot_1_19_1_R1</module> <!-- 1.19.1 -->
+        <module>spigot_1_19_0_R1</module> <!-- 1.19 -->
         <module>spigot_1_18_R2</module> <!-- 1.18.2 -->
         <module>spigot_1_18_R1</module> <!-- 1.18, 1.18.1 -->
         <module>spigot_1_17_R1</module> <!-- 1.17, 1.17.1 -->

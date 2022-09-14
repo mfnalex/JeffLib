@@ -19,12 +19,10 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R2;
 
 import com.jeff_media.jefflib.ReflUtils;
-import net.minecraft.server.v1_16_R2.Block;
-import net.minecraft.server.v1_16_R2.FluidType;
-import net.minecraft.server.v1_16_R2.IBlockData;
-import net.minecraft.server.v1_16_R2.Item;
+import net.minecraft.server.v1_16_R2.*;
 import org.bukkit.Fluid;
 import org.bukkit.Material;
+import org.bukkit.block.BlockState;
 import org.bukkit.craftbukkit.v1_16_R2.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -34,10 +32,10 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitUnsafe {
-    public static final com.jeff_media.jefflib.internal.nms.BukkitUnsafe INSTANCE = new BukkitUnsafe();
+    public static final BukkitUnsafe INSTANCE = new BukkitUnsafe();
 
     @Override
-    public Object getNMSBlockState(final Material material, final byte data) {
+    public IBlockData getNMSBlockState(final Material material, final byte data) {
         return CraftMagicNumbers.getBlock(material, data);
     }
 
@@ -72,12 +70,12 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getNMSItemFromMaterial(final Material material) {
+    public Item getNMSItemFromMaterial(final Material material) {
         return CraftMagicNumbers.getItem(material);
     }
 
     @Override
-    public Object getNMSBlockFromMaterial(final Material material) {
+    public Block getNMSBlockFromMaterial(final Material material) {
         return CraftMagicNumbers.getBlock(material);
     }
 
@@ -87,7 +85,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getNMSResourceLocation(final Material material) {
+    public MinecraftKey getNMSResourceLocation(final Material material) {
         return CraftMagicNumbers.key(material);
     }
 

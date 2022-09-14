@@ -19,13 +19,13 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>JeffLib-spigot_1_19_R1</artifactId>
+    <artifactId>JeffLib-spigot_1_19_2_R1</artifactId>
 
     <packaging>jar</packaging>
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>11.1.5</version>
+        <version>11.2.0</version>
     </parent>
     <build>
         <plugins>
@@ -69,12 +69,6 @@
         </plugins>
     </build>
     <dependencies>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>

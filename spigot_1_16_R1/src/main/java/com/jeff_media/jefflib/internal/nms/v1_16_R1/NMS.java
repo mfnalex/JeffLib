@@ -120,4 +120,8 @@ public final class NMS {
         return ((CraftPlayer)player).getHandle();
     }
 
+    public static net.minecraft.server.v1_16_R1.Block toNms(final Block block) {
+        return ((CraftBlock)block).getNMS().getBlock();
+    }
+
 }

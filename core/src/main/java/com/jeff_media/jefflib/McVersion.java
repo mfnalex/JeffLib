@@ -35,7 +35,7 @@ public class McVersion implements Comparable<McVersion> {
     static {
         final int currentMajor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[0]);
         final int currentMinor = Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[1].split("-")[0]);
-        boolean hasPatch = WordUtils.countChar(Bukkit.getBukkitVersion(), '.') == 2;
+        boolean hasPatch = WordUtils.countChar(Bukkit.getBukkitVersion(), '.') == 3;
         final int currentPatch = hasPatch ? Integer.parseInt(Bukkit.getBukkitVersion().split("\\.")[2].split("-")[0]) : 0;
 
         CURRENT_VERSION = new McVersion(currentMajor, currentMinor, currentPatch);

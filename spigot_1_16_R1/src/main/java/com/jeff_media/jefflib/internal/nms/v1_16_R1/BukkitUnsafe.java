@@ -20,9 +20,7 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
 import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import net.minecraft.server.v1_16_R1.Block;
-import net.minecraft.server.v1_16_R1.IBlockData;
-import net.minecraft.server.v1_16_R1.Item;
+import net.minecraft.server.v1_16_R1.*;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
@@ -33,10 +31,10 @@ import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitUnsafe {
-    public static final com.jeff_media.jefflib.internal.nms.BukkitUnsafe INSTANCE = new BukkitUnsafe();
+    public static final BukkitUnsafe INSTANCE = new BukkitUnsafe();
 
     @Override
-    public Object getNMSBlockState(final Material material, final byte data) {
+    public IBlockData getNMSBlockState(final Material material, final byte data) {
         return CraftMagicNumbers.getBlock(material, data);
     }
 
@@ -46,7 +44,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getNMSItem(final Material material, final short data) {
+    public Item getNMSItem(final Material material, final short data) {
         return CraftMagicNumbers.getItem(material, data);
     }
 
@@ -66,27 +64,27 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
     }
 
     @Override
-    public Object getFluidFromNMSFluid(final Object nmsFluid) {
+    public FluidType getFluidFromNMSFluid(final Object nmsFluid) {
         throw new NMSNotSupportedException("1_16_R1 and older does not support this method");
     }
 
     @Override
-    public Object getNMSItemFromMaterial(final Material material) {
+    public Item getNMSItemFromMaterial(final Material material) {
         return CraftMagicNumbers.getItem(material);
     }
 
     @Override
-    public Object getNMSBlockFromMaterial(final Material material) {
+    public Block getNMSBlockFromMaterial(final Material material) {
         return CraftMagicNumbers.getBlock(material);
     }
 
     @Override
-    public Object getNMSFluid(final Object fluid) {
+    public FluidType getNMSFluid(final Object fluid) {
         throw new NMSNotSupportedException("1_16_R1 and older does not support this method");
     }
 
     @Override
-    public Object getNMSResourceLocation(final Material material) {
+    public MinecraftKey getNMSResourceLocation(final Material material) {
         return CraftMagicNumbers.key(material);
     }
 
