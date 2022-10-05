@@ -18,9 +18,13 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
 import java.util.Arrays;
@@ -28,7 +32,7 @@ import java.util.Iterator;
 import java.util.Locale;
 
 /**
- * Word related methods, like capitalization
+ * Word and language related methods, like capitalization or getting translation keys
  */
 @UtilityClass
 public class WordUtils {
@@ -72,15 +76,15 @@ public class WordUtils {
     }
 
     /**
-     * Converts a NamespacedKey into a human readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
-     *
-     * @param key NamespacedKey
-     * @return Human readable key name
+     * Converts a NamespacedKey into a human-readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
      */
     public static String getNiceName(@Nonnull final NamespacedKey key) {
         return getNiceName(key.getKey());
     }
 
+    /**
+     * Converts a given String into a human-readable String, by replacing underscores with spaces, and making all words Uppercase. For example, "ARMOR_STAND" will return "Armor Stand"
+     */
     public static String getNiceName(@Nonnull final String string) {
         final String[] split = string.split("_");
         final Iterator<String> iterator = Arrays.stream(split).iterator();
@@ -116,5 +120,45 @@ public class WordUtils {
             }
         }
         return count;
+    }
+
+    /**
+     * Gets the translation key of a {@link Material}
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static String getTranslationKey(final @Nonnull Material mat) {
+        return JeffLib.getNMSHandler().getTranslationKey(mat);
+    }
+
+    /**
+     * Gets the translation key of a {@link Block}
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static String getTranslationKey(final @Nonnull Block block) {
+        return JeffLib.getNMSHandler().getTranslationKey(block);
+    }
+
+    /**
+     * Gets the translation key of an {@link EntityType}
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static String getTranslationKey(final @Nonnull EntityType entityType) {
+        return JeffLib.getNMSHandler().getTranslationKey(entityType);
+    }
+
+    /**
+     * Gets the translation key of an {@link ItemStack}
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static String getTranslationKey(final @Nonnull ItemStack itemStack) {
+        return JeffLib.getNMSHandler().getTranslationKey(itemStack);
     }
 }

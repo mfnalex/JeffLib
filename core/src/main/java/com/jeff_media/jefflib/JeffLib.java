@@ -38,6 +38,7 @@ import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitTask;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -258,11 +259,9 @@ public class JeffLib {
         final String internalsName;
         if (McVersion.current().isAtLeast(1, 19)) {
             internalsName = "v" + McVersion.current().getMajor() + "_" + McVersion.current().getMinor() + ((McVersion.current().getPatch() > 0) ? ("_" + McVersion.current().getPatch()) : "") + "_R1";
-            System.out.println("Using the new names");
         }
         else {
             internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
-            System.out.println("Using the old names");
         }
         try {
             abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
@@ -277,7 +276,7 @@ public class JeffLib {
             }
         }
         if (abstractNmsHandler == null) {
-            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName());
+            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName() + "(" + internalsName + ")");
         }
     }
 
@@ -331,26 +330,9 @@ public class JeffLib {
         JeffLib.plugin = plugin;
         checkRelocation();
         if (!initDone) {
-            registerInternalListeners();
             ProtectionUtils.loadPluginProtections();
         }
         initDone = true;
-    }
-
-    private static void registerInternalListeners() {
-        Bukkit.getPluginManager().registerEvents(new Listener() {
-            @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-            public void onPluginEnable(final PluginEnableEvent event) {
-                handlePluginChange(event.getPlugin());
-            }
-            @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-            public void onPluginDisable(final PluginDisableEvent event) {
-                handlePluginChange(event.getPlugin());
-            }
-            public void handlePluginChange(Plugin plugin) {
-                ProtectionUtils.loadPluginProtections();
-            }
-        }, getPlugin());
     }
 
     /**

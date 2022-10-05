@@ -127,4 +127,8 @@ public class NumberUtils {
             return null;
         }
     }
+
+    public static boolean isInbetweenInclusive(final int number, final int min, final int max) {
+        return number >= min && number <= max;
+    }
 }

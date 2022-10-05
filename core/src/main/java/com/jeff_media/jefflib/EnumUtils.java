@@ -39,8 +39,16 @@ public class EnumUtils {
      * Gets an EnumSet of the given Enum constants by their names. Enum constants that aren't found will print a warning.
      * Case is ignored for Bukkit enums.
      */
-    public static <E extends Enum<E>> EnumSet<E> getEnumsFromList(final Class<E> enumClazz, final List<String> list) {
-        return EnumSet.copyOf(getEnumsFromList(enumClazz, list, Collectors.toSet()));
+    public static <E extends Enum<E>> EnumSet<E> getEnumsFromListAsEnumSet(final Class<E> enumClazz, final List<String> list) {
+        return getEnumsFromList(enumClazz, list, Collectors.toCollection(() -> EnumSet.noneOf(enumClazz)));
+    }
+
+    /**
+     * Gets a Set of the given Enum constants by their names. Enum constants that aren't found will print a warning.
+     * Case is ignored for Bukkit enums.
+     */
+    public static <E extends Enum<E>> Set<E> getEnumsFromListAsSet(final Class<E> enumClazz, final List<String> list) {
+        return getEnumsFromList(enumClazz, list, Collectors.toSet());
     }
 
     /**

@@ -50,7 +50,6 @@ Latest version: ![Latest Version](https://img.shields.io/maven-metadata/v?metada
 ### Relocation
 
 ```xml
-
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>

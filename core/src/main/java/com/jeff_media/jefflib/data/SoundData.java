@@ -16,9 +16,11 @@
  *
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.data;
 
 import com.google.common.base.Enums;
+import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.NumberUtils;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -113,6 +115,7 @@ public final class SoundData {
     }
 
     private float getFinalPitch() {
+        if(NumberUtils.isZeroOrNegative(pitchVariant)) return pitch;
         return (float) (pitch - (pitchVariant / 2) + JeffLib.getThreadLocalRandom().nextDouble(0, pitchVariant));
     }
 

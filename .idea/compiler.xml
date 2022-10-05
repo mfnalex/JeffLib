@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="JeffLib-spigot_1_18_R1" />
+        <module name="JeffLib-spigot_1_19_R1" />
+        <module name="JeffLib-spigot_1_17_R1" />
+        <module name="JeffLib-spigot_1_16_R1" />
+        <module name="JeffLib-spigot_1_18_R2" />
+        <module name="JeffLib-core" />
+        <module name="JeffLib-spigot_1_19_1_R1" />
+        <module name="JeffLib-spigot_1_19_2_R1" />
+        <module name="JeffLib (1)" />
+        <module name="JeffLib-spigot_1_16_R2" />
+        <module name="JeffLib-spigot_1_16_R3" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="JeffLib-plugin-PlotSquared6" target="1.8" />
+      <module name="JeffLib-spigot_1_19_0_R1" target="1.8" />
+      <module name="nms-factory" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

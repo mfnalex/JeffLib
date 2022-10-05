@@ -124,7 +124,10 @@ public class BlockTracker {
         return pdc.getOrDefault(PLAYER_PLACED_TAG, PersistentDataType.TAG_CONTAINER, pdc.getAdapterContext().newPersistentDataContainer());
     }
 
-    private static NamespacedKey getKey(final Block block) {
+    /**
+     * Gets a {@link NamespacedKey} for every block
+     */
+    private static NamespacedKey getKey(@Nonnull final Block block) {
         final int x = block.getX() & 0x000F;
         final int y = block.getY();
         final int z = block.getZ() & 0x000F;

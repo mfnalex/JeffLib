@@ -19,8 +19,10 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.collect.ImmutableMap;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 
 import javax.annotation.Nonnull;
+import java.io.File;
 import java.util.UUID;
 
 public final class ProfileUtils {
@@ -44,5 +46,19 @@ public final class ProfileUtils {
 
     public static boolean isValidAccountName(@Nonnull final String name) {
         return name.matches("^\\w{3,16}$");
+    }
+
+    /**
+     * Returns the player's data (.dat) file
+     * @nms
+     */
+    @NMS
+    @Nonnull
+    public static File getPlayerDataFile(UUID uuid) {
+        File playerDataFolder = new File(WorldUtils.getDefaultWorld().getWorldFolder(), "playerdata");
+        if(!playerDataFolder.exists()) {
+            playerDataFolder.mkdirs();
+        }
+        return new File(playerDataFolder, uuid.toString() + ".dat");
     }
 }

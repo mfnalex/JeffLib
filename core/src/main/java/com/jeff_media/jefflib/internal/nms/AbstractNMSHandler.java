@@ -26,6 +26,7 @@ import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.Hologram;
+import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
@@ -43,12 +44,18 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.File;
 import java.io.IOException;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
+/**
+ * Abstract NMS handler, for internal use only.
+ * @deprecated For internal use only
+ */
 @Internal
+@Deprecated
 public interface AbstractNMSHandler {
 
     //void updateMap(@Nonnull final MapView map);
@@ -153,4 +160,8 @@ public interface AbstractNMSHandler {
     String getTranslationKey(EntityType entityType);
 
     String getTranslationKey(ItemStack itemStack);
+
+    OfflinePlayerPersistentDataContainer getPDCFromDatFile(File file) throws IOException;
+
+    void updatePdcInDatFile(OfflinePlayerPersistentDataContainer pdc) throws IOException;
 }

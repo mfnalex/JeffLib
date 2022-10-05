@@ -75,11 +75,13 @@ public class EntityUtils {
     }
 
     /**
-     * Gets the closest player in this world, or null if there is no player
+     * Gets the closest player in this world, or null if there is no player, or if the world isn't loaded
      */
     @Nullable
     public static Player getClosestPlayer(@Nonnull final Location location) {
-        return location.getWorld().getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
+        World world = location.getWorld();
+        if(world == null) return null;
+        return world.getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
     }
 
     /**

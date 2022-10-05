@@ -32,6 +32,7 @@ import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.data.ByteCounter;
 import com.jeff_media.jefflib.data.Hologram;
+import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
@@ -44,6 +45,7 @@ import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
@@ -71,6 +73,7 @@ import org.bukkit.craftbukkit.v1_18_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_18_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_18_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_18_R1.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.v1_18_R1.persistence.CraftPersistentDataTypeRegistry;
 import org.bukkit.craftbukkit.v1_18_R1.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_18_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.*;
@@ -79,6 +82,7 @@ import org.bukkit.util.Vector;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Objects;
@@ -414,6 +418,24 @@ public class NMSHandler implements AbstractNMSHandler {
     public String getTranslationKey(org.bukkit.inventory.ItemStack itemStack) {
         ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
         return nmsItemStack.getItem().getDescriptionId(nmsItemStack);
+    }
+
+    @Override
+    public OfflinePlayerPersistentDataContainer getPDCFromDatFile(File file) throws IOException {
+        CraftPersistentDataTypeRegistry registry = new CraftPersistentDataTypeRegistry();
+        CraftPersistentDataContainer container = new CraftPersistentDataContainer(registry);
+        CompoundTag fileTag = NbtIo.readCompressed(file);
+        CompoundTag pdcTag = fileTag.getCompound("BukkitValues");
+        container.putAll(pdcTag);
+        return new OfflinePlayerPersistentDataContainer(container, file, fileTag);
+    }
+
+    @Override
+    public void updatePdcInDatFile(OfflinePlayerPersistentDataContainer pdc) throws IOException {
+        CompoundTag pdcTag = ((CraftPersistentDataContainer)pdc.getCraftPersistentDataContainer()).toTagCompound();
+        CompoundTag fileTag = (CompoundTag) pdc.getCompoundTag();
+        fileTag.put("BukkitValues", pdcTag);
+        NbtIo.writeCompressed(fileTag, pdc.getFile());
     }
 
 }

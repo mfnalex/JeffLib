@@ -18,10 +18,13 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
@@ -33,6 +36,7 @@ import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.io.IOException;
 import java.util.*;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * PersistentDataContainer related methods.
@@ -296,6 +300,19 @@ public class PDCUtils {
     }
 
     /**
+     * Checks whether the holder's PDC contains a key
+     *
+     * @param holder Holder
+     * @param key    Key name
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     * @return True when the PDC contains the key, otherwise false
+     */
+    public static <T, Z> boolean has(@Nonnull final PersistentDataHolder holder, @Nonnull final String key) {
+        return holder.getPersistentDataContainer().getKeys().contains(getKey(key));
+    }
+
+    /**
      * Removes a key from the holder's PDC
      *
      * @param holder Holder
@@ -340,6 +357,20 @@ public class PDCUtils {
      * Checks whether the holder's PDC contains a key
      *
      * @param holder Holder
+     * @param key    Key name
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     * @return True when the PDC contains the key, otherwise false
+     */
+    public <T, Z> boolean has(@Nonnull final ItemStack holder, @Nonnull final String key) {
+        Objects.requireNonNull(holder.getItemMeta());
+        return has(holder.getItemMeta(), getKey(key));
+    }
+
+    /**
+     * Checks whether the holder's PDC contains a key
+     *
+     * @param holder Holder
      * @param key    NamespacedKey
      * @param type   Data type
      * @param <T>    Primitive data type
@@ -355,6 +386,19 @@ public class PDCUtils {
      *
      * @param holder Holder
      * @param key    NamespacedKey
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     * @return True when the PDC contains the key, otherwise false
+     */
+    public static <T, Z> boolean has(@Nonnull final PersistentDataHolder holder, @Nonnull final NamespacedKey key) {
+        return holder.getPersistentDataContainer().getKeys().contains(key);
+    }
+
+    /**
+     * Checks whether the holder's PDC contains a key
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
      * @param type   Data type
      * @param <T>    Primitive data type
      * @param <Z>    Complex data type
@@ -363,6 +407,20 @@ public class PDCUtils {
     public <T, Z> boolean has(@Nonnull final ItemStack holder, @Nonnull final NamespacedKey key, @Nonnull final PersistentDataType<T, Z> type) {
         Objects.requireNonNull(holder.getItemMeta());
         return has(holder.getItemMeta(), key, type);
+    }
+
+    /**
+     * Checks whether the holder's PDC contains a key
+     *
+     * @param holder Holder
+     * @param key    NamespacedKey
+     * @param <T>    Primitive data type
+     * @param <Z>    Complex data type
+     * @return True when the PDC contains the key, otherwise false
+     */
+    public <T, Z> boolean has(@Nonnull final ItemStack holder, @Nonnull final NamespacedKey key) {
+        Objects.requireNonNull(holder.getItemMeta());
+        return has(holder.getItemMeta(), key);
     }
 
     /**
@@ -456,6 +514,30 @@ public class PDCUtils {
         } catch (Exception e) {
             throw new IOException("Could not deserialize PDC", e);
         }
+    }
+
+    /**
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}. <b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     */
+    @Nonnull
+    @NMS
+    public static CompletableFuture<OfflinePlayerPersistentDataContainer> getOfflinePlayerPersistentDataContainer(UUID uuid) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return JeffLib.getNMSHandler().getPDCFromDatFile(ProfileUtils.getPlayerDataFile(uuid));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}. <b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     */
+    @Nonnull
+    @NMS
+    public static CompletableFuture<OfflinePlayerPersistentDataContainer> getOfflinePlayerPersistentDataContainer(OfflinePlayer player) {
+        return getOfflinePlayerPersistentDataContainer(player.getUniqueId());
     }
 
 }
