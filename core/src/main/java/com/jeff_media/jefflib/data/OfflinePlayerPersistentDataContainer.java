@@ -1,8 +1,11 @@
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.ProfileUtils;
 import com.jeff_media.jefflib.internal.annotations.Internal;
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.NamespacedKey;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
@@ -11,17 +14,27 @@ import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a {@link PersistentDataContainer} from an {@link org.bukkit.OfflinePlayer}. <b>Important:</b> When changing values, you have to call {@link #save()} or {@link #saveAsync()} afterwards.
+ * @nms
  */
+@NMS
 public class OfflinePlayerPersistentDataContainer implements PersistentDataContainer {
 
     private final PersistentDataContainer craftPersistentDataContainer;
     private final File file;
     private final Object compoundTag;
 
+    /**
+     * @deprecated For internal use only
+     * @internal
+     * @hidden
+     */
+    @Deprecated
+    @Internal
     public OfflinePlayerPersistentDataContainer(@Nonnull PersistentDataContainer craftPersistentDataContainer, @Nonnull File file, @Nonnull Object compoundTag) {
         this.craftPersistentDataContainer = craftPersistentDataContainer;
         this.file = file;
@@ -31,6 +44,8 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     /**
      * For internal use only
      * @deprecated For internal use only
+     * @internal
+     * @hidden
      */
     @Deprecated
     @Internal
@@ -41,6 +56,8 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     /**
      * For internal use only
      * @deprecated For internal use only
+     * @internal
+     * @hidden
      */
     @Deprecated
     @Internal
@@ -48,6 +65,37 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
         return compoundTag;
     }
 
+    /**
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     * @nms
+     */
+    @Nonnull
+    @NMS
+    public static CompletableFuture<OfflinePlayerPersistentDataContainer> of(UUID uuid) {
+        return CompletableFuture.supplyAsync(() -> {
+            try {
+                return JeffLib.getNMSHandler().getPDCFromDatFile(ProfileUtils.getPlayerDataFile(uuid));
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    /**
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     * @nms
+     */
+    @Nonnull
+    @NMS
+    public static CompletableFuture<OfflinePlayerPersistentDataContainer> of(OfflinePlayer player) {
+        return of(player.getUniqueId());
+    }
+
+    /**
+     * Returns the player's data .dat file
+     */
     public File getFile() {
         return file;
     }
@@ -103,10 +151,6 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
         return craftPersistentDataContainer.getKeys();
     }
 
-    /**
-     * <b>Not supported</b>
-     * @throws UnsupportedOperationException This PersistentDataContainer is read-only
-     */
     @Override
     public void remove(@Nonnull NamespacedKey namespacedKey) {
         craftPersistentDataContainer.remove(namespacedKey);

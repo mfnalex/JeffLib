@@ -48,12 +48,14 @@ import com.jeff_media.jefflib.internal.nms.v1_19_2_R1.ai.HatchedPathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_19_2_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import net.md_5.bungee.api.chat.TextComponent;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.Connection;
+import net.minecraft.network.PacketSendListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
@@ -67,6 +69,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -83,6 +86,7 @@ import org.bukkit.craftbukkit.v1_19_R1.persistence.CraftPersistentDataTypeRegist
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.*;
+import org.bukkit.inventory.Inventory;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
@@ -443,4 +447,5 @@ public class NMSHandler implements AbstractNMSHandler {
         fileTag.put("BukkitValues", pdcTag);
         NbtIo.writeCompressed(fileTag, pdc.getFile());
     }
+
 }

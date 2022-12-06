@@ -516,28 +516,27 @@ public class PDCUtils {
         }
     }
 
+
     /**
-     * Returns an OfflinePlayer's {@link PersistentDataContainer}. <b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     * @nms
      */
     @Nonnull
     @NMS
     public static CompletableFuture<OfflinePlayerPersistentDataContainer> getOfflinePlayerPersistentDataContainer(UUID uuid) {
-        return CompletableFuture.supplyAsync(() -> {
-            try {
-                return JeffLib.getNMSHandler().getPDCFromDatFile(ProfileUtils.getPlayerDataFile(uuid));
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        return OfflinePlayerPersistentDataContainer.of(uuid);
     }
 
     /**
-     * Returns an OfflinePlayer's {@link PersistentDataContainer}. <b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
+     * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     * @nms
      */
     @Nonnull
     @NMS
     public static CompletableFuture<OfflinePlayerPersistentDataContainer> getOfflinePlayerPersistentDataContainer(OfflinePlayer player) {
-        return getOfflinePlayerPersistentDataContainer(player.getUniqueId());
+        return OfflinePlayerPersistentDataContainer.of(player);
     }
 
 }

@@ -48,6 +48,7 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.TagParser;
 import net.minecraft.network.Connection;
+import net.minecraft.network.PacketSendListener;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.*;
@@ -61,6 +62,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
@@ -89,6 +91,8 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
+
+import static com.jeff_media.jefflib.internal.nms.v1_19_1_R1.NMS.toNms;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -246,13 +250,13 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void addGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
-        NMS.asMob(entity).goalSelector.addGoal(priority, NMS.toNms(goal));
+        NMS.asMob(entity).goalSelector.addGoal(priority, toNms(goal));
     }
 
 
     @Override
     public void removeGoal(final Mob entity, final PathfinderGoal goal) {
-        NMS.asMob(entity).goalSelector.removeGoal(NMS.toNms(goal));
+        NMS.asMob(entity).goalSelector.removeGoal(toNms(goal));
     }
 
     @Override
@@ -262,12 +266,12 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void addTargetGoal(final Mob entity, final PathfinderGoal goal, final int priority) {
-        NMS.asMob(entity).targetSelector.addGoal(priority, NMS.toNms(goal));
+        NMS.asMob(entity).targetSelector.addGoal(priority, toNms(goal));
     }
 
     @Override
     public void removeTargetGoal(final Mob entity, final PathfinderGoal goal) {
-        NMS.asMob(entity).targetSelector.removeGoal(NMS.toNms(goal));
+        NMS.asMob(entity).targetSelector.removeGoal(toNms(goal));
     }
 
     @Override
@@ -303,7 +307,7 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public Vector getRandomPosAway(final Creature entity, final int var1, final int var2, final Vector var3) {
         final PathfinderMob pathfinderMob = NMS.asPathfinder(entity);
-        final Vec3 vec = DefaultRandomPos.getPosAway(pathfinderMob, var1, var2, NMS.toNms(var3));
+        final Vec3 vec = DefaultRandomPos.getPosAway(pathfinderMob, var1, var2, toNms(var3));
         return vec == null ? null : NMS.toBukkit(vec);
     }
 
@@ -311,7 +315,7 @@ public class NMSHandler implements AbstractNMSHandler {
     @Override
     public Vector getRandomPosTowards(final Creature entity, final int var1, final int var2, final Vector var3, final double var4) {
         final PathfinderMob pathfinderMob = NMS.asPathfinder(entity);
-        final Vec3 vec = DefaultRandomPos.getPosTowards(pathfinderMob, var1, var2, NMS.toNms(var3), var4);
+        final Vec3 vec = DefaultRandomPos.getPosTowards(pathfinderMob, var1, var2, toNms(var3), var4);
         return vec == null ? null : NMS.toBukkit(vec);
     }
 
@@ -359,24 +363,24 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public String serializePdc(PersistentDataContainer pdc) {
-        return ((CraftPersistentDataContainer)pdc).toTagCompound().getAsString();
+        return ((CraftPersistentDataContainer) pdc).toTagCompound().getAsString();
     }
 
     @Override
     public void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception {
         CompoundTag tag = TagParser.parseTag(serializedPdc);
-        ((CraftPersistentDataContainer)target).putAll(tag);
+        ((CraftPersistentDataContainer) target).putAll(tag);
     }
 
     @Override
     public void respawnPlayer(Player player) {
-        NMS.getServer().getPlayerList().respawn(NMS.toNms(player),true);
+        NMS.getServer().getPlayerList().respawn(toNms(player), true);
     }
 
     @Override
     public SerializedEntity serialize(org.bukkit.entity.Entity entity) {
         CompoundTag tag = new CompoundTag();
-        NMS.toNms(entity).saveWithoutId(tag);
+        toNms(entity).saveWithoutId(tag);
         return new SerializedEntity(entity.getType(), tag.getAsString());
     }
 
@@ -388,12 +392,12 @@ public class NMSHandler implements AbstractNMSHandler {
         } catch (CommandSyntaxException e) {
             throw new IllegalArgumentException(e);
         }
-        NMS.toNms(entity).load(tag);
+        toNms(entity).load(tag);
     }
 
     @Override
     public String getTranslationKey(Material mat) {
-        if(mat.isBlock()) {
+        if (mat.isBlock()) {
             return unsafe.getNMSBlockFromMaterial(mat).getDescriptionId();
         } else {
             return unsafe.getNMSItemFromMaterial(mat).getDescriptionId();
@@ -402,14 +406,12 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public String getTranslationKey(Block block) {
-        return NMS.toNms(block).getDescriptionId();
+        return toNms(block).getDescriptionId();
     }
 
     @Override
     public String getTranslationKey(EntityType entityType) {
-        return net.minecraft.world.entity.EntityType.byString(entityType.getName())
-                .map(net.minecraft.world.entity.EntityType::getDescriptionId)
-                .orElse(null);
+        return net.minecraft.world.entity.EntityType.byString(entityType.getName()).map(net.minecraft.world.entity.EntityType::getDescriptionId).orElse(null);
     }
 
     @Override
@@ -430,9 +432,10 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void updatePdcInDatFile(OfflinePlayerPersistentDataContainer pdc) throws IOException {
-        CompoundTag pdcTag = ((CraftPersistentDataContainer)pdc.getCraftPersistentDataContainer()).toTagCompound();
+        CompoundTag pdcTag = ((CraftPersistentDataContainer) pdc.getCraftPersistentDataContainer()).toTagCompound();
         CompoundTag fileTag = (CompoundTag) pdc.getCompoundTag();
         fileTag.put("BukkitValues", pdcTag);
         NbtIo.writeCompressed(fileTag, pdc.getFile());
     }
+
 }

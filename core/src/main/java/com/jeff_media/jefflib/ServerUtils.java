@@ -54,6 +54,13 @@ public class ServerUtils {
     }
 
     /**
+     * Gets whether this server is running something that supports or claims to support Forge
+     */
+    public static boolean isRunningForge() {
+        return ClassUtils.exists("net.minecraftforge.server.ServerMain");
+    }
+
+    /**
      * Gets whether this server is running Spigot or a fork of Spigot.
      *
      * @return True when running Spigot or a fork of Spigot, false if it's only CraftBukkit

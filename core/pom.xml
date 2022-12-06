@@ -34,7 +34,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>11.3.0</version>
+        <version>11.5.0</version>
     </parent>
 
     <build>
@@ -83,6 +83,10 @@
                             <head>Meant for internal use only.</head>
                         </tag>
                     </tags>
+                    <linksource>true</linksource>
+                    <excludePackageNames>com.jeff_media.jefflib.internal.cherokee,com.jeff_media.jefflib.internal.listeners,com.jeff_media.jefflib.internal.nms,com.jeff_media.jefflib.internal.protection</excludePackageNames>
+                    <nodeprecated>true</nodeprecated>
+                    <quiet>true</quiet>
                 </configuration>
                 <executions>
                     <execution>

@@ -23,55 +23,34 @@
 JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an
 overview.
 
-## Maven
+## Dependency Information
 
-### Repository
-
+### Maven
+Repository:
 ```xml
 <repository>
     <id>jeff-media-gbr</id>
     <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
 </repository>
 ```
-
-### Dependency
-
+Dependency:
 ```xml
 <dependency>
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version><!-- Check latest verion in pom.xml --></version>
+    <version>11.5.0</version>
     <scope>compile</scope>
 </dependency>
 ```
 
 Latest version: ![Latest Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml) 
 
-### Relocation
-
+Shading (add this to ```<build><plugins>```) if you don't already have it:
 ```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>
     <version>3.3.0</version>
-    <configuration>
-        <minimizeJar>true</minimizeJar>
-        <relocations>
-            <relocation>
-                <pattern>com.jeff_media.jefflib</pattern>
-                <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
-            </relocation>
-        </relocations>
-        <filters>
-            <filter>
-                <artifact>*:*</artifact>
-                <excludeDefaults>false</excludeDefaults>
-                <includes>
-                    <include>com/jeff_media/jefflib/internal/nms/**</include>
-                </includes>
-            </filter>
-        </filters>
-    </configuration>
     <executions>
         <execution>
             <phase>package</phase>
@@ -81,6 +60,39 @@ Latest version: ![Latest Version](https://img.shields.io/maven-metadata/v?metada
         </execution>
     </executions>
 </plugin>
+```
+
+Optionally you can adjust your shade configuration to relocate JeffLib and to make the NMS classes work while using the "minizeJar" option by adding this to your maven-shade-plugin's `<configuration>`:
+```xml
+<minimizeJar>true</minimizeJar>
+<relocations>
+    <relocation>
+        <pattern>com.jeff_media.jefflib</pattern>
+        <shadedPattern>YOUR.PACKAGE.jefflib</shadedPattern>
+    </relocation>
+</relocations>
+<filters>
+    <filter>
+        <artifact>*:*</artifact>
+        <excludeDefaults>false</excludeDefaults>
+        <includes>
+            <include>com/jeff_media/jefflib/internal/nms/**</include>
+        </includes>
+    </filter>
+</filters>
+```
+
+### Gradle (Groovy)
+Repository:
+```groovy
+maven {
+    url = uri('https://hub.jeff-media.com/nexus/repository/jeff-media-public/')
+}
+```
+
+Dependency:
+```groovy
+implementation 'com.jeff_media:JeffLib:11.5.0'
 ```
 
 ## Usage

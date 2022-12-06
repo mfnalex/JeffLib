@@ -18,12 +18,16 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryDragEvent;
+import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 
 import javax.annotation.Nonnull;
@@ -31,8 +35,6 @@ import javax.annotation.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Predicate;
 
 /**
  * Inventory related methods
@@ -169,7 +171,7 @@ public class InventoryUtils {
     }
 
     /**
-     * Returns a map of all items from this inventory that match the given item. The key is the slot number where the tack was found.
+     * Returns a map of all items from this inventory that match the given item. The key is the slot number where the stack was found.
      */
     public static HashMap<Integer, ? extends ItemStack> getAll(final Inventory inventory, final ItemStack item) {
         final HashMap<Integer, ItemStack> map = new HashMap<>();

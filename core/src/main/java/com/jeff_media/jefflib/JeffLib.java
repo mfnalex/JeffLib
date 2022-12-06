@@ -60,7 +60,6 @@ public class JeffLib {
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
-    private static boolean checkedRelocation = false;
     private static Plugin plugin;
     @Getter
     private static boolean debug = false;
@@ -70,7 +69,7 @@ public class JeffLib {
     private static boolean initDone = false;
 
     static {
-        checkRelocation();
+        //checkRelocation();
 
         if (!ServerUtils.isRunningMockBukkit()) {
             try {
@@ -78,7 +77,7 @@ public class JeffLib {
                     version = reader.readLine();
                 }
             } catch (final Throwable ex) {
-                ex.printStackTrace();
+                //ex.printStackTrace();
             }
 
         } else {
@@ -97,28 +96,28 @@ public class JeffLib {
         return Bukkit.getLogger();
     }
 
-    /**
-     * Checks for proper relocation
-     */
-    private static void checkRelocation() {
-        if (checkedRelocation) return;
-        try {
-            if (ServerUtils.isRunningMockBukkit()) return;
-            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
-            final String packageName = JeffLib.class.getPackage().getName();
-            if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
-                final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
-                final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
-                //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-            }
-        } catch (final Throwable ignored) {
-            return;
-        }
-        checkedRelocation = true;
-    }
+//    /**
+//     * Checks for proper relocation
+//     */
+//    private static void checkRelocation() {
+//        if (checkedRelocation) return;
+//        try {
+//            if (ServerUtils.isRunningMockBukkit()) return;
+//            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+//            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
+//            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
+//            final String packageName = JeffLib.class.getPackage().getName();
+//            if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
+//                final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
+//                final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
+//                //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+//                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
+//            }
+//        } catch (final Throwable ignored) {
+//            return;
+//        }
+//        checkedRelocation = true;
+//    }
 
     /**
      * Only for Unit Tests
@@ -153,7 +152,7 @@ public class JeffLib {
     @DoNotRename
     public static Plugin getPlugin() {
         if (plugin == null) {
-            checkRelocation();
+            //checkRelocation();
             try {
                 plugin = JavaPlugin.getProvidingPlugin(ClassUtils.getCurrentClass(1));
                 init(plugin);
@@ -231,10 +230,13 @@ public class JeffLib {
     /**
      * Returns the {@link AbstractNMSHandler}.
      *
-     * @nms
+     * @deprecated
      * @internal
+     * @hidden
+     * @nms
      */
     @DoNotRename
+    @Deprecated
     @Internal
     @NMS
     public static AbstractNMSHandler getNMSHandler() {
@@ -328,7 +330,7 @@ public class JeffLib {
      */
     public static void init(final Plugin plugin) {
         JeffLib.plugin = plugin;
-        checkRelocation();
+        //checkRelocation();
         if (!initDone) {
             ProtectionUtils.loadPluginProtections();
         }
