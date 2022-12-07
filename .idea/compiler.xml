@@ -15,6 +15,7 @@
         <module name="JeffLib-spigot_1_19_1_R1" />
         <module name="JeffLib-spigot_1_19_2_R1" />
         <module name="JeffLib (1)" />
+        <module name="JeffLib-spigot_1_19_3_R1" />
         <module name="JeffLib-spigot_1_16_R2" />
         <module name="JeffLib-spigot_1_16_R3" />
       </profile>
