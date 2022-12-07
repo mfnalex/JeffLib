@@ -82,26 +82,32 @@ Optionally you can adjust your shade configuration to relocate JeffLib and to ma
 </filters>
 ```
 
-### Gradle (Groovy)
+### Gradle
+
 Repository:
 ```groovy
-maven {
-    url = uri('https://hub.jeff-media.com/nexus/repository/jeff-media-public/')
+repositories {
+    maven {
+        url = uri('https://hub.jeff-media.com/nexus/repository/jeff-media-public/')
+    }
 }
 ```
 
 Dependency:
 ```groovy
-implementation 'com.jeff_media:JeffLib:11.5.0'
+dependencies {
+    implementation 'com.jeff_media:JeffLib:11.5.0'
+}
 ```
+
+You also need an additional third-party plugin to shade JeffLib into your .jar as Gradle doesn't have any official plugin for this. You'll furthermore want to tell your shading plugin to minimize your .jar after that to remove unused classes from JeffLib, except for the classes in `com.jeff_media.jefflib.internal.nms`, and to relocate those classes to your own package name.  I have no clue how to make the Gradle Shadow plugin be able to both, relocate classes, while also using filters in the minimize() block, so you'll have to figure this out yourself, or simply use Maven instead (see above).
+
 
 ## Usage
 
-Just include JeffLib as dependency in your pom.xml.
-
 **Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only
 works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for
-example PDCUtils), then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
+example PDCUtils) before it got enabled, then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
 
 ```java
 public class MyPlugin extends JavaPlugin {
@@ -112,7 +118,7 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
-**Note:** If you use methods annotated with "@RequiresNMS", you have to enable NMS support:
+**Note:** If you use methods annotated with "@RequiresNMS", you also have to enable NMS support:
 
 ```java
 public class MyPlugin extends JavaPlugin {
@@ -123,17 +129,7 @@ public class MyPlugin extends JavaPlugin {
 }
 ```
 
-### Obfuscation settings
-
-If you're using allatori to obfuscate your plugin, you need the following additional settings:
-
-```xml
-<ignore-classes>
-  <class template="class **.nms.**" />
-</ignore-classes>
-```
-
-### Building from source
+## Building from source
 To build JeffLib from source, you need the following Spigot versions installed in your local repository:
 
   - 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
