@@ -316,10 +316,6 @@ echo "Total runtime: $RUNTIME seconds"
 
 banner "Success!"
 
-for ((i = 0; i < ${#ALREADY_BUILT_VERSIONS[@]}; i++)); do
-  echo "${ALREADY_BUILT_VERSIONS[$i]}"
-done
-
 #################################################################################################
 
 # Unused stuff
