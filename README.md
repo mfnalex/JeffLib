@@ -132,6 +132,7 @@ public class MyPlugin extends JavaPlugin {
 ## Building from source
 To build JeffLib from source, you need the following Spigot versions installed in your local repository:
 
+  - 1.19.3-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.19.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
   - 1.19-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
