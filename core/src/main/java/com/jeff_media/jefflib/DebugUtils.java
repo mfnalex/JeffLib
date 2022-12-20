@@ -24,6 +24,7 @@ import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
+import org.bukkit.UnsafeValues;
 import org.bukkit.entity.Llama;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
@@ -50,6 +51,7 @@ public class DebugUtils {
     public static void print(final Map<?, ?> map) {
         for (final Map.Entry<?, ?> entry : map.entrySet()) {
             System.out.println(entry.getKey() + " -> " + entry.getValue());
+            UnsafeValues values = values.getMaterial()
         }
     }
 
