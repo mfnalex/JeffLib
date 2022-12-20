@@ -80,11 +80,11 @@ function error {
 
 function cleanup {
   if [[ -d "$TEMP_FILE" ]]; then
-    if [[ $1 -ne "silent" ]]; then
+    if [[ "$1" != "silent" ]]; then
       banner "Deleting temporary directory"
     fi
     if rm -rf "$TEMP_FILE"; then
-      if [[ $1 -ne "silent" ]]; then
+      if [[ "$1" != "silent" ]]; then
         echo "Deleted temp file successfully"
       fi
     else
@@ -139,6 +139,11 @@ function buildVersion {
   if isInRepo "$fullVersion" "$remapped" == $TRUE; then
     echo "Skipped building version $fullVersion$classifier as it is already in your local repository"
     ALREADY_BUILT_VERSIONS+=("$versionWithClassifier")
+
+        if [[ $remapped == "$TRUE" ]]; then
+          buildVersion "$1" "$2" $FALSE
+        fi
+
     return $TRUE
   fi
 
@@ -147,7 +152,7 @@ function buildVersion {
     remappedParam="--remapped"
   fi
 
-  local label="Building version $fullVersion$classifier ... (this might take a while)"
+  local label="Building version $fullVersion$classifier ..."
   #echo "Debug: $version"
   (runBuildTools "$version" "$javaPath" "$remappedParam") >"$BT_OUTPUT_FILE" 2>&1 &
   show_spinner $! "$label"

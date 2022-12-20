@@ -130,20 +130,20 @@ public class MyPlugin extends JavaPlugin {
 ```
 
 ## Building from source
-To build JeffLib from source, you need the following Spigot versions installed in your local repository:
+To build JeffLib from source, just clone this repo, then run the `run-buildtools.sh`file, which will automatically build
+all needed Spigot versions that you don't already have in your local repo. After that, you can build JeffLib by running
+`mvn clean install` in the root directory of this repo. The final .jar will be in the `dist/target` folder.
 
-  - 1.19.3-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.19.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.19.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.19-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.18.2-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.18.1-R0.1-SNAPSHOT:remapped-mojang (Java 17+)
-  - 1.17.1-R0.1-SNAPSHOT:remapped-mojang (Java 16+)
-  - 1.16.5-R0.1-SNAPSHOT (Java 8 - Java 16)
-  - 1.16.3-R0.1-SNAPSHOT (Java 8 - Java 16)
-  - 1.16.1-R0.1-SNAPSHOT (Java 8 - Java 16)
+```shell
+git clone https://github.com/JEFF-Media-GbR/JeffLib/
+cd JeffLib
+bash run-buildtools.sh
+mvn clean install
+```
 
-You can use the included script `run-buildtools.sh` to build those all at once.
+**Note**: On Windows, you need to use "git bash" or similar to run the `run-buildtools.sh` script. If it complains about
+missing java versions, edit the script and change the `JAVA_VERSION` and `LEGACY_JAVA_VERSION` variables to point at your
+java 17 and java 8/11 installations.
 
 ## JavaDocs
 
