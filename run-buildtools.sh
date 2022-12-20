@@ -129,7 +129,7 @@ function buildVersion {
   local versionWithClassifier=$version
 
   if [[ $remapped == "$TRUE" ]]; then
-    buildVersion "$1" "$2" $FALSE
+    #buildVersion "$1" "$2" $FALSE
     classifier=":remapped-mojang"
     versionWithClassifier="${version} (remapped)"
   fi
