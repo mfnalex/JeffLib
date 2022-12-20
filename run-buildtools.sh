@@ -1,16 +1,28 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Path to your java 17 executable
-JAVA17_PATH="/c/Program Files/Java/jdk-17.0.1/bin/java.exe"
+JAVA_PATH="/c/Program Files/Java/jdk-17.0.1/bin/java.exe"
 # Path to your java 8 or java 11 java executable
-JAVA_PATH="/c/Program Files/Java/jdk1.8.0_271/bin/java.exe"
+LEGACY_JAVA_PATH="/c/Program Files/Java/jdk1.8.0_271/bin/java.exe"
 
 ###############################
 # Do not edit below this line #
 ###############################
-BT_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+
+#################################################################################################
+
 readonly TRUE=0
 readonly FALSE=1
+
+readonly BT_URL="https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar"
+
+readonly NOT_AN_EXECUTABLE=-1
+readonly FILE_NOT_FOUND=-2
+readonly NO_JAVA_VERSION_REQUIREMENT=-3
+
+readonly BT_RETURN_VALUE_FILE="buildtools_return_value.txt"
+readonly BT_ERROR_FILE="$HOME/buildtools_error.txt"
+readonly BT_OUTPUT_FILE="buildtools_output.txt"
 
 BUILT_VERSIONS=()
 ALREADY_BUILT_VERSIONS=()
@@ -33,15 +45,48 @@ function banner() {
   echo
 }
 
+function stringJoin() {
+  local separator="$1"
+  shift
+  local first="$1"
+  shift
+  printf "%s" "$first" "${@/#/$separator}"
+}
+
+show_spinner() {
+  local -r pid="${1}"
+  shift
+  local -r delay='0.75'
+  local spinstr='\|/-'
+  local temp
+  local waitingForBt="$*"
+  local waitingFotBtLength=${#waitingForBt}
+  while ps a | awk '{print $1}' | grep -q "${pid}"; do
+    temp="${spinstr#?}"
+    printf " [%c]  $waitingForBt" "${spinstr}"
+    spinstr=${temp}${spinstr%"${temp}"}
+    sleep "${delay}"
+    #printf "\b\b\b\b\b\b"
+    for ((i = 0; i <= $((waitingFotBtLength + 6)); i++)); do
+      printf "\b"
+    done
+  done
+  printf "    \b\b\b\b"
+}
+
 function error {
   echo >&2 "Error: $*"
 }
 
 function cleanup {
   if [[ -d "$TEMP_FILE" ]]; then
-    banner "Deleting temporary directory"
+    if [[ $1 -ne "silent" ]]; then
+      banner "Deleting temporary directory"
+    fi
     if rm -rf "$TEMP_FILE"; then
-      echo "Deleted temp file successfully"
+      if [[ $1 -ne "silent" ]]; then
+        echo "Deleted temp file successfully"
+      fi
     else
       error "Failed to delete temporary directory: $TEMP_FILE"
     fi
@@ -52,6 +97,11 @@ function error_exit {
   error "$*"
   cleanup
   exit 1
+}
+
+function runBuildTools {
+  "$javaPath" -jar buildtools.jar --rev "$version" "$remappedParam"
+  echo "$?" >$BT_RETURN_VALUE_FILE
 }
 
 function isInRepo {
@@ -76,13 +126,19 @@ function buildVersion {
   local remapped=$3
   local fullVersion=$version-R0.1-SNAPSHOT
   local classifier=""
-  if [[ $remapped == "true" ]]; then
+  local versionWithClassifier=$version
+
+  if [[ $remapped == "$TRUE" ]]; then
+    buildVersion "$1" "$2" $FALSE
     classifier=":remapped-mojang"
+    versionWithClassifier="${version} (remapped)"
   fi
 
+  banner "Building version ${fullVersion}${classifier}"
+
   if isInRepo "$fullVersion" "$remapped" == $TRUE; then
-    echo "Version $fullVersion$classifier is already in the repository"
-    ALREADY_BUILT_VERSIONS+=("$version")
+    echo "Skipped building version $fullVersion$classifier as it is already in your local repository"
+    ALREADY_BUILT_VERSIONS+=("$versionWithClassifier")
     return $TRUE
   fi
 
@@ -91,14 +147,27 @@ function buildVersion {
     remappedParam="--remapped"
   fi
 
-  echo "Building version $fullVersion$classifier ... (this might take a while)"
-  echo "Debug: $version"
-  "$javaPath" -jar buildtools.jar --rev "$version" $remappedParam || {
-    cat buildtools.log
-    rm buildtools.log
-    error_exit "Failed to build version $fullVersion$classifier. See above for the BuildTools error message."
-  }
-  BUILT_VERSIONS+=("$version")
+  local label="Building version $fullVersion$classifier ... (this might take a while)"
+  #echo "Debug: $version"
+  (runBuildTools "$version" "$javaPath" "$remappedParam") >"$BT_OUTPUT_FILE" 2>&1 &
+  show_spinner $! "$label"
+  local BT_RETURN_VALUE
+  BT_RETURN_VALUE=$(cat $BT_RETURN_VALUE_FILE)
+  rm "$BT_RETURN_VALUE_FILE"
+  if [[ $BT_RETURN_VALUE -eq 0 ]]; then
+    echo "Successfully built version $fullVersion$classifier"
+  else
+    error "Failed to build version $fullVersion$classifier. See below for the full error message. The error message will also be saved to $BT_ERROR_FILE"
+    echo
+    cat "$BT_OUTPUT_FILE"
+    cp "$BT_OUTPUT_FILE" "$BT_ERROR_FILE"
+    rm "$BT_OUTPUT_FILE"
+    echo
+    banner "Failed!"
+    cleanup silent
+    error_exit "Failed to build version $fullVersion$classifier: Java exited with return code $BT_RETURN_VALUE. See above for the full error message. The error message has also been saved to $BT_ERROR_FILE"
+  fi
+  BUILT_VERSIONS+=("$versionWithClassifier")
   return $TRUE
 }
 
@@ -117,13 +186,68 @@ function exitWhenCommandNotExists() {
   fi
 }
 
+function checkJavaExec() {
+  local varName
+  varName=$1
+  echo "Please adjust the variable \"$varName\" at the top of this script to point to your java executable."
+}
+
+function getJavaVersion() {
+  local javaPath
+  javaPath=$1
+  if [[ ! -f "$javaPath" ]]; then
+    echo $FILE_NOT_FOUND
+  fi
+  if [[ ! -x "$javaPath" ]]; then
+    echo $NOT_AN_EXECUTABLE
+  fi
+  "$javaPath" -version 2>&1 | sed -n ';s/.* version "\(.*\)\.\(.*\)\..*".*/\1\2/p;'
+}
+
 function checkSelf() {
-  if [[ ! -f "$JAVA_PATH" ]]; then
-    error_exit "Java 8 or 11 not found at $JAVA_PATH"
+  local javaVersion
+  local legacyJavaVersion
+
+  javaVersion=$(getJavaVersion "$JAVA_PATH")
+  legacyJavaVersion=$(getJavaVersion "$LEGACY_JAVA_PATH")
+
+  echo "Java version: $javaVersion"
+  echo "Legacy Java version: $legacyJavaVersion"
+
+  ## Java 17
+
+  if [[ $javaVersion == "$FILE_NOT_FOUND" ]]; then
+    error_exit "Could not find java executable at $JAVA_PATH. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
   fi
 
-  if [[ ! -f "$JAVA17_PATH" ]]; then
-    error_exit "Java 17 not found at $JAVA17_PATH"
+  if [[ $javaVersion == "$NOT_AN_EXECUTABLE" ]]; then
+    error_exit "The java executable at $JAVA_PATH is not an executable. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
+  fi
+
+  if [[ $javaVersion -lt 170 ]]; then
+    error_exit "The java executable at $JAVA_PATH is older than java 17. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
+  fi
+
+  if [[ $javaVersion -ge 180 ]]; then
+    error_exit "The java executable at $JAVA_PATH is newer than java 17. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
+  fi
+
+  ## Java Legacy
+
+  if [[ $legacyJavaVersion == "$FILE_NOT_FOUND" ]]; then
+    error_exit "Could not find java executable at $LEGACY_JAVA_PATH. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java executable."
+  fi
+
+  if [[ $legacyJavaVersion == "$NOT_AN_EXECUTABLE" ]]; then
+    error_exit "The java executable at $LEGACY_JAVA_PATH is not an executable. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java executable."
+  fi
+
+  if [[ $legacyJavaVersion -lt 18 ]]; then
+    error_exit "The java executable at $LEGACY_JAVA_PATH is older than java 8. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java 8 or java 11 executable."
+  fi
+
+  if [[ $legacyJavaVersion -gt 119 ]]; then
+    error_exit "The java executable at $LEGACY_JAVA_PATH is newer than java 11. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java 8 or java 11 executable."
   fi
 
   if (! commandExists curl) && (! commandExists wget); then
@@ -137,6 +261,10 @@ function checkSelf() {
   exitWhenCommandNotExists echo
   exitWhenCommandNotExists trap
   exitWhenCommandNotExists date
+  exitWhenCommandNotExists grep
+  exitWhenCommandNotExists sed
+  exitWhenCommandNotExists wc
+  exitWhenCommandNotExists printf
   #exitWhenCommandNotExists testCommandLmaoTest
 
 }
@@ -161,31 +289,95 @@ curl -o buildtools.jar $BT_URL || wget -O buildtools.jar $BT_URL || {
 }
 
 for version in 1.19.3 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1; do
-  banner "Building version ${version}-R0.1-SNAPSHOT:remapped-mojang"
-  buildVersion ${version} "$JAVA17_PATH" $TRUE
+  buildVersion ${version} "$JAVA_PATH" $TRUE
 done
 
 for version in 1.16.5 1.16.3 1.16.1; do
-  banner "Building version ${version}-R0.1-SNAPSHOT"
-  buildVersion ${version} "$JAVA_PATH" $FALSE
+  buildVersion ${version} "$LEGACY_JAVA_PATH" $FALSE
 done
 
 cleanup
 
 banner "Summary"
 END_TIME=$(date +%s)
-RUNTIME=$((END_TIME-START_TIME))
+RUNTIME=$((END_TIME - START_TIME))
 NUMBER_OF_BUILT_VERSIONS=${#BUILT_VERSIONS[@]}
 NUMBER_OF_ALREADY_BUILT_VERSIONS=${#ALREADY_BUILT_VERSIONS[@]}
 echo "Finished successfully!"
 echo
 if [[ $NUMBER_OF_BUILT_VERSIONS -gt 0 ]]; then
-  echo "Built versions ($NUMBER_OF_BUILT_VERSIONS): ${BUILT_VERSIONS[*]}"
+  echo "Built versions ($NUMBER_OF_BUILT_VERSIONS): $(stringJoin ', ' "${BUILT_VERSIONS[@]}")"
 fi
 if [[ $NUMBER_OF_ALREADY_BUILT_VERSIONS -gt 0 ]]; then
-  echo "Skipped already built versions ($NUMBER_OF_ALREADY_BUILT_VERSIONS): ${ALREADY_BUILT_VERSIONS[*]}"
+  echo "Skipped already built versions ($NUMBER_OF_ALREADY_BUILT_VERSIONS): $(stringJoin ', ' "${ALREADY_BUILT_VERSIONS[@]}")"
 fi
 echo
 echo "Total runtime: $RUNTIME seconds"
 
-banner "Done!"
+banner "Success!"
+
+for ((i = 0; i < ${#ALREADY_BUILT_VERSIONS[@]}; i++)); do
+  echo "${ALREADY_BUILT_VERSIONS[$i]}"
+done
+
+#################################################################################################
+
+# Unused stuff
+
+function byteCodeToJavaVersion() {
+  case $1 in
+  50) echo "6" ;;
+  51) echo "7" ;;
+  52) echo "8" ;;
+  53) echo "9" ;;
+  54) echo "10" ;;
+  55) echo "11" ;;
+  56) echo "12" ;;
+  57) echo "13" ;;
+  58) echo "14" ;;
+  59) echo "15" ;;
+  60) echo "16" ;;
+  61) echo "17" ;;
+  62) echo "18" ;;
+  63) echo "19" ;;
+  64) echo "20" ;;
+  65) echo "21" ;;
+  *) echo "Unknown" ;;
+  esac
+}
+
+function getRequiredJavaVersions() {
+  local spigotVersion
+  local json
+  local split
+  local minJavaVersion
+  local maxJavaVersion
+  local javaVersionsLine
+  local line
+  spigotVersion="$1"
+  json=$(curl -s "https://hub.spigotmc.org/versions/$spigotVersion.json")
+  javaVersionsLine=$(echo "$json" | grep '"javaVersions":')
+  if [[ $(echo "$javaVersionsLine" | wc -l) -eq 0 ]]; then
+    echo "$NO_JAVA_VERSION_REQUIREMENT"
+    return
+  fi
+  split=()
+  while IFS='' read -r line; do split+=("$line"); done < <(echo "$javaVersionsLine" | grep -o "[[:digit:]]\{1,\}")
+  minJavaVersion=$(byteCodeToJavaVersion "${split[0]}")
+  maxJavaVersion=$(byteCodeToJavaVersion "${split[1]}")
+  echo "$minJavaVersion-$maxJavaVersion"
+}
+
+function isJavaVersionInRange() {
+  local javaVersion
+  local minJavaVersion
+  local maxJavaVersion
+  javaVersion="$1"
+  minJavaVersion="$2"
+  maxJavaVersion="$3"
+  if [[ $javaVersion -ge $minJavaVersion && $javaVersion -le $maxJavaVersion ]]; then
+    echo "$TRUE"
+  else
+    echo "$FALSE"
+  fi
+}
