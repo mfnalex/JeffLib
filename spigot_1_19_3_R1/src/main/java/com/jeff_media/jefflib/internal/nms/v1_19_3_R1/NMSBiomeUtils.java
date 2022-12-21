@@ -16,7 +16,7 @@
  *
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_19_2_R1;
+package com.jeff_media.jefflib.internal.nms.v1_19_3_R1;
 
 import com.jeff_media.jefflib.data.tuples.Pair;
 import lombok.experimental.UtilityClass;
@@ -30,15 +30,14 @@ import net.minecraft.world.level.biome.Biome;
 import net.minecraft.world.level.chunk.LevelChunk;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
-import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_19_R2.CraftServer;
+import org.bukkit.craftbukkit.v1_19_R2.CraftWorld;
 
 
 @UtilityClass
 class NMSBiomeUtils {
 
-    // Let's check how the registry works in 1.19.2
-    private final ResourceKey<Registry<Biome>> BIOME_REGISTRY_RESOURCE_KEY = Registry.BIOME_REGISTRY;
+    private final ResourceKey<Registry<Biome>> BIOME_REGISTRY_RESOURCE_KEY = ResourceKey.createRegistryKey(new ResourceLocation("worldgen/biome"));
 
     Pair<String, String> getBiomeName(final Location location) {
         final ResourceLocation key = getBiomeKey(location);

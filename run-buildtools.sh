@@ -1,4 +1,22 @@
 #!/usr/bin/env bash
+# Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+###############################
+#        Configuration        #
+###############################
 
 # Path to your java 17 executable
 JAVA_PATH="/c/Program Files/Java/jdk-17.0.1/bin/java.exe"
@@ -10,6 +28,9 @@ LEGACY_JAVA_PATH="/c/Program Files/Java/jdk1.8.0_271/bin/java.exe"
 ###############################
 
 #################################################################################################
+
+readonly LEGACY_VERSIONS=(1.16.5 1.16.3 1.16.1)
+readonly VERSIONS=(1.19.3 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1)
 
 readonly TRUE=0
 readonly FALSE=1
@@ -56,7 +77,7 @@ function stringJoin() {
 show_spinner() {
   local -r pid="${1}"
   shift
-  local -r delay='0.75'
+  local -r delay='0.25'
   local spinstr='\|/-'
   local temp
   local waitingForBt="$*"
@@ -293,11 +314,11 @@ curl -o buildtools.jar $BT_URL || wget -O buildtools.jar $BT_URL || {
   error_exit "Could not download BuildTools!"
 }
 
-for version in 1.19.3 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1; do
+for version in "${VERSIONS[@]}"; do
   buildVersion ${version} "$JAVA_PATH" $TRUE
 done
 
-for version in 1.16.5 1.16.3 1.16.1; do
+for version in "${LEGACY_VERSIONS[@]}"; do
   buildVersion ${version} "$LEGACY_JAVA_PATH" $FALSE
 done
 
