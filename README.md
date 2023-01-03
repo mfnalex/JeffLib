@@ -84,11 +84,20 @@ Optionally you can adjust your shade configuration to relocate JeffLib and to ma
 
 ### Gradle
 
+Plugin:
+```groovy
+plugins {
+    id 'java'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
+}
+```
+
 Repository:
 ```groovy
 repositories {
     maven {
-        url = uri('https://hub.jeff-media.com/nexus/repository/jeff-media-public/')
+        name 'jeff-media-gbr'
+        url 'https://hub.jeff-media.com/nexus/repository/jeff-media-public/'
     }
 }
 ```
@@ -97,8 +106,19 @@ Dependency:
 ```groovy
 dependencies {
     implementation 'com.jeff_media:JeffLib:12.0.0'
+} 
+```
+
+Shadow with re-location
+```groovy
+shadowJar {
+    relocate 'com.jeff_media.jefflib', 'YOUR.PACKAGE.jefflib'
+    minimize() {
+        exclude("com/jeff_media/jefflib/internal/nms/**")
+    }
 }
 ```
+
 
 You also need an additional third-party plugin to shade JeffLib into your .jar as Gradle doesn't have any official plugin for this. You'll furthermore want to tell your shading plugin to minimize your .jar after that to remove unused classes from JeffLib, except for the classes in `com.jeff_media.jefflib.internal.nms`, and to relocate those classes to your own package name.  I have no clue how to make the Gradle Shadow plugin be able to both, relocate classes, while also using filters in the minimize() block, so you'll have to figure this out yourself, or simply use Maven instead (see above).
 
