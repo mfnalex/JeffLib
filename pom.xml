@@ -23,7 +23,7 @@
 
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version>12.0.0</version>
+    <version><!-- JeffLib version start -->12.0.1<!-- JeffLib version end --></version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
 

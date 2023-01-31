@@ -31,10 +31,10 @@
         <config.version>${maven.build.timestamp}</config.version>
     </properties>
 
-    <parent>
+    <parent>you
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version>12.0.0</version>
+        <version><!-- JeffLib version start -->12.0.1<!-- JeffLib version end --></version>
     </parent>
 
     <build>
@@ -57,10 +57,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.3.2</version>
-                <configuration> <!-- add this to disable checking -->
-                    <source>${java.version}</source>
-                    <failOnError>true</failOnError>
-                    <failOnWarnings>false</failOnWarnings>
+                <configuration>
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
                         <link>https://docs.oracle.com/javase/8/docs/api/</link>

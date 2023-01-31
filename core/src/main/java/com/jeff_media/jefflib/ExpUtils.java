@@ -18,10 +18,12 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.cherokee.Validate;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.ExperienceOrb;
+import org.bukkit.entity.Player;
 
 import java.util.Objects;
 
@@ -57,6 +59,33 @@ public class ExpUtils {
         if (currentLevel <= 15) return (2 * currentLevel) + 7;
         if (currentLevel <= 30) return (5 * currentLevel) - 38;
         return (9 * currentLevel) - 158;
+    }
+
+    /**
+     * Gets the amount of XP required to reach the next level from the current level and progress
+     * @param player Player to check for
+     * @return Amount of XP required to reach the next level from the current level and progress
+     */
+    public static int getXpLeftUntilNextLevel(Player player) {
+        int currentLevel = player.getLevel();
+        float currentLevelProgress = player.getExp();
+        return getXpLeftUntilNextLevel(currentLevel, currentLevelProgress);
+    }
+
+    /**
+     * Gets the amount of XP required to reach the next level from the current level and progress
+     * @param currentLevel The current level
+     * @param currentLevelProgress The current level progress, must be between 0 and 1
+     * @return Amount of XP required to reach the next level from the current level and progress
+     * @throws IllegalArgumentException If currentLevelProgress is not between 0 and 1
+     */
+    public static int getXpLeftUntilNextLevel(int currentLevel, float currentLevelProgress) {
+        if(currentLevelProgress - NumberUtils.EPSILON_F > 1 || currentLevelProgress + NumberUtils.EPSILON_F < 0) {
+            throw new IllegalArgumentException("currentLevelProgress must be between 0 and 1, but was " + currentLevelProgress);
+        }
+        int xpRequiredFromCurrentLevelToNextLevel = com.jeff_media.jefflib.ExpUtils.getXPRequiredForNextLevel(currentLevel);
+        int xpTheyAlreadyHaveInThisLevel = (int) (currentLevelProgress * xpRequiredFromCurrentLevelToNextLevel);
+        return xpRequiredFromCurrentLevelToNextLevel - xpTheyAlreadyHaveInThisLevel;
     }
 
     /**

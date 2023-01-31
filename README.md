@@ -39,7 +39,7 @@ Dependency:
 <dependency>
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib</artifactId>
-    <version>12.0.0</version>
+    <version>12.0.1</version>
     <scope>compile</scope>
 </dependency>
 ```
