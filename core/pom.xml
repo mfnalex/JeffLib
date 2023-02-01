@@ -15,28 +15,23 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
   -->
-
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>JeffLib-core</artifactId>
-
     <packaging>jar</packaging>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
         <config.version>${maven.build.timestamp}</config.version>
     </properties>
-
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
         <version><!-- changeme -->12.0.2</version>
     </parent>
-
     <build>
         <resources>
             <resource>
@@ -113,23 +108,10 @@
             </plugin>
         </plugins>
     </build>
-
     <repositories>
-        <repository>
-            <id>spigot-repo</id>
-            <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
-        </repository>
         <repository>
             <id>papermc</id>
             <url>https://papermc.io/repo/repository/maven-public/</url>
-        </repository>
-        <repository>
-            <id>jeff-media-public</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
-        </repository>
-        <repository>
-            <id>jeff-media-thirdparty</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-thirdparty/</url>
         </repository>
         <repository>
             <id>minecraft-libraries</id>
@@ -162,7 +144,6 @@
             <url>https://mvn.intellectualsites.com/content/repositories/snapshots/</url>
         </repository>
     </repositories>
-
     <dependencies>
         <dependency>
             <groupId>javax.annotation</groupId>
@@ -177,22 +158,22 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.19.1-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-            <classifier>remapped-mojang</classifier>
-        </dependency>
-        <dependency>
             <groupId>com.github.seeseemelk</groupId>
             <artifactId>MockBukkit-v1.18</artifactId> <!-- MockBukkit 1.19 doesn't work on Spigot anymore -->
             <version>2.26.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <classifier>remapped-mojang</classifier>
+        </dependency>
+        <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19-R0.1-SNAPSHOT</version>
+            <version>1.19.3-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -201,64 +182,54 @@
             <version>3.2.38</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.allatori</groupId>
             <artifactId>allatori-annotations</artifactId>
-            <version>8.0</version>
+            <version>8.4</version>
             <scope>provided</scope>
         </dependency>
-
-
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
             <version>2.10.10</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-bukkit</artifactId>
             <version>7.2.5</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.comphenix.protocol</groupId>
             <artifactId>ProtocolLib</artifactId>
             <version>4.7.0</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
             <version>7.0.4</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
-            <groupId>io.th0rgal</groupId>
+            <groupId>com.github.oraxen</groupId>
             <artifactId>oraxen</artifactId>
-            <version>1.135.2</version>
+            <version>bea381fb82</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
             <version>1.2</version>
             <scope>provided</scope>
         </dependency>
-
         <dependency>
             <groupId>com.github.LoneDev6</groupId>
             <artifactId>api-itemsadder</artifactId>
             <version>2.4.7</version>
             <scope>provided</scope>
         </dependency>
-
         <!-- MMOItems start -->
         <dependency>
             <groupId>net.Indyuce</groupId>
@@ -279,7 +250,6 @@
             <scope>provided</scope>
         </dependency>
         <!-- MMOItems End -->
-
         <!-- PlotSquared 6 Start -->
         <dependency>
             <groupId>com.plotsquared</groupId>
@@ -293,9 +263,6 @@
             <version>6.6.0</version>
             <scope>provided</scope>
         </dependency>
-        <!-- PlotSquared 6 End -->
-
-
         <dependency>
             <groupId>com.github.angeschossen</groupId>
             <artifactId>LandsAPI</artifactId>
@@ -303,6 +270,4 @@
             <scope>provided</scope>
         </dependency>
     </dependencies>
-
-
 </project>

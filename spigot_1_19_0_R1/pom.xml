@@ -15,12 +15,10 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   ~
   -->
-
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <artifactId>JeffLib-spigot_1_19_0_R1</artifactId>
-
     <packaging>jar</packaging>
     <parent>
         <groupId>com.jeff_media</groupId>
@@ -81,17 +79,11 @@
             <artifactId>JeffLib-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.mojang</groupId>
-            <artifactId>authlib</artifactId>
-            <version>3.2.38</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.mojang</groupId>-->
+<!--            <artifactId>authlib</artifactId>-->
+<!--            <version>3.2.38</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
     </dependencies>
-    <repositories>
-        <repository>
-            <id>jeff-media-thirdparty</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-thirdparty/</url>
-        </repository>
-    </repositories>
 </project>
