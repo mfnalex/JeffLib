@@ -18,7 +18,24 @@
 
 package com.jeff_media.jefflib.data;
 
-import org.bukkit.*;
+import org.bukkit.DyeColor;
+import org.bukkit.Effect;
+import org.bukkit.EntityEffect;
+import org.bukkit.FluidCollisionMode;
+import org.bukkit.GameMode;
+import org.bukkit.Instrument;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.Note;
+import org.bukkit.Particle;
+import org.bukkit.Server;
+import org.bukkit.Sound;
+import org.bukkit.SoundCategory;
+import org.bukkit.Statistic;
+import org.bukkit.WeatherType;
+import org.bukkit.World;
+import org.bukkit.WorldBorder;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.advancement.AdvancementProgress;
 import org.bukkit.attribute.Attribute;
@@ -30,11 +47,26 @@ import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.conversations.Conversation;
 import org.bukkit.conversations.ConversationAbandonedEvent;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityCategory;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
+import org.bukkit.entity.Pose;
+import org.bukkit.entity.Projectile;
+import org.bukkit.entity.SpawnCategory;
+import org.bukkit.entity.Villager;
 import org.bukkit.entity.memory.MemoryKey;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerTeleportEvent;
-import org.bukkit.inventory.*;
+import org.bukkit.inventory.EntityEquipment;
+import org.bukkit.inventory.EquipmentSlot;
+import org.bukkit.inventory.Inventory;
+import org.bukkit.inventory.InventoryView;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.MainHand;
+import org.bukkit.inventory.Merchant;
+import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.map.MapView;
 import org.bukkit.metadata.MetadataValue;
 import org.bukkit.permissions.Permission;
@@ -49,11 +81,14 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.net.InetSocketAddress;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 
 // Todo: extend CraftPlayer instead and simply override the message methods
 // Maybe also override other setter methods?
@@ -116,24 +151,30 @@ public class ShadowPlayer implements Player {
     @Override
     public void sendMessage(@Nonnull final String[] strings) {
 
-    }    @Override
-    public void setCompassTarget(@Nonnull final Location location) {
-
     }
 
     @Override
     public void sendMessage(@Nullable final UUID uuid, @Nonnull final String s) {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public Location getCompassTarget() {
         return player.getCompassTarget();
     }
 
     @Override
+    public void setCompassTarget(@Nonnull final Location location) {
+
+    }
+
+    @Override
     public void sendMessage(@Nullable final UUID uuid, @Nonnull final String[] strings) {
 
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public InetSocketAddress getAddress() {
         return player.getAddress();
@@ -169,7 +210,9 @@ public class ShadowPlayer implements Player {
     @Override
     public Player getPlayer() {
         return player;
-    }    @Override
+    }
+
+    @Override
     public void sendRawMessage(@Nonnull final String s) {
 
     }
@@ -182,7 +225,9 @@ public class ShadowPlayer implements Player {
     @Override
     public long getLastPlayed() {
         return player.getLastPlayed();
-    }    @Override
+    }
+
+    @Override
     public void kickPlayer(@Nullable final String s) {
 
     }
@@ -190,7 +235,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasPlayedBefore() {
         return player.hasPlayedBefore();
-    }    @Override
+    }
+
+    @Override
     public void chat(@Nonnull final String s) {
 
     }
@@ -198,7 +245,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void incrementStatistic(@Nonnull final Statistic statistic) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public boolean performCommand(@Nonnull final String s) {
         return false;
     }
@@ -216,24 +265,30 @@ public class ShadowPlayer implements Player {
     @Override
     public void decrementStatistic(@Nonnull final Statistic statistic, final int i) throws IllegalArgumentException {
 
-    }    @Override
-    public void setVelocity(@Nonnull final Vector vector) {
-
     }
 
     @Override
     public void setStatistic(@Nonnull final Statistic statistic, final int i) throws IllegalArgumentException {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public Vector getVelocity() {
         return player.getVelocity();
     }
 
     @Override
+    public void setVelocity(@Nonnull final Vector vector) {
+
+    }
+
+    @Override
     public int getStatistic(@Nonnull final Statistic statistic) throws IllegalArgumentException {
         return player.getStatistic(statistic);
-    }    @Override
+    }
+
+    @Override
     public double getHeight() {
         return player.getHeight();
     }
@@ -241,7 +296,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public double getWidth() {
         return player.getWidth();
     }
@@ -249,7 +306,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public BoundingBox getBoundingBox() {
         return player.getBoundingBox();
@@ -258,7 +317,9 @@ public class ShadowPlayer implements Player {
     @Override
     public int getStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material) throws IllegalArgumentException {
         return player.getStatistic(statistic, material);
-    }    @Override
+    }
+
+    @Override
     public boolean isOnGround() {
         return player.isOnGround();
     }
@@ -266,7 +327,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public boolean isInWater() {
         return player.isInWater();
     }
@@ -274,7 +337,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public World getWorld() {
         return player.getWorld();
@@ -283,7 +348,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void setStatistic(@Nonnull final Statistic statistic, @Nonnull final Material material, final int i) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public void setRotation(final float v, final float v1) {
 
     }
@@ -291,7 +358,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public boolean teleport(@Nonnull final Location location) {
         return false;
     }
@@ -299,7 +368,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public boolean teleport(@Nonnull final Location location, @Nonnull final PlayerTeleportEvent.TeleportCause teleportCause) {
         return false;
     }
@@ -307,7 +378,9 @@ public class ShadowPlayer implements Player {
     @Override
     public int getStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType) throws IllegalArgumentException {
         return player.getStatistic(statistic, entityType);
-    }    @Override
+    }
+
+    @Override
     public boolean teleport(@Nonnull final Entity entity) {
         return false;
     }
@@ -315,7 +388,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void incrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) throws IllegalArgumentException {
 
-    }    @Override
+    }
+
+    @Override
     public boolean teleport(@Nonnull final Entity entity, @Nonnull final PlayerTeleportEvent.TeleportCause teleportCause) {
         return false;
     }
@@ -323,7 +398,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void decrementStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public List<Entity> getNearbyEntities(final double v, final double v1, final double v2) {
         return player.getNearbyEntities(v, v1, v2);
@@ -332,7 +409,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void setStatistic(@Nonnull final Statistic statistic, @Nonnull final EntityType entityType, final int i) {
 
-    }    @Override
+    }
+
+    @Override
     public int getEntityId() {
         return player.getEntityId();
     }
@@ -341,16 +420,25 @@ public class ShadowPlayer implements Player {
     @SuppressWarnings("MethodMayBeStatic")
     public boolean sendChunkChange(@Nonnull final Location location, final int i, final int i1, final int i2, final byte[] bytes) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public int getFireTicks() {
         return player.getFireTicks();
+    }
+
+    @Override
+    public void setFireTicks(final int i) {
+
     }
 
     @Nonnull
     @Override
     public Map<String, Object> serialize() {
         return player.serialize();
-    }    @Override
+    }
+
+    @Override
     public int getMaxFireTicks() {
         return player.getMaxFireTicks();
     }
@@ -359,41 +447,51 @@ public class ShadowPlayer implements Player {
     @Override
     public String getName() {
         return player.getName();
-    }    @Override
-    public void setFireTicks(final int i) {
-
     }
 
     @Nonnull
     @Override
     public String getDisplayName() {
         return player.getDisplayName();
-    }    @Override
-    public void setVisualFire(final boolean b) {
-
     }
 
     @Override
     public void setDisplayName(@Nullable final String s) {
 
-    }    @Override
+    }
+
+    @Override
     public boolean isVisualFire() {
         return player.isVisualFire();
+    }
+
+    @Override
+    public void setVisualFire(final boolean b) {
+
     }
 
     @Nonnull
     @Override
     public String getPlayerListName() {
         return player.getPlayerListName();
-    }    @Override
-    public int getFreezeTicks() {
-        return player.getFreezeTicks();
     }
 
     @Override
     public void setPlayerListName(@Nullable final String s) {
 
-    }    @Override
+    }
+
+    @Override
+    public int getFreezeTicks() {
+        return player.getFreezeTicks();
+    }
+
+    @Override
+    public void setFreezeTicks(final int i) {
+
+    }
+
+    @Override
     public int getMaxFreezeTicks() {
         return player.getMaxFreezeTicks();
     }
@@ -402,8 +500,10 @@ public class ShadowPlayer implements Player {
     @Override
     public String getPlayerListHeader() {
         return player.getPlayerListHeader();
-    }    @Override
-    public void setFreezeTicks(final int i) {
+    }
+
+    @Override
+    public void setPlayerListHeader(@Nullable final String s) {
 
     }
 
@@ -411,23 +511,24 @@ public class ShadowPlayer implements Player {
     @Override
     public String getPlayerListFooter() {
         return player.getPlayerListFooter();
-    }    @Override
-    public boolean isFrozen() {
-        return player.isFrozen();
-    }
-
-    @Override
-    public void setPlayerListHeader(@Nullable final String s) {
-
-    }    @Override
-    public void remove() {
-
     }
 
     @Override
     public void setPlayerListFooter(@Nullable final String s) {
 
-    }    @Override
+    }
+
+    @Override
+    public boolean isFrozen() {
+        return player.isFrozen();
+    }
+
+    @Override
+    public void remove() {
+
+    }
+
+    @Override
     public boolean isDead() {
         return player.isDead();
     }
@@ -435,7 +536,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void setPlayerListHeaderFooter(@Nullable final String s, @Nullable final String s1) {
 
-    }    @Override
+    }
+
+    @Override
     public boolean isValid() {
         return player.isValid();
     }
@@ -467,7 +570,9 @@ public class ShadowPlayer implements Player {
     @Override
     public InventoryView getOpenInventory() {
         return player.getOpenInventory();
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public Server getServer() {
         return player.getServer();
@@ -477,25 +582,31 @@ public class ShadowPlayer implements Player {
     @Override
     public InventoryView openInventory(@Nonnull final Inventory inventory) {
         return null;
-    }    @Override
+    }
+
+    @Override
     public boolean isPersistent() {
         return player.isPersistent();
     }
 
-    @Nullable
     @Override
-    public InventoryView openWorkbench(@Nullable final Location location, final boolean b) {
-        return null;
-    }    @Override
     public void setPersistent(final boolean b) {
 
     }
 
     @Nullable
     @Override
+    public InventoryView openWorkbench(@Nullable final Location location, final boolean b) {
+        return null;
+    }
+
+    @Nullable
+    @Override
     public InventoryView openEnchanting(@Nullable final Location location, final boolean b) {
         return null;
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public Entity getPassenger() {
         return player.getPassenger();
@@ -504,7 +615,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void openInventory(@Nonnull final InventoryView inventoryView) {
 
-    }    @Override
+    }
+
+    @Override
     public boolean setPassenger(@Nonnull final Entity entity) {
         return false;
     }
@@ -513,7 +626,9 @@ public class ShadowPlayer implements Player {
     @Override
     public InventoryView openMerchant(@Nonnull final Villager villager, final boolean b) {
         return null;
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public List<Entity> getPassengers() {
         return player.getPassengers();
@@ -523,7 +638,9 @@ public class ShadowPlayer implements Player {
     @Override
     public InventoryView openMerchant(@Nonnull final Merchant merchant, final boolean b) {
         return null;
-    }    @Override
+    }
+
+    @Override
     public boolean addPassenger(@Nonnull final Entity entity) {
         return false;
     }
@@ -531,7 +648,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void closeInventory() {
 
-    }    @Override
+    }
+
+    @Override
     public boolean removePassenger(@Nonnull final Entity entity) {
         return false;
     }
@@ -540,15 +659,19 @@ public class ShadowPlayer implements Player {
     @Override
     public ItemStack getItemInHand() {
         return player.getItemInHand();
-    }    @Override
-    public boolean isEmpty() {
-        return player.isEmpty();
     }
 
     @Override
     public void setItemInHand(@Nullable final ItemStack itemStack) {
 
-    }    @Override
+    }
+
+    @Override
+    public boolean isEmpty() {
+        return player.isEmpty();
+    }
+
+    @Override
     public boolean eject() {
         return false;
     }
@@ -557,15 +680,19 @@ public class ShadowPlayer implements Player {
     @Override
     public ItemStack getItemOnCursor() {
         return player.getItemOnCursor();
-    }    @Override
-    public float getFallDistance() {
-        return player.getFallDistance();
     }
 
     @Override
     public void setItemOnCursor(@Nullable final ItemStack itemStack) {
 
-    }    @Override
+    }
+
+    @Override
+    public float getFallDistance() {
+        return player.getFallDistance();
+    }
+
+    @Override
     public void setFallDistance(final float v) {
 
     }
@@ -573,24 +700,30 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasCooldown(@Nonnull final Material material) {
         return player.hasCooldown(material);
-    }    @Override
-    public void setLastDamageCause(@Nullable final EntityDamageEvent entityDamageEvent) {
-
     }
 
     @Override
     public int getCooldown(@Nonnull final Material material) {
         return player.getCooldown(material);
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public EntityDamageEvent getLastDamageCause() {
         return player.getLastDamageCause();
     }
 
     @Override
+    public void setLastDamageCause(@Nullable final EntityDamageEvent entityDamageEvent) {
+
+    }
+
+    @Override
     public void setCooldown(@Nonnull final Material material, final int i) {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public UUID getUniqueId() {
         return player.getUniqueId();
@@ -604,16 +737,20 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean sleep(@Nonnull final Location location, final boolean b) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public int getTicksLived() {
         return player.getTicksLived();
     }
 
     @Override
-    public void wakeup(final boolean b) {
-
-    }    @Override
     public void setTicksLived(final int i) {
+
+    }
+
+    @Override
+    public void wakeup(final boolean b) {
 
     }
 
@@ -621,7 +758,9 @@ public class ShadowPlayer implements Player {
     @Override
     public Location getBedLocation() {
         return player.getBedLocation();
-    }    @Override
+    }
+
+    @Override
     public void playEffect(@Nonnull final EntityEffect entityEffect) {
 
     }
@@ -630,16 +769,20 @@ public class ShadowPlayer implements Player {
     @Override
     public GameMode getGameMode() {
         return player.getGameMode();
-    }    @Nonnull
+    }
+
+    @Override
+    public void setGameMode(@Nonnull final GameMode gameMode) {
+
+    }
+
+    @Nonnull
     @Override
     public EntityType getType() {
         return player.getType();
     }
 
     @Override
-    public void setGameMode(@Nonnull final GameMode gameMode) {
-
-    }    @Override
     public boolean isInsideVehicle() {
         return player.isInsideVehicle();
     }
@@ -647,7 +790,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean isBlocking() {
         return player.isBlocking();
-    }    @Override
+    }
+
+    @Override
     public boolean leaveVehicle() {
         return false;
     }
@@ -655,7 +800,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean isHandRaised() {
         return player.isHandRaised();
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public Entity getVehicle() {
         return player.getVehicle();
@@ -665,72 +812,90 @@ public class ShadowPlayer implements Player {
     @Override
     public ItemStack getItemInUse() {
         return player.getItemInUse();
-    }    @Override
-    public void setCustomNameVisible(final boolean b) {
-
     }
 
     @Override
     public int getExpToLevel() {
         return player.getExpToLevel();
-    }    @Override
+    }
+
+    @Override
     public boolean isCustomNameVisible() {
         return player.isCustomNameVisible();
     }
 
     @Override
+    public void setCustomNameVisible(final boolean b) {
+
+    }
+
+    @Override
     public float getAttackCooldown() {
         return player.getAttackCooldown();
-    }    @Override
-    public void setGlowing(final boolean b) {
-
     }
 
     @Override
     public boolean discoverRecipe(@Nonnull final NamespacedKey namespacedKey) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public boolean isGlowing() {
         return player.isGlowing();
     }
 
     @Override
+    public void setGlowing(final boolean b) {
+
+    }
+
+    @Override
     public int discoverRecipes(@Nonnull final Collection<NamespacedKey> collection) {
         return 0;
-    }    @Override
-    public void setInvulnerable(final boolean b) {
-
     }
 
     @Override
     public boolean undiscoverRecipe(@Nonnull final NamespacedKey namespacedKey) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public boolean isInvulnerable() {
         return player.isInvulnerable();
     }
 
     @Override
+    public void setInvulnerable(final boolean b) {
+
+    }
+
+    @Override
     public int undiscoverRecipes(@Nonnull final Collection<NamespacedKey> collection) {
         return 0;
-    }    @Override
+    }
+
+    @Override
     public boolean isSilent() {
         return player.isSilent();
     }
 
     @Override
-    public boolean hasDiscoveredRecipe(@Nonnull final NamespacedKey namespacedKey) {
-        return player.hasDiscoveredRecipe(namespacedKey);
-    }    @Override
     public void setSilent(final boolean b) {
 
+    }
+
+    @Override
+    public boolean hasDiscoveredRecipe(@Nonnull final NamespacedKey namespacedKey) {
+        return player.hasDiscoveredRecipe(namespacedKey);
     }
 
     @Nonnull
     @Override
     public Set<NamespacedKey> getDiscoveredRecipes() {
         return player.getDiscoveredRecipes();
-    }    @Override
+    }
+
+    @Override
     public boolean hasGravity() {
         return player.hasGravity();
     }
@@ -739,32 +904,40 @@ public class ShadowPlayer implements Player {
     @Override
     public Entity getShoulderEntityLeft() {
         return player.getShoulderEntityLeft();
-    }    @Override
-    public void setGravity(final boolean b) {
-
     }
 
     @Override
     public void setShoulderEntityLeft(@Nullable final Entity entity) {
 
-    }    @Override
+    }
+
+    @Override
+    public void setGravity(final boolean b) {
+
+    }
+
+    @Override
     public int getPortalCooldown() {
         return player.getPortalCooldown();
+    }
+
+    @Override
+    public void setPortalCooldown(final int i) {
+
     }
 
     @Nullable
     @Override
     public Entity getShoulderEntityRight() {
         return player.getShoulderEntityRight();
-    }    @Override
-    public void setPortalCooldown(final int i) {
-
     }
 
     @Override
     public void setShoulderEntityRight(@Nullable final Entity entity) {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
     @Override
     public Set<String> getScoreboardTags() {
         return player.getScoreboardTags();
@@ -773,7 +946,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean dropItem(final boolean b) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public boolean addScoreboardTag(@Nonnull final String s) {
         return false;
     }
@@ -781,15 +956,19 @@ public class ShadowPlayer implements Player {
     @Override
     public float getExhaustion() {
         return player.getExhaustion();
-    }    @Override
-    public boolean removeScoreboardTag(@Nonnull final String s) {
-        return false;
     }
 
     @Override
     public void setExhaustion(final float v) {
 
-    }    @Nonnull
+    }
+
+    @Override
+    public boolean removeScoreboardTag(@Nonnull final String s) {
+        return false;
+    }
+
+    @Nonnull
     @Override
     public PistonMoveReaction getPistonMoveReaction() {
         return player.getPistonMoveReaction();
@@ -798,16 +977,20 @@ public class ShadowPlayer implements Player {
     @Override
     public float getSaturation() {
         return player.getSaturation();
-    }    @Nonnull
-    @Override
-    public BlockFace getFacing() {
-        return player.getFacing();
     }
 
     @Override
     public void setSaturation(final float v) {
 
-    }    @Nonnull
+    }
+
+    @Nonnull
+    @Override
+    public BlockFace getFacing() {
+        return player.getFacing();
+    }
+
+    @Nonnull
     @Override
     public Pose getPose() {
         return player.getPose();
@@ -816,48 +999,60 @@ public class ShadowPlayer implements Player {
     @Override
     public int getFoodLevel() {
         return player.getFoodLevel();
-    }    @Nonnull
+    }
+
+    @Override
+    public void setFoodLevel(final int i) {
+
+    }
+
+    @Nonnull
     @Override
     public SpawnCategory getSpawnCategory() {
         return player.getSpawnCategory();
     }
 
     @Override
-    public void setFoodLevel(final int i) {
-
-    }    @Override
     public boolean isSneaking() {
         return player.isSneaking();
     }
 
     @Override
-    public int getSaturatedRegenRate() {
-        return player.getSaturatedRegenRate();
-    }    @Override
     public void setSneaking(final boolean b) {
 
     }
 
     @Override
+    public int getSaturatedRegenRate() {
+        return player.getSaturatedRegenRate();
+    }
+
+    @Override
     public void setSaturatedRegenRate(final int i) {
 
-    }    @Override
+    }
+
+    @Override
     public boolean isSprinting() {
         return player.isSprinting();
     }
 
     @Override
-    public int getUnsaturatedRegenRate() {
-        return player.getUnsaturatedRegenRate();
-    }    @Override
     public void setSprinting(final boolean b) {
 
     }
 
     @Override
+    public int getUnsaturatedRegenRate() {
+        return player.getUnsaturatedRegenRate();
+    }
+
+    @Override
     public void setUnsaturatedRegenRate(final int i) {
 
-    }    @Override
+    }
+
+    @Override
     public void saveData() {
 
     }
@@ -865,16 +1060,15 @@ public class ShadowPlayer implements Player {
     @Override
     public int getStarvationRate() {
         return player.getStarvationRate();
-    }    @Override
-    public void loadData() {
-
     }
 
     @Override
     public void setStarvationRate(final int i) {
 
-    }    @Override
-    public void setSleepingIgnored(final boolean b) {
+    }
+
+    @Override
+    public void loadData() {
 
     }
 
@@ -882,13 +1076,20 @@ public class ShadowPlayer implements Player {
     @Override
     public Location getLastDeathLocation() {
         return player.getLastDeathLocation();
-    }    @Override
+    }
+
+    @Override
+    public void setLastDeathLocation(@Nullable final Location location) {
+
+    }
+
+    @Override
     public boolean isSleepingIgnored() {
         return player.isSleepingIgnored();
     }
 
     @Override
-    public void setLastDeathLocation(@Nullable final Location location) {
+    public void setSleepingIgnored(final boolean b) {
 
     }
 
@@ -936,10 +1137,17 @@ public class ShadowPlayer implements Player {
     @Override
     public Block getTargetBlockExact(final int i, @Nonnull final FluidCollisionMode fluidCollisionMode) {
         return player.getTargetBlockExact(i, fluidCollisionMode);
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public Location getBedSpawnLocation() {
         return player.getBedSpawnLocation();
+    }
+
+    @Override
+    public void setBedSpawnLocation(@Nullable final Location location) {
+
     }
 
     @Nullable
@@ -1038,15 +1246,14 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean addPotionEffect(@Nonnull final PotionEffect potionEffect, final boolean b) {
         return false;
-    }    @Override
-    public void setBedSpawnLocation(@Nullable final Location location) {
-
     }
 
     @Override
     public boolean addPotionEffects(@Nonnull final Collection<PotionEffect> collection) {
         return false;
-    }    @Override
+    }
+
+    @Override
     public void setBedSpawnLocation(@Nullable final Location location, final boolean b) {
 
     }
@@ -1054,7 +1261,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasPotionEffect(@Nonnull final PotionEffectType potionEffectType) {
         return player.hasPotionEffect(potionEffectType);
-    }    @Override
+    }
+
+    @Override
     public void playNote(@Nonnull final Location location, final byte b, final byte b1) {
 
     }
@@ -1063,7 +1272,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PotionEffect getPotionEffect(@Nonnull final PotionEffectType potionEffectType) {
         return player.getPotionEffect(potionEffectType);
-    }    @Override
+    }
+
+    @Override
     public void playNote(@Nonnull final Location location, @Nonnull final Instrument instrument, @Nonnull final Note note) {
 
     }
@@ -1071,7 +1282,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void removePotionEffect(@Nonnull final PotionEffectType potionEffectType) {
 
-    }    @Override
+    }
+
+    @Override
     public void playSound(@Nonnull final Location location, @Nonnull final Sound sound, final float v, final float v1) {
 
     }
@@ -1080,7 +1293,9 @@ public class ShadowPlayer implements Player {
     @Override
     public Collection<PotionEffect> getActivePotionEffects() {
         return player.getActivePotionEffects();
-    }    @Override
+    }
+
+    @Override
     public void playSound(@Nonnull final Location location, @Nonnull final String s, final float v, final float v1) {
 
     }
@@ -1088,7 +1303,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasLineOfSight(@Nonnull final Entity entity) {
         return player.hasLineOfSight(entity);
-    }    @Override
+    }
+
+    @Override
     public void playSound(@Nonnull final Location location, @Nonnull final Sound sound, @Nonnull final SoundCategory soundCategory, final float v, final float v1) {
 
     }
@@ -1096,15 +1313,19 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean getRemoveWhenFarAway() {
         return player.getRemoveWhenFarAway();
-    }    @Override
-    public void playSound(@Nonnull final Location location, @Nonnull final String s, @Nonnull final SoundCategory soundCategory, final float v, final float v1) {
-
     }
 
     @Override
     public void setRemoveWhenFarAway(final boolean b) {
 
-    }    @Override
+    }
+
+    @Override
+    public void playSound(@Nonnull final Location location, @Nonnull final String s, @Nonnull final SoundCategory soundCategory, final float v, final float v1) {
+
+    }
+
+    @Override
     public void playSound(@Nonnull final Entity entity, @Nonnull final Sound sound, final float volume, final float pitch) {
 
     }
@@ -1113,7 +1334,9 @@ public class ShadowPlayer implements Player {
     @Override
     public EntityEquipment getEquipment() {
         return player.getEquipment();
-    }    @Override
+    }
+
+    @Override
     public void playSound(@Nonnull final Entity entity, @Nonnull final Sound sound, @Nonnull final SoundCategory category, final float volume, final float pitch) {
 
     }
@@ -1122,7 +1345,9 @@ public class ShadowPlayer implements Player {
     @Override
     public AttributeInstance getAttribute(@Nonnull final Attribute attribute) {
         return player.getAttribute(attribute);
-    }    @Override
+    }
+
+    @Override
     public void stopSound(@Nonnull final Sound sound) {
 
     }
@@ -1130,7 +1355,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void damage(final double v) {
 
-    }    @Override
+    }
+
+    @Override
     public void stopSound(@Nonnull final String s) {
 
     }
@@ -1138,7 +1365,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void damage(final double v, @Nullable final Entity entity) {
 
-    }    @Override
+    }
+
+    @Override
     public void stopSound(@Nonnull final Sound sound, @Nullable final SoundCategory soundCategory) {
 
     }
@@ -1146,15 +1375,19 @@ public class ShadowPlayer implements Player {
     @Override
     public double getHealth() {
         return player.getHealth();
-    }    @Override
-    public void stopSound(@Nonnull final String s, @Nullable final SoundCategory soundCategory) {
-
     }
 
     @Override
     public void setHealth(final double v) {
 
-    }    @Override
+    }
+
+    @Override
+    public void stopSound(@Nonnull final String s, @Nullable final SoundCategory soundCategory) {
+
+    }
+
+    @Override
     public void stopSound(@Nonnull SoundCategory soundCategory) {
 
     }
@@ -1162,15 +1395,19 @@ public class ShadowPlayer implements Player {
     @Override
     public double getAbsorptionAmount() {
         return player.getAbsorptionAmount();
-    }    @Override
-    public void stopAllSounds() {
-
     }
 
     @Override
     public void setAbsorptionAmount(final double v) {
 
-    }    @Override
+    }
+
+    @Override
+    public void stopAllSounds() {
+
+    }
+
+    @Override
     public void playEffect(@Nonnull final Location location, @Nonnull final Effect effect, final int i) {
 
     }
@@ -1178,15 +1415,19 @@ public class ShadowPlayer implements Player {
     @Override
     public double getMaxHealth() {
         return player.getMaxHealth();
-    }    @Override
-    public <T> void playEffect(@Nonnull final Location location, @Nonnull final Effect effect, @Nullable final T t) {
-
     }
 
     @Override
     public void setMaxHealth(final double v) {
 
-    }    @Override
+    }
+
+    @Override
+    public <T> void playEffect(@Nonnull final Location location, @Nonnull final Effect effect, @Nullable final T t) {
+
+    }
+
+    @Override
     public boolean breakBlock(@Nonnull final Block block) {
         return false;
     }
@@ -1194,7 +1435,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void resetMaxHealth() {
 
-    }    @Override
+    }
+
+    @Override
     public void sendBlockChange(@Nonnull final Location location, @Nonnull final Material material, final byte b) {
 
     }
@@ -1203,15 +1446,19 @@ public class ShadowPlayer implements Player {
     @Override
     public String getCustomName() {
         return player.getCustomName();
-    }    @Override
-    public void sendBlockChange(@Nonnull final Location location, @Nonnull final BlockData blockData) {
-
     }
 
     @Override
     public void setCustomName(@Nullable final String s) {
 
-    }    @Override
+    }
+
+    @Override
+    public void sendBlockChange(@Nonnull final Location location, @Nonnull final BlockData blockData) {
+
+    }
+
+    @Override
     public void sendBlockDamage(@Nonnull final Location location, final float v) {
 
     }
@@ -1219,7 +1466,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void setMetadata(@Nonnull final String s, @Nonnull final MetadataValue metadataValue) {
 
-    }    @Override
+    }
+
+    @Override
     public void sendEquipmentChange(@Nonnull final LivingEntity livingEntity, @Nonnull final EquipmentSlot equipmentSlot, @Nonnull final ItemStack itemStack) {
 
     }
@@ -1233,7 +1482,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasMetadata(@Nonnull final String s) {
         return player.hasMetadata(s);
-    }    @Override
+    }
+
+    @Override
     public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings) throws IllegalArgumentException {
 
     }
@@ -1241,7 +1492,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void removeMetadata(@Nonnull final String s, @Nonnull final Plugin plugin) {
 
-    }    @Override
+    }
+
+    @Override
     public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings, @Nonnull final DyeColor dyeColor) throws IllegalArgumentException {
 
     }
@@ -1249,7 +1502,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean isPermissionSet(@Nonnull final String s) {
         return player.isPermissionSet(s);
-    }    @Override
+    }
+
+    @Override
     public void sendSignChange(@Nonnull final Location location, @Nullable final String[] strings, @Nonnull final DyeColor dyeColor, final boolean b) throws IllegalArgumentException {
 
     }
@@ -1257,7 +1512,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean isPermissionSet(@Nonnull final Permission permission) {
         return player.isPermissionSet(permission);
-    }    @Override
+    }
+
+    @Override
     public void sendMap(@Nonnull final MapView mapView) {
 
     }
@@ -1265,7 +1522,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasPermission(@Nonnull final String s) {
         return player.hasPermission(s);
-    }    @Override
+    }
+
+    @Override
     public void updateInventory() {
 
     }
@@ -1273,7 +1532,9 @@ public class ShadowPlayer implements Player {
     @Override
     public boolean hasPermission(@Nonnull final Permission permission) {
         return player.hasPermission(permission);
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public GameMode getPreviousGameMode() {
         return player.getPreviousGameMode();
@@ -1283,7 +1544,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, @Nonnull final String s, final boolean b) {
         return player.addAttachment(plugin, s, b);
-    }    @Override
+    }
+
+    @Override
     public void setPlayerTime(final long l, final boolean b) {
 
     }
@@ -1292,7 +1555,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PermissionAttachment addAttachment(@Nonnull final Plugin plugin) {
         return player.addAttachment(plugin);
-    }    @Override
+    }
+
+    @Override
     public long getPlayerTime() {
         return player.getPlayerTime();
     }
@@ -1301,7 +1566,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, @Nonnull final String s, final boolean b, final int i) {
         return null;
-    }    @Override
+    }
+
+    @Override
     public long getPlayerTimeOffset() {
         return player.getPlayerTimeOffset();
     }
@@ -1310,7 +1577,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PermissionAttachment addAttachment(@Nonnull final Plugin plugin, final int i) {
         return null;
-    }    @Override
+    }
+
+    @Override
     public boolean isPlayerTimeRelative() {
         return player.isPlayerTimeRelative();
     }
@@ -1318,7 +1587,9 @@ public class ShadowPlayer implements Player {
     @Override
     public void removeAttachment(@Nonnull final PermissionAttachment permissionAttachment) {
 
-    }    @Override
+    }
+
+    @Override
     public void resetPlayerTime() {
 
     }
@@ -1326,33 +1597,41 @@ public class ShadowPlayer implements Player {
     @Override
     public void recalculatePermissions() {
 
-    }    @Override
-    public void setPlayerWeather(@Nonnull final WeatherType weatherType) {
-
     }
 
     @Nonnull
     @Override
     public Set<PermissionAttachmentInfo> getEffectivePermissions() {
         return player.getEffectivePermissions();
-    }    @Nullable
+    }
+
+    @Nullable
     @Override
     public WeatherType getPlayerWeather() {
         return player.getPlayerWeather();
     }
 
     @Override
+    public void setPlayerWeather(@Nonnull final WeatherType weatherType) {
+
+    }
+
+    @Override
     public boolean isOp() {
         return player.isOp();
-    }    @Override
-    public void resetPlayerWeather() {
-
     }
 
     @Override
     public void setOp(final boolean b) {
 
-    }    @Override
+    }
+
+    @Override
+    public void resetPlayerWeather() {
+
+    }
+
+    @Override
     public void giveExp(final int i) {
 
     }
@@ -1361,7 +1640,9 @@ public class ShadowPlayer implements Player {
     @Override
     public PersistentDataContainer getPersistentDataContainer() {
         return player.getPersistentDataContainer();
-    }    @Override
+    }
+
+    @Override
     public void giveExpLevels(final int i) {
 
     }
@@ -1369,36 +1650,44 @@ public class ShadowPlayer implements Player {
     @Override
     public void sendPluginMessage(@Nonnull final Plugin plugin, @Nonnull final String s, final byte[] bytes) {
 
-    }    @Override
+    }
+
+    @Override
     public float getExp() {
         return player.getExp();
     }
 
-    @Nonnull
     @Override
-    public Set<String> getListeningPluginChannels() {
-        return player.getListeningPluginChannels();
-    }    @Override
     public void setExp(final float v) {
 
     }
 
     @Nonnull
     @Override
+    public Set<String> getListeningPluginChannels() {
+        return player.getListeningPluginChannels();
+    }
+
+    @Nonnull
+    @Override
     public <T extends Projectile> T launchProjectile(@Nonnull final Class<? extends T> aClass) {
         return player.launchProjectile(aClass);
-    }    @Override
+    }
+
+    @Override
     public int getLevel() {
         return player.getLevel();
+    }
+
+    @Override
+    public void setLevel(final int i) {
+
     }
 
     @Nonnull
     @Override
     public <T extends Projectile> T launchProjectile(@Nonnull final Class<? extends T> aClass, @Nullable final Vector vector) {
         return player.launchProjectile(aClass, vector);
-    }    @Override
-    public void setLevel(final int i) {
-
     }
 
     @Override
@@ -1479,23 +1768,23 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setFlySpeed(final float v) throws IllegalArgumentException {
-
-    }
-
-    @Override
-    public void setWalkSpeed(final float v) throws IllegalArgumentException {
-
-    }
-
-    @Override
     public float getFlySpeed() {
         return player.getFlySpeed();
     }
 
     @Override
+    public void setFlySpeed(final float v) throws IllegalArgumentException {
+
+    }
+
+    @Override
     public float getWalkSpeed() {
         return player.getWalkSpeed();
+    }
+
+    @Override
+    public void setWalkSpeed(final float v) throws IllegalArgumentException {
+
     }
 
     @Override
@@ -1561,13 +1850,13 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setHealthScale(final double v) throws IllegalArgumentException {
-
+    public double getHealthScale() {
+        return player.getHealthScale();
     }
 
     @Override
-    public double getHealthScale() {
-        return player.getHealthScale();
+    public void setHealthScale(final double v) throws IllegalArgumentException {
+
     }
 
     @Nullable
@@ -1708,200 +1997,14 @@ public class ShadowPlayer implements Player {
         return player.spigot();
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @Override
+    public boolean getCanPickupItems() {
+        return player.getCanPickupItems();
+    }
 
     @Override
     public void setCanPickupItems(final boolean b) {
 
-    }
-
-    @Override
-    public boolean getCanPickupItems() {
-        return player.getCanPickupItems();
     }
 
     @Override
@@ -1981,13 +2084,13 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setCollidable(final boolean b) {
-
+    public boolean isCollidable() {
+        return player.isCollidable();
     }
 
     @Override
-    public boolean isCollidable() {
-        return player.isCollidable();
+    public void setCollidable(final boolean b) {
+
     }
 
     @Nonnull
@@ -2014,80 +2117,14 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
-    public void setInvisible(final boolean b) {
-
-    }
-
-    @Override
     public boolean isInvisible() {
         return player.isInvisible();
     }
 
+    @Override
+    public void setInvisible(final boolean b) {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    }
 
 
 }
