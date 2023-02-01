@@ -42,6 +42,7 @@ import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
+import org.bukkit.block.BlockState;
 import org.bukkit.block.PistonMoveReaction;
 import org.bukkit.block.Sign;
 import org.bukkit.block.data.BlockData;
@@ -50,6 +51,7 @@ import org.bukkit.conversations.ConversationAbandonedEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityCategory;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.Firework;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Pose;
@@ -81,6 +83,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import java.net.InetSocketAddress;
@@ -93,6 +96,7 @@ import java.util.UUID;
 // Todo: extend CraftPlayer instead and simply override the message methods
 // Maybe also override other setter methods?
 @SuppressWarnings("deprecation")
+@Deprecated
 public class ShadowPlayer implements Player {
 
     private final Player player;
@@ -566,6 +570,16 @@ public class ShadowPlayer implements Player {
         return false;
     }
 
+    @Override
+    public int getEnchantmentSeed() {
+        return player.getEnchantmentSeed();
+    }
+
+    @Override
+    public void setEnchantmentSeed(int i) {
+
+    }
+
     @Nonnull
     @Override
     public InventoryView getOpenInventory() {
@@ -780,6 +794,24 @@ public class ShadowPlayer implements Player {
     @Override
     public EntityType getType() {
         return player.getType();
+    }
+
+    @NotNull
+    @Override
+    public Sound getSwimSound() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getSwimSplashSound() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getSwimHighSpeedSplashSound() {
+        return player.getSwimHighSpeedSplashSound();
     }
 
     @Override
@@ -1083,6 +1115,12 @@ public class ShadowPlayer implements Player {
 
     }
 
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Firework fireworkBoost(@NotNull ItemStack itemStack) {
+        return player.fireworkBoost(itemStack);
+    }
+
     @Override
     public boolean isSleepingIgnored() {
         return player.isSleepingIgnored();
@@ -1330,6 +1368,11 @@ public class ShadowPlayer implements Player {
 
     }
 
+    @Override
+    public void playSound(@NotNull Entity entity, @NotNull String s, float v, float v1) {
+
+    }
+
     @Nullable
     @Override
     public EntityEquipment getEquipment() {
@@ -1338,6 +1381,11 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void playSound(@Nonnull final Entity entity, @Nonnull final Sound sound, @Nonnull final SoundCategory category, final float volume, final float pitch) {
+
+    }
+
+    @Override
+    public void playSound(@NotNull Entity entity, @NotNull String s, @NotNull SoundCategory soundCategory, float v, float v1) {
 
     }
 
@@ -1455,6 +1503,11 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void sendBlockChange(@Nonnull final Location location, @Nonnull final BlockData blockData) {
+
+    }
+
+    @Override
+    public void sendBlockChanges(@NotNull Collection<BlockState> collection, boolean b) {
 
     }
 
@@ -2108,6 +2161,53 @@ public class ShadowPlayer implements Player {
     @Override
     public <T> void setMemory(@Nonnull final MemoryKey<T> memoryKey, @Nullable final T t) {
 
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Sound getHurtSound() {
+        return null;
+    }
+
+    @org.jetbrains.annotations.Nullable
+    @Override
+    public Sound getDeathSound() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getFallDamageSound(int i) {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getFallDamageSoundSmall() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getFallDamageSoundBig() {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getDrinkingSound(@NotNull ItemStack itemStack) {
+        return null;
+    }
+
+    @NotNull
+    @Override
+    public Sound getEatingSound(@NotNull ItemStack itemStack) {
+        return player.getEatingSound(itemStack);
+    }
+
+    @Override
+    public boolean canBreatheUnderwater() {
+        return player.canBreatheUnderwater();
     }
 
     @Nonnull
