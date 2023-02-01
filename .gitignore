@@ -2,7 +2,7 @@
 /target/
 *.lst
 *.class
-/.idea/workspace.xml
+/.idea/
 *.iml
 target/
 compile/
