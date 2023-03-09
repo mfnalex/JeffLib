@@ -18,12 +18,22 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-
-import java.util.*;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import lombok.experimental.UtilityClass;
 
 /**
  * Enum related methods
@@ -33,7 +43,7 @@ public class EnumUtils {
 
     private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
     private static final Map<Class<? extends Enum<?>>, List<? extends Enum<?>>> ENUM_ARRAY_CACHE = new HashMap<>();
-    private static final Map<Class<? extends Enum<?>>, EnumMap<?,?>> NEXT_ENUMS = new HashMap<>();
+    private static final Map<Class<? extends Enum<?>>, EnumMap<?, ?>> NEXT_ENUMS = new HashMap<>();
 
     /**
      * Gets an EnumSet of the given Enum constants by their names. Enum constants that aren't found will print a warning.
@@ -119,7 +129,7 @@ public class EnumUtils {
     @SuppressWarnings("unchecked")
     public static <E extends Enum<E>> List<E> getValues(final Class<E> enumClazz) {
         List<E> values = (List<E>) ENUM_ARRAY_CACHE.get(enumClazz);
-        if(values == null) {
+        if (values == null) {
             values = Collections.unmodifiableList(Arrays.asList(enumClazz.getEnumConstants()));
             ENUM_ARRAY_CACHE.put(enumClazz, values);
         }
@@ -135,9 +145,9 @@ public class EnumUtils {
     @SuppressWarnings("unchecked")
     public static <E extends Enum<E>> E getNextElement(final E e) {
         final Class<E> enumClazz = (Class<E>) e.getClass();
-        final EnumMap<E, E> nextEnums = (EnumMap<E, E>) NEXT_ENUMS.computeIfAbsent(enumClazz, __ -> new EnumMap<E,E>(enumClazz));
+        final EnumMap<E, E> nextEnums = (EnumMap<E, E>) NEXT_ENUMS.computeIfAbsent(enumClazz, __ -> new EnumMap<E, E>(enumClazz));
         E next = nextEnums.get(e);
-        if(next == null) {
+        if (next == null) {
             final int ordinal = e.ordinal();
             final List<E> values = getValues(enumClazz);
             next = values.get((ordinal + 1) % values.size());

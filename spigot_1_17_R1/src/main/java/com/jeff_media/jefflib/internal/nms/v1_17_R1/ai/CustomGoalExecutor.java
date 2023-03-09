@@ -24,13 +24,12 @@ import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
-import net.minecraft.world.entity.Mob;
-import net.minecraft.world.entity.ai.goal.Goal;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.ai.goal.Goal;
 
 public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.ai.goal.CustomGoalExecutor {
 
@@ -41,6 +40,18 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
         this.pmob = pmob;
         this.goal = goal;
 
+    }
+
+    @Nonnull
+    private static EnumSet<Flag> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
+        if (flags == null) return EnumSet.noneOf(Flag.class);
+        return flags.stream().map(flag -> Flag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Flag.class)));
+    }
+
+    @Nonnull
+    private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Flag> flags) {
+        if (flags == null) return EnumSet.noneOf(GoalFlag.class);
+        return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
     }
 
     @Override
@@ -106,17 +117,5 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
     @Override
     public JumpController getJumpController() {
         return new HatchedJumpController(pmob.getJumpControl());
-    }
-
-    @Nonnull
-    private static EnumSet<Flag> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
-        if (flags == null) return EnumSet.noneOf(Flag.class);
-        return flags.stream().map(flag -> Flag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Flag.class)));
-    }
-
-    @Nonnull
-    private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Flag> flags) {
-        if (flags == null) return EnumSet.noneOf(GoalFlag.class);
-        return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
     }
 }

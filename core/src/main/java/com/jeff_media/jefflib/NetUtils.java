@@ -18,11 +18,6 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,6 +27,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 
 /**
  * Internet and network related methodds

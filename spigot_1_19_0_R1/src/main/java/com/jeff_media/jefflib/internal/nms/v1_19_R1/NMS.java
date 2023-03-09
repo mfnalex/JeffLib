@@ -21,6 +21,9 @@ package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -41,14 +44,14 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_19_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_19_R1.block.CraftBlock;
-import org.bukkit.craftbukkit.v1_19_R1.entity.*;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftCreature;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_19_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.stream.Stream;
 
 public final class NMS {
 
@@ -114,11 +117,11 @@ public final class NMS {
     }
 
     public static Goal toNms(final PathfinderGoal pathfinderGoal) {
-        if(pathfinderGoal instanceof Goal) {
+        if (pathfinderGoal instanceof Goal) {
             return (Goal) pathfinderGoal;
-        } else if(pathfinderGoal instanceof CustomGoal) {
-            final CustomGoalExecutor customGoalExecutor = ((CustomGoal)pathfinderGoal).getExecutor();
-            if(customGoalExecutor instanceof Goal) {
+        } else if (pathfinderGoal instanceof CustomGoal) {
+            final CustomGoalExecutor customGoalExecutor = ((CustomGoal) pathfinderGoal).getExecutor();
+            if (customGoalExecutor instanceof Goal) {
                 return (Goal) customGoalExecutor;
             }
         }
@@ -130,11 +133,11 @@ public final class NMS {
     }
 
     public static ServerPlayer toNms(final org.bukkit.entity.Player player) {
-        return ((CraftPlayer)player).getHandle();
+        return ((CraftPlayer) player).getHandle();
     }
 
     public static net.minecraft.world.level.block.Block toNms(final Block block) {
-        return ((CraftBlock)block).getNMS().getBlock();
+        return ((CraftBlock) block).getNMS().getBlock();
     }
 
 }

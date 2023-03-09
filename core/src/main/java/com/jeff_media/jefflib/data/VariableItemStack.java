@@ -21,11 +21,10 @@ package com.jeff_media.jefflib.data;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.NumberUtils;
 import com.jeff_media.jefflib.RandomUtils;
+import javax.annotation.Nonnull;
 import lombok.Data;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
 
 @Data
 public class VariableItemStack {

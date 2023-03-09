@@ -19,12 +19,16 @@
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.JeffLib;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UncheckedIOException;
+import java.util.Objects;
+import javax.annotation.Nonnull;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import javax.annotation.Nonnull;
-import java.io.*;
-import java.util.Objects;
 
 /**
  * Represents a configuration that automatically loads the default values from the plugin's resources, if it exists.

@@ -20,14 +20,17 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
 import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
-import net.minecraft.server.v1_16_R1.*;
+import java.io.File;
+import java.util.Objects;
+import net.minecraft.server.v1_16_R1.Block;
+import net.minecraft.server.v1_16_R1.FluidType;
+import net.minecraft.server.v1_16_R1.IBlockData;
+import net.minecraft.server.v1_16_R1.Item;
+import net.minecraft.server.v1_16_R1.MinecraftKey;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
-
-import java.io.File;
-import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitUnsafe {
@@ -95,7 +98,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
 
     @Override
     public String getMappingsVersion() {
-        return ((CraftMagicNumbers)CraftMagicNumbers.INSTANCE).getMappingsVersion();
+        return ((CraftMagicNumbers) CraftMagicNumbers.INSTANCE).getMappingsVersion();
     }
 
     @Override

@@ -18,14 +18,13 @@
 
 package com.jeff_media.jefflib;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.configuration.file.YamlConfiguration;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
+import javax.annotation.Nonnull;
+import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.configuration.file.YamlConfiguration;
 
 /**
  * Caches player names, UUIDs, Skins, etc.

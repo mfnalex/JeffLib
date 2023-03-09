@@ -19,14 +19,22 @@
 package com.jeff_media.jefflib;
 
 import com.google.gson.Gson;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Material;
-
+import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Map;
+import javax.annotation.Nullable;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Material;
+import org.bukkit.entity.EntityType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Material related methods
@@ -100,5 +108,68 @@ public class MaterialUtils {
         ReflUtils.setFieldValue(Material.class, material, "maxStack", maxStackSize);
         JeffLib.getNMSHandler().getMaterialHandler().setMaxStackSize(material, maxStackSize);
     }
+
+    /**
+     * Get the translation key of the item or block associated with this material. If this material has both an item and a block form, the item form is used.
+     * @nms Requires NMS in versions below latest 1.19.3
+     * @see #getBlockTranslationKey(Material)
+     * @return the translation key of the item or block associated with this material. If this material has both an item and a block form, the item form is used.
+     */
+    @NMS
+    @NotNull
+    public static String getTranslationKey(@NotNull final Material material) {
+        String result;
+        if(material.isItem()) {
+            result = getItemTranslationKey(material);
+        } else {
+            result = getBlockTranslationKey(material);
+        }
+        if(result == null) {
+            throw new IllegalStateException("Material " + material + " has neither a block nor item translation key");
+        }
+        return result;
+    }
+
+    /**
+     * Get the translation key of the block associated with this material. If this material does not have any block form, like DIAMOND_PICKAXE, it returns null
+     * @nms Requires NMS in versions below latest 1.19.3
+     * @see #getItemTranslationKey(Material)
+     * @return The translation key of the block associated with this material, or null if this material does not have a block form
+     */
+    @NMS
+    @Nullable
+    public static String getBlockTranslationKey(@NotNull final Material material) {
+        if(ServerUtils.hasTranslationKeyProvider()) {
+            return material.getBlockTranslationKey();
+        } else {
+            if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
+                return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getBlockTranslationKey(material);
+            } else {
+                throw new NMSNotSupportedException("This version of NMS does not support getting the translation key of an EntityType");
+            }
+        }
+    }
+
+    /**
+     * Get the translation key of the item associated with this material. If this material does not have any item form, like NETHER_PORTAL_FRAME, it returns null
+     * @nms Requires NMS in versions below latest 1.19.3
+     * @see #getBlockTranslationKey(Material)
+     * @return The translation key of the item associated with this material, or null if this item does not have a block form
+     */
+    @NMS
+    @Nullable
+    public static String getItemTranslationKey(@NotNull final Material material) {
+        if(ServerUtils.hasTranslationKeyProvider()) {
+            return material.getItemTranslationKey();
+        } else {
+            if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
+                return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getItemTranslationKey(material);
+            } else {
+                throw new NMSNotSupportedException("This version of NMS does not support getting the translation key of an EntityType");
+            }
+        }
+    }
+
+
 
 }

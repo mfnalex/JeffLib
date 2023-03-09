@@ -18,11 +18,10 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.Objects;
+import javax.annotation.Nonnull;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-
-import javax.annotation.Nonnull;
-import java.util.Objects;
 
 /**
  * World related methods

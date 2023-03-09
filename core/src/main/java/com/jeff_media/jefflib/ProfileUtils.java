@@ -18,12 +18,10 @@
 
 package com.jeff_media.jefflib;
 
-import com.google.common.collect.ImmutableMap;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.util.UUID;
+import javax.annotation.Nonnull;
 
 public final class ProfileUtils {
 
@@ -50,13 +48,14 @@ public final class ProfileUtils {
 
     /**
      * Returns the player's data (.dat) file
+     *
      * @nms
      */
     @NMS
     @Nonnull
     public static File getPlayerDataFile(UUID uuid) {
         File playerDataFolder = new File(WorldUtils.getDefaultWorld().getWorldFolder(), "playerdata");
-        if(!playerDataFolder.exists()) {
+        if (!playerDataFolder.exists()) {
             playerDataFolder.mkdirs();
         }
         return new File(playerDataFolder, uuid.toString() + ".dat");

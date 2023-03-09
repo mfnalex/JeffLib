@@ -19,6 +19,17 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -33,11 +44,6 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.util.*;
 
 /**
  * ItemStack related methods
@@ -61,6 +67,7 @@ public class ItemStackUtils {
     /**
      * Gets the size of an ItemStack's NBT data, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
      *
+     * @param itemStack ItemStack to get the NBT data size of
      * @return NBT data size in byteds, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
      */
     public static int getSizeInBytes(@NonNull final ItemStack itemStack) {
@@ -75,6 +82,8 @@ public class ItemStackUtils {
     /**
      * Parses an ItemStack from a ConfigurationSection without applying any placeholder values.
      *
+     * @param config ConfigurationSection to parse the ItemStack from
+     * @return ItemStack parsed from the ConfigurationSection
      * @see #fromConfigurationSection(ConfigurationSection, HashMap)
      */
     public ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config) {
@@ -98,6 +107,9 @@ public class ItemStackUtils {
      *   efficiency: 5
      * </pre>
      *
+     * @param config        ConfigurationSection to parse the ItemStack from
+     * @param placeholders  Placeholders to apply to the ItemStack
+     * @return ItemStack parsed from the ConfigurationSection
      * @see TextUtils#replaceInString(String, Map)
      */
     public static ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config, final HashMap<String, String> placeholders) {
@@ -160,7 +172,7 @@ public class ItemStackUtils {
             ((Damageable) meta).setDamage(damage);
         }
 
-        if(config.getBoolean("prevent-stacking", false)) {
+        if (config.getBoolean("prevent-stacking", false)) {
             meta.getPersistentDataContainer().set(PDCUtils.getKey("prevent-stacking"), PersistentDataType.STRING, UUID.randomUUID().toString());
         }
 
@@ -263,7 +275,7 @@ public class ItemStackUtils {
     }
 
     public static void reduceItem(ItemStack item) {
-        item.setAmount(item.getAmount()-1);
+        item.setAmount(item.getAmount() - 1);
     }
 
 }

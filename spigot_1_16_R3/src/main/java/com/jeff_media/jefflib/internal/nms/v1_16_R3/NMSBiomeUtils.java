@@ -20,7 +20,14 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R3;
 
 import com.jeff_media.jefflib.data.tuples.Pair;
 import lombok.experimental.UtilityClass;
-import net.minecraft.server.v1_16_R3.*;
+import net.minecraft.server.v1_16_R3.BiomeBase;
+import net.minecraft.server.v1_16_R3.BlockPosition;
+import net.minecraft.server.v1_16_R3.Chunk;
+import net.minecraft.server.v1_16_R3.DedicatedServer;
+import net.minecraft.server.v1_16_R3.IRegistry;
+import net.minecraft.server.v1_16_R3.IRegistryWritable;
+import net.minecraft.server.v1_16_R3.MinecraftKey;
+import net.minecraft.server.v1_16_R3.ResourceKey;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.craftbukkit.v1_16_R3.CraftServer;

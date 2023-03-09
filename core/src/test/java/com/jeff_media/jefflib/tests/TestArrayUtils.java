@@ -44,4 +44,12 @@ public class TestArrayUtils extends UnitTest {
     public void testCombine() {
         Assertions.assertArrayEquals(combined, ArrayUtils.combine(first, second, first));
     }
+
+    @Test
+    public void testCreate() {
+        String[] stringArray0 = ArrayUtils.createArray(String.class);
+        String[] stringArray3 = ArrayUtils.createArray(String.class, 3);
+        Assertions.assertEquals(0, stringArray0.length);
+        Assertions.assertEquals(3, stringArray3.length);
+    }
 }

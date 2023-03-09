@@ -33,9 +33,9 @@ public class TestPDCUtils extends UnitTest {
         Player player = getServer().addPlayer("test");
         Player player2 = getServer().addPlayer("test2");
         NamespacedKey key = new NamespacedKey(getPlugin(), "test");
-        player.getPersistentDataContainer().set(key, PersistentDataType.STRING,"test");
-        Assertions.assertEquals(PersistentDataType.STRING, PDCUtils.getDataType(player.getPersistentDataContainer(),key));
-        PDCUtils.copy(player.getPersistentDataContainer(),player2.getPersistentDataContainer());
-        Assertions.assertEquals("test",PDCUtils.get(player2, key, PersistentDataType.STRING));
+        player.getPersistentDataContainer().set(key, PersistentDataType.STRING, "test");
+        Assertions.assertEquals(PersistentDataType.STRING, PDCUtils.getDataType(player.getPersistentDataContainer(), key));
+        PDCUtils.copy(player.getPersistentDataContainer(), player2.getPersistentDataContainer());
+        Assertions.assertEquals("test", PDCUtils.get(player2, key, PersistentDataType.STRING));
     }
 }

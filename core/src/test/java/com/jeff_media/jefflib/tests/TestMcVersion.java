@@ -20,12 +20,11 @@ package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.McVersion;
 import com.jeff_media.jefflib.UnitTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 
 public class TestMcVersion extends UnitTest {
 
@@ -60,7 +59,7 @@ public class TestMcVersion extends UnitTest {
 
         final List<McVersion> unsorted = Arrays.asList(v1_18, v1_8_8, v1_19, v1_18_2);
         final McVersion[] sorted = new ArrayList<>(unsorted).stream().sorted().toArray(McVersion[]::new);
-        Assertions.assertArrayEquals(sorted, new McVersion[]{v1_8_8, v1_18, v1_18_2, v1_19});
+        Assertions.assertArrayEquals(sorted, new McVersion[] {v1_8_8, v1_18, v1_18_2, v1_19});
     }
 
     @Test

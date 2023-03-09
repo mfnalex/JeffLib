@@ -18,10 +18,9 @@
 
 package com.jeff_media.jefflib;
 
-import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
 import java.util.Objects;
+import javax.annotation.Nonnull;
+import org.bukkit.Bukkit;
 
 /**
  * Provides version comparing methods

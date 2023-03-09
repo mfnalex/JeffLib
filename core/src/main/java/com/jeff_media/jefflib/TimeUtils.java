@@ -18,17 +18,16 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-
-import javax.annotation.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
+import javax.annotation.Nullable;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 
 /**
  * Time related methods, like measuring time and converting nanoseconds to milliseconds, etc.
@@ -130,7 +129,7 @@ public class TimeUtils {
         return nanoseconds;
     }
 
-        /**
+    /**
      * Converts a Unix Timestamp to a String
      *
      * @param unix A Unix timestamp
@@ -143,7 +142,7 @@ public class TimeUtils {
         format.setTimeZone(TimeZone.getTimeZone("GMT-4"));
         return format.format(date);
     }
-    
+
     /**
      * Converts seconds to Days, Hours, Minutes, Seconds
      *

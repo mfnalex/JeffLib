@@ -19,10 +19,9 @@
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import java.util.Objects;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
-
-import java.util.Objects;
 
 /**
  * Represents a hex color code
@@ -115,20 +114,6 @@ public final class HexColor {
     }
 
     /**
-     * Converts the HexColor into color codes readable by {@link ChatColor#translateAlternateColorCodes(char, String)}, using the ampersand (&amp;) as alternate color character
-     *
-     * @return HexColor as color code, e.g. "&amp;x&amp;0&amp;0&amp;f&amp;f&amp;0&amp;0"
-     */
-    public String toColorCode() {
-        final StringBuilder sb = new StringBuilder("&x");
-        final char[] chars = toHex().toCharArray();
-        for (final Character aChar : chars) {
-            sb.append('&').append(aChar);
-        }
-        return sb.toString();
-    }
-
-    /**
      * Returns the HexColor for a given gradient at the given position
      *
      * @param start     Starting color
@@ -150,15 +135,6 @@ public final class HexColor {
     }
 
     /**
-     * Returns the HexColor as a String in the format rrggbb (e.g. 00ff00)
-     *
-     * @return HexColor as String
-     */
-    public String toHex() {
-        return String.format("%02x", getRed()) + String.format("%02x", getGreen()) + String.format("%02x", getBlue());
-    }
-
-    /**
      * Returns the value for a specific color component at a given location inside a gradient
      *
      * @param start        Color component value at the gradient's start
@@ -173,6 +149,29 @@ public final class HexColor {
         if (start == end) return start;
         final int diff = start - end;
         return start - (diff / colorsNeeded) * position;
+    }
+
+    /**
+     * Converts the HexColor into color codes readable by {@link ChatColor#translateAlternateColorCodes(char, String)}, using the ampersand (&amp;) as alternate color character
+     *
+     * @return HexColor as color code, e.g. "&amp;x&amp;0&amp;0&amp;f&amp;f&amp;0&amp;0"
+     */
+    public String toColorCode() {
+        final StringBuilder sb = new StringBuilder("&x");
+        final char[] chars = toHex().toCharArray();
+        for (final Character aChar : chars) {
+            sb.append('&').append(aChar);
+        }
+        return sb.toString();
+    }
+
+    /**
+     * Returns the HexColor as a String in the format rrggbb (e.g. 00ff00)
+     *
+     * @return HexColor as String
+     */
+    public String toHex() {
+        return String.format("%02x", getRed()) + String.format("%02x", getGreen()) + String.format("%02x", getBlue());
     }
 
     /**

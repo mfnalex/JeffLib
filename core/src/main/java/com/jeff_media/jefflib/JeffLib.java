@@ -27,19 +27,6 @@ import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import com.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
-import lombok.Getter;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
-import org.bukkit.event.Listener;
-import org.bukkit.event.server.PluginDisableEvent;
-import org.bukkit.event.server.PluginEnableEvent;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -51,6 +38,13 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Main class of the library, has to be initialized for certain methods to work.
@@ -212,6 +206,7 @@ public class JeffLib {
     /**
      * Prints debug text when debug mode is enabled
      *
+     * @param text Text to print
      * @see #setDebug(boolean)
      */
     public static void debug(final String text) {
@@ -221,6 +216,7 @@ public class JeffLib {
     /**
      * Enables/disables debug mode.
      *
+     * @param debug Whether debug mode should be enabled
      * @see #debug(String)
      */
     public static void setDebug(final boolean debug) {
@@ -230,13 +226,11 @@ public class JeffLib {
     /**
      * Returns the {@link AbstractNMSHandler}.
      *
-     * @deprecated
      * @internal
      * @hidden
      * @nms
      */
     @DoNotRename
-    @Deprecated
     @Internal
     @NMS
     public static AbstractNMSHandler getNMSHandler() {
@@ -261,8 +255,7 @@ public class JeffLib {
         final String internalsName;
         if (McVersion.current().isAtLeast(1, 19)) {
             internalsName = "v" + McVersion.current().getMajor() + "_" + McVersion.current().getMinor() + ((McVersion.current().getPatch() > 0) ? ("_" + McVersion.current().getPatch()) : "") + "_R1";
-        }
-        else {
+        } else {
             internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }
         try {

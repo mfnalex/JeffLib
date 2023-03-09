@@ -1,13 +1,19 @@
 package com.jeff_media.jefflib.pluginhooks.worldguard;
 
-import lombok.Getter;
-
 import java.util.Objects;
+import lombok.Getter;
 
 public class StateFlag {
 
-    @Getter private final String name;
-    @Getter private final State defaultValue;
+    @Getter
+    private final String name;
+    @Getter
+    private final State defaultValue;
+
+    StateFlag(String name, State defaultValue) {
+        this.name = name;
+        this.defaultValue = defaultValue;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -20,11 +26,6 @@ public class StateFlag {
     @Override
     public int hashCode() {
         return Objects.hash(name);
-    }
-
-    StateFlag(String name, State defaultValue) {
-        this.name = name;
-        this.defaultValue = defaultValue;
     }
 
     public enum State {

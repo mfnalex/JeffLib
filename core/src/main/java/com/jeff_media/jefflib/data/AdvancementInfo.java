@@ -21,19 +21,19 @@ package com.jeff_media.jefflib.data;
 import com.jeff_media.jefflib.McVersion;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.MemoryConfiguration;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
-
 /**
  * Provides information about an advancement.
- * @nms
+ *
  * @author CroaBeast
+ * @nms
  * @see <a href="https://www.spigotmc.org/threads/getting-advancement-info-1-12-1-18.537707/">SpigotMC Thread</a>
  */
 @NMS
@@ -62,35 +62,14 @@ public class AdvancementInfo {
     private String description;
     @Getter
     private String frameType;
+
+    /**
+     * Creates a new instance of AdvancementInfo.
+     * @param adv The advancement to get the information from.
+     */
     public AdvancementInfo(final Advancement adv) {
         this.adv = adv;
         registerKeys();
-    }
-
-    private void registerKeys() {
-
-        final Object craftAdv = CLASS_CRAFTADVANCEMENT.cast(adv);
-        final Object advHandle = getObject(CLASS_CRAFTADVANCEMENT, craftAdv, "getHandle");
-        if (advHandle == null) return;
-
-        final Object craftDisplay = getObject(advHandle, "c");
-        if (craftDisplay == null) return;
-
-        final Object frameType = getObject(craftDisplay, "e");
-        final Object chatComponentTitle = getObject(craftDisplay, "a");
-        final Object chatComponentDesc = getObject(craftDisplay, "b");
-        if (frameType == null || chatComponentTitle == null || chatComponentDesc == null) return;
-
-        final Class<?> chatClass = MC_VERSION >= 17 ? getNMSClass("net.minecraft.network.chat", "IChatBaseComponent", false) : getNMSClass(null, "IChatBaseComponent", true);
-        if (chatClass == null) return;
-
-        final Object title = getObject(chatClass, chatComponentTitle, "getString");
-        final Object description = getObject(chatClass, chatComponentDesc, "getString");
-        if (title == null || description == null) return;
-
-        this.frameType = frameType.toString();
-        this.title = title.toString();
-        this.description = description.toString();
     }
 
     private static Object getObject(final Class<?> clazz, final Object initial, final String method) {
@@ -116,11 +95,37 @@ public class AdvancementInfo {
         }
     }
 
-    public static ConfigurationSection fromMap(final Map<String, Object> map) {
-        final ConfigurationSection section = new MemoryConfiguration();
-        for (final Map.Entry<String, Object> entry : map.entrySet()) {
-            section.set(entry.getKey(), entry.getValue());
-        }
-        return section;
+//    public static ConfigurationSection fromMap(final Map<String, Object> map) {
+//        final ConfigurationSection section = new MemoryConfiguration();
+//        for (final Map.Entry<String, Object> entry : map.entrySet()) {
+//            section.set(entry.getKey(), entry.getValue());
+//        }
+//        return section;
+//    }
+
+    private void registerKeys() {
+
+        final Object craftAdv = CLASS_CRAFTADVANCEMENT.cast(adv);
+        final Object advHandle = getObject(CLASS_CRAFTADVANCEMENT, craftAdv, "getHandle");
+        if (advHandle == null) return;
+
+        final Object craftDisplay = getObject(advHandle, "c");
+        if (craftDisplay == null) return;
+
+        final Object frameType = getObject(craftDisplay, "e");
+        final Object chatComponentTitle = getObject(craftDisplay, "a");
+        final Object chatComponentDesc = getObject(craftDisplay, "b");
+        if (frameType == null || chatComponentTitle == null || chatComponentDesc == null) return;
+
+        final Class<?> chatClass = MC_VERSION >= 17 ? getNMSClass("net.minecraft.network.chat", "IChatBaseComponent", false) : getNMSClass(null, "IChatBaseComponent", true);
+        if (chatClass == null) return;
+
+        final Object title = getObject(chatClass, chatComponentTitle, "getString");
+        final Object description = getObject(chatClass, chatComponentDesc, "getString");
+        if (title == null || description == null) return;
+
+        this.frameType = frameType.toString();
+        this.title = title.toString();
+        this.description = description.toString();
     }
 }

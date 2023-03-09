@@ -18,14 +18,14 @@
 
 package com.jeff_media.jefflib;
 
+import static org.bukkit.block.BlockFace.DOWN;
+import static org.bukkit.block.BlockFace.UP;
 import lombok.experimental.UtilityClass;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
-
-import static org.bukkit.block.BlockFace.*;
 
 /**
  * BlockFace related methods
@@ -122,12 +122,15 @@ public class BlockFaceUtils {
     }
 
     /**
-     * Gets the "other side" of this block. E.g. if the block is a top door part, this will return the bottom door part.
+     * Gets the "other part" of this bisected block. E.g. if the block is a top door part, this will return the bottom door part.
+     *
+     * @param block Bisected block to check
+     * @return The "other part" of the bisected block
      * @throws IllegalArgumentException if the block is not a bisected block
      */
     public static Block getOppositeOfBisected(final Block block) {
         BlockData data = block.getBlockData();
-        if(!(data instanceof Bisected)) {
+        if (!(data instanceof Bisected)) {
             throw new IllegalArgumentException("Given block's data must be instanceof Bisected");
         }
         Bisected bisected = (Bisected) block.getBlockData();

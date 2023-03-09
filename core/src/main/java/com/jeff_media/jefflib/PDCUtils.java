@@ -21,8 +21,16 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.inventory.ItemStack;
@@ -31,12 +39,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Contract;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * PersistentDataContainer related methods.
@@ -47,11 +49,10 @@ import java.util.concurrent.CompletableFuture;
 @SuppressWarnings("unused")
 public class PDCUtils {
 
-    private static final Map<String, NamespacedKey> KEYS = new HashMap<>();
     /**
      * An array of all primitive {@link PersistentDataType}s builtin to Bukkit.
      */
-    public static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES = new PersistentDataType<?, ?>[]{
+    public static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES = new PersistentDataType<?, ?>[] {
             PersistentDataType.BYTE,
             PersistentDataType.SHORT,
             PersistentDataType.INTEGER,
@@ -64,6 +65,7 @@ public class PDCUtils {
             PersistentDataType.LONG_ARRAY,
             PersistentDataType.TAG_CONTAINER_ARRAY,
             PersistentDataType.TAG_CONTAINER};
+    private static final Map<String, NamespacedKey> KEYS = new HashMap<>();
 
     /**
      * Generates a random NamespacedKey
@@ -472,11 +474,11 @@ public class PDCUtils {
      */
     @SuppressWarnings("unchecked")
     public static void copy(@Nonnull final PersistentDataContainer source, @Nonnull final PersistentDataContainer target) {
-        for(final NamespacedKey key : source.getKeys()) {
-            final PersistentDataType<Object,Object> type = (PersistentDataType<Object, Object>) getDataType(source, key);
+        for (final NamespacedKey key : source.getKeys()) {
+            final PersistentDataType<Object, Object> type = (PersistentDataType<Object, Object>) getDataType(source, key);
             Validate.notNull(type, "Could not find data type for key " + key);
             final Object value = source.get(key, type);
-            if(value != null) {
+            if (value != null) {
                 target.set(key, type, value);
             }
         }
@@ -496,6 +498,7 @@ public class PDCUtils {
 
     /**
      * Turns a PersistentDataContainer into String
+     *
      * @nms
      */
     @NMS
@@ -506,6 +509,7 @@ public class PDCUtils {
 
     /**
      * Loads a String from {@link PDCUtils#serialize(PersistentDataContainer)} into a PersistentDataContainer, overwriting already existing keys of the same name
+     *
      * @throws IOException When the String cannot be deserialized
      */
     public static void deserialize(@Nonnull final String serializedPdc, @Nonnull final PersistentDataContainer target) throws IOException {
@@ -520,6 +524,7 @@ public class PDCUtils {
     /**
      * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
      * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     *
      * @nms
      */
     @Nonnull
@@ -531,6 +536,7 @@ public class PDCUtils {
     /**
      * Returns an OfflinePlayer's {@link PersistentDataContainer}.&nbsp;<b>Important: </b>When doing changes to the PDC, you must call {@link OfflinePlayerPersistentDataContainer#save()} or {@link OfflinePlayerPersistentDataContainer#saveAsync()} to save the changes.
      * The player's .dat file must already exist, i.e. it doesn't work for players who have never joined before.
+     *
      * @nms
      */
     @Nonnull

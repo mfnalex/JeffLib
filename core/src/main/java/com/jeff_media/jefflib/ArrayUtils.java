@@ -18,13 +18,12 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-
-import javax.annotation.Nonnull;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.annotation.Nonnull;
+import lombok.experimental.UtilityClass;
 
 /**
  * Array manipulation related methods
@@ -34,6 +33,10 @@ public class ArrayUtils {
 
     /**
      * Combines the given arrays into a new array
+     *
+     * @param array Arrays to combine
+     * @param <T>   Array's component type
+     * @return Combined array
      */
     @SafeVarargs
     public static <T> T[] combine(final T[]... array) {

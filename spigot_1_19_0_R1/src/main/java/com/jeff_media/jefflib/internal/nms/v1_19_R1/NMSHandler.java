@@ -18,6 +18,7 @@
 
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
+import static com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS.*;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -38,10 +39,26 @@ import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
+import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
-import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.*;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedAvoidEntityGoal;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedJumpController;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedLookController;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedMoveController;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedMoveToBlockGoal;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedPathNavigation;
+import com.jeff_media.jefflib.internal.nms.v1_19_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import net.minecraft.advancements.critereon.DeserializationContext;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -50,7 +67,11 @@ import net.minecraft.nbt.TagParser;
 import net.minecraft.network.Connection;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.*;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
+import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
+import net.minecraft.network.protocol.game.ClientboundRemoveEntitiesPacket;
+import net.minecraft.network.protocol.game.ClientboundSetEntityDataPacket;
+import net.minecraft.network.protocol.game.ClientboundSetTimePacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.ServerAdvancementManager;
 import net.minecraft.server.level.ServerLevel;
@@ -61,12 +82,15 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.ai.util.DefaultRandomPos;
 import net.minecraft.world.entity.decoration.ArmorStand;
-import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.GameRules;
 import net.minecraft.world.level.block.entity.SkullBlockEntity;
 import net.minecraft.world.phys.Vec3;
-import org.bukkit.*;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_19_R1.CraftServer;
@@ -76,25 +100,16 @@ import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_19_R1.persistence.CraftPersistentDataContainer;
 import org.bukkit.craftbukkit.v1_19_R1.persistence.CraftPersistentDataTypeRegistry;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftChatMessage;
-import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftNamespacedKey;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
-import static com.jeff_media.jefflib.internal.nms.v1_19_R1.NMS.*;
-
-public class NMSHandler implements AbstractNMSHandler {
+public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKeyProvider {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
     private final BlockHandler blockHandler = new BlockHandler();
@@ -363,18 +378,18 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public String serializePdc(PersistentDataContainer pdc) {
-        return ((CraftPersistentDataContainer)pdc).toTagCompound().getAsString();
+        return ((CraftPersistentDataContainer) pdc).toTagCompound().getAsString();
     }
 
     @Override
     public void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception {
         CompoundTag tag = TagParser.parseTag(serializedPdc);
-        ((CraftPersistentDataContainer)target).putAll(tag);
+        ((CraftPersistentDataContainer) target).putAll(tag);
     }
 
     @Override
     public void respawnPlayer(Player player) {
-        NMS.getServer().getPlayerList().respawn(NMS.toNms(player),true);
+        NMS.getServer().getPlayerList().respawn(NMS.toNms(player), true);
     }
 
     @Override
@@ -396,12 +411,13 @@ public class NMSHandler implements AbstractNMSHandler {
     }
 
     @Override
-    public String getTranslationKey(Material mat) {
-        if(mat.isBlock()) {
-            return unsafe.getNMSBlockFromMaterial(mat).getDescriptionId();
-        } else {
-            return unsafe.getNMSItemFromMaterial(mat).getDescriptionId();
-        }
+    public String getItemTranslationKey(Material mat) {
+        return unsafe.getNMSItemFromMaterial(mat).getDescriptionId();
+    }
+
+    @Override
+    public String getBlockTranslationKey(Material mat) {
+        return unsafe.getNMSBlockFromMaterial(mat).getDescriptionId();
     }
 
     @Override
@@ -434,7 +450,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void updatePdcInDatFile(OfflinePlayerPersistentDataContainer pdc) throws IOException {
-        CompoundTag pdcTag = ((CraftPersistentDataContainer)pdc.getCraftPersistentDataContainer()).toTagCompound();
+        CompoundTag pdcTag = ((CraftPersistentDataContainer) pdc.getCraftPersistentDataContainer()).toTagCompound();
         CompoundTag fileTag = (CompoundTag) pdc.getCompoundTag();
         fileTag.put("BukkitValues", pdcTag);
         NbtIo.writeCompressed(fileTag, pdc.getFile());

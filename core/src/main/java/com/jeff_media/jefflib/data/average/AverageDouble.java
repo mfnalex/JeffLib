@@ -18,23 +18,28 @@
 
 package com.jeff_media.jefflib.data.average;
 
-import lombok.Getter;
-
 import java.util.Arrays;
 import java.util.Objects;
+import lombok.Getter;
 
 /**
  * Represents an average double value consisting of a given number of previous values
  */
 public final class AverageDouble {
 
-    @Getter private final int maxSamples;
-    @Getter private final double[] data;
-    @Getter private int index = 0;
-    @Getter private int currentSamples = 0;
+    @Getter
+    private final int maxSamples;
+    @Getter
+    private final double[] data;
+    @Getter
+    private int index = 0;
+    @Getter
+    private int currentSamples = 0;
 
     /**
      * Creates a new instance that stores up to the given number of samples
+     *
+     * @param maxSamples Maximum number of samples to store
      */
     public AverageDouble(final int maxSamples) {
         this.maxSamples = maxSamples;
@@ -63,17 +68,21 @@ public final class AverageDouble {
 
     /**
      * Adds a new value to the average
+     *
+     * @param value Value to add
      */
     public void add(final double value) {
         data[index] = value;
         index = (index + 1) % maxSamples;
-        if(currentSamples != maxSamples) {
+        if (currentSamples != maxSamples) {
             currentSamples++;
         }
     }
 
     /**
      * Gets the average of the stored values
+     *
+     * @return Average of the stored values
      */
     public double getAverage() {
         double sum = 0;

@@ -23,13 +23,12 @@ import com.jeff_media.jefflib.PDCUtils;
 import com.jeff_media.jefflib.Tasks;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 
 /**
@@ -61,7 +60,7 @@ public class ToastMessage {
     }
 
     public void send(@Nonnull final Player player) {
-        send(new Player[]{player});
+        send(new Player[] {player});
     }
 
     private Advancement registerMyself(final String title, final String description, final boolean announceToChat, final Material icon, final FrameType frameType) {
@@ -80,7 +79,7 @@ public class ToastMessage {
             }, 1);
             Tasks.later(() -> {
                 for (final Player player : players) {
-                    if(player.isOnline()) {
+                    if (player.isOnline()) {
                         player.getAdvancementProgress(adv).revokeCriteria(CRITERIA);
                     }
                 }

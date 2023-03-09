@@ -18,6 +18,10 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
+import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -27,11 +31,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
-
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
+import org.jetbrains.annotations.Contract;
 
 /**
  * Tracks player placed blocks.
@@ -125,8 +125,12 @@ public class BlockTracker {
     }
 
     /**
-     * Gets a {@link NamespacedKey} for every block
+     * Creates a {@link NamespacedKey} for a block based on its chunk location
+     *
+     * @param block Block to create the key for
+     * @return NamespacedKey for the block
      */
+    @Contract("_ -> new")
     private static NamespacedKey getKey(@Nonnull final Block block) {
         final int x = block.getX() & 0x000F;
         final int y = block.getY();

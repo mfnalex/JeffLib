@@ -20,11 +20,10 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-
-import javax.annotation.Nonnull;
 
 /**
  * Biome related methods

@@ -19,13 +19,16 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.TPS;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.nio.file.Paths;
+import javax.annotation.Nonnull;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.entity.EntityType;
+import org.bukkit.event.server.ServerListPingEvent;
 
 /**
  * Server related methods
@@ -34,6 +37,7 @@ import java.nio.file.Paths;
 public class ServerUtils {
 
     private static final Field CURRENT_TICK_FIELD;
+    private static final InetAddress LOCALHOST;
 
     static {
         Field tmpCurrentTickField;
@@ -44,6 +48,26 @@ public class ServerUtils {
             tmpCurrentTickField = null;
         }
         CURRENT_TICK_FIELD = tmpCurrentTickField;
+
+        InetAddress tmpLocalhost;
+        try {
+            tmpLocalhost = InetAddress.getLocalHost();
+        } catch (final UnknownHostException ignored) {
+            tmpLocalhost = null;
+        }
+        LOCALHOST = tmpLocalhost;
+    }
+
+    /**
+     * Gets the effective MOTD (after plugins might have changed it)
+     */
+    public static String getEffectiveMotd() {
+        if(LOCALHOST == null) {
+            return Bukkit.getMotd();
+        }
+        ServerListPingEvent event = new ServerListPingEvent("localhost", LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+        Bukkit.getPluginManager().callEvent(event);
+        return event.getMotd();
     }
 
     /**
@@ -116,18 +140,39 @@ public class ServerUtils {
     }
 
     /**
+     * Gets the server's working directory
+     */
+    @Nonnull
+    public File getServerFolder() {
+        return Paths.get("").toAbsolutePath().toFile();
+    }
+
+    /**
      * Represents the server's current life phase
      */
     public enum ServerLifePhase {
         STARTUP, RUNNING, SHUTDOWN, UNKNOWN
     }
 
+    private static final boolean HAS_TRANSLATION_KEY_PROVIDER;
+
+    static {
+        boolean hasTranslationKeyProvider = false;
+        try {
+            EntityType.class.getDeclaredMethod("getTranslationKey");
+            hasTranslationKeyProvider = true;
+        } catch (ReflectiveOperationException ignored) {
+
+        }
+        HAS_TRANSLATION_KEY_PROVIDER = hasTranslationKeyProvider;
+    }
+
     /**
-     * Gets the server's working directory
+     * Returns whether this server supports getting translation keys without using NMS (latest versions of 1.19.3+)
+     * @return true if this server supports getting translation keys without using NMS
      */
-    @Nonnull
-    public File getServerFolder() {
-        return Paths.get("").toAbsolutePath().toFile();
+    public static boolean hasTranslationKeyProvider() {
+        return HAS_TRANSLATION_KEY_PROVIDER;
     }
 
 

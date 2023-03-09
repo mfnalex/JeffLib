@@ -19,17 +19,25 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
-import org.bukkit.*;
+import org.bukkit.Chunk;
+import org.bukkit.ChunkSnapshot;
+import org.bukkit.Location;
+import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.*;
-import java.util.function.Predicate;
 
 /**
  * Block related methods
@@ -40,10 +48,13 @@ public class BlockUtils {
     /**
      * Offsets of valid bookshelf locations from an enchantment table
      */
-    public static final int[][] BOOKSHELF_OFFSETS = {{-2, 0, -2}, {-1, 0, -2}, {0, 0, -2}, {1, 0, -2}, {2, 0, -2}, {-2, 0, -1}, {2, 0, -1}, {-2, 0, 0}, {2, 0, 0}, {-2, 0, 1}, {2, 0, 1}, {-2, 0, 2}, {-1, 0, 2}, {0, 0, 2}, {1, 0, 2}, {2, 0, 2}, {-2, 1, -2}, {-1, 1, -2}, {0, 1, -2}, {1, 1, -2}, {2, 1, -2}, {-2, 1, -1}, {2, 1, -1}, {-2, 1, 0}, {2, 1, 0}, {-2, 1, 1}, {2, 1, 1}, {-2, 1, 2}, {-1, 1, 2}, {0, 1, 2}, {1, 1, 2}, {2, 1, 2},};
+    public static final int[][] BOOKSHELF_OFFSETS = {{-2, 0, -2}, {-1, 0, -2}, {0, 0, -2}, {1, 0, -2}, {2, 0, -2}, {-2, 0, -1}, {2, 0, -1}, {-2, 0, 0}, {2, 0, 0}, {-2, 0, 1}, {2, 0, 1}, {-2, 0, 2}, {-1, 0, 2}, {0, 0, 2}, {1, 0, 2}, {2, 0, 2}, {-2, 1, -2}, {-1, 1, -2}, {0, 1, -2}, {1, 1, -2}, {2, 1, -2}, {-2, 1, -1}, {2, 1, -1}, {-2, 1, 0}, {2, 1, 0}, {-2, 1, 1}, {2, 1, 1}, {-2, 1, 2}, {-1, 1, 2}, {0, 1, 2}, {1, 1, 2}, {2, 1, 2}};
 
     /**
      * Returns the lowest non-air block at a given location
+     *
+     * @param location The location to check
+     * @return The lowest non-air block at the given location
      */
     @Nullable
     public static Block getLowestBlockAt(@Nonnull final Location location) {
@@ -52,6 +63,11 @@ public class BlockUtils {
 
     /**
      * Returns the lowest non-air block at a given position
+     *
+     * @param world World
+     * @param x     X coordinate
+     * @param z     Z coordinate
+     * @return The lowest non-air block at the given position
      */
     @Nullable
     public static Block getLowestBlockAt(@Nonnull final World world, final int x, final int z) {
@@ -60,16 +76,6 @@ public class BlockUtils {
             if (!current.getType().isAir()) return current;
         }
         return null;
-    }
-
-    /**
-     * Gets the lowest possible building height for a world. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
-     *
-     * @deprecated Use {@link WorldUtils#getWorldMinHeight(World)}
-     */
-    @Deprecated
-    private static int getWorldMinHeight(final @Nonnull World world) {
-        return WorldUtils.getWorldMinHeight(world);
     }
 
     /**
@@ -195,7 +201,10 @@ public class BlockUtils {
     /**
      * Gets all {@link Chunk}s that are inside or intersect the given {@link BoundingBox}
      *
-     * @param onlyLoadedChunks When true, only returns Chunks if the related chunk is already loaded. When false, this will force load chunks
+     * @param world World to check for
+     * @param box   BoundingBox to check for
+     * @param onlyLoadedChunks When true, only returns already loaded chunks. When false, this will force load chunks and return those too
+     * @return List of all chunks that are inside or intersect the given BoundingBox
      */
     public static List<Chunk> getChunks(final World world, final BoundingBox box, final boolean onlyLoadedChunks) {
         final int minX = (int) box.getMinX() >> 4;
@@ -218,7 +227,11 @@ public class BlockUtils {
     /**
      * Gets a list of all {@link BlockVector}s inside the given {@link BoundingBox} that match the given {@link Predicate}&lt;{@link BlockData}>
      *
-     * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks
+     * @param world World to check for
+     * @param box   BoundingBox to check for
+     * @param onlyLoadedChunks When true, only returns BlockVectors if the related chunk is already loaded. When false, this will force load chunks and return BlockVectors from those too
+     * @param predicate Predicate to check for
+     * @return List of all BlockVectors inside the given BoundingBox that match the given Predicate
      */
     public static List<BlockVector> getBlocks(final World world, final BoundingBox box, final boolean onlyLoadedChunks, final Predicate<BlockData> predicate) {
         final List<ChunkSnapshot> chunks = getChunkSnapshots(world, box, onlyLoadedChunks);
@@ -246,7 +259,10 @@ public class BlockUtils {
     /**
      * Gets all {@link ChunkSnapshot}s that are inside or intersect the given {@link BoundingBox}
      *
-     * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks
+     * @param world World to check for
+     * @param box  BoundingBox to check for
+     * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks and return ChunkSnapshots from those too
+     * @return List of all ChunkSnapshots that are inside or intersect the given BoundingBox
      */
     public static List<ChunkSnapshot> getChunkSnapshots(final World world, final BoundingBox box, final boolean onlyLoadedChunks) {
         final int minX = (int) box.getMinX() >> 4;
@@ -281,6 +297,9 @@ public class BlockUtils {
 
     /**
      * Returns the number of valid (usable) bookshelves around the given enchantment table position.
+     *
+     * @param enchantmentTable The hypothetical enchantment table position
+     * @return The number of valid bookshelves
      */
     public static int getNumberOfEnchantmentTableBookShelves(final Block enchantmentTable) {
         return (int) Arrays.stream(BOOKSHELF_OFFSETS).filter(offset -> isValidBookShelf(enchantmentTable, offset)).count();
@@ -308,7 +327,7 @@ public class BlockUtils {
      * Some predefined Block Predicates
      */
     @UtilityClass
-public class Predicates {
+    public class Predicates {
         /**
          * Represents AIR and CAVE_AIR
          */

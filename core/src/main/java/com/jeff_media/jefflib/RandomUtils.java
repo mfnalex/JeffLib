@@ -70,6 +70,7 @@ public class RandomUtils {
 
     /**
      * The same as {@link EnumUtils#getRandomElement(Class)}
+     *
      * @see EnumUtils#getRandomElement(Class)
      */
     public static <E extends Enum<E>> E getRandomEnumElement(final Class<E> enumClazz) {

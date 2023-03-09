@@ -20,8 +20,20 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.ai.goal.GoalSelector;
 import com.jeff_media.jefflib.ai.goal.TargetSelector;
-import com.jeff_media.jefflib.ai.navigation.*;
+import com.jeff_media.jefflib.ai.navigation.Controls;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -29,15 +41,13 @@ import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
 import org.bukkit.util.BoundingBox;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Entity related methods
@@ -80,7 +90,7 @@ public class EntityUtils {
     @Nullable
     public static Player getClosestPlayer(@Nonnull final Location location) {
         World world = location.getWorld();
-        if(world == null) return null;
+        if (world == null) return null;
         return world.getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
     }
 
@@ -260,4 +270,23 @@ public class EntityUtils {
     public static void respawnPlayer(@Nonnull final Player player) {
         JeffLib.getNMSHandler().respawnPlayer(player);
     }
+
+
+    /**
+     * Gets the translation key associated with this EntityType
+     * @nms Requires NMS in versions below latest 1.19.3
+     */
+    @NMS
+    @NotNull public static String getTranslationKey(@NotNull final EntityType entityType) {
+        if(ServerUtils.hasTranslationKeyProvider()) {
+            return entityType.getTranslationKey();
+        } else {
+            if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
+                return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getTranslationKey(entityType);
+            } else {
+                throw new NMSNotSupportedException("This version of NMS does not support getting the translation key of an EntityType");
+            }
+        }
+    }
+
 }

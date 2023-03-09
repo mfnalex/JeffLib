@@ -19,17 +19,16 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Locale;
+import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
-
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Locale;
 
 /**
  * Word and language related methods, like capitalization or getting translation keys
@@ -95,70 +94,32 @@ public class WordUtils {
         }
         return builder.toString();
     }
-    
+
     /**
      * Builds a String from the given args and starting point
      *
-     * @param args args String Array
+     * @param args  args String Array
      * @param start Starting index to append strings together with
      * @return String The final String
      */
     public static String buildString(final String[] args, final int start) {
         StringBuilder stringBuilder = new StringBuilder();
-        for(int i = start; i < args.length; i++) {
+        for (int i = start; i < args.length; i++) {
             stringBuilder.append(args[i]).append(" ");
         }
-        return stringBuilder.substring(0, stringBuilder.length()-1);
+        return stringBuilder.substring(0, stringBuilder.length() - 1);
     }
 
     public static int countChar(final String string, final char aChar) {
         int count = 0;
         char[] arr = string.toCharArray();
         for (int i = 0; i < string.length(); i++) {
-            if(arr[i] == aChar) {
+            if (arr[i] == aChar) {
                 count++;
             }
         }
         return count;
     }
 
-    /**
-     * Gets the translation key of a {@link Material}
-     * @nms
-     */
-    @NMS
-    @Nonnull
-    public static String getTranslationKey(final @Nonnull Material mat) {
-        return JeffLib.getNMSHandler().getTranslationKey(mat);
-    }
 
-    /**
-     * Gets the translation key of a {@link Block}
-     * @nms
-     */
-    @NMS
-    @Nonnull
-    public static String getTranslationKey(final @Nonnull Block block) {
-        return JeffLib.getNMSHandler().getTranslationKey(block);
-    }
-
-    /**
-     * Gets the translation key of an {@link EntityType}
-     * @nms
-     */
-    @NMS
-    @Nonnull
-    public static String getTranslationKey(final @Nonnull EntityType entityType) {
-        return JeffLib.getNMSHandler().getTranslationKey(entityType);
-    }
-
-    /**
-     * Gets the translation key of an {@link ItemStack}
-     * @nms
-     */
-    @NMS
-    @Nonnull
-    public static String getTranslationKey(final @Nonnull ItemStack itemStack) {
-        return JeffLib.getNMSHandler().getTranslationKey(itemStack);
-    }
 }

@@ -21,13 +21,12 @@ package com.jeff_media.jefflib.pluginhooks.worldguard;
 import com.jeff_media.jefflib.PluginUtils;
 import com.jeff_media.jefflib.exceptions.MissingPluginException;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
+import java.util.Collection;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.Collection;
 
 /**
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
@@ -87,7 +86,7 @@ public class WorldGuardUtils {
     }
 
     public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
-        if(isWorldGuardInstalled()) {
+        if (isWorldGuardInstalled()) {
             return WorldGuardHandler.canPlace(player, location);
         }
         return true;
@@ -113,7 +112,7 @@ public class WorldGuardUtils {
 
     @Nonnull
     public static StateFlag registerStateFlag(@Nonnull String name, @Nonnull StateFlag.State defaultValue) {
-        if(isWorldGuardInstalled()) {
+        if (isWorldGuardInstalled()) {
             return WorldGuardHandler.registerStateFlag(name, defaultValue);
         }
         return new StateFlag(name, StateFlag.State.DENY);
@@ -121,13 +120,11 @@ public class WorldGuardUtils {
 
     @Nonnull
     public static StateFlag.State testStateFlag(@Nullable Player player, @Nonnull Location location, @Nonnull StateFlag flag) {
-        if(isWorldGuardInstalled()) {
+        if (isWorldGuardInstalled()) {
             return StateFlag.State.fromBoolean(WorldGuardHandler.testStateFlag(player, location, flag));
         }
         return flag.getDefaultValue();
     }
-
-
 
 
 }

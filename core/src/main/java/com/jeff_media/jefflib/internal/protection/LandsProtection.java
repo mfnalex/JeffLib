@@ -25,7 +25,7 @@ public class LandsProtection implements PluginProtection {
 
     private boolean hasRoleFlag(Player player, Location location, RoleFlag flag) {
         Area area = lands.getAreaByLoc(location);
-        if(area == null) return true;
+        if (area == null) return true;
         return area.hasFlag(player, flag, false);
     }
 }

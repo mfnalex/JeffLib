@@ -18,10 +18,9 @@
 
 package com.jeff_media.jefflib.data;
 
-import lombok.Getter;
-
-import javax.annotation.Nonnull;
 import java.io.DataOutput;
+import javax.annotation.Nonnull;
+import lombok.Getter;
 
 /**
  * A simple {@link DataOutput} implementation that counts the number of bytes written and discards the actual data
@@ -30,6 +29,21 @@ public class ByteCounter implements DataOutput {
 
     @Getter
     private int bytes = 0;
+
+    public static long getUTFLength(final @Nonnull String s) {
+        long length = 0;
+        char[] chars = s.toCharArray();
+        for (char c : chars) {
+            if (c >= 0x0001 && c <= 0x007F) {
+                length++;
+            } else if (c > 0x07FF) {
+                length += 3;
+            } else {
+                length += 2;
+            }
+        }
+        return length;
+    }
 
     @Override
     public void write(final int i) {
@@ -99,20 +113,5 @@ public class ByteCounter implements DataOutput {
     @Override
     public void writeUTF(final String s) {
         bytes += 2 + getUTFLength(s);
-    }
-
-    public static long getUTFLength(final @Nonnull String s) {
-        long length = 0;
-        char[] chars = s.toCharArray();
-        for (char c : chars) {
-            if (c >= 0x0001 && c <= 0x007F) {
-                length++;
-            } else if (c > 0x07FF) {
-                length += 3;
-            } else {
-                length += 2;
-            }
-        }
-        return length;
     }
 }

@@ -1,9 +1,8 @@
 package com.jeff_media.jefflib.internal.protection;
 
+import javax.annotation.Nonnull;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
-import javax.annotation.Nonnull;
 
 public interface PluginProtection {
 

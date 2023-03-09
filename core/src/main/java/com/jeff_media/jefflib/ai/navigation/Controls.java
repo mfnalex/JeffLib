@@ -21,9 +21,8 @@ package com.jeff_media.jefflib.ai.navigation;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import org.bukkit.entity.Mob;
-
 import javax.annotation.Nonnull;
+import org.bukkit.entity.Mob;
 
 /**
  * Represents an entity's navigation, movement, jump and look controls
@@ -48,6 +47,19 @@ public final class Controls {
         this.jumpController = jumpController;
         this.lookController = lookController;
         this.navigation = navigation;
+    }
+
+    /**
+     * Gets this mob's controls
+     */
+    @NMS
+    @Nonnull
+    public static Controls of(@Nonnull final Mob mob) {
+        return new Controls(mob);
+    }
+
+    public static Controls of(@Nonnull final MoveController moveController, @Nonnull final JumpController jumpController, @Nonnull final LookController lookController, @Nonnull final PathNavigation navigation) {
+        return new Controls(moveController, jumpController, lookController, navigation);
     }
 
     /**
@@ -76,18 +88,6 @@ public final class Controls {
      */
     public PathNavigation getNavigation() {
         return navigation;
-    }
-
-    /**
-     * Gets this mob's controls
-     */
-    @NMS
-    @Nonnull public static Controls of(@Nonnull final Mob mob) {
-        return new Controls(mob);
-    }
-
-    public static Controls of(@Nonnull final MoveController moveController, @Nonnull final JumpController jumpController, @Nonnull final LookController lookController, @Nonnull final PathNavigation navigation) {
-        return new Controls(moveController, jumpController, lookController, navigation);
     }
 
 }

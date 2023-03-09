@@ -20,7 +20,22 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
-import net.minecraft.server.v1_16_R1.*;
+import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import net.minecraft.server.v1_16_R1.BlockPosition;
+import net.minecraft.server.v1_16_R1.DedicatedServer;
+import net.minecraft.server.v1_16_R1.Entity;
+import net.minecraft.server.v1_16_R1.EntityCreature;
+import net.minecraft.server.v1_16_R1.EntityInsentient;
+import net.minecraft.server.v1_16_R1.EntityLiving;
+import net.minecraft.server.v1_16_R1.EntityPlayer;
+import net.minecraft.server.v1_16_R1.ItemStack;
+import net.minecraft.server.v1_16_R1.MinecraftServer;
+import net.minecraft.server.v1_16_R1.PathfinderGoal;
+import net.minecraft.server.v1_16_R1.RecipeItemStack;
+import net.minecraft.server.v1_16_R1.Vec3D;
+import net.minecraft.server.v1_16_R1.WorldServer;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.World;
@@ -28,14 +43,14 @@ import org.bukkit.block.Block;
 import org.bukkit.craftbukkit.v1_16_R1.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R1.CraftWorld;
 import org.bukkit.craftbukkit.v1_16_R1.block.CraftBlock;
-import org.bukkit.craftbukkit.v1_16_R1.entity.*;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftCreature;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftEntity;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftLivingEntity;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftMob;
+import org.bukkit.craftbukkit.v1_16_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.util.stream.Stream;
 
 public final class NMS {
 
@@ -101,11 +116,11 @@ public final class NMS {
     }
 
     public static PathfinderGoal toNms(final com.jeff_media.jefflib.ai.goal.PathfinderGoal pathfinderGoal) {
-        if(pathfinderGoal instanceof PathfinderGoal) {
+        if (pathfinderGoal instanceof PathfinderGoal) {
             return (PathfinderGoal) pathfinderGoal;
-        } else if(pathfinderGoal instanceof CustomGoal) {
-            final CustomGoalExecutor customGoalExecutor = ((CustomGoal)pathfinderGoal).getExecutor();
-            if(customGoalExecutor instanceof PathfinderGoal) {
+        } else if (pathfinderGoal instanceof CustomGoal) {
+            final CustomGoalExecutor customGoalExecutor = ((CustomGoal) pathfinderGoal).getExecutor();
+            if (customGoalExecutor instanceof PathfinderGoal) {
                 return (PathfinderGoal) customGoalExecutor;
             }
         }
@@ -117,11 +132,11 @@ public final class NMS {
     }
 
     public static EntityPlayer toNms(final org.bukkit.entity.Player player) {
-        return ((CraftPlayer)player).getHandle();
+        return ((CraftPlayer) player).getHandle();
     }
 
     public static net.minecraft.server.v1_16_R1.Block toNms(final Block block) {
-        return ((CraftBlock)block).getNMS().getBlock();
+        return ((CraftBlock) block).getNMS().getBlock();
     }
 
 }

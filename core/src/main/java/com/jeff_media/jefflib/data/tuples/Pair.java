@@ -18,8 +18,8 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import javax.annotation.Nullable;
 import java.util.Objects;
+import javax.annotation.Nullable;
 
 /**
  * Tuple of two values

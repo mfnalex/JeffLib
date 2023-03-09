@@ -31,31 +31,35 @@ import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.mojang.authlib.GameProfile;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
-import org.bukkit.entity.*;
+import org.bukkit.entity.Creature;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Mob;
+import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-
 /**
  * Abstract NMS handler, for internal use only.
- * @deprecated For internal use only
+ *
+ * @internal For internal use only
  */
 @Internal
-@Deprecated
 public interface AbstractNMSHandler {
 
     //void updateMap(@Nonnull final MapView map);
@@ -143,7 +147,7 @@ public interface AbstractNMSHandler {
     @Nonnull
     BukkitUnsafe getUnsafe();
 
-	String serializePdc(PersistentDataContainer pdc);
+    String serializePdc(PersistentDataContainer pdc);
 
     void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception;
 
@@ -152,14 +156,6 @@ public interface AbstractNMSHandler {
     SerializedEntity serialize(Entity entity);
 
     void applyNbt(Entity entity, String nbtData);
-
-    String getTranslationKey(Material mat);
-
-    String getTranslationKey(Block block);
-
-    String getTranslationKey(EntityType entityType);
-
-    String getTranslationKey(ItemStack itemStack);
 
     OfflinePlayerPersistentDataContainer getPDCFromDatFile(File file) throws IOException;
 

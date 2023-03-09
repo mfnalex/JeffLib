@@ -19,9 +19,9 @@
 ###############################
 
 # Path to your java 17 executable
-JAVA_PATH="/c/Program Files/Java/jdk-17.0.1/bin/java.exe"
+JAVA_PATH="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java"
 # Path to your java 8 or java 11 java executable
-LEGACY_JAVA_PATH="/c/Program Files/Java/jdk1.8.0_271/bin/java.exe"
+LEGACY_JAVA_PATH="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java"
 
 ###############################
 # Do not edit below this line #
@@ -250,13 +250,7 @@ function checkSelf() {
     error_exit "The java executable at $JAVA_PATH is not an executable. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
   fi
 
-  if [[ $javaVersion -lt 170 ]]; then
-    error_exit "The java executable at $JAVA_PATH is older than java 17. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
-  fi
 
-  if [[ $javaVersion -ge 180 ]]; then
-    error_exit "The java executable at $JAVA_PATH is newer than java 17. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
-  fi
 
   ## Java Legacy
 
@@ -268,13 +262,6 @@ function checkSelf() {
     error_exit "The java executable at $LEGACY_JAVA_PATH is not an executable. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java executable."
   fi
 
-  if [[ $legacyJavaVersion -lt 18 ]]; then
-    error_exit "The java executable at $LEGACY_JAVA_PATH is older than java 8. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java 8 or java 11 executable."
-  fi
-
-  if [[ $legacyJavaVersion -gt 119 ]]; then
-    error_exit "The java executable at $LEGACY_JAVA_PATH is newer than java 11. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java 8 or java 11 executable."
-  fi
 
   if (! commandExists curl) && (! commandExists wget); then
     error_exit "Neither curl nor wget could be found"

@@ -18,10 +18,9 @@
 
 package com.jeff_media.jefflib.internal.cherokee;
 
-import org.jetbrains.annotations.Contract;
-
-import javax.annotation.Nonnull;
 import java.util.regex.Pattern;
+import javax.annotation.Nonnull;
+import org.jetbrains.annotations.Contract;
 
 public final class Validate {
 

@@ -20,6 +20,7 @@ package com.jeff_media.jefflib.events;
 
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ServerUtils;
+import javax.annotation.Nonnull;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -34,8 +35,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-
-import javax.annotation.Nonnull;
 
 /**
  * Represents an event called when a player jumps.

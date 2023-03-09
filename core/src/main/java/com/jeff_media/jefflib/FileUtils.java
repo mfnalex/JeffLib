@@ -19,16 +19,23 @@
 package com.jeff_media.jefflib;
 
 
-import lombok.SneakyThrows;
-import lombok.experimental.UtilityClass;
-import org.bukkit.plugin.Plugin;
-
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
+import org.bukkit.plugin.Plugin;
 
 /**
  * File related methods
@@ -57,7 +64,7 @@ public class FileUtils {
      * @param line line to append
      */
     public static void appendLines(final File file, final String line) throws IOException {
-        appendLines(file, new String[]{line});
+        appendLines(file, new String[] {line});
     }
 
     /**
@@ -146,6 +153,7 @@ public class FileUtils {
 
     /**
      * Saves a resource to the data folder if it doesn't already exist.
+     *
      * @return true if the file has been created, otherwise false
      */
     public static boolean saveResourceIfNotExists(final String filename) {

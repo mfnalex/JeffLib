@@ -19,13 +19,12 @@
 package com.jeff_media.jefflib.events;
 
 import com.allatori.annotations.DoNotRename;
+import javax.annotation.Nonnull;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
-
-import javax.annotation.Nonnull;
 
 /**
  * Gets called when a player scrolls through their hotbar. When cancelled, the main hand slot will not be changed.

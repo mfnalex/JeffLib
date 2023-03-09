@@ -19,15 +19,14 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 
 /**
  * Animation related methods. Currently only contains methods to play custom Totem animations
@@ -38,6 +37,8 @@ public class AnimationUtils {
     /**
      * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
      * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
+     * @param player Player to play the animation to
      */
     @NMS
     public static void playTotemAnimation(@Nonnull final Player player) {
@@ -48,6 +49,7 @@ public class AnimationUtils {
      * Plays the totem of undying animation to a given player using the provided custom model data.
      * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
      *
+     * @param player          Player to play the animation to
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
     @NMS

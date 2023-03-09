@@ -30,7 +30,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.0.2</version>
+        <version><!-- changeme -->12.0.3</version>
     </parent>
     <build>
         <resources>
@@ -76,7 +76,9 @@
                         </tag>
                     </tags>
                     <linksource>true</linksource>
-                    <excludePackageNames>com.jeff_media.jefflib.internal.cherokee,com.jeff_media.jefflib.internal.listeners,com.jeff_media.jefflib.internal.nms,com.jeff_media.jefflib.internal.protection</excludePackageNames>
+                    <excludePackageNames>
+                        com.jeff_media.jefflib.internal.cherokee,com.jeff_media.jefflib.internal.listeners,com.jeff_media.jefflib.internal.nms,com.jeff_media.jefflib.internal.protection
+                    </excludePackageNames>
                     <nodeprecated>true</nodeprecated>
                     <quiet>true</quiet>
                 </configuration>

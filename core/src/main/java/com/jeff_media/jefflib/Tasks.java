@@ -18,12 +18,11 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.function.Consumer;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.scheduler.BukkitScheduler;
 import org.bukkit.scheduler.BukkitTask;
-
-import java.util.function.Consumer;
 
 /**
  * Shortcuts to schedule tasks

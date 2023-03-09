@@ -27,14 +27,18 @@ overview.
 ## Dependency Information
 
 ### Maven
+
 Repository:
+
 ```xml
 <repository>
     <id>jeff-media-gbr</id>
     <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
 </repository>
 ```
+
 Dependency:
+
 ```xml
 <dependency>
     <groupId>com.jeff_media</groupId>
@@ -44,9 +48,11 @@ Dependency:
 </dependency>
 ```
 
-Latest version: ![Latest Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml) 
+Latest
+version: ![Latest Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml)
 
 Shading (add this to ```<build><plugins>```) if you don't already have it:
+
 ```xml
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
@@ -63,7 +69,9 @@ Shading (add this to ```<build><plugins>```) if you don't already have it:
 </plugin>
 ```
 
-Optionally you can adjust your shade configuration to relocate JeffLib and to make the NMS classes work while using the "minizeJar" option by adding this to your maven-shade-plugin's `<configuration>`:
+Optionally you can adjust your shade configuration to relocate JeffLib and to make the NMS classes work while using
+the "minizeJar" option by adding this to your maven-shade-plugin's `<configuration>`:
+
 ```xml
 <minimizeJar>true</minimizeJar>
 <relocations>
@@ -86,6 +94,7 @@ Optionally you can adjust your shade configuration to relocate JeffLib and to ma
 ### Gradle
 
 Plugin:
+
 ```groovy
 plugins {
     id 'java'
@@ -94,6 +103,7 @@ plugins {
 ```
 
 Repository:
+
 ```groovy
 repositories {
     maven {
@@ -104,6 +114,7 @@ repositories {
 ```
 
 Dependency:
+
 ```groovy
 dependencies {
     implementation 'com.jeff_media:JeffLib:12.0.0'
@@ -111,6 +122,7 @@ dependencies {
 ```
 
 Shadow with re-location
+
 ```groovy
 shadowJar {
     relocate 'com.jeff_media.jefflib', 'YOUR.PACKAGE.jefflib'
@@ -120,15 +132,19 @@ shadowJar {
 }
 ```
 
-
-You also need an additional third-party plugin to shade JeffLib into your .jar as Gradle doesn't have any official plugin for this. You'll furthermore want to tell your shading plugin to minimize your .jar after that to remove unused classes from JeffLib, except for the classes in `com.jeff_media.jefflib.internal.nms`, and to relocate those classes to your own package name.  I have no clue how to make the Gradle Shadow plugin be able to both, relocate classes, while also using filters in the minimize() block, so you'll have to figure this out yourself, or simply use Maven instead (see above).
-
+You also need an additional third-party plugin to shade JeffLib into your .jar as Gradle doesn't have any official
+plugin for this. You'll furthermore want to tell your shading plugin to minimize your .jar after that to remove unused
+classes from JeffLib, except for the classes in `com.jeff_media.jefflib.internal.nms`, and to relocate those classes to
+your own package name. I have no clue how to make the Gradle Shadow plugin be able to both, relocate classes, while also
+using filters in the minimize() block, so you'll have to figure this out yourself, or simply use Maven instead (see
+above).
 
 ## Usage
 
 **Note:** Some methods require an instance of your plugin. JeffLib tries to get it automatically, however this only
 works if your plugin has already been enabled. If you need to access methods that need an instance of your plugin (for
-example PDCUtils) before it got enabled, then please pass your plugin instance to JeffLib.init(Plugin) as soon as possible:
+example PDCUtils) before it got enabled, then please pass your plugin instance to JeffLib.init(Plugin) as soon as
+possible:
 
 ```java
 public class MyPlugin extends JavaPlugin {
@@ -151,6 +167,7 @@ public class MyPlugin extends JavaPlugin {
 ```
 
 ## Building from source
+
 To build JeffLib from source, just clone this repo, then run the `run-buildtools.sh`file, which will automatically build
 all needed Spigot versions that you don't already have in your local repo. After that, you can build JeffLib by running
 `mvn clean install` in the root directory of this repo. The final .jar will be in the `dist/target` folder.
@@ -163,7 +180,8 @@ mvn clean install
 ```
 
 **Note**: On Windows, you need to use "git bash" or similar to run the `run-buildtools.sh` script. If it complains about
-missing java versions, edit the script and change the `JAVA_VERSION` and `LEGACY_JAVA_VERSION` variables to point at your
+missing java versions, edit the script and change the `JAVA_VERSION` and `LEGACY_JAVA_VERSION` variables to point at
+your
 java 17 and java 8/11 installations.
 
 ## JavaDocs

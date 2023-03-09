@@ -20,11 +20,10 @@ package com.jeff_media.jefflib.internal.nms.v1_16_R1.ai;
 
 import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS;
+import java.util.function.Predicate;
 import net.minecraft.server.v1_16_R1.EntityCreature;
 import net.minecraft.server.v1_16_R1.EntityLiving;
 import net.minecraft.server.v1_16_R1.PathfinderGoalAvoidTarget;
-
-import java.util.function.Predicate;
 
 public class HatchedAvoidEntityGoal extends PathfinderGoalAvoidTarget<EntityLiving> implements PathfinderGoal {
 

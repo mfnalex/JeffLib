@@ -25,7 +25,7 @@ import java.util.Map;
  */
 public class Replacer {
 
-    private final Map<String,String> map = new java.util.HashMap<>();
+    private final Map<String, String> map = new java.util.HashMap<>();
 
     /**
      * Adds a new placeholder
@@ -40,7 +40,7 @@ public class Replacer {
      */
     public String apply(final String input) {
         String output = input;
-        for(final Map.Entry<String,String> entry : map.entrySet()) {
+        for (final Map.Entry<String, String> entry : map.entrySet()) {
             output = output.replace(entry.getKey(), entry.getValue());
         }
         return output;

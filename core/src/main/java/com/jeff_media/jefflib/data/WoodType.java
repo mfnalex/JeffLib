@@ -19,11 +19,10 @@
 package com.jeff_media.jefflib.data;
 
 import com.google.common.base.Enums;
-import lombok.Getter;
-import org.bukkit.Material;
-
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import lombok.Getter;
+import org.bukkit.Material;
 
 public enum WoodType {
 

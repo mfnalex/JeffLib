@@ -20,11 +20,6 @@ package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -32,6 +27,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 
 /**
  * Reflection related methods
@@ -94,6 +93,9 @@ public class ReflUtils {
 
     /**
      * Gets whether a class is already cached
+     *
+     * @param className The class name
+     * @return Whether the class is already cached
      */
     public static boolean isClassCached(final String className) {
         return CLASSES.containsKey(className);
@@ -101,6 +103,10 @@ public class ReflUtils {
 
     /**
      * Gets whether a method is already cached
+     *
+     * @param clazz The class
+     * @param methodName The method name
+     * @return Whether the method is already cached
      */
     public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
         return METHODS_NO_ARGS.contains(clazz, methodName);
@@ -197,6 +203,7 @@ public class ReflUtils {
 
     /**
      * Gets a field's value
+     *
      * @param object Object to get the field value from, or null if it's a static field
      * @throws RuntimeException if an IllegalAccessException is thrown
      */

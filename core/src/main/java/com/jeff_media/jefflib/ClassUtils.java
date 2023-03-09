@@ -18,9 +18,6 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-
-import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.net.URL;
 import java.security.CodeSource;
@@ -29,6 +26,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import javax.annotation.Nonnull;
+import lombok.experimental.UtilityClass;
 
 /**
  * Class related methods that do not have something to do with Reflection (see {@link ReflUtils} for that)
@@ -43,6 +42,9 @@ public class ClassUtils {
      * @return true if the class exists, otherwise false
      */
     public static boolean exists(@Nonnull final String name) {
+        if(ReflUtils.isClassCached(name)) {
+            return true;
+        }
         try {
             Class.forName(name);
             return true;
@@ -121,17 +123,17 @@ public class ClassUtils {
     @Nonnull
     public static List<String> listAllClasses(@Nonnull final Class<?> clazz) {
         final CodeSource source = clazz.getProtectionDomain().getCodeSource();
-        if(source == null) return Collections.emptyList();
+        if (source == null) return Collections.emptyList();
         final URL url = source.getLocation();
         try (
                 final ZipInputStream zip = new ZipInputStream(url.openStream())) {
             final List<String> classes = new ArrayList<>();
-            while(true) {
+            while (true) {
                 final ZipEntry entry = zip.getNextEntry();
-                if(entry == null) break;
-                if(entry.isDirectory()) continue;
+                if (entry == null) break;
+                if (entry.isDirectory()) continue;
                 final String name = entry.getName();
-                if(name.endsWith(".class")) {
+                if (name.endsWith(".class")) {
                     classes.add(name.replace('/', '.').substring(0, name.length() - 6));
                 }
             }

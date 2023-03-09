@@ -21,15 +21,14 @@ package com.jeff_media.jefflib.ai.goal;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import org.bukkit.entity.Mob;
-
 import javax.annotation.Nonnull;
+import org.bukkit.entity.Mob;
 
 /**
  * Represents an entity's target selector
  */
 @DoNotRename
-public final class TargetSelector extends GoalSelector{
+public final class TargetSelector extends GoalSelector {
 
     private TargetSelector(@Nonnull final Mob mob) {
         super(mob);
@@ -44,7 +43,8 @@ public final class TargetSelector extends GoalSelector{
 
     /**
      * Adds a {@link PathfinderGoal} to this mob's target selector
-     * @param goal Goal to add
+     *
+     * @param goal     Goal to add
      * @param priority Priority of the goal
      */
     @NMS
@@ -55,6 +55,7 @@ public final class TargetSelector extends GoalSelector{
 
     /**
      * Removes a {@link PathfinderGoal} from this mob's target selector
+     *
      * @param goal Goal to remove
      */
     @NMS

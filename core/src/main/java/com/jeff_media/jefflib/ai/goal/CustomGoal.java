@@ -20,12 +20,15 @@ package com.jeff_media.jefflib.ai.goal;
 
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
-import com.jeff_media.jefflib.ai.navigation.*;
-import org.bukkit.entity.Mob;
-
+import com.jeff_media.jefflib.ai.navigation.Controls;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import com.jeff_media.jefflib.ai.navigation.LookController;
+import com.jeff_media.jefflib.ai.navigation.MoveController;
+import com.jeff_media.jefflib.ai.navigation.PathNavigation;
+import java.util.EnumSet;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.EnumSet;
+import org.bukkit.entity.Mob;
 
 /**
  * An extendable {@link PathfinderGoal} that can be used to create custom AI goals.
@@ -88,14 +91,14 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         return CustomGoalExecutor.super.getControls();
     }
 
-    @Override
-    public void setGoalFlags(final @Nullable EnumSet<GoalFlag> flags) {
-        executor.setGoalFlags(flags);
-    }
-
     @Nonnull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return executor.getGoalFlags();
+    }
+
+    @Override
+    public void setGoalFlags(final @Nullable EnumSet<GoalFlag> flags) {
+        executor.setGoalFlags(flags);
     }
 }

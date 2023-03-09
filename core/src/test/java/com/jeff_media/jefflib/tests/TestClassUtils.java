@@ -36,4 +36,15 @@ public class TestClassUtils extends UnitTest {
         Assertions.assertEquals(this.getClass(), ClassUtils.getCurrentClass(0));
         Assertions.assertEquals(this.getClass(), ClassUtils.getCurrentClass());
     }
+
+    @Test
+    public void testCurrentLine() {
+        Assertions.assertEquals(42, ClassUtils.getCurrentLineNumber());
+    }
+
+    @Test
+    public void testCurrentMethod() {
+        Assertions.assertEquals("testCurrentMethod", ClassUtils.getCurrentMethodName());
+    }
+
 }

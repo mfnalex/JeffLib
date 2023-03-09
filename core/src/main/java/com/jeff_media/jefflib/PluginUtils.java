@@ -18,10 +18,9 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.function.Supplier;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
-
-import java.util.function.Supplier;
 
 @UtilityClass
 public class PluginUtils {
