@@ -65,7 +65,7 @@ public class ServerUtils {
         if(LOCALHOST == null) {
             return Bukkit.getMotd();
         }
-        ServerListPingEvent event = new ServerListPingEvent("localhost", LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
         Bukkit.getPluginManager().callEvent(event);
         return event.getMotd();
     }
