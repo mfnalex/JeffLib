@@ -18,7 +18,7 @@ public class TestWeightedRandomList extends UnitTest {
         WeightedRandomList<String> list = new WeightedRandomList<>();
         list.add(9, "a");
         list.add(90, "b");
-        list.add(1, "c");
+        list.add(list.new WeightedElement(1, "c"));
         Map<String, Integer> map = new HashMap<>();
         System.out.println(list);
         for (int i = 0; i < LOOPS; i++) {
