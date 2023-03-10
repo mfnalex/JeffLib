@@ -18,6 +18,7 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.annotations.NMS;
 import javax.annotation.Nullable;
 import org.bukkit.entity.Creature;
 import org.bukkit.util.Vector;
@@ -35,6 +36,7 @@ public final class RandomPos {
      * @nms Untested in 1.16.5 and older
      */
     @Nullable
+    @NMS
     public static Vector getPos(Creature entity, int var1, int var2) {
         return JeffLib.getNMSHandler().getRandomPos(entity, var1, var2);
     }
@@ -47,6 +49,7 @@ public final class RandomPos {
      * @nms Untested in 1.16.5 and older
      */
     @Nullable
+    @NMS
     public static Vector getPosAway(Creature entity, int var1, int var2, Vector var3) {
         return JeffLib.getNMSHandler().getRandomPosAway(entity, var1, var2, var3);
     }
@@ -59,6 +62,7 @@ public final class RandomPos {
      * @nms Untested in 1.16.5 and older
      */
     @Nullable
+    @NMS
     public static Vector getPosTowards(Creature entity, int var1, int var2, Vector var3, double var4) {
         return JeffLib.getNMSHandler().getRandomPosTowards(entity, var1, var2, var3, var4);
     }
