@@ -857,6 +857,16 @@ public class ShadowPlayer implements Player {
     }
 
     @Override
+    public void setVisibleByDefault(boolean b) {
+
+    }
+
+    @Override
+    public boolean isVisibleByDefault() {
+        return player.isVisibleByDefault();
+    }
+
+    @Override
     public void setCustomNameVisible(final boolean b) {
 
     }
@@ -1526,6 +1536,11 @@ public class ShadowPlayer implements Player {
 
     }
 
+    @Override
+    public void sendEquipmentChange(@NotNull LivingEntity livingEntity, @NotNull Map<EquipmentSlot, ItemStack> map) {
+
+    }
+
     @Nonnull
     @Override
     public List<MetadataValue> getMetadata(@Nonnull final String s) {
@@ -1569,6 +1584,21 @@ public class ShadowPlayer implements Player {
 
     @Override
     public void sendMap(@Nonnull final MapView mapView) {
+
+    }
+
+    @Override
+    public void addCustomChatCompletions(@NotNull Collection<String> collection) {
+
+    }
+
+    @Override
+    public void removeCustomChatCompletions(@NotNull Collection<String> collection) {
+
+    }
+
+    @Override
+    public void setCustomChatCompletions(@NotNull Collection<String> collection) {
 
     }
 

@@ -15,6 +15,20 @@ import lombok.Setter;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+/**
+ * Represents a list of elements with weights. When calling {@link #getRandomElement()}, it returns a random element based on it's weight.
+ * <p>
+ * Example: You have the following elements in the list (Element -> Weight):
+ * <pre>A -> 5.0
+ * B -> 3.0
+ * C -> 2.0</pre>
+ *
+ * If you now call {@link #getRandomElement()}, it will return A 50% times, B 30% times and C 20% times.
+ * <p>
+ * The total weight of all elements added together does not matter.
+ *
+ * @param <E> The type of the elements
+ */
 @SuppressWarnings("unused")
 public class WeightedRandomList<E> {
 
@@ -63,6 +77,10 @@ public class WeightedRandomList<E> {
         boolean changed = list.remove(e);
         if(changed) sortAndIndex();
         return changed;
+    }
+
+    public boolean remove(double weight, E element) {
+        return remove(new WeightedElement<>(weight, element));
     }
 
     public boolean remove(E e) {
@@ -123,6 +141,10 @@ public class WeightedRandomList<E> {
         return Arrays.toString(list.toArray());
     }
 
+    /**
+     * Represents an element with a weight.
+     * @param <E> The type of the element
+     */
     public static final class WeightedElement<E> implements Comparable<WeightedElement<E>>, Comparator<WeightedElement<E>> {
 
         private static final Comparator<WeightedElement<?>> COMPARATOR = (o1, o2) -> -Double.compare(o1.chance, o2.chance);
