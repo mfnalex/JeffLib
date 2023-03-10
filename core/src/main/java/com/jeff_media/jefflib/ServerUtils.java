@@ -60,6 +60,8 @@ public class ServerUtils {
 
     /**
      * Gets the effective MOTD (after plugins might have changed it)
+     *
+     * @return The effective MOTD
      */
     public static String getEffectiveMotd() {
         if(LOCALHOST == null) {
