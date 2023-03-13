@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version><!-- changeme -->12.1.1</version>
+    <version><!-- changeme -->12.2.0</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
     <properties>
