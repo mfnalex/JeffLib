@@ -25,6 +25,8 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import javax.annotation.Nonnull;
+
+import com.jeff_media.jefflib.internal.ServerListPingEventFactory;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -62,19 +64,19 @@ public class ServerUtils {
         HAS_TRANSLATION_KEY_PROVIDER = ReflUtils.getMethod(Material.class, "getBlockTranslationKey") != null;
     }
 
-//    /**
-//     * Gets the effective MOTD (after plugins might have changed it)
-//     *
-//     * @return The effective MOTD
-//     */
-//    public static String getEffectiveMotd() {
-//        if(LOCALHOST == null) {
-//            return Bukkit.getMotd();
-//        }
-//        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
-//        Bukkit.getPluginManager().callEvent(event);
-//        return event.getMotd();
-//    }
+    /**
+     * Gets the effective MOTD (after plugins might have changed it)
+     *
+     * @return The effective MOTD
+     */
+    public static String getEffectiveMotd() {
+        if(LOCALHOST == null) {
+            return Bukkit.getMotd();
+        }
+        ServerListPingEvent event = ServerListPingEventFactory.createServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), false, Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+        Bukkit.getPluginManager().callEvent(event);
+        return event.getMotd();
+    }
 
     /**
      * Gets whether this server is running MockBukkit
