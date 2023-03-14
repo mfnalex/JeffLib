@@ -25,6 +25,7 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -33,7 +34,6 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -41,6 +41,25 @@ import org.jetbrains.annotations.NotNull;
  */
 @UtilityClass
 public class MaterialUtils {
+
+    private static final Method GET_BLOCK_TRANSLATION_KEY_METHOD;
+    private static final Method GET_ITEM_TRANSLATION_KEY_METHOD;
+
+    static {
+        Method tmpGetBlockTranslationKeyMethod = null;
+        Method tmpGetItemTranslationKeyMethod = null;
+        if(ServerUtils.hasTranslationKeyProvider()) {
+            try {
+                tmpGetBlockTranslationKeyMethod = Material.class.getMethod("getBlockTranslationKey");
+                tmpGetItemTranslationKeyMethod = Material.class.getMethod("getItemTranslationKey");
+            } catch (ReflectiveOperationException ignored) {
+
+            }
+        }
+        GET_BLOCK_TRANSLATION_KEY_METHOD = tmpGetBlockTranslationKeyMethod;
+        GET_ITEM_TRANSLATION_KEY_METHOD = tmpGetItemTranslationKeyMethod;
+    }
+
 
     /**
      * Reads Minecraft's client translation files into a map
@@ -140,7 +159,11 @@ public class MaterialUtils {
     @Nullable
     public static String getBlockTranslationKey(@NotNull final Material material) {
         if(ServerUtils.hasTranslationKeyProvider()) {
-            return material.getBlockTranslationKey();
+            try {
+                return (String) GET_BLOCK_TRANSLATION_KEY_METHOD.invoke(material);
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
                 return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getBlockTranslationKey(material);
@@ -160,7 +183,11 @@ public class MaterialUtils {
     @Nullable
     public static String getItemTranslationKey(@NotNull final Material material) {
         if(ServerUtils.hasTranslationKeyProvider()) {
-            return material.getItemTranslationKey();
+            try {
+                return (String) GET_ITEM_TRANSLATION_KEY_METHOD.invoke(material);
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException(e);
+            }
         } else {
             if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
                 return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getItemTranslationKey(material);

@@ -4,6 +4,7 @@ import static org.junit.Assert.assertNotNull;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.UnitTest;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import org.bukkit.entity.EntityType;
 import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
@@ -20,6 +21,8 @@ public class TestTranslationKeys extends UnitTest {
                 Assertions.assertNotNull(translationKey, "Translation key for " + type + " is null");
             }
         } catch (UnimplementedOperationException ignored) {
+            // Ignore
+        } catch (NMSNotSupportedException ignored) {
             // Ignore
         }
     }

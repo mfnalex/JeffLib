@@ -27,6 +27,7 @@ import java.nio.file.Paths;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.server.ServerListPingEvent;
 
@@ -38,6 +39,7 @@ public class ServerUtils {
 
     private static final Field CURRENT_TICK_FIELD;
     private static final InetAddress LOCALHOST;
+    private static boolean HAS_TRANSLATION_KEY_PROVIDER;
 
     static {
         Field tmpCurrentTickField;
@@ -56,18 +58,20 @@ public class ServerUtils {
             tmpLocalhost = null;
         }
         LOCALHOST = tmpLocalhost;
+
+        HAS_TRANSLATION_KEY_PROVIDER = ReflUtils.getMethod(Material.class, "getBlockTranslationKey") != null;
     }
 
-    /**
-     * Gets the effective MOTD (after plugins might have changed it)
-     *
-     * @return The effective MOTD
-     */
+//    /**
+//     * Gets the effective MOTD (after plugins might have changed it)
+//     *
+//     * @return The effective MOTD
+//     */
 //    public static String getEffectiveMotd() {
 //        if(LOCALHOST == null) {
 //            return Bukkit.getMotd();
 //        }
-//        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+//        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
 //        Bukkit.getPluginManager().callEvent(event);
 //        return event.getMotd();
 //    }
@@ -149,33 +153,15 @@ public class ServerUtils {
         return Paths.get("").toAbsolutePath().toFile();
     }
 
+    public static boolean hasTranslationKeyProvider() {
+        return HAS_TRANSLATION_KEY_PROVIDER;
+    }
+
     /**
      * Represents the server's current life phase
      */
     public enum ServerLifePhase {
         STARTUP, RUNNING, SHUTDOWN, UNKNOWN
     }
-
-    private static final boolean HAS_TRANSLATION_KEY_PROVIDER;
-
-    static {
-        boolean hasTranslationKeyProvider = false;
-        try {
-            EntityType.class.getDeclaredMethod("getTranslationKey");
-            hasTranslationKeyProvider = true;
-        } catch (ReflectiveOperationException ignored) {
-
-        }
-        HAS_TRANSLATION_KEY_PROVIDER = hasTranslationKeyProvider;
-    }
-
-    /**
-     * Returns whether this server supports getting translation keys without using NMS (latest versions of 1.19.3+)
-     * @return true if this server supports getting translation keys without using NMS
-     */
-    public static boolean hasTranslationKeyProvider() {
-        return HAS_TRANSLATION_KEY_PROVIDER;
-    }
-
 
 }
