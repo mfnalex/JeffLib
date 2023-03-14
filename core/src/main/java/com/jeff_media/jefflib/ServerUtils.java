@@ -24,6 +24,7 @@ import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
+import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nonnull;
 
 import com.jeff_media.jefflib.internal.ServerListPingEventFactory;
@@ -69,13 +70,15 @@ public class ServerUtils {
      *
      * @return The effective MOTD
      */
-    public static String getEffectiveMotd() {
+    public static CompletableFuture<String> getEffectiveMotd() {
         if(LOCALHOST == null) {
-            return Bukkit.getMotd();
+            return CompletableFuture.completedFuture(Bukkit.getMotd());
         }
-        ServerListPingEvent event = ServerListPingEventFactory.createServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), false, Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
-        Bukkit.getPluginManager().callEvent(event);
-        return event.getMotd();
+        return CompletableFuture.supplyAsync(() -> {
+            ServerListPingEvent event = ServerListPingEventFactory.createServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), false, Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+            Bukkit.getPluginManager().callEvent(event);
+            return event.getMotd();
+        });
     }
 
     /**

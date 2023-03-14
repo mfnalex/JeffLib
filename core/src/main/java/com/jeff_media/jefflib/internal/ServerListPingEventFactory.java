@@ -22,20 +22,20 @@ public class ServerListPingEventFactory {
     static {
         Constructor<ServerListPingEvent> constructor;
 
-        findCoonstructor:
+        findConstructor:
         {
             // Try the proper constructor
             constructor = getProperConstructor();
             if (constructor != null) {
                 CONSTRUCTOR_INVOKER = new ProperServerListPingEventConstructorInvoker(constructor);
-                break findCoonstructor;
+                break findConstructor;
             }
 
             // Try the corrupted constructor
             constructor = getCorruptedConstructor();
             if (constructor != null) {
                 CONSTRUCTOR_INVOKER = new CorruptedServerListPingEventConstructorInvoker(constructor);
-                break findCoonstructor;
+                break findConstructor;
             }
 
             // Couldn't find any constructor
@@ -74,7 +74,7 @@ public class ServerListPingEventFactory {
      * @return The corrupted constructor
      */
     private static Constructor<ServerListPingEvent> getCorruptedConstructor() {
-        return (Constructor<ServerListPingEvent>) ReflUtils.getConstructor(ServerListPingEvent.class, String.class, InetAddress.class, boolean.class, String.class, int.class, int.class);
+        return (Constructor<ServerListPingEvent>) ReflUtils.getConstructor(ServerListPingEvent.class, String.class, InetAddress.class, String.class, boolean.class, int.class, int.class);
     }
 
     private interface ServerListPingEventConstructorInvoker {
