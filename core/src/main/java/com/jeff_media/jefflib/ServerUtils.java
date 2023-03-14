@@ -63,14 +63,14 @@ public class ServerUtils {
      *
      * @return The effective MOTD
      */
-    public static String getEffectiveMotd() {
-        if(LOCALHOST == null) {
-            return Bukkit.getMotd();
-        }
-        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
-        Bukkit.getPluginManager().callEvent(event);
-        return event.getMotd();
-    }
+//    public static String getEffectiveMotd() {
+//        if(LOCALHOST == null) {
+//            return Bukkit.getMotd();
+//        }
+//        ServerListPingEvent event = new ServerListPingEvent(LOCALHOST.getHostName(), LOCALHOST, Bukkit.getMotd(), Bukkit.getOnlinePlayers().size(), Bukkit.getMaxPlayers());
+//        Bukkit.getPluginManager().callEvent(event);
+//        return event.getMotd();
+//    }
 
     /**
      * Gets whether this server is running MockBukkit

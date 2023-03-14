@@ -70,6 +70,11 @@
                             <head>Requires Plugin:</head>
                         </tag>
                         <tag>
+                            <name>paper</name>
+                            <placement>a</placement>
+                            <head>Requires Paper.</head>
+                        </tag>
+                        <tag>
                             <name>internal</name>
                             <placement>a</placement>
                             <head>Meant for internal use only.</head>
@@ -148,12 +153,24 @@
     </repositories>
     <dependencies>
         <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
             <version>1.3.2</version>
             <scope>provided</scope>
         </dependency>
-        <dependency> <!-- Do not remove - otherwise MockBukkit breaks during creation of the DefaultServiceLocator -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
             <version>2.17.2</version>
@@ -161,23 +178,17 @@
         </dependency>
         <dependency>
             <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.18</artifactId> <!-- MockBukkit 1.19 doesn't work on Spigot anymore -->
-            <version>2.26.0</version>
+            <artifactId>MockBukkit-v1.19</artifactId>
+            <version>2.145.0</version>
             <scope>test</scope>
         </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-            <classifier>remapped-mojang</classifier>
-        </dependency>
-        <dependency>
-            <groupId>io.papermc.paper</groupId>
-            <artifactId>paper-api</artifactId>
-            <version>1.19.3-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.spigotmc</groupId>-->
+<!--            <artifactId>spigot</artifactId>-->
+<!--            <version>1.19.3-R0.1-SNAPSHOT</version>-->
+<!--            <scope>provided</scope>-->
+<!--            <classifier>remapped-mojang</classifier>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>com.mojang</groupId>
             <artifactId>authlib</artifactId>

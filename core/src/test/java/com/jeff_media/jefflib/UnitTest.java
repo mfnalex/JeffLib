@@ -37,7 +37,7 @@ public class UnitTest {
     @BeforeEach
     void setup() throws IllegalAccessException {
         server = MockBukkit.mock();
-        plugin = MockBukkit.loadSimple(MockPlugin.class);
+        plugin = MockBukkit.createMockPlugin();
         JeffLib.setPluginMock(plugin);
     }
 

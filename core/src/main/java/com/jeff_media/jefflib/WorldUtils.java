@@ -18,10 +18,11 @@
 
 package com.jeff_media.jefflib;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * World related methods
@@ -31,13 +32,12 @@ public final class WorldUtils {
     private static final boolean HAS_WORLD_MIN_HEIGHT_METHOD;
 
     static {
-        boolean tmpHasWorldMinHeightMethod = false;
+        boolean tmpHasWorldMinHeightMethod;
         try {
-            if (World.class.getMethod("getMinHeight") != null) {
-                tmpHasWorldMinHeightMethod = true;
-            }
+            World.class.getMethod("getMinHeight");
+            tmpHasWorldMinHeightMethod = true;
         } catch (NoSuchMethodException ignored) {
-
+            tmpHasWorldMinHeightMethod = false;
         }
         HAS_WORLD_MIN_HEIGHT_METHOD = tmpHasWorldMinHeightMethod;
     }

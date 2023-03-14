@@ -24,6 +24,7 @@ import java.util.Iterator;
 import java.util.Locale;
 import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 import org.bukkit.block.Block;
@@ -119,6 +120,19 @@ public class WordUtils {
             }
         }
         return count;
+    }
+
+    /**
+     * Returns the correct English genitive suffix for the given word. E.g., for "mfnalex" it will return "'s", for "Jesus" it will return "'"
+     * @param word The word to get the genitive suffix for
+     * @return The genitive suffix
+     */
+    public static String getGenitiveSuffix(final String word) {
+        final String strippedWord = ChatColor.stripColor(word);
+        if (strippedWord.endsWith("s")) {
+            return "'";
+        }
+        return "'s";
     }
 
 

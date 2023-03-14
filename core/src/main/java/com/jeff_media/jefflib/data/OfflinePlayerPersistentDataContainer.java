@@ -10,11 +10,14 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
 import javax.annotation.Nonnull;
+
+import com.jeff_media.jefflib.internal.annotations.Paper;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents a {@link PersistentDataContainer} from an {@link org.bukkit.OfflinePlayer}. <b>Important:</b> When changing values, you have to call {@link #save()} or {@link #saveAsync()} afterwards.
@@ -30,8 +33,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
 
     /**
      * @internal
-     * @hidden
-     * @internal Forinternal use only
+     * @internal For internal use only
      */
     @Deprecated
     @Internal
@@ -75,8 +77,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      * For internal use only
      *
      * @internal
-     * @hidden
-     * @internal Forinternal use only
+     * @internal For internal use only
      */
     @Deprecated
     @Internal
@@ -88,8 +89,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      * For internal use only
      *
      * @internal
-     * @hidden
-     * @internal Forinternal use only
+     * @internal For internal use only
      */
     @Deprecated
     @Internal
@@ -136,6 +136,24 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
 
     public boolean has(@Nonnull NamespacedKey namespacedKey) {
         return craftPersistentDataContainer.getKeys().contains(namespacedKey);
+    }
+
+    /**
+     * @paper
+     */
+    @Override
+    @Paper
+    public byte @NotNull [] serializeToBytes() throws IOException {
+        return craftPersistentDataContainer.serializeToBytes();
+    }
+
+    /**
+     * @paper
+     */
+    @Override
+    @Paper
+    public void readFromBytes(byte @NotNull [] bytes, boolean b) throws IOException {
+        craftPersistentDataContainer.readFromBytes(bytes, b);
     }
 
     @Override
