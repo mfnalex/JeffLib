@@ -39,6 +39,8 @@ import org.bukkit.plugin.SimplePluginManager;
 @UtilityClass
 public class CommandUtils {
 
+    private static CommandMap commandMap;
+
     /**
      * Registers a new command
      *
@@ -78,7 +80,9 @@ public class CommandUtils {
      * Gets the CommandMap
      */
     public static CommandMap getCommandMap() {
-        CommandMap commandMap = null;
+        if (commandMap != null) {
+            return commandMap;
+        }
 
         try {
             if (Bukkit.getPluginManager() instanceof SimplePluginManager) {
@@ -88,7 +92,7 @@ public class CommandUtils {
                 commandMap = (CommandMap) field.get(Bukkit.getPluginManager());
             }
         } catch (final NoSuchFieldException | IllegalAccessException | IllegalArgumentException | SecurityException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Could not get CommandMap", e);
         }
 
         return commandMap;

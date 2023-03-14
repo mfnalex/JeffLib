@@ -19,6 +19,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
+import com.jeff_media.jefflib.internal.GlowEnchantment;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,6 @@ public class EnchantmentUtils {
      *
      * @param enchantment Enchantment to register
      */
-    @Deprecated
     public void registerEnchantment(final Enchantment enchantment) throws ConflictingEnchantmentException {
         try {
             final Field fieldAcceptingNew = Enchantment.class.getDeclaredField("acceptingNew");
@@ -113,6 +113,36 @@ public class EnchantmentUtils {
             }
         }
         return null;
+    }
+
+    /**
+     * Adds a glowing effect to the given item (doesn't work on all items)
+     * @param meta ItemMeta to add the effect to
+     * @return true if the effect was added, false if it was already present
+     */
+    public static boolean addGlowEffect(@Nonnull ItemMeta meta) {
+        if(meta.hasEnchant(GlowEnchantment.getInstance())) {
+            return false;
+        }
+        meta.addEnchant(GlowEnchantment.getInstance(), 1, true);
+        return true;
+    }
+
+    /**
+     * Adds a glowing effect to the given item (doesn't work on all items)
+     * @param item ItemStack to add the effect to
+     * @return true if the effect was added, false if it was already present or if the item has no ItemMeta
+     */
+    public static boolean addGlowEffect(@Nonnull ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        if(meta == null) {
+            return false;
+        }
+        boolean result = addGlowEffect(meta);
+        if(result) {
+            item.setItemMeta(meta);
+        }
+        return result;
     }
 
 }
