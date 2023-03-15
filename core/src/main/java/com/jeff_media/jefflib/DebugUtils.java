@@ -24,6 +24,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.stream.Stream;
+
+import com.jeff_media.jefflib.data.McVersion;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -115,7 +117,7 @@ public class DebugUtils {
         }
 
         private void testItemStackToJson() {
-            player.sendMessage("Diamond pickaxe as json: " + ItemSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
+            player.sendMessage("Diamond pickaxe as json: " + ItemStackSerializer.toJson(new ItemStack(Material.DIAMOND_PICKAXE)));
         }
 
         private void testTotemAnimation() {

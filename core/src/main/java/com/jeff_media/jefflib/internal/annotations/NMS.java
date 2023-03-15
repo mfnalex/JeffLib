@@ -29,7 +29,7 @@ import javax.annotation.meta.TypeQualifierNickname;
  */
 @Documented
 @TypeQualifierNickname
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 public @interface NMS {
     /**
      * The minimum version of Minecraft that this feature is supported on

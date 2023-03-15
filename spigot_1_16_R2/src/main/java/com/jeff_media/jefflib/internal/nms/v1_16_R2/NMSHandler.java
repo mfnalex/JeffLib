@@ -218,6 +218,13 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
+    public org.bukkit.inventory.ItemStack itemStackFromJson(@Nonnull String json) throws Exception {
+        final NBTTagCompound compoundTag = MojangsonParser.parse(json);
+        final ItemStack nmsItemStack = ItemStack.a(compoundTag);
+        return CraftItemStack.asBukkitCopy(nmsItemStack);
+    }
+
+    @Override
     public void setFullTimeWithoutTimeSkipEvent(@Nonnull final org.bukkit.World world, final long time, final boolean notifyPlayers) {
         final WorldServer level = ((CraftWorld) world).getHandle();
         level.setDayTime(time);

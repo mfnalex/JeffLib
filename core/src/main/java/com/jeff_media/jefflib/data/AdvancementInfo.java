@@ -18,16 +18,13 @@
 
 package com.jeff_media.jefflib.data;
 
-import com.jeff_media.jefflib.McVersion;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Map;
+
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.advancement.Advancement;
-import org.bukkit.configuration.ConfigurationSection;
-import org.bukkit.configuration.MemoryConfiguration;
 
 /**
  * Provides information about an advancement.

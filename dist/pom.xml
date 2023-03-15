@@ -112,6 +112,11 @@
         </dependency>
         <dependency>
             <groupId>com.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_19_4_R1</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jeff_media</groupId>
             <artifactId>JeffLib-spigot_1_19_3_R1</artifactId>
             <version>${project.version}</version>
         </dependency>

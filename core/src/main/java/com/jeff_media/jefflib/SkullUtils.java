@@ -19,6 +19,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import java.lang.reflect.Field;
@@ -87,6 +88,7 @@ public class SkullUtils {
      * @nms
      */
     @NMS
+    @Tested("1.19.4")
     public static void setHeadTexture(@Nonnull final Block block, @Nonnull final String base64) {
         final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", base64));

@@ -19,6 +19,7 @@
 package com.jeff_media.jefflib;
 
 import com.allatori.annotations.DoNotRename;
+import com.jeff_media.jefflib.data.McVersion;
 import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
@@ -41,7 +42,6 @@ import java.util.logging.Logger;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.EntityType;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;

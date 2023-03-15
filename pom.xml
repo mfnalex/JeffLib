@@ -33,6 +33,7 @@
     </properties>
     <modules>
         <module>core</module>
+        <module>spigot_1_19_4_R1</module> <!-- 1.19.4 -->
         <module>spigot_1_19_3_R1</module> <!-- 1.19.3 -->
         <module>spigot_1_19_2_R1</module> <!-- 1.19.2 -->
         <module>spigot_1_19_1_R1</module> <!-- 1.19.1 -->
@@ -44,6 +45,7 @@
         <module>spigot_1_16_R2</module> <!-- 1.16.2, 1.16.3 -->
         <module>spigot_1_16_R1</module> <!-- 1.16.1 -->
         <module>dist</module>
+        <module>test-plugin</module>
     </modules>
     <profiles>
         <profile>

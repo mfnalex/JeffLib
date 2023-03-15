@@ -35,7 +35,6 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      * @internal
      * @internal For internal use only
      */
-    @Deprecated
     @Internal
     public OfflinePlayerPersistentDataContainer(@Nonnull PersistentDataContainer craftPersistentDataContainer, @Nonnull File file, @Nonnull Object compoundTag) {
         this.craftPersistentDataContainer = craftPersistentDataContainer;

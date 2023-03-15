@@ -21,6 +21,8 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import lombok.experimental.UtilityClass;
 import org.bukkit.EntityEffect;
 import org.bukkit.Material;
@@ -41,6 +43,7 @@ public class AnimationUtils {
      * @param player Player to play the animation to
      */
     @NMS
+    @Tested("1.19.4")
     public static void playTotemAnimation(@Nonnull final Player player) {
         playTotemAnimation(player, null);
     }
@@ -53,6 +56,7 @@ public class AnimationUtils {
      * @param customModelData Custom model data to use, or null to not use any custom model data
      */
     @NMS
+    @Tested("1.19.4")
     public static void playTotemAnimation(@Nonnull final Player player, @Nullable final Integer customModelData) {
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
         final ItemMeta meta = totem.getItemMeta();

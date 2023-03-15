@@ -85,11 +85,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.mojang</groupId>-->
-        <!--            <artifactId>authlib</artifactId>-->
-        <!--            <version>3.2.38</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
+
     </dependencies>
 </project>

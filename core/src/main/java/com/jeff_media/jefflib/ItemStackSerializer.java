@@ -23,7 +23,10 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
+import java.io.UncheckedIOException;
 import java.util.Base64;
+
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -38,7 +41,7 @@ import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
  * Provides methods to serialize and deserialize ItemStacks, ItemStack arrays and Inventories to/from byte arrays and/or base64
  */
 @UtilityClass
-public class ItemSerializer {
+public class ItemStackSerializer {
 
     /**
      * Turns an ItemStack into a Base64 String
@@ -221,10 +224,30 @@ public class ItemSerializer {
     /**
      * Turns an ItemStack into a json-formatted String
      *
+     * @see #fromJson(String)
      * @nms
      */
     @NMS
+    @Tested("1.19.4")
     public static String toJson(final ItemStack itemStack) {
         return JeffLib.getNMSHandler().itemStackToJson(itemStack);
+    }
+
+    /**
+     * Turns a json-formatted String into an ItemStack
+     * @param json json-formatted String
+     * @return ItemStack
+     * @throws UncheckedIOException if the server couldn't parse it
+     * @see #toJson(ItemStack)
+     * @nms
+     */
+    @NMS
+    @Tested("1.19.4")
+    public static ItemStack fromJson(final String json) {
+        try {
+            return JeffLib.getNMSHandler().itemStackFromJson(json);
+        } catch (Exception ex) {
+            throw new UncheckedIOException(new IOException(ex));
+        }
     }
 }

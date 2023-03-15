@@ -21,6 +21,8 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import javax.annotation.Nonnull;
+
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
@@ -39,6 +41,7 @@ public class BiomeUtils {
      * @nms 1.16.2+
      */
     @NMS("1.16.2")
+    @Tested("1.19.4")
     public NamespacedKey getBiomeNamespacedKey(@Nonnull final Location location) {
         final Pair<String, String> keyPair = JeffLib.getNMSHandler().getBiomeName(location);
         return NamespacedKey.fromString(keyPair.getFirst() + ":" + keyPair.getSecond());

@@ -79,11 +79,6 @@
             <artifactId>JeffLib-core</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <!--        <dependency>-->
-        <!--            <groupId>com.mojang</groupId>-->
-        <!--            <artifactId>authlib</artifactId>-->
-        <!--            <version>3.2.38</version>-->
-        <!--            <scope>provided</scope>-->
-        <!--        </dependency>-->
+
     </dependencies>
 </project>

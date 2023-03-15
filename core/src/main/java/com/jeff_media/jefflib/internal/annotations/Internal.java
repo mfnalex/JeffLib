@@ -28,6 +28,6 @@ import javax.annotation.meta.TypeQualifierNickname;
  */
 @Documented
 @TypeQualifierNickname
-@Retention(RetentionPolicy.RUNTIME)
+@Retention(RetentionPolicy.CLASS)
 public @interface Internal {
 }

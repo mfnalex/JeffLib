@@ -5,5 +5,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public class NMS extends JavaPlugin implements Listener {
 
+    {
+
+    }
 
 }

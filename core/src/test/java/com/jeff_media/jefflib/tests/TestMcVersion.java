@@ -18,7 +18,7 @@
 
 package com.jeff_media.jefflib.tests;
 
-import com.jeff_media.jefflib.McVersion;
+import com.jeff_media.jefflib.data.McVersion;
 import com.jeff_media.jefflib.UnitTest;
 import java.util.ArrayList;
 import java.util.Arrays;

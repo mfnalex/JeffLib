@@ -30,6 +30,7 @@ import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
 import java.io.File;
 import java.io.IOException;
@@ -78,13 +79,20 @@ public interface AbstractNMSHandler {
 
     void sendPacket(@Nonnull final Player player, @Nonnull final Object packet);
 
+    @Tested("1.19.4")
     Pair<String, String> getBiomeName(@Nonnull final Location location);
 
+    @Tested("1.19.4")
     void playTotemAnimation(@Nonnull final Player player);
 
+    @Tested("1.19.4")
     void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile);
 
+    @Tested("1.19.4")
     String itemStackToJson(@Nonnull final ItemStack itemStack);
+
+    @Tested("1.19.4")
+    ItemStack itemStackFromJson(@Nonnull final String json) throws Exception;
 
     void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
