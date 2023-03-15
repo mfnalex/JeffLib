@@ -2,6 +2,7 @@ package com.jefflib.jefflibtestplugin;
 
 import co.aikar.commands.PaperCommandManager;
 import com.jefflib.jefflibtestplugin.commands.JeffLibTestCommand;
+import com.jefflib.jefflibtestplugin.commands.SwingCommand;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Difficulty;
@@ -39,6 +40,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
     public void onEnable() {
         PaperCommandManager acf = new PaperCommandManager(this);
         acf.registerCommand(new JeffLibTestCommand(this));
+        acf.registerCommand(new SwingCommand());
 
         createTestRunner(null).run();
 

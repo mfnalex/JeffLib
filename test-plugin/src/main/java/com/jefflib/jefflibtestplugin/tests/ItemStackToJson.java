@@ -1,4 +1,4 @@
-package com.jefflib.jefflibtestplugin.tests.itemstackserializer;
+package com.jefflib.jefflibtestplugin.tests;
 
 import com.jeff_media.jefflib.ItemStackSerializer;
 import com.jeff_media.jefflib.ItemStackUtils;
@@ -29,11 +29,6 @@ public class ItemStackToJson implements NMSTest {
         if(!item.equals(cloned) || !item.toString().equals(cloned.toString())) {
             throw new TestException("Itemstacks are not equal: " + item + " vs " + cloned);
         }
-    }
-
-    @Override
-    public String getName() {
-        return "ItemStackSerializer: ItemStack <> Mojangson";
     }
 
     @Override

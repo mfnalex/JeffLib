@@ -2,6 +2,7 @@ package com.jefflib.jefflibtestplugin;
 
 import com.jeff_media.jefflib.ClassUtils;
 import lombok.Getter;
+import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.ComponentBuilder;
@@ -11,6 +12,9 @@ import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
+import org.bukkit.event.HandlerList;
+import org.bukkit.event.Listener;
+import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
 import javax.annotation.Nullable;
@@ -28,7 +32,7 @@ public class TestRunner implements Runnable {
 
     private static final String BR = "\n";
 
-    private final JeffLibTestPlugin plugin;
+    @Getter private final JeffLibTestPlugin plugin;
     private final Deque<NMSTest> tests;
     @Nullable
     private final Player player;
@@ -43,6 +47,8 @@ public class TestRunner implements Runnable {
     private NMSTest currentTest;
     @Getter
     private String session;
+    private BukkitTask task;
+    @Setter private boolean waitingForTestResult = false;
 
     public TestRunner(JeffLibTestPlugin plugin, @Nullable Player player) {
         this.plugin = plugin;
@@ -51,7 +57,8 @@ public class TestRunner implements Runnable {
         this.tests = getTests(player);
         this.world = plugin.getFlatWorld();
         this.spawn = new Location(world, 0.5, world.getHighestBlockYAt(0, 0) + 1, 0.5, 0, 0);
-        blockInFront = world.getBlockAt(0, -59, 2);
+        this.blockInFront = world.getBlockAt(0, -59, 2);
+        this.task = Bukkit.getScheduler().runTaskTimer(plugin, this, 0, 1);
     }
 
     @NotNull
@@ -92,6 +99,7 @@ public class TestRunner implements Runnable {
         if (player != null) {
             player.teleport(originalLocation);
         }
+        task.cancel();
     }
 
     public boolean hasNext() {
@@ -121,10 +129,23 @@ public class TestRunner implements Runnable {
         printBanner(ChatColor.GOLD + "Running test: " + ChatColor.AQUA + ChatColor.BOLD + test.getName());
         beforeEach();
 
+        boolean exception = false;
+
         try {
+            if(test instanceof Listener) {
+                Bukkit.getPluginManager().registerEvents((Listener) test, plugin);
+            }
             test.run(this, player);
         } catch (Throwable throwable) {
             throwException(throwable);
+            exception = true;
+        }
+
+        if(test instanceof Listener) {
+            HandlerList.unregisterAll((Listener) test);
+        }
+
+        if(exception) {
             return false;
         }
 
@@ -194,6 +215,7 @@ public class TestRunner implements Runnable {
     public void run() {
 
         if (!hasNext()) {
+            currentTest.cleanup();
             printBanner(ChatColor.GREEN + "Success!");
             plugin.destroyTestRunner();
             return;
@@ -202,6 +224,7 @@ public class TestRunner implements Runnable {
         while (runNext()) {
 
         }
+
     }
 
     public void repeat() {

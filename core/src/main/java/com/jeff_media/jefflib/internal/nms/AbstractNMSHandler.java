@@ -94,6 +94,7 @@ public interface AbstractNMSHandler {
     @Tested("1.19.4")
     ItemStack itemStackFromJson(@Nonnull final String json) throws Exception;
 
+    @Tested("1.19.4")
     void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
     double[] getTps();
@@ -159,6 +160,7 @@ public interface AbstractNMSHandler {
 
     void deserializePdc(String serializedPdc, PersistentDataContainer target) throws Exception;
 
+    @Tested("1.19.4")
     void respawnPlayer(Player player);
 
     SerializedEntity serialize(Entity entity);

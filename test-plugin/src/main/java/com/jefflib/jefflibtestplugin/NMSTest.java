@@ -32,18 +32,18 @@ public interface NMSTest extends Comparable<NMSTest> {
      * Whether this test can run from the console without any player object
      * @return Whether this test can run from the console
      */
-    /*default */boolean isRunnableFromConsole(); /*{
+    default boolean isRunnableFromConsole() {
         return true;
-    }*/
+    }
 
     /**
      * Whether this test provides a player-related confirmation prompt. This is intended to check whether the test was successful,
      * even if it didn't throw any exceptions.
      * @return Whether this test provides a confirmation prompt
      */
-    /*default */boolean hasConfirmation(); /*{
+    default boolean hasConfirmation() {
         return false;
-    }*/
+    }
 
     @Override
     default int compareTo(NMSTest o) {

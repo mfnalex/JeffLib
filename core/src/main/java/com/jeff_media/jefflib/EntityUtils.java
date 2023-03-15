@@ -27,6 +27,7 @@ import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -265,8 +266,10 @@ public class EntityUtils {
 
     /**
      * Respawns a player. This does the same thing as {@link Player.Spigot#respawn()} but also works for living players
+     * @nms
      */
     @NMS
+    @Tested("1.19.4")
     public static void respawnPlayer(@Nonnull final Player player) {
         JeffLib.getNMSHandler().respawnPlayer(player);
     }

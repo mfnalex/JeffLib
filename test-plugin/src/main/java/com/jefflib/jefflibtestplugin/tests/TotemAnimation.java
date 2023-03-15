@@ -1,4 +1,4 @@
-package com.jefflib.jefflibtestplugin.tests.animationutils;
+package com.jefflib.jefflibtestplugin.tests;
 
 import com.jeff_media.jefflib.AnimationUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;

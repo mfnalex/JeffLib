@@ -1,4 +1,4 @@
-package com.jefflib.jefflibtestplugin.tests.biomeutils;
+package com.jefflib.jefflibtestplugin.tests;
 
 import com.jeff_media.jefflib.BiomeUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;
@@ -26,11 +26,6 @@ public class GetBiomeNamespacedKey implements NMSTest {
     @Override
     public String getConfirmation() {
         return "Is your current biome " + biomeKey + "?";
-    }
-
-    @Override
-    public String getName() {
-        return "BiomeUtils: getBiomeNamespacedKey(Location)";
     }
 
     @Override

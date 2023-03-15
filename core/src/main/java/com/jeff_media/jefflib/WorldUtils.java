@@ -18,6 +18,8 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
@@ -62,7 +64,14 @@ public final class WorldUtils {
 
     /**
      * Sets the full game time for a world without calling {@link org.bukkit.event.world.TimeSkipEvent}
+     *
+     * @param world         The world
+     * @param time          The time
+     * @param notifyPlayers Whether to send a time update packet to all players
+     * @nms
      */
+    @Tested("1.19.4")
+    @NMS
     public static void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers) {
         JeffLib.getNMSHandler().setFullTimeWithoutTimeSkipEvent(world, time, notifyPlayers);
     }

@@ -1,4 +1,4 @@
-package com.jefflib.jefflibtestplugin.tests.skullutils;
+package com.jefflib.jefflibtestplugin.tests;
 
 import com.jeff_media.jefflib.SkullUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;
@@ -24,11 +24,6 @@ public class HeadTexture implements NMSTest {
     @Override
     public String getConfirmation() {
         return "Does the skull have a green checkmark texture?";
-    }
-
-    @Override
-    public String getName() {
-        return "SkullUtils: setHeadTexture(Block, String)";
     }
 
     @Override
