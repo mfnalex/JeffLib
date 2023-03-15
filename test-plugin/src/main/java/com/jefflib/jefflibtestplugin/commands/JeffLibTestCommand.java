@@ -40,7 +40,7 @@ public class JeffLibTestCommand extends BaseCommand {
             return;
         }
         if(!isConfirmationCorrect(confirmation)) return;
-        plugin.getTestRunner().run();
+        plugin.getTestRunner().setWaitingForTestResult(false);
     }
 
     private boolean isConfirmationCorrect(String confirmation) {

@@ -12,7 +12,7 @@ import java.lang.annotation.Target;
  */
 @Documented
 @TypeQualifierNickname
-@Retention(RetentionPolicy.CLASS)
+@Retention(RetentionPolicy.SOURCE)
 @Target(ElementType.METHOD)
 public @interface Tested {
     String[] value();

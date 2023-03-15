@@ -39,7 +39,6 @@ public class TestRunner implements Runnable {
     private final Location originalLocation;
     @Getter
     private final World world;
-    @Getter
     private final Location spawn;
     @Getter
     private final Block blockInFront;
@@ -47,7 +46,7 @@ public class TestRunner implements Runnable {
     private NMSTest currentTest;
     @Getter
     private String session;
-    private BukkitTask task;
+    private final BukkitTask task;
     @Setter private boolean waitingForTestResult = false;
 
     public TestRunner(JeffLibTestPlugin plugin, @Nullable Player player) {
@@ -66,16 +65,27 @@ public class TestRunner implements Runnable {
         return ClassUtils.listAllClasses().stream().filter(className -> className.startsWith("com.jefflib.jefflibtestplugin.tests.")).map(className -> {
             try {
                 Class<?> clazz = Class.forName(className);
-                Class<? extends NMSTest> testClass = clazz.asSubclass(NMSTest.class);
-                if(Modifier.isAbstract(testClass.getModifiers())) {
+
+                // No inner classes
+                if(clazz.isAnonymousClass()) {
                     return null;
                 }
+
+                // No abstract classes
+                if(Modifier.isAbstract(clazz.getModifiers())) {
+                    return null;
+                }
+
+                // Only classes implementing NMSTest
+                if(!NMSTest.class.isAssignableFrom(clazz)) {
+                    throw new RuntimeException("Class " + className + " does not implement NMSTest");
+                }
+
+                Class<? extends NMSTest> testClass = clazz.asSubclass(NMSTest.class);
                 Constructor<? extends NMSTest> constructor = testClass.getConstructor();
                 return constructor.newInstance();
             } catch (NoSuchMethodException e) {
                 throw new RuntimeException("Class " + className + " does not have a no-args constructor");
-            } catch (ClassCastException e) {
-                throw new RuntimeException("Class " + className + " does not implement NMSTest");
             } catch (ClassNotFoundException | InstantiationException | IllegalAccessException |
                      InvocationTargetException e) {
                 throw new RuntimeException(e);
@@ -125,6 +135,8 @@ public class TestRunner implements Runnable {
     private boolean runTest(NMSTest test) {
 
         session = String.valueOf(UUID.randomUUID());
+
+        waitingForTestResult = true;
 
         printBanner(ChatColor.GOLD + "Running test: " + ChatColor.AQUA + ChatColor.BOLD + test.getName());
         beforeEach();
@@ -213,16 +225,21 @@ public class TestRunner implements Runnable {
 
     @Override
     public void run() {
+        if(!waitingForTestResult) {
+            if (!hasNext()) {
+                currentTest.cleanup();
+                printBanner(ChatColor.GREEN + "Success!");
+                plugin.destroyTestRunner();
+                return;
+            }
 
-        if (!hasNext()) {
-            currentTest.cleanup();
-            printBanner(ChatColor.GREEN + "Success!");
-            plugin.destroyTestRunner();
-            return;
-        }
-
-        while (runNext()) {
-
+            if(!runNext()) {
+                waitingForTestResult = true;
+            }
+        } else {
+            if(currentTest.isDone() && (player == null || !currentTest.hasConfirmation())) {
+                waitingForTestResult = false;
+            }
         }
 
     }
@@ -230,5 +247,9 @@ public class TestRunner implements Runnable {
     public void repeat() {
         currentTest.cleanup();
         runTest(currentTest);
+    }
+
+    public Location getSpawn() {
+        return spawn.clone();
     }
 }

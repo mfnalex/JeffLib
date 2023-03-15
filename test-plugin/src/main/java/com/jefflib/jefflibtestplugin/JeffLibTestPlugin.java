@@ -54,7 +54,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
         try {
             this.testRunner = new TestRunner(this, player);
         } catch (Throwable t) {
-            this.testRunner = null;
+            throw new RuntimeException(t);
         }
 
         return this.testRunner;
