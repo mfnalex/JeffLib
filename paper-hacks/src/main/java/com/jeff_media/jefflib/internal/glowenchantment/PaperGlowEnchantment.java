@@ -1,10 +1,9 @@
-package com.jeff_media.jefflib.internal;
+package com.jeff_media.jefflib.internal.glowenchantment;
 
-import com.jeff_media.jefflib.EnchantmentUtils;
-import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
-import com.jeff_media.jefflib.internal.annotations.Paper;
 import io.papermc.paper.enchantments.EnchantmentRarity;
-import lombok.Getter;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -14,29 +13,11 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-import java.util.Collections;
-import java.util.Set;
+public class PaperGlowEnchantment extends Enchantment {
 
-public class GlowEnchantment extends Enchantment {
+    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(NamespacedKey.fromString("jefflib:glow"));
 
-    @Getter private static final Enchantment instance;
-    private static final NamespacedKey GLOW_ENCHANTMENT_KEY = NamespacedKey.fromString("jefflib:glow");
-
-    static {
-        Enchantment existing = Enchantment.getByKey(GLOW_ENCHANTMENT_KEY);
-        if(existing != null) {
-            instance = existing;
-        } else {
-            instance = new GlowEnchantment();
-            try {
-                EnchantmentUtils.registerEnchantment(instance);
-            } catch (ConflictingEnchantmentException e) {
-                throw new RuntimeException(e);
-            }
-        }
-    }
-
-    private GlowEnchantment() {
+    public PaperGlowEnchantment() {
         super(GLOW_ENCHANTMENT_KEY);
     }
 
@@ -84,9 +65,8 @@ public class GlowEnchantment extends Enchantment {
     }
 
     @Override
-    @Paper
     public @NotNull Component displayName(int i) {
-        return Component.text(getName());
+        return Component.text("Glow");
     }
 
     @Override

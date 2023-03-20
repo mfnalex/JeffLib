@@ -25,6 +25,7 @@ import com.jeff_media.jefflib.events.PlayerScrollEvent;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
 import com.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import com.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -327,6 +328,7 @@ public class JeffLib {
         if (!initDone) {
             ProtectionUtils.loadPluginProtections();
         }
+        GlowEnchantmentFactory.register();
         initDone = true;
     }
 

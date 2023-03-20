@@ -20,6 +20,8 @@ package com.jeff_media.jefflib.events;
 
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ServerUtils;
+import com.jeff_media.jefflib.internal.annotations.Internal;
+import com.plotsquared.bukkit.listener.PaperListener;
 import javax.annotation.Nonnull;
 import lombok.Getter;
 import org.bukkit.Bukkit;
@@ -59,14 +61,17 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
     /**
      * Registers the listener needed to call this event
+     * @return The listener that was registered
      */
-    public static void registerListener() {
+    public static Listener registerListener() {
         Plugin plugin = JeffLib.getPlugin();
-        if (ServerUtils.isRunningPaper()) {
-            Bukkit.getPluginManager().registerEvents(new PaperListener(), plugin);
+        Listener listener;
+        if (ServerUtils.isRunningPaper()) { // TODO
+            Bukkit.getPluginManager().registerEvents(listener = new PaperPlayerJumpEventListener(), plugin);
         } else {
-            Bukkit.getPluginManager().registerEvents(new SpigotListener(), plugin);
+            Bukkit.getPluginManager().registerEvents(listener = new SpigotListener(), plugin);
         }
+        return listener;
     }
 
     @Nonnull
@@ -90,17 +95,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
         return HANDLERS;
     }
 
-    public static class PaperListener implements Listener {
-        @EventHandler
-        public void onJump(com.destroystokyo.paper.event.player.PlayerJumpEvent paperEvent) {
-            PlayerJumpEvent ownEvent = new PlayerJumpEvent(paperEvent.getPlayer(), paperEvent.getFrom(), paperEvent.getTo());
-            Bukkit.getPluginManager().callEvent(ownEvent);
-            if (ownEvent.isCancelled()) {
-                paperEvent.setCancelled(true);
-            }
-        }
-    }
-
+    @Internal
     public static class SpigotListener implements Listener {
 
         @EventHandler

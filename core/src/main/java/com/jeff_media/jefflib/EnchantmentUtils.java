@@ -19,7 +19,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
-import com.jeff_media.jefflib.internal.GlowEnchantment;
+import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -121,10 +121,10 @@ public class EnchantmentUtils {
      * @return true if the effect was added, false if it was already present
      */
     public static boolean addGlowEffect(@Nonnull ItemMeta meta) {
-        if(meta.hasEnchant(GlowEnchantment.getInstance())) {
+        if(meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
             return false;
         }
-        meta.addEnchant(GlowEnchantment.getInstance(), 1, true);
+        meta.addEnchant(GlowEnchantmentFactory.getInstance(), 1, true);
         return true;
     }
 

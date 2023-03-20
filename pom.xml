@@ -46,6 +46,7 @@
         <module>spigot_1_16_R1</module> <!-- 1.16.1 -->
         <module>dist</module>
         <module>test-plugin</module>
+        <module>paper-hacks</module>
     </modules>
     <profiles>
         <profile>

@@ -2,6 +2,7 @@ package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ProfileUtils;
+import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import java.io.File;
@@ -140,19 +141,29 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     /**
      * @paper
      */
-    @Override
+    //@Override
     @Paper
     public byte @NotNull [] serializeToBytes() throws IOException {
-        return craftPersistentDataContainer.serializeToBytes();
+        try {
+            return (byte[]) ReflUtils.getMethod(craftPersistentDataContainer.getClass(), "serializeToBytes").invoke(craftPersistentDataContainer);
+        } catch (ReflectiveOperationException ex) {
+            throw new RuntimeException(ex);
+        }
+        //return craftPersistentDataContainer.serializeToBytes();
     }
 
     /**
      * @paper
      */
-    @Override
+    //@Override
     @Paper
     public void readFromBytes(byte @NotNull [] bytes, boolean b) throws IOException {
-        craftPersistentDataContainer.readFromBytes(bytes, b);
+        try {
+            ReflUtils.getMethod(craftPersistentDataContainer.getClass(), "readFromBytes", byte[].class, boolean.class).invoke(craftPersistentDataContainer, bytes, b);
+        } catch (ReflectiveOperationException ex) {
+            throw new RuntimeException(ex);
+        }
+        //craftPersistentDataContainer.readFromBytes(bytes, b);
     }
 
     @Override
