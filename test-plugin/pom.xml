@@ -15,7 +15,17 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <outputDirectory>${project.basedir}/target</outputDirectory>
     </properties>
+
+    <profiles>
+        <profile>
+            <id>exportTestPluginToTestServer</id>
+            <properties>
+                <outputDirectory>C:\mctest\plugins</outputDirectory>
+            </properties>
+        </profile>
+    </profiles>
 
     <build>
         <resources>
@@ -71,7 +81,7 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.3.0</version>
                 <configuration>
-                    <outputDirectory>C:\mctest\plugins\</outputDirectory>
+                    <outputDirectory>${outputDirectory}</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>

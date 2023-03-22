@@ -1,6 +1,8 @@
 package com.jefflib.jefflibtestplugin;
 
 import co.aikar.commands.PaperCommandManager;
+import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.Tasks;
 import com.jefflib.jefflibtestplugin.commands.JeffLibTestCommand;
 import com.jefflib.jefflibtestplugin.commands.SwingCommand;
 import lombok.Getter;
@@ -22,6 +24,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
 
     {
         instance = this;
+        JeffLib.init(this);
     }
 
     public World getFlatWorld() {
@@ -42,7 +45,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
         acf.registerCommand(new JeffLibTestCommand(this));
         acf.registerCommand(new SwingCommand());
 
-        createTestRunner(null).run();
+        Tasks.nextTick(() -> createTestRunner(null).run());
 
     }
 

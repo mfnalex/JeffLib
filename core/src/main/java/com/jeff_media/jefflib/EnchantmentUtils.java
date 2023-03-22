@@ -52,7 +52,7 @@ public class EnchantmentUtils {
             fieldAcceptingNew.setAccessible(false);
 
             Enchantment.registerEnchantment(enchantment);
-        } catch (final NoSuchFieldException | IllegalAccessException exception) {
+        } catch (final Throwable exception) {
             throw new ConflictingEnchantmentException(exception.getMessage());
         }
     }

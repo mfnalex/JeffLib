@@ -29,11 +29,6 @@ public class GetBiomeNamespacedKey implements NMSTest {
     }
 
     @Override
-    public boolean isRunnableFromConsole() {
-        return true;
-    }
-
-    @Override
     public boolean hasConfirmation() {
         return true;
     }

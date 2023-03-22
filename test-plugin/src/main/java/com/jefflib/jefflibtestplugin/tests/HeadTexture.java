@@ -32,11 +32,6 @@ public class HeadTexture implements NMSTest {
     }
 
     @Override
-    public boolean isRunnableFromConsole() {
-        return true;
-    }
-
-    @Override
     public boolean hasConfirmation() {
         return true;
     }

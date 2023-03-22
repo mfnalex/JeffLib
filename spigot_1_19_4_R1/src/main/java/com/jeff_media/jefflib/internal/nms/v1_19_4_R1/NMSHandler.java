@@ -36,6 +36,7 @@ import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
+import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
@@ -367,6 +368,7 @@ public class NMSHandler implements AbstractNMSHandler {
         return new HatchedPathNavigation(pathfinderMob.getNavigation());
     }
 
+    @Tested("1.19.4")
     @Nullable
     @Override
     public Advancement loadVolatileAdvancement(final NamespacedKey key, final String advancement) {

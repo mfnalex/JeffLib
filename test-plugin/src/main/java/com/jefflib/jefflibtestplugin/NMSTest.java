@@ -47,7 +47,7 @@ public interface NMSTest extends Comparable<NMSTest> {
 
     @Override
     default int compareTo(NMSTest o) {
-        return Boolean.compare(hasConfirmation(), o.hasConfirmation());
+        return -Boolean.compare(hasConfirmation(), o.hasConfirmation());
     }
 
     default boolean isDone() {

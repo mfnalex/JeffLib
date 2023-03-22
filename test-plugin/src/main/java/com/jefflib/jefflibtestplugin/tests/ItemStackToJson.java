@@ -31,13 +31,4 @@ public class ItemStackToJson implements NMSTest {
         }
     }
 
-    @Override
-    public boolean isRunnableFromConsole() {
-        return true;
-    }
-
-    @Override
-    public boolean hasConfirmation() {
-        return false;
-    }
 }

@@ -50,11 +50,6 @@ public class SetFullTimeWithoutTimeSkipEvent implements NMSTest, Listener {
     }
 
     @Override
-    public boolean isRunnableFromConsole() {
-        return true;
-    }
-
-    @Override
     public boolean hasConfirmation() {
         return true;
     }

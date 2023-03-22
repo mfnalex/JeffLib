@@ -54,11 +54,6 @@ public class MoveToBlockGoal implements NMSTest {
     }
 
     @Override
-    public boolean hasConfirmation() {
-        return false;
-    }
-
-    @Override
     public boolean isDone() {
         double distance = pig.getLocation().distance(targetBlock.getLocation());
         System.out.println(distance);

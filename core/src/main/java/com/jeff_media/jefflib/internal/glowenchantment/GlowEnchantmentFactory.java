@@ -27,11 +27,16 @@ public abstract class GlowEnchantmentFactory {
     }
 
     public static void register() {
+//        Throwable throwable = null;
         try {
             EnchantmentUtils.registerEnchantment(instance);
-        } catch (ConflictingEnchantmentException ignored) {
-            //throw new RuntimeException(e);
+        } catch (Throwable throwable1) {
+//            throwable = throwable1;
         }
+
+//        if(instance == null && throwable != null) {
+//            throw new RuntimeException("Could not register nor get existing glow enchantment",throwable);
+//        }
     }
 
 }

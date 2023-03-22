@@ -97,20 +97,25 @@ public interface AbstractNMSHandler {
     @Tested("1.19.4")
     void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
 
+    @Tested("1.19.4")
     double[] getTps();
 
+    @Tested("1.19.4")
     int getItemStackSizeInBytes(ItemStack itemStack) throws IOException;
 
+    @Tested("1.19.4")
     String getDefaultWorldName();
 
     PathfinderGoal createTemptGoal(Creature entity, Stream<Material> materials, double speed, boolean canScare);
 
     PathfinderGoal createAvoidEntityGoal(Creature entity, Predicate<LivingEntity> predicate, float maxDistance, double walkSpeedModifier, double sprintSpeedModifier);
 
+    @Tested("1.19.4")
     PathfinderGoal createMoveToBlockGoal(Creature entity, Set<Material> blocks, double speed, int searchRange, int verticalSearchRange);
 
     PathfinderGoal createMoveToBlockGoal(Creature entity, Predicate<Block> blockPredicate, double speed, int searchRange, int verticalSearchRange);
 
+    @Tested("1.19.4")
     void addGoal(Mob entity, PathfinderGoal goal, int priority);
 
     void removeGoal(Mob entity, PathfinderGoal goal);

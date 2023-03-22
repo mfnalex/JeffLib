@@ -19,6 +19,7 @@
 package com.jeff_media.jefflib.data;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Represents the server's last TPS
@@ -58,5 +59,23 @@ public class TPS {
      */
     public double getLast15Minute() {
         return last15Minute;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        TPS tps = (TPS) o;
+        return Double.compare(tps.last1Minute, last1Minute) == 0 && Double.compare(tps.last5Minute, last5Minute) == 0 && Double.compare(tps.last15Minute, last15Minute) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(last1Minute, last5Minute, last15Minute);
+    }
+
+    @Override
+    public String toString() {
+        return "TPS{" + "last1Minute=" + last1Minute + ", last5Minute=" + last5Minute + ", last15Minute=" + last15Minute + '}';
     }
 }

@@ -22,6 +22,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Objects;
 import java.util.UUID;
@@ -102,7 +103,7 @@ public class TestRunner implements Runnable {
         if (player != null) {
             player.teleport(spawn);
         }
-        world.getEntities().stream().filter(entity -> !entity.equals(player)).forEach(Entity::remove);
+        world.getEntities().stream().filter(entity -> !(entity instanceof Player)).forEach(Entity::remove);
     }
 
     public void cleanup() {
@@ -198,15 +199,16 @@ public class TestRunner implements Runnable {
         print("");
     }
 
-    public void print(String... text) {
-        print(LogLevel.INFO, text);
+    public void print(Object... objects) {
+        print(LogLevel.INFO, objects);
     }
 
-    public void print(LogLevel logLevel, String... text) {
+    public void print(LogLevel logLevel, Object... objects) {
+        String[] text = Arrays.stream(objects).map(Object::toString).toArray(String[]::new);
         if (player != null) {
             player.sendMessage(text);
         }
-        for (String line : text) {
+        for(String line : text) {
             line = ChatColor.stripColor(line);
             switch (logLevel) {
                 case INFO:
