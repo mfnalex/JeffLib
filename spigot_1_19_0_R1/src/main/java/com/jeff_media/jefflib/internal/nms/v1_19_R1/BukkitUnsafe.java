@@ -19,8 +19,6 @@
 package com.jeff_media.jefflib.internal.nms.v1_19_R1;
 
 import com.jeff_media.jefflib.ReflUtils;
-import java.io.File;
-import java.util.Objects;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
@@ -30,6 +28,9 @@ import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_19_R1.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
+
+import java.io.File;
+import java.util.Objects;
 
 @SuppressWarnings("deprecation")
 public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitUnsafe {

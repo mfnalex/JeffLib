@@ -18,6 +18,12 @@
 
 package com.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
+import org.bukkit.configuration.ConfigurationSection;
+
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -31,11 +37,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.World;
-import org.bukkit.configuration.ConfigurationSection;
 
 /**
  * Collection related methods. Also contains specific methods for concrete collection types.

@@ -2,12 +2,13 @@ package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.util.HashMap;
-import java.util.Map;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents a serialized entity that can be respawned later, keeping ALL NBT data

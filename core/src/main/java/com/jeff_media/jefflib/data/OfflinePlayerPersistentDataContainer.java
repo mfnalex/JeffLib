@@ -5,13 +5,6 @@ import com.jeff_media.jefflib.ProfileUtils;
 import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import javax.annotation.Nonnull;
-
 import com.jeff_media.jefflib.internal.annotations.Paper;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -19,6 +12,13 @@ import org.bukkit.persistence.PersistentDataAdapterContext;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * Represents a {@link PersistentDataContainer} from an {@link org.bukkit.OfflinePlayer}. <b>Important:</b> When changing values, you have to call {@link #save()} or {@link #saveAsync()} afterwards.

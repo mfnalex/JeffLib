@@ -2,14 +2,11 @@ package com.jeff_media.jefflib.internal.glowenchantment;
 
 import com.jeff_media.jefflib.EnchantmentUtils;
 import com.jeff_media.jefflib.ServerUtils;
-import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
-import java.util.Objects;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.inventory.ItemStack;
-import org.jetbrains.annotations.NotNull;
+
+import java.util.Objects;
 
 public abstract class GlowEnchantmentFactory {
 

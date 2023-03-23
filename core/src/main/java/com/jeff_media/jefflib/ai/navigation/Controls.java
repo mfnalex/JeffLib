@@ -21,8 +21,9 @@ package com.jeff_media.jefflib.ai.navigation;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import javax.annotation.Nonnull;
 import org.bukkit.entity.Mob;
+
+import javax.annotation.Nonnull;
 
 /**
  * Represents an entity's navigation, movement, jump and look controls

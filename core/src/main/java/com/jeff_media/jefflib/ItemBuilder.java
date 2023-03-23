@@ -18,13 +18,14 @@
 
 package com.jeff_media.jefflib;
 
-import java.util.Arrays;
-import java.util.List;
-import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Provides a builder for ItemStacks

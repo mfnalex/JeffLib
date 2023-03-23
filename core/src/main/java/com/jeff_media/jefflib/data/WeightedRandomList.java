@@ -1,5 +1,9 @@
 package com.jeff_media.jefflib.data;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,9 +13,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.annotation.Nonnull;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a list of elements with weights. When calling {@link #getRandomElement()}, it returns a random element based on its weight.

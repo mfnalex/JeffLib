@@ -18,8 +18,8 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import java.util.Objects;
 import javax.annotation.Nullable;
+import java.util.Objects;
 
 /**
  * Tuple of five values. If you ever need more, <b>just create your own data class</b> (sigh)

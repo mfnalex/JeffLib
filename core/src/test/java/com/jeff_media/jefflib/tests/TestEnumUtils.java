@@ -20,12 +20,13 @@ package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.EnumUtils;
 import com.jeff_media.jefflib.UnitTest;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 import org.bukkit.Material;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class TestEnumUtils extends UnitTest {
 

@@ -18,11 +18,11 @@
 
 package com.jeff_media.jefflib.data;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
-
 import com.jeff_media.jefflib.WordUtils;
 import org.bukkit.Bukkit;
+
+import javax.annotation.Nonnull;
+import java.util.Objects;
 
 /**
  * Provides version comparing methods

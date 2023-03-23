@@ -21,8 +21,9 @@ package com.jeff_media.jefflib.ai.goal;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import javax.annotation.Nonnull;
 import org.bukkit.entity.Mob;
+
+import javax.annotation.Nonnull;
 
 /**
  * Represents an entity's goal selector

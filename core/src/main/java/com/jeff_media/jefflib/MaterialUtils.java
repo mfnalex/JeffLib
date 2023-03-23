@@ -22,6 +22,11 @@ import com.google.gson.Gson;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Material;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nullable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -31,10 +36,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
 import java.util.Map;
-import javax.annotation.Nullable;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Material;
-import org.jetbrains.annotations.NotNull;
 
 /**
  * Material related methods

@@ -18,13 +18,14 @@
 
 package com.jeff_media.jefflib.tests;
 
-import com.jeff_media.jefflib.data.McVersion;
 import com.jeff_media.jefflib.UnitTest;
+import com.jeff_media.jefflib.data.McVersion;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class TestMcVersion extends UnitTest {
 

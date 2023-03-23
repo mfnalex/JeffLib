@@ -19,9 +19,6 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
-import java.util.Locale;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +27,10 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Locale;
 
 /**
  * Data class to wrap all information needed to play a sound

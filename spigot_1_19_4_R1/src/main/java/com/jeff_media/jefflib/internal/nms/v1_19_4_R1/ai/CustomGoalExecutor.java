@@ -24,16 +24,13 @@ import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
-import java.util.EnumSet;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedJumpController;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedMoveController;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedPathNavigation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.EnumSet;
+import java.util.stream.Collectors;
 
 public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.ai.goal.CustomGoalExecutor {
 

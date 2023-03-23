@@ -18,11 +18,12 @@
 
 package com.jeff_media.jefflib;
 
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nullable;
 
 /**
  * Sends messages to CommandSenders while applying color codes, gradients, placeholders and emojis

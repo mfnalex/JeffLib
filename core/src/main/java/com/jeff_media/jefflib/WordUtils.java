@@ -18,18 +18,15 @@
 
 package com.jeff_media.jefflib;
 
-import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Locale;
-import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-import org.bukkit.block.Block;
-import org.bukkit.entity.EntityType;
-import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Locale;
 
 /**
  * Word and language related methods, like capitalization or getting translation keys

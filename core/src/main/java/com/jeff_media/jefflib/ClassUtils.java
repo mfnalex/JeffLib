@@ -18,6 +18,9 @@
 
 package com.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
+
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.net.URL;
 import java.security.CodeSource;
@@ -26,8 +29,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
-import javax.annotation.Nonnull;
-import lombok.experimental.UtilityClass;
 
 /**
  * Class related methods that do not have something to do with Reflection (see {@link ReflUtils} for that)

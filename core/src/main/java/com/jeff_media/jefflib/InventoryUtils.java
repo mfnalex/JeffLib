@@ -18,11 +18,6 @@
 
 package com.jeff_media.jefflib;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,6 +25,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Inventory related methods

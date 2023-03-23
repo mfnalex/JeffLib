@@ -21,7 +21,6 @@ package com.jeff_media.jefflib.internal.nms;
 import com.google.common.collect.Multimap;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -36,8 +35,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
+
+import java.io.File;
 
 /**
  * Represents Bukkit's {@link UnsafeValues} class with all version-dependant methods from org.bukkit.craftbukkit.&lt;version&gt;.util.CraftMagicNumbers included

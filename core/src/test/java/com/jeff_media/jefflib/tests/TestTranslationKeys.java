@@ -1,12 +1,10 @@
 package com.jeff_media.jefflib.tests;
 
-import static org.junit.Assert.assertNotNull;
 import be.seeseemelk.mockbukkit.UnimplementedOperationException;
 import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.UnitTest;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import org.bukkit.entity.EntityType;
-import org.junit.Ignore;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

@@ -21,15 +21,6 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -39,6 +30,16 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Contract;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * PersistentDataContainer related methods.

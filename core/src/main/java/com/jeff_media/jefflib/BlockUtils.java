@@ -19,15 +19,6 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -38,6 +29,16 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * Block related methods

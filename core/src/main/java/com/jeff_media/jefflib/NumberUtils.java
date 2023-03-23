@@ -18,8 +18,9 @@
 
 package com.jeff_media.jefflib;
 
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
+
+import javax.annotation.Nullable;
 
 /**
  * Number parsing related methods

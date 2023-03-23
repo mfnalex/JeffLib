@@ -19,13 +19,6 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.UncheckedIOException;
-import java.util.Base64;
-
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
@@ -36,6 +29,13 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
+
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.UncheckedIOException;
+import java.util.Base64;
 
 /**
  * Provides methods to serialize and deserialize ItemStacks, ItemStack arrays and Inventories to/from byte arrays and/or base64

@@ -2,10 +2,11 @@ package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.CollectionUtils;
 import com.jeff_media.jefflib.UnitTest;
-import java.util.HashMap;
-import java.util.Map;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class TestCollectionUtils extends UnitTest {
 

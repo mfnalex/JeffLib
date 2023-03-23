@@ -19,20 +19,19 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.TPS;
+import com.jeff_media.jefflib.internal.ServerListPingEventFactory;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.event.server.ServerListPingEvent;
+
+import javax.annotation.Nonnull;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
-import javax.annotation.Nonnull;
-
-import com.jeff_media.jefflib.internal.ServerListPingEventFactory;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.entity.EntityType;
-import org.bukkit.event.server.ServerListPingEvent;
 
 /**
  * Server related methods

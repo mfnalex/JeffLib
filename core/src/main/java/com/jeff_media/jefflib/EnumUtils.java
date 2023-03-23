@@ -18,6 +18,8 @@
 
 package com.jeff_media.jefflib;
 
+import lombok.experimental.UtilityClass;
+
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -33,7 +35,6 @@ import java.util.Set;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
-import lombok.experimental.UtilityClass;
 
 /**
  * Enum related methods

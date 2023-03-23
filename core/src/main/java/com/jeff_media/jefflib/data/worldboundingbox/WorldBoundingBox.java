@@ -20,12 +20,6 @@ package com.jeff_media.jefflib.data.worldboundingbox;
 
 import com.jeff_media.jefflib.LocationUtils;
 import com.jeff_media.jefflib.exceptions.InvalidRegionDefinitionException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -33,6 +27,13 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 
 /**

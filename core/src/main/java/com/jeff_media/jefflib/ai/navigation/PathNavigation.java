@@ -19,11 +19,12 @@
 package com.jeff_media.jefflib.ai.navigation;
 
 import com.allatori.annotations.DoNotRename;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.BlockVector;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 
 /**
  * Represents the NMS PathNavigation of an entity

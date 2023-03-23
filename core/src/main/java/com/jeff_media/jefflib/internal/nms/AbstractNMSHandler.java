@@ -32,13 +32,6 @@ import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -47,13 +40,20 @@ import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Abstract NMS handler, for internal use only.

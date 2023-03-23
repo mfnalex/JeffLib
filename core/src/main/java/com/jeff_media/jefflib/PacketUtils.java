@@ -18,11 +18,12 @@
 
 package com.jeff_media.jefflib;
 
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import java.util.function.Predicate;
 
 /**
  * Packet sending related methods

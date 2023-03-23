@@ -18,11 +18,12 @@
 
 package com.jeff_media.jefflib;
 
-import java.util.Comparator;
-import javax.annotation.Nonnull;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+
+import javax.annotation.Nonnull;
+import java.util.Comparator;
 
 /**
  * Some useful comparators

@@ -19,17 +19,6 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.NonNull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -44,6 +33,18 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 
 /**
  * ItemStack related methods

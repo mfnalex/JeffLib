@@ -29,13 +29,14 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import com.sk89q.worldguard.protection.regions.ProtectedRegion;
 import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
-import java.util.ArrayList;
-import java.util.List;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.List;
 
 @Internal
 @UtilityClass

@@ -22,9 +22,7 @@ import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.MockPlugin;
 import be.seeseemelk.mockbukkit.ServerMock;
 import lombok.Getter;
-import org.bukkit.World;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 
 public class UnitTest {

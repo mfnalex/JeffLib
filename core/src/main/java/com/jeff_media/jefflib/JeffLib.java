@@ -29,6 +29,13 @@ import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
 import com.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import com.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -40,12 +47,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
-import lombok.Getter;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Main class of the library, has to be initialized for certain methods to work.

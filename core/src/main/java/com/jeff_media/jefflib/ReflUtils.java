@@ -20,6 +20,11 @@ package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -27,10 +32,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
 
 /**
  * Reflection related methods

@@ -19,9 +19,10 @@
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.internal.cherokee.Validate;
-import java.util.Objects;
 import lombok.SneakyThrows;
 import org.bukkit.ChatColor;
+
+import java.util.Objects;
 
 /**
  * Represents a hex color code

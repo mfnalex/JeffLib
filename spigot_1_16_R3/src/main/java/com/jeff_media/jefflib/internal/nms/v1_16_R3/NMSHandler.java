@@ -18,7 +18,6 @@
 
 package com.jeff_media.jefflib.internal.nms.v1_16_R3;
 
-import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.*;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -51,14 +50,6 @@ import com.jeff_media.jefflib.internal.nms.v1_16_R3.ai.HatchedPathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_16_R3.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import java.io.File;
-import java.io.IOException;
-import java.util.Collections;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.server.v1_16_R3.AdvancementDataWorld;
 import net.minecraft.server.v1_16_R3.BlockPosition;
 import net.minecraft.server.v1_16_R3.ChatDeserializer;
@@ -112,6 +103,23 @@ import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.asMob;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.asPathfinder;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.getDedicatedServer;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.getServer;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.ingredient;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.toBukkit;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R3.NMS.toNms;
 
 public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKeyProvider {
 

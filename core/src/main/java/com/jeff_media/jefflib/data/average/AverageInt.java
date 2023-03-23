@@ -18,9 +18,10 @@
 
 package com.jeff_media.jefflib.data.average;
 
+import lombok.Getter;
+
 import java.util.Arrays;
 import java.util.Objects;
-import lombok.Getter;
 
 /**
  * Represents an average double value consisting of a given number of previous values

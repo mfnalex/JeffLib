@@ -19,6 +19,10 @@
 package com.jeff_media.jefflib;
 
 
+import lombok.SneakyThrows;
+import lombok.experimental.UtilityClass;
+import org.bukkit.plugin.Plugin;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,9 +37,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import lombok.SneakyThrows;
-import lombok.experimental.UtilityClass;
-import org.bukkit.plugin.Plugin;
 
 /**
  * File related methods

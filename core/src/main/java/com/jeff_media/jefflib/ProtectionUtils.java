@@ -22,15 +22,16 @@ import com.jeff_media.jefflib.internal.protection.LandsProtection;
 import com.jeff_media.jefflib.internal.protection.PlotSquared6Protection;
 import com.jeff_media.jefflib.internal.protection.PluginProtection;
 import com.jeff_media.jefflib.internal.protection.WorldGuardProtection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.function.Supplier;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Supplier;
 
 /**
  * Utility class for common protection checks.
