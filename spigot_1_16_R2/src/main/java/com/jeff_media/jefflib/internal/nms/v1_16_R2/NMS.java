@@ -48,8 +48,8 @@ import org.bukkit.craftbukkit.v1_16_R2.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.stream.Stream;
 
 public final class NMS {
@@ -82,12 +82,12 @@ public final class NMS {
         return RecipeItemStack.a(set.map(mat -> new ItemStack(CraftMagicNumbers.getItem(mat))));
     }
 
-    @Nonnull
+    @NotNull
     public static EntityCreature asPathfinder(final org.bukkit.entity.Creature bukkitEntity) {
         return ((CraftCreature) bukkitEntity).getHandle();
     }
 
-    @Nonnull
+    @NotNull
     public static EntityInsentient asMob(final org.bukkit.entity.Mob bukkitEntity) {
         return ((CraftMob) bukkitEntity).getHandle();
     }

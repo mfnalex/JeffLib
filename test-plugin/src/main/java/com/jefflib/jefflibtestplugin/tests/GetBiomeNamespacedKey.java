@@ -23,7 +23,7 @@ import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class GetBiomeNamespacedKey implements NMSTest {
 

@@ -25,8 +25,8 @@ import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Objects;
@@ -54,28 +54,28 @@ public class InventoryUtils {
     /**
      * Counts how many times the given ItemStack is present in the given array
      */
-    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final ItemStack item) {
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final ItemStack item) {
         return Arrays.stream(array).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given array
      */
-    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final Material material) {
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final Material material) {
         return Arrays.stream(array).filter(Objects::nonNull).filter(candidate -> candidate.getType() == material).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given ItemStack is present in the given inventory
      */
-    public static int countItemStacks(@Nonnull final Inventory inventory, @Nonnull final ItemStack item) {
+    public static int countItemStacks(@NotNull final Inventory inventory, @NotNull final ItemStack item) {
         return Arrays.stream(inventory.getContents()).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given inventory
      */
-    public static int countMaterials(@Nonnull final Inventory inventory, @Nonnull final Material material) {
+    public static int countMaterials(@NotNull final Inventory inventory, @NotNull final Material material) {
         return inventory.all(material).values().stream().filter(Objects::nonNull).mapToInt(ItemStack::getAmount).sum();
     }
 
@@ -86,7 +86,7 @@ public class InventoryUtils {
      * @param items  ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@NotNull final Player player, @NotNull final Iterable<ItemStack> items) {
         return addOrDrop(player, player.getLocation(), items);
     }
 
@@ -98,7 +98,7 @@ public class InventoryUtils {
      * @param items        ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@NotNull final Player player, @Nullable final Location dropLocation, @NotNull final Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for (final ItemStack item : items) {
             for (final ItemStack leftover : player.getInventory().addItem(item).values()) {
@@ -117,7 +117,7 @@ public class InventoryUtils {
      * @param items        ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final ItemStack... items) {
+    public static boolean addOrDrop(@NotNull final Player player, @Nullable final Location dropLocation, @NotNull final ItemStack... items) {
         return addOrDrop(player, dropLocation, Arrays.asList(items));
     }
 
@@ -128,7 +128,7 @@ public class InventoryUtils {
      * @param items  ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final ItemStack... items) {
+    public static boolean addOrDrop(@NotNull final Player player, @NotNull final ItemStack... items) {
         return addOrDrop(player, player.getLocation(), Arrays.asList(items));
     }
 

@@ -19,7 +19,7 @@ package com.jeff_media.jefflib.data;
 
 import lombok.Getter;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.DataOutput;
 
 /**
@@ -30,7 +30,7 @@ public class ByteCounter implements DataOutput {
     @Getter
     private int bytes = 0;
 
-    public static long getUTFLength(final @Nonnull String s) {
+    public static long getUTFLength(final @NotNull String s) {
         long length = 0;
         char[] chars = s.toCharArray();
         for (char c : chars) {
@@ -51,12 +51,12 @@ public class ByteCounter implements DataOutput {
     }
 
     @Override
-    public void write(final @Nonnull byte[] bytes) {
+    public void write(final @NotNull byte[] bytes) {
         this.bytes += bytes.length;
     }
 
     @Override
-    public void write(final @Nonnull byte[] bytes, final int off, final int len) {
+    public void write(final @NotNull byte[] bytes, final int off, final int len) {
         this.bytes += len;
     }
 

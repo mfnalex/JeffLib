@@ -24,8 +24,8 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Collection;
 
 /**
@@ -75,7 +75,7 @@ public class WorldGuardUtils {
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
      */
-    @Nonnull
+    @NotNull
     @RequiresPlugin("WorldGuard")
     public static Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
@@ -85,7 +85,7 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         if (isWorldGuardInstalled()) {
             return WorldGuardHandler.canPlace(player, location);
         }
@@ -93,7 +93,7 @@ public class WorldGuardUtils {
     }
 
     @RequiresPlugin("WorldGuard")
-    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canInteract(player, location);
         } catch (final Throwable t) {
@@ -102,7 +102,7 @@ public class WorldGuardUtils {
     }
 
     @RequiresPlugin("WorldGuard")
-    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canBreak(player, location);
         } catch (final Throwable t) {
@@ -110,16 +110,16 @@ public class WorldGuardUtils {
         }
     }
 
-    @Nonnull
-    public static StateFlag registerStateFlag(@Nonnull String name, @Nonnull StateFlag.State defaultValue) {
+    @NotNull
+    public static StateFlag registerStateFlag(@NotNull String name, @NotNull StateFlag.State defaultValue) {
         if (isWorldGuardInstalled()) {
             return WorldGuardHandler.registerStateFlag(name, defaultValue);
         }
         return new StateFlag(name, StateFlag.State.DENY);
     }
 
-    @Nonnull
-    public static StateFlag.State testStateFlag(@Nullable Player player, @Nonnull Location location, @Nonnull StateFlag flag) {
+    @NotNull
+    public static StateFlag.State testStateFlag(@Nullable Player player, @NotNull Location location, @NotNull StateFlag flag) {
         if (isWorldGuardInstalled()) {
             return StateFlag.State.fromBoolean(WorldGuardHandler.testStateFlag(player, location, flag));
         }

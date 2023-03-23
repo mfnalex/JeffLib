@@ -24,7 +24,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.event.server.ServerListPingEvent;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
@@ -151,7 +151,7 @@ public class ServerUtils {
     /**
      * Gets the server's working directory
      */
-    @Nonnull
+    @NotNull
     public File getServerFolder() {
         return Paths.get("").toAbsolutePath().toFile();
     }

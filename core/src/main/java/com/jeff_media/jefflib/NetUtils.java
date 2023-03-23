@@ -20,8 +20,8 @@ package com.jeff_media.jefflib;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -41,7 +41,7 @@ public class NetUtils {
     /**
      * Downloads a URL and returns the response as String list asynchronously.
      */
-    @Nonnull
+    @NotNull
     public static CompletableFuture<List<String>> downloadToStringListAsync(final String url) {
         final CompletableFuture<List<String>> future = new CompletableFuture<>();
         Bukkit.getScheduler().runTaskAsynchronously(JeffLib.getPlugin(), () -> {
@@ -58,7 +58,7 @@ public class NetUtils {
     /**
      * Downloads a URL and returns the response as String list. Blocks the main thread.
      */
-    @Nonnull
+    @NotNull
     public static List<String> downloadToStringList(final String url) throws IOException {
 
         final HttpURLConnection httpConnection = (HttpURLConnection) new URL(url).openConnection();

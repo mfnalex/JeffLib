@@ -22,7 +22,7 @@ import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Mob;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents an entity's navigation, movement, jump and look controls
@@ -35,7 +35,7 @@ public final class Controls {
     private final LookController lookController;
     private final PathNavigation navigation;
 
-    private Controls(@Nonnull final Mob mob) {
+    private Controls(@NotNull final Mob mob) {
         this.moveController = EntityUtils.getMoveController(mob);
         this.jumpController = EntityUtils.getJumpController(mob);
         this.lookController = EntityUtils.getLookController(mob);
@@ -53,12 +53,12 @@ public final class Controls {
      * Gets this mob's controls
      */
     @NMS
-    @Nonnull
-    public static Controls of(@Nonnull final Mob mob) {
+    @NotNull
+    public static Controls of(@NotNull final Mob mob) {
         return new Controls(mob);
     }
 
-    public static Controls of(@Nonnull final MoveController moveController, @Nonnull final JumpController jumpController, @Nonnull final LookController lookController, @Nonnull final PathNavigation navigation) {
+    public static Controls of(@NotNull final MoveController moveController, @NotNull final JumpController jumpController, @NotNull final LookController lookController, @NotNull final PathNavigation navigation) {
         return new Controls(moveController, jumpController, lookController, navigation);
     }
 

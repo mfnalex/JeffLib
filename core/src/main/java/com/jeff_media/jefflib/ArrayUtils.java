@@ -19,7 +19,7 @@ package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -61,7 +61,7 @@ public class ArrayUtils {
      * @param <T>           Array's component type
      * @return Array of the given class type with length 0
      */
-    public static <T> T[] createArray(@Nonnull final Class<T> componentType) {
+    public static <T> T[] createArray(@NotNull final Class<T> componentType) {
         return createArray(componentType, 0);
     }
 
@@ -73,7 +73,7 @@ public class ArrayUtils {
      * @param length        Array's length
      * @return Array of the given class type with the given length
      */
-    public static <T> T[] createArray(@Nonnull final Class<T> componentType, final int length) {
+    public static <T> T[] createArray(@NotNull final Class<T> componentType, final int length) {
         //noinspection unchecked
         return (T[]) Array.newInstance(componentType, length);
     }

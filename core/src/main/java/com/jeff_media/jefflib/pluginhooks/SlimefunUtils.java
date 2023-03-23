@@ -21,7 +21,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.lang.reflect.Method;
 
 @UtilityClass
@@ -55,7 +55,7 @@ public class SlimefunUtils {
         getByItemMethod = slimefunItemClass.getMethod("getByItem", ItemStack.class);
     }
 
-    public static boolean isSlimefunBackpack(@Nonnull final ItemStack item) {
+    public static boolean isSlimefunBackpack(@NotNull final ItemStack item) {
 
         if (Bukkit.getPluginManager().getPlugin("Slimefun") == null) {
             return false;

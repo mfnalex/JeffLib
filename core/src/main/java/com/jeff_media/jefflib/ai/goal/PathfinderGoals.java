@@ -25,7 +25,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Collection;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -46,7 +46,7 @@ public interface PathfinderGoals {
      * @param canScare      Whether the entity can be scared
      * @return The created goal
      */
-    static PathfinderGoal temptGoal(@Nonnull final Creature entity, @Nonnull final Collection<Material> materials, final double speedModifier, final boolean canScare) {
+    static PathfinderGoal temptGoal(@NotNull final Creature entity, @NotNull final Collection<Material> materials, final double speedModifier, final boolean canScare) {
         return temptGoal(entity, materials.stream(), speedModifier, canScare);
     }
 
@@ -60,7 +60,7 @@ public interface PathfinderGoals {
      * @param canScare      Whether the entity can be scared
      * @return The created goal
      */
-    static PathfinderGoal temptGoal(@Nonnull final Creature entity, @Nonnull final Stream<Material> materials, final double speedModifier, final boolean canScare) {
+    static PathfinderGoal temptGoal(@NotNull final Creature entity, @NotNull final Stream<Material> materials, final double speedModifier, final boolean canScare) {
         return JeffLib.getNMSHandler().createTemptGoal(entity, materials, speedModifier, canScare);
     }
 
@@ -74,7 +74,7 @@ public interface PathfinderGoals {
      * @param sprintSpeedModifier The sprint speed modifier to use when the entity is being scared
      * @return The created goal
      */
-    static PathfinderGoal avoidEntity(@Nonnull final Creature entity, @Nonnull Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
+    static PathfinderGoal avoidEntity(@NotNull final Creature entity, @NotNull Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
         return JeffLib.getNMSHandler().createAvoidEntityGoal(entity, predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
     }
 
@@ -88,7 +88,7 @@ public interface PathfinderGoals {
      * @param verticalSearchDistance The maximum vertical distance the entity will look for matching blocks
      * @return The created goal
      */
-    static PathfinderGoal moveToBlock(@Nonnull final Creature entity, @Nonnull Set<Material> blockTypes, double speedModifier, int searchDistance, int verticalSearchDistance) {
+    static PathfinderGoal moveToBlock(@NotNull final Creature entity, @NotNull Set<Material> blockTypes, double speedModifier, int searchDistance, int verticalSearchDistance) {
         return JeffLib.getNMSHandler().createMoveToBlockGoal(entity, blockTypes, speedModifier, searchDistance, verticalSearchDistance);
     }
 
@@ -102,7 +102,7 @@ public interface PathfinderGoals {
      * @param verticalSearchDistance The maximum vertical distance the entity will look for matching blocks
      * @return The created goal
      */
-    static PathfinderGoal moveToBlock(@Nonnull final Creature entity, @Nonnull Predicate<Block> blockPredicate, double speedModifier, int searchDistance, int verticalSearchDistance) {
+    static PathfinderGoal moveToBlock(@NotNull final Creature entity, @NotNull Predicate<Block> blockPredicate, double speedModifier, int searchDistance, int verticalSearchDistance) {
         return JeffLib.getNMSHandler().createMoveToBlockGoal(entity, blockPredicate, speedModifier, searchDistance, verticalSearchDistance);
     }
 

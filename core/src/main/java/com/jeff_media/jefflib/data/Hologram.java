@@ -30,8 +30,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,10 +51,10 @@ public class Hologram implements ConfigurationSerializable {
     @Getter
     private final Type type;
     @Getter
-    @Nonnull
+    @NotNull
     private final List<OfflinePlayer> players = new ArrayList<>();
     @Getter
-    @Nonnull
+    @NotNull
     private final List<Object> entities = new ArrayList<>();
     private Integer task = null;
     @Getter
@@ -63,14 +63,14 @@ public class Hologram implements ConfigurationSerializable {
     private OfflinePlayer player;
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private Location location;
     @Getter
     @Setter
     private double lineOffset = LINE_OFFSET_DEFAULT;
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private List<String> lines = new ArrayList<>();
     @Getter
     @Setter
@@ -83,7 +83,7 @@ public class Hologram implements ConfigurationSerializable {
         this.type = type;
     }
 
-    public static Hologram deserialize(@Nonnull final Map<String, Object> map) {
+    public static Hologram deserialize(@NotNull final Map<String, Object> map) {
         final Type type = Enums.getIfPresent(Type.class, (String) map.getOrDefault(Keys.TYPE, "ARMORSTAND")).or(Type.ARMORSTAND);
         final Hologram hologram = new Hologram(type);
         hologram.setLineOffset((double) map.getOrDefault(Keys.LINE_OFFSET, LINE_OFFSET_DEFAULT));
@@ -165,7 +165,7 @@ public class Hologram implements ConfigurationSerializable {
         HologramManager.getHOLOGRAMS().add(this);
     }
 
-    @Nonnull
+    @NotNull
     public Map<String, Object> serialize() {
         final Map<String, Object> map = new HashMap<>();
         map.put(Keys.LINE_OFFSET, lineOffset);

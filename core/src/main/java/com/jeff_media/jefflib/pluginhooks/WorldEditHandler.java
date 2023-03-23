@@ -32,7 +32,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.util.BoundingBox;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 

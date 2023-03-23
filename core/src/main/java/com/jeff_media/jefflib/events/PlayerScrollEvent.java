@@ -24,7 +24,7 @@ import org.bukkit.event.Cancellable;
 import org.bukkit.event.Event;
 import org.bukkit.event.HandlerList;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Gets called when a player scrolls through their hotbar. When cancelled, the main hand slot will not be changed.
@@ -39,7 +39,7 @@ public final class PlayerScrollEvent extends Event implements Cancellable {
 
     private boolean cancelled;
 
-    public PlayerScrollEvent(@Nonnull final Player who, final ScrollDirection direction) {
+    public PlayerScrollEvent(@NotNull final Player who, final ScrollDirection direction) {
         this.who = who;
         this.direction = direction;
     }
@@ -51,7 +51,7 @@ public final class PlayerScrollEvent extends Event implements Cancellable {
 
     @Override
     @DoNotRename
-    @Nonnull
+    @NotNull
     public HandlerList getHandlers() {
         return HANDLERS;
     }

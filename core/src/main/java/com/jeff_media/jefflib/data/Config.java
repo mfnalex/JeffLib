@@ -21,7 +21,7 @@ import com.jeff_media.jefflib.JeffLib;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -43,7 +43,7 @@ public class Config extends YamlConfiguration {
     /**
      * Creates a new config with the given filename.
      */
-    public Config(@Nonnull final String filename) {
+    public Config(@NotNull final String filename) {
         this.filename = filename;
         file = new File(JeffLib.getPlugin().getDataFolder(), filename);
         loadDefaults();

@@ -19,7 +19,7 @@ package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Number parsing related methods

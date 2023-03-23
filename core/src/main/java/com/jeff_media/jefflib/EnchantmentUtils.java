@@ -25,8 +25,8 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
@@ -86,7 +86,7 @@ public class EnchantmentUtils {
      * @param section ConfigurationSection to parse
      * @return A Map&lt;Enchantment,Integer> containing the given enchantments mapped to their given levels
      */
-    @Nonnull
+    @NotNull
     public static Map<Enchantment, Integer> fromConfigurationSection(final ConfigurationSection section) {
         final Map<Enchantment, Integer> map = new HashMap<>();
         for (final String enchantName : section.getKeys(false)) {
@@ -106,7 +106,7 @@ public class EnchantmentUtils {
      * @return The enchantment of the specified name
      */
     @Nullable
-    public static Enchantment getByName(@Nonnull final String name) {
+    public static Enchantment getByName(@NotNull final String name) {
         for (final Enchantment enchant : Enchantment.values()) {
             if (enchant.getKey().getKey().equalsIgnoreCase(name)) {
                 return enchant;
@@ -120,7 +120,7 @@ public class EnchantmentUtils {
      * @param meta ItemMeta to add the effect to
      * @return true if the effect was added, false if it was already present
      */
-    public static boolean addGlowEffect(@Nonnull ItemMeta meta) {
+    public static boolean addGlowEffect(@NotNull ItemMeta meta) {
         if(meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
             return false;
         }
@@ -133,7 +133,7 @@ public class EnchantmentUtils {
      * @param item ItemStack to add the effect to
      * @return true if the effect was added, false if it was already present or if the item has no ItemMeta
      */
-    public static boolean addGlowEffect(@Nonnull ItemStack item) {
+    public static boolean addGlowEffect(@NotNull ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         if(meta == null) {
             return false;

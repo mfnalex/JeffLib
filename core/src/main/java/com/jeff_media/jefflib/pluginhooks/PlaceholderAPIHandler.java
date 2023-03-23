@@ -24,7 +24,7 @@ import lombok.experimental.UtilityClass;
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -46,7 +46,7 @@ public final class PlaceholderAPIHandler {
 
     private static AnonymousPlaceholderExpansion expansion;
 
-    public static void register(@Nonnull final BiFunction<OfflinePlayer, String, String> function) {
+    public static void register(@NotNull final BiFunction<OfflinePlayer, String, String> function) {
         init();
         expansion.biFunctions.add(function);
     }
@@ -58,7 +58,7 @@ public final class PlaceholderAPIHandler {
         }
     }
 
-    public static void register(@Nonnull final String placeholder, @Nonnull final Function<OfflinePlayer, String> function) {
+    public static void register(@NotNull final String placeholder, @NotNull final Function<OfflinePlayer, String> function) {
         init();
         expansion.functions.put(placeholder, function);
     }
@@ -69,19 +69,19 @@ public final class PlaceholderAPIHandler {
         private final Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
-        @Nonnull
+        @NotNull
         public String getIdentifier() {
             return JeffLib.getPlugin().getName().toLowerCase(Locale.ROOT);
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public String getAuthor() {
             return JeffLib.getPlugin().getDescription().getAuthors().isEmpty() ? "" : JeffLib.getPlugin().getDescription().getAuthors().get(0);
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public String getVersion() {
             return JeffLib.getPlugin().getDescription().getVersion();
         }
@@ -92,7 +92,7 @@ public final class PlaceholderAPIHandler {
         }
 
         @Override
-        public String onRequest(final OfflinePlayer player, @Nonnull final String params) {
+        public String onRequest(final OfflinePlayer player, @NotNull final String params) {
             final Function<OfflinePlayer, String> function = functions.get(params);
             if (function != null) {
                 return function.apply(player);

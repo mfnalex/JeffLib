@@ -25,7 +25,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;

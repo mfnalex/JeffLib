@@ -24,7 +24,7 @@ import org.bukkit.World;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -35,15 +35,15 @@ import java.util.Objects;
 public class CuboidWorldBoundingBox extends WorldBoundingBox {
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private World world;
 
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private BoundingBox boundingBox;
 
-    public CuboidWorldBoundingBox(@Nonnull final World world, @Nonnull final BoundingBox boundingBox) {
+    public CuboidWorldBoundingBox(@NotNull final World world, @NotNull final BoundingBox boundingBox) {
         this.world = world;
         this.boundingBox = boundingBox;
     }

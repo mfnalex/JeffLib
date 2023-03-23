@@ -19,7 +19,7 @@ package com.jefflib.jefflibtestplugin;
 
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a test that can be run by {@link TestRunner}

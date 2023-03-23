@@ -21,7 +21,7 @@ import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Comparator;
 
 /**
@@ -53,11 +53,11 @@ public abstract class Comparators {
 
         private final Location origin;
 
-        public EntityByDistanceComparator(final @Nonnull Entity origin) {
+        public EntityByDistanceComparator(final @NotNull Entity origin) {
             this.origin = origin.getLocation();
         }
 
-        public EntityByDistanceComparator(final @Nonnull Location origin) {
+        public EntityByDistanceComparator(final @NotNull Location origin) {
             this.origin = origin;
         }
 
@@ -74,11 +74,11 @@ public abstract class Comparators {
 
         private final Location origin;
 
-        public BlockByDistanceComparator(final @Nonnull Location origin) {
+        public BlockByDistanceComparator(final @NotNull Location origin) {
             this.origin = origin;
         }
 
-        public BlockByDistanceComparator(final @Nonnull Block origin) {
+        public BlockByDistanceComparator(final @NotNull Block origin) {
             this.origin = BlockUtils.getCenter(origin);
         }
 

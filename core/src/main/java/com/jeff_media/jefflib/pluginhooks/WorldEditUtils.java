@@ -24,7 +24,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
@@ -64,7 +64,7 @@ public class WorldEditUtils {
      * @return {@link WorldBoundingBox} containing the player's WorldEdit selection, or null if the player doesn't have any or only an incomplete selection.
      * @throws MissingPluginException Exception thrown when WorldEdit is not installed
      */
-    public static WorldBoundingBox getSelection(@Nonnull final Player player) throws MissingPluginException {
+    public static WorldBoundingBox getSelection(@NotNull final Player player) throws MissingPluginException {
         try {
             return WorldEditHandler.getCuboidSelection(player);
         } catch (final Throwable throwable) {
@@ -72,7 +72,7 @@ public class WorldEditUtils {
         }
     }
 
-    public static List<Location> getPolygonSelection(@Nonnull final Player player) throws MissingPluginException {
+    public static List<Location> getPolygonSelection(@NotNull final Player player) throws MissingPluginException {
         try {
             return WorldEditHandler.getPolygonSelection(player);
         } catch (final Throwable throwable) {

@@ -21,7 +21,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.YamlConfiguration;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.UUID;
@@ -46,7 +46,7 @@ public final class PlayerCache {
         return getName(Bukkit.getOfflinePlayer(uuid));
     }
 
-    @Nonnull
+    @NotNull
     public static String getName(final OfflinePlayer player) {
         final String name = player.getName();
         if (name != null) {

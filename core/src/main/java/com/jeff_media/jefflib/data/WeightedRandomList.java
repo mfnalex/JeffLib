@@ -20,7 +20,7 @@ package com.jeff_media.jefflib.data;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -48,9 +48,9 @@ import java.util.concurrent.ThreadLocalRandom;
 @SuppressWarnings("unused")
 public class WeightedRandomList<E> {
 
-    @Nonnull
+    @NotNull
     private final List<WeightedElement> list = new ArrayList<>();
-    @Nonnull
+    @NotNull
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     private final Comparator<WeightedElement> COMPARATOR = (o1, o2) -> -Double.compare(o1.weight, o2.weight);
     private double currentTotalWeight = 0;

@@ -22,7 +22,7 @@ import com.jeff_media.jefflib.internal.annotations.Tested;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 /**
@@ -48,7 +48,7 @@ public final class WorldUtils {
      *
      * @nms
      */
-    public static @Nonnull World getDefaultWorld() {
+    public static @NotNull World getDefaultWorld() {
         return Objects.requireNonNull(Bukkit.getWorld(getDefaultWorldName()));
     }
 
@@ -57,7 +57,7 @@ public final class WorldUtils {
      *
      * @nms
      */
-    public static @Nonnull String getDefaultWorldName() {
+    public static @NotNull String getDefaultWorldName() {
         return JeffLib.getNMSHandler().getDefaultWorldName();
     }
 
@@ -71,14 +71,14 @@ public final class WorldUtils {
      */
     @Tested("1.19.4")
     @NMS
-    public static void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers) {
+    public static void setFullTimeWithoutTimeSkipEvent(@NotNull final World world, final long time, final boolean notifyPlayers) {
         JeffLib.getNMSHandler().setFullTimeWithoutTimeSkipEvent(world, time, notifyPlayers);
     }
 
     /**
      * Gets the lowest possible building height for a world. It's the same as {@link World#getMinHeight()} but also works on 1.16.4 and earlier
      */
-    public static int getWorldMinHeight(final @Nonnull World world) {
+    public static int getWorldMinHeight(final @NotNull World world) {
         return HAS_WORLD_MIN_HEIGHT_METHOD ? world.getMinHeight() : 0;
     }
 }

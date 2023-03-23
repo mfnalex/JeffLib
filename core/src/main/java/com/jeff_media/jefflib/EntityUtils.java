@@ -47,8 +47,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -66,14 +66,14 @@ public class EntityUtils {
      * Gets the closest other player in this world, or null if there is no other player
      */
     @Nullable
-    public static Player getClosestOtherPlayer(@Nonnull final Player player) {
+    public static Player getClosestOtherPlayer(@NotNull final Player player) {
         return player.getWorld().getPlayers().stream().filter(other -> other != player).min(new Comparators.EntityByDistanceComparator(player)).orElse(null);
     }
 
     /**
      * Gets the generic movement speed of an entity
      */
-    public static double getMovementSpeed(@Nonnull final LivingEntity entity) {
+    public static double getMovementSpeed(@NotNull final LivingEntity entity) {
         final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
         if (attribute != null) {
             return attribute.getValue();
@@ -85,7 +85,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Entity entity) {
+    public static Player getClosestPlayer(@NotNull final Entity entity) {
         return getClosestPlayer(entity.getLocation());
     }
 
@@ -93,7 +93,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player, or if the world isn't loaded
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Location location) {
+    public static Player getClosestPlayer(@NotNull final Location location) {
         World world = location.getWorld();
         if (world == null) return null;
         return world.getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
@@ -103,7 +103,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Block block) {
+    public static Player getClosestPlayer(@NotNull final Block block) {
         return getClosestPlayer(BlockUtils.getCenter(block));
     }
 
@@ -175,8 +175,8 @@ public class EntityUtils {
     /**
      * Returns a collection of all entities of the given class, from all worlds
      */
-    @Nonnull
-    public static <T extends Entity> Collection<T> getEntities(@Nonnull final Class<T> entityClass) {
+    @NotNull
+    public static <T extends Entity> Collection<T> getEntities(@NotNull final Class<T> entityClass) {
         final Collection<T> list = new ArrayList<>();
         for (final World world : Bukkit.getWorlds()) {
             list.addAll(world.getEntitiesByClass(entityClass));
@@ -198,7 +198,7 @@ public class EntityUtils {
     /**
      * Returns a collection of all entities from all worlds
      */
-    @Nonnull
+    @NotNull
     public static Collection<Entity> getAllEntities() {
         final Collection<Entity> list = new ArrayList<>();
         for (final World world : Bukkit.getWorlds()) {
@@ -210,16 +210,16 @@ public class EntityUtils {
     /**
      * Gets this mob's {@link GoalSelector}
      */
-    @Nonnull
-    public static GoalSelector getGoalSelector(@Nonnull final Mob mob) {
+    @NotNull
+    public static GoalSelector getGoalSelector(@NotNull final Mob mob) {
         return GoalSelector.of(mob);
     }
 
     /**
      * Gets this mob's {@link TargetSelector}
      */
-    @Nonnull
-    public static TargetSelector getTargetSelector(@Nonnull final Mob mob) {
+    @NotNull
+    public static TargetSelector getTargetSelector(@NotNull final Mob mob) {
         return TargetSelector.of(mob);
     }
 
@@ -227,8 +227,8 @@ public class EntityUtils {
      * Get this mob's {@link PathNavigation}
      */
     @NMS
-    @Nonnull
-    public static PathNavigation getNavigation(@Nonnull final Mob entity) {
+    @NotNull
+    public static PathNavigation getNavigation(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getPathNavigation(entity);
     }
 
@@ -236,8 +236,8 @@ public class EntityUtils {
      * Gets this mob's {@link MoveController}
      */
     @NMS
-    @Nonnull
-    public static MoveController getMoveController(@Nonnull final Mob entity) {
+    @NotNull
+    public static MoveController getMoveController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getMoveControl(entity);
     }
 
@@ -245,8 +245,8 @@ public class EntityUtils {
      * Gets this mob's {@link JumpController}
      */
     @NMS
-    @Nonnull
-    public static JumpController getJumpController(@Nonnull final Mob entity) {
+    @NotNull
+    public static JumpController getJumpController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getJumpControl(entity);
     }
 
@@ -254,8 +254,8 @@ public class EntityUtils {
      * Gets this mob's {@link LookController}
      */
     @NMS
-    @Nonnull
-    public static LookController getLookController(@Nonnull final Mob entity) {
+    @NotNull
+    public static LookController getLookController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getLookControl(entity);
     }
 
@@ -263,8 +263,8 @@ public class EntityUtils {
      * Gets this mob's {@link com.jeff_media.jefflib.ai.navigation.Controls}
      */
     @NMS
-    @Nonnull
-    public static Controls getControls(@Nonnull final Mob entity) {
+    @NotNull
+    public static Controls getControls(@NotNull final Mob entity) {
         return Controls.of(entity);
     }
 
@@ -274,7 +274,7 @@ public class EntityUtils {
      */
     @NMS
     @Tested("1.19.4")
-    public static void respawnPlayer(@Nonnull final Player player) {
+    public static void respawnPlayer(@NotNull final Player player) {
         JeffLib.getNMSHandler().respawnPlayer(player);
     }
 
@@ -286,7 +286,7 @@ public class EntityUtils {
      */
     @NMS
     @Tested("1.19.4")
-    public static void playTotemAnimation(@Nonnull final Player player) {
+    public static void playTotemAnimation(@NotNull final Player player) {
         playTotemAnimation(player, null);
     }
 
@@ -299,7 +299,7 @@ public class EntityUtils {
      */
     @NMS
     @Tested("1.19.4")
-    public static void playTotemAnimation(@Nonnull final Player player, @Nullable final Integer customModelData) {
+    public static void playTotemAnimation(@NotNull final Player player, @Nullable final Integer customModelData) {
         final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
         final ItemMeta meta = totem.getItemMeta();
         assert meta != null;

@@ -21,15 +21,15 @@ import com.google.common.base.Enums;
 import lombok.Getter;
 import org.bukkit.Material;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public enum WoodType {
 
     OAK("OAK"), JUNGLE("JUNGLE"), DARK_OAK("DARK_OAK"), ACACIA("ACACIA"), BIRCH("BIRCH"), SPRUCE("SPRUCE"), CRIMSON("CRIMSON"), WARPED("WARPED"), MANGROVE("MANGROVE");
 
     @Getter
-    @Nonnull
+    @NotNull
     private final Material button, door, fence, fenceGate, leaves, log, planks, pressurePlate, sapling, sign, slab, stairs, trapdoor, wallSign, wood, pottedSapling, strippedLog, strippedWood;
 
     @Getter

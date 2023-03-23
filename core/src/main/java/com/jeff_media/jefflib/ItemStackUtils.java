@@ -33,8 +33,8 @@ import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -70,7 +70,7 @@ public class ItemStackUtils {
      * @param itemStack ItemStack to get the NBT data size of
      * @return NBT data size in byteds, or {@link #NO_DATA} if it doesn't have any, or {@link #ERROR_READING_DATA} if the data couldn't be parsed
      */
-    public static int getSizeInBytes(@NonNull final ItemStack itemStack) {
+    public static int getSizeInBytes(@NotNull final ItemStack itemStack) {
         try {
             return JeffLib.getNMSHandler().getItemStackSizeInBytes(itemStack);
         } catch (IOException e) {
@@ -86,7 +86,7 @@ public class ItemStackUtils {
      * @return ItemStack parsed from the ConfigurationSection
      * @see #fromConfigurationSection(ConfigurationSection, HashMap)
      */
-    public ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config) {
+    public ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config) {
         return fromConfigurationSection(config, new HashMap<>());
     }
 
@@ -112,7 +112,7 @@ public class ItemStackUtils {
      * @return ItemStack parsed from the ConfigurationSection
      * @see TextUtils#replaceInString(String, Map)
      */
-    public static ItemStack fromConfigurationSection(@Nonnull final ConfigurationSection config, final HashMap<String, String> placeholders) {
+    public static ItemStack fromConfigurationSection(@NotNull final ConfigurationSection config, final HashMap<String, String> placeholders) {
         final String materialName = config.getString("material", "BARRIER").toUpperCase(Locale.ROOT);
 
         int amount = 1;
@@ -225,7 +225,7 @@ public class ItemStackUtils {
     /**
      * Applies a display name to the given item
      */
-    public static void setDisplayName(@Nonnull final ItemStack item, @Nonnull final String name) {
+    public static void setDisplayName(@NotNull final ItemStack item, @NotNull final String name) {
         final ItemMeta meta = item.getItemMeta();
         Objects.requireNonNull(meta).setDisplayName(name);
         item.setItemMeta(meta);
@@ -238,7 +238,7 @@ public class ItemStackUtils {
      * @param item   ItemStack to be damaged
      * @param player Player who damaged the item
      */
-    public static void damageItem(int amount, final @Nonnull ItemStack item, @Nullable final Player player) {
+    public static void damageItem(int amount, final @NotNull ItemStack item, @Nullable final Player player) {
         final ItemMeta meta = item.getItemMeta();
         if (!(meta instanceof Damageable) || amount < 0) return;
         final int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);

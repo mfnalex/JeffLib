@@ -24,12 +24,12 @@ import lombok.Data;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 @Data
 public class VariableItemStack {
 
-    @Nonnull
+    @NotNull
     private final ItemStack itemStack;
     private final int minAmount;
     private final int maxAmount;

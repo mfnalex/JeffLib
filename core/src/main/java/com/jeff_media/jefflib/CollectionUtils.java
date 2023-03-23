@@ -22,7 +22,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -51,7 +51,7 @@ public class CollectionUtils {
      * @return List of all given elements
      */
     @SafeVarargs
-    @Nonnull
+    @NotNull
     public static <T> List<T> asList(final T... elements) {
         return new ArrayList<>(Arrays.asList(elements));
     }
@@ -68,7 +68,7 @@ public class CollectionUtils {
     }
 
     @SafeVarargs
-    @Nonnull
+    @NotNull
     public static <T> Set<T> asSet(final T... elements) {
         final HashSet<T> set = new HashSet<>();
         Collections.addAll(set, elements);

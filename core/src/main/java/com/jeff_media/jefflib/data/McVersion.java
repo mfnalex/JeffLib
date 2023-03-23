@@ -20,7 +20,7 @@ package com.jeff_media.jefflib.data;
 import com.jeff_media.jefflib.WordUtils;
 import org.bukkit.Bukkit;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
 
 /**
@@ -71,7 +71,7 @@ public class McVersion implements Comparable<McVersion> {
     }
 
     @Override
-    public int compareTo(@Nonnull final McVersion other) {
+    public int compareTo(@NotNull final McVersion other) {
         if (this.major > other.major) return 3;
         if (other.major > this.major) return -3;
         if (this.minor > other.minor) return 2;

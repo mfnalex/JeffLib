@@ -21,7 +21,7 @@ import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Creature;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Provides a way to get a random position in a given radius around a given entity's location.

@@ -37,7 +37,7 @@ import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.SmokingRecipe;
 import org.bukkit.inventory.StonecuttingRecipe;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -258,7 +258,7 @@ public class RecipeUtils {
         return new StonecuttingRecipe(key, result, getRecipeChoice(section));
     }
 
-    @Nonnull
+    @NotNull
     private static Map<Character, RecipeChoice> getRecipeChoices(final ConfigurationSection section) {
         final Map<Character, RecipeChoice> map = new HashMap<>();
         for (final String key : section.getKeys(false)) {
@@ -284,7 +284,7 @@ public class RecipeUtils {
         return map;
     }
 
-    @Nonnull
+    @NotNull
     private static List<RecipeChoice> getRecipeChoices(final List<?> ingredients) {
         final List<RecipeChoice> list = new ArrayList<>();
 
@@ -304,7 +304,7 @@ public class RecipeUtils {
         return list;
     }
 
-    @Nonnull
+    @NotNull
     private static RecipeChoice getRecipeChoice(final ConfigurationSection section) {
         if (section.isSet("ingredients")) {
             if (section.isConfigurationSection("ingredients")) {

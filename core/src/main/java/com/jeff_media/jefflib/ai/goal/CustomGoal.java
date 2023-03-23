@@ -26,8 +26,8 @@ import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import org.bukkit.entity.Mob;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 
 /**
@@ -61,37 +61,37 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         return bukkitEntity;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PathNavigation getNavigation() {
         return executor.getNavigation();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public MoveController getMoveController() {
         return executor.getMoveController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LookController getLookController() {
         return executor.getLookController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JumpController getJumpController() {
         return executor.getJumpController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Controls getControls() {
         return CustomGoalExecutor.super.getControls();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return executor.getGoalFlags();

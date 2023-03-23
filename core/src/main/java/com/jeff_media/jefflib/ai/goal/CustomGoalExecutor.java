@@ -24,8 +24,8 @@ import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 
 
@@ -38,7 +38,7 @@ public interface CustomGoalExecutor {
     /**
      * Gets the goal flags of this goal's executor
      */
-    @Nonnull
+    @NotNull
     EnumSet<GoalFlag> getGoalFlags();
 
     /**
@@ -49,35 +49,35 @@ public interface CustomGoalExecutor {
     /**
      * Returns the {@link PathNavigation} associated with this goal's entity
      */
-    @Nonnull
+    @NotNull
     PathNavigation getNavigation();
 
     /**
      * Returns the {@link MoveController} associated with this goal's entity
      */
-    @Nonnull
+    @NotNull
     MoveController getMoveController();
 
     /**
      * Returns the {@link LookController} associated with this goal's entity
      */
-    @Nonnull
+    @NotNull
     LookController getLookController();
 
     /**
      * Returns the {@link JumpController} associated with this goal's entity
      */
-    @Nonnull
+    @NotNull
     JumpController getJumpController();
 
     /**
      * Returns the {@link Controls} associated with this goal's entity
      */
-    @Nonnull
+    @NotNull
     default Controls getControls() {
         return Controls.of(getMoveController(), getJumpController(), getLookController(), getNavigation());
     }
 
-    //@Nonnull CustomGoal getGoal();
+    //@NotNull CustomGoal getGoal();
 
 }

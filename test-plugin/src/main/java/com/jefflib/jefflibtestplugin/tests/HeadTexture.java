@@ -24,7 +24,7 @@ import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class HeadTexture implements NMSTest {
 

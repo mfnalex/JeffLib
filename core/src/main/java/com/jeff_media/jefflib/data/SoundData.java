@@ -30,8 +30,8 @@ import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.Locale;
 import java.util.Objects;
 
@@ -77,7 +77,7 @@ public final class SoundData {
      * @param prefix Prefix to use when looking up values in the ConfigurationSection. If non-null, this prefix is prefixed to all keys. For example, if this is set to "foo-", then the keys to look up are "foo-sound", "foo-volume", etc.
      * @throws IllegalArgumentException When no sound is defined, or if the sound category is not valid.
      */
-    public static SoundData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException {
+    public static SoundData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException {
         if (prefix == null) prefix = "";
         String soundName = config.getString(prefix + "effect");
         if (soundName == null || soundName.isEmpty()) {

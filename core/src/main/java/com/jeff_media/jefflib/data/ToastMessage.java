@@ -27,7 +27,7 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 
 /**
@@ -46,7 +46,7 @@ public class ToastMessage {
     private final Material icon;
     private final NamespacedKey key = PDCUtils.getRandomKey();
 
-    public ToastMessage(@Nonnull final String title, /*@Nullable final String description, */@Nonnull final Material icon, @Nonnull final FrameType frameType, final boolean announceToChat) {
+    public ToastMessage(@NotNull final String title, /*@Nullable final String description, */@NotNull final Material icon, @NotNull final FrameType frameType, final boolean announceToChat) {
         this.title = title;
         this.frameType = frameType;
         this.icon = icon;
@@ -59,7 +59,7 @@ public class ToastMessage {
         Validate.notNull(frameType, "frameType cannot be null");
     }
 
-    public void send(@Nonnull final Player player) {
+    public void send(@NotNull final Player player) {
         send(new Player[] {player});
     }
 
@@ -106,7 +106,7 @@ public class ToastMessage {
 
         private final String name;
 
-        FrameType(@Nonnull final String name) {
+        FrameType(@NotNull final String name) {
             this.name = name;
         }
 

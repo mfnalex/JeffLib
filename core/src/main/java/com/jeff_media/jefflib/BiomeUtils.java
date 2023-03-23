@@ -24,7 +24,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Biome related methods
@@ -41,7 +41,7 @@ public class BiomeUtils {
      */
     @NMS("1.16.2")
     @Tested("1.19.4")
-    public NamespacedKey getBiomeNamespacedKey(@Nonnull final Location location) {
+    public NamespacedKey getBiomeNamespacedKey(@NotNull final Location location) {
         final Pair<String, String> keyPair = JeffLib.getNMSHandler().getBiomeName(location);
         return NamespacedKey.fromString(keyPair.getFirst() + ":" + keyPair.getSecond());
     }

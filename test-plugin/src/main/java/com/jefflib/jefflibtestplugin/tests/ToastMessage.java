@@ -22,7 +22,7 @@ import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class ToastMessage implements NMSTest {
     @Override

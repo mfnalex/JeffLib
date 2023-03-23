@@ -98,8 +98,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collections;
@@ -133,7 +133,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
+    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
         for (final Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new ClientboundSetEntityDataPacket(((Entity) entity).getId(), ((Entity) entity).getEntityData(), true));
@@ -141,7 +141,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public Object createHologram(@Nonnull final Location location, @Nonnull final String line, @Nonnull final Hologram.Type type) {
+    public Object createHologram(@NotNull final Location location, @NotNull final String line, @NotNull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final ServerLevel world = Objects.requireNonNull(craftWorld).getHandle();
         final Component baseComponent = CraftChatMessage.fromString(line)[0];
@@ -172,28 +172,28 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
         PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
         PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity) entity).getId(), ((Entity) entity).getEntityData(), true));
     }
 
     @Override
-    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
         PacketUtils.sendPacket(player, new ClientboundRemoveEntitiesPacket(((Entity) entity).getId()));
     }
 
     @Override
-    public void sendPacket(@Nonnull final Player player, @Nonnull final Object packet) {
+    public void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
     @Override
-    public Pair<String, String> getBiomeName(@Nonnull final Location location) {
+    public Pair<String, String> getBiomeName(@NotNull final Location location) {
         return NMSBiomeUtils.getBiomeName(location);
     }
 
     @Override
-    public void playTotemAnimation(@Nonnull final Player player) {
+    public void playTotemAnimation(@NotNull final Player player) {
         final ServerPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<?> packet = new ClientboundEntityEventPacket(entityPlayer, (byte) 35);
         final Connection playerConnection = entityPlayer.connection.connection;
@@ -201,7 +201,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
+    public void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile) {
         final ServerLevel world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPos blockPosition = new BlockPos(block.getX(), block.getY(), block.getZ());
         final SkullBlockEntity skull = (SkullBlockEntity) world.getBlockEntity(blockPosition, false);
@@ -210,7 +210,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public String itemStackToJson(@Nonnull final org.bukkit.inventory.ItemStack itemStack) {
+    public String itemStackToJson(@NotNull final org.bukkit.inventory.ItemStack itemStack) {
         final ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
         final CompoundTag compoundTag = new CompoundTag();
         nmsItemStack.save(compoundTag);
@@ -218,14 +218,14 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public org.bukkit.inventory.ItemStack itemStackFromJson(@Nonnull String json) throws Exception {
+    public org.bukkit.inventory.ItemStack itemStackFromJson(@NotNull String json) throws Exception {
         final CompoundTag compoundTag = TagParser.parseTag(json);
         final ItemStack nmsItemStack = ItemStack.of(compoundTag);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     @Override
-    public void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers) {
+    public void setFullTimeWithoutTimeSkipEvent(@NotNull final World world, final long time, final boolean notifyPlayers) {
         final ServerLevel level = ((CraftWorld) world).getHandle();
         level.setDayTime(time);
         if (notifyPlayers) {
@@ -348,25 +348,25 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
         return vec == null ? null : toBukkit(vec);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getMoveControl());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JumpController getJumpControl(final Mob entity) {
         return new HatchedJumpController(asMob(entity).getJumpControl());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LookController getLookControl(final Mob entity) {
         return new HatchedLookController(asMob(entity).getLookControl());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PathNavigation getPathNavigation(final Mob entity) {
         final net.minecraft.world.entity.Mob pathfinderMob = asMob(entity);
@@ -384,7 +384,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
         return Bukkit.getAdvancement(key);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public BukkitUnsafe getUnsafe() {
         return com.jeff_media.jefflib.internal.nms.v1_18_R2.BukkitUnsafe.INSTANCE;

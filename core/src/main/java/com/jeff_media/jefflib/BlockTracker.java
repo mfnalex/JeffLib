@@ -28,7 +28,7 @@ import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -131,7 +131,7 @@ public class BlockTracker {
      * @return NamespacedKey for the block
      */
     @Contract("_ -> new")
-    private static NamespacedKey getKey(@Nonnull final Block block) {
+    private static NamespacedKey getKey(@NotNull final Block block) {
         final int x = block.getX() & 0x000F;
         final int y = block.getY();
         final int z = block.getZ() & 0x000F;
@@ -146,7 +146,7 @@ public class BlockTracker {
      * @param chunk Chunk to check
      * @return Collection of all blocks inside the chunk that have been placed by players
      */
-    @Nonnull
+    @NotNull
     public static Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
         final Collection<Block> blocks = new HashSet<>();
         final PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);

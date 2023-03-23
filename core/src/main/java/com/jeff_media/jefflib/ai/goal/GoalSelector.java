@@ -22,7 +22,7 @@ import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Mob;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents an entity's goal selector
@@ -32,14 +32,14 @@ public class GoalSelector {
 
     protected final Mob mob;
 
-    protected GoalSelector(@Nonnull final Mob mob) {
+    protected GoalSelector(@NotNull final Mob mob) {
         this.mob = mob;
     }
 
     /**
      * Gets this mob's goal selector
      */
-    public static GoalSelector of(@Nonnull final Mob mob) {
+    public static GoalSelector of(@NotNull final Mob mob) {
         return new GoalSelector(mob);
     }
 
@@ -50,7 +50,7 @@ public class GoalSelector {
      * @param priority Priority of the goal
      */
     @NMS
-    public void addGoal(@Nonnull final PathfinderGoal goal, final int priority) {
+    public void addGoal(@NotNull final PathfinderGoal goal, final int priority) {
         JeffLib.getNMSHandler().addGoal(mob, goal, priority);
     }
 
@@ -60,7 +60,7 @@ public class GoalSelector {
      * @param goal Goal to remove
      */
     @NMS
-    public void removeGoal(@Nonnull final PathfinderGoal goal) {
+    public void removeGoal(@NotNull final PathfinderGoal goal) {
         JeffLib.getNMSHandler().removeGoal(mob, goal);
     }
 

@@ -27,7 +27,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.world.TimeSkipEvent;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 
 public class SetFullTimeWithoutTimeSkipEvent implements NMSTest, Listener {
 

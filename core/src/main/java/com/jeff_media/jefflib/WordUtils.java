@@ -22,7 +22,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.Locale;
@@ -74,14 +74,14 @@ public class WordUtils {
     /**
      * Converts a NamespacedKey into a human-readable name, ignoring the namespace. For example, "minecraft:warm_ocean" will return "Warm Ocean"
      */
-    public static String getNiceName(@Nonnull final NamespacedKey key) {
+    public static String getNiceName(@NotNull final NamespacedKey key) {
         return getNiceName(key.getKey());
     }
 
     /**
      * Converts a given String into a human-readable String, by replacing underscores with spaces, and making all words Uppercase. For example, "ARMOR_STAND" will return "Armor Stand"
      */
-    public static String getNiceName(@Nonnull final String string) {
+    public static String getNiceName(@NotNull final String string) {
         final String[] split = string.split("_");
         final Iterator<String> iterator = Arrays.stream(split).iterator();
         final StringBuilder builder = new StringBuilder();

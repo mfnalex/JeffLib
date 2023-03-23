@@ -50,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.5.0</version>
                 <configuration>
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
@@ -98,7 +98,7 @@
                             <links>
                                 <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
                                 <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                                <link>https://javadoc.io/doc/javax.annotation/javax.annotation-api/latest/</link>
+                                <link>https://javadoc.io/doc/org.jetbrains/annotations/</link>
                             </links>
                         </configuration>
                     </execution>
@@ -151,6 +151,12 @@
         </repository>
     </repositories>
     <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>24.0.1</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Test Dependencies Start -->
         <dependency>
             <groupId>io.papermc.paper</groupId>

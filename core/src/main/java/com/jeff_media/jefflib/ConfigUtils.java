@@ -20,7 +20,7 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.Config;
 import org.bukkit.configuration.ConfigurationSection;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,7 +32,7 @@ public final class ConfigUtils {
     /**
      * Turns a ConfigurationSection into a Map&lt;String,Object&gt; (just like SnakeYAML)
      */
-    public static Map<String, Object> asMap(@Nonnull final ConfigurationSection section) {
+    public static Map<String, Object> asMap(@NotNull final ConfigurationSection section) {
         final Map<String, Object> map = new HashMap<>();
         section.getKeys(false).forEach(key -> map.put(key, section.get(key)));
         return map;

@@ -179,12 +179,6 @@
             <version>3.2.38</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>20.1.0</version>
-            <scope>compile</scope>
-        </dependency>
     </dependencies>
 
 </project>

@@ -22,8 +22,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.BlockVector;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents the NMS PathNavigation of an entity
@@ -34,7 +34,7 @@ public interface PathNavigation {
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final BlockVector pos, final double speedModifier) {
+    default boolean moveTo(@NotNull final BlockVector pos, final double speedModifier) {
         return moveTo(pos.getX(), pos.getY(), pos.getZ(), speedModifier);
     }
 
@@ -46,14 +46,14 @@ public interface PathNavigation {
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final Entity entity, final double speedModifier) {
+    default boolean moveTo(@NotNull final Entity entity, final double speedModifier) {
         return moveTo(entity.getLocation(), speedModifier);
     }
 
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final Location loc, final double speedModifier) {
+    default boolean moveTo(@NotNull final Location loc, final double speedModifier) {
         return moveTo(loc.getX(), loc.getY(), loc.getZ(), speedModifier);
     }
 

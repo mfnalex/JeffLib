@@ -17,7 +17,7 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
 
 /**

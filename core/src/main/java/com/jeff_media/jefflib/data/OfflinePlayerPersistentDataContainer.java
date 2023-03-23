@@ -30,7 +30,7 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
@@ -54,7 +54,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      * @internal For internal use only
      */
     @Internal
-    public OfflinePlayerPersistentDataContainer(@Nonnull PersistentDataContainer craftPersistentDataContainer, @Nonnull File file, @Nonnull Object compoundTag) {
+    public OfflinePlayerPersistentDataContainer(@NotNull PersistentDataContainer craftPersistentDataContainer, @NotNull File file, @NotNull Object compoundTag) {
         this.craftPersistentDataContainer = craftPersistentDataContainer;
         this.file = file;
         this.compoundTag = compoundTag;
@@ -66,7 +66,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      *
      * @nms
      */
-    @Nonnull
+    @NotNull
     @NMS
     public static CompletableFuture<OfflinePlayerPersistentDataContainer> of(UUID uuid) {
         return CompletableFuture.supplyAsync(() -> {
@@ -84,7 +84,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      *
      * @nms
      */
-    @Nonnull
+    @NotNull
     @NMS
     public static CompletableFuture<OfflinePlayerPersistentDataContainer> of(OfflinePlayer player) {
         return of(player.getUniqueId());
@@ -142,16 +142,16 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     }
 
     @Override
-    public <T, Z> void set(@Nonnull NamespacedKey namespacedKey, @Nonnull PersistentDataType<T, Z> persistentDataType, @Nonnull Z z) {
+    public <T, Z> void set(@NotNull NamespacedKey namespacedKey, @NotNull PersistentDataType<T, Z> persistentDataType, @NotNull Z z) {
         craftPersistentDataContainer.set(namespacedKey, persistentDataType, z);
     }
 
     @Override
-    public <T, Z> boolean has(@Nonnull NamespacedKey namespacedKey, @Nonnull PersistentDataType<T, Z> persistentDataType) {
+    public <T, Z> boolean has(@NotNull NamespacedKey namespacedKey, @NotNull PersistentDataType<T, Z> persistentDataType) {
         return craftPersistentDataContainer.has(namespacedKey, persistentDataType);
     }
 
-    public boolean has(@Nonnull NamespacedKey namespacedKey) {
+    public boolean has(@NotNull NamespacedKey namespacedKey) {
         return craftPersistentDataContainer.getKeys().contains(namespacedKey);
     }
 
@@ -160,7 +160,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      */
     //@Override
     @Paper
-    public byte @NotNull [] serializeToBytes() throws IOException {
+    public @NotNull byte[] serializeToBytes() throws IOException {
         try {
             return (byte[]) ReflUtils.getMethod(craftPersistentDataContainer.getClass(), "serializeToBytes").invoke(craftPersistentDataContainer);
         } catch (ReflectiveOperationException ex) {
@@ -174,7 +174,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
      */
     //@Override
     @Paper
-    public void readFromBytes(byte @NotNull [] bytes, boolean b) throws IOException {
+    public void readFromBytes(@NotNull byte[] bytes, boolean b) throws IOException {
         try {
             ReflUtils.getMethod(craftPersistentDataContainer.getClass(), "readFromBytes", byte[].class, boolean.class).invoke(craftPersistentDataContainer, bytes, b);
         } catch (ReflectiveOperationException ex) {
@@ -184,24 +184,24 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     }
 
     @Override
-    public <T, Z> Z get(@Nonnull NamespacedKey namespacedKey, @Nonnull PersistentDataType<T, Z> persistentDataType) {
+    public <T, Z> Z get(@NotNull NamespacedKey namespacedKey, @NotNull PersistentDataType<T, Z> persistentDataType) {
         return craftPersistentDataContainer.get(namespacedKey, persistentDataType);
     }
 
     @Override
-    @Nonnull
-    public <T, Z> Z getOrDefault(@Nonnull NamespacedKey namespacedKey, @Nonnull PersistentDataType<T, Z> persistentDataType, @Nonnull Z z) {
+    @NotNull
+    public <T, Z> Z getOrDefault(@NotNull NamespacedKey namespacedKey, @NotNull PersistentDataType<T, Z> persistentDataType, @NotNull Z z) {
         return craftPersistentDataContainer.getOrDefault(namespacedKey, persistentDataType, z);
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public Set<NamespacedKey> getKeys() {
         return craftPersistentDataContainer.getKeys();
     }
 
     @Override
-    public void remove(@Nonnull NamespacedKey namespacedKey) {
+    public void remove(@NotNull NamespacedKey namespacedKey) {
         craftPersistentDataContainer.remove(namespacedKey);
     }
 
@@ -211,7 +211,7 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public PersistentDataAdapterContext getAdapterContext() {
         return craftPersistentDataContainer.getAdapterContext();
     }

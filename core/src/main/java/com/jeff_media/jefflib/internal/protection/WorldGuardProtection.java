@@ -26,7 +26,7 @@ import com.sk89q.worldguard.protection.flags.StateFlag;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 public class WorldGuardProtection implements PluginProtection {
 
@@ -43,12 +43,12 @@ public class WorldGuardProtection implements PluginProtection {
     }
 
     @Override
-    public boolean canBuild(@Nonnull Player player, @Nonnull Location location) {
+    public boolean canBuild(@NotNull Player player, @NotNull Location location) {
         return testStateFlag(player, location, Flags.BLOCK_PLACE);
     }
 
     @Override
-    public boolean canBreak(@Nonnull Player player, @Nonnull Location location) {
+    public boolean canBreak(@NotNull Player player, @NotNull Location location) {
         return testStateFlag(player, location, Flags.BLOCK_BREAK);
     }
 

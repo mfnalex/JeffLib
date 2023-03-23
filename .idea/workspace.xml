@@ -4,8 +4,126 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="Optimized Imports">
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockFaceUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockFaceUtils.java" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="added .idea">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ArrayUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ArrayUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockTracker.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ClassUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CollectionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CollectionUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CommandUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CommandUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/Comparators.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/Comparators.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ConfigUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ConfigUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/EnchantmentUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/EnchantmentUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/EntityUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/EntityUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/InventoryUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/InventoryUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ItemBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ItemBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ItemStackUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ItemStackUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LocationUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LocationUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LootUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LootUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/MaterialUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/MaterialUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/Msg.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/Msg.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NBTAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NBTAPI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NetUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NetUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NumberUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/NumberUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PacketUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PacketUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ParticleData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ParticleData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ParticleUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ParticleUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PlayerCache.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PlayerCache.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ProfileUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ProfileUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/RandomPos.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/RandomPos.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/RecipeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/RecipeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ReflUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ReflUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ServerUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ServerUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/SkullUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/SkullUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TextUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TextUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TimeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TimeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/WordUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/WordUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/WorldUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/WorldUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/CustomGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/CustomGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/GoalSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/GoalSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/PathfinderGoals.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/PathfinderGoals.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/TargetSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/TargetSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/navigation/Controls.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/navigation/Controls.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/navigation/PathNavigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/navigation/PathNavigation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/ByteCounter.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/ByteCounter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/Hologram.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/Hologram.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/McVersion.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/McVersion.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/OfflinePlayerPersistentDataContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/OfflinePlayerPersistentDataContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/SoundData.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/SoundData.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/ToastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/ToastMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/VariableItemStack.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/VariableItemStack.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/WeightedRandomList.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/WeightedRandomList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/WoodType.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/WoodType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Pair.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Pair.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Quartet.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Quartet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Quintet.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Quintet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Triplet.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/tuples/Triplet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/CuboidWorldBoundingBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/CuboidWorldBoundingBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/PolygonWorldBoundingBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/PolygonWorldBoundingBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/WorldBoundingBox.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/worldboundingbox/WorldBoundingBox.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/events/PlayerJumpEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/events/PlayerJumpEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/events/PlayerScrollEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/events/PlayerScrollEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/cherokee/Validate.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/cherokee/Validate.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/protection/PluginProtection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/protection/PluginProtection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/protection/WorldGuardProtection.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/protection/WorldGuardProtection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/PlaceholderAPIHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/PlaceholderAPIHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/PlaceholderAPIUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/PlaceholderAPIUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/SlimefunUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/SlimefunUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/NMSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/NMSTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/TestRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GetBiomeNamespacedKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GetBiomeNamespacedKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GlowEnchantment.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GlowEnchantment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/HeadTexture.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/HeadTexture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/RespawnPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/RespawnPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/SetFullTimeWithoutTimeSkipEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/SetFullTimeWithoutTimeSkipEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/ToastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/ToastMessage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,20 +172,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "jdk.selected.JAVA_MODULE": "17",
-    "last_opened_file_path": "C:/Users/mfnal/IdeaProjects/ChestSort",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.2",
-    "run.code.analysis.last.selected.profile": "pProject Default",
-    "settings.editor.selected.configurable": "copyright"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mfnal/IdeaProjects/ChestSort&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;copyright&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.jefflib.jefflibtestplugin" />
@@ -96,6 +214,7 @@
       <command value="mvn dependency:go-offline" />
       <command value="mvn install --offline" />
       <command value="mvn clean javadoc:javadoc" />
+      <command value="git add .idea" />
     </option>
   </component>
   <component name="RunManager" selected="JUnit.TestMotdEvent.testMotdEvent">
@@ -232,7 +351,9 @@
       <workItem from="1679032279061" duration="743000" />
       <workItem from="1679301860044" duration="2478000" />
       <workItem from="1679514577455" duration="9109000" />
-      <workItem from="1679570569935" duration="2783000" />
+      <workItem from="1679570569935" duration="2969000" />
+      <workItem from="1679597889060" duration="81000" />
+      <workItem from="1679599829150" duration="1589000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -451,7 +572,28 @@
       <option name="project" value="LOCAL" />
       <updated>1679597217875</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Updated Copyright">
+      <created>1679597745229</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1679597745229</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Updated .gitignore">
+      <created>1679597828386</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1679597828386</updated>
+    </task>
+    <task id="LOCAL-00034" summary="added .idea">
+      <created>1679597849193</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1679597849193</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="UpdateCopyrightCheckinHandler">
@@ -471,9 +613,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="11.1.5" />
-    <MESSAGE value="Added SerializedEntity" />
-    <MESSAGE value="Added experimental ProtectionUtils, removed final from @UtilityClasses" />
     <MESSAGE value="still gotta add new methods to the old NMS handlers" />
     <MESSAGE value="11.2.0" />
     <MESSAGE value="11.3.0 Added OfflinePlayerPersistentDataContainer &amp; more" />
@@ -496,7 +635,10 @@
     <MESSAGE value="Added KitchenSink" />
     <MESSAGE value="Moved playTotemAnimation to EntityUtils" />
     <MESSAGE value="Optimized Imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="Optimized Imports" />
+    <MESSAGE value="Updated Copyright" />
+    <MESSAGE value="Updated .gitignore" />
+    <MESSAGE value="added .idea" />
+    <option name="LAST_COMMIT_MESSAGE" value="added .idea" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

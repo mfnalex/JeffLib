@@ -45,9 +45,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import java.io.File;
 import java.io.IOException;
 import java.util.Set;
@@ -62,39 +62,39 @@ import java.util.stream.Stream;
 @Internal
 public interface AbstractNMSHandler {
 
-    //void updateMap(@Nonnull final MapView map);
+    //void updateMap(@NotNull final MapView map);
 
     AbstractNMSMaterialHandler getMaterialHandler();
 
     AbstractNMSBlockHandler getBlockHandler();
 
-    void changeNMSEntityName(@Nonnull Object entity, @Nonnull String name);
+    void changeNMSEntityName(@NotNull Object entity, @NotNull String name);
 
-    Object createHologram(@Nonnull Location location, @Nonnull String line, @Nonnull Hologram.Type type);
+    Object createHologram(@NotNull Location location, @NotNull String line, @NotNull Hologram.Type type);
 
-    void showEntityToPlayer(@Nonnull Object entity, @Nonnull Player player);
+    void showEntityToPlayer(@NotNull Object entity, @NotNull Player player);
 
-    void hideEntityFromPlayer(@Nonnull Object entity, @Nonnull Player player);
+    void hideEntityFromPlayer(@NotNull Object entity, @NotNull Player player);
 
-    void sendPacket(@Nonnull final Player player, @Nonnull final Object packet);
-
-    @Tested("1.19.4")
-    Pair<String, String> getBiomeName(@Nonnull final Location location);
+    void sendPacket(@NotNull final Player player, @NotNull final Object packet);
 
     @Tested("1.19.4")
-    void playTotemAnimation(@Nonnull final Player player);
+    Pair<String, String> getBiomeName(@NotNull final Location location);
 
     @Tested("1.19.4")
-    void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile);
+    void playTotemAnimation(@NotNull final Player player);
 
     @Tested("1.19.4")
-    String itemStackToJson(@Nonnull final ItemStack itemStack);
+    void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile);
 
     @Tested("1.19.4")
-    ItemStack itemStackFromJson(@Nonnull final String json) throws Exception;
+    String itemStackToJson(@NotNull final ItemStack itemStack);
 
     @Tested("1.19.4")
-    void setFullTimeWithoutTimeSkipEvent(@Nonnull final World world, final long time, final boolean notifyPlayers);
+    ItemStack itemStackFromJson(@NotNull final String json) throws Exception;
+
+    @Tested("1.19.4")
+    void setFullTimeWithoutTimeSkipEvent(@NotNull final World world, final long time, final boolean notifyPlayers);
 
     @Tested("1.19.4")
     double[] getTps();
@@ -142,22 +142,22 @@ public interface AbstractNMSHandler {
     @Nullable
     Vector getRandomPosTowards(Creature entity, int var1, int var2, Vector var3, double var4);
 
-    @Nonnull
+    @NotNull
     MoveController getMoveControl(Mob entity);
 
-    @Nonnull
+    @NotNull
     JumpController getJumpControl(Mob entity);
 
-    @Nonnull
+    @NotNull
     LookController getLookControl(Mob entity);
 
-    @Nonnull
+    @NotNull
     PathNavigation getPathNavigation(Mob entity);
 
     @Nullable
     Advancement loadVolatileAdvancement(NamespacedKey key, String advancement);
 
-    @Nonnull
+    @NotNull
     BukkitUnsafe getUnsafe();
 
     String serializePdc(PersistentDataContainer pdc);

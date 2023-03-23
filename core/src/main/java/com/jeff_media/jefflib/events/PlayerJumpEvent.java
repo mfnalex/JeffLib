@@ -35,7 +35,7 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents an event called when a player jumps.
@@ -47,12 +47,12 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList HANDLERS = new HandlerList();
     @Getter
-    private final @Nonnull Location from;
+    private final @NotNull Location from;
     @Getter
-    private final @Nonnull Location to;
+    private final @NotNull Location to;
     private boolean cancelled;
 
-    public PlayerJumpEvent(@Nonnull Player who, @Nonnull Location from, @Nonnull Location to) {
+    public PlayerJumpEvent(@NotNull Player who, @NotNull Location from, @NotNull Location to) {
         super(who);
         this.from = from;
         this.to = to;
@@ -73,7 +73,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
         return listener;
     }
 
-    @Nonnull
+    @NotNull
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
@@ -88,7 +88,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
         this.cancelled = cancelled;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public HandlerList getHandlers() {
         return HANDLERS;

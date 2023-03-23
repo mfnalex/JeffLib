@@ -23,7 +23,7 @@ import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -34,35 +34,35 @@ import java.util.stream.Collectors;
  */
 public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
-    @Nonnull
+    @NotNull
     @Getter
     private final List<Vector> points;
     private final double minY;
     private final double maxY;
     @Setter
-    @Nonnull
+    @NotNull
     private World world;
 
-    private PolygonWorldBoundingBox(@Nonnull final World world, @Nonnull final List<Vector> points) {
+    private PolygonWorldBoundingBox(@NotNull final World world, @NotNull final List<Vector> points) {
         this.world = world;
         this.points = Collections.unmodifiableList(points);
         this.minY = points.stream().mapToDouble(Vector::getY).min().getAsDouble();
         this.maxY = points.stream().mapToDouble(Vector::getY).max().getAsDouble();
     }
 
-    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final Location... points) {
+    public static PolygonWorldBoundingBox fromLocations(@NotNull final World world, @NotNull final Location... points) {
         return fromLocations(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final List<Location> points) {
+    public static PolygonWorldBoundingBox fromLocations(@NotNull final World world, @NotNull final List<Location> points) {
         return new PolygonWorldBoundingBox(world, points.stream().map(Location::toVector).collect(Collectors.toList()));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final Vector... points) {
+    public static PolygonWorldBoundingBox fromVectors(@NotNull final World world, @NotNull final Vector... points) {
         return fromVectors(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final List<Vector> points) {
+    public static PolygonWorldBoundingBox fromVectors(@NotNull final World world, @NotNull final List<Vector> points) {
         return new PolygonWorldBoundingBox(world, points);
     }
 
@@ -128,7 +128,7 @@ public final class PolygonWorldBoundingBox extends WorldBoundingBox {
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public World getWorld() {
         return null;
     }

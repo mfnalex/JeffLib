@@ -29,8 +29,8 @@ import org.bukkit.block.data.BlockData;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -57,7 +57,7 @@ public class BlockUtils {
      * @return The lowest non-air block at the given location
      */
     @Nullable
-    public static Block getLowestBlockAt(@Nonnull final Location location) {
+    public static Block getLowestBlockAt(@NotNull final Location location) {
         return getLowestBlockAt(Objects.requireNonNull(location.getWorld()), location.getBlockX(), location.getBlockZ());
     }
 
@@ -70,7 +70,7 @@ public class BlockUtils {
      * @return The lowest non-air block at the given position
      */
     @Nullable
-    public static Block getLowestBlockAt(@Nonnull final World world, final int x, final int z) {
+    public static Block getLowestBlockAt(@NotNull final World world, final int x, final int z) {
         for (int y = WorldUtils.getWorldMinHeight(world); y < world.getMaxHeight(); y++) {
             final Block current = world.getBlockAt(x, y, z);
             if (!current.getType().isAir()) return current;

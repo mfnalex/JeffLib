@@ -26,8 +26,8 @@ import com.jeff_media.jefflib.ai.navigation.PathNavigation;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.ai.goal.Goal;
 
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
 
@@ -42,13 +42,13 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
 
     }
 
-    @Nonnull
+    @NotNull
     private static EnumSet<Flag> translateGoalFlags(@Nullable final EnumSet<GoalFlag> flags) {
         if (flags == null) return EnumSet.noneOf(Flag.class);
         return flags.stream().map(flag -> Flag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(Flag.class)));
     }
 
-    @Nonnull
+    @NotNull
     private static EnumSet<GoalFlag> translateFlags(@Nullable final EnumSet<Flag> flags) {
         if (flags == null) return EnumSet.noneOf(GoalFlag.class);
         return flags.stream().map(flag -> GoalFlag.valueOf(flag.name())).collect(Collectors.toCollection(() -> EnumSet.noneOf(GoalFlag.class)));
@@ -84,7 +84,7 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
         goal.tick();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return translateFlags(this.getFlags());
@@ -95,25 +95,25 @@ public class CustomGoalExecutor extends Goal implements com.jeff_media.jefflib.a
         this.setFlags(translateGoalFlags(flags));
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PathNavigation getNavigation() {
         return new HatchedPathNavigation(pmob.getNavigation());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public MoveController getMoveController() {
         return new HatchedMoveController(pmob.getMoveControl());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LookController getLookController() {
         return new HatchedLookController(pmob.getLookControl());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JumpController getJumpController() {
         return new HatchedJumpController(pmob.getJumpControl());

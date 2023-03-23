@@ -19,7 +19,7 @@ package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.URL;
 import java.security.CodeSource;
@@ -41,7 +41,7 @@ public class ClassUtils {
      * @param name Fully qualified class name
      * @return true if the class exists, otherwise false
      */
-    public static boolean exists(@Nonnull final String name) {
+    public static boolean exists(@NotNull final String name) {
         if(ReflUtils.isClassCached(name)) {
             return true;
         }
@@ -112,7 +112,7 @@ public class ClassUtils {
     /**
      * Returns a list of all classes included in the plugin's jar file. The returned classes have a format like "com.jeff_media.jefflib.ClassUtils"
      */
-    @Nonnull
+    @NotNull
     public static List<String> listAllClasses() {
         return listAllClasses(ClassUtils.class);
     }
@@ -120,8 +120,8 @@ public class ClassUtils {
     /**
      * Returns a list of all classes included in the plugin's jar file that provides the given class. The returned classes have a format like "com.jeff_media.jefflib.ClassUtils"
      */
-    @Nonnull
-    public static List<String> listAllClasses(@Nonnull final Class<?> clazz) {
+    @NotNull
+    public static List<String> listAllClasses(@NotNull final Class<?> clazz) {
         final CodeSource source = clazz.getProtectionDomain().getCodeSource();
         if (source == null) return Collections.emptyList();
         final URL url = source.getLocation();

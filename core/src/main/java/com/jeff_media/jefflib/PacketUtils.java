@@ -21,7 +21,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
-import javax.annotation.Nonnull;
+import org.jetbrains.annotations.NotNull;
 import java.util.function.Predicate;
 
 /**
@@ -33,14 +33,14 @@ public class PacketUtils {
     /**
      * Sends the given packet objects to all players matching the given Predicate
      */
-    public static void sendPacket(@Nonnull final Predicate<Player> players, @Nonnull final Object... packets) {
+    public static void sendPacket(@NotNull final Predicate<Player> players, @NotNull final Object... packets) {
         Bukkit.getOnlinePlayers().stream().filter(players).forEach(player -> sendPacket(player, packets));
     }
 
     /**
      * Sends the given packet objects to a player
      */
-    public static void sendPacket(@Nonnull final Player player, @Nonnull final Object... packets) {
+    public static void sendPacket(@NotNull final Player player, @NotNull final Object... packets) {
         for (Object packet : packets) {
             JeffLib.getNMSHandler().sendPacket(player, packet);
         }
