@@ -29,15 +29,11 @@ import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -47,8 +43,17 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Entity related methods
@@ -272,6 +277,39 @@ public class EntityUtils {
     @Tested("1.19.4")
     public static void respawnPlayer(@Nonnull final Player player) {
         JeffLib.getNMSHandler().respawnPlayer(player);
+    }
+
+    /**
+     * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
+     * @param player Player to play the animation to
+     */
+    @NMS
+    @Tested("1.19.4")
+    public static void playTotemAnimation(@Nonnull final Player player) {
+        playTotemAnimation(player, null);
+    }
+
+    /**
+     * Plays the totem of undying animation to a given player using the provided custom model data.
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
+     * @param player          Player to play the animation to
+     * @param customModelData Custom model data to use, or null to not use any custom model data
+     */
+    @NMS
+    @Tested("1.19.4")
+    public static void playTotemAnimation(@Nonnull final Player player, @Nullable final Integer customModelData) {
+        final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+        final ItemMeta meta = totem.getItemMeta();
+        assert meta != null;
+        meta.setCustomModelData(customModelData);
+        totem.setItemMeta(meta);
+        final ItemStack hand = player.getInventory().getItemInMainHand();
+        player.getInventory().setItemInMainHand(totem);
+        JeffLib.getNMSHandler().playTotemAnimation(player);
+        player.getInventory().setItemInMainHand(hand);
     }
 
 
