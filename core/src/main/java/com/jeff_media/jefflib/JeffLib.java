@@ -60,7 +60,7 @@ public class JeffLib {
     private static boolean debug = false;
     @Getter
     private static String version = "N/A";
-    private static AbstractNMSHandler abstractNmsHandler;
+    private static AbstractNMSHandler nmsHandler;
     private static boolean initDone = false;
 
     static {
@@ -235,13 +235,13 @@ public class JeffLib {
     @Internal
     @NMS
     public static AbstractNMSHandler getNMSHandler() {
-        if (abstractNmsHandler == null) {
+        if (nmsHandler == null) {
             enableNMS();
-            if (abstractNmsHandler == null) {
+            if (nmsHandler == null) {
                 throw new NMSNotSupportedException();
             }
         }
-        return abstractNmsHandler;
+        return nmsHandler;
     }
 
     /**
@@ -260,18 +260,18 @@ public class JeffLib {
             internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }
         try {
-            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
+            nmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
         } catch (final ReflectiveOperationException exception) {
             final String className = ClassUtils.listAllClasses().stream().filter(name -> name.endsWith(internalsName + ".NMSHandler")).findFirst().orElse(null);
             if (className != null) {
                 try {
-                    abstractNmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
+                    nmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
                 } catch (final ReflectiveOperationException ignored) {
 
                 }
             }
         }
-        if (abstractNmsHandler == null) {
+        if (nmsHandler == null) {
             throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName() + "(" + internalsName + ")");
         }
     }
@@ -341,5 +341,7 @@ public class JeffLib {
         init(plugin);
         if (nms) enableNMS();
     }
+
+    public static final class KitchenSink { }
 
 }
