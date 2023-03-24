@@ -1,24 +1,22 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.internal.nms.v1_16_R1;
 
-import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.*;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -52,17 +50,6 @@ import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.HatchedPathNavigation;
 import com.jeff_media.jefflib.internal.nms.v1_16_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.util.Collections;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import net.minecraft.server.v1_16_R1.AdvancementDataWorld;
 import net.minecraft.server.v1_16_R1.BlockPosition;
 import net.minecraft.server.v1_16_R1.ChatDeserializer;
@@ -117,6 +104,26 @@ import org.bukkit.entity.Player;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.util.Collections;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
+
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.asMob;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.asPathfinder;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.getDedicatedServer;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.getServer;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.ingredient;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.toBukkit;
+import static com.jeff_media.jefflib.internal.nms.v1_16_R1.NMS.toNms;
+
 public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKeyProvider {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
@@ -134,7 +141,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void changeNMSEntityName(@Nonnull final Object entity, @Nonnull final String name) {
+    public void changeNMSEntityName(@NotNull final Object entity, @NotNull final String name) {
         ((Entity) entity).setCustomName(CraftChatMessage.fromString(name)[0]);
         for (final Player player : Bukkit.getOnlinePlayers()) {
             sendPacket(player, new PacketPlayOutEntityMetadata(((Entity) entity).getId(), ((Entity) entity).getDataWatcher(), true));
@@ -142,7 +149,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public Object createHologram(@Nonnull final Location location, @Nonnull final String line, @Nonnull final Hologram.Type type) {
+    public Object createHologram(@NotNull final Location location, @NotNull final String line, @NotNull final Hologram.Type type) {
         final CraftWorld craftWorld = (CraftWorld) location.getWorld();
         final World world = craftWorld.getHandle();
         final IChatBaseComponent baseComponent = CraftChatMessage.fromString(line)[0];
@@ -173,7 +180,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void showEntityToPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+    public void showEntityToPlayer(@NotNull final Object entity, @NotNull final Player player) {
         final PacketPlayOutSpawnEntity packetSpawn = new PacketPlayOutSpawnEntity((Entity) entity);
         PacketUtils.sendPacket(player, packetSpawn);
 
@@ -182,23 +189,23 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void hideEntityFromPlayer(@Nonnull final Object entity, @Nonnull final Player player) {
+    public void hideEntityFromPlayer(@NotNull final Object entity, @NotNull final Player player) {
         final PacketPlayOutEntityDestroy packetDestroy = new PacketPlayOutEntityDestroy(((Entity) entity).getId());
         PacketUtils.sendPacket(player, packetDestroy);
     }
 
     @Override
-    public void sendPacket(@Nonnull final Player player, @Nonnull final Object packet) {
+    public void sendPacket(@NotNull final Player player, @NotNull final Object packet) {
         NMSPacketUtils.sendPacket(player, packet);
     }
 
     @Override
-    public Pair<String, String> getBiomeName(@Nonnull final Location location) {
+    public Pair<String, String> getBiomeName(@NotNull final Location location) {
         throw new NMSNotSupportedException("1_16_R1 and older does not support this method");
     }
 
     @Override
-    public void playTotemAnimation(@Nonnull final Player player) {
+    public void playTotemAnimation(@NotNull final Player player) {
         final EntityPlayer entityPlayer = ((CraftPlayer) player).getHandle();
         final Packet<PacketListenerPlayOut> packet = new PacketPlayOutEntityStatus(entityPlayer, (byte) 35);
         final PlayerConnection playerConnection = entityPlayer.playerConnection;
@@ -206,7 +213,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public void setHeadTexture(final Block block, @Nonnull final GameProfile gameProfile) {
+    public void setHeadTexture(final Block block, @NotNull final GameProfile gameProfile) {
         final World world = ((CraftWorld) block.getWorld()).getHandle();
         final BlockPosition blockPosition = new BlockPosition(block.getX(), block.getY(), block.getZ());
         final TileEntitySkull skull = (TileEntitySkull) world.getTileEntity(blockPosition);
@@ -214,7 +221,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public String itemStackToJson(@Nonnull final org.bukkit.inventory.ItemStack itemStack) {
+    public String itemStackToJson(@NotNull final org.bukkit.inventory.ItemStack itemStack) {
         final ItemStack nmsItemStack = CraftItemStack.asNMSCopy(itemStack);
         final NBTTagCompound compoundTag = new NBTTagCompound();
         nmsItemStack.save(compoundTag);
@@ -222,14 +229,14 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
     }
 
     @Override
-    public org.bukkit.inventory.ItemStack itemStackFromJson(@Nonnull String json) throws Exception {
+    public org.bukkit.inventory.ItemStack itemStackFromJson(@NotNull String json) throws Exception {
         final NBTTagCompound compoundTag = MojangsonParser.parse(json);
         final ItemStack nmsItemStack = ItemStack.a(compoundTag);
         return CraftItemStack.asBukkitCopy(nmsItemStack);
     }
 
     @Override
-    public void setFullTimeWithoutTimeSkipEvent(@Nonnull final org.bukkit.World world, final long time, final boolean notifyPlayers) {
+    public void setFullTimeWithoutTimeSkipEvent(@NotNull final org.bukkit.World world, final long time, final boolean notifyPlayers) {
         final WorldServer level = ((CraftWorld) world).getHandle();
         level.setDayTime(time);
         if (notifyPlayers) {
@@ -353,25 +360,25 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
         return vec == null ? null : toBukkit(vec);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public MoveController getMoveControl(final Mob entity) {
         return new HatchedMoveController(asMob(entity).getControllerMove());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JumpController getJumpControl(final Mob entity) {
         return new HatchedJumpController(asMob(entity).getControllerJump());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LookController getLookControl(final Mob entity) {
         return new HatchedLookController(asMob(entity).getControllerLook());
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PathNavigation getPathNavigation(final Mob entity) {
         final EntityInsentient pathfinderMob = asMob(entity);
@@ -389,7 +396,7 @@ public class NMSHandler implements AbstractNMSHandler, AbstractNMSTranslationKey
         return Bukkit.getAdvancement(key);
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public BukkitUnsafe getUnsafe() {
         return com.jeff_media.jefflib.internal.nms.v1_16_R1.BukkitUnsafe.INSTANCE;

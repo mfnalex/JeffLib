@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
@@ -29,15 +28,11 @@ import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.EntityEffect;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.attribute.AttributeInstance;
@@ -47,8 +42,17 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
 
 /**
  * Entity related methods
@@ -62,14 +66,14 @@ public class EntityUtils {
      * Gets the closest other player in this world, or null if there is no other player
      */
     @Nullable
-    public static Player getClosestOtherPlayer(@Nonnull final Player player) {
+    public static Player getClosestOtherPlayer(@NotNull final Player player) {
         return player.getWorld().getPlayers().stream().filter(other -> other != player).min(new Comparators.EntityByDistanceComparator(player)).orElse(null);
     }
 
     /**
      * Gets the generic movement speed of an entity
      */
-    public static double getMovementSpeed(@Nonnull final LivingEntity entity) {
+    public static double getMovementSpeed(@NotNull final LivingEntity entity) {
         final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
         if (attribute != null) {
             return attribute.getValue();
@@ -81,7 +85,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Entity entity) {
+    public static Player getClosestPlayer(@NotNull final Entity entity) {
         return getClosestPlayer(entity.getLocation());
     }
 
@@ -89,7 +93,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player, or if the world isn't loaded
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Location location) {
+    public static Player getClosestPlayer(@NotNull final Location location) {
         World world = location.getWorld();
         if (world == null) return null;
         return world.getPlayers().stream().min(new Comparators.EntityByDistanceComparator(location)).orElse(null);
@@ -99,7 +103,7 @@ public class EntityUtils {
      * Gets the closest player in this world, or null if there is no player
      */
     @Nullable
-    public static Player getClosestPlayer(@Nonnull final Block block) {
+    public static Player getClosestPlayer(@NotNull final Block block) {
         return getClosestPlayer(BlockUtils.getCenter(block));
     }
 
@@ -171,8 +175,8 @@ public class EntityUtils {
     /**
      * Returns a collection of all entities of the given class, from all worlds
      */
-    @Nonnull
-    public static <T extends Entity> Collection<T> getEntities(@Nonnull final Class<T> entityClass) {
+    @NotNull
+    public static <T extends Entity> Collection<T> getEntities(@NotNull final Class<T> entityClass) {
         final Collection<T> list = new ArrayList<>();
         for (final World world : Bukkit.getWorlds()) {
             list.addAll(world.getEntitiesByClass(entityClass));
@@ -194,7 +198,7 @@ public class EntityUtils {
     /**
      * Returns a collection of all entities from all worlds
      */
-    @Nonnull
+    @NotNull
     public static Collection<Entity> getAllEntities() {
         final Collection<Entity> list = new ArrayList<>();
         for (final World world : Bukkit.getWorlds()) {
@@ -206,16 +210,16 @@ public class EntityUtils {
     /**
      * Gets this mob's {@link GoalSelector}
      */
-    @Nonnull
-    public static GoalSelector getGoalSelector(@Nonnull final Mob mob) {
+    @NotNull
+    public static GoalSelector getGoalSelector(@NotNull final Mob mob) {
         return GoalSelector.of(mob);
     }
 
     /**
      * Gets this mob's {@link TargetSelector}
      */
-    @Nonnull
-    public static TargetSelector getTargetSelector(@Nonnull final Mob mob) {
+    @NotNull
+    public static TargetSelector getTargetSelector(@NotNull final Mob mob) {
         return TargetSelector.of(mob);
     }
 
@@ -223,8 +227,8 @@ public class EntityUtils {
      * Get this mob's {@link PathNavigation}
      */
     @NMS
-    @Nonnull
-    public static PathNavigation getNavigation(@Nonnull final Mob entity) {
+    @NotNull
+    public static PathNavigation getNavigation(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getPathNavigation(entity);
     }
 
@@ -232,8 +236,8 @@ public class EntityUtils {
      * Gets this mob's {@link MoveController}
      */
     @NMS
-    @Nonnull
-    public static MoveController getMoveController(@Nonnull final Mob entity) {
+    @NotNull
+    public static MoveController getMoveController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getMoveControl(entity);
     }
 
@@ -241,8 +245,8 @@ public class EntityUtils {
      * Gets this mob's {@link JumpController}
      */
     @NMS
-    @Nonnull
-    public static JumpController getJumpController(@Nonnull final Mob entity) {
+    @NotNull
+    public static JumpController getJumpController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getJumpControl(entity);
     }
 
@@ -250,8 +254,8 @@ public class EntityUtils {
      * Gets this mob's {@link LookController}
      */
     @NMS
-    @Nonnull
-    public static LookController getLookController(@Nonnull final Mob entity) {
+    @NotNull
+    public static LookController getLookController(@NotNull final Mob entity) {
         return JeffLib.getNMSHandler().getLookControl(entity);
     }
 
@@ -259,8 +263,8 @@ public class EntityUtils {
      * Gets this mob's {@link com.jeff_media.jefflib.ai.navigation.Controls}
      */
     @NMS
-    @Nonnull
-    public static Controls getControls(@Nonnull final Mob entity) {
+    @NotNull
+    public static Controls getControls(@NotNull final Mob entity) {
         return Controls.of(entity);
     }
 
@@ -270,8 +274,41 @@ public class EntityUtils {
      */
     @NMS
     @Tested("1.19.4")
-    public static void respawnPlayer(@Nonnull final Player player) {
+    public static void respawnPlayer(@NotNull final Player player) {
         JeffLib.getNMSHandler().respawnPlayer(player);
+    }
+
+    /**
+     * Plays the totem of undying animation to a given player. This is the same as <pre>playTotemAnimation(player, null)</pre>
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
+     * @param player Player to play the animation to
+     */
+    @NMS
+    @Tested("1.19.4")
+    public static void playTotemAnimation(@NotNull final Player player) {
+        playTotemAnimation(player, null);
+    }
+
+    /**
+     * Plays the totem of undying animation to a given player using the provided custom model data.
+     * Unlike {@link Player#playEffect(EntityEffect)}, this will only be shown to the affected player.
+     *
+     * @param player          Player to play the animation to
+     * @param customModelData Custom model data to use, or null to not use any custom model data
+     */
+    @NMS
+    @Tested("1.19.4")
+    public static void playTotemAnimation(@NotNull final Player player, @Nullable final Integer customModelData) {
+        final ItemStack totem = new ItemStack(Material.TOTEM_OF_UNDYING);
+        final ItemMeta meta = totem.getItemMeta();
+        assert meta != null;
+        meta.setCustomModelData(customModelData);
+        totem.setItemMeta(meta);
+        final ItemStack hand = player.getInventory().getItemInMainHand();
+        player.getInventory().setItemInMainHand(totem);
+        JeffLib.getNMSHandler().playTotemAnimation(player);
+        player.getInventory().setItemInMainHand(hand);
     }
 
 

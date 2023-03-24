@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.jefflib.jefflibtestplugin;
 
 import com.jeff_media.jefflib.ClassUtils;
@@ -17,11 +34,12 @@ import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
 
-import javax.annotation.Nullable;
+import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 import java.util.ArrayDeque;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.Objects;
 import java.util.UUID;
@@ -102,7 +120,7 @@ public class TestRunner implements Runnable {
         if (player != null) {
             player.teleport(spawn);
         }
-        world.getEntities().stream().filter(entity -> !entity.equals(player)).forEach(Entity::remove);
+        world.getEntities().stream().filter(entity -> !(entity instanceof Player)).forEach(Entity::remove);
     }
 
     public void cleanup() {
@@ -198,15 +216,16 @@ public class TestRunner implements Runnable {
         print("");
     }
 
-    public void print(String... text) {
-        print(LogLevel.INFO, text);
+    public void print(Object... objects) {
+        print(LogLevel.INFO, objects);
     }
 
-    public void print(LogLevel logLevel, String... text) {
+    public void print(LogLevel logLevel, Object... objects) {
+        String[] text = Arrays.stream(objects).map(Object::toString).toArray(String[]::new);
         if (player != null) {
             player.sendMessage(text);
         }
-        for (String line : text) {
+        for(String line : text) {
             line = ChatColor.stripColor(line);
             switch (logLevel) {
                 case INFO:

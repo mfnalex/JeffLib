@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.pluginhooks.worldguard;
@@ -21,12 +20,13 @@ package com.jeff_media.jefflib.pluginhooks.worldguard;
 import com.jeff_media.jefflib.PluginUtils;
 import com.jeff_media.jefflib.exceptions.MissingPluginException;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
-import java.util.Collection;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Collection;
 
 /**
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
@@ -75,7 +75,7 @@ public class WorldGuardUtils {
      * @return Collection of all region names at this location
      * @throws MissingPluginException exception
      */
-    @Nonnull
+    @NotNull
     @RequiresPlugin("WorldGuard")
     public static Collection<String> getRegionsAtLocation(final Location location) throws MissingPluginException {
         try {
@@ -85,7 +85,7 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canPlace(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         if (isWorldGuardInstalled()) {
             return WorldGuardHandler.canPlace(player, location);
         }
@@ -93,7 +93,7 @@ public class WorldGuardUtils {
     }
 
     @RequiresPlugin("WorldGuard")
-    public static boolean canInteract(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canInteract(player, location);
         } catch (final Throwable t) {
@@ -102,7 +102,7 @@ public class WorldGuardUtils {
     }
 
     @RequiresPlugin("WorldGuard")
-    public static boolean canBreak(@Nonnull final Player player, @Nonnull final Location location) throws MissingPluginException {
+    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
         try {
             return WorldGuardHandler.canBreak(player, location);
         } catch (final Throwable t) {
@@ -110,16 +110,16 @@ public class WorldGuardUtils {
         }
     }
 
-    @Nonnull
-    public static StateFlag registerStateFlag(@Nonnull String name, @Nonnull StateFlag.State defaultValue) {
+    @NotNull
+    public static StateFlag registerStateFlag(@NotNull String name, @NotNull StateFlag.State defaultValue) {
         if (isWorldGuardInstalled()) {
             return WorldGuardHandler.registerStateFlag(name, defaultValue);
         }
         return new StateFlag(name, StateFlag.State.DENY);
     }
 
-    @Nonnull
-    public static StateFlag.State testStateFlag(@Nullable Player player, @Nonnull Location location, @Nonnull StateFlag flag) {
+    @NotNull
+    public static StateFlag.State testStateFlag(@Nullable Player player, @NotNull Location location, @NotNull StateFlag flag) {
         if (isWorldGuardInstalled()) {
             return StateFlag.State.fromBoolean(WorldGuardHandler.testStateFlag(player, location, flag));
         }

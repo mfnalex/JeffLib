@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
@@ -29,6 +28,13 @@ import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
 import com.jeff_media.jefflib.internal.listeners.BlockTrackListener;
 import com.jeff_media.jefflib.internal.listeners.PlayerScrollListener;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
+import lombok.Getter;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.bukkit.plugin.PluginDescriptionFile;
+import org.bukkit.plugin.java.JavaPlugin;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
@@ -40,12 +46,6 @@ import java.util.Objects;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.logging.Logger;
-import lombok.Getter;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-import org.bukkit.plugin.PluginDescriptionFile;
-import org.bukkit.plugin.java.JavaPlugin;
 
 /**
  * Main class of the library, has to be initialized for certain methods to work.
@@ -60,7 +60,7 @@ public class JeffLib {
     private static boolean debug = false;
     @Getter
     private static String version = "N/A";
-    private static AbstractNMSHandler abstractNmsHandler;
+    private static AbstractNMSHandler nmsHandler;
     private static boolean initDone = false;
 
     static {
@@ -235,13 +235,13 @@ public class JeffLib {
     @Internal
     @NMS
     public static AbstractNMSHandler getNMSHandler() {
-        if (abstractNmsHandler == null) {
+        if (nmsHandler == null) {
             enableNMS();
-            if (abstractNmsHandler == null) {
+            if (nmsHandler == null) {
                 throw new NMSNotSupportedException();
             }
         }
-        return abstractNmsHandler;
+        return nmsHandler;
     }
 
     /**
@@ -260,18 +260,18 @@ public class JeffLib {
             internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }
         try {
-            abstractNmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
+            nmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + internalsName + ".NMSHandler").getDeclaredConstructor().newInstance();
         } catch (final ReflectiveOperationException exception) {
             final String className = ClassUtils.listAllClasses().stream().filter(name -> name.endsWith(internalsName + ".NMSHandler")).findFirst().orElse(null);
             if (className != null) {
                 try {
-                    abstractNmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
+                    nmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
                 } catch (final ReflectiveOperationException ignored) {
 
                 }
             }
         }
-        if (abstractNmsHandler == null) {
+        if (nmsHandler == null) {
             throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName() + "(" + internalsName + ")");
         }
     }
@@ -341,5 +341,7 @@ public class JeffLib {
         init(plugin);
         if (nms) enableNMS();
     }
+
+    public static final class KitchenSink { }
 
 }

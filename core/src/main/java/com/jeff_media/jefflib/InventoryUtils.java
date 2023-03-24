@@ -1,28 +1,22 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -30,6 +24,12 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryDragEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Objects;
 
 /**
  * Inventory related methods
@@ -54,28 +54,28 @@ public class InventoryUtils {
     /**
      * Counts how many times the given ItemStack is present in the given array
      */
-    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final ItemStack item) {
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final ItemStack item) {
         return Arrays.stream(array).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given array
      */
-    public static int countItemStacks(@Nonnull final ItemStack[] array, @Nonnull final Material material) {
+    public static int countItemStacks(@NotNull final ItemStack[] array, @NotNull final Material material) {
         return Arrays.stream(array).filter(Objects::nonNull).filter(candidate -> candidate.getType() == material).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given ItemStack is present in the given inventory
      */
-    public static int countItemStacks(@Nonnull final Inventory inventory, @Nonnull final ItemStack item) {
+    public static int countItemStacks(@NotNull final Inventory inventory, @NotNull final ItemStack item) {
         return Arrays.stream(inventory.getContents()).filter(Objects::nonNull).filter(itemStack -> itemStack.isSimilar(item)).mapToInt(ItemStack::getAmount).sum();
     }
 
     /**
      * Counts how many times the given Material is present in the given inventory
      */
-    public static int countMaterials(@Nonnull final Inventory inventory, @Nonnull final Material material) {
+    public static int countMaterials(@NotNull final Inventory inventory, @NotNull final Material material) {
         return inventory.all(material).values().stream().filter(Objects::nonNull).mapToInt(ItemStack::getAmount).sum();
     }
 
@@ -86,7 +86,7 @@ public class InventoryUtils {
      * @param items  ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@NotNull final Player player, @NotNull final Iterable<ItemStack> items) {
         return addOrDrop(player, player.getLocation(), items);
     }
 
@@ -98,7 +98,7 @@ public class InventoryUtils {
      * @param items        ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final Iterable<ItemStack> items) {
+    public static boolean addOrDrop(@NotNull final Player player, @Nullable final Location dropLocation, @NotNull final Iterable<ItemStack> items) {
         boolean storedEverything = true;
         for (final ItemStack item : items) {
             for (final ItemStack leftover : player.getInventory().addItem(item).values()) {
@@ -117,7 +117,7 @@ public class InventoryUtils {
      * @param items        ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nullable final Location dropLocation, @Nonnull final ItemStack... items) {
+    public static boolean addOrDrop(@NotNull final Player player, @Nullable final Location dropLocation, @NotNull final ItemStack... items) {
         return addOrDrop(player, dropLocation, Arrays.asList(items));
     }
 
@@ -128,7 +128,7 @@ public class InventoryUtils {
      * @param items  ItemStacks to add
      * @return true when all items could be stored, otherwise false
      */
-    public static boolean addOrDrop(@Nonnull final Player player, @Nonnull final ItemStack... items) {
+    public static boolean addOrDrop(@NotNull final Player player, @NotNull final ItemStack... items) {
         return addOrDrop(player, player.getLocation(), Arrays.asList(items));
     }
 

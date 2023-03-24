@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.ai.goal;
@@ -21,8 +20,9 @@ package com.jeff_media.jefflib.ai.goal;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
-import javax.annotation.Nonnull;
 import org.bukkit.entity.Mob;
+
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Represents an entity's target selector
@@ -30,14 +30,14 @@ import org.bukkit.entity.Mob;
 @DoNotRename
 public final class TargetSelector extends GoalSelector {
 
-    private TargetSelector(@Nonnull final Mob mob) {
+    private TargetSelector(@NotNull final Mob mob) {
         super(mob);
     }
 
     /**
      * Gets this mob's target selector
      */
-    public static TargetSelector of(@Nonnull final Mob mob) {
+    public static TargetSelector of(@NotNull final Mob mob) {
         return new TargetSelector(mob);
     }
 
@@ -49,7 +49,7 @@ public final class TargetSelector extends GoalSelector {
      */
     @NMS
     @Override
-    public void addGoal(@Nonnull final PathfinderGoal goal, final int priority) {
+    public void addGoal(@NotNull final PathfinderGoal goal, final int priority) {
         JeffLib.getNMSHandler().addTargetGoal(mob, goal, priority);
     }
 
@@ -60,7 +60,7 @@ public final class TargetSelector extends GoalSelector {
      */
     @NMS
     @Override
-    public void removeGoal(@Nonnull final PathfinderGoal goal) {
+    public void removeGoal(@NotNull final PathfinderGoal goal) {
         JeffLib.getNMSHandler().removeTargetGoal(mob, goal);
     }
 

@@ -1,5 +1,26 @@
+/*
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.jeff_media.jefflib.data;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -9,9 +30,6 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
-import javax.annotation.Nonnull;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents a list of elements with weights. When calling {@link #getRandomElement()}, it returns a random element based on its weight.
@@ -30,9 +48,9 @@ import org.jetbrains.annotations.Nullable;
 @SuppressWarnings("unused")
 public class WeightedRandomList<E> {
 
-    @Nonnull
+    @NotNull
     private final List<WeightedElement> list = new ArrayList<>();
-    @Nonnull
+    @NotNull
     private final ThreadLocalRandom random = ThreadLocalRandom.current();
     private final Comparator<WeightedElement> COMPARATOR = (o1, o2) -> -Double.compare(o1.weight, o2.weight);
     private double currentTotalWeight = 0;

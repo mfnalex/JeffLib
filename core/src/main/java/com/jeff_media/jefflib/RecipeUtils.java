@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
@@ -21,14 +20,6 @@ package com.jeff_media.jefflib;
 import com.google.common.base.Enums;
 import com.jeff_media.jefflib.exceptions.InvalidRecipeException;
 import com.jeff_media.jefflib.internal.cherokee.NotImplementedException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -45,6 +36,15 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.SmokingRecipe;
 import org.bukkit.inventory.StonecuttingRecipe;
+
+import org.jetbrains.annotations.NotNull;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 
 /**
  * Crafting recipe related methods
@@ -258,7 +258,7 @@ public class RecipeUtils {
         return new StonecuttingRecipe(key, result, getRecipeChoice(section));
     }
 
-    @Nonnull
+    @NotNull
     private static Map<Character, RecipeChoice> getRecipeChoices(final ConfigurationSection section) {
         final Map<Character, RecipeChoice> map = new HashMap<>();
         for (final String key : section.getKeys(false)) {
@@ -284,7 +284,7 @@ public class RecipeUtils {
         return map;
     }
 
-    @Nonnull
+    @NotNull
     private static List<RecipeChoice> getRecipeChoices(final List<?> ingredients) {
         final List<RecipeChoice> list = new ArrayList<>();
 
@@ -304,7 +304,7 @@ public class RecipeUtils {
         return list;
     }
 
-    @Nonnull
+    @NotNull
     private static RecipeChoice getRecipeChoice(final ConfigurationSection section) {
         if (section.isSet("ingredients")) {
             if (section.isConfigurationSection("ingredients")) {

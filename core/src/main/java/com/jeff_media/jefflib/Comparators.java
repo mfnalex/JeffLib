@@ -1,28 +1,28 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
-import java.util.Comparator;
-import javax.annotation.Nonnull;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
+
+import org.jetbrains.annotations.NotNull;
+import java.util.Comparator;
 
 /**
  * Some useful comparators
@@ -53,11 +53,11 @@ public abstract class Comparators {
 
         private final Location origin;
 
-        public EntityByDistanceComparator(final @Nonnull Entity origin) {
+        public EntityByDistanceComparator(final @NotNull Entity origin) {
             this.origin = origin.getLocation();
         }
 
-        public EntityByDistanceComparator(final @Nonnull Location origin) {
+        public EntityByDistanceComparator(final @NotNull Location origin) {
             this.origin = origin;
         }
 
@@ -74,11 +74,11 @@ public abstract class Comparators {
 
         private final Location origin;
 
-        public BlockByDistanceComparator(final @Nonnull Location origin) {
+        public BlockByDistanceComparator(final @NotNull Location origin) {
             this.origin = origin;
         }
 
-        public BlockByDistanceComparator(final @Nonnull Block origin) {
+        public BlockByDistanceComparator(final @NotNull Block origin) {
             this.origin = BlockUtils.getCenter(origin);
         }
 

@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.data;
@@ -22,15 +21,6 @@ import com.google.common.base.Enums;
 import com.jeff_media.jefflib.HologramManager;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.TextUtils;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -39,6 +29,16 @@ import org.bukkit.Location;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.entity.Player;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Represents a Hologram
@@ -51,10 +51,10 @@ public class Hologram implements ConfigurationSerializable {
     @Getter
     private final Type type;
     @Getter
-    @Nonnull
+    @NotNull
     private final List<OfflinePlayer> players = new ArrayList<>();
     @Getter
-    @Nonnull
+    @NotNull
     private final List<Object> entities = new ArrayList<>();
     private Integer task = null;
     @Getter
@@ -63,14 +63,14 @@ public class Hologram implements ConfigurationSerializable {
     private OfflinePlayer player;
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private Location location;
     @Getter
     @Setter
     private double lineOffset = LINE_OFFSET_DEFAULT;
     @Getter
     @Setter
-    @Nonnull
+    @NotNull
     private List<String> lines = new ArrayList<>();
     @Getter
     @Setter
@@ -83,7 +83,7 @@ public class Hologram implements ConfigurationSerializable {
         this.type = type;
     }
 
-    public static Hologram deserialize(@Nonnull final Map<String, Object> map) {
+    public static Hologram deserialize(@NotNull final Map<String, Object> map) {
         final Type type = Enums.getIfPresent(Type.class, (String) map.getOrDefault(Keys.TYPE, "ARMORSTAND")).or(Type.ARMORSTAND);
         final Hologram hologram = new Hologram(type);
         hologram.setLineOffset((double) map.getOrDefault(Keys.LINE_OFFSET, LINE_OFFSET_DEFAULT));
@@ -165,7 +165,7 @@ public class Hologram implements ConfigurationSerializable {
         HologramManager.getHOLOGRAMS().add(this);
     }
 
-    @Nonnull
+    @NotNull
     public Map<String, Object> serialize() {
         final Map<String, Object> map = new HashMap<>();
         map.put(Keys.LINE_OFFSET, lineOffset);

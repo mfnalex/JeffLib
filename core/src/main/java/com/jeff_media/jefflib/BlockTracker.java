@@ -1,27 +1,22 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashSet;
-import javax.annotation.Nonnull;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Chunk;
 import org.bukkit.Material;
@@ -32,6 +27,11 @@ import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.bukkit.plugin.Plugin;
 import org.jetbrains.annotations.Contract;
+
+import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * Tracks player placed blocks.
@@ -131,7 +131,7 @@ public class BlockTracker {
      * @return NamespacedKey for the block
      */
     @Contract("_ -> new")
-    private static NamespacedKey getKey(@Nonnull final Block block) {
+    private static NamespacedKey getKey(@NotNull final Block block) {
         final int x = block.getX() & 0x000F;
         final int y = block.getY();
         final int z = block.getZ() & 0x000F;
@@ -146,7 +146,7 @@ public class BlockTracker {
      * @param chunk Chunk to check
      * @return Collection of all blocks inside the chunk that have been placed by players
      */
-    @Nonnull
+    @NotNull
     public static Collection<Block> getPlayerPlacedBlocks(final Chunk chunk) {
         final Collection<Block> blocks = new HashSet<>();
         final PersistentDataContainer pdc = getPlayerPlacedPDC(chunk);

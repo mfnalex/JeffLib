@@ -1,35 +1,35 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
 import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
-import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Enchantment related methods
@@ -52,7 +52,7 @@ public class EnchantmentUtils {
             fieldAcceptingNew.setAccessible(false);
 
             Enchantment.registerEnchantment(enchantment);
-        } catch (final NoSuchFieldException | IllegalAccessException exception) {
+        } catch (final Throwable exception) {
             throw new ConflictingEnchantmentException(exception.getMessage());
         }
     }
@@ -86,7 +86,7 @@ public class EnchantmentUtils {
      * @param section ConfigurationSection to parse
      * @return A Map&lt;Enchantment,Integer> containing the given enchantments mapped to their given levels
      */
-    @Nonnull
+    @NotNull
     public static Map<Enchantment, Integer> fromConfigurationSection(final ConfigurationSection section) {
         final Map<Enchantment, Integer> map = new HashMap<>();
         for (final String enchantName : section.getKeys(false)) {
@@ -106,7 +106,7 @@ public class EnchantmentUtils {
      * @return The enchantment of the specified name
      */
     @Nullable
-    public static Enchantment getByName(@Nonnull final String name) {
+    public static Enchantment getByName(@NotNull final String name) {
         for (final Enchantment enchant : Enchantment.values()) {
             if (enchant.getKey().getKey().equalsIgnoreCase(name)) {
                 return enchant;
@@ -120,7 +120,7 @@ public class EnchantmentUtils {
      * @param meta ItemMeta to add the effect to
      * @return true if the effect was added, false if it was already present
      */
-    public static boolean addGlowEffect(@Nonnull ItemMeta meta) {
+    public static boolean addGlowEffect(@NotNull ItemMeta meta) {
         if(meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
             return false;
         }
@@ -133,7 +133,7 @@ public class EnchantmentUtils {
      * @param item ItemStack to add the effect to
      * @return true if the effect was added, false if it was already present or if the item has no ItemMeta
      */
-    public static boolean addGlowEffect(@Nonnull ItemStack item) {
+    public static boolean addGlowEffect(@NotNull ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         if(meta == null) {
             return false;

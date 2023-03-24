@@ -2,8 +2,6 @@
 /target/
 *.lst
 *.class
-/.idea/
-*.iml
 target/
 compile/
 */target

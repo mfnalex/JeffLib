@@ -1,68 +1,68 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.data.worldboundingbox;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
 
+import org.jetbrains.annotations.NotNull;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Represents a polygon region linked to a {@link World}
  */
 public final class PolygonWorldBoundingBox extends WorldBoundingBox {
 
-    @Nonnull
+    @NotNull
     @Getter
     private final List<Vector> points;
     private final double minY;
     private final double maxY;
     @Setter
-    @Nonnull
+    @NotNull
     private World world;
 
-    private PolygonWorldBoundingBox(@Nonnull final World world, @Nonnull final List<Vector> points) {
+    private PolygonWorldBoundingBox(@NotNull final World world, @NotNull final List<Vector> points) {
         this.world = world;
         this.points = Collections.unmodifiableList(points);
         this.minY = points.stream().mapToDouble(Vector::getY).min().getAsDouble();
         this.maxY = points.stream().mapToDouble(Vector::getY).max().getAsDouble();
     }
 
-    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final Location... points) {
+    public static PolygonWorldBoundingBox fromLocations(@NotNull final World world, @NotNull final Location... points) {
         return fromLocations(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromLocations(@Nonnull final World world, @Nonnull final List<Location> points) {
+    public static PolygonWorldBoundingBox fromLocations(@NotNull final World world, @NotNull final List<Location> points) {
         return new PolygonWorldBoundingBox(world, points.stream().map(Location::toVector).collect(Collectors.toList()));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final Vector... points) {
+    public static PolygonWorldBoundingBox fromVectors(@NotNull final World world, @NotNull final Vector... points) {
         return fromVectors(world, Arrays.asList(points));
     }
 
-    public static PolygonWorldBoundingBox fromVectors(@Nonnull final World world, @Nonnull final List<Vector> points) {
+    public static PolygonWorldBoundingBox fromVectors(@NotNull final World world, @NotNull final List<Vector> points) {
         return new PolygonWorldBoundingBox(world, points);
     }
 
@@ -128,7 +128,7 @@ public final class PolygonWorldBoundingBox extends WorldBoundingBox {
     }
 
     @Override
-    @Nonnull
+    @NotNull
     public World getWorld() {
         return null;
     }

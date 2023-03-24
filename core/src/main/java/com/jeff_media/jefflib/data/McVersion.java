@@ -1,28 +1,27 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.data;
 
-import java.util.Objects;
-import javax.annotation.Nonnull;
-
 import com.jeff_media.jefflib.WordUtils;
 import org.bukkit.Bukkit;
+
+import org.jetbrains.annotations.NotNull;
+import java.util.Objects;
 
 /**
  * Provides version comparing methods
@@ -72,7 +71,7 @@ public class McVersion implements Comparable<McVersion> {
     }
 
     @Override
-    public int compareTo(@Nonnull final McVersion other) {
+    public int compareTo(@NotNull final McVersion other) {
         if (this.major > other.major) return 3;
         if (other.major > this.major) return -3;
         if (this.minor > other.minor) return 2;

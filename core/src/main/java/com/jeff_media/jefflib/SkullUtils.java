@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
@@ -22,10 +21,6 @@ import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import java.lang.reflect.Field;
-import java.util.UUID;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -34,6 +29,11 @@ import org.bukkit.block.Block;
 import org.bukkit.block.Skull;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.lang.reflect.Field;
+import java.util.UUID;
 
 /**
  * Skull / Player head related methods
@@ -46,13 +46,13 @@ public class SkullUtils {
      *
      * @throws IllegalArgumentException when the block is not a head
      */
-    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final UUID uuid) {
+    public static void setHeadTexture(@NotNull final Block block, @NotNull final UUID uuid) {
         checkIfIsSkull(block);
         final OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         setHeadTexture(block, player);
     }
 
-    private static void checkIfIsSkull(@Nonnull final Block block) throws IllegalArgumentException {
+    private static void checkIfIsSkull(@NotNull final Block block) throws IllegalArgumentException {
         if (!(block.getState() instanceof Skull)) {
             throw new IllegalArgumentException("BlockState is not a Skull but " + block.getState().getClass().getSimpleName());
         }
@@ -63,7 +63,7 @@ public class SkullUtils {
      *
      * @throws IllegalArgumentException when the block is not a skull
      */
-    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final OfflinePlayer player) {
+    public static void setHeadTexture(@NotNull final Block block, @NotNull final OfflinePlayer player) {
         checkIfIsSkull(block);
         final Skull state = (Skull) block.getState();
         state.setOwningPlayer(player);
@@ -77,7 +77,7 @@ public class SkullUtils {
      */
     @Deprecated
     @NMS
-    public static void setBase64Texture(@Nonnull final Block block, @Nonnull final String base64) {
+    public static void setBase64Texture(@NotNull final Block block, @NotNull final String base64) {
         setHeadTexture(block, base64);
     }
 
@@ -89,7 +89,7 @@ public class SkullUtils {
      */
     @NMS
     @Tested("1.19.4")
-    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final String base64) {
+    public static void setHeadTexture(@NotNull final Block block, @NotNull final String base64) {
         final GameProfile profile = new GameProfile(UUID.randomUUID(), "");
         profile.getProperties().put("textures", new Property("textures", base64));
         setHeadTexture(block, profile);
@@ -102,7 +102,7 @@ public class SkullUtils {
      * @nms
      */
     @NMS
-    public static void setHeadTexture(@Nonnull final Block block, @Nonnull final GameProfile gameProfile) {
+    public static void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile) {
         checkIfIsSkull(block);
         JeffLib.getNMSHandler().setHeadTexture(block, gameProfile);
     }
@@ -110,7 +110,7 @@ public class SkullUtils {
     /**
      * Gets a head with the skin of the given UUID
      */
-    public static ItemStack getHead(@Nonnull final UUID uuid) {
+    public static ItemStack getHead(@NotNull final UUID uuid) {
         final OfflinePlayer player = Bukkit.getOfflinePlayer(uuid);
         return getHead(player);
     }
@@ -118,7 +118,7 @@ public class SkullUtils {
     /**
      * Gets a head with the skin of the given OfflinePlayer
      */
-    public static ItemStack getHead(@Nonnull final OfflinePlayer player) {
+    public static ItemStack getHead(@NotNull final OfflinePlayer player) {
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         final SkullMeta meta = (SkullMeta) head.getItemMeta();
         assert meta != null;
@@ -130,7 +130,7 @@ public class SkullUtils {
     /**
      * Gets a head with the given base64 skin
      */
-    public static ItemStack getHead(@Nonnull final String base64) {
+    public static ItemStack getHead(@NotNull final String base64) {
         final ItemStack head = new ItemStack(Material.PLAYER_HEAD);
         @SuppressWarnings("TypeMayBeWeakened") final SkullMeta meta = (SkullMeta) head.getItemMeta();
         final GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "");
@@ -152,7 +152,7 @@ public class SkullUtils {
      * Gets the base64 skin of the given SkullMeta
      */
     @Nullable
-    public static String getBase64Texture(@Nonnull final SkullMeta skullMeta) {
+    public static String getBase64Texture(@NotNull final SkullMeta skullMeta) {
         try {
             final Field profileField = skullMeta.getClass().getDeclaredField("profile");
             profileField.setAccessible(true);

@@ -1,19 +1,18 @@
 <!--
-  ~     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+  ~ Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
   ~
-  ~     This program is free software: you can redistribute it and/or modify
-  ~     it under the terms of the GNU General Public License as published by
-  ~     the Free Software Foundation, either version 3 of the License, or
-  ~     (at your option) any later version.
+  ~ This program is free software: you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation, either version 3 of the License, or
+  ~ (at your option) any later version.
   ~
-  ~     This program is distributed in the hope that it will be useful,
-  ~     but WITHOUT ANY WARRANTY; without even the implied warranty of
-  ~     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  ~     GNU General Public License for more details.
+  ~ This program is distributed in the hope that it will be useful,
+  ~ but WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  ~ GNU General Public License for more details.
   ~
-  ~     You should have received a copy of the GNU General Public License
-  ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
-  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xmlns="http://maven.apache.org/POM/4.0.0"
@@ -51,7 +50,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.5.0</version>
                 <configuration>
                     <links>
                         <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
@@ -99,7 +98,7 @@
                             <links>
                                 <link>https://hub.spigotmc.org/javadocs/bukkit/</link>
                                 <link>https://docs.oracle.com/javase/8/docs/api/</link>
-                                <link>https://javadoc.io/doc/javax.annotation/javax.annotation-api/latest/</link>
+                                <link>https://javadoc.io/doc/org.jetbrains/annotations/</link>
                             </links>
                         </configuration>
                     </execution>
@@ -152,6 +151,12 @@
         </repository>
     </repositories>
     <dependencies>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations-java5</artifactId>
+            <version>24.0.1</version>
+            <scope>provided</scope>
+        </dependency>
         <!-- Test Dependencies Start -->
         <dependency>
             <groupId>io.papermc.paper</groupId>

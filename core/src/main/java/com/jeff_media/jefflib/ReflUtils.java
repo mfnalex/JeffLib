@@ -1,25 +1,29 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -27,10 +31,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
 
 /**
  * Reflection related methods
@@ -60,7 +60,7 @@ public class ReflUtils {
      *
      * @return The class, or null if not found
      */
-    public static @Nullable Class<?> getClass(final @Nonnull String className) {
+    public static @Nullable Class<?> getClass(final @NotNull String className) {
         if (CLASSES.containsKey(className)) {
             return CLASSES.get(className);
         }
@@ -76,7 +76,7 @@ public class ReflUtils {
     /**
      * Gets the NMS version String as used in the package name, e.g. "v1_19_R1"
      */
-    public static @Nonnull String getNMSVersion() {
+    public static @NotNull String getNMSVersion() {
         if (nmsVersion == null) {
             nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }
@@ -108,7 +108,7 @@ public class ReflUtils {
      * @param methodName The method name
      * @return Whether the method is already cached
      */
-    public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
+    public static boolean isMethodCached(final @NotNull Class<?> clazz, final @NotNull String methodName) {
         return METHODS_NO_ARGS.contains(clazz, methodName);
     }
 
@@ -117,7 +117,7 @@ public class ReflUtils {
      *
      * @return The method, or null if not found
      */
-    public static @Nullable Method getMethod(final @Nonnull Class<?> clazz, final @Nonnull String methodName) {
+    public static @Nullable Method getMethod(final @NotNull Class<?> clazz, final @NotNull String methodName) {
         if (METHODS_NO_ARGS.contains(clazz, methodName)) {
             return METHODS_NO_ARGS.get(clazz, methodName);
         }
@@ -134,7 +134,7 @@ public class ReflUtils {
     /**
      * Gets whether a method with parameters is already cached
      */
-    public static boolean isMethodCached(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
+    public static boolean isMethodCached(final @NotNull Class<?> clazz, final @NotNull String methodName, final @NotNull Class<?>... params) {
         return METHODS_WITH_ARGS.contains(clazz, new MethodParameters(methodName, params));
     }
 
@@ -143,7 +143,7 @@ public class ReflUtils {
      *
      * @return The method, or null if not found
      */
-    public static Method getMethod(final @Nonnull Class<?> clazz, final @Nonnull String methodName, final @Nonnull Class<?>... params) {
+    public static Method getMethod(final @NotNull Class<?> clazz, final @NotNull String methodName, final @NotNull Class<?>... params) {
         final MethodParameters methodParameters = new MethodParameters(methodName, params);
         if (METHODS_WITH_ARGS.contains(clazz, methodParameters)) {
             return METHODS_WITH_ARGS.get(clazz, methodParameters);
@@ -161,7 +161,7 @@ public class ReflUtils {
     /**
      * Sets an object's field to the given value
      */
-    public static void setFieldValue(final @Nonnull Object object, final @Nonnull String fieldName, final @Nullable Object value) {
+    public static void setFieldValue(final @NotNull Object object, final @NotNull String fieldName, final @Nullable Object value) {
         setFieldValue(object.getClass(), object, fieldName, value);
     }
 
@@ -173,7 +173,7 @@ public class ReflUtils {
      * @param fieldName Name of the field to set
      * @param value     Value to set the field to
      */
-    public static void setFieldValue(final @Nonnull Class<?> clazz, final @Nullable Object object, final @Nonnull String fieldName, final @Nullable Object value) {
+    public static void setFieldValue(final @NotNull Class<?> clazz, final @Nullable Object object, final @NotNull String fieldName, final @Nullable Object value) {
         try {
             final Field field = getField(clazz, fieldName);
             java.util.Objects.requireNonNull(field).set(object, value);
@@ -187,7 +187,7 @@ public class ReflUtils {
      *
      * @return The field, or null if not found
      */
-    public static Field getField(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+    public static Field getField(final @NotNull Class<?> clazz, final @NotNull String fieldName) {
         if (FIELDS.contains(clazz, fieldName)) {
             return FIELDS.get(clazz, fieldName);
         }
@@ -207,7 +207,7 @@ public class ReflUtils {
      * @param object Object to get the field value from, or null if it's a static field
      * @throws RuntimeException if an IllegalAccessException is thrown
      */
-    public static Object getFieldValue(final @Nonnull Class<?> clazz, final @Nonnull String fieldName, final @Nullable Object object) {
+    public static Object getFieldValue(final @NotNull Class<?> clazz, final @NotNull String fieldName, final @Nullable Object object) {
         Field field = getField(clazz, fieldName);
         try {
             return field.get(object);
@@ -219,21 +219,21 @@ public class ReflUtils {
     /**
      * Gets whether a field is already cached
      */
-    public static boolean isFieldCached(final @Nonnull Class<?> clazz, final @Nonnull String fieldName) {
+    public static boolean isFieldCached(final @NotNull Class<?> clazz, final @NotNull String fieldName) {
         return FIELDS.contains(clazz, fieldName);
     }
 
     /**
      * Gets if the no-args constructor is already cached
      */
-    public static boolean isConstructorCached(final @Nonnull Class<?> clazz) {
+    public static boolean isConstructorCached(final @NotNull Class<?> clazz) {
         return CONSTRUCTORS_NO_ARGS.containsKey(clazz);
     }
 
     /**
      * Gets if the constructor with parameters is already cached
      */
-    public static boolean isConstructorCached(final @Nonnull Class<?> clazz, final @Nonnull Class<?>... params) {
+    public static boolean isConstructorCached(final @NotNull Class<?> clazz, final @NotNull Class<?>... params) {
         return CONSTRUCTOR_WITH_ARGS.contains(clazz, new Parameters(params));
     }
 
@@ -242,7 +242,7 @@ public class ReflUtils {
      *
      * @return The constructor, or null if not found
      */
-    public static Constructor<?> getConstructor(final @Nonnull Class<?> clazz) {
+    public static Constructor<?> getConstructor(final @NotNull Class<?> clazz) {
         if (CONSTRUCTORS_NO_ARGS.containsKey(clazz)) {
             return CONSTRUCTORS_NO_ARGS.get(clazz);
         }
@@ -261,7 +261,7 @@ public class ReflUtils {
      *
      * @return The constructor, or null if not found
      */
-    public static Constructor<?> getConstructor(final @Nonnull Class<?> clazz, final @Nullable Class<?>... params) {
+    public static Constructor<?> getConstructor(final @NotNull Class<?> clazz, final @Nullable Class<?>... params) {
         final Parameters constructorParams = new Parameters(params);
         if (CONSTRUCTOR_WITH_ARGS.contains(clazz, constructorParams)) {
             return CONSTRUCTOR_WITH_ARGS.get(clazz, constructorParams);
@@ -277,10 +277,10 @@ public class ReflUtils {
     }
 
     private static class Parameters {
-        @Nonnull
+        @NotNull
         private final Class<?>[] parameterClazzes;
 
-        private Parameters(@Nonnull Class<?>... parameterClazzes) {
+        private Parameters(@NotNull Class<?>... parameterClazzes) {
             this.parameterClazzes = parameterClazzes;
         }
 
@@ -300,10 +300,10 @@ public class ReflUtils {
 
     private static final class MethodParameters extends Parameters {
 
-        @Nonnull
+        @NotNull
         private final String name;
 
-        MethodParameters(final @Nonnull String name, final @Nonnull Class<?>... params) {
+        MethodParameters(final @NotNull String name, final @NotNull Class<?>... params) {
             super(params);
             this.name = name;
         }

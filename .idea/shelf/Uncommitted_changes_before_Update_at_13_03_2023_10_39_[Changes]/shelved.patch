@@ -1,0 +1,60 @@
+Index: .idea/compiler.xml
+===================================================================
+diff --git a/.idea/compiler.xml b/.idea/compiler.xml
+--- a/.idea/compiler.xml	
++++ b/.idea/compiler.xml	
+@@ -6,23 +6,23 @@
+         <sourceOutputDir name="target/generated-sources/annotations" />
+         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+         <outputRelativeToContentRoot value="true" />
++        <module name="JeffLib-core" />
++        <module name="JeffLib (1)" />
++        <module name="JeffLib-spigot_1_19_3_R1" />
++        <module name="JeffLib-spigot_1_16_R2" />
++        <module name="JeffLib-spigot_1_16_R3" />
+         <module name="JeffLib-spigot_1_18_R1" />
+         <module name="JeffLib-spigot_1_19_R1" />
+         <module name="JeffLib-spigot_1_17_R1" />
+         <module name="JeffLib-spigot_1_16_R1" />
+         <module name="JeffLib-spigot_1_18_R2" />
+-        <module name="JeffLib-core" />
+         <module name="JeffLib-spigot_1_19_1_R1" />
++        <module name="JeffLib-spigot_1_19_0_R1" />
+         <module name="JeffLib-spigot_1_19_2_R1" />
+-        <module name="JeffLib (1)" />
+-        <module name="JeffLib-spigot_1_19_3_R1" />
+-        <module name="JeffLib-spigot_1_16_R2" />
+-        <module name="JeffLib-spigot_1_16_R3" />
+       </profile>
+     </annotationProcessing>
+     <bytecodeTargetLevel>
+       <module name="JeffLib-plugin-PlotSquared6" target="1.8" />
+-      <module name="JeffLib-spigot_1_19_0_R1" target="1.8" />
+       <module name="nms-factory" target="1.8" />
+     </bytecodeTargetLevel>
+   </component>
+Index: .idea/jarRepositories.xml
+===================================================================
+diff --git a/.idea/jarRepositories.xml b/.idea/jarRepositories.xml
+--- a/.idea/jarRepositories.xml	
++++ b/.idea/jarRepositories.xml	
+@@ -22,14 +22,14 @@
+       <option name="url" value="https://hub.jeff-media.com/nexus/repository/jeff-media-thirdparty/" />
+     </remote-repository>
+     <remote-repository>
+-      <option name="id" value="central" />
+-      <option name="name" value="Maven Central repository" />
+-      <option name="url" value="https://repo1.maven.org/maven2" />
+-    </remote-repository>
+-    <remote-repository>
+       <option name="id" value="placeholderapi" />
+       <option name="name" value="placeholderapi" />
+       <option name="url" value="https://repo.extendedclip.com/content/repositories/placeholderapi/" />
++    </remote-repository>
++    <remote-repository>
++      <option name="id" value="central" />
++      <option name="name" value="Maven Central repository" />
++      <option name="url" value="https://repo1.maven.org/maven2" />
+     </remote-repository>
+     <remote-repository>
+       <option name="id" value="lumine-repo" />

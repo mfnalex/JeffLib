@@ -1,27 +1,23 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
-import java.util.Locale;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -30,6 +26,10 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Locale;
 
 /**
  * Data class to wrap all information needed to play a sound
@@ -46,7 +46,7 @@ public final class ParticleData {
     private double offsetZ;
     private double speed;
 
-    public static ParticleData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) {
+    public static ParticleData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) {
 
         if (prefix == null) prefix = "";
         final String particleName = config.getString(prefix + "type");
@@ -83,11 +83,11 @@ public final class ParticleData {
         return new ParticleData(particle, amount, offsetX, offsetY, offsetZ, speed);
     }
 
-    public void playToPlayer(@Nonnull final Player player, @Nonnull final Location location) {
+    public void playToPlayer(@NotNull final Player player, @NotNull final Location location) {
         player.spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed);
     }
 
-    public void playToWorld(@Nonnull final Location location) {
+    public void playToWorld(@NotNull final Location location) {
         location.getWorld().spawnParticle(particle, location, amount, offsetX, offsetY, offsetZ, speed);
     }
 

@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.ai.goal;
@@ -25,10 +24,11 @@ import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
-import java.util.EnumSet;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.entity.Mob;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.EnumSet;
 
 /**
  * An extendable {@link PathfinderGoal} that can be used to create custom AI goals.
@@ -61,37 +61,37 @@ public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
         return bukkitEntity;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public PathNavigation getNavigation() {
         return executor.getNavigation();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public MoveController getMoveController() {
         return executor.getMoveController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public LookController getLookController() {
         return executor.getLookController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public JumpController getJumpController() {
         return executor.getJumpController();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public Controls getControls() {
         return CustomGoalExecutor.super.getControls();
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public EnumSet<GoalFlag> getGoalFlags() {
         return executor.getGoalFlags();

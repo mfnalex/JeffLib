@@ -1,35 +1,35 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.ai.goal;
 
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
-import java.util.Collection;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
-import javax.annotation.Nonnull;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
+
+import org.jetbrains.annotations.NotNull;
+import java.util.Collection;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 /**
  * Utility methods to create some custom {@link PathfinderGoal}s. For a custom goal, extend {@link CustomGoal}
@@ -46,7 +46,7 @@ public interface PathfinderGoals {
      * @param canScare      Whether the entity can be scared
      * @return The created goal
      */
-    static PathfinderGoal temptGoal(@Nonnull final Creature entity, @Nonnull final Collection<Material> materials, final double speedModifier, final boolean canScare) {
+    static PathfinderGoal temptGoal(@NotNull final Creature entity, @NotNull final Collection<Material> materials, final double speedModifier, final boolean canScare) {
         return temptGoal(entity, materials.stream(), speedModifier, canScare);
     }
 
@@ -60,7 +60,7 @@ public interface PathfinderGoals {
      * @param canScare      Whether the entity can be scared
      * @return The created goal
      */
-    static PathfinderGoal temptGoal(@Nonnull final Creature entity, @Nonnull final Stream<Material> materials, final double speedModifier, final boolean canScare) {
+    static PathfinderGoal temptGoal(@NotNull final Creature entity, @NotNull final Stream<Material> materials, final double speedModifier, final boolean canScare) {
         return JeffLib.getNMSHandler().createTemptGoal(entity, materials, speedModifier, canScare);
     }
 
@@ -74,7 +74,7 @@ public interface PathfinderGoals {
      * @param sprintSpeedModifier The sprint speed modifier to use when the entity is being scared
      * @return The created goal
      */
-    static PathfinderGoal avoidEntity(@Nonnull final Creature entity, @Nonnull Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
+    static PathfinderGoal avoidEntity(@NotNull final Creature entity, @NotNull Predicate<LivingEntity> predicate, final float maxDistance, final double walkSpeedModifier, final double sprintSpeedModifier) {
         return JeffLib.getNMSHandler().createAvoidEntityGoal(entity, predicate, maxDistance, walkSpeedModifier, sprintSpeedModifier);
     }
 
@@ -88,7 +88,7 @@ public interface PathfinderGoals {
      * @param verticalSearchDistance The maximum vertical distance the entity will look for matching blocks
      * @return The created goal
      */
-    static PathfinderGoal moveToBlock(@Nonnull final Creature entity, @Nonnull Set<Material> blockTypes, double speedModifier, int searchDistance, int verticalSearchDistance) {
+    static PathfinderGoal moveToBlock(@NotNull final Creature entity, @NotNull Set<Material> blockTypes, double speedModifier, int searchDistance, int verticalSearchDistance) {
         return JeffLib.getNMSHandler().createMoveToBlockGoal(entity, blockTypes, speedModifier, searchDistance, verticalSearchDistance);
     }
 
@@ -102,7 +102,7 @@ public interface PathfinderGoals {
      * @param verticalSearchDistance The maximum vertical distance the entity will look for matching blocks
      * @return The created goal
      */
-    static PathfinderGoal moveToBlock(@Nonnull final Creature entity, @Nonnull Predicate<Block> blockPredicate, double speedModifier, int searchDistance, int verticalSearchDistance) {
+    static PathfinderGoal moveToBlock(@NotNull final Creature entity, @NotNull Predicate<Block> blockPredicate, double speedModifier, int searchDistance, int verticalSearchDistance) {
         return JeffLib.getNMSHandler().createMoveToBlockGoal(entity, blockPredicate, speedModifier, searchDistance, verticalSearchDistance);
     }
 

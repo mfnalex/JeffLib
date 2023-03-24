@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.data;
@@ -21,10 +20,6 @@ package com.jeff_media.jefflib.data;
 import com.google.common.base.Enums;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.NumberUtils;
-import java.util.Locale;
-import java.util.Objects;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -34,6 +29,11 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.Locale;
+import java.util.Objects;
 
 // TODO: Test whether something broke after switching from Sound to String
 
@@ -77,7 +77,7 @@ public final class SoundData {
      * @param prefix Prefix to use when looking up values in the ConfigurationSection. If non-null, this prefix is prefixed to all keys. For example, if this is set to "foo-", then the keys to look up are "foo-sound", "foo-volume", etc.
      * @throws IllegalArgumentException When no sound is defined, or if the sound category is not valid.
      */
-    public static SoundData fromConfigurationSection(@Nonnull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException {
+    public static SoundData fromConfigurationSection(@NotNull final ConfigurationSection config, @Nullable String prefix) throws IllegalArgumentException {
         if (prefix == null) prefix = "";
         String soundName = config.getString(prefix + "effect");
         if (soundName == null || soundName.isEmpty()) {

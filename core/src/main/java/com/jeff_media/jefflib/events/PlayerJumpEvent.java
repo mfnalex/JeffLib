@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.events;
@@ -21,8 +20,6 @@ package com.jeff_media.jefflib.events;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ServerUtils;
 import com.jeff_media.jefflib.internal.annotations.Internal;
-import com.plotsquared.bukkit.listener.PaperListener;
-import javax.annotation.Nonnull;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -38,6 +35,8 @@ import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
+import org.jetbrains.annotations.NotNull;
+
 /**
  * Represents an event called when a player jumps.
  * <p>
@@ -48,12 +47,12 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
     private static final HandlerList HANDLERS = new HandlerList();
     @Getter
-    private final @Nonnull Location from;
+    private final @NotNull Location from;
     @Getter
-    private final @Nonnull Location to;
+    private final @NotNull Location to;
     private boolean cancelled;
 
-    public PlayerJumpEvent(@Nonnull Player who, @Nonnull Location from, @Nonnull Location to) {
+    public PlayerJumpEvent(@NotNull Player who, @NotNull Location from, @NotNull Location to) {
         super(who);
         this.from = from;
         this.to = to;
@@ -74,7 +73,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
         return listener;
     }
 
-    @Nonnull
+    @NotNull
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
@@ -89,7 +88,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
         this.cancelled = cancelled;
     }
 
-    @Nonnull
+    @NotNull
     @Override
     public HandlerList getHandlers() {
         return HANDLERS;

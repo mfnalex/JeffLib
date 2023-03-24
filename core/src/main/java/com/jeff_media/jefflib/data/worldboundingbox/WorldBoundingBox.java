@@ -1,31 +1,24 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.data.worldboundingbox;
 
 import com.jeff_media.jefflib.LocationUtils;
 import com.jeff_media.jefflib.exceptions.InvalidRegionDefinitionException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -34,13 +27,20 @@ import org.bukkit.configuration.serialization.ConfigurationSerializable;
 import org.bukkit.util.BoundingBox;
 import org.bukkit.util.Vector;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 /**
  * Represents a region inside a {@link World}
  */
 public abstract class WorldBoundingBox implements ConfigurationSerializable {
 
-    static WorldBoundingBox fromConfigurationSection(@Nonnull final ConfigurationSection section, @Nullable final String path) {
+    static WorldBoundingBox fromConfigurationSection(@NotNull final ConfigurationSection section, @Nullable final String path) {
 
         final String worldPath = path == null ? "world" : path + ".world";
         final String pointsPath = path == null ? "points" : path + ".points";
@@ -63,8 +63,8 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return getCuboidWorldBoundingBoxFromConfigurationSection(section, path, world);
     }
 
-    @Nonnull
-    private static WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(@Nonnull final ConfigurationSection section, @Nonnull final List<?> points, @Nonnull final World world) {
+    @NotNull
+    private static WorldBoundingBox getUnknownWorldBoundingBoxFromConfigurationSection(@NotNull final ConfigurationSection section, @NotNull final List<?> points, @NotNull final World world) {
         final List<Vector> vectors = new ArrayList<>();
         for (final Object point : points) {
             if (!(point instanceof Vector)) {
@@ -81,8 +81,8 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return PolygonWorldBoundingBox.fromVectors(world, vectors);
     }
 
-    @Nonnull
-    private static CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(@Nonnull final ConfigurationSection section, @Nullable final String path, @Nonnull final World world) {
+    @NotNull
+    private static CuboidWorldBoundingBox getCuboidWorldBoundingBoxFromConfigurationSection(@NotNull final ConfigurationSection section, @Nullable final String path, @NotNull final World world) {
         final String minPath = path == null ? "min" : path + ".min";
         final String maxPath = path == null ? "max" : path + ".max";
 
@@ -97,7 +97,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
 
     abstract boolean contains(Location location);
 
-    @Nonnull
+    @NotNull
     @Override
     public Map<String, Object> serialize() {
         final HashMap<String, Object> map = new HashMap<>();
@@ -106,7 +106,7 @@ public abstract class WorldBoundingBox implements ConfigurationSerializable {
         return map;
     }
 
-    @Nonnull
+    @NotNull
     abstract World getWorld();
 
     abstract List<Vector> getPoints();

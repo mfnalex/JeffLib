@@ -1,19 +1,18 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.pluginhooks;
@@ -21,6 +20,11 @@ package com.jeff_media.jefflib.pluginhooks;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
+import lombok.experimental.UtilityClass;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.OfflinePlayer;
+
+import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -28,10 +32,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
-import javax.annotation.Nonnull;
-import lombok.experimental.UtilityClass;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.OfflinePlayer;
 
 /**
  * PlaceholderAPI related methods
@@ -46,7 +46,7 @@ public final class PlaceholderAPIHandler {
 
     private static AnonymousPlaceholderExpansion expansion;
 
-    public static void register(@Nonnull final BiFunction<OfflinePlayer, String, String> function) {
+    public static void register(@NotNull final BiFunction<OfflinePlayer, String, String> function) {
         init();
         expansion.biFunctions.add(function);
     }
@@ -58,7 +58,7 @@ public final class PlaceholderAPIHandler {
         }
     }
 
-    public static void register(@Nonnull final String placeholder, @Nonnull final Function<OfflinePlayer, String> function) {
+    public static void register(@NotNull final String placeholder, @NotNull final Function<OfflinePlayer, String> function) {
         init();
         expansion.functions.put(placeholder, function);
     }
@@ -69,19 +69,19 @@ public final class PlaceholderAPIHandler {
         private final Collection<BiFunction<OfflinePlayer, String, String>> biFunctions = new ArrayList<>();
 
         @Override
-        @Nonnull
+        @NotNull
         public String getIdentifier() {
             return JeffLib.getPlugin().getName().toLowerCase(Locale.ROOT);
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public String getAuthor() {
             return JeffLib.getPlugin().getDescription().getAuthors().isEmpty() ? "" : JeffLib.getPlugin().getDescription().getAuthors().get(0);
         }
 
         @Override
-        @Nonnull
+        @NotNull
         public String getVersion() {
             return JeffLib.getPlugin().getDescription().getVersion();
         }
@@ -92,7 +92,7 @@ public final class PlaceholderAPIHandler {
         }
 
         @Override
-        public String onRequest(final OfflinePlayer player, @Nonnull final String params) {
+        public String onRequest(final OfflinePlayer player, @NotNull final String params) {
             final Function<OfflinePlayer, String> function = functions.get(params);
             if (function != null) {
                 return function.apply(player);

@@ -1,29 +1,29 @@
 /*
- *     Copyright (c) 2022. JEFF Media GbR / mfnalex et al.
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
  *
- *     This program is free software: you can redistribute it and/or modify
- *     it under the terms of the GNU General Public License as published by
- *     the Free Software Foundation, either version 3 of the License, or
- *     (at your option) any later version.
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
  *
- *     This program is distributed in the hope that it will be useful,
- *     but WITHOUT ANY WARRANTY; without even the implied warranty of
- *     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *     GNU General Public License for more details.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
  *
- *     You should have received a copy of the GNU General Public License
- *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
- *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
 package com.jeff_media.jefflib.ai.navigation;
 
 import com.allatori.annotations.DoNotRename;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.BlockVector;
+
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Represents the NMS PathNavigation of an entity
@@ -34,7 +34,7 @@ public interface PathNavigation {
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final BlockVector pos, final double speedModifier) {
+    default boolean moveTo(@NotNull final BlockVector pos, final double speedModifier) {
         return moveTo(pos.getX(), pos.getY(), pos.getZ(), speedModifier);
     }
 
@@ -46,14 +46,14 @@ public interface PathNavigation {
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final Entity entity, final double speedModifier) {
+    default boolean moveTo(@NotNull final Entity entity, final double speedModifier) {
         return moveTo(entity.getLocation(), speedModifier);
     }
 
     /**
      * Makes the entity move to the specified location
      */
-    default boolean moveTo(@Nonnull final Location loc, final double speedModifier) {
+    default boolean moveTo(@NotNull final Location loc, final double speedModifier) {
         return moveTo(loc.getX(), loc.getY(), loc.getZ(), speedModifier);
     }
 
