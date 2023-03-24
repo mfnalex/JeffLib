@@ -23,13 +23,15 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.EnchantmentStorageMeta;
 import org.bukkit.inventory.meta.ItemMeta;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Enchantment related methods
@@ -55,6 +57,46 @@ public class EnchantmentUtils {
         } catch (final Throwable exception) {
             throw new ConflictingEnchantmentException(exception.getMessage());
         }
+    }
+
+    /**
+     * Applies an enchanted book to an item. This will not apply incompatible enchantments (either because the target item type doesn't support it, or because it conflicts with an existing enchantment), unless {@param ignoreRestrictions} is set to true.
+     * If the target item already has an enchantment of the same type, the higher level will be applied. If both levels are the same, the level will be increased by 1.
+     *
+     * @param book               Book to apply
+     * @param target             Target item
+     * @param ignoreRestrictions Whether to ignore restrictions
+     */
+    public static void applyBook(final EnchantmentStorageMeta book, final ItemStack target, final boolean ignoreRestrictions) {
+        final Map<Enchantment, Integer> existingEnchantments = target.getEnchantments();
+        final ItemMeta meta = Objects.requireNonNull(target.getItemMeta());
+
+        newEnchantments:
+        for (final Map.Entry<Enchantment, Integer> entry : book.getStoredEnchants().entrySet()) {
+            Enchantment enchant = entry.getKey();
+            int level = entry.getValue();
+            if (!ignoreRestrictions) {
+                if (!enchant.canEnchantItem(target)) {
+                    continue;
+                }
+
+                existingEnchantments:
+                for (Enchantment existingEnchant : existingEnchantments.keySet()) {
+                    if (!enchant.conflictsWith(existingEnchant)) {
+                        continue newEnchantments;
+                    }
+                }
+            }
+            final int existingLevel = existingEnchantments.getOrDefault(enchant, 0);
+            if (existingLevel > level) {
+                continue;
+            }
+            if (existingLevel == level) {
+                level++;
+            }
+            meta.addEnchant(enchant, level, true);
+        }
+        target.setItemMeta(meta);
     }
 
     /**
@@ -117,32 +159,34 @@ public class EnchantmentUtils {
 
     /**
      * Adds a glowing effect to the given item (doesn't work on all items)
-     * @param meta ItemMeta to add the effect to
-     * @return true if the effect was added, false if it was already present
-     */
-    public static boolean addGlowEffect(@NotNull ItemMeta meta) {
-        if(meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
-            return false;
-        }
-        meta.addEnchant(GlowEnchantmentFactory.getInstance(), 1, true);
-        return true;
-    }
-
-    /**
-     * Adds a glowing effect to the given item (doesn't work on all items)
+     *
      * @param item ItemStack to add the effect to
      * @return true if the effect was added, false if it was already present or if the item has no ItemMeta
      */
     public static boolean addGlowEffect(@NotNull ItemStack item) {
         ItemMeta meta = item.getItemMeta();
-        if(meta == null) {
+        if (meta == null) {
             return false;
         }
         boolean result = addGlowEffect(meta);
-        if(result) {
+        if (result) {
             item.setItemMeta(meta);
         }
         return result;
+    }
+
+    /**
+     * Adds a glowing effect to the given item (doesn't work on all items)
+     *
+     * @param meta ItemMeta to add the effect to
+     * @return true if the effect was added, false if it was already present
+     */
+    public static boolean addGlowEffect(@NotNull ItemMeta meta) {
+        if (meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
+            return false;
+        }
+        meta.addEnchant(GlowEnchantmentFactory.getInstance(), 1, true);
+        return true;
     }
 
 }
