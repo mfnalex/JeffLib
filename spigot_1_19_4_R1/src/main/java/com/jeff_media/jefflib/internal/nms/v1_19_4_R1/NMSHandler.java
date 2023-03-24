@@ -114,7 +114,6 @@ public class NMSHandler implements AbstractNMSHandler {
 
     private final MaterialHandler materialHandler = new MaterialHandler();
     private final BlockHandler blockHandler = new BlockHandler();
-    private final com.jeff_media.jefflib.internal.nms.v1_19_4_R1.BukkitUnsafe unsafe = com.jeff_media.jefflib.internal.nms.v1_19_4_R1.BukkitUnsafe.INSTANCE;
 
     @Override
     public AbstractNMSMaterialHandler getMaterialHandler() {
