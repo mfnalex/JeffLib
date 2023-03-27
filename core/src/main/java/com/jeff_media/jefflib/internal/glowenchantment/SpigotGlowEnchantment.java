@@ -33,7 +33,7 @@ public class SpigotGlowEnchantment extends Enchantment {
     @NotNull
     @Override
     public String getName() {
-        return "Glow";
+        return "JeffLibGlowEffect";
     }
 
     @Override

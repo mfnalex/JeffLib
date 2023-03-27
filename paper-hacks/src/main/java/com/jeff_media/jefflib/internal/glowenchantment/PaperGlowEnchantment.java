@@ -42,7 +42,7 @@ public class PaperGlowEnchantment extends Enchantment {
     @NotNull
     @Override
     public String getName() {
-        return "Glow";
+        return "JeffLibGlowEffect";
     }
 
     @Override

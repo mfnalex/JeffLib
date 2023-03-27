@@ -35,7 +35,7 @@ public class EnumCache<E extends Enum<E>> implements Iterable<E> {
      */
     @SuppressWarnings("unchecked")
     public static <E extends Enum<E>> EnumCache<E> of(Class<E> enumClass) {
-        return (EnumCache<E>) CACHE.computeIfAbsent(enumClass, EnumCache::new);
+        return (EnumCache<E>) CACHE.computeIfAbsent(enumClass, __ -> new EnumCache<>(enumClass)); // Do NOT change lambda to method reference or it fails to compile in OpenJDK
     }
 
     @NotNull

@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: com.mojang:authlib:3.17.30">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mojang/authlib/3.17.30/authlib-3.17.30.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mojang/authlib/3.17.30/authlib-3.17.30-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/com/mojang/authlib/3.17.30/authlib-3.17.30-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

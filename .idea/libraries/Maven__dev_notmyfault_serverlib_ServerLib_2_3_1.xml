@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: dev.notmyfault.serverlib:ServerLib:2.3.1">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/notmyfault/serverlib/ServerLib/2.3.1/ServerLib-2.3.1.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/notmyfault/serverlib/ServerLib/2.3.1/ServerLib-2.3.1-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/dev/notmyfault/serverlib/ServerLib/2.3.1/ServerLib-2.3.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
