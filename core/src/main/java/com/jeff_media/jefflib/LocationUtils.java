@@ -173,7 +173,7 @@ public class LocationUtils {
         final ChunkCoordinates chunkCoordinates = getChunkCoordinates(location);
         final int cx = chunkCoordinates.getX();
         final int cz = chunkCoordinates.getZ();
-        if (!Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx, cz)) return false;
+        //if (!Objects.requireNonNull(location.getWorld()).isChunkGenerated(cx, cz)) return false;
         return location.getWorld().isChunkLoaded(cx, cz);
     }
 
