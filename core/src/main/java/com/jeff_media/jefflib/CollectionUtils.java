@@ -37,6 +37,9 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import java.util.Spliterators;
+import java.util.stream.StreamSupport;
+
 /**
  * Collection related methods. Also contains specific methods for concrete collection types.
  */
@@ -44,7 +47,7 @@ import java.util.stream.Collectors;
 public class CollectionUtils {
 
     /**
-     * Creates a List of all given elements
+     * Creates a modifiable list of all given elements
      *
      * @param elements Elements
      * @param <T>      Type
@@ -60,11 +63,7 @@ public class CollectionUtils {
      * Creates a list from an iterator
      */
     public static <T> List<T> asList(final Iterator<T> iterator) {
-        final List<T> list = new ArrayList<>();
-        while (iterator.hasNext()) {
-            list.add(iterator.next());
-        }
-        return list;
+        return StreamSupport.stream(Spliterators.spliteratorUnknownSize(iterator, 0), false).collect(Collectors.toList());
     }
 
     @SafeVarargs
