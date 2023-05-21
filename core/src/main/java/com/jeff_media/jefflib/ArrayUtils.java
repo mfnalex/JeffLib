@@ -40,18 +40,7 @@ public class ArrayUtils {
      */
     @SafeVarargs
     public static <T> T[] combine(final T[]... array) {
-        int totalSize = 0;
-        for (final T[] part : array) {
-            totalSize += part.length;
-        }
-        //noinspection unchecked
-        final T[] combined = (T[]) Array.newInstance(array.getClass().getComponentType().getComponentType(), totalSize);
-        int index = 0;
-        for (final T[] part : array) {
-            System.arraycopy(part, 0, combined, index, part.length);
-            index += part.length;
-        }
-        return combined;
+        return (T[]) Arrays.stream(array).flatMap(Arrays::stream).toArray();
     }
 
     /**
@@ -87,13 +76,10 @@ public class ArrayUtils {
      * @return Array with the desired item removed
      */
     public static <T> T[] removeAtIndex(final T[] arr, final int index) {
-        if (arr == null || index < 0 || index >= arr.length) {
-            return arr;
-        }
-        final List<T> list = new ArrayList<>(Arrays.asList(arr));
-        list.remove(index);
-        //noinspection unchecked
-        return list.toArray((T[]) Array.newInstance(arr.getClass().getComponentType(), 0));
+        T[] newArr = (T[]) Array.newInstance(arr.getClass().getComponentType(), arr.length - 1);
+        System.arraycopy(arr, 0, newArr, 0, index);
+        System.arraycopy(arr, index + 1, newArr, index, arr.length - index - 1);
+        return newArr;
     }
 
     /**
@@ -105,9 +91,8 @@ public class ArrayUtils {
      * @return Array with the desired item appended
      */
     public static <T> T[] addAfter(final T[] arr, final T object) {
-        final List<T> list = new ArrayList<>(Arrays.asList(arr));
-        list.add(object);
-        //noinspection unchecked
-        return list.toArray((T[]) Array.newInstance(arr.getClass().getComponentType(), 0));
+        T[] newArr = Arrays.copyOf(arr, arr.length + 1);
+        newArr[arr.length] = object;
+        return newArr;
     }
 }
