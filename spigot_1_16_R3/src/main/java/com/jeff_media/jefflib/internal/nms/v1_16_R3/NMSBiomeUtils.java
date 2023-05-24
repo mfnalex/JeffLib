@@ -53,10 +53,10 @@ class NMSBiomeUtils {
     }
 
     BiomeBase getBiomeBase(final Location location) {
-        final BlockPosition pos = new BlockPosition(location.getBlockX(), 0, location.getBlockZ());
+        final BlockPosition pos = new BlockPosition(location.getBlockX(), location.getBlockY(), location.getBlockZ());
         final Chunk nmsChunk = ((CraftWorld) location.getWorld()).getHandle().getChunkAtWorldCoords(pos);
         if (nmsChunk != null) {
-            return nmsChunk.getBiomeIndex().getBiome(pos.getX(), 0, pos.getZ());
+            return nmsChunk.getBiomeIndex().getBiome(pos.getX(), pos.getY(), pos.getZ());
         }
         return null;
     }
