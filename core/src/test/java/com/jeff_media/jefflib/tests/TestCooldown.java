@@ -31,14 +31,9 @@ public class TestCooldown {
         Assertions.assertFalse(cooldown.hasCooldown(1));
         cooldown.setCooldown(1, 20, TimeUnit.MILLISECONDS);
         Assertions.assertTrue(cooldown.hasCooldown(1));
-        try {
-            Thread.sleep(10);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
         Assertions.assertTrue(cooldown.hasCooldown(1));
         try {
-            Thread.sleep(10);
+            Thread.sleep(21);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }

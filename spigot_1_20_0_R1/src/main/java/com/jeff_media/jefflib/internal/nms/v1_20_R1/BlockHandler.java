@@ -15,25 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.annotations;
+package com.jeff_media.jefflib.internal.nms.v1_20_R1;
 
-import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
+import net.minecraft.world.level.block.ComposterBlock;
 
-import javax.annotation.meta.TypeQualifierNickname;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-
-/**
- * Indicates that the annotated method uses NMS and will only work in a supported Minecraft version after calling {@link JeffLib#enableNMS()}
- */
-@Documented
-@TypeQualifierNickname
-@Retention(RetentionPolicy.CLASS)
-public @interface NMS {
-    /**
-     * The minimum version of Minecraft that this feature is supported on
-     */
-    String value() default "";
-
+public class BlockHandler implements AbstractNMSBlockHandler {
+    @Override
+    public void playComposterParticlesAndSound(final org.bukkit.block.Block block, final boolean success) {
+        ComposterBlock.handleFill(NMS.getLevel(block.getWorld()), NMS.getBlockPos(block), success);
+    }
 }

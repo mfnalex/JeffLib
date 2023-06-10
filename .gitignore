@@ -9,3 +9,4 @@ compile/
 */target/*
 */dependency-reduced-pom.xml
 /dist/allatori/*.jar
+/.idea/libraries/

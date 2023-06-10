@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_19_4_R1;
+package com.jeff_media.jefflib.internal.nms.v1_20_R1;
 
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
@@ -39,13 +39,13 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedAvoidEntityGoal;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedJumpController;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedLookController;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedMoveController;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedMoveToBlockGoal;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedPathNavigation;
-import com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.HatchedTemptGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedAvoidEntityGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedJumpController;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedLookController;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedMoveController;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedMoveToBlockGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedPathNavigation;
+import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.advancements.critereon.DeserializationContext;
@@ -82,14 +82,14 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_19_R3.CraftServer;
-import org.bukkit.craftbukkit.v1_19_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_19_R3.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_19_R3.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_19_R3.persistence.CraftPersistentDataContainer;
-import org.bukkit.craftbukkit.v1_19_R3.persistence.CraftPersistentDataTypeRegistry;
-import org.bukkit.craftbukkit.v1_19_R3.util.CraftChatMessage;
-import org.bukkit.craftbukkit.v1_19_R3.util.CraftNamespacedKey;
+import org.bukkit.craftbukkit.v1_20_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_20_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_20_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_20_R1.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.v1_20_R1.persistence.CraftPersistentDataTypeRegistry;
+import org.bukkit.craftbukkit.v1_20_R1.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_20_R1.util.CraftNamespacedKey;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -108,13 +108,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.asMob;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.asPathfinder;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.getDedicatedServer;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.getServer;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.ingredient;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.toBukkit;
-import static com.jeff_media.jefflib.internal.nms.v1_19_4_R1.NMS.toNms;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.asMob;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.asPathfinder;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.getDedicatedServer;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.getServer;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.ingredient;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.toBukkit;
+import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.toNms;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -231,7 +231,7 @@ public class NMSHandler implements AbstractNMSHandler {
             for (final Player player : world.getPlayers()) {
                 final ServerPlayer serverPlayer = ((CraftPlayer) player).getHandle();
                 if (serverPlayer.connection != null) {
-                    serverPlayer.connection.send(new ClientboundSetTimePacket(serverPlayer.level.getGameTime(), serverPlayer.getPlayerTime(), serverPlayer.level.getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)));
+                    serverPlayer.connection.send(new ClientboundSetTimePacket(serverPlayer.level().getGameTime(), serverPlayer.getPlayerTime(), serverPlayer.level().getGameRules().getBoolean(GameRules.RULE_DAYLIGHT)));
                 }
             }
         }
@@ -320,7 +320,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
-        return new com.jeff_media.jefflib.internal.nms.v1_19_4_R1.ai.CustomGoalExecutor(customGoal, asMob(entity));
+        return new com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.CustomGoalExecutor(customGoal, asMob(entity));
     }
 
     @Nullable
@@ -379,7 +379,7 @@ public class NMSHandler implements AbstractNMSHandler {
         final ResourceLocation resourceLocation = CraftNamespacedKey.toMinecraft(key);
         final JsonElement jsonelement = ServerAdvancementManager.GSON.fromJson(advancement, JsonElement.class);
         final JsonObject jsonobject = GsonHelper.convertToJsonObject(jsonelement, "advancement");
-        net.minecraft.advancements.Advancement.Builder nms = net.minecraft.advancements.Advancement.Builder.fromJson(jsonobject, new DeserializationContext(resourceLocation, getServer().getPredicateManager()));
+        net.minecraft.advancements.Advancement.Builder nms = net.minecraft.advancements.Advancement.Builder.fromJson(jsonobject, new DeserializationContext(resourceLocation, getServer().getLootData()));
         getServer().getAdvancements().advancements.add(Maps.newHashMap(Collections.singletonMap(resourceLocation, nms)));
         return Bukkit.getAdvancement(key);
     }
@@ -387,7 +387,7 @@ public class NMSHandler implements AbstractNMSHandler {
     @NotNull
     @Override
     public BukkitUnsafe getUnsafe() {
-        return com.jeff_media.jefflib.internal.nms.v1_19_4_R1.BukkitUnsafe.INSTANCE;
+        return com.jeff_media.jefflib.internal.nms.v1_20_R1.BukkitUnsafe.INSTANCE;
     }
 
     @Override

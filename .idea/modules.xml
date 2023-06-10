@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" filepath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/core/JeffLib-core.iml" filepath="$PROJECT_DIR$/core/JeffLib-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/paper-hacks/JeffLib-paper-hacks.iml" filepath="$PROJECT_DIR$/paper-hacks/JeffLib-paper-hacks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_16_R1/JeffLib-spigot_1_16_R1.iml" filepath="$PROJECT_DIR$/spigot_1_16_R1/JeffLib-spigot_1_16_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_16_R2/JeffLib-spigot_1_16_R2.iml" filepath="$PROJECT_DIR$/spigot_1_16_R2/JeffLib-spigot_1_16_R2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_16_R3/JeffLib-spigot_1_16_R3.iml" filepath="$PROJECT_DIR$/spigot_1_16_R3/JeffLib-spigot_1_16_R3.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" filepath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" filepath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" filepath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" filepath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" filepath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" filepath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" filepath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" filepath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" filepath="$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" />
+    </modules>
+  </component>
+</project>

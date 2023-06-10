@@ -24,6 +24,7 @@
         <module name="JeffLib-spigot_1_19_0_R1" />
         <module name="JeffLib-spigot_1_19_2_R1" />
         <module name="JeffLib" />
+        <module name="JeffLib-spigot_1_20_0_R1" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

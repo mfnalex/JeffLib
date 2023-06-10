@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jeff_media</groupId>
     <artifactId>JeffLib-parent</artifactId>
-    <version><!-- changeme -->12.3.1</version>
+    <version><!-- changeme -->12.4.0</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
     <properties>
@@ -32,6 +32,7 @@
     </properties>
     <modules>
         <module>core</module>
+        <module>spigot_1_20_0_R1</module> <!-- 1.20 -->
         <module>spigot_1_19_4_R1</module> <!-- 1.19.4 -->
         <module>spigot_1_19_3_R1</module> <!-- 1.19.3 -->
         <module>spigot_1_19_2_R1</module> <!-- 1.19.2 -->
@@ -110,14 +111,14 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-site-plugin</artifactId>
                 <version>3.7.1</version>
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>javadocs</id>-->
-<!--                        <goals>-->
-<!--                            <goal>attach-descriptor</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
+                <executions>
+                    <execution>
+                        <id>javadocs</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -201,7 +202,7 @@
     <distributionManagement>
         <repository>
             <id>jeff-media-public</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
+            <url>https://repo.jeff-media.com/public/</url>
         </repository>
         <site>
             <id>jeff-media-public-site</id>

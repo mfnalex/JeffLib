@@ -15,25 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.annotations;
+package com.jeff_media.jefflib.internal.nms.v1_20_R1.ai;
 
-import com.jeff_media.jefflib.JeffLib;
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import net.minecraft.world.entity.ai.control.JumpControl;
 
-import javax.annotation.meta.TypeQualifierNickname;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
+public class HatchedJumpController implements JumpController {
 
-/**
- * Indicates that the annotated method uses NMS and will only work in a supported Minecraft version after calling {@link JeffLib#enableNMS()}
- */
-@Documented
-@TypeQualifierNickname
-@Retention(RetentionPolicy.CLASS)
-public @interface NMS {
-    /**
-     * The minimum version of Minecraft that this feature is supported on
-     */
-    String value() default "";
+    private final JumpControl jumpControl;
 
+    public HatchedJumpController(final JumpControl jumpControl) {
+        this.jumpControl = jumpControl;
+    }
+
+    @Override
+    public void jump() {
+        jumpControl.jump();
+    }
 }
