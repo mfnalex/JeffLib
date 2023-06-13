@@ -20,6 +20,8 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -66,6 +68,31 @@ public class PDCUtils {
             PersistentDataType.TAG_CONTAINER_ARRAY,
             PersistentDataType.TAG_CONTAINER};
     private static final Map<String, NamespacedKey> KEYS = new HashMap<>();
+
+    private static final Method namespacedKeyFromStringMethod;
+    private static final Constructor<NamespacedKey> namespacedKeyConstructor;
+
+    static {
+            namespacedKeyFromStringMethod = ReflUtils.getMethod(NamespacedKey.class, "fromString", String.class);
+            namespacedKeyConstructor = (Constructor<NamespacedKey>) ReflUtils.getConstructor(NamespacedKey.class, String.class, String.class);
+    }
+
+    public static NamespacedKey getKeyFromString(String namespace, String key) {
+        if(namespacedKeyFromStringMethod != null) {
+            try {
+                return (NamespacedKey) namespacedKeyFromStringMethod.invoke(null, namespace + ":" + key);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else if(namespacedKeyConstructor != null) {
+            try {
+                return namespacedKeyConstructor.newInstance(namespace, key);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        throw new IllegalStateException("Could not find NamespacedKey#fromString(String) method, nor a NamespacedKey(String, String) constructor.");
+    }
 
     /**
      * Generates a random NamespacedKey

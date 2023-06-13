@@ -18,6 +18,7 @@
 package com.jeff_media.jefflib.internal.glowenchantment;
 
 import com.jeff_media.jefflib.EnchantmentUtils;
+import com.jeff_media.jefflib.PDCUtils;
 import com.jeff_media.jefflib.ServerUtils;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
@@ -29,7 +30,7 @@ public abstract class GlowEnchantmentFactory {
 
     @Getter private static final Enchantment instance;
 
-    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(NamespacedKey.fromString("jefflib:glow"));
+    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(PDCUtils.getKeyFromString("jefflib","glow"));
 
     static {
         Enchantment existing = Enchantment.getByKey(GLOW_ENCHANTMENT_KEY);

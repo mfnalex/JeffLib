@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.4.0</version>
+        <version><!-- changeme -->12.4.2</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <properties>
@@ -107,6 +107,11 @@
         <dependency>
             <groupId>com.jeff_media</groupId>
             <artifactId>JeffLib-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jeff_media</groupId>
+            <artifactId>JeffLib-spigot_1_20_1_R1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

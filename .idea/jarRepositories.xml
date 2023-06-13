@@ -27,14 +27,14 @@
       <option name="url" value="https://mvn.lumine.io/repository/maven-public/" />
     </remote-repository>
     <remote-repository>
-      <option name="id" value="intellectual-sites" />
-      <option name="name" value="intellectual-sites" />
-      <option name="url" value="https://mvn.intellectualsites.com/content/repositories/snapshots/" />
-    </remote-repository>
-    <remote-repository>
       <option name="id" value="papermc" />
       <option name="name" value="papermc" />
       <option name="url" value="https://repo.papermc.io/repository/maven-public/" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="intellectual-sites" />
+      <option name="name" value="intellectual-sites" />
+      <option name="url" value="https://mvn.intellectualsites.com/content/repositories/snapshots/" />
     </remote-repository>
     <remote-repository>
       <option name="id" value="jitpack-repo" />
