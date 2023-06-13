@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_20_R1;
+package com.jeff_media.jefflib.internal.nms.v1_20_1_R1;
 
 import com.google.common.collect.Maps;
 import com.google.gson.JsonElement;
@@ -39,13 +39,13 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedAvoidEntityGoal;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedJumpController;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedLookController;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedMoveController;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedMoveToBlockGoal;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedPathNavigation;
-import com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.HatchedTemptGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedAvoidEntityGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedJumpController;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedLookController;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedMoveController;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedMoveToBlockGoal;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedPathNavigation;
+import com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.HatchedTemptGoal;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import net.minecraft.advancements.critereon.DeserializationContext;
@@ -108,13 +108,13 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.asMob;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.asPathfinder;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.getDedicatedServer;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.getServer;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.ingredient;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.toBukkit;
-import static com.jeff_media.jefflib.internal.nms.v1_20_R1.NMS.toNms;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.asMob;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.asPathfinder;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.getDedicatedServer;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.getServer;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.ingredient;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.toBukkit;
+import static com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.toNms;
 
 public class NMSHandler implements AbstractNMSHandler {
 
@@ -320,7 +320,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
-        return new com.jeff_media.jefflib.internal.nms.v1_20_R1.ai.CustomGoalExecutor(customGoal, asMob(entity));
+        return new com.jeff_media.jefflib.internal.nms.v1_20_1_R1.ai.CustomGoalExecutor(customGoal, asMob(entity));
     }
 
     @Nullable
@@ -387,7 +387,7 @@ public class NMSHandler implements AbstractNMSHandler {
     @NotNull
     @Override
     public BukkitUnsafe getUnsafe() {
-        return com.jeff_media.jefflib.internal.nms.v1_20_R1.BukkitUnsafe.INSTANCE;
+        return com.jeff_media.jefflib.internal.nms.v1_20_1_R1.BukkitUnsafe.INSTANCE;
     }
 
     @Override

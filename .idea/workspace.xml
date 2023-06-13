@@ -4,28 +4,43 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="1.20 support">
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="1.20.1 support">
+      <change afterPath="$PROJECT_DIR$/core/JeffLib-core.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/paper-hacks/JeffLib-paper-hacks.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_16_R1/JeffLib-spigot_1_16_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_16_R2/JeffLib-spigot_1_16_R2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_16_R3/JeffLib-spigot_1_16_R3.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/JeffLib-spigot_1_20_1_R1.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/GlowEnchantmentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/GlowEnchantmentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_16_R3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_0_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BlockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BlockHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BukkitUnsafe.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BukkitUnsafe.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/MaterialHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/MaterialHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSBiomeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSBiomeUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSPacketUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSPacketUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/CustomGoalExecutor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedAvoidEntityGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedJumpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedJumpController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedLookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedLookController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveToBlockGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedPathNavigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedPathNavigation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedTemptGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedTemptGoal.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -272,6 +287,7 @@
       <workItem from="1686409212643" duration="2714000" />
       <workItem from="1686421526877" duration="620000" />
       <workItem from="1686594293040" duration="354000" />
+      <workItem from="1686668356711" duration="1186000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -525,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686422144227</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="1.20.1 support">
+      <created>1686668980257</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1686668980257</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -548,7 +571,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="11.3.0 Added OfflinePlayerPersistentDataContainer &amp; more" />
     <MESSAGE value="11.5.0 included example plugin, removed not working inventory rename method, and stuff" />
     <MESSAGE value="add non-working build.gradle file, but who cares, gradle users are used to spend hours fixing their build scripts" />
     <MESSAGE value="Updated README.md for gradle stuff" />
@@ -573,7 +595,8 @@
     <MESSAGE value="added .idea" />
     <MESSAGE value="added EnumCache" />
     <MESSAGE value="1.20 support" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.20 support" />
+    <MESSAGE value="1.20.1 support" />
+    <option name="LAST_COMMIT_MESSAGE" value="1.20.1 support" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_20_R1;
+package com.jeff_media.jefflib.internal.nms.v1_20_1_R1;
 
 import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -23,6 +23,6 @@ import net.minecraft.world.level.block.ComposterBlock;
 public class BlockHandler implements AbstractNMSBlockHandler {
     @Override
     public void playComposterParticlesAndSound(final org.bukkit.block.Block block, final boolean success) {
-        ComposterBlock.handleFill(NMS.getLevel(block.getWorld()), NMS.getBlockPos(block), success);
+        ComposterBlock.handleFill(com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.getLevel(block.getWorld()), com.jeff_media.jefflib.internal.nms.v1_20_1_R1.NMS.getBlockPos(block), success);
     }
 }

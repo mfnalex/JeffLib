@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_20_R1;
+package com.jeff_media.jefflib.internal.nms.v1_20_1_R1;
 
 import com.jeff_media.jefflib.internal.NMSReflUtils;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
