@@ -32,7 +32,7 @@ LEGACY_JAVA_PATH="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Ho
 #################################################################################################
 
 readonly LEGACY_VERSIONS=(1.16.5 1.16.3 1.16.1)
-readonly VERSIONS=(1.19.4 1.19.3 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1)
+readonly VERSIONS=(1.20.1 1.20 1.19.4 1.19.3 1.19.2 1.19.1 1.19 1.18.2 1.18.1 1.17.1)
 
 readonly TRUE=0
 readonly FALSE=1
