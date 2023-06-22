@@ -5,42 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="1.20.1 support">
-      <change afterPath="$PROJECT_DIR$/core/JeffLib-core.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/paper-hacks/JeffLib-paper-hacks.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_16_R1/JeffLib-spigot_1_16_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_16_R2/JeffLib-spigot_1_16_R2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_16_R3/JeffLib-spigot_1_16_R3.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/JeffLib-spigot_1_20_1_R1.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BlockHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BlockHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BukkitUnsafe.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BukkitUnsafe.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/MaterialHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/MaterialHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSBiomeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSBiomeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSPacketUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSPacketUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/CustomGoalExecutor.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/CustomGoalExecutor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedAvoidEntityGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedJumpController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedJumpController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedLookController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedLookController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveController.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveToBlockGoal.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedPathNavigation.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedPathNavigation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedTemptGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedTemptGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,6 +38,9 @@
     <option name="RESET_MODE" value="HARD" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$MAVEN_REPOSITORY$/com/sk89q/worldedit/worldedit-bukkit/7.2.5/worldedit-bukkit-7.2.5.jar!/com/sk89q/worldedit/bukkit/BukkitAdapter.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-core/2.14.1/log4j-core-2.14.1.jar!/org/apache/logging/log4j/core/appender/AbstractAppender.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/apache/logging/log4j/log4j-core/2.17.0/log4j-core-2.17.0-sources.jar!/org/apache/logging/log4j/core/filter/AbstractFilterable.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.19.1-R0.1-SNAPSHOT/spigot-api-1.19.1-R0.1-SNAPSHOT-sources.jar!/org/bukkit/UnsafeValues.java" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot-api/1.19.4-R0.1-SNAPSHOT/spigot-api-1.19.4-R0.1-SNAPSHOT.jar!/org/bukkit/inventory/meta/ItemMeta.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/net/minecraft/core/Registry.class" root0="SKIP_INSPECTION" />
@@ -89,8 +68,10 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mfnal/IdeaProjects/ChestSort&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/mfnal/IdeaProjects/LumberJack&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
@@ -99,7 +80,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -288,6 +269,18 @@
       <workItem from="1686421526877" duration="620000" />
       <workItem from="1686594293040" duration="354000" />
       <workItem from="1686668356711" duration="1186000" />
+      <workItem from="1686669586134" duration="391000" />
+      <workItem from="1686673821823" duration="22000" />
+      <workItem from="1687105306897" duration="1264000" />
+      <workItem from="1687183060099" duration="1864000" />
+      <workItem from="1687256927477" duration="1362000" />
+      <workItem from="1687298647463" duration="797000" />
+      <workItem from="1687307635765" duration="623000" />
+      <workItem from="1687373825613" duration="3075000" />
+      <workItem from="1687383304753" duration="392000" />
+      <workItem from="1687383725127" duration="606000" />
+      <workItem from="1687384458181" duration="34000" />
+      <workItem from="1687384511158" duration="846000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -548,7 +541,14 @@
       <option name="project" value="LOCAL" />
       <updated>1686668980257</updated>
     </task>
-    <option name="localTasksCounter" value="38" />
+    <task id="LOCAL-00038" summary="1.20.1 support">
+      <created>1686669965225</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1686669965225</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
