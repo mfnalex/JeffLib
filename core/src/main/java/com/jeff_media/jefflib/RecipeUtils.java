@@ -20,6 +20,13 @@ package com.jeff_media.jefflib;
 import com.google.common.base.Enums;
 import com.jeff_media.jefflib.exceptions.InvalidRecipeException;
 import com.jeff_media.jefflib.internal.cherokee.NotImplementedException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -36,15 +43,7 @@ import org.bukkit.inventory.ShapelessRecipe;
 import org.bukkit.inventory.SmithingRecipe;
 import org.bukkit.inventory.SmokingRecipe;
 import org.bukkit.inventory.StonecuttingRecipe;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
 
 /**
  * Crafting recipe related methods

@@ -17,13 +17,12 @@
 
 package com.jeff_media.jefflib.pluginhooks;
 
+import java.util.function.BiFunction;
+import java.util.function.Function;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @UtilityClass
 public class PlaceholderAPIUtils {

@@ -28,6 +28,10 @@ import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSTranslationKeyProvider;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.function.Predicate;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.EntityEffect;
@@ -46,13 +50,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.BoundingBox;
 import org.jetbrains.annotations.NotNull;
-
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.function.Predicate;
 
 /**
  * Entity related methods
@@ -270,6 +268,7 @@ public class EntityUtils {
 
     /**
      * Respawns a player. This does the same thing as {@link Player.Spigot#respawn()} but also works for living players
+     *
      * @nms
      */
     @NMS
@@ -314,14 +313,16 @@ public class EntityUtils {
 
     /**
      * Gets the translation key associated with this EntityType
+     *
      * @nms Requires NMS in versions below latest 1.19.3
      */
     @NMS
-    @NotNull public static String getTranslationKey(@NotNull final EntityType entityType) {
-        if(ServerUtils.hasTranslationKeyProvider()) {
+    @NotNull
+    public static String getTranslationKey(@NotNull final EntityType entityType) {
+        if (ServerUtils.hasTranslationKeyProvider()) {
             return entityType.getTranslationKey();
         } else {
-            if(JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
+            if (JeffLib.getNMSHandler() instanceof AbstractNMSTranslationKeyProvider) {
                 return ((AbstractNMSTranslationKeyProvider) JeffLib.getNMSHandler()).getTranslationKey(entityType);
             } else {
                 throw new NMSNotSupportedException("This version of NMS does not support getting the translation key of an EntityType");

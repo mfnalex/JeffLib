@@ -18,7 +18,6 @@
 package com.jeff_media.jefflib;
 
 import lombok.experimental.UtilityClass;
-
 import org.jetbrains.annotations.Nullable;
 
 /**

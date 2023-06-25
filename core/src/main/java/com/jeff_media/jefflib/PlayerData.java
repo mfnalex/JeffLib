@@ -17,14 +17,13 @@
 
 package com.jeff_media.jefflib;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.YamlConfiguration;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.UUID;
 
 /**
  * Provides a YamlConfiguration per player.

@@ -21,7 +21,6 @@ import com.allatori.annotations.DoNotRename;
 import org.bukkit.Location;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.BlockVector;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

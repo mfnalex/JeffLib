@@ -21,7 +21,6 @@ import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.Nullable;
 
 public class ToastMessage implements NMSTest {
@@ -31,8 +30,8 @@ public class ToastMessage implements NMSTest {
         com.jeff_media.jefflib.data.ToastMessage toastChallenge = new com.jeff_media.jefflib.data.ToastMessage("Hello challenge 2", Material.IRON_INGOT, com.jeff_media.jefflib.data.ToastMessage.FrameType.CHALLENGE, false);
         com.jeff_media.jefflib.data.ToastMessage toastGoal = new com.jeff_media.jefflib.data.ToastMessage("Hello goal 3", Material.DIAMOND, com.jeff_media.jefflib.data.ToastMessage.FrameType.GOAL, false);
 
-        if(player != null) {
-            for (com.jeff_media.jefflib.data.ToastMessage toast : new com.jeff_media.jefflib.data.ToastMessage[]{toastAdvancement, toastChallenge, toastGoal}) {
+        if (player != null) {
+            for (com.jeff_media.jefflib.data.ToastMessage toast : new com.jeff_media.jefflib.data.ToastMessage[] {toastAdvancement, toastChallenge, toastGoal}) {
                 toast.send(player);
             }
         }

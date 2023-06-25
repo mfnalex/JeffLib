@@ -23,7 +23,6 @@ import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-
 import org.jetbrains.annotations.Nullable;
 
 public class GlowEnchantment implements NMSTest {
@@ -34,7 +33,7 @@ public class GlowEnchantment implements NMSTest {
     public void run(TestRunner runner, Player player) throws Throwable {
         ItemStack item = new ItemStack(Material.DIAMOND);
         EnchantmentUtils.addGlowEffect(item);
-        if(player != null) {
+        if (player != null) {
             this.player = player;
             player.getInventory().setItemInMainHand(item);
         }
@@ -58,7 +57,7 @@ public class GlowEnchantment implements NMSTest {
 
     @Override
     public void cleanup() {
-        if(player != null) {
+        if (player != null) {
             player.getInventory().setItemInMainHand(null);
         }
     }

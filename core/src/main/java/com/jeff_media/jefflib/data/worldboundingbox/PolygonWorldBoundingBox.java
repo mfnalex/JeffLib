@@ -17,17 +17,16 @@
 
 package com.jeff_media.jefflib.data.worldboundingbox;
 
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Represents a polygon region linked to a {@link World}

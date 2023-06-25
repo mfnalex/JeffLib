@@ -23,13 +23,12 @@ import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
-import net.minecraft.server.v1_16_R1.EntityInsentient;
-import net.minecraft.server.v1_16_R1.PathfinderGoal;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.util.EnumSet;
 import java.util.stream.Collectors;
+import net.minecraft.server.v1_16_R1.EntityInsentient;
+import net.minecraft.server.v1_16_R1.PathfinderGoal;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media.jefflib.ai.goal.CustomGoalExecutor {
 

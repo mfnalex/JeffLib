@@ -4,19 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="1.20.1 support">
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="12.5.0 added cherry trees to WoodType">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/WorldEditUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/JeffLib-TestPlugin.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -281,6 +271,8 @@
       <workItem from="1687383725127" duration="606000" />
       <workItem from="1687384458181" duration="34000" />
       <workItem from="1687384511158" duration="846000" />
+      <workItem from="1687420127723" duration="1642000" />
+      <workItem from="1687634059788" duration="656000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -548,7 +540,15 @@
       <option name="project" value="LOCAL" />
       <updated>1686669965225</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="12.5.0 added cherry trees to WoodType">
+      <option name="closed" value="true" />
+      <created>1687420497703</created>
+      <option name="number" value="00039" />
+      <option name="presentableId" value="LOCAL-00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1687420497703</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -571,7 +571,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="11.5.0 included example plugin, removed not working inventory rename method, and stuff" />
     <MESSAGE value="add non-working build.gradle file, but who cares, gradle users are used to spend hours fixing their build scripts" />
     <MESSAGE value="Updated README.md for gradle stuff" />
     <MESSAGE value="12.0.0 updated to 1.19.3" />
@@ -596,7 +595,8 @@
     <MESSAGE value="added EnumCache" />
     <MESSAGE value="1.20 support" />
     <MESSAGE value="1.20.1 support" />
-    <option name="LAST_COMMIT_MESSAGE" value="1.20.1 support" />
+    <MESSAGE value="12.5.0 added cherry trees to WoodType" />
+    <option name="LAST_COMMIT_MESSAGE" value="12.5.0 added cherry trees to WoodType" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

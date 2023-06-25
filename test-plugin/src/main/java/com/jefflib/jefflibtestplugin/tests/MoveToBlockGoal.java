@@ -21,15 +21,14 @@ import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoals;
 import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestRunner;
+import java.util.HashSet;
+import java.util.Set;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.entity.Pig;
 import org.bukkit.entity.Player;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class MoveToBlockGoal implements NMSTest {
 

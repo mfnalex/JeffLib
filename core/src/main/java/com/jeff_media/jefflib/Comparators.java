@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.Comparator;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.Comparator;
 
 /**
  * Some useful comparators

@@ -18,6 +18,9 @@
 package com.jeff_media.jefflib.internal.nms.v1_16_R1.ai;
 
 import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import net.minecraft.server.v1_16_R1.Block;
 import net.minecraft.server.v1_16_R1.BlockPosition;
 import net.minecraft.server.v1_16_R1.EntityCreature;
@@ -26,10 +29,6 @@ import net.minecraft.server.v1_16_R1.PathfinderGoalGotoTarget;
 import org.bukkit.Material;
 import org.bukkit.craftbukkit.v1_16_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Creature;
-
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public abstract class HatchedMoveToBlockGoal extends PathfinderGoalGotoTarget implements PathfinderGoal {
 

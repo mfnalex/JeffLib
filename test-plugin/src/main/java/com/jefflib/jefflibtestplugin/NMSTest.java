@@ -18,7 +18,6 @@
 package com.jefflib.jefflibtestplugin;
 
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.Nullable;
 
 /**
@@ -35,6 +34,7 @@ public interface NMSTest extends Comparable<NMSTest> {
 
     /**
      * Friendly name of the test, should include the class and method name when possible
+     *
      * @return Friendly name of the test
      */
     default String getName() {
@@ -47,6 +47,7 @@ public interface NMSTest extends Comparable<NMSTest> {
 
     /**
      * Whether this test can run from the console without any player object
+     *
      * @return Whether this test can run from the console
      */
     default boolean isRunnableFromConsole() {
@@ -56,6 +57,7 @@ public interface NMSTest extends Comparable<NMSTest> {
     /**
      * Whether this test provides a player-related confirmation prompt. This is intended to check whether the test was successful,
      * even if it didn't throw any exceptions.
+     *
      * @return Whether this test provides a confirmation prompt
      */
     default boolean hasConfirmation() {

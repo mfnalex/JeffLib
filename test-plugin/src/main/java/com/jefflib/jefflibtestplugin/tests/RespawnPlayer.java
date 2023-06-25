@@ -21,7 +21,6 @@ import com.jeff_media.jefflib.EntityUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.Nullable;
 
 public class RespawnPlayer implements NMSTest {

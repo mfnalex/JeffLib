@@ -1,3 +1,20 @@
+/*
+ * Copyright (c) 2023. JEFF Media GbR / mfnalex et al.
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+ */
+
 package com.jeff_media.jefflib.data;
 
 import java.util.Arrays;
@@ -11,6 +28,7 @@ import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple {@link Enum} cache that caches the enum constants and size of the enum
+ *
  * @param <E> The enum type
  */
 public class EnumCache<E extends Enum<E>> implements Iterable<E> {
@@ -29,9 +47,10 @@ public class EnumCache<E extends Enum<E>> implements Iterable<E> {
 
     /**
      * Creates a new or returns the cached {@link EnumCache} for the given enum class
+     *
      * @param enumClass The enum class
+     * @param <E>       The enum type
      * @return The {@link EnumCache} for the given enum class
-     * @param <E> The enum type
      */
     @SuppressWarnings("unchecked")
     public static <E extends Enum<E>> EnumCache<E> of(Class<E> enumClass) {
@@ -55,6 +74,7 @@ public class EnumCache<E extends Enum<E>> implements Iterable<E> {
 
     /**
      * Returns an unmodifiable list of the enum constants
+     *
      * @return An unmodifiable list of the enum constants
      */
     public List<E> getEnumConstants() {
@@ -63,6 +83,7 @@ public class EnumCache<E extends Enum<E>> implements Iterable<E> {
 
     /**
      * Returns the size of the enum
+     *
      * @return The size of the enum
      */
     public int getSize() {

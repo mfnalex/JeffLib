@@ -24,5 +24,5 @@
     <!-- Don't check for missing package declarations in tests-->
     <suppress checks="JavadocPackage" files="^.*\/internal\/.*\.java$"/>
     <suppress checks="JavadocMethod" files="^com\/jeff_media\/jefflib\/internal\/nms\/BukkitUnsafe\.java$"/>
-<!--    <suppress checks="JavadocMethod" files="^.*\.java$"/>-->
+    <!--    <suppress checks="JavadocMethod" files="^.*\.java$"/>-->
 </suppressions>

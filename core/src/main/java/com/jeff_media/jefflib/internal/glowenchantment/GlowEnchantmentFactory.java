@@ -20,21 +20,20 @@ package com.jeff_media.jefflib.internal.glowenchantment;
 import com.jeff_media.jefflib.EnchantmentUtils;
 import com.jeff_media.jefflib.PDCUtils;
 import com.jeff_media.jefflib.ServerUtils;
+import java.util.Objects;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
-import java.util.Objects;
-
 public abstract class GlowEnchantmentFactory {
 
-    @Getter private static final Enchantment instance;
-
-    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(PDCUtils.getKeyFromString("jefflib","glow"));
+    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(PDCUtils.getKeyFromString("jefflib", "glow"));
+    @Getter
+    private static final Enchantment instance;
 
     static {
         Enchantment existing = Enchantment.getByKey(GLOW_ENCHANTMENT_KEY);
-        if(existing != null) {
+        if (existing != null) {
             instance = existing;
         } else {
             instance = ServerUtils.isRunningPaper() ? new PaperGlowEnchantment() : new SpigotGlowEnchantment();

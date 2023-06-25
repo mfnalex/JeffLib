@@ -23,7 +23,6 @@ import com.jeff_media.jefflib.RandomUtils;
 import lombok.Data;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
 
 @Data

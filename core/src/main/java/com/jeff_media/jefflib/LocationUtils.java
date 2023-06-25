@@ -18,18 +18,17 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.exceptions.InvalidLocationDefinitionException;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.UUID;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Locale;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * Location related methods

@@ -17,17 +17,16 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
-
-import org.jetbrains.annotations.Nullable;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.TimeZone;
 import java.util.logging.Logger;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Time related methods, like measuring time and converting nanoseconds to milliseconds, etc.

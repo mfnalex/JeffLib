@@ -17,11 +17,6 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -31,6 +26,10 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Internet and network related methodds

@@ -19,11 +19,10 @@ package com.jeff_media.jefflib.internal.protection;
 
 import com.plotsquared.core.plot.Plot;
 import com.sk89q.worldedit.math.BlockVector3;
+import java.util.UUID;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.UUID;
 
 public class PlotSquared6Protection implements PluginProtection {
 

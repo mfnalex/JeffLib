@@ -20,7 +20,6 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Creature;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.Nullable;
 
 /**

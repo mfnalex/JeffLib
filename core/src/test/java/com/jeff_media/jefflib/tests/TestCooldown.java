@@ -18,10 +18,9 @@
 package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.data.Cooldown;
+import java.util.concurrent.TimeUnit;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-
-import java.util.concurrent.TimeUnit;
 
 public class TestCooldown {
 

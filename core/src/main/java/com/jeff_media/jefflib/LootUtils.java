@@ -18,6 +18,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import java.util.Collection;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -26,10 +27,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.loot.LootContext;
 import org.bukkit.loot.LootTable;
 import org.bukkit.loot.LootTables;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Collection;
 
 /**
  * {@link LootTable} related methods

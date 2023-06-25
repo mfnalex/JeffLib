@@ -18,10 +18,9 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
-
-import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.util.UUID;
+import org.jetbrains.annotations.NotNull;
 
 public final class ProfileUtils {
 

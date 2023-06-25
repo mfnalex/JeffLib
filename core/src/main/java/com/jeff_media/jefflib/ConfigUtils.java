@@ -18,11 +18,10 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.Config;
-import org.bukkit.configuration.ConfigurationSection;
-
-import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
+import org.bukkit.configuration.ConfigurationSection;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Configuration file related methods

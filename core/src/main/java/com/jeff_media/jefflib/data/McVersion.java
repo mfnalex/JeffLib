@@ -18,10 +18,9 @@
 package com.jeff_media.jefflib.data;
 
 import com.jeff_media.jefflib.WordUtils;
-import org.bukkit.Bukkit;
-
-import org.jetbrains.annotations.NotNull;
 import java.util.Objects;
+import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Provides version comparing methods

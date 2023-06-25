@@ -18,12 +18,11 @@
 package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.WordUtils;
+import java.util.Objects;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.EntityType;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.Objects;
 
 public class TestWordUtils {
 

@@ -43,7 +43,7 @@ public class ItemStackToJson implements NMSTest {
         String json = ItemStackSerializer.toJson(item);
         runner.print(json);
         ItemStack cloned = ItemStackSerializer.fromJson(json);
-        if(!item.equals(cloned) || !item.toString().equals(cloned.toString())) {
+        if (!item.equals(cloned) || !item.toString().equals(cloned.toString())) {
             throw new TestException("Itemstacks are not equal: " + item + " vs " + cloned);
         }
     }

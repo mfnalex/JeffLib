@@ -19,17 +19,16 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * Manages holograms

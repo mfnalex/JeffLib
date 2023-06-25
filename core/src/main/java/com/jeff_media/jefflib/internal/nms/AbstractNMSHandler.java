@@ -31,6 +31,11 @@ import com.jeff_media.jefflib.data.tuples.Pair;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
+import java.io.File;
+import java.io.IOException;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -47,12 +52,6 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
-import java.io.File;
-import java.io.IOException;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * Abstract NMS handler, for internal use only.

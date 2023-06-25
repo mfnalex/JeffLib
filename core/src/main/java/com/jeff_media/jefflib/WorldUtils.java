@@ -19,11 +19,10 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
+import java.util.Objects;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.Objects;
 
 /**
  * World related methods

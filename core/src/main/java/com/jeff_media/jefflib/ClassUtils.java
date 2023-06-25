@@ -17,9 +17,6 @@
 
 package com.jeff_media.jefflib;
 
-import lombok.experimental.UtilityClass;
-
-import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 import java.net.URL;
 import java.security.CodeSource;
@@ -28,6 +25,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
+import lombok.experimental.UtilityClass;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Class related methods that do not have something to do with Reflection (see {@link ReflUtils} for that)
@@ -42,7 +41,7 @@ public class ClassUtils {
      * @return true if the class exists, otherwise false
      */
     public static boolean exists(@NotNull final String name) {
-        if(ReflUtils.isClassCached(name)) {
+        if (ReflUtils.isClassCached(name)) {
             return true;
         }
         try {

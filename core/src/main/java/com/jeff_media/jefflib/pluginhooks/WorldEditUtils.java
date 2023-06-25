@@ -20,12 +20,11 @@ package com.jeff_media.jefflib.pluginhooks;
 import com.jeff_media.jefflib.PluginUtils;
 import com.jeff_media.jefflib.data.worldboundingbox.WorldBoundingBox;
 import com.jeff_media.jefflib.exceptions.MissingPluginException;
+import java.util.List;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.List;
 
 /**
  * WorldEdit related methods. Can be safely used even when WorldEdit is not installed, as long as you catch the {@link MissingPluginException}

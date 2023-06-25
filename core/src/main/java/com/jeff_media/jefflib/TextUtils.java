@@ -19,13 +19,6 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.HexColor;
 import com.jeff_media.jefflib.internal.cherokee.StringUtils;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.OfflinePlayer;
-import org.bukkit.plugin.Plugin;
-
-import org.jetbrains.annotations.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -33,6 +26,12 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
+import org.bukkit.plugin.Plugin;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Methods related to color translation, placeholder and emoji application and more

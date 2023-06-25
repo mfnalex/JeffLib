@@ -22,7 +22,6 @@ import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestRunner;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.Nullable;
 
 public class GetBiomeNamespacedKey implements NMSTest {
@@ -32,7 +31,7 @@ public class GetBiomeNamespacedKey implements NMSTest {
     @Override
     public void run(TestRunner runner, Player player) throws Throwable {
         Location location = runner.getSpawn();
-        if(player != null) {
+        if (player != null) {
             location = player.getLocation();
         }
         biomeKey = BiomeUtils.getBiomeNamespacedKey(location).toString();

@@ -19,15 +19,15 @@ package com.jeff_media.jefflib.internal;
 
 import com.jeff_media.jefflib.ReflUtils;
 import com.jeff_media.jefflib.internal.annotations.Internal;
+import java.lang.reflect.Constructor;
+import java.net.InetAddress;
 import lombok.RequiredArgsConstructor;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.jetbrains.annotations.Contract;
 
-import java.lang.reflect.Constructor;
-import java.net.InetAddress;
-
 /**
  * Factory for {@link ServerListPingEvent}, which is required for versions using chat preview
+ *
  * @internal
  */
 @SuppressWarnings("unchecked")
@@ -62,12 +62,13 @@ public class ServerListPingEventFactory {
 
     /**
      * Creates a new ServerListPingEvent
-     * @param hostname The hostname
-     * @param address The address
-     * @param motd The MOTD
+     *
+     * @param hostname               The hostname
+     * @param address                The address
+     * @param motd                   The MOTD
      * @param shouldSendChatPreviews Whether chat previews should be sent
-     * @param numPlayers The number of online players
-     * @param maxPlayers The maximum number of players
+     * @param numPlayers             The number of online players
+     * @param maxPlayers             The maximum number of players
      * @return The new ServerListPingEvent
      */
     @Contract("_, _, _, _, _, _ -> new")

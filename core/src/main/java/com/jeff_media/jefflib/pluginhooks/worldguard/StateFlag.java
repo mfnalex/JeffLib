@@ -17,9 +17,8 @@
 
 package com.jeff_media.jefflib.pluginhooks.worldguard;
 
-import lombok.Getter;
-
 import java.util.Objects;
+import lombok.Getter;
 
 public class StateFlag {
 

@@ -17,8 +17,8 @@
 
 package com.jeff_media.jefflib.data.tuples;
 
-import org.jetbrains.annotations.Nullable;
 import java.util.Objects;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Tuple of three values

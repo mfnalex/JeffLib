@@ -17,6 +17,8 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.HashMap;
+import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
@@ -25,11 +27,8 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.HashMap;
-import java.util.Objects;
 
 /**
  * Provides methods to store and retrieve Strings from PersistentDataHolders or ItemStacks

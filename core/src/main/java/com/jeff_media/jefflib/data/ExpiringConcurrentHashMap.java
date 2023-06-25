@@ -21,7 +21,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
-public class ExpiringConcurrentHashMap<K,V> extends ConcurrentHashMap<K,V> {
+public class ExpiringConcurrentHashMap<K, V> extends ConcurrentHashMap<K, V> {
 
     private final long expirationTime;
     private final long checkInterval;

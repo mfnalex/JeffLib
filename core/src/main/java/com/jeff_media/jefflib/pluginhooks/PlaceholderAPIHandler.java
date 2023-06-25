@@ -20,11 +20,6 @@ package com.jeff_media.jefflib.pluginhooks;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
-import lombok.experimental.UtilityClass;
-import me.clip.placeholderapi.expansion.PlaceholderExpansion;
-import org.bukkit.OfflinePlayer;
-
-import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -32,6 +27,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import lombok.experimental.UtilityClass;
+import me.clip.placeholderapi.expansion.PlaceholderExpansion;
+import org.bukkit.OfflinePlayer;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * PlaceholderAPI related methods

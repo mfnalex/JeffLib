@@ -65,7 +65,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
     }
 
     public TestRunner createTestRunner(Player player) {
-        if(this.testRunner != null) {
+        if (this.testRunner != null) {
             this.testRunner.cleanup();
         }
 
@@ -79,7 +79,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
     }
 
     public void destroyTestRunner() {
-        if(this.testRunner != null) {
+        if (this.testRunner != null) {
             this.testRunner.cleanup();
         }
         this.testRunner = null;

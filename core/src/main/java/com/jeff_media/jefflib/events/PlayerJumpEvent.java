@@ -34,7 +34,6 @@ import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -60,6 +59,7 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
 
     /**
      * Registers the listener needed to call this event
+     *
      * @return The listener that was registered
      */
     public static Listener registerListener() {

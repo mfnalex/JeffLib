@@ -23,7 +23,7 @@
 <module name="Checker">
 
     <module name="SuppressionFilter">
-        <property name="file" value="checkstyle-suppressions.xml" />
+        <property name="file" value="checkstyle-suppressions.xml"/>
     </module>
 
     <!-- See http://checkstyle.sourceforge.net/config_misc.html#NewlineAtEndOfFile -->

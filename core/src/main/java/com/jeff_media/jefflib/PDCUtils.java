@@ -18,10 +18,18 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.cherokee.Validate;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CompletableFuture;
 import lombok.experimental.UtilityClass;
 import org.bukkit.NamespacedKey;
 import org.bukkit.OfflinePlayer;
@@ -31,16 +39,8 @@ import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataHolder;
 import org.bukkit.persistence.PersistentDataType;
 import org.jetbrains.annotations.Contract;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
-import java.util.concurrent.CompletableFuture;
 
 /**
  * PersistentDataContainer related methods.
@@ -72,26 +72,73 @@ public class PDCUtils {
     private static final Method namespacedKeyFromStringMethod;
     private static final Constructor<NamespacedKey> namespacedKeyConstructor;
 
+    private static final Object craftPersistentDataTypeRegistry;
+    private static final Constructor<?> craftPersistentDataContainerConstructor;
+
     static {
-            namespacedKeyFromStringMethod = ReflUtils.getMethod(NamespacedKey.class, "fromString", String.class);
-            namespacedKeyConstructor = (Constructor<NamespacedKey>) ReflUtils.getConstructor(NamespacedKey.class, String.class, String.class);
+        namespacedKeyFromStringMethod = ReflUtils.getMethod(NamespacedKey.class, "fromString", String.class);
+        namespacedKeyConstructor = (Constructor<NamespacedKey>) ReflUtils.getConstructor(NamespacedKey.class, String.class, String.class);
+
+        Class<?> tmpCraftPersistentDataTypeRegistryClass = null;
+        Object tempRegistry = null;
+        Constructor<?> tmpCraftPersistentDataContainerConstructor = null;
+        try {
+            tmpCraftPersistentDataTypeRegistryClass = ReflUtils.getOBCClass("persistence.CraftPersistentDataTypeRegistry");
+            tempRegistry = ReflUtils.getConstructor(tmpCraftPersistentDataTypeRegistryClass).newInstance();
+            tmpCraftPersistentDataContainerConstructor = ReflUtils.getOBCClass("persistence.CraftPersistentDataContainer").getConstructor(tmpCraftPersistentDataTypeRegistryClass);
+        } catch (ReflectiveOperationException ex) {
+
+        }
+        craftPersistentDataTypeRegistry = tempRegistry;
+        craftPersistentDataContainerConstructor = tmpCraftPersistentDataContainerConstructor;
     }
 
-    public static NamespacedKey getKeyFromString(String namespace, String key) {
-        if(namespacedKeyFromStringMethod != null) {
+    /**
+     * Creates a new PersistentDataContainer without needing any {@link org.bukkit.persistence.PersistentDataAdapterContext}
+     *
+     * @return new PersistentDataContainer
+     */
+    @NotNull
+    @Contract(" -> new")
+    @NMS
+    public static PersistentDataContainer createPersistentDataContainer() {
+        if (craftPersistentDataTypeRegistry == null || craftPersistentDataContainerConstructor == null) {
+            throw new NMSNotSupportedException("Couldn't find class or appropriate constructor of CraftPersistentDataTypeRegistry or CraftPersistentDataContainer.");
+        }
+        try {
+            return (PersistentDataContainer) craftPersistentDataContainerConstructor.newInstance(craftPersistentDataTypeRegistry);
+        } catch (ReflectiveOperationException ex) {
+            throw new RuntimeException("Couldn't create new CraftPersistentDataContainer", ex);
+        }
+    }
+
+    /**
+     * Creates a NamespacedKey from a String. This method is a workaround for the fact that {@link NamespacedKey#fromString(String)} isn't available in 1.16.4 and older, and because {@link NamespacedKey#NamespacedKey(String, String)} is deprecated.
+     *
+     * @param namespace Namespace
+     * @param key       Key
+     * @return NamespacedKey, or null if key or namespace is invalid
+     */
+    @Nullable
+    public static NamespacedKey getKeyFromString(@NotNull String namespace, @NotNull String key) {
+        Validate.notNull(namespace, "Namespace cannot be null");
+        Validate.notNull(key, "Key cannot be null");
+        if (namespacedKeyFromStringMethod != null) {
             try {
                 return (NamespacedKey) namespacedKeyFromStringMethod.invoke(null, namespace + ":" + key);
-            } catch (Exception e) {
+            } catch (ReflectiveOperationException e) {
                 e.printStackTrace();
             }
-        } else if(namespacedKeyConstructor != null) {
+        } else if (namespacedKeyConstructor != null) {
             try {
                 return namespacedKeyConstructor.newInstance(namespace, key);
-            } catch (Exception e) {
+            } catch (ReflectiveOperationException e) {
                 e.printStackTrace();
+            } catch (IllegalArgumentException e) {
+                return null;
             }
         }
-        throw new IllegalStateException("Could not find NamespacedKey#fromString(String) method, nor a NamespacedKey(String, String) constructor.");
+        throw new IllegalStateException("Could not find or invoke NamespacedKey#fromString(String) nor NamespacedKey#NamespacedKey(String, String).");
     }
 
     /**

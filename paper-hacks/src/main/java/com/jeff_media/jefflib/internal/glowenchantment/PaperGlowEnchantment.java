@@ -18,6 +18,9 @@
 package com.jeff_media.jefflib.internal.glowenchantment;
 
 import io.papermc.paper.enchantments.EnchantmentRarity;
+import java.util.Collections;
+import java.util.Objects;
+import java.util.Set;
 import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -26,10 +29,6 @@ import org.bukkit.entity.EntityCategory;
 import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
 
 public class PaperGlowEnchantment extends Enchantment {
 

@@ -20,12 +20,11 @@ package com.jefflib.jefflibtestplugin.tests;
 import com.jeff_media.jefflib.ItemStackUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestRunner;
+import java.util.Objects;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.BookMeta;
-
-import java.util.Objects;
 
 public class ItemStackSizeInBytes implements NMSTest {
     @Override

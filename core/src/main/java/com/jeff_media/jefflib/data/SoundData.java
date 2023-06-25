@@ -20,6 +20,8 @@ package com.jeff_media.jefflib.data;
 import com.google.common.base.Enums;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.NumberUtils;
+import java.util.Locale;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -29,11 +31,8 @@ import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Locale;
-import java.util.Objects;
 
 // TODO: Test whether something broke after switching from Sound to String
 

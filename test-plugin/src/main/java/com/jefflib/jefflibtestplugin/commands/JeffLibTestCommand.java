@@ -22,10 +22,9 @@ import co.aikar.commands.annotation.CommandAlias;
 import co.aikar.commands.annotation.Default;
 import co.aikar.commands.annotation.Subcommand;
 import com.jefflib.jefflibtestplugin.JeffLibTestPlugin;
+import java.util.Objects;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-
-import java.util.Objects;
 
 @CommandAlias("jefflibtest")
 public class JeffLibTestCommand extends BaseCommand {
@@ -46,28 +45,28 @@ public class JeffLibTestCommand extends BaseCommand {
 
     @Subcommand("repeat")
     public void repeat(String confirmation) {
-        if(!isConfirmationCorrect(confirmation)) return;
+        if (!isConfirmationCorrect(confirmation)) return;
         plugin.getTestRunner().repeat();
     }
 
     @Subcommand("confirm")
     public void next(String confirmation) {
-        if(plugin.getTestRunner()==null) {
+        if (plugin.getTestRunner() == null) {
             //player.sendMessage("NMSTest runner not initialized");
             return;
         }
-        if(!isConfirmationCorrect(confirmation)) return;
+        if (!isConfirmationCorrect(confirmation)) return;
         plugin.getTestRunner().setWaitingForTestResult(false);
     }
 
     private boolean isConfirmationCorrect(String confirmation) {
-        if(confirmation == null) {
+        if (confirmation == null) {
             confirmation = "";
         }
-        if(confirmation.equals("force")) {
+        if (confirmation.equals("force")) {
             return true;
         }
-        if(plugin.getTestRunner() == null) {
+        if (plugin.getTestRunner() == null) {
             return false;
         }
         return Objects.equals(plugin.getTestRunner().getSession(), confirmation);

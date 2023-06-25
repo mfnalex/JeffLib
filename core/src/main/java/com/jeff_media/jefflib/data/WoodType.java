@@ -20,7 +20,6 @@ package com.jeff_media.jefflib.data;
 import com.google.common.base.Enums;
 import lombok.Getter;
 import org.bukkit.Material;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

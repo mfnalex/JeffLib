@@ -17,6 +17,8 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.Objects;
+import java.util.Set;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.Particle;
@@ -25,10 +27,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.BoundingBox;
-
 import org.jetbrains.annotations.Nullable;
-import java.util.Objects;
-import java.util.Set;
 
 /**
  * Particle related methods

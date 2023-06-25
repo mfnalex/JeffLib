@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib.internal.glowenchantment;
 
+import java.util.Objects;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
-
-import java.util.Objects;
 
 public class SpigotGlowEnchantment extends Enchantment {
 

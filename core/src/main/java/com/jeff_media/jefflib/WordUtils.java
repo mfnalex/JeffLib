@@ -17,15 +17,14 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.Locale;
 import lombok.experimental.UtilityClass;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Locale;
 
 /**
  * Word and language related methods, like capitalization or getting translation keys
@@ -120,6 +119,7 @@ public class WordUtils {
 
     /**
      * Returns the correct English genitive suffix for the given word. E.g., for "mfnalex" it will return "'s", for "Jesus" it will return "'"
+     *
      * @param word The word to get the genitive suffix for
      * @return The genitive suffix
      */

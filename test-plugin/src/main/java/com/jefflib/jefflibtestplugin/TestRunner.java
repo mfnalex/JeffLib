@@ -18,6 +18,16 @@
 package com.jefflib.jefflibtestplugin;
 
 import com.jeff_media.jefflib.ClassUtils;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Modifier;
+import java.util.ArrayDeque;
+import java.util.Arrays;
+import java.util.Deque;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import net.md_5.bungee.api.ChatColor;
@@ -33,24 +43,14 @@ import org.bukkit.event.HandlerList;
 import org.bukkit.event.Listener;
 import org.bukkit.scheduler.BukkitTask;
 import org.jetbrains.annotations.NotNull;
-
 import org.jetbrains.annotations.Nullable;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Modifier;
-import java.util.ArrayDeque;
-import java.util.Arrays;
-import java.util.Deque;
-import java.util.Objects;
-import java.util.UUID;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class TestRunner implements Runnable {
 
     private static final String BR = "\n";
 
-    @Getter private final JeffLibTestPlugin plugin;
+    @Getter
+    private final JeffLibTestPlugin plugin;
     private final Deque<NMSTest> tests;
     @Nullable
     private final Player player;
@@ -60,12 +60,12 @@ public class TestRunner implements Runnable {
     private final Location spawn;
     @Getter
     private final Block blockInFront;
-
+    private final BukkitTask task;
     private NMSTest currentTest;
     @Getter
     private String session;
-    private final BukkitTask task;
-    @Setter private boolean waitingForTestResult = false;
+    @Setter
+    private boolean waitingForTestResult = false;
 
     public TestRunner(JeffLibTestPlugin plugin, @Nullable Player player) {
         this.plugin = plugin;
@@ -85,17 +85,17 @@ public class TestRunner implements Runnable {
                 Class<?> clazz = Class.forName(className);
 
                 // No inner classes
-                if(clazz.isAnonymousClass()) {
+                if (clazz.isAnonymousClass()) {
                     return null;
                 }
 
                 // No abstract classes
-                if(Modifier.isAbstract(clazz.getModifiers())) {
+                if (Modifier.isAbstract(clazz.getModifiers())) {
                     return null;
                 }
 
                 // Only classes implementing NMSTest
-                if(!NMSTest.class.isAssignableFrom(clazz)) {
+                if (!NMSTest.class.isAssignableFrom(clazz)) {
                     throw new RuntimeException("Class " + className + " does not implement NMSTest");
                 }
 
@@ -162,7 +162,7 @@ public class TestRunner implements Runnable {
         boolean exception = false;
 
         try {
-            if(test instanceof Listener) {
+            if (test instanceof Listener) {
                 Bukkit.getPluginManager().registerEvents((Listener) test, plugin);
             }
             test.run(this, player);
@@ -171,17 +171,17 @@ public class TestRunner implements Runnable {
             exception = true;
         }
 
-        if(test instanceof Listener) {
+        if (test instanceof Listener) {
             HandlerList.unregisterAll((Listener) test);
         }
 
-        if(exception) {
+        if (exception) {
             return false;
         }
 
         if (test.hasConfirmation() && player != null) {
             String confirmation = test.getConfirmation();
-            if(confirmation == null) {
+            if (confirmation == null) {
                 throw new NullPointerException("confirmation is null although hasConfirmation() returned true");
             }
             ComponentBuilder builder = new ComponentBuilder();
@@ -225,7 +225,7 @@ public class TestRunner implements Runnable {
         if (player != null) {
             player.sendMessage(text);
         }
-        for(String line : text) {
+        for (String line : text) {
             line = ChatColor.stripColor(line);
             switch (logLevel) {
                 case INFO:
@@ -244,7 +244,7 @@ public class TestRunner implements Runnable {
 
     @Override
     public void run() {
-        if(!waitingForTestResult) {
+        if (!waitingForTestResult) {
             if (!hasNext()) {
                 currentTest.cleanup();
                 printBanner(ChatColor.GREEN + "Success!");
@@ -252,11 +252,11 @@ public class TestRunner implements Runnable {
                 return;
             }
 
-            if(!runNext()) {
+            if (!runNext()) {
                 waitingForTestResult = true;
             }
         } else {
-            if(currentTest.isDone() && (player == null || !currentTest.hasConfirmation())) {
+            if (currentTest.isDone() && (player == null || !currentTest.hasConfirmation())) {
                 waitingForTestResult = false;
             }
         }

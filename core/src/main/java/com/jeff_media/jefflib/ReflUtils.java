@@ -19,11 +19,6 @@ package com.jeff_media.jefflib;
 
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.Table;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -31,6 +26,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * Reflection related methods
@@ -104,7 +103,7 @@ public class ReflUtils {
     /**
      * Gets whether a method is already cached
      *
-     * @param clazz The class
+     * @param clazz      The class
      * @param methodName The method name
      * @return Whether the method is already cached
      */

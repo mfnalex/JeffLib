@@ -16,7 +16,7 @@
   ~ along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<cache xmlns="http://maven.apache.org/BUILD-CACHE-CONFIG/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<cache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/BUILD-CACHE-CONFIG/1.0.0"
        xsi:schemaLocation="http://maven.apache.org/BUILD-CACHE-CONFIG/1.0.0 http://maven.apache.org/xsd/cache-config-1.0.0.xsd">
     <configuration>
         <enabled>true</enabled>

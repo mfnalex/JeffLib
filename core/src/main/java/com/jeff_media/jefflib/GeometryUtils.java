@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib;
 
+import java.util.HashSet;
+import java.util.Set;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.World;
-
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Geometry related methods

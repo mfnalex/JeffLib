@@ -20,13 +20,12 @@ package com.jeff_media.jefflib.pluginhooks.worldguard;
 import com.jeff_media.jefflib.PluginUtils;
 import com.jeff_media.jefflib.exceptions.MissingPluginException;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
+import java.util.Collection;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Collection;
 
 /**
  * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}

@@ -23,7 +23,6 @@ import com.jeff_media.jefflib.internal.annotations.Tested;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.NamespacedKey;
-
 import org.jetbrains.annotations.NotNull;
 
 /**

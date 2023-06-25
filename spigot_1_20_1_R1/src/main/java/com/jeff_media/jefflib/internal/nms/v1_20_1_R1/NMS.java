@@ -20,6 +20,7 @@ package com.jeff_media.jefflib.internal.nms.v1_20_1_R1;
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoal;
+import java.util.stream.Stream;
 import net.minecraft.core.BlockPos;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.dedicated.DedicatedServer;
@@ -48,10 +49,8 @@ import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_20_R1.util.CraftMagicNumbers;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.Vector;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.stream.Stream;
 
 public final class NMS {
 

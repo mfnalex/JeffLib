@@ -21,6 +21,7 @@ import com.jeff_media.jefflib.PDCUtils;
 import com.jefflib.jefflibtestplugin.NMSTest;
 import com.jefflib.jefflibtestplugin.TestException;
 import com.jefflib.jefflibtestplugin.TestRunner;
+import java.io.IOException;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Pig;
@@ -29,12 +30,10 @@ import org.bukkit.entity.Sheep;
 import org.bukkit.persistence.PersistentDataContainer;
 import org.bukkit.persistence.PersistentDataType;
 
-import java.io.IOException;
-
 public class PdcSerialization implements NMSTest {
 
-    private Entity entity;
     private final NamespacedKey key = NamespacedKey.fromString("jefflibtestplugin:mykey");
+    private Entity entity;
 
     @Override
     public void run(TestRunner runner, Player player) throws Throwable {
@@ -52,7 +51,7 @@ public class PdcSerialization implements NMSTest {
                 throw new TestException("Couldn't deserialize PDC", e);
             }
             String result = sheep.getPersistentDataContainer().get(key, PersistentDataType.STRING);
-            if(result == null || !result.equals("abc")) {
+            if (result == null || !result.equals("abc")) {
                 throw new TestException("Expected abc, got " + result);
             }
         });

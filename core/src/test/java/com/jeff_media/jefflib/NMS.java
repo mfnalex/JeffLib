@@ -17,38 +17,13 @@
 
 package com.jeff_media.jefflib;
 
-import be.seeseemelk.mockbukkit.plugin.PluginManagerMock;
-import java.io.Serializable;
-import java.util.Arrays;
-import java.util.EnumSet;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.ThreadLocalRandom;
-import me.clip.placeholderapi.PlaceholderAPI;
-import net.kyori.adventure.pointer.Pointered;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.apache.logging.log4j.core.Appender;
-import org.apache.logging.log4j.core.Filter;
-import org.apache.logging.log4j.core.Layout;
-import org.apache.logging.log4j.core.LogEvent;
-import org.apache.logging.log4j.core.appender.AbstractAppender;
-import org.apache.logging.log4j.core.config.Property;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Snowball;
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitTask;
 
 public class NMS extends JavaPlugin implements Listener {
 
+    {
 
+    }
 
 }

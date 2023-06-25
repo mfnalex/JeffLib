@@ -17,14 +17,13 @@
 
 package com.jeff_media.jefflib.data;
 
-import org.bukkit.entity.Entity;
-
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.function.LongSupplier;
 import java.util.stream.Collectors;
+import org.bukkit.entity.Entity;
 
 /**
  * A cooldown tracker for all kinds of objects. One instance should be used per kind of cooldown. For example if you have

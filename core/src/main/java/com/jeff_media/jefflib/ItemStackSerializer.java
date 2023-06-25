@@ -19,6 +19,12 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.UncheckedIOException;
+import java.util.Base64;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
@@ -28,13 +34,6 @@ import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutput;
-import java.io.UncheckedIOException;
-import java.util.Base64;
 
 /**
  * Provides methods to serialize and deserialize ItemStacks, ItemStack arrays and Inventories to/from byte arrays and/or base64
@@ -223,8 +222,8 @@ public class ItemStackSerializer {
     /**
      * Turns an ItemStack into a json-formatted String
      *
-     * @see #fromJson(String)
      * @nms
+     * @see #fromJson(String)
      */
     @NMS
     @Tested("1.19.4")
@@ -234,11 +233,12 @@ public class ItemStackSerializer {
 
     /**
      * Turns a json-formatted String into an ItemStack
+     *
      * @param json json-formatted String
      * @return ItemStack
      * @throws UncheckedIOException if the server couldn't parse it
-     * @see #toJson(ItemStack)
      * @nms
+     * @see #toJson(ItemStack)
      */
     @NMS
     @Tested("1.19.4")

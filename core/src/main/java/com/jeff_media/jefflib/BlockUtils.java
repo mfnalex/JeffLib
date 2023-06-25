@@ -18,6 +18,13 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import java.util.AbstractMap;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Chunk;
 import org.bukkit.ChunkSnapshot;
@@ -28,16 +35,8 @@ import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.util.BlockVector;
 import org.bukkit.util.BoundingBox;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.AbstractMap;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.function.Predicate;
 
 /**
  * Block related methods
@@ -201,8 +200,8 @@ public class BlockUtils {
     /**
      * Gets all {@link Chunk}s that are inside or intersect the given {@link BoundingBox}
      *
-     * @param world World to check for
-     * @param box   BoundingBox to check for
+     * @param world            World to check for
+     * @param box              BoundingBox to check for
      * @param onlyLoadedChunks When true, only returns already loaded chunks. When false, this will force load chunks and return those too
      * @return List of all chunks that are inside or intersect the given BoundingBox
      */
@@ -227,10 +226,10 @@ public class BlockUtils {
     /**
      * Gets a list of all {@link BlockVector}s inside the given {@link BoundingBox} that match the given {@link Predicate}&lt;{@link BlockData}>
      *
-     * @param world World to check for
-     * @param box   BoundingBox to check for
+     * @param world            World to check for
+     * @param box              BoundingBox to check for
      * @param onlyLoadedChunks When true, only returns BlockVectors if the related chunk is already loaded. When false, this will force load chunks and return BlockVectors from those too
-     * @param predicate Predicate to check for
+     * @param predicate        Predicate to check for
      * @return List of all BlockVectors inside the given BoundingBox that match the given Predicate
      */
     public static List<BlockVector> getBlocks(final World world, final BoundingBox box, final boolean onlyLoadedChunks, final Predicate<BlockData> predicate) {
@@ -259,8 +258,8 @@ public class BlockUtils {
     /**
      * Gets all {@link ChunkSnapshot}s that are inside or intersect the given {@link BoundingBox}
      *
-     * @param world World to check for
-     * @param box  BoundingBox to check for
+     * @param world            World to check for
+     * @param box              BoundingBox to check for
      * @param onlyLoadedChunks When true, only returns ChunkSnapshots if the related chunk is already loaded. When false, this will force load chunks and return ChunkSnapshots from those too
      * @return List of all ChunkSnapshots that are inside or intersect the given BoundingBox
      */

@@ -20,10 +20,9 @@ package com.jeff_media.jefflib.tests;
 import com.jeff_media.jefflib.Assertions2;
 import com.jeff_media.jefflib.UnitTest;
 import com.jeff_media.jefflib.data.WeightedRandomList;
-import org.junit.jupiter.api.Test;
-
 import java.util.HashMap;
 import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class TestWeightedRandomList extends UnitTest {
 

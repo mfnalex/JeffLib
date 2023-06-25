@@ -27,14 +27,13 @@ import com.sk89q.worldedit.entity.Player;
 import com.sk89q.worldedit.regions.Region;
 import com.sk89q.worldedit.session.SessionManager;
 import com.sk89q.worldedit.world.World;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.util.BoundingBox;
-
 import org.jetbrains.annotations.Nullable;
-import java.util.ArrayList;
-import java.util.List;
 
 @Internal
 @UtilityClass

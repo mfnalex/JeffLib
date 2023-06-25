@@ -23,10 +23,9 @@ import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
 import com.jeff_media.jefflib.ai.navigation.MoveController;
 import com.jeff_media.jefflib.ai.navigation.PathNavigation;
-
+import java.util.EnumSet;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.EnumSet;
 
 
 /**

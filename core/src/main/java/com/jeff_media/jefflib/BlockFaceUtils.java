@@ -17,15 +17,14 @@
 
 package com.jeff_media.jefflib;
 
+import static org.bukkit.block.BlockFace.DOWN;
+import static org.bukkit.block.BlockFace.UP;
 import lombok.experimental.UtilityClass;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
-
-import static org.bukkit.block.BlockFace.DOWN;
-import static org.bukkit.block.BlockFace.UP;
 
 /**
  * BlockFace related methods

@@ -20,6 +20,7 @@ package com.jeff_media.jefflib.internal.nms;
 import com.google.common.collect.Multimap;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import java.io.File;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -35,8 +36,6 @@ import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.InvalidPluginException;
 import org.bukkit.plugin.PluginDescriptionFile;
 
-import java.io.File;
-
 /**
  * Represents Bukkit's {@link UnsafeValues} class with all version-dependant methods from org.bukkit.craftbukkit.&lt;version&gt;.util.CraftMagicNumbers included
  */
@@ -45,6 +44,7 @@ public interface BukkitUnsafe {
 
     /**
      * Returns the BukkitUnsafe instance
+     *
      * @return The BukkitUnsafe instance
      */
     static BukkitUnsafe getInstance() {
@@ -53,6 +53,7 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a Material into a legacy Material
+     *
      * @param material The Material to convert
      * @return The legacy Material
      */
@@ -62,6 +63,7 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a legacy Material into a Material
+     *
      * @param material The legacy Material to convert
      * @return The Material
      */
@@ -71,6 +73,7 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a legacy MaterialData into a Material
+     *
      * @param material The legacy MaterialData to convert
      * @return The Material
      */
@@ -80,7 +83,8 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a legacy MaterialData into a Material
-     * @param material The legacy MaterialData to convert
+     *
+     * @param material     The legacy MaterialData to convert
      * @param itemPriority Whether to prioritize items over blocks if the MaterialData is ambiguous
      * @return The Material
      */
@@ -90,8 +94,9 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a legacy Material with data into a BlockData
+     *
      * @param material The legacy Material to convert
-     * @param data The legacy data value
+     * @param data     The legacy data value
      * @return The Material
      */
     default BlockData fromLegacy(final Material material, final byte data) {
@@ -100,8 +105,9 @@ public interface BukkitUnsafe {
 
     /**
      * Turns a material name from an older version into a Material
+     *
      * @param material The old material name
-     * @param version The "world version" / "DataFixer version" the material name is from
+     * @param version  The "world version" / "DataFixer version" the material name is from
      * @return The Material
      */
     default Material getMaterial(final String material, final int version) {
@@ -110,6 +116,7 @@ public interface BukkitUnsafe {
 
     /**
      * Gets the current "world version" / "DataFixer version"
+     *
      * @return The current "world version" / "DataFixer version"
      */
     default int getDataVersion() {
@@ -118,7 +125,8 @@ public interface BukkitUnsafe {
 
     /**
      * Applies the given "Mojangson" NBT data to the given ItemStack (similar to how the vanilla /give command works)
-     * @param stack The ItemStack to modify
+     *
+     * @param stack     The ItemStack to modify
      * @param arguments The "Mojangson" NBT data to apply
      * @return The modified ItemStack
      */
@@ -128,6 +136,7 @@ public interface BukkitUnsafe {
 
     /**
      * Checks if the server supports the API version defined in the given {@link PluginDescriptionFile}, and enables Legacy Material support if it doesn't define an API version.
+     *
      * @param pdf The PluginDescriptionFile to check
      * @throws InvalidPluginException If the API version defined in the PluginDescriptionFile is not supported by the server
      */
@@ -137,8 +146,9 @@ public interface BukkitUnsafe {
 
     /**
      * Translates a class between legacy and modern constants (biome names, material names, etc), e.g. "CACTUS_GREEN" &lt;-&gt; "GREEN_DYE" or "JUNGLE_EDGE" &lt;-&gt; "SPARSE_JUNGLE"
-     * @param pdf The PluginDescriptionFile of the plugin to translate the class for
-     * @param path The path/name of the class to translate
+     *
+     * @param pdf   The PluginDescriptionFile of the plugin to translate the class for
+     * @param path  The path/name of the class to translate
      * @param clazz The bytecode of the class to translate
      * @return The translated bytecode, that then gets thrown at the outdated plugin's class loader
      */
@@ -149,7 +159,8 @@ public interface BukkitUnsafe {
     /**
      * Loads and registers an advancement from a JSON string. This registers the advancement
      * both in NMS and Bukkit.
-     * @param key The NamespacedKey under which to register this advancement
+     *
+     * @param key         The NamespacedKey under which to register this advancement
      * @param advancement The JSON string containing the advancement data
      * @return The loaded Bukkit advancement
      */
@@ -159,6 +170,7 @@ public interface BukkitUnsafe {
 
     /**
      * Removes an advancement's file from Bukkit's datapack folder. It will NOT immediately unload it from the server.
+     *
      * @param key The NamespacedKey of the advancement to remove
      * @return Whether the advancement's file was successfully removed
      */
@@ -168,8 +180,9 @@ public interface BukkitUnsafe {
 
     /**
      * Gets the default attribute modifiers for the given material and equipment slot
+     *
      * @param material The material to get the default attribute modifiers for
-     * @param slot The equipment slot to get the default attribute modifiers for
+     * @param slot     The equipment slot to get the default attribute modifiers for
      * @return The default attribute modifiers for the given material and equipment slot
      */
     default Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(final Material material, final EquipmentSlot slot) {
@@ -202,6 +215,7 @@ public interface BukkitUnsafe {
 
     /**
      * Turns an NMS Fluid into a Bukkit Fluid
+     *
      * @param nmsFluid The NMS Fluid
      * @return The Bukkit Fluid
      * @nms 1.16.2+

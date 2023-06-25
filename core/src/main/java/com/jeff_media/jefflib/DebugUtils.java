@@ -20,6 +20,10 @@ package com.jeff_media.jefflib;
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.PathfinderGoals;
 import com.jeff_media.jefflib.data.McVersion;
+import java.util.Collection;
+import java.util.Map;
+import java.util.logging.Logger;
+import java.util.stream.Stream;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Material;
 import org.bukkit.NamespacedKey;
@@ -30,11 +34,6 @@ import org.bukkit.entity.Villager;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.Collection;
-import java.util.Map;
-import java.util.logging.Logger;
-import java.util.stream.Stream;
 
 @UtilityClass
 public class DebugUtils {

@@ -19,17 +19,16 @@ package com.jeff_media.jefflib.ai.goal;
 
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
+import java.util.Collection;
+import java.util.Set;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 import org.bukkit.GameMode;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
-
 import org.jetbrains.annotations.NotNull;
-import java.util.Collection;
-import java.util.Set;
-import java.util.function.Predicate;
-import java.util.stream.Stream;
 
 /**
  * Utility methods to create some custom {@link PathfinderGoal}s. For a custom goal, extend {@link CustomGoal}

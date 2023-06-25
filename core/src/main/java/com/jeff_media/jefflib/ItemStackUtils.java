@@ -18,7 +18,15 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
-import lombok.NonNull;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -32,18 +40,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.persistence.PersistentDataType;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Objects;
-import java.util.UUID;
 
 /**
  * ItemStack related methods
@@ -107,8 +105,8 @@ public class ItemStackUtils {
      *   efficiency: 5
      * </pre>
      *
-     * @param config        ConfigurationSection to parse the ItemStack from
-     * @param placeholders  Placeholders to apply to the ItemStack
+     * @param config       ConfigurationSection to parse the ItemStack from
+     * @param placeholders Placeholders to apply to the ItemStack
      * @return ItemStack parsed from the ConfigurationSection
      * @see TextUtils#replaceInString(String, Map)
      */

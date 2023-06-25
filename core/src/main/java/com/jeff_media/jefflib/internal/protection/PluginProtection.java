@@ -19,7 +19,6 @@ package com.jeff_media.jefflib.internal.protection;
 
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 
 public interface PluginProtection {

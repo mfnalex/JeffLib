@@ -18,6 +18,7 @@
 package com.jeff_media.jefflib;
 
 import com.google.common.base.Enums;
+import java.util.Locale;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,10 +27,8 @@ import org.bukkit.Location;
 import org.bukkit.Particle;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import java.util.Locale;
 
 /**
  * Data class to wrap all information needed to play a sound

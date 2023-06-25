@@ -19,18 +19,17 @@ package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.data.TPS;
 import com.jeff_media.jefflib.internal.ServerListPingEventFactory;
-import lombok.experimental.UtilityClass;
-import org.bukkit.Bukkit;
-import org.bukkit.Material;
-import org.bukkit.event.server.ServerListPingEvent;
-
-import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.nio.file.Paths;
 import java.util.concurrent.CompletableFuture;
+import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.Material;
+import org.bukkit.event.server.ServerListPingEvent;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Server related methods
@@ -69,7 +68,7 @@ public class ServerUtils {
      * @return The effective MOTD
      */
     public static CompletableFuture<String> getEffectiveMotd() {
-        if(LOCALHOST == null) {
+        if (LOCALHOST == null) {
             return CompletableFuture.completedFuture(Bukkit.getMotd());
         }
         return CompletableFuture.supplyAsync(() -> {

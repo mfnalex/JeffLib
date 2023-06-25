@@ -17,10 +17,9 @@
 
 package com.jeff_media.jefflib.data;
 
-import lombok.Getter;
-
-import org.jetbrains.annotations.NotNull;
 import java.io.DataOutput;
+import lombok.Getter;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * A simple {@link DataOutput} implementation that counts the number of bytes written and discards the actual data

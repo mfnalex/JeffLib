@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib.pluginhooks;
 
+import java.lang.reflect.Method;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.ItemStack;
-
 import org.jetbrains.annotations.NotNull;
-import java.lang.reflect.Method;
 
 @UtilityClass
 public class SlimefunUtils {
