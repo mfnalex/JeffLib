@@ -4,26 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="12.5.0 added cherry trees to WoodType">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/data/CommandData.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/exceptions/UtilityClassInstantiationException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/examples/CommandData.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nms-generic/pom.xml" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="formatting / config files">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/JeffLib-core.iml" beforeDir="false" afterPath="$PROJECT_DIR$/core/JeffLib-core.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ArrayUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ArrayUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockFaceUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockFaceUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockTracker.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BlockTracker.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CollectionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/CollectionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestCollectionUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestCollectionUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run-buildtools.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-buildtools.sh" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +38,7 @@
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.1-R0.1-SNAPSHOT/spigot-1.19.1-R0.1-SNAPSHOT-remapped-mojang.jar!/net/minecraft/world/level/block/Block.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/net/minecraft/core/Registry.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/net/minecraft/world/entity/Entity.class" root0="SKIP_INSPECTION" />
+    <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/net/minecraft/world/entity/npc/Villager.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/CraftServer.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/entity/CraftEntity.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/entity/CraftLivingEntity.class" root0="SKIP_INSPECTION" />
@@ -97,7 +81,7 @@
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
@@ -110,6 +94,7 @@
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\Example-Plugin-Maven" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\core\src\main\java\com\jeff_media\jefflib\internal\nms" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\plugin-plotsquared6\src\main\java" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\plugin-plotsquared6" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib" />
@@ -353,6 +338,9 @@
       <workItem from="1691348607475" duration="4015000" />
       <workItem from="1691521539245" duration="935000" />
       <workItem from="1691665819570" duration="182000" />
+      <workItem from="1691741648716" duration="1298000" />
+      <workItem from="1691742962401" duration="73000" />
+      <workItem from="1691743053086" duration="426000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -628,7 +616,71 @@
       <option name="project" value="LOCAL" />
       <updated>1687420497703</updated>
     </task>
-    <option name="localTasksCounter" value="40" />
+    <task id="LOCAL-00040" summary="removed @UtilityClass">
+      <option name="closed" value="true" />
+      <created>1691742573728</created>
+      <option name="number" value="00040" />
+      <option name="presentableId" value="LOCAL-00040" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742573728</updated>
+    </task>
+    <task id="LOCAL-00041" summary="removed test stuff">
+      <option name="closed" value="true" />
+      <created>1691742600714</created>
+      <option name="number" value="00041" />
+      <option name="presentableId" value="LOCAL-00041" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742600714</updated>
+    </task>
+    <task id="LOCAL-00042" summary="pom.xml">
+      <option name="closed" value="true" />
+      <created>1691742609948</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742609948</updated>
+    </task>
+    <task id="LOCAL-00043" summary="added test for utility classes">
+      <option name="closed" value="true" />
+      <created>1691742626731</created>
+      <option name="number" value="00043" />
+      <option name="presentableId" value="LOCAL-00043" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742626731</updated>
+    </task>
+    <task id="LOCAL-00044" summary="added tests for enum maps and sets">
+      <option name="closed" value="true" />
+      <created>1691742639373</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742639373</updated>
+    </task>
+    <task id="LOCAL-00045" summary="added try/catch for ItemsAdder api">
+      <option name="closed" value="true" />
+      <created>1691742653575</created>
+      <option name="number" value="00045" />
+      <option name="presentableId" value="LOCAL-00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742653575</updated>
+    </task>
+    <task id="LOCAL-00046" summary="added UtilityClassInstantiationException">
+      <option name="closed" value="true" />
+      <created>1691742665503</created>
+      <option name="number" value="00046" />
+      <option name="presentableId" value="LOCAL-00046" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742665503</updated>
+    </task>
+    <task id="LOCAL-00047" summary="formatting / config files">
+      <option name="closed" value="true" />
+      <created>1691742705136</created>
+      <option name="number" value="00047" />
+      <option name="presentableId" value="LOCAL-00047" />
+      <option name="project" value="LOCAL" />
+      <updated>1691742705136</updated>
+    </task>
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -651,14 +703,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="add non-working build.gradle file, but who cares, gradle users are used to spend hours fixing their build scripts" />
-    <MESSAGE value="Updated README.md for gradle stuff" />
-    <MESSAGE value="12.0.0 updated to 1.19.3" />
-    <MESSAGE value="12.0.0 updated to 1.19.3, improved run-buildtools.sh" />
-    <MESSAGE value="improved run-buildtools.sh" />
-    <MESSAGE value="updated README.md for 1.19.3" />
-    <MESSAGE value="fixed calling buildVersion twice for both remapped and not remapped, as remapped automatically also installs the unmapped jar" />
-    <MESSAGE value="removed debug output" />
     <MESSAGE value="try to build unremapped .jar when the remapped already exists, in case people only have the remapped .jar in their repo but not the normal one" />
     <MESSAGE value="1.19.3" />
     <MESSAGE value="added build cache plugin" />
@@ -676,7 +720,15 @@
     <MESSAGE value="1.20 support" />
     <MESSAGE value="1.20.1 support" />
     <MESSAGE value="12.5.0 added cherry trees to WoodType" />
-    <option name="LAST_COMMIT_MESSAGE" value="12.5.0 added cherry trees to WoodType" />
+    <MESSAGE value="removed @UtilityClass" />
+    <MESSAGE value="removed test stuff" />
+    <MESSAGE value="pom.xml" />
+    <MESSAGE value="added test for utility classes" />
+    <MESSAGE value="added tests for enum maps and sets" />
+    <MESSAGE value="added try/catch for ItemsAdder api" />
+    <MESSAGE value="added UtilityClassInstantiationException" />
+    <MESSAGE value="formatting / config files" />
+    <option name="LAST_COMMIT_MESSAGE" value="formatting / config files" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

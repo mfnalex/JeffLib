@@ -22,7 +22,7 @@
     <parent>
         <artifactId>JeffLib-parent</artifactId>
         <groupId>com.jeff_media</groupId>
-        <version><!-- changeme -->12.6.0</version>
+        <version><!-- changeme -->12.6.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -163,7 +163,7 @@
         <dependency>
             <groupId>com.jeff_media</groupId>
             <artifactId>JeffLib</artifactId>
-            <version><!-- changeme -->12.6.0</version>
+            <version><!-- changeme -->12.6.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

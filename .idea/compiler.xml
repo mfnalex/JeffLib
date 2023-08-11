@@ -22,7 +22,6 @@
         <module name="JeffLib-paper-hacks" />
         <module name="JeffLib-spigot_1_19_0_R1" />
         <module name="JeffLib-spigot_1_19_1_R1" />
-        <module name="JeffLib-nms-generic" />
         <module name="JeffLib-spigot_1_19_2_R1" />
         <module name="JeffLib" />
         <module name="JeffLib-spigot_1_20_0_R1" />
@@ -31,6 +30,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JeffLib-NativeTranslationKeyProvider" target="1.8" />
+      <module name="JeffLib-nms-generic" target="1.8" />
       <module name="JeffLib-spigot_1_20_0_R1 (1)" target="1.8" />
       <module name="JeffLib-spigot_1_20_0_R1 (2)" target="1.5" />
       <module name="test-plugin" target="1.8" />

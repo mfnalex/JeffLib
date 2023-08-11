@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jeff_media</groupId>
         <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.6.0</version>
+        <version><!-- changeme -->12.6.1</version>
     </parent>
     <build>
         <resources>
@@ -193,7 +193,7 @@
         <dependency>
             <groupId>com.jeff_media</groupId>
             <artifactId>JeffLib-paper-hacks</artifactId>
-            <version><!-- changeme -->12.6.0</version>
+            <version><!-- changeme -->12.6.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
