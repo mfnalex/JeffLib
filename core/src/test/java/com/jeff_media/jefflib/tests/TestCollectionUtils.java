@@ -19,8 +19,12 @@ package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.CollectionUtils;
 import com.jeff_media.jefflib.UnitTest;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import org.bukkit.Material;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -38,6 +42,30 @@ public class TestCollectionUtils extends UnitTest {
         sortedMap.put("c", 3);
 
         Assertions.assertEquals(sortedMap, CollectionUtils.sortByEntry(map));
+    }
+
+    @Test
+    public void testEnumMap() {
+        Map<Material,String> map = CollectionUtils.createEnumMap(Material.class,String.class);
+        map.put(Material.DIRT,"dirt");
+
+        Map<Integer, String> map2 = CollectionUtils.createEnumMap(Integer.class, String.class);
+        map2.put(1,"one");
+    }
+
+    @Test
+    public void testEnumSet() {
+        Set<Material> materialSet = CollectionUtils.createEnumSet(Material.class);
+        materialSet = CollectionUtils.createEnumSetOf(Material.DIRT);
+        List<Material> dirtList = new ArrayList<>();
+        dirtList.add(Material.DIRT);
+        materialSet = CollectionUtils.createEnumSetOf(Material.class, dirtList);
+
+        Set<Integer> integerSet = CollectionUtils.createEnumSet(Integer.class);
+        integerSet = CollectionUtils.createEnumSetOf(3);
+        List<Integer> intList = new ArrayList<>();
+        intList.add(3);
+        integerSet = CollectionUtils.createEnumSetOf(Integer.class, intList);
     }
 
 }
