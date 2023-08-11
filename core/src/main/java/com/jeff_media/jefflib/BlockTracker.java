@@ -17,6 +17,7 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.exceptions.UtilityClassInstantiationException;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
@@ -40,8 +41,11 @@ import org.jetbrains.annotations.NotNull;
  * <p>
  * <b>Important: Tracking blocks requires registering the listener using {@link JeffLib#registerBlockTracker()}</b>
  */
-@UtilityClass
-public class BlockTracker {
+public final class BlockTracker {
+
+    private BlockTracker() {
+        throw new UtilityClassInstantiationException();
+    }
 
     private static final Plugin plugin = JeffLib.getPlugin();
     private static final NamespacedKey PLAYER_PLACED_TAG = new NamespacedKey(plugin, "playerplaced");

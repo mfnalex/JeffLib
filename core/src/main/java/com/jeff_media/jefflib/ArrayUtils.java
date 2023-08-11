@@ -17,16 +17,20 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.exceptions.UtilityClassInstantiationException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import lombok.experimental.UtilityClass;
 import org.jetbrains.annotations.NotNull;
 
 /**
- * Array manipulation related methods
+ * Array related methods
  */
-@UtilityClass
-public class ArrayUtils {
+public final class ArrayUtils {
+
+    private ArrayUtils() {
+        throw new UtilityClassInstantiationException();
+    }
 
     /**
      * Combines the given arrays into a new array

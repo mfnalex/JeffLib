@@ -19,6 +19,7 @@ package com.jeff_media.jefflib;
 
 import static org.bukkit.block.BlockFace.DOWN;
 import static org.bukkit.block.BlockFace.UP;
+import com.jeff_media.jefflib.exceptions.UtilityClassInstantiationException;
 import lombok.experimental.UtilityClass;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
@@ -29,8 +30,11 @@ import org.bukkit.block.data.Directional;
 /**
  * BlockFace related methods
  */
-@UtilityClass
-public class BlockFaceUtils {
+public final class BlockFaceUtils {
+
+    private BlockFaceUtils() {
+        throw new UtilityClassInstantiationException();
+    }
 
     /**
      * Gets the block another block (e.g. a ladder) is attached to

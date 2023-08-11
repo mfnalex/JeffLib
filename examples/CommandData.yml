@@ -1,0 +1,11 @@
+command-when-player-joins:
+  - sender: console
+    run: "say %player_name% has just joined!"
+  - sender: player
+    run:
+      - spawn
+      - balance
+  - sender: console
+    run:
+      - tell %player_name% Your UUID is %player_uuid%
+      - tell %player_name% Your IP is %player_ip%

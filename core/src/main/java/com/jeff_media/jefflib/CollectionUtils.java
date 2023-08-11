@@ -17,11 +17,15 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.exceptions.UtilityClassInstantiationException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -32,15 +36,48 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
+import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
+import org.checkerframework.checker.units.qual.K;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * Collection related methods. Also contains specific methods for concrete collection types.
  */
-@UtilityClass
 public class CollectionUtils {
+
+    private CollectionUtils() {
+        throw new UtilityClassInstantiationException();
+    }
+
+    public static <K,V> Map<K, V> createEnumMap(Class<K> keyClazz, Class<V> valueClazz) {
+        if(keyClazz.isEnum()) {
+            return new EnumMap(keyClazz);
+        } else {
+            return new HashMap<>();
+        }
+    }
+
+    public static <T> Set<T> createEnumSet(Class<T> clazz) {
+        if(clazz.isEnum()) {
+            return EnumSet.noneOf((Class<? extends Enum>) clazz);
+        } else {
+            return new HashSet<>();
+        }
+    }
+
+    public static <T> Set<T> createEnumSetOf(T... elements) {
+        Set<T> set = createEnumSet((Class<T>) elements.getClass().getComponentType());
+        Collections.addAll(set, elements);
+        return set;
+    }
+
+    public static <T> Set<T> createEnumSetOf(Class<T> clazz, Collection<T> elements) {
+        Set<T> set = createEnumSet(clazz);
+        set.addAll(elements);
+        return set;
+    }
 
     /**
      * Creates a List of all given elements
