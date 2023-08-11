@@ -48,6 +48,7 @@
         <module>dist</module>
         <module>test-plugin</module>
         <module>paper-hacks</module>
+<!--        <module>nms-generic</module>-->
     </modules>
     <profiles>
         <profile>
