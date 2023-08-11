@@ -22,6 +22,7 @@
         <module name="JeffLib-paper-hacks" />
         <module name="JeffLib-spigot_1_19_0_R1" />
         <module name="JeffLib-spigot_1_19_1_R1" />
+        <module name="JeffLib-nms-generic" />
         <module name="JeffLib-spigot_1_19_2_R1" />
         <module name="JeffLib" />
         <module name="JeffLib-spigot_1_20_0_R1" />
@@ -36,8 +37,27 @@
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_STRING" value=" " />
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="JeffLib" options="" />
       <module name="JeffLib-TestPlugin" options="-parameters" />
+      <module name="JeffLib-core" options="" />
+      <module name="JeffLib-nms-generic" options="" />
+      <module name="JeffLib-paper-hacks" options="" />
+      <module name="JeffLib-parent" options="" />
+      <module name="JeffLib-spigot_1_16_R1" options="" />
+      <module name="JeffLib-spigot_1_16_R2" options="" />
+      <module name="JeffLib-spigot_1_16_R3" options="" />
+      <module name="JeffLib-spigot_1_17_R1" options="" />
+      <module name="JeffLib-spigot_1_18_R1" options="" />
+      <module name="JeffLib-spigot_1_18_R2" options="" />
+      <module name="JeffLib-spigot_1_19_0_R1" options="" />
+      <module name="JeffLib-spigot_1_19_1_R1" options="" />
+      <module name="JeffLib-spigot_1_19_2_R1" options="" />
+      <module name="JeffLib-spigot_1_19_3_R1" options="" />
+      <module name="JeffLib-spigot_1_19_4_R1" options="" />
+      <module name="JeffLib-spigot_1_20_0_R1" options="" />
+      <module name="JeffLib-spigot_1_20_1_R1" options="" />
       <module name="test-plugin" options="-parameters" />
     </option>
   </component>

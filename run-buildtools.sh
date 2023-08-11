@@ -52,6 +52,23 @@ ALREADY_BUILT_VERSIONS=()
 
 #################################################################################################
 
+function show_help() {
+  echo "Usage: $0 [-f] [-h]"
+  echo "  -f  Force rebuilding all versions"
+  echo "  -h  Show this help"
+  exit 0
+}
+
+while getopts fh opt; do
+  case $opt in
+  f) echo "Option D : ($OPTARG)" ;;
+  h) show_help() ;;
+  *) echo "Unknown option : $opt" ;;
+  esac
+done
+
+
+
 function banner() {
   local width
 
@@ -163,9 +180,9 @@ function buildVersion {
     echo "Skipped building version $fullVersion$classifier as it is already in your local repository"
     ALREADY_BUILT_VERSIONS+=("$versionWithClassifier")
 
-        if [[ $remapped == "$TRUE" ]]; then
-          buildVersion "$1" "$2" $FALSE
-        fi
+    if [[ $remapped == "$TRUE" ]]; then
+      buildVersion "$1" "$2" $FALSE
+    fi
 
     return $TRUE
   fi
@@ -252,8 +269,6 @@ function checkSelf() {
     error_exit "The java executable at $JAVA_PATH is not an executable. Please adjust the variable \"JAVA_PATH\" at the top of this script to point to your java 17 executable."
   fi
 
-
-
   ## Java Legacy
 
   if [[ $legacyJavaVersion == "$FILE_NOT_FOUND" ]]; then
@@ -263,7 +278,6 @@ function checkSelf() {
   if [[ $legacyJavaVersion == "$NOT_AN_EXECUTABLE" ]]; then
     error_exit "The java executable at $LEGACY_JAVA_PATH is not an executable. Please adjust the variable \"LEGACY_JAVA_PATH\" at the top of this script to point to your java executable."
   fi
-
 
   if (! commandExists curl) && (! commandExists wget); then
     error_exit "Neither curl nor wget could be found"
