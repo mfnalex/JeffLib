@@ -121,7 +121,11 @@ public class TextUtils {
             placeholderApiPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("PlaceholderAPI"));
         }
         if (placeholderApiPlugin.get() != null) {
-            text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
+            try {
+                text = me.clip.placeholderapi.PlaceholderAPI.setPlaceholders(player, text);
+            } catch (Throwable ignored) {
+
+            }
         }
         return text;
     }
