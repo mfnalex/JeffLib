@@ -18,7 +18,11 @@
 package com.jeff_media.jefflib.tests;
 
 import com.jeff_media.jefflib.ClassUtils;
+import com.jeff_media.jefflib.CollectionUtils;
 import com.jeff_media.jefflib.UnitTest;
+import com.jeff_media.jefflib.exceptions.UtilityClassInstantiationException;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -44,6 +48,21 @@ public class TestClassUtils extends UnitTest {
     @Test
     public void testCurrentMethod() {
         Assertions.assertEquals("testCurrentMethod", ClassUtils.getCurrentMethodName());
+    }
+
+    @Test
+    public void testUtilityClass() throws ReflectiveOperationException{
+            Class<CollectionUtils> clazz = CollectionUtils.class;
+            Constructor<CollectionUtils> constructor = clazz.getDeclaredConstructor();
+            constructor.setAccessible(true);
+            Assertions.assertThrows(InvocationTargetException.class, constructor::newInstance);
+            Exception ex = null;
+            try {
+                constructor.newInstance();
+            } catch (InvocationTargetException ex2) {
+                ex = (Exception) ex2.getCause();
+            }
+            Assertions.assertTrue(ex instanceof UtilityClassInstantiationException);
     }
 
 }
