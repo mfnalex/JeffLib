@@ -52,21 +52,6 @@ ALREADY_BUILT_VERSIONS=()
 
 #################################################################################################
 
-function show_help() {
-  echo "Usage: $0 [-f] [-h]"
-  echo "  -f  Force rebuilding all versions"
-  echo "  -h  Show this help"
-  exit 0
-}
-
-while getopts fh opt; do
-  case $opt in
-  f) echo "Option D : ($OPTARG)" ;;
-  h) show_help() ;;
-  *) echo "Unknown option : $opt" ;;
-  esac
-done
-
 
 
 function banner() {

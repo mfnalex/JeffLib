@@ -4,9 +4,278 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="formatting / config files">
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="12.6.1">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/JeffLib.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/JeffLib.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/PDCUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ReflUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ReflUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/GoalSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/GoalSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/TargetSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/ai/goal/TargetSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSBlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSMaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/nms/AbstractNMSTranslationKeyProvider.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardStateFlag.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardStateFlag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/worldguard/WorldGuardUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/tests/TestClassUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms-generic/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run-buildtools.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run-buildtools.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/JeffLib-spigot_1_16_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/JeffLib-spigot_1_16_R2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R2/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/JeffLib-spigot_1_16_R3.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_16_R3/src/main/java/com/jeff_media/jefflib/internal/nms/v1_16_R3/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/JeffLib-spigot_1_17_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSInternals.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_17_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_17_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/JeffLib-spigot_1_18_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSInternals.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/JeffLib-spigot_1_18_R2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_18_R2/src/main/java/com/jeff_media/jefflib/internal/nms/v1_18_R2/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/JeffLib-spigot_1_19_0_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/JeffLib-spigot_1_19_1_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_1_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/JeffLib-spigot_1_19_2_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_2_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_2_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/JeffLib-spigot_1_19_3_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_3_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_3_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/JeffLib-spigot_1_19_4_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_19_4_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_19_4_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_0_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/JeffLib-spigot_1_20_1_R1.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BlockHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/BukkitUnsafe.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/MaterialHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMS.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSBiomeUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSHandler.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/NMSPacketUtils.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/CustomGoalExecutor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedAvoidEntityGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedJumpController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedLookController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedMoveToBlockGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedPathNavigation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/spigot_1_20_1_R1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1_R1/ai/HatchedTemptGoal.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/JeffLibTestPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/JeffLibTestPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/LogLevel.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/LogLevel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/NMSTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/NMSTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/TestException.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/TestException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/TestResult.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/TestResult.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/TestRunner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/Utils.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/WorldResetter.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/WorldResetter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/commands/JeffLibTestCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/commands/JeffLibTestCommand.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/DefaultWorldName.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/DefaultWorldName.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GetBiomeNamespacedKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/GetBiomeNamespacedKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/GlowEnchantment.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/GlowEnchantment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/HeadTexture.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/HeadTexture.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/HelloWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/HelloWorld.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/ItemStackSizeInBytes.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/ItemStackSizeInBytes.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/ItemStackToJson.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/ItemStackToJson.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/MoveToBlockGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/MoveToBlockGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/PdcSerialization.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/PdcSerialization.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/RespawnPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/RespawnPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/SetFullTimeWithoutTimeSkipEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/SetFullTimeWithoutTimeSkipEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/TPS.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/TPS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/ToastMessage.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/ToastMessage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jefflib/jefflibtestplugin/tests/TotemAnimation.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/tests/TotemAnimation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/resources/plugin.yml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/resources/plugin.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,28 +332,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/mctest/buildtools/CraftBukkit/pom.xml&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "last_opened_file_path": "C:/Users/mfnal/IdeaProjects/HarvestBacon",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settings.ide.settings.new.ui",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.jefflib.jefflibtestplugin" />
@@ -94,6 +363,7 @@
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\Example-Plugin-Maven" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\nms-generic\src\main\java\com\jeff_media\jefflib\internal\nms" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\core\src\main\java\com\jeff_media\jefflib\internal\nms" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\plugin-plotsquared6\src\main\java" />
       <recent name="C:\Users\mfnal\IdeaProjects\JeffLib\plugin-plotsquared6" />
@@ -340,7 +610,12 @@
       <workItem from="1691665819570" duration="182000" />
       <workItem from="1691741648716" duration="1298000" />
       <workItem from="1691742962401" duration="73000" />
-      <workItem from="1691743053086" duration="426000" />
+      <workItem from="1691743053086" duration="6542000" />
+      <workItem from="1691847651872" duration="4101000" />
+      <workItem from="1691936943976" duration="296000" />
+      <workItem from="1691937271342" duration="3809000" />
+      <workItem from="1691992189488" duration="2784000" />
+      <workItem from="1692093881890" duration="4458000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -680,7 +955,15 @@
       <option name="project" value="LOCAL" />
       <updated>1691742705136</updated>
     </task>
-    <option name="localTasksCounter" value="48" />
+    <task id="LOCAL-00048" summary="12.6.1">
+      <option name="closed" value="true" />
+      <created>1691743550412</created>
+      <option name="number" value="00048" />
+      <option name="presentableId" value="LOCAL-00048" />
+      <option name="project" value="LOCAL" />
+      <updated>1691743550412</updated>
+    </task>
+    <option name="localTasksCounter" value="49" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -703,7 +986,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="try to build unremapped .jar when the remapped already exists, in case people only have the remapped .jar in their repo but not the normal one" />
     <MESSAGE value="1.19.3" />
     <MESSAGE value="added build cache plugin" />
     <MESSAGE value="12.2.0" />
@@ -728,7 +1010,8 @@
     <MESSAGE value="added try/catch for ItemsAdder api" />
     <MESSAGE value="added UtilityClassInstantiationException" />
     <MESSAGE value="formatting / config files" />
-    <option name="LAST_COMMIT_MESSAGE" value="formatting / config files" />
+    <MESSAGE value="12.6.1" />
+    <option name="LAST_COMMIT_MESSAGE" value="12.6.1" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

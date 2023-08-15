@@ -22,13 +22,14 @@ import com.jeff_media.jefflib.exceptions.MissingPluginException;
 import com.jeff_media.jefflib.internal.annotations.RequiresPlugin;
 import java.util.Collection;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * WorldGuard related methods. Can be safely used even when WorldGuard is not installed, as long as you catch the {@link MissingPluginException}
+ * WorldGuard related methods. Can be safely used even when WorldGuard is not installed
  */
 @UtilityClass
 public class WorldGuardUtils {
@@ -38,8 +39,12 @@ public class WorldGuardUtils {
      *
      * @return true when WorldGuard is installed and enabled, otherwise false
      */
-    public static boolean isWorldGuardInstalled() {
+    public static boolean isWorldGuardInstalledAndEnabled() {
         return PluginUtils.isInstalledAndEnabled("WorldGuard");
+    }
+
+    public static boolean isWorldGuardInstalled() {
+        return Bukkit.getPluginManager().getPlugin("WorldGuard") != null;
     }
 
     /**
@@ -84,29 +89,48 @@ public class WorldGuardUtils {
         }
     }
 
-    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
-        if (isWorldGuardInstalled()) {
+    public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) /*throws MissingPluginException */{
+        if (isWorldGuardInstalledAndEnabled()) {
             return WorldGuardHandler.canPlace(player, location);
         }
         return true;
     }
 
-    @RequiresPlugin("WorldGuard")
-    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
-        try {
+    //@RequiresPlugin("WorldGuard")
+    public static boolean canInteract(@NotNull final Player player, @NotNull final Location location)/* throws MissingPluginException */{
+        //try {
+        if (isWorldGuardInstalledAndEnabled()) {
             return WorldGuardHandler.canInteract(player, location);
-        } catch (final Throwable t) {
-            throw new MissingPluginException("WorldGuard");
         }
+        return true;
+
+        /*} catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }*/
     }
 
-    @RequiresPlugin("WorldGuard")
-    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) throws MissingPluginException {
-        try {
-            return WorldGuardHandler.canBreak(player, location);
-        } catch (final Throwable t) {
-            throw new MissingPluginException("WorldGuard");
+    //@RequiresPlugin("WorldGuard")
+    public static boolean canUse(@NotNull final Player player, @NotNull final Location location) /*throws MissingPluginException */{
+        //try {
+        if (isWorldGuardInstalledAndEnabled()) {
+            return WorldGuardHandler.canUse(player, location);
         }
+        return true;
+        /*} catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }*/
+    }
+
+    //@RequiresPlugin("WorldGuard")
+    public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) /*throws MissingPluginException*/ {
+        //try {
+        if (isWorldGuardInstalledAndEnabled()) {
+            return WorldGuardHandler.canBreak(player, location);
+        }
+        return true;
+        /*} catch (final Throwable t) {
+            throw new MissingPluginException("WorldGuard");
+        }*/
     }
 
     @NotNull
@@ -114,12 +138,12 @@ public class WorldGuardUtils {
         if (isWorldGuardInstalled()) {
             return WorldGuardHandler.registerStateFlag(name, defaultValue);
         }
-        return new StateFlag(name, StateFlag.State.DENY);
+        return new StateFlag(name, defaultValue);
     }
 
     @NotNull
     public static StateFlag.State testStateFlag(@Nullable Player player, @NotNull Location location, @NotNull StateFlag flag) {
-        if (isWorldGuardInstalled()) {
+        if (isWorldGuardInstalledAndEnabled()) {
             return StateFlag.State.fromBoolean(WorldGuardHandler.testStateFlag(player, location, flag));
         }
         return flag.getDefaultValue();

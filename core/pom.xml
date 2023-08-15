@@ -18,7 +18,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>JeffLib-core</artifactId>
+    <artifactId>jefflib-core</artifactId>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -27,9 +27,9 @@
         <config.version>${maven.build.timestamp}</config.version>
     </properties>
     <parent>
-        <groupId>com.jeff_media</groupId>
-        <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.6.1</version>
+        <groupId>com.jeff-media.jefflib</groupId>
+        <artifactId>jefflib-parent</artifactId>
+        <version><!-- changeme -->13.0.0-alpha5</version>
     </parent>
     <build>
         <resources>
@@ -81,7 +81,7 @@
                     </tags>
                     <linksource>true</linksource>
                     <excludePackageNames>
-                        com.jeff_media.jefflib.internal.cherokee,com.jeff_media.jefflib.internal.listeners,com.jeff_media.jefflib.internal.nms,com.jeff_media.jefflib.internal.protection
+                        com.jeff-media.jefflib.internal.cherokee,com.jeff-media.jefflib.internal.listeners,com.jeff-media.jefflib.internal.nms,com.jeff-media.jefflib.internal.protection
                     </excludePackageNames>
                     <nodeprecated>true</nodeprecated>
                     <quiet>true</quiet>
@@ -191,9 +191,14 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-paper-hacks</artifactId>
-            <version><!-- changeme -->12.6.1</version>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-generic</artifactId>
+            <version><!-- changeme -->13.0.0-alpha5</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-paper-hacks</artifactId>
+            <version><!-- changeme -->13.0.0-alpha5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
@@ -235,7 +240,7 @@
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
-            <version>7.0.4</version>
+            <version>7.0.9</version>
             <scope>provided</scope>
         </dependency>
         <dependency>

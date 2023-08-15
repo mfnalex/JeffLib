@@ -30,6 +30,7 @@ import com.sk89q.worldguard.protection.regions.RegionContainer;
 import com.sk89q.worldguard.protection.regions.RegionQuery;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Location;
 import org.bukkit.entity.Player;
@@ -57,7 +58,10 @@ public class WorldGuardHandler {
     }
 
     public static boolean canPlace(@NotNull final Player player, @NotNull final Location location) {
-        return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_PLACE);
+        //return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_PLACE);
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.BLOCK_PLACE)
+                || WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
     }
 
     public static boolean testBuiltInStateFlag(@Nullable final Player player, @NotNull final Location location, @NotNull final StateFlag flag) {
@@ -68,18 +72,30 @@ public class WorldGuardHandler {
 
     public static boolean testStateFlag(@Nullable final Player player, @NotNull final Location location, @NotNull final com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag flag) {
         if (flag instanceof WorldGuardStateFlag) {
-            return testBuiltInStateFlag(player, location, ((WorldGuardStateFlag) flag).getWorldGuardStateFlag());
+            return testBuiltInStateFlag(player, location, Objects.requireNonNull(((WorldGuardStateFlag) flag).getWorldGuardStateFlag(), "WorldGuardFlag is null"));
         } else {
             throw new IllegalArgumentException("Given flag is not a WorldGuardStateFlag");
         }
     }
 
     public static boolean canBreak(@NotNull final Player player, @NotNull final Location location) {
-        return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_BREAK);
+        //return testBuiltInStateFlag(player, location, Flags.BUILD) && testBuiltInStateFlag(player, location, Flags.BLOCK_BREAK);
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.BLOCK_BREAK)
+                || WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
     }
 
     public static boolean canInteract(@NotNull final Player player, @NotNull final Location location) {
-        return testBuiltInStateFlag(player, location, Flags.INTERACT);
+        //return testBuiltInStateFlag(player, location, Flags.INTERACT);
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.INTERACT)
+                || WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
+    }
+
+    public static boolean canUse(@NotNull final Player player, @NotNull final Location location) {
+        LocalPlayer localPlayer = WorldGuardPlugin.inst().wrapPlayer(player);
+        return WorldGuard.getInstance().getPlatform().getRegionContainer().createQuery().testBuild(BukkitAdapter.adapt(location), localPlayer, Flags.USE)
+                || WorldGuard.getInstance().getPlatform().getSessionManager().hasBypass(localPlayer, BukkitAdapter.adapt(player.getWorld()));
     }
 
     public static com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag registerStateFlag(String name, com.jeff_media.jefflib.pluginhooks.worldguard.StateFlag.State defaultValue) {

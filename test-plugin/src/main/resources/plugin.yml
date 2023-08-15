@@ -1,4 +1,4 @@
 name: JeffLib-NMSTest-Plugin
 version: ${project.version}
-main: com.jefflib.jefflibtestplugin.JeffLibTestPlugin
+main: com.jeff_media.jefflibtestplugin.JeffLibTestPlugin
 api-version: "1.16"

@@ -86,8 +86,9 @@ public class PDCUtils {
             tmpCraftPersistentDataTypeRegistryClass = ReflUtils.getOBCClass("persistence.CraftPersistentDataTypeRegistry");
             tempRegistry = ReflUtils.getConstructor(tmpCraftPersistentDataTypeRegistryClass).newInstance();
             tmpCraftPersistentDataContainerConstructor = ReflUtils.getOBCClass("persistence.CraftPersistentDataContainer").getConstructor(tmpCraftPersistentDataTypeRegistryClass);
-        } catch (ReflectiveOperationException ex) {
-
+        } catch (Throwable ignored) {
+            // Catching throwable instead of ReflectiveOperationException to avoid issues with missing NMS classes
+            // when NMS support is not needed
         }
         craftPersistentDataTypeRegistry = tempRegistry;
         craftPersistentDataContainerConstructor = tmpCraftPersistentDataContainerConstructor;

@@ -20,13 +20,13 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>JeffLib-parent</artifactId>
-        <groupId>com.jeff_media</groupId>
-        <version><!-- changeme -->12.6.1</version>
+        <artifactId>jefflib-parent</artifactId>
+        <groupId>com.jeff-media.jefflib</groupId>
+        <version><!-- changeme -->13.0.0-alpha5</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>JeffLib-TestPlugin</artifactId>
+    <artifactId>jefflib-testplugin</artifactId>
 
     <properties>
         <maven.compiler.source>17</maven.compiler.source>
@@ -161,9 +161,9 @@
             <classifier>remapped-mojang</classifier>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib</artifactId>
-            <version><!-- changeme -->12.6.1</version>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib</artifactId>
+            <version><!-- changeme -->13.0.0-alpha5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

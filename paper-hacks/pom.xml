@@ -21,12 +21,12 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>com.jeff_media</groupId>
-        <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.6.1</version>
+        <groupId>com.jeff-media.jefflib</groupId>
+        <artifactId>jefflib-parent</artifactId>
+        <version><!-- changeme -->13.0.0-alpha5</version>
     </parent>
 
-    <artifactId>JeffLib-paper-hacks</artifactId>
+    <artifactId>jefflib-paper-hacks</artifactId>
 
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>

@@ -77,7 +77,11 @@ public class ReflUtils {
      */
     public static @NotNull String getNMSVersion() {
         if (nmsVersion == null) {
-            nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            if (ServerUtils.isRunningMockBukkit()) {
+                nmsVersion = "vMockBukkit";
+            } else {
+                nmsVersion = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
+            }
         }
 
         return nmsVersion;

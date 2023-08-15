@@ -25,7 +25,7 @@ import lombok.Getter;
 class WorldGuardStateFlag extends StateFlag {
 
     @Getter
-    private com.sk89q.worldguard.protection.flags.StateFlag worldGuardStateFlag;
+    private final com.sk89q.worldguard.protection.flags.StateFlag worldGuardStateFlag;
 
     WorldGuardStateFlag(String name, State defaultValue) {
         super(name, defaultValue);
@@ -41,5 +41,6 @@ class WorldGuardStateFlag extends StateFlag {
                 throw exception;
             }
         }
+        worldGuardStateFlag = stateFlag;
     }
 }

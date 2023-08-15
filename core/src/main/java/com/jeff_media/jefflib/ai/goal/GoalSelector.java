@@ -20,6 +20,7 @@ package com.jeff_media.jefflib.ai.goal;
 import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
+import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import org.bukkit.entity.Mob;
 import org.jetbrains.annotations.NotNull;
 

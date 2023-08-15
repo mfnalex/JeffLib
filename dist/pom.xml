@@ -17,12 +17,12 @@
 <project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>JeffLib</artifactId>
+    <artifactId>jefflib</artifactId>
     <packaging>jar</packaging>
     <parent>
-        <groupId>com.jeff_media</groupId>
-        <artifactId>JeffLib-parent</artifactId>
-        <version><!-- changeme -->12.6.1</version>
+        <groupId>com.jeff-media.jefflib</groupId>
+        <artifactId>jefflib-parent</artifactId>
+        <version><!-- changeme -->13.0.0-alpha5</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <properties>
@@ -66,7 +66,7 @@
                         <configuration>
                             <artifactSet>
                                 <includes>
-                                    <include>com.jeff_media:JeffLib-*</include>
+                                    <include>com.jeff-media:JeffLib-*</include>
                                 </includes>
                             </artifactSet>
                             <filters>
@@ -105,73 +105,73 @@
     </build>
     <dependencies>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-core</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-core</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_20_1_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.20.1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_20_0_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.20</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_19_4_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.19.4</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_19_3_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.19.3</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_19_2_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.19.2</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_19_1_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.19.1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_19_0_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.19</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_18_R2</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_18_R2</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_18_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_18_R1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_17_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_17_R1</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_16_R3</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_16_R3</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_16_R2</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_16_R2</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>JeffLib-spigot_1_16_R1</artifactId>
+            <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1_16_R1</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

@@ -254,7 +254,7 @@ public class JeffLib {
         final String packageName = JeffLib.class.getPackage().getName();
         final String internalsName;
         if (McVersion.current().isAtLeast(1, 19)) {
-            internalsName = "v" + McVersion.current().getMajor() + "_" + McVersion.current().getMinor() + ((McVersion.current().getPatch() > 0) ? ("_" + McVersion.current().getPatch()) : "") + "_R1";
+            internalsName = "v" + McVersion.current().getMajor() + "_" + McVersion.current().getMinor() + ((McVersion.current().getPatch() > 0) ? ("_" + McVersion.current().getPatch()) : "");
         } else {
             internalsName = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         }

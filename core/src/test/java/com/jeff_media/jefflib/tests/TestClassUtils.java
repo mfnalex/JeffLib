@@ -42,7 +42,7 @@ public class TestClassUtils extends UnitTest {
 
     @Test
     public void testCurrentLine() {
-        Assertions.assertEquals(41, ClassUtils.getCurrentLineNumber());
+        Assertions.assertEquals(45, ClassUtils.getCurrentLineNumber());
     }
 
     @Test
