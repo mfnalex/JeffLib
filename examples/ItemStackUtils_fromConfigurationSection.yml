@@ -1,0 +1,13 @@
+myCustomItem:
+  material: PLAYER_HEAD
+  base64: "someBase64String"
+  amount: 1
+  lore:
+    - "first line"
+  display-name: "My Custom Item"
+  custom-model-data: 2
+  damage: 100
+  prevent-stacking: false
+  enchantments:
+    unbreaking: 1
+    efficiency: 5
