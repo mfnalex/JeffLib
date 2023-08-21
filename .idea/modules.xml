@@ -16,7 +16,9 @@
       <module fileurl="file://$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" filepath="$PROJECT_DIR$/spigot_1_20_0_R1/JeffLib-spigot_1_20_0_R1.iml" />
       <module fileurl="file://$PROJECT_DIR$/spigot_1_20_1_R1/JeffLib-spigot_1_20_1_R1.iml" filepath="$PROJECT_DIR$/spigot_1_20_1_R1/JeffLib-spigot_1_20_1_R1.iml" />
       <module fileurl="file://$PROJECT_DIR$/core/jefflib-core.iml" filepath="$PROJECT_DIR$/core/jefflib-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/nms/1.20.1/jefflib-nms-1.20.1.iml" filepath="$PROJECT_DIR$/nms/1.20.1/jefflib-nms-1.20.1.iml" />
       <module fileurl="file://$PROJECT_DIR$/paper-hacks/jefflib-paper-hacks.iml" filepath="$PROJECT_DIR$/paper-hacks/jefflib-paper-hacks.iml" />
+      <module fileurl="file://$PROJECT_DIR$/test-plugin/jefflib-testplugin.iml" filepath="$PROJECT_DIR$/test-plugin/jefflib-testplugin.iml" />
     </modules>
   </component>
 </project>

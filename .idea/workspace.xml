@@ -4,11 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="13.0.0-alpha5">
-      <change afterPath="$PROJECT_DIR$/examples/ItemStackUtils_fromConfigurationSection.yml" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="nms">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/generic/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/generic/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +60,13 @@
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/CraftServer.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/entity/CraftEntity.class" root0="SKIP_INSPECTION" />
     <setting file="jar://$MAVEN_REPOSITORY$/org/spigotmc/spigot/1.19.2-R0.1-SNAPSHOT/spigot-1.19.2-R0.1-SNAPSHOT-remapped-mojang.jar!/org/bukkit/craftbukkit/v1_19_R1/entity/CraftLivingEntity.class" root0="SKIP_INSPECTION" />
+  </component>
+  <component name="InvalidFacetManager">
+    <ignored-facets>
+      <facet id="jefflib-core/invalid/Minecraft" />
+      <facet id="jefflib-paper-hacks/invalid/Minecraft" />
+      <facet id="jefflib-testplugin/invalid/Minecraft" />
+    </ignored-facets>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -119,8 +142,8 @@
       <command value="mvn clean javadoc:javadoc" />
       <command value="git add .idea" />
       <command value="./run-buildtools.sh" />
-      <command value="mvn clean install -U" />
       <command value="mvn clean deploy " />
+      <command value="mvn clean install -U" />
     </option>
   </component>
   <component name="RunManager" selected="JUnit.TestCollectionUtils.testEnumSet">
@@ -349,7 +372,11 @@
       <workItem from="1691937271342" duration="3809000" />
       <workItem from="1691992189488" duration="2784000" />
       <workItem from="1692093881890" duration="5934000" />
-      <workItem from="1692279475825" duration="1013000" />
+      <workItem from="1692279475825" duration="3593000" />
+      <workItem from="1692388232526" duration="2323000" />
+      <workItem from="1692465981103" duration="612000" />
+      <workItem from="1692578163125" duration="363000" />
+      <workItem from="1692578545889" duration="978000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -617,14 +644,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686669965225</updated>
     </task>
-    <task id="LOCAL-00039" summary="12.5.0 added cherry trees to WoodType">
-      <option name="closed" value="true" />
-      <created>1687420497703</created>
-      <option name="number" value="00039" />
-      <option name="presentableId" value="LOCAL-00039" />
-      <option name="project" value="LOCAL" />
-      <updated>1687420497703</updated>
-    </task>
     <task id="LOCAL-00040" summary="removed @UtilityClass">
       <option name="closed" value="true" />
       <created>1691742573728</created>
@@ -705,7 +724,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692099350475</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL-00050" summary="nms">
+      <option name="closed" value="true" />
+      <created>1692283832899</created>
+      <option name="number" value="00050" />
+      <option name="presentableId" value="LOCAL-00050" />
+      <option name="project" value="LOCAL" />
+      <updated>1692283832899</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -728,7 +755,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="added build cache plugin" />
     <MESSAGE value="12.2.0" />
     <MESSAGE value="12.2.0 - now adding tests &gt; 1 tick" />
     <MESSAGE value="12.2.0 - multiple ticks tests working" />
@@ -753,7 +779,8 @@
     <MESSAGE value="formatting / config files" />
     <MESSAGE value="12.6.1" />
     <MESSAGE value="13.0.0-alpha5" />
-    <option name="LAST_COMMIT_MESSAGE" value="13.0.0-alpha5" />
+    <MESSAGE value="nms" />
+    <option name="LAST_COMMIT_MESSAGE" value="nms" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

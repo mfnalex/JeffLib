@@ -20,6 +20,7 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
