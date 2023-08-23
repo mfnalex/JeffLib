@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="nms">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="fixed parent pom path, removed build-cache-plugin, removed useless NMS code">
+      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TagUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/generic/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/generic/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20.1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1/NMS.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -376,7 +360,8 @@
       <workItem from="1692388232526" duration="2323000" />
       <workItem from="1692465981103" duration="612000" />
       <workItem from="1692578163125" duration="363000" />
-      <workItem from="1692578545889" duration="978000" />
+      <workItem from="1692578545889" duration="1225000" />
+      <workItem from="1692795926854" duration="634000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -644,14 +629,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686669965225</updated>
     </task>
-    <task id="LOCAL-00040" summary="removed @UtilityClass">
-      <option name="closed" value="true" />
-      <created>1691742573728</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1691742573728</updated>
-    </task>
     <task id="LOCAL-00041" summary="removed test stuff">
       <option name="closed" value="true" />
       <created>1691742600714</created>
@@ -732,7 +709,15 @@
       <option name="project" value="LOCAL" />
       <updated>1692283832899</updated>
     </task>
-    <option name="localTasksCounter" value="51" />
+    <task id="LOCAL-00051" summary="fixed parent pom path, removed build-cache-plugin, removed useless NMS code">
+      <option name="closed" value="true" />
+      <created>1692579762479</created>
+      <option name="number" value="00051" />
+      <option name="presentableId" value="LOCAL-00051" />
+      <option name="project" value="LOCAL" />
+      <updated>1692579762479</updated>
+    </task>
+    <option name="localTasksCounter" value="52" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -755,7 +740,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="12.2.0" />
     <MESSAGE value="12.2.0 - now adding tests &gt; 1 tick" />
     <MESSAGE value="12.2.0 - multiple ticks tests working" />
     <MESSAGE value="12.3.0" />
@@ -780,7 +764,8 @@
     <MESSAGE value="12.6.1" />
     <MESSAGE value="13.0.0-alpha5" />
     <MESSAGE value="nms" />
-    <option name="LAST_COMMIT_MESSAGE" value="nms" />
+    <MESSAGE value="fixed parent pom path, removed build-cache-plugin, removed useless NMS code" />
+    <option name="LAST_COMMIT_MESSAGE" value="fixed parent pom path, removed build-cache-plugin, removed useless NMS code" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

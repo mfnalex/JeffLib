@@ -54,10 +54,6 @@ import org.jetbrains.annotations.Nullable;
 
 public final class NMS {
 
-    {
-
-    }
-
     public static Level getLevel(final World world) {
         return ((CraftWorld) world).getHandle();
     }
