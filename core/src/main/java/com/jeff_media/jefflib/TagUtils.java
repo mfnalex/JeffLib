@@ -24,7 +24,6 @@ import java.util.Map;
 import javax.annotation.Nullable;
 import org.bukkit.Keyed;
 import org.bukkit.Tag;
-import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -35,11 +34,11 @@ public final class TagUtils {
     private static final Map<String, Tag<? extends Keyed>> TAGS = new HashMap<>();
 
     static {
-        for(Field field : Tag.class.getFields()) {
-            if(!Modifier.isPublic(field.getModifiers())) {
+        for (Field field : Tag.class.getFields()) {
+            if (!Modifier.isPublic(field.getModifiers())) {
                 continue;
             }
-            if(field.getType() != Tag.class) {
+            if (field.getType() != Tag.class) {
                 continue;
             }
             try {
@@ -53,6 +52,7 @@ public final class TagUtils {
 
     /**
      * Gets a tag by its name as declared in {@link Tag}
+     *
      * @param name Name of the tag
      * @return Tag or null if not found
      */

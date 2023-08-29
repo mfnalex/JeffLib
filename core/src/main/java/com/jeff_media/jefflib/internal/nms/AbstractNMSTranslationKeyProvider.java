@@ -15,15 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.internal.nms;
 
+import org.bukkit.Material;
+import org.bukkit.block.Block;
+import org.bukkit.entity.EntityType;
+import org.bukkit.inventory.ItemStack;
 
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
+public interface AbstractNMSTranslationKeyProvider {
+    String getItemTranslationKey(Material mat);
 
-public class NMS extends JavaPlugin implements Listener {
+    String getBlockTranslationKey(Material mat);
 
+    String getTranslationKey(Block block);
 
+    String getTranslationKey(EntityType entityType);
+
+    String getTranslationKey(ItemStack itemStack);
 }
-
-

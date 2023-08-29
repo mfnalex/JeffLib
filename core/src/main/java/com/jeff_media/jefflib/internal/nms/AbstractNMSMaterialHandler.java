@@ -15,15 +15,11 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.internal.nms;
 
+import org.bukkit.Material;
 
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
+public interface AbstractNMSMaterialHandler {
 
-public class NMS extends JavaPlugin implements Listener {
-
-
+    void setMaxStackSize(Material material, int maxStackSize);
 }
-
-
