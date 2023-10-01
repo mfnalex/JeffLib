@@ -218,9 +218,11 @@ public interface BukkitUnsafe {
      *
      * @param nmsFluid The NMS Fluid
      * @return The Bukkit Fluid
-     * @nms 1.16.2+
+     * @nms 1.16.2-1.20.1
+     * @deprecated Used methods no longer exist in 1.20.2
      */
     @NMS("1.16.2")
+    @Deprecated
     Object getFluidFromNMSFluid(Object nmsFluid);
 
     Object getNMSItemFromMaterial(Material material);
@@ -228,9 +230,11 @@ public interface BukkitUnsafe {
     Object getNMSBlockFromMaterial(Material material);
 
     /**
-     * @nms 1.16.2+
+     * @nms 1.16.2-1.20.1
+     * @deprecated Used methods no longer exist in 1.20.2
      */
     @NMS("1.16.2")
+    @Deprecated
     Object getNMSFluid(Object fluid);
 
     Object getNMSResourceLocation(Material material);
