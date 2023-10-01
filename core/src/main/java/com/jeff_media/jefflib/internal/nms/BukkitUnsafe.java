@@ -219,7 +219,6 @@ public interface BukkitUnsafe {
      * @param nmsFluid The NMS Fluid
      * @return The Bukkit Fluid
      * @nms 1.16.2-1.20.1
-     * @deprecated Used methods no longer exist in 1.20.2
      */
     @NMS("1.16.2")
     @Deprecated
@@ -231,7 +230,6 @@ public interface BukkitUnsafe {
 
     /**
      * @nms 1.16.2-1.20.1
-     * @deprecated Used methods no longer exist in 1.20.2
      */
     @NMS("1.16.2")
     @Deprecated
