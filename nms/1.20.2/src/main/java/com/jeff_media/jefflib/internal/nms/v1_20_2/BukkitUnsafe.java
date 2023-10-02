@@ -26,6 +26,7 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.Fluid;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_20_R2.CraftFluid;
 import org.bukkit.craftbukkit.v1_20_R2.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -66,7 +67,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
 
     @Override
     public Fluid getFluidFromNMSFluid(final Object nmsFluid) {
-        throw new UnsupportedOperationException("getFluidFromNMSFluid not supported in 1.20.2");
+        return CraftFluid.minecraftToBukkit((net.minecraft.world.level.material.Fluid) nmsFluid);
     }
 
     @Override
@@ -81,7 +82,7 @@ public class BukkitUnsafe implements com.jeff_media.jefflib.internal.nms.BukkitU
 
     @Override
     public net.minecraft.world.level.material.Fluid getNMSFluid(final Object fluid) {
-        throw new UnsupportedOperationException("getNMSFluid not supported in 1.20.2");
+        return CraftFluid.bukkitToMinecraft((Fluid) fluid);
     }
 
     @Override
