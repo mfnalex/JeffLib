@@ -59,6 +59,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
     public void onEnable() {
         PaperCommandManager acf = new PaperCommandManager(this);
         acf.registerCommand(new JeffLibTestCommand(this));
+        acf.usePerIssuerLocale(false);
 
         Tasks.nextTick(() -> createTestRunner(null).run());
 

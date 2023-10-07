@@ -7,102 +7,33 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="jefflib-core" />
+        <module name="jefflib-nms-1_17_R1" />
+        <module name="jefflib-nms-1_18_R2" />
+        <module name="jefflib-nms-1.19" />
         <module name="JeffLib (1)" />
+        <module name="jefflib-nms-1_16_R1" />
+        <module name="jefflib-nms-1_18_R1" />
+        <module name="jefflib-testplugin" />
+        <module name="jefflib-nms-1.19.1" />
+        <module name="jefflib-nms-1.19.2" />
+        <module name="jefflib-nms-1.19.3" />
+        <module name="jefflib-nms-1.19.4" />
         <module name="JeffLib-spigot_1_19_R1" />
         <module name="paper-hacks" />
-        <module name="jefflib-nms-1.20.1" />
-      </profile>
-      <profile name="Annotation profile for jefflib-parent" enabled="true">
-        <sourceOutputDir name="../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
         <module name="jefflib" />
-        <module name="jefflib-testplugin" />
-        <module name="jefflib-paper-hacks" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.19" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1.19" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.19.1" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1.19.1" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.19.2" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1.19.2" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.19.3" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1.19.3" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.19.4" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1.19.4" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1.20" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
+        <module name="jefflib-nms-1.20.1" />
         <module name="jefflib-nms-1.20" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_16_R1" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_16_R1" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_16_R2" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_16_R2" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_16_R3" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_16_R3" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_17_R1" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_17_R1" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_18_R1" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_18_R1" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-1_18_R2" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
-        <module name="jefflib-nms-1_18_R2" />
-      </profile>
-      <profile name="Annotation profile for jefflib-nms-generic" enabled="true">
-        <sourceOutputDir name="../../target/generated-sources/annotations" />
-        <sourceTestOutputDir name="../../target/generated-test-sources/test-annotations" />
-        <outputRelativeToContentRoot value="true" />
         <module name="jefflib-nms-generic" />
+        <module name="jefflib-nms-1_16_R3" />
+        <module name="jefflib-nms-1_16_R2" />
+        <module name="jefflib-paper-hacks" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="JeffLib" target="1.8" />
       <module name="JeffLib-core" target="1.8" />
       <module name="JeffLib-NativeTranslationKeyProvider" target="1.8" />
+      <module name="jefflib-nms-1.20.2" target="1.5" />
       <module name="JeffLib-nms-generic" target="1.8" />
       <module name="JeffLib-paper-hacks" target="1.8" />
       <module name="JeffLib-parent" target="1.8" />

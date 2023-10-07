@@ -80,7 +80,7 @@ public class TestRunner implements Runnable {
 
     @NotNull
     private ArrayDeque<NMSTest> getTests(@Nullable Player player) {
-        return ClassUtils.listAllClasses().stream().filter(className -> className.startsWith("com.jefflib.jefflibtestplugin.tests.")).map(className -> {
+        return ClassUtils.listAllClasses().stream().filter(className -> className.startsWith("com.jeff_media.jefflibtestplugin.tests.")).map(className -> {
             try {
                 Class<?> clazz = Class.forName(className);
 
@@ -246,7 +246,9 @@ public class TestRunner implements Runnable {
     public void run() {
         if (!waitingForTestResult) {
             if (!hasNext()) {
-                currentTest.cleanup();
+                if(currentTest != null) {
+                    currentTest.cleanup();
+                }
                 printBanner(ChatColor.GREEN + "Success!");
                 plugin.destroyTestRunner();
                 return;
