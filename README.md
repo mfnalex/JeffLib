@@ -15,11 +15,15 @@
 <!--- Buttons end -->
 
 
-<p align="center">
-<a href="https://hub.jeff-media.com/nexus/#browse/browse:jeff-media-public:com%2Fjeff_media%2FJeffLib">
-  <img src="https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml" alt="Maven" /></a>
-<img src="https://img.shields.io/github/last-commit/jeff-media-gbr/jefflib" />
-</p>
+[//]: # (<p align="center">)
+
+[//]: # (<a href="https://hub.jeff-media.com/nexus/#browse/browse:jeff-media-public:com%2Fjeff_media%2FJeffLib">)
+
+[//]: # (  <img src="https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml" alt="Maven" /></a>)
+
+[//]: # (<img src="https://img.shields.io/github/last-commit/jeff-media-gbr/jefflib" />)
+
+[//]: # (</p>)
 
 JeffLib includes a ton of useful methods that you would normally have to write yourself. Check the Javadocs for an
 overview.
@@ -41,9 +45,9 @@ Dependency:
 
 ```xml
 <dependency>
-    <groupId>com.jeff_media</groupId>
-    <artifactId>JeffLib</artifactId>
-    <version><!-- changeme -->12.6.0</version>
+    <groupId>com.jeff-media.jefflib</groupId>
+    <artifactId>jefflib</artifactId>
+    <version><!-- changeme -->13.0.1</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -57,7 +61,7 @@ Shading (add this to ```<build><plugins>```) if you don't already have it:
 <plugin>
     <groupId>org.apache.maven.plugins</groupId>
     <artifactId>maven-shade-plugin</artifactId>
-    <version>3.3.0</version>
+    <version>3.5.0</version>
     <executions>
         <execution>
             <phase>package</phase>
@@ -117,7 +121,7 @@ Dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.jeff_media:JeffLib:12.0.0'
+    implementation 'com.jeff-media.jefflib:jefflib:13.0.1'
 } 
 ```
 
