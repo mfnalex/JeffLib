@@ -59,8 +59,8 @@
                 <configuration>
                     <relocations>
                         <relocation>
-                            <pattern>com.jeff_media.jefflib</pattern>
-                            <shadedPattern>com.jeff_media.jefflibtestplugin.jefflib</shadedPattern>
+                            <pattern>com.jeff_media.jefflib.</pattern>
+                            <shadedPattern>com.jeff_media.jefflibtestplugin.jefflib.</shadedPattern>
                         </relocation>
                         <relocation>
                             <pattern>co.aikar.commands</pattern>
