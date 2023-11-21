@@ -5,10 +5,39 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="fixed parent pom path, removed build-cache-plugin, removed useless NMS code">
-      <change afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/TagUtils.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/src/main/java/com/jeff_media/jefflib/internal/nms/v1_20_1/NMS.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/SkullUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/SkullUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.1/jefflib-nms-1.19.1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/jefflib-nms-1.19.1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.2/jefflib-nms-1.19.2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/jefflib-nms-1.19.2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.3/jefflib-nms-1.19.3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/jefflib-nms-1.19.3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.4/jefflib-nms-1.19.4.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/jefflib-nms-1.19.4.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19/jefflib-nms-1.19.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/jefflib-nms-1.19.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.19/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20.1/jefflib-nms-1.20.1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/jefflib-nms-1.20.1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20/jefflib-nms-1.20.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20/jefflib-nms-1.20.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1.20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/jefflib-nms-1_17_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/jefflib-nms-1_17_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/jefflib-nms-1_18_R1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/jefflib-nms-1_18_R1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/jefflib-nms-1_18_R2.iml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/jefflib-nms-1_18_R2.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nms/generic/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/generic/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -362,6 +391,9 @@
       <workItem from="1692578163125" duration="363000" />
       <workItem from="1692578545889" duration="1225000" />
       <workItem from="1692795926854" duration="634000" />
+      <workItem from="1699386747245" duration="650000" />
+      <workItem from="1700128819256" duration="303000" />
+      <workItem from="1700541802196" duration="1686000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
