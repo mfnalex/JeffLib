@@ -18,10 +18,17 @@
 package com.jeff_media.jefflib;
 
 
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.inventory.AnvilMenu;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class NMS extends JavaPlugin implements Listener {
+
+    {
+
+    }
 
 
 }
