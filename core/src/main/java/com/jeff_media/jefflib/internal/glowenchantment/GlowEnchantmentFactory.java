@@ -19,7 +19,6 @@ package com.jeff_media.jefflib.internal.glowenchantment;
 
 import com.jeff_media.jefflib.EnchantmentUtils;
 import com.jeff_media.jefflib.PDCUtils;
-import com.jeff_media.jefflib.ServerUtils;
 import java.util.Objects;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
@@ -33,11 +32,19 @@ public abstract class GlowEnchantmentFactory {
 
     static {
         Enchantment existing = Enchantment.getByKey(GLOW_ENCHANTMENT_KEY);
-        if (existing != null) {
-            instance = existing;
-        } else {
-            instance = ServerUtils.isRunningPaper() ? new PaperGlowEnchantment() : new SpigotGlowEnchantment();
+        if (existing == null) {
+            try {
+                existing = new KeyedGlowEnchantment();
+            } catch (Throwable ignored) {
+                try {
+                    existing = new LegacyGlowEnchantment();
+                } catch (Throwable ignored2) {
+//                    ServerUtils.log("Could not register glow enchantment");
+//                    throw new RuntimeException("Could not register glow enchantment");
+                }
+            }
         }
+        instance = existing;
     }
 
     public static void register() {

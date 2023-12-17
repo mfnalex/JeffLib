@@ -11,6 +11,8 @@
       <list>
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/spigot_1_20_1_R1/pom.xml" />
+        <option value="$PROJECT_DIR$/glow-enchantment/keyed/pom.xml" />
+        <option value="$PROJECT_DIR$/glow-enchantment/legacy/pom.xml" />
       </list>
     </option>
     <option name="ignoredFiles">
@@ -18,13 +20,14 @@
         <option value="$PROJECT_DIR$/JeffLib-NativeTranslationKeyProvider/pom.xml" />
       </set>
     </option>
+    <option name="workspaceImportForciblyTurnedOn" value="true" />
   </component>
   <component name="NullableNotNullManager">
     <option name="myDefaultNullable" value="javax.annotation.Nullable" />
     <option name="myDefaultNotNull" value="org.jetbrains.annotations.NotNull" />
     <option name="myNullables">
       <value>
-        <list size="16">
+        <list size="17">
           <item index="0" class="java.lang.String" itemvalue="com.android.annotations.Nullable" />
           <item index="1" class="java.lang.String" itemvalue="io.reactivex.rxjava3.annotations.Nullable" />
           <item index="2" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNullable" />
@@ -41,12 +44,13 @@
           <item index="13" class="java.lang.String" itemvalue="io.reactivex.annotations.Nullable" />
           <item index="14" class="java.lang.String" itemvalue="org.jspecify.nullness.Nullable" />
           <item index="15" class="java.lang.String" itemvalue="jakarta.annotation.Nullable" />
+          <item index="16" class="java.lang.String" itemvalue="org.jspecify.annotations.Nullable" />
         </list>
       </value>
     </option>
     <option name="myNotNulls">
       <value>
-        <list size="17">
+        <list size="18">
           <item index="0" class="java.lang.String" itemvalue="androidx.annotation.RecentlyNonNull" />
           <item index="1" class="java.lang.String" itemvalue="org.checkerframework.checker.nullness.qual.NonNull" />
           <item index="2" class="java.lang.String" itemvalue="io.reactivex.annotations.NonNull" />
@@ -64,6 +68,7 @@
           <item index="14" class="java.lang.String" itemvalue="jakarta.annotation.Nonnull" />
           <item index="15" class="java.lang.String" itemvalue="jakarta.validation.constraints.NotNull" />
           <item index="16" class="java.lang.String" itemvalue="org.jspecify.nullness.NonNull" />
+          <item index="17" class="java.lang.String" itemvalue="org.jspecify.annotations.NonNull" />
         </list>
       </value>
     </option>

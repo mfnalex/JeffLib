@@ -22,7 +22,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->13.0.2</version>
+        <version><!-- changeme -->13.0.3</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <properties>
@@ -111,7 +111,7 @@
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
-            <artifactId>jefflib-nms-1.20.3</artifactId>
+            <artifactId>jefflib-nms-1.20.4</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

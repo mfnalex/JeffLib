@@ -18,16 +18,15 @@
 package com.jeff_media.jefflib.internal.glowenchantment;
 
 import java.util.Objects;
+import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class SpigotGlowEnchantment extends Enchantment {
+public class KeyedGlowEnchantment extends Enchantment {
 
-    public SpigotGlowEnchantment() {
-        super(Objects.requireNonNull(GlowEnchantmentFactory.GLOW_ENCHANTMENT_KEY));
-    }
+    private final NamespacedKey key = Objects.requireNonNull(NamespacedKey.fromString("jefflib:glow"));
 
     @NotNull
     @Override
@@ -70,5 +69,11 @@ public class SpigotGlowEnchantment extends Enchantment {
     @Override
     public boolean canEnchantItem(@NotNull ItemStack item) {
         return true;
+    }
+
+    @NotNull
+    @Override
+    public NamespacedKey getKey() {
+        return key;
     }
 }

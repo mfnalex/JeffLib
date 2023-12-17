@@ -17,25 +17,18 @@
 
 package com.jeff_media.jefflib.internal.glowenchantment;
 
-import io.papermc.paper.enchantments.EnchantmentRarity;
-import java.util.Collections;
-import java.util.Objects;
-import java.util.Set;
-import net.kyori.adventure.text.Component;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
-import org.bukkit.entity.EntityCategory;
-import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class PaperGlowEnchantment extends Enchantment {
+public class LegacyGlowEnchantment extends Enchantment {
 
-    public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(NamespacedKey.fromString("jefflib:glow"));
+    private static final NamespacedKey KEY = new NamespacedKey("jefflib","glow");
 
-    public PaperGlowEnchantment() {
-        super(GLOW_ENCHANTMENT_KEY);
+    public LegacyGlowEnchantment() {
+        super(KEY);
     }
 
     @NotNull
@@ -81,38 +74,10 @@ public class PaperGlowEnchantment extends Enchantment {
         return true;
     }
 
+    @NotNull
     @Override
-    public @NotNull Component displayName(int i) {
-        return Component.text("Glow");
+    public NamespacedKey getKey() {
+        return KEY;
     }
 
-    @Override
-    public boolean isTradeable() {
-        return false;
-    }
-
-    @Override
-    public boolean isDiscoverable() {
-        return false;
-    }
-
-    @Override
-    public @NotNull EnchantmentRarity getRarity() {
-        return EnchantmentRarity.COMMON;
-    }
-
-    @Override
-    public float getDamageIncrease(int i, @NotNull EntityCategory entityCategory) {
-        return 0;
-    }
-
-    @Override
-    public @NotNull Set<EquipmentSlot> getActiveSlots() {
-        return Collections.emptySet();
-    }
-
-    @Override
-    public @NotNull String translationKey() {
-        return "enchantment.jefflib.glow";
-    }
 }
