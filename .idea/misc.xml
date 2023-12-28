@@ -18,6 +18,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/JeffLib-NativeTranslationKeyProvider/pom.xml" />
+        <option value="$PROJECT_DIR$/nms/1.20/pom.xml" />
       </set>
     </option>
     <option name="workspaceImportForciblyTurnedOn" value="true" />

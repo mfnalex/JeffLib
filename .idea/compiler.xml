@@ -24,7 +24,6 @@
         <module name="jefflib-nms-1.19.3" />
         <module name="jefflib-nms-1.19.4" />
         <module name="jefflib-nms-1.20.1" />
-        <module name="jefflib-nms-1.20" />
         <module name="jefflib-nms-1.20.2" />
         <module name="jefflib-nms-1.20.3" />
         <module name="jefflib-nms-1_16_R3" />
@@ -37,6 +36,7 @@
       <module name="JeffLib" target="1.8" />
       <module name="JeffLib-core" target="1.8" />
       <module name="JeffLib-NativeTranslationKeyProvider" target="1.8" />
+      <module name="jefflib-nms-1.20" target="1.8" />
       <module name="JeffLib-nms-generic" target="1.8" />
       <module name="JeffLib-paper-hacks" target="1.8" />
       <module name="JeffLib-parent" target="1.8" />
