@@ -4,43 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="13.0.2">
-      <change afterPath="$PROJECT_DIR$/glow-enchantment/keyed/keyed.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/glow-enchantment/keyed/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/glow-enchantment/keyed/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/KeyedGlowEnchantment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/glow-enchantment/legacy/jefflib-glowenchantment-legacy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/glow-enchantment/legacy/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nms/1.20.2/jefflib-nms-1.20.2.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/nms/1.20.4/jefflib-nms-1.20.3.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="13.0.3 1.20.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/JeffLib.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/JeffLib.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/GlowEnchantmentFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/GlowEnchantmentFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/SpigotGlowEnchantment.java" beforeDir="false" afterPath="$PROJECT_DIR$/glow-enchantment/legacy/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/LegacyGlowEnchantment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/generic/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/generic/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper-hacks/src/main/java/com/jeff_media/jefflib/internal/glowenchantment/PaperGlowEnchantment.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +82,7 @@
     "jdk.selected.JAVA_MODULE": "17",
     "kotlin-language-version-configured": "true",
     "last_directory_selection": "C:/Users/mfnal/IdeaProjects/JeffLib/glow-enchantment/legacy/src/main/java",
-    "last_opened_file_path": "C:/Users/mfnal/IdeaProjects/HarvestBacon",
+    "last_opened_file_path": "C:/Users/mfnal/IdeaProjects/FilterHoppers",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
@@ -410,7 +375,7 @@
       <workItem from="1700128819256" duration="303000" />
       <workItem from="1700541802196" duration="3901000" />
       <workItem from="1702464326260" duration="1454000" />
-      <workItem from="1702811906935" duration="2235000" />
+      <workItem from="1702811906935" duration="5488000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -678,14 +643,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686669965225</updated>
     </task>
-    <task id="LOCAL-00042" summary="pom.xml">
-      <option name="closed" value="true" />
-      <created>1691742609948</created>
-      <option name="number" value="00042" />
-      <option name="presentableId" value="LOCAL-00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1691742609948</updated>
-    </task>
     <task id="LOCAL-00043" summary="added test for utility classes">
       <option name="closed" value="true" />
       <created>1691742626731</created>
@@ -766,7 +723,15 @@
       <option name="project" value="LOCAL" />
       <updated>1700572441966</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL-00053" summary="13.0.3 1.20.4">
+      <option name="closed" value="true" />
+      <created>1702814460960</created>
+      <option name="number" value="00053" />
+      <option name="presentableId" value="LOCAL-00053" />
+      <option name="project" value="LOCAL" />
+      <updated>1702814460961</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -789,7 +754,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="12.2.0 - multiple ticks tests working" />
     <MESSAGE value="12.3.0" />
     <MESSAGE value="Added KitchenSink" />
     <MESSAGE value="Moved playTotemAnimation to EntityUtils" />
@@ -814,7 +778,8 @@
     <MESSAGE value="nms" />
     <MESSAGE value="fixed parent pom path, removed build-cache-plugin, removed useless NMS code" />
     <MESSAGE value="13.0.2" />
-    <option name="LAST_COMMIT_MESSAGE" value="13.0.2" />
+    <MESSAGE value="13.0.3 1.20.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="13.0.3 1.20.4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
