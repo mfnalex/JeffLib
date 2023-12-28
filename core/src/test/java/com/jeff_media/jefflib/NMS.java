@@ -21,8 +21,6 @@ package com.jeff_media.jefflib;
 import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.inventory.AnvilMenu;
 import net.minecraft.world.inventory.ContainerLevelAccess;
-import org.bukkit.craftbukkit.v1_19_R1.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_20_R3.inventory.CraftItemStack;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
