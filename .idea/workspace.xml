@@ -4,36 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="removed 1.20">
+    <list default="true" id="84a10e7c-13c4-4be9-9002-dc8d78899309" name="Changes" comment="13.0.4">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/BiomeUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LootUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/LootUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/McMMOUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/main/java/com/jeff_media/jefflib/pluginhooks/McMMOUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" beforeDir="false" afterPath="$PROJECT_DIR$/core/src/test/java/com/jeff_media/jefflib/NMS.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dist/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/dist/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/glow-enchantment/keyed/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/glow-enchantment/keyed/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/glow-enchantment/legacy/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/glow-enchantment/legacy/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19.4/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.19/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.19/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1.20.4/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1.20.4/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_16_R3/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_17_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R1/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/1_18_R2/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nms/generic/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nms/generic/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/paper-hacks/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/paper-hacks/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-plugin/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/JeffLibTestPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-plugin/src/main/java/com/jeff_media/jefflibtestplugin/JeffLibTestPlugin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,32 +69,33 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Maven.jefflib-parent [clean].executor&quot;: &quot;Run&quot;,
-    &quot;Maven.jefflib-parent [deploy].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;17&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_directory_selection&quot;: &quot;C:/Users/mfnal/IdeaProjects/JeffLib/glow-enchantment/legacy/src/main/java&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/mfnal/IdeaProjects/javafinder&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.settings.ide.settings.new.ui&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Maven.jefflib-parent [clean,deploy...].executor": "Run",
+    "Maven.jefflib-parent [clean].executor": "Run",
+    "Maven.jefflib-parent [deploy].executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "17",
+    "kotlin-language-version-configured": "true",
+    "last_directory_selection": "C:/Users/mfnal/IdeaProjects/JeffLib/glow-enchantment/legacy/src/main/java",
+    "last_opened_file_path": "C:/Users/mfnal/IdeaProjects/javafinder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.postfix.templates",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="com.jefflib.jefflibtestplugin" />
@@ -157,6 +130,7 @@
       <command value="./run-buildtools.sh" />
       <command value="mvn clean deploy " />
       <command value="mvn clean install -U" />
+      <command value="mvn clean deploy -DskipTests=true" />
     </option>
   </component>
   <component name="RunManager" selected="JUnit.TestCollectionUtils.testEnumSet">
@@ -407,7 +381,7 @@
       <workItem from="1703783979293" duration="713000" />
       <workItem from="1703927222906" duration="1656000" />
       <workItem from="1703961892557" duration="3548000" />
-      <workItem from="1704391950802" duration="312000" />
+      <workItem from="1704391950802" duration="947000" />
     </task>
     <task id="LOCAL-00001" summary="11.1.5">
       <created>1662569108098</created>
@@ -675,14 +649,6 @@
       <option name="project" value="LOCAL" />
       <updated>1686669965225</updated>
     </task>
-    <task id="LOCAL-00046" summary="added UtilityClassInstantiationException">
-      <option name="closed" value="true" />
-      <created>1691742665503</created>
-      <option name="number" value="00046" />
-      <option name="presentableId" value="LOCAL-00046" />
-      <option name="project" value="LOCAL" />
-      <updated>1691742665503</updated>
-    </task>
     <task id="LOCAL-00047" summary="formatting / config files">
       <option name="closed" value="true" />
       <created>1691742705136</created>
@@ -763,7 +729,15 @@
       <option name="project" value="LOCAL" />
       <updated>1703784246123</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="13.0.4">
+      <option name="closed" value="true" />
+      <created>1704392354467</created>
+      <option name="number" value="00057" />
+      <option name="presentableId" value="LOCAL-00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1704392354468</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -786,7 +760,6 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_NEW_TODO" value="false" />
-    <MESSAGE value="Added KitchenSink" />
     <MESSAGE value="Moved playTotemAnimation to EntityUtils" />
     <MESSAGE value="Optimized Imports" />
     <MESSAGE value="Updated Copyright" />
@@ -811,7 +784,8 @@
     <MESSAGE value="13.0.2" />
     <MESSAGE value="13.0.3 1.20.4" />
     <MESSAGE value="removed 1.20" />
-    <option name="LAST_COMMIT_MESSAGE" value="removed 1.20" />
+    <MESSAGE value="13.0.4" />
+    <option name="LAST_COMMIT_MESSAGE" value="13.0.4" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
