@@ -46,6 +46,6 @@ public final class BiomeUtils {
     @Tested("1.19.4")
     public static NamespacedKey getBiomeNamespacedKey(@NotNull final Location location) {
         final Pair<String, String> keyPair = JeffLib.getNMSHandler().getBiomeName(location);
-        return NamespacedKey.fromString(keyPair.getFirst() + ":" + keyPair.getSecond());
+        return PDCUtils.getKeyFromString(keyPair.getFirst(), keyPair.getSecond());
     }
 }

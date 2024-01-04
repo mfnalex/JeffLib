@@ -71,15 +71,15 @@ public final class LootUtils {
 
     }
 
-    public static @Nullable ItemStack getRandomLoot(@NotNull Player player, @NotNull String lootTable) {
-        return getRandomLoot(player, lootTable, null);
-    }
+//    public static @Nullable ItemStack getRandomLoot(@NotNull Player player, @NotNull String lootTable) {
+//        return getRandomLoot(player, lootTable, null);
+//    }
 
-    public static @Nullable ItemStack getRandomLoot(@NotNull Player player, @NotNull String lootTable, @Nullable LootContext context) {
-        NamespacedKey key = NamespacedKey.fromString(lootTable);
-        Validate.notNull(key, "Not a valid NamespacedKey: " + lootTable);
-        return getRandomLoot(player, key, context);
-    }
+//    public static @Nullable ItemStack getRandomLoot(@NotNull Player player, @NotNull String lootTable, @Nullable LootContext context) {
+//        NamespacedKey key = NamespacedKey.fromString(lootTable);
+//        Validate.notNull(key, "Not a valid NamespacedKey: " + lootTable);
+//        return getRandomLoot(player, key, context);
+//    }
 
     public static @Nullable ItemStack getRandomLoot(@NotNull Player player, @NotNull NamespacedKey lootTable, @Nullable LootContext context) {
         Validate.notNull(lootTable, "NamespacedKey must not be null");

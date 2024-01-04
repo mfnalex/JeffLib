@@ -18,15 +18,21 @@
 package com.jeff_media.jefflib;
 
 
-import net.minecraft.world.SimpleMenuProvider;
-import net.minecraft.world.inventory.AnvilMenu;
-import net.minecraft.world.inventory.ContainerLevelAccess;
+import org.bukkit.Bukkit;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class NMS extends JavaPlugin implements Listener {
 
     {
+        Bukkit.getPluginManager().registerEvents(new Listener() {
+            @EventHandler
+            public void onDeath(EntityDeathEvent event) {
+
+            }
+        }, null);
 
     }
 

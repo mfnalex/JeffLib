@@ -29,6 +29,9 @@ import org.bukkit.World;
 import org.bukkit.WorldCreator;
 import org.bukkit.WorldType;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.world.AsyncStructureSpawnEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class JeffLibTestPlugin extends JavaPlugin {
@@ -45,7 +48,7 @@ public class JeffLibTestPlugin extends JavaPlugin {
 
     public World getFlatWorld() {
         WorldCreator creator = new WorldCreator("jefflib-test-world");
-        creator.generateStructures(false);
+        creator.generateStructures(true);
         creator.type(WorldType.FLAT);
         World world = Bukkit.createWorld(creator);
         world.setDifficulty(Difficulty.PEACEFUL);
@@ -62,6 +65,14 @@ public class JeffLibTestPlugin extends JavaPlugin {
         acf.usePerIssuerLocale(false);
 
         Tasks.nextTick(() -> createTestRunner(null).run());
+
+        getServer().getPluginManager().registerEvents(new Listener() {
+            @EventHandler
+            public void onStructureSpawn(AsyncStructureSpawnEvent event) {
+                event.setCancelled(true);
+                getLogger().warning("Cancelled spawning " + event.getStructure().getStructureType() + " at " + event.getBoundingBox().getMin());
+            }
+        }, this);
 
     }
 

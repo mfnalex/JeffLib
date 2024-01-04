@@ -29,7 +29,7 @@ import org.bukkit.persistence.PersistentDataType;
  */
 public final class McMMOUtils {
 
-    private static final NamespacedKey SUPER_ABILITY_KEY = NamespacedKey.fromString("mcmmo:super_ability_boosted");
+    private static final NamespacedKey SUPER_ABILITY_KEY = PDCUtils.getKeyFromString("mcmmo","super_ability_boosted");
 
     public static void removeSuperAbilityBoost(final ItemStack item) {
         if (item == null || !item.hasItemMeta()) return;
