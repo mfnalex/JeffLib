@@ -54,19 +54,37 @@ public class PDCUtils {
     /**
      * An array of all primitive {@link PersistentDataType}s builtin to Bukkit.
      */
-    public static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES = new PersistentDataType<?, ?>[] {
-            PersistentDataType.BYTE,
-            PersistentDataType.SHORT,
-            PersistentDataType.INTEGER,
-            PersistentDataType.LONG,
-            PersistentDataType.FLOAT,
-            PersistentDataType.DOUBLE,
-            PersistentDataType.STRING,
-            PersistentDataType.BYTE_ARRAY,
-            PersistentDataType.INTEGER_ARRAY,
-            PersistentDataType.LONG_ARRAY,
-            PersistentDataType.TAG_CONTAINER_ARRAY,
-            PersistentDataType.TAG_CONTAINER};
+    public static final PersistentDataType<?, ?>[] PRIMITIVE_DATA_TYPES;
+
+    static {
+        PersistentDataType<?,?>[] arr = new PersistentDataType<?, ?>[] {
+                PersistentDataType.BYTE,
+                PersistentDataType.SHORT,
+                PersistentDataType.INTEGER,
+                PersistentDataType.LONG,
+                PersistentDataType.FLOAT,
+                PersistentDataType.DOUBLE,
+                PersistentDataType.STRING,
+                PersistentDataType.BYTE_ARRAY,
+                PersistentDataType.INTEGER_ARRAY,
+                PersistentDataType.LONG_ARRAY};
+        try {
+            arr = new PersistentDataType<?, ?>[] {
+                    PersistentDataType.BYTE,
+                    PersistentDataType.SHORT,
+                    PersistentDataType.INTEGER,
+                    PersistentDataType.LONG,
+                    PersistentDataType.FLOAT,
+                    PersistentDataType.DOUBLE,
+                    PersistentDataType.STRING,
+                    PersistentDataType.BYTE_ARRAY,
+                    PersistentDataType.INTEGER_ARRAY,
+                    PersistentDataType.LONG_ARRAY,
+                    PersistentDataType.TAG_CONTAINER_ARRAY,
+                    PersistentDataType.TAG_CONTAINER};
+        } catch (Throwable __) {}
+        PRIMITIVE_DATA_TYPES = arr;
+    }
     private static final Map<String, NamespacedKey> KEYS = new HashMap<>();
 
     private static final Method namespacedKeyFromStringMethod;

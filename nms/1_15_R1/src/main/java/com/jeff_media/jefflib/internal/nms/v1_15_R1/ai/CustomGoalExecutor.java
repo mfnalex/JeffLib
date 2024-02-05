@@ -112,7 +112,7 @@ public class CustomGoalExecutor extends PathfinderGoal implements com.jeff_media
         return new HatchedJumpController(pmob.getControllerJump());
     }
 
-    @Override
+    //@Override
     public boolean D_() {
         return goal.isInterruptable();
     }
