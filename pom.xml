@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jeff-media.jefflib</groupId>
     <artifactId>jefflib-parent</artifactId>
-    <version><!-- changeme -->13.0.4</version>
+    <version><!-- changeme -->13.0.5</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
     <properties>
@@ -49,6 +49,7 @@
         <module>nms/1_16_R3</module> <!-- 1.16.4, 1.16.5 -->
         <module>nms/1_16_R2</module> <!-- 1.16.2, 1.16.3 -->
         <module>nms/1_16_R1</module> <!-- 1.16.1 -->
+        <module>nms/1_15_R1</module> <!-- 1.15.2 -->
         <module>dist</module>
         <module>test-plugin</module>
         <module>paper-hacks</module>

@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->13.0.4</version>
+        <version><!-- changeme -->13.0.5</version>
     </parent>
     <build>
         <resources>
@@ -193,24 +193,24 @@
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-nms-generic</artifactId>
-            <version><!-- changeme -->13.0.4</version>
+            <version><!-- changeme -->13.0.5</version>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-paper-hacks</artifactId>
-            <version><!-- changeme -->13.0.4</version>
+            <version><!-- changeme -->13.0.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-keyed</artifactId>
-            <version><!-- changeme -->13.0.4</version>
+            <version><!-- changeme -->13.0.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-legacy</artifactId>
-            <version><!-- changeme -->13.0.4</version>
+            <version><!-- changeme -->13.0.5</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
