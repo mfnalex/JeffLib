@@ -18,22 +18,59 @@
 package com.jeff_media.jefflib;
 
 
-import org.bukkit.Bukkit;
-import org.bukkit.event.EventHandler;
+import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.world.item.enchantment.Enchantment;
+import net.minecraft.world.item.enchantment.EnchantmentCategory;
+import org.bukkit.Material;
+import org.bukkit.NamespacedKey;
+import org.bukkit.craftbukkit.v1_20_R3.enchantments.CraftEnchantment;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 
 public class NMS extends JavaPlugin implements Listener {
 
     {
-        Bukkit.getPluginManager().registerEvents(new Listener() {
-            @EventHandler
-            public void onDeath(EntityDeathEvent event) {
+        // Create Item
+        ItemStack item = new ItemStack(Material.POTION);
 
-            }
-        }, null);
+        // Get meta
+        PotionMeta meta = (PotionMeta) item.getItemMeta();
 
+        // Create custom effect
+        PotionEffect effect = new PotionEffect(PotionEffectType.INVISIBILITY, /* Duration */30 * 20, /*Amplifier/Level*/1);
+
+        // Add effect to meta
+        meta.addCustomEffect(effect, false);
+
+        // Set meta to item
+        item.setItemMeta(meta);
+    }
+
+    static class NmsGlowEnchantment extends Enchantment {
+
+        static NmsGlowEnchantment INSTANCE = new NmsGlowEnchantment();
+
+        protected NmsGlowEnchantment() {
+            super(Rarity.COMMON, EnchantmentCategory.BREAKABLE, EquipmentSlot.values());
+        }
+    }
+
+    static class CraftGlowEnchantment extends CraftEnchantment {
+
+        private static final NamespacedKey KEY = NamespacedKey.fromString("whatever:glow");
+
+        public CraftGlowEnchantment() {
+            super(KEY, NmsGlowEnchantment.INSTANCE);
+        }
+
+        @Override
+        public boolean isCursed() {
+            return true; // Custom enchantments *are* cursed in 1.20.3+
+        }
     }
 
 

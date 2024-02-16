@@ -102,7 +102,9 @@ public class TextUtils {
             itemsAdderPlugin = new AtomicReference<>(Bukkit.getPluginManager().getPlugin("ItemsAdder"));
         }
         if (itemsAdderPlugin.get() != null) {
-            text = dev.lone.itemsadder.api.FontImages.FontImageWrapper.replaceFontImages(text);
+            try {
+                text = dev.lone.itemsadder.api.FontImages.FontImageWrapper.replaceFontImages(text);
+            } catch (Throwable ignored) { }
         }
         return text;
     }
