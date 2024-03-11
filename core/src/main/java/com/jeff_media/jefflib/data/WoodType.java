@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 
 public enum WoodType {
 
-    OAK("OAK"), JUNGLE("JUNGLE"), DARK_OAK("DARK_OAK"), ACACIA("ACACIA"), BIRCH("BIRCH"), SPRUCE("SPRUCE"), CRIMSON("CRIMSON"), WARPED("WARPED"), MANGROVE("MANGROVE"), CHERRY("CHERRY");
+    OAK("OAK"), JUNGLE("JUNGLE"), DARK_OAK("DARK_OAK"), ACACIA("ACACIA"), BIRCH("BIRCH"), SPRUCE("SPRUCE"), CRIMSON("CRIMSON"), WARPED("WARPED"), MANGROVE("MANGROVE"), CHERRY("CHERRY"), BAMBOO("BAMBOO");
 
     @Getter
     @NotNull
@@ -117,6 +117,16 @@ public enum WoodType {
                     return Enums.getIfPresent(Material.class, "MANGROVE_ROOTS").orNull();
                 case "SAPLING":
                     return Enums.getIfPresent(Material.class, "MANGROVE_PROPAGULE").orNull();
+            }
+        }
+        if (this == BAMBOO) {
+            switch(type) {
+                case "BOAT":
+                    return Enums.getIfPresent(Material.class, "BAMBOO_RAFT").orNull();
+                case "WOOD":
+                    return Enums.getIfPresent(Material.class, prefix.equals("STRIPPED") ? "STRIPPED_BAMBOO_BLOCK" : "BAMBOO_BLOCK").orNull();
+                case "SAPLING":
+                    return Enums.getIfPresent(Material.class, prefix.equals("POTTED") ? "POTTED_BAMBOO" : "BAMBOO_SAPLING").orNull();
             }
         }
         if (isFungus(woodType)) {
