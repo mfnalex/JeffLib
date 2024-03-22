@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->13.0.6</version>
+        <version><!-- changeme -->13.0.8</version>
     </parent>
 
     <artifactId>jefflib-paper-hacks</artifactId>

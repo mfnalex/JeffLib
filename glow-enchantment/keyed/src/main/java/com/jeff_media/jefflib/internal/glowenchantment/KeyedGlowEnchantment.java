@@ -19,12 +19,13 @@ package com.jeff_media.jefflib.internal.glowenchantment;
 
 import java.util.Objects;
 import org.bukkit.NamespacedKey;
+import org.bukkit.Translatable;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.enchantments.EnchantmentTarget;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
-public class KeyedGlowEnchantment extends Enchantment {
+public class KeyedGlowEnchantment extends Enchantment implements Translatable {
 
     private final NamespacedKey key = Objects.requireNonNull(NamespacedKey.fromString("jefflib:glow"));
 
@@ -75,5 +76,11 @@ public class KeyedGlowEnchantment extends Enchantment {
     @Override
     public NamespacedKey getKey() {
         return key;
+    }
+
+    @NotNull
+    @Override
+    public String getTranslationKey() {
+        return "jefflib:enchantment/glow";
     }
 }
