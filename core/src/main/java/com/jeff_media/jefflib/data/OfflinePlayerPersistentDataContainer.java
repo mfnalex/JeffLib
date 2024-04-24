@@ -20,6 +20,7 @@ package com.jeff_media.jefflib.data;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ProfileUtils;
 import com.jeff_media.jefflib.ReflUtils;
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Paper;
@@ -206,6 +207,15 @@ public class OfflinePlayerPersistentDataContainer implements PersistentDataConta
     @Override
     public boolean isEmpty() {
         return craftPersistentDataContainer.isEmpty();
+    }
+
+    @Override
+    public void copyTo(@NotNull PersistentDataContainer persistentDataContainer, boolean b) {
+        try {
+            craftPersistentDataContainer.copyTo(persistentDataContainer, b);
+        } catch (Throwable t) {
+            throw new NMSNotSupportedException("Requires 1.20.5+");
+        }
     }
 
     @Override

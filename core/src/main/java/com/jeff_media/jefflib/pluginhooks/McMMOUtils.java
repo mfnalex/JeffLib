@@ -17,6 +17,7 @@
 
 package com.jeff_media.jefflib.pluginhooks;
 
+import com.jeff_media.jefflib.EnchantmentUtils;
 import com.jeff_media.jefflib.PDCUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
@@ -52,9 +53,9 @@ public final class McMMOUtils {
     private static void setEfficiency(final ItemStack item, final int originalLevel) {
         final ItemMeta meta = item.getItemMeta();
         if (meta == null) return;
-        meta.removeEnchant(Enchantment.DIG_SPEED);
+        meta.removeEnchant(EnchantmentUtils.DIG_SPEED_ENCHANTMENT);
         if (originalLevel != 0) {
-            meta.addEnchant(Enchantment.DIG_SPEED, originalLevel, true);
+            meta.addEnchant(EnchantmentUtils.DIG_SPEED_ENCHANTMENT, originalLevel, true);
         }
         item.setItemMeta(meta);
     }

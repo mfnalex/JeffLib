@@ -17,13 +17,19 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.data.McVersion;
 import com.jeff_media.jefflib.exceptions.ConflictingEnchantmentException;
+import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.glowenchantment.GlowEnchantmentFactory;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
+import org.bukkit.NamespacedKey;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
@@ -37,6 +43,34 @@ import org.jetbrains.annotations.Nullable;
  */
 @UtilityClass
 public class EnchantmentUtils {
+
+    public static final Enchantment DURABILIRY_ENCHANTMENT;
+    public static final Enchantment DIG_SPEED_ENCHANTMENT;
+
+    private static Enchantment getEnchant(String namespaced, String oldFieldName, String newFieldName) {
+        Enchantment ench = null;
+
+        try {
+            ench = Bukkit.getRegistry(Enchantment.class).get(NamespacedKey.minecraft(namespaced));
+        } catch (Throwable t) {
+            try {
+                ench = (Enchantment) Enchantment.class.getDeclaredField(newFieldName).get(null);
+            } catch (Throwable t2) {
+                try {
+                    ench = (Enchantment) Enchantment.class.getDeclaredField(oldFieldName).get(null);
+                } catch (Throwable t3) {
+
+                }
+            }
+        }
+
+        return Objects.requireNonNull(ench, "Couldn't get enchantment " + namespaced + " from registry, field " + newFieldName + " or field " + oldFieldName);
+    }
+
+    static {
+        DURABILIRY_ENCHANTMENT = getEnchant("unbreaking", "DURABILITY", "UNBREAKING");
+        DIG_SPEED_ENCHANTMENT = getEnchant("efficiency", "DIG_SPEED", "EFFICIENCY");
+    }
 
     /**
      * Registers a custom enchantment. You should not do that, but instead rely on PDC tags to identify your custom enchantments.
@@ -52,7 +86,8 @@ public class EnchantmentUtils {
             fieldAcceptingNew.set(null, true);
             fieldAcceptingNew.setAccessible(false);
 
-            Enchantment.registerEnchantment(enchantment);
+            Method method = Enchantment.class.getDeclaredMethod("registerEnchantment", Enchantment.class);
+            method.invoke(null, enchantment);
         } catch (final Throwable exception) {
             throw new ConflictingEnchantmentException(exception.getMessage());
         }
@@ -181,11 +216,55 @@ public class EnchantmentUtils {
      * @return true if the effect was added, false if it was already present
      */
     public static boolean addGlowEffect(@NotNull ItemMeta meta) {
-        if (meta.hasEnchant(GlowEnchantmentFactory.getInstance())) {
+
+        if(McVersion.current().isAtLeast(1,20,5)) {
+            if(meta.hasEnchantmentGlintOverride()) return false;
+            meta.setEnchantmentGlintOverride(true);
+            return true;
+        }
+
+        if (meta.hasEnchant(GlowEnchantmentFactory.getDeprecatedInstance())) {
             return false;
         }
-        meta.addEnchant(GlowEnchantmentFactory.getInstance(), 1, true);
+        meta.addEnchant(GlowEnchantmentFactory.getDeprecatedInstance(), 1, true);
         return true;
+    }
+
+    public static boolean hasGlowEffect(@NotNull ItemMeta meta) {
+        if(McVersion.current().isAtLeast(1,20,5)) {
+            return meta.hasEnchantmentGlintOverride();
+        }
+        return meta.hasEnchant(GlowEnchantmentFactory.getDeprecatedInstance());
+    }
+
+    private static boolean hasNagged0 = false;
+
+    /**
+     * Removes the custom glow effect.
+     * @param meta
+     * @return true if the effect was removed, false if it was not present
+     */
+    public static boolean removeGlowEffect(@NotNull ItemMeta meta) {
+        if(hasGlowEffect(meta)) {
+            return false;
+        }
+
+        if(McVersion.current().isAtLeast(1,20,5)) {
+            meta.setEnchantmentGlintOverride(null);
+        } else {
+            try {
+                meta.removeEnchant(GlowEnchantmentFactory.getDeprecatedInstance());
+            } catch (Throwable t) {
+                if(!hasNagged0) {
+                    JeffLib.getLogger().warning("Failed to remove glow effect - consider updating to 1.20.5+");
+                    hasNagged0 = true;
+                }
+                return false;
+            }
+        }
+
+        return true;
+
     }
 
 }

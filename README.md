@@ -47,7 +47,7 @@ Dependency:
 <dependency>
     <groupId>com.jeff-media.jefflib</groupId>
     <artifactId>jefflib</artifactId>
-    <version><!-- changeme -->13.1.0</version>
+    <version><!-- changeme -->14.0.0</version>
     <scope>compile</scope>
 </dependency>
 ```

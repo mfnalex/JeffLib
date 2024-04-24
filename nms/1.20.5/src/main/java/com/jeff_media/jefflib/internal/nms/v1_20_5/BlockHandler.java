@@ -15,14 +15,14 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.internal.nms.v1_20_5;
 
+import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
+import net.minecraft.world.level.block.ComposterBlock;
 
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
-
-public class NMS extends JavaPlugin implements Listener {
-
+public class BlockHandler implements AbstractNMSBlockHandler {
+    @Override
+    public void playComposterParticlesAndSound(final org.bukkit.block.Block block, final boolean success) {
+        ComposterBlock.handleFill(NMS.getLevel(block.getWorld()), NMS.getBlockPos(block), success);
+    }
 }
-
-

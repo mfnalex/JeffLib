@@ -18,6 +18,7 @@
 package com.jeff_media.jefflib;
 
 import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
+import com.jeff_media.jefflib.exceptions.UseApiNowException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import java.io.ByteArrayInputStream;
@@ -244,14 +245,11 @@ public class ItemStackSerializer {
     @NMS
     @Tested("1.19.4")
     public static String toJson(final ItemStack itemStack) {
-        //try {
-           return JeffLib.getNMSHandler().itemStackToJson(itemStack);
-        /*}
         try {
+           return JeffLib.getNMSHandler().itemStackToJson(itemStack);
+        } catch (UseApiNowException ex) {
             return JsonConfigurationSerialization.serialize(itemStack);
-        } catch (NMSNotSupportedException e) {
-            return toSnbtWithType(itemStack);
-        }*/
+        }
     }
 
     /**
@@ -268,8 +266,9 @@ public class ItemStackSerializer {
     public static ItemStack fromJson(final String json) {
         try {
             return JeffLib.getNMSHandler().itemStackFromJson(json);
-        //} catch(NMSNotSupportedException e) {
-        //    return JsonConfigurationSerialization.deserialize(json, ItemStack.class);
+        } catch(UseApiNowException e) {
+            //return Bukkit.getItemFactory().createItemStack(json);
+            return JsonConfigurationSerialization.deserialize(json, ItemStack.class);
         } catch (Exception ex) {
             throw new UncheckedIOException(new IOException(ex));
         }

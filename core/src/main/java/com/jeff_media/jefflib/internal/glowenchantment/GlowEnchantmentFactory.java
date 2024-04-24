@@ -20,15 +20,24 @@ package com.jeff_media.jefflib.internal.glowenchantment;
 import com.jeff_media.jefflib.EnchantmentUtils;
 import com.jeff_media.jefflib.PDCUtils;
 import java.util.Objects;
+
+import com.jeff_media.jefflib.internal.annotations.Internal;
 import lombok.Getter;
 import org.bukkit.NamespacedKey;
 import org.bukkit.enchantments.Enchantment;
 
+@Deprecated
+@Internal
 public abstract class GlowEnchantmentFactory {
 
     public static final NamespacedKey GLOW_ENCHANTMENT_KEY = Objects.requireNonNull(PDCUtils.getKeyFromString("jefflib", "glow"));
-    @Getter
+
     private static final Enchantment instance;
+
+    @Deprecated
+    public static Enchantment getDeprecatedInstance() {
+        return instance;
+    }
 
     static {
         Enchantment existing = Enchantment.getByKey(GLOW_ENCHANTMENT_KEY);

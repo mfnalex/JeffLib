@@ -15,14 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.exceptions;
 
-
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
-
-public class NMS extends JavaPlugin implements Listener {
-
+public class UseApiNowException extends RuntimeException {
 }
-
-

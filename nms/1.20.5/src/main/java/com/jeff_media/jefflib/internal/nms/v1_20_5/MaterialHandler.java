@@ -15,14 +15,20 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.internal.nms.v1_20_5;
 
+import com.jeff_media.jefflib.internal.NMSReflUtils;
+import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
+import net.minecraft.world.item.Item;
+import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_20_R4.util.CraftMagicNumbers;
 
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
+class MaterialHandler implements AbstractNMSMaterialHandler {
 
-public class NMS extends JavaPlugin implements Listener {
+    private static final String ITEM_MAXSTACKSIZE_FIELD = "d";
 
+    @Override
+    public void setMaxStackSize(final Material material, final int maxStackSize) {
+        NMSReflUtils.setField(Item.class, CraftMagicNumbers.getItem(material), ITEM_MAXSTACKSIZE_FIELD, maxStackSize);
+    }
 }
-
-

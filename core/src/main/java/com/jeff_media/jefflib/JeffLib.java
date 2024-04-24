@@ -339,7 +339,9 @@ public class JeffLib {
         if (!initDone) {
             ProtectionUtils.loadPluginProtections();
         }
-        GlowEnchantmentFactory.register();
+        if(!McVersion.current().isAtLeast(1,20,5)) {
+            GlowEnchantmentFactory.register();
+        }
         initDone = true;
     }
 

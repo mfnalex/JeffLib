@@ -239,7 +239,7 @@ public class ItemStackUtils {
     public static void damageItem(int amount, final @NotNull ItemStack item, @Nullable final Player player) {
         final ItemMeta meta = item.getItemMeta();
         if (!(meta instanceof Damageable) || amount < 0) return;
-        final int durability = item.getEnchantmentLevel(Enchantment.DURABILITY);
+        final int durability = item.getEnchantmentLevel(EnchantmentUtils.DURABILIRY_ENCHANTMENT);
         int k = 0;
         for (int l = 0; durability > 0 && l < amount; l++) {
             if (JeffLib.getRandom().nextInt(durability + 1) > 0) {

@@ -15,14 +15,21 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib;
+package com.jeff_media.jefflib.internal.nms.v1_20_5.ai;
 
+import com.jeff_media.jefflib.ai.navigation.JumpController;
+import net.minecraft.world.entity.ai.control.JumpControl;
 
-import org.bukkit.event.Listener;
-import org.bukkit.plugin.java.JavaPlugin;
+public class HatchedJumpController implements JumpController {
 
-public class NMS extends JavaPlugin implements Listener {
+    private final JumpControl jumpControl;
 
+    public HatchedJumpController(final JumpControl jumpControl) {
+        this.jumpControl = jumpControl;
+    }
+
+    @Override
+    public void jump() {
+        jumpControl.jump();
+    }
 }
-
-

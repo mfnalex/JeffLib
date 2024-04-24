@@ -28,6 +28,7 @@ import com.jeff_media.jefflib.data.Hologram;
 import com.jeff_media.jefflib.data.OfflinePlayerPersistentDataContainer;
 import com.jeff_media.jefflib.data.SerializedEntity;
 import com.jeff_media.jefflib.data.tuples.Pair;
+import com.jeff_media.jefflib.exceptions.UseApiNowException;
 import com.jeff_media.jefflib.internal.annotations.Internal;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import com.mojang.authlib.GameProfile;
@@ -87,10 +88,14 @@ public interface AbstractNMSHandler {
     void setHeadTexture(@NotNull final Block block, @NotNull final GameProfile gameProfile);
 
     @Tested("1.19.4")
-    String itemStackToJson(@NotNull final ItemStack itemStack);
+    default String itemStackToJson(@NotNull final ItemStack itemStack) {
+        throw new UseApiNowException();
+    }
 
     @Tested("1.19.4")
-    ItemStack itemStackFromJson(@NotNull final String json) throws Exception;
+    default ItemStack itemStackFromJson(@NotNull final String json) throws Exception {
+        throw new UseApiNowException();
+    }
 
     @Tested("1.19.4")
     void setFullTimeWithoutTimeSkipEvent(@NotNull final World world, final long time, final boolean notifyPlayers);
