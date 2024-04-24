@@ -52,8 +52,7 @@ Dependency:
 </dependency>
 ```
 
-Latest
-version: ![Latest Version](https://img.shields.io/maven-metadata/v?metadataUrl=https%3A%2F%2Fhub.jeff-media.com%2Fnexus%2Frepository%2Fjeff-media-public%2Fcom%2Fjeff_media%2FJeffLib%2Fmaven-metadata.xml)
+Check the latest version in the [repository explorer](https://repo.jeff-media.com/#/public/com/jeff-media/jefflib/jefflib/).
 
 Shading (add this to ```<build><plugins>```) if you don't already have it:
 
@@ -121,7 +120,7 @@ Dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.jeff-media.jefflib:jefflib:13.0.5'
+    implementation 'com.jeff-media.jefflib:jefflib:14.0.0' // Check the latest version in the repository explorer: https://repo.jeff-media.com/#/public/com/jeff-media/jefflib/jefflib/
 } 
 ```
 
