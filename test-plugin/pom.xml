@@ -22,7 +22,7 @@
     <parent>
         <artifactId>jefflib-parent</artifactId>
         <groupId>com.jeff-media.jefflib</groupId>
-        <version><!-- changeme -->13.0.8</version>
+        <version><!-- changeme -->13.1.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -84,7 +84,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.1</version>
+                <version>3.13.0</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
@@ -162,7 +162,7 @@
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib</artifactId>
-            <version><!-- changeme -->13.0.8</version>
+            <version><!-- changeme -->13.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

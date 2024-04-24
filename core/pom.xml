@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->13.0.8</version>
+        <version><!-- changeme -->13.1.0</version>
     </parent>
     <build>
         <resources>
@@ -183,6 +183,12 @@
             <version>2.145.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.jeff-media</groupId>
+            <artifactId>json-configuration-serialization</artifactId>
+            <version>1.1.4</version>
+            <scope>compile</scope>
+        </dependency>
         <!-- Test dependencies end -->
         <dependency>
             <groupId>org.spigotmc</groupId>
@@ -193,26 +199,34 @@
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-nms-generic</artifactId>
-            <version><!-- changeme -->13.0.8</version>
+            <version><!-- changeme -->13.1.0</version>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-paper-hacks</artifactId>
-            <version><!-- changeme -->13.0.8</version>
+            <version><!-- changeme -->13.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-keyed</artifactId>
-            <version><!-- changeme -->13.0.8</version>
+            <version><!-- changeme -->13.1.0</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-legacy</artifactId>
-            <version><!-- changeme -->13.0.8</version>
+            <version><!-- changeme -->13.1.0</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.angeschossen</groupId>
+            <artifactId>LandsAPI</artifactId>
+            <version>6.44.14</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>javax.annotation</groupId>
             <artifactId>javax.annotation-api</artifactId>
@@ -304,12 +318,6 @@
             <groupId>com.plotsquared</groupId>
             <artifactId>PlotSquared-Bukkit</artifactId>
             <version>6.6.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.angeschossen</groupId>
-            <artifactId>LandsAPI</artifactId>
-            <version>6.28.11</version>
             <scope>provided</scope>
         </dependency>
 <!--        <dependency>-->

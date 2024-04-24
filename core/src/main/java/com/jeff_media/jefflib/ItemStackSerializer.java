@@ -17,6 +17,7 @@
 
 package com.jeff_media.jefflib;
 
+import com.jeff_media.jefflib.exceptions.NMSNotSupportedException;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.annotations.Tested;
 import java.io.ByteArrayInputStream;
@@ -25,12 +26,15 @@ import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.UncheckedIOException;
 import java.util.Base64;
+
+import com.jeff_media.jsonconfigurationserialization.JsonConfigurationSerialization;
 import lombok.SneakyThrows;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.io.BukkitObjectInputStream;
 import org.bukkit.util.io.BukkitObjectOutputStream;
 import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
@@ -219,6 +223,18 @@ public class ItemStackSerializer {
         }
     }
 
+    public static String toSnbtWithType(ItemStack itemStack) {
+        String material = itemStack.getType().name().toLowerCase();
+        ItemMeta meta = itemStack.getItemMeta();
+        String metaString = (meta != null) ? meta.getAsString() : "";
+        return "minecraft:" + material + metaString;
+    }
+
+    public static String toSnbtWithoutType(ItemStack itemStack) {
+        ItemMeta meta = itemStack.getItemMeta();
+        return (meta != null) ? meta.getAsString() : "";
+    }
+
     /**
      * Turns an ItemStack into a json-formatted String
      *
@@ -228,7 +244,14 @@ public class ItemStackSerializer {
     @NMS
     @Tested("1.19.4")
     public static String toJson(final ItemStack itemStack) {
-        return JeffLib.getNMSHandler().itemStackToJson(itemStack);
+        //try {
+           return JeffLib.getNMSHandler().itemStackToJson(itemStack);
+        /*}
+        try {
+            return JsonConfigurationSerialization.serialize(itemStack);
+        } catch (NMSNotSupportedException e) {
+            return toSnbtWithType(itemStack);
+        }*/
     }
 
     /**
@@ -245,6 +268,8 @@ public class ItemStackSerializer {
     public static ItemStack fromJson(final String json) {
         try {
             return JeffLib.getNMSHandler().itemStackFromJson(json);
+        //} catch(NMSNotSupportedException e) {
+        //    return JsonConfigurationSerialization.deserialize(json, ItemStack.class);
         } catch (Exception ex) {
             throw new UncheckedIOException(new IOException(ex));
         }

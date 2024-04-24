@@ -24,7 +24,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->13.0.8</version>
+        <version><!-- changeme -->13.1.0</version>
         <relativePath>../../pom.xml</relativePath>
     </parent>
 
