@@ -17,6 +17,9 @@
 
 package com.jeff_media.jefflib.exceptions;
 
+import com.allatori.annotations.DoNotRename;
+
+@DoNotRename
 public class InvalidBlockDataException extends Exception {
 
     public InvalidBlockDataException(final String text) {

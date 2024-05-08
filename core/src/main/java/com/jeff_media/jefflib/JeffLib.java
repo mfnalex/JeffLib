@@ -255,6 +255,10 @@ public class JeffLib {
         final String internalsName;
         McVersion mcVersion = McVersion.current();
 
+        if(mcVersion.equals(new McVersion(1,20,6))) {
+            mcVersion = new McVersion(1,20,5);
+        }
+
         // 1.20.3 has been replaced by 1.20.4
         if(mcVersion.equals(new McVersion(1,20,3))) {
             mcVersion = new McVersion(1,20,4);

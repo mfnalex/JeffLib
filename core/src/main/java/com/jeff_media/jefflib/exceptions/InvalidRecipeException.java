@@ -17,6 +17,9 @@
 
 package com.jeff_media.jefflib.exceptions;
 
+import com.allatori.annotations.DoNotRename;
+
+@DoNotRename
 public class InvalidRecipeException extends IllegalArgumentException {
 
     public InvalidRecipeException(final String message) {

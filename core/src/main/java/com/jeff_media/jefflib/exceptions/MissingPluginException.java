@@ -17,9 +17,12 @@
 
 package com.jeff_media.jefflib.exceptions;
 
+import com.allatori.annotations.DoNotRename;
+
 /**
  * Gets thrown when a plugin is not installed that is required by a specific API method
  */
+@DoNotRename
 public final class MissingPluginException extends Exception {
 
     public MissingPluginException(final String pluginName) {
