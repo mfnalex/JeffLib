@@ -88,8 +88,6 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
     @Override
     public void setMaxStackSize(final Material material, final int maxStackSize) {
         Item item = CraftMagicNumbers.getItem(material);
-        int defaultMax = item.getDefaultMaxStackSize();
-        //if (defaultMax == maxStackSize) return;
         DataComponentMap map = item.components();
 
         Integer boxed = maxStackSize;
@@ -107,50 +105,5 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
         } else {
             throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - map is not an instance of Map<?,?> or SimpleMap, but " + map.getClass().getName());
         }
-
-        ItemStack bukkitStack = new ItemStack(material);
-
-        net.minecraft.world.item.ItemStack nmsItemStack = CraftItemStack.asNMSCopy(bukkitStack);
-
-        //int bukkitMetaMaxStack = bukkitMeta.getMaxStackSize();
-        int bukkitItemStackMaxStack = bukkitStack.getMaxStackSize();
-        int nmsItemStackMaxStack = nmsItemStack.getMaxStackSize();
-
-        int bukkitMaterialMaxStack = material.getMaxStackSize();
-        int nmsItemDefaultMaxStack = item.getDefaultMaxStackSize();
-
-
-//        if(bukkitMetaMaxStack != maxStackSize) {
-//            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - #1 bukkitMetaMaxStack is " + bukkitMetaMaxStack);
-//        }
-
-        if(bukkitItemStackMaxStack != maxStackSize) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - #2 bukkitItemStackMaxStack is " + bukkitItemStackMaxStack);
-        }
-
-        if(nmsItemStackMaxStack != maxStackSize) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - #3 nmsItemStackMaxStack is " + nmsItemStackMaxStack);
-        }
-
-        if(bukkitMaterialMaxStack != maxStackSize) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - #4 bukkitMaterialMaxStack is " + bukkitMaterialMaxStack);
-        }
-
-        if(nmsItemDefaultMaxStack != maxStackSize) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - #5 nmsItemDefaultMaxStack is " + nmsItemDefaultMaxStack);
-        }
-
-        Integer componentStackSize = item.components().get(DataComponents.MAX_STACK_SIZE);
-        if(componentStackSize == null) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - componentStackSize is null");
-        }
-        if(componentStackSize != maxStackSize) {
-            throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - componentStackSize is " + componentStackSize);
-        }
-
-        System.out.println("Successfully set max stack size of " + material.name() + " to " + maxStackSize);
-
-
-
     }
 }
