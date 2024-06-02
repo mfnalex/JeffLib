@@ -52,6 +52,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 @UtilityClass
 public class JeffLib {
 
+    public static String LATEST_NMS = "v1_20_5";
+
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
     private static Plugin plugin;
@@ -251,6 +253,9 @@ public class JeffLib {
      */
     @NMS
     public static void enableNMS() throws NMSNotSupportedException {
+
+        Exception cause = null;
+
         final String packageName = JeffLib.class.getPackage().getName();
         final String internalsName;
         McVersion mcVersion = McVersion.current();
@@ -281,13 +286,20 @@ public class JeffLib {
             if (className != null) {
                 try {
                     nmsHandler = (AbstractNMSHandler) Class.forName(className).getDeclaredConstructor().newInstance();
-                } catch (final ReflectiveOperationException ignored) {
-
+                } catch (final ReflectiveOperationException ex) {
+                    cause = ex;
                 }
             }
         }
         if (nmsHandler == null) {
-            throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName() + "(" + internalsName + ")");
+            try {
+                nmsHandler = (AbstractNMSHandler) Class.forName(packageName + ".internal.nms." + LATEST_NMS + ".NMSHandler").getDeclaredConstructor().newInstance();
+            } catch (final ReflectiveOperationException ex) {
+                cause = ex;
+            }
+            if(nmsHandler == null) {
+                throw new NMSNotSupportedException("JeffLib " + version + " does not support NMS for " + McVersion.current().getName() + " (using handler " + internalsName + ")", cause);
+            }
         }
     }
 

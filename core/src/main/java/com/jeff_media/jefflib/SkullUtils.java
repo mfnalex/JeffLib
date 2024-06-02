@@ -165,10 +165,14 @@ public class SkullUtils {
     }
 
     public static URL getUrlFromBase64(String base64) throws MalformedURLException {
-        String decoded = new String(Base64.getDecoder().decode(base64));
-        // We simply remove the "beginning" and "ending" part of the JSON, so we're left with only the URL. You could use a proper
-        // JSON parser for this, but that's not worth it. The String will always start exactly with this stuff anyway
-        return new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length()));
+        try {
+            String decoded = new String(Base64.getDecoder().decode(base64));
+            // We simply remove the "beginning" and "ending" part of the JSON, so we're left with only the URL. You could use a proper
+            // JSON parser for this, but that's not worth it. The String will always start exactly with this stuff anyway
+            return new URL(decoded.substring("{\"textures\":{\"SKIN\":{\"url\":\"".length(), decoded.length() - "\"}}}".length()));
+        } catch (Throwable t) {
+            throw new MalformedURLException("Invalid base64 string: " + base64);
+        }
     }
 
     private static void setBase64ToSkullMeta(String base64, SkullMeta meta) {
