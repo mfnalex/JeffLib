@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.events;
 
-import com.destroystokyo.paper.event.player.PlayerJumpEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
