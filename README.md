@@ -47,7 +47,7 @@ Dependency:
 <dependency>
     <groupId>com.jeff-media.jefflib</groupId>
     <artifactId>jefflib</artifactId>
-    <version><!-- changeme -->14.0.7</version>
+    <version><!-- changeme -->14.0.8</version>
     <scope>compile</scope>
 </dependency>
 ```
@@ -120,7 +120,7 @@ Dependency:
 
 ```groovy
 dependencies {
-    implementation 'com.jeff-media.jefflib:jefflib:14.0.7' // Check the latest version in the repository explorer: https://repo.jeff-media.com/#/public/com/jeff-media/jefflib/jefflib/
+    implementation 'com.jeff-media.jefflib:jefflib:14.0.8' // Check the latest version in the repository explorer: https://repo.jeff-media.com/#/public/com/jeff-media/jefflib/jefflib/
 } 
 ```
 

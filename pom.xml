@@ -20,7 +20,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.jeff-media.jefflib</groupId>
     <artifactId>jefflib-parent</artifactId>
-    <version><!-- changeme -->14.0.7</version>
+    <version><!-- changeme -->14.0.8</version>
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
     <properties>
