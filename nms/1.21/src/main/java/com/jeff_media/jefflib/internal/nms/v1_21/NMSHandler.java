@@ -15,11 +15,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1_20_5;
+package com.jeff_media.jefflib.internal.nms.v1_21;
 
 import static com.jeff_media.jefflib.ItemStackUtils.NO_DATA;
-import static com.jeff_media.jefflib.internal.nms.v1_20_5.NMS.*;
+import static com.jeff_media.jefflib.internal.nms.v1_21.NMS.*;
 
+import com.jeff_media.jefflib.ItemStackSerializer;
+import com.jeff_media.jefflib.ItemStackUtils;
 import com.jeff_media.jefflib.PacketUtils;
 import com.jeff_media.jefflib.ai.goal.CustomGoal;
 import com.jeff_media.jefflib.ai.goal.CustomGoalExecutor;
@@ -40,13 +42,13 @@ import com.jeff_media.jefflib.internal.nms.AbstractNMSBlockHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSMaterialHandler;
 import com.jeff_media.jefflib.internal.nms.BukkitUnsafe;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedAvoidEntityGoal;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedJumpController;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedLookController;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedMoveToBlockGoal;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedTemptGoal;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedMoveController;
-import com.jeff_media.jefflib.internal.nms.v1_20_5.ai.HatchedPathNavigation;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedAvoidEntityGoal;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedJumpController;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedLookController;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedMoveToBlockGoal;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedTemptGoal;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedMoveController;
+import com.jeff_media.jefflib.internal.nms.v1_21.ai.HatchedPathNavigation;
 import com.mojang.authlib.GameProfile;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import java.io.File;
@@ -91,13 +93,13 @@ import org.bukkit.NamespacedKey;
 import org.bukkit.World;
 import org.bukkit.advancement.Advancement;
 import org.bukkit.block.Block;
-import org.bukkit.craftbukkit.v1_20_R4.CraftServer;
-import org.bukkit.craftbukkit.v1_20_R4.CraftWorld;
-import org.bukkit.craftbukkit.v1_20_R4.entity.CraftPlayer;
-import org.bukkit.craftbukkit.v1_20_R4.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_20_R4.persistence.CraftPersistentDataContainer;
-import org.bukkit.craftbukkit.v1_20_R4.util.CraftChatMessage;
-import org.bukkit.craftbukkit.v1_20_R4.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R1.CraftServer;
+import org.bukkit.craftbukkit.v1_21_R1.CraftWorld;
+import org.bukkit.craftbukkit.v1_21_R1.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_21_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_21_R1.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.v1_21_R1.util.CraftChatMessage;
+import org.bukkit.craftbukkit.v1_21_R1.util.CraftMagicNumbers;
 import org.bukkit.entity.Creature;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Mob;
@@ -167,7 +169,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void showEntityToPlayer(@NotNull final Object entity, @NotNull final org.bukkit.entity.Player player) {
-        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity));
+        PacketUtils.sendPacket(player, new ClientboundAddEntityPacket((Entity) entity, 0, ((Entity) entity).blockPosition()));
         PacketUtils.sendPacket(player, new ClientboundSetEntityDataPacket(((Entity) entity).getId(), ((Entity) entity).getEntityData().getNonDefaultValues()));
     }
 
@@ -303,7 +305,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public CustomGoalExecutor getCustomGoalExecutor(final CustomGoal customGoal, final Mob entity) {
-        return new com.jeff_media.jefflib.internal.nms.v1_20_5.ai.CustomGoalExecutor(customGoal, asMob(entity));
+        return new com.jeff_media.jefflib.internal.nms.v1_21.ai.CustomGoalExecutor(customGoal, asMob(entity));
     }
 
     @Nullable
@@ -371,7 +373,7 @@ public class NMSHandler implements AbstractNMSHandler {
     @NotNull
     @Override
     public BukkitUnsafe getUnsafe() {
-        return com.jeff_media.jefflib.internal.nms.v1_20_5.BukkitUnsafe.INSTANCE;
+        return com.jeff_media.jefflib.internal.nms.v1_21.BukkitUnsafe.INSTANCE;
     }
 
     @Override
@@ -387,7 +389,7 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public void respawnPlayer(Player player) {
-        getServer().getPlayerList().respawn(toNms(player), true, PlayerRespawnEvent.RespawnReason.PLUGIN);
+        getServer().getPlayerList().respawn(toNms(player), true, Entity.RemovalReason.KILLED, PlayerRespawnEvent.RespawnReason.PLUGIN);
     }
 
     @Override

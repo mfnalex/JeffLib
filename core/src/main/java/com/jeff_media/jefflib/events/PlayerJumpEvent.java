@@ -33,6 +33,8 @@ import org.bukkit.event.player.PlayerEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerStatisticIncrementEvent;
 import org.bukkit.plugin.Plugin;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 import org.jetbrains.annotations.NotNull;
 
@@ -65,10 +67,10 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
     public static Listener registerListener() {
         Plugin plugin = JeffLib.getPlugin();
         Listener listener;
-        if (ServerUtils.isRunningPaper()) { // TODO
+        if (ServerUtils.isRunningPaper()) {
             Bukkit.getPluginManager().registerEvents(listener = new PaperPlayerJumpEventListener(), plugin);
         } else {
-            Bukkit.getPluginManager().registerEvents(listener = new SpigotListener(), plugin);
+        Bukkit.getPluginManager().registerEvents(listener = new SpigotListener(), plugin);
         }
         return listener;
     }
@@ -107,7 +109,8 @@ public class PlayerJumpEvent extends PlayerEvent implements Cancellable {
             Bukkit.getPluginManager().callEvent(ownEvent);
             if (ownEvent.isCancelled()) {
                 statsEvent.setCancelled(true);
-                player.teleport(from);
+                PotionEffect effect = new PotionEffect(PotionEffectType.JUMP_BOOST, 1, Byte.MIN_VALUE, false, false, false);
+                player.addPotionEffect(effect);
             }
         }
     }
