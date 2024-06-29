@@ -61,6 +61,8 @@ import net.minecraft.core.HolderGetter;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.NbtAccounter;
+import net.minecraft.nbt.NbtIo;
 import net.minecraft.nbt.NbtOps;
 import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.TagParser;
@@ -96,6 +98,7 @@ import org.bukkit.craftbukkit.v1_20_R4.CraftWorld;
 import org.bukkit.craftbukkit.v1_20_R4.entity.CraftPlayer;
 import org.bukkit.craftbukkit.v1_20_R4.inventory.CraftItemStack;
 import org.bukkit.craftbukkit.v1_20_R4.persistence.CraftPersistentDataContainer;
+import org.bukkit.craftbukkit.v1_20_R4.persistence.CraftPersistentDataTypeRegistry;
 import org.bukkit.craftbukkit.v1_20_R4.util.CraftChatMessage;
 import org.bukkit.craftbukkit.v1_20_R4.util.CraftMagicNumbers;
 import org.bukkit.entity.Creature;
@@ -410,23 +413,21 @@ public class NMSHandler implements AbstractNMSHandler {
 
     @Override
     public OfflinePlayerPersistentDataContainer getPDCFromDatFile(File file) throws IOException {
-        /*CraftPersistentDataTypeRegistry registry = new CraftPersistentDataTypeRegistry();
+        CraftPersistentDataTypeRegistry registry = new CraftPersistentDataTypeRegistry();
         CraftPersistentDataContainer container = new CraftPersistentDataContainer(registry);
-        CompoundTag fileTag = NbtIo.readCompressed(file);
+        CompoundTag fileTag = NbtIo.readCompressed(file.toPath(), NbtAccounter.unlimitedHeap());
         CompoundTag pdcTag = fileTag.getCompound("BukkitValues");
         container.putAll(pdcTag);
         return new OfflinePlayerPersistentDataContainer(container, file, fileTag);
-        */
-        throw new NMSNotSupportedException("Only available in 1.20.2 and earlier"); // TODO
+
     }
 
     @Override
     public void updatePdcInDatFile(OfflinePlayerPersistentDataContainer pdc) throws IOException {
-        /*CompoundTag pdcTag = ((CraftPersistentDataContainer) pdc.getCraftPersistentDataContainer()).toTagCompound();
+        CompoundTag pdcTag = ((CraftPersistentDataContainer) pdc.getCraftPersistentDataContainer()).toTagCompound();
         CompoundTag fileTag = (CompoundTag) pdc.getCompoundTag();
         fileTag.put("BukkitValues", pdcTag);
-        NbtIo.writeCompressed(fileTag, pdc.getFile());*/
-        throw new NMSNotSupportedException("Only available in 1.20.2 and earlier"); // TODO
+        NbtIo.writeCompressed(fileTag, pdc.getFile().toPath());
     }
 
 }
