@@ -100,14 +100,14 @@ public class EnumUtils {
             try {
                 for(Field field : enumClazz.getDeclaredFields()) {
                     if(!field.getName().equals(value)) continue;
-                    if(!Modifier.isStatic(field.getModifiers())) throw new RuntimeException("Field " + field.getName() + " in " + enumClazz.getName() + " is not static");
+                    if(!Modifier.isStatic(field.getModifiers())) continue;
                     Class<?> returnClass = field.getType();
                     if(enumClazz.isAssignableFrom(returnClass)) {
                         field.setAccessible(true);
                         return (T) field.get(null);
                     }
                 }
-                throw new RuntimeException("Could not find field " + value + " in " + enumClazz.getName());
+                throw new RuntimeException("Could not find static field " + value + " in " + enumClazz.getName());
             } catch (ReflectiveOperationException ex) {
                 throw new RuntimeException(ex);
             }
