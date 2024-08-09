@@ -32,10 +32,12 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Level;
 import java.util.regex.Pattern;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 import lombok.experimental.UtilityClass;
+import org.bukkit.Bukkit;
 
 /**
  * Enum related methods
@@ -99,9 +101,9 @@ public class EnumUtils {
                 for(Field field : enumClazz.getDeclaredFields()) {
                     if(!field.getName().equals(value)) continue;
                     if(!Modifier.isStatic(field.getModifiers())) throw new RuntimeException("Field " + field.getName() + " in " + enumClazz.getName() + " is not static");
-                    if(!field.isAccessible()) throw new RuntimeException("Field " + field.getName() + " in " + enumClazz.getName() + " is not accessible");
                     Class<?> returnClass = field.getType();
                     if(enumClazz.isAssignableFrom(returnClass)) {
+                        field.setAccessible(true);
                         return (T) field.get(null);
                     }
                 }
@@ -115,9 +117,17 @@ public class EnumUtils {
     /**
      * Gets an {@link Optional} of a given Enum by its name
      */
-    public static <E> Optional<E> getIfPresent(final Class<E> enumClazz, final String value) {
+    private static <E> Optional<E> getIfPresent0(final Class<E> enumClazz, final String value) {
         final Set<String> enumSet = ENUM_CACHE.computeIfAbsent(enumClazz, EnumUtils::toStringSet);
         return Optional.ofNullable(enumSet.contains(value) ? valueOf(enumClazz, value) : null);
+    }
+
+    public static <E> Optional<E> getIfPresent(final Class<E> enumClazz, final String... value) {
+        for(String candidate : value) {
+            final Optional<E> result = getIfPresent0(enumClazz, candidate);
+            if(result.isPresent()) return result;
+        }
+        return Optional.empty();
     }
 
     private static final Method enumValueOfMethod;
@@ -125,13 +135,42 @@ public class EnumUtils {
 
 
     private static Set<String> toStringSet(final Class<?> enumClazz) {
-        return Arrays.stream(enumClazz.getEnumConstants()).map(object -> {
-            if(object instanceof Enum<?>) {
-                return ((Enum<?>) object).name();
-            } else {
-                return object.toString();
-            }
-        }).collect(Collectors.toSet());
+        if(enumClazz.isEnum()) {
+            return Arrays.stream(enumClazz.getEnumConstants()).map(object -> {
+                if (object instanceof Enum<?>) {
+                    return ((Enum<?>) object).name();
+                } else {
+                    return object.toString();
+                }
+            }).collect(Collectors.toSet());
+        } else {
+
+                Set<String> result = Arrays.stream(enumClazz.getFields()).filter(field -> {
+                    try {
+                        //System.out.println("Found field: " + field.getName());
+                        if (!Modifier.isStatic(field.getModifiers())) {
+                            //System.out.println("Field " + field.getName() + " in " + enumClazz.getName() + " is not static");
+                            return false;
+                        }
+                        if (!enumClazz.isAssignableFrom(field.getType())) {
+                            //System.out.println("Field " + field.getName() + " in " + enumClazz.getName() + " is not of type " + enumClazz.getName());
+                            return false;
+                        }
+                        field.setAccessible(true);
+                        return true;
+                    } catch (Exception ex) {
+                        Bukkit.getLogger().log(Level.SEVERE,"Couldn't access field", ex);
+                        return false;
+                    }
+                }).map(Field::getName).collect(Collectors.toSet());
+
+                if(result.isEmpty()) {
+                    throw new RuntimeException("Could not find any static fields in " + enumClazz.getName());
+                }
+
+                return result;
+
+        }
     }
 
     /**

@@ -35,6 +35,8 @@ import org.jetbrains.annotations.Nullable;
 @UtilityClass
 public class ParticleUtils {
 
+    public static final Particle PARTICLE_EXPLOSION_NORMAL = EnumUtils.getIfPresent(Particle.class, "EXPLOSION_NORMAL").orElseGet(() -> EnumUtils.getIfPresent(Particle.class, "EXPLOSION").orElse(null));
+
     /**
      * Returns a runnable that creates cube-formed particles
      *
