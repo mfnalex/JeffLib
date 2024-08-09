@@ -17,6 +17,9 @@
 
 package com.jeff_media.jefflib;
 
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -40,9 +43,9 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class EnumUtils {
 
-    private static final Map<Class<? extends Enum<?>>, Set<String>> ENUM_CACHE = new HashMap<>();
-    private static final Map<Class<? extends Enum<?>>, List<? extends Enum<?>>> ENUM_ARRAY_CACHE = new HashMap<>();
-    private static final Map<Class<? extends Enum<?>>, EnumMap<?, ?>> NEXT_ENUMS = new HashMap<>();
+    private static final Map<Class<?>, Set<String>> ENUM_CACHE = new HashMap<>();
+    private static final Map<Class<?>, List<? extends Enum<?>>> ENUM_ARRAY_CACHE = new HashMap<>();
+    private static final Map<Class<?>, EnumMap<?, ?>> NEXT_ENUMS = new HashMap<>();
 
     /**
      * Gets an EnumSet of the given Enum constants by their names. Enum constants that aren't found will print a warning.
@@ -75,16 +78,60 @@ public class EnumUtils {
         }).filter(Objects::nonNull).collect(collector);
     }
 
+    static {
+        try {
+            enumValueOfMethod = Enum.class.getMethod("valueOf", Class.class, String.class);
+        } catch (ReflectiveOperationException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private static <T> T valueOf(final Class<T> enumClazz, final String value) {
+        if(enumClazz.isEnum()) {
+            try {
+                return (T) enumValueOfMethod.invoke(null, enumClazz, value);
+            } catch (ReflectiveOperationException ex) {
+                throw new RuntimeException(ex);
+            }
+        } else {
+            try {
+                for(Field field : enumClazz.getDeclaredFields()) {
+                    if(!field.getName().equals(value)) continue;
+                    if(!Modifier.isStatic(field.getModifiers())) throw new RuntimeException("Field " + field.getName() + " in " + enumClazz.getName() + " is not static");
+                    if(!field.isAccessible()) throw new RuntimeException("Field " + field.getName() + " in " + enumClazz.getName() + " is not accessible");
+                    Class<?> returnClass = field.getType();
+                    if(enumClazz.isAssignableFrom(returnClass)) {
+                        return (T) field.get(null);
+                    }
+                }
+                throw new RuntimeException("Could not find field " + value + " in " + enumClazz.getName());
+            } catch (ReflectiveOperationException ex) {
+                throw new RuntimeException(ex);
+            }
+        }
+    }
+
     /**
      * Gets an {@link Optional} of a given Enum by its name
      */
-    public static <E extends Enum<E>> Optional<E> getIfPresent(final Class<E> enumClazz, final String value) {
+    public static <E> Optional<E> getIfPresent(final Class<E> enumClazz, final String value) {
         final Set<String> enumSet = ENUM_CACHE.computeIfAbsent(enumClazz, EnumUtils::toStringSet);
-        return Optional.ofNullable(enumSet.contains(value) ? Enum.valueOf(enumClazz, value) : null);
+        return Optional.ofNullable(enumSet.contains(value) ? valueOf(enumClazz, value) : null);
     }
 
-    private static Set<String> toStringSet(final Class<? extends Enum<?>> enumClazz) {
-        return Arrays.stream(enumClazz.getEnumConstants()).map(Enum::toString).collect(Collectors.toSet());
+    private static final Method enumValueOfMethod;
+
+
+
+    private static Set<String> toStringSet(final Class<?> enumClazz) {
+        return Arrays.stream(enumClazz.getEnumConstants()).map(object -> {
+            if(object instanceof Enum<?>) {
+                return ((Enum<?>) object).name();
+            } else {
+                return object.toString();
+            }
+        }).collect(Collectors.toSet());
     }
 
     /**
