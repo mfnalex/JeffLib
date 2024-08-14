@@ -52,7 +52,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 @UtilityClass
 public class JeffLib {
 
-    public static String LATEST_NMS = "v1_20_5";
+    public static String LATEST_NMS = "v1_21";
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();
@@ -91,29 +91,6 @@ public class JeffLib {
         if (plugin != null) return plugin.getLogger();
         return Bukkit.getLogger();
     }
-
-//    /**
-//     * Checks for proper relocation
-//     */
-//    private static void checkRelocation() {
-//        if (checkedRelocation) return;
-//        try {
-//            if (ServerUtils.isRunningMockBukkit()) return;
-//            final String defaultPackageDe = new String(new byte[]{'d', 'e', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-//            final String defaultPackageCom = new String(new byte[]{'c', 'o', 'm', '.', 'j', 'e', 'f', 'f', '_', 'm', 'e', 'd', 'i', 'a', '.', 'j', 'e', 'f', 'f', 'l', 'i', 'b'});
-//            final String examplePackage = new String(new byte[]{'y', 'o', 'u', 'r', '.', 'p', 'a', 'c', 'k', 'a', 'g', 'e'});
-//            final String packageName = JeffLib.class.getPackage().getName();
-//            if (packageName.startsWith(defaultPackageDe) || packageName.startsWith(defaultPackageCom) || packageName.startsWith(examplePackage)) {
-//                final String authors = String.join(", ", getPlugin0().getDescription().getAuthors());
-//                final String plugin = getPlugin().getName() + " " + getPlugin0().getDescription().getVersion();
-//                //throw new JeffLibNotRelocatedException("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-//                getPlugin().getLogger().severe("Nag author(s) " + authors + (authors.length() == 0 ? "" : " ") + "of plugin " + plugin + " for failing to properly relocate JeffLib!");
-//            }
-//        } catch (final Throwable ignored) {
-//            return;
-//        }
-//        checkedRelocation = true;
-//    }
 
     /**
      * Only for Unit Tests
@@ -259,6 +236,10 @@ public class JeffLib {
         final String packageName = JeffLib.class.getPackage().getName();
         final String internalsName;
         McVersion mcVersion = McVersion.current();
+
+        if(mcVersion.equals(new McVersion(1,21,1))) {
+            mcVersion = new McVersion(1,21,0);
+        }
 
         if(mcVersion.equals(new McVersion(1,20,6))) {
             mcVersion = new McVersion(1,20,5);
