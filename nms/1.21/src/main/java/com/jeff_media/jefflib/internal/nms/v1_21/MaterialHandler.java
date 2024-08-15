@@ -30,6 +30,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -39,6 +40,7 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
     private static final Field field_Item_components;
     private static final Class<?> class_DataComponentMap_Builder_SimpleMap;
     private static final Field field_SimpleMap_map;
+    private static final Field field_Material_maxStack;
 
     static {
         Field foundComponentsField = null;
@@ -83,6 +85,20 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
         } else {
             field_SimpleMap_map = foundMapField;
         }
+
+        Field materialMaxStackField = null;
+        try {
+
+            Field modifiersField = Field.class.getDeclaredField("modifiers");
+            modifiersField.setAccessible(true);
+
+            materialMaxStackField = Material.class.getDeclaredField("maxStack");
+            materialMaxStackField.setAccessible(true);
+
+            modifiersField.setInt(materialMaxStackField, materialMaxStackField.getModifiers() & ~Modifier.FINAL);
+
+        } catch (Throwable ignored) { }
+        field_Material_maxStack = materialMaxStackField;
     }
 
     @Override
@@ -104,6 +120,12 @@ class MaterialHandler implements AbstractNMSMaterialHandler {
             }
         } else {
             throw new RuntimeException("Could not set max stack size of " + material.name() + " to " + maxStackSize + " - map is not an instance of Map<?,?> or SimpleMap, but " + map.getClass().getName());
+        }
+
+        if(field_Material_maxStack != null) {
+            try {
+                field_Material_maxStack.set(material, maxStackSize);
+            } catch (Exception ignored) { }
         }
     }
 }
