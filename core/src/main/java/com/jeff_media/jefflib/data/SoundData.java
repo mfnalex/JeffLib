@@ -18,6 +18,7 @@
 package com.jeff_media.jefflib.data;
 
 import com.google.common.base.Enums;
+import com.jeff_media.jefflib.EnumUtils;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.NumberUtils;
 import java.util.Locale;
@@ -82,7 +83,7 @@ public final class SoundData {
         if (soundName == null || soundName.isEmpty()) {
             throw new IllegalArgumentException("No sound effect defined");
         }
-        final Sound sound = Enums.getIfPresent(Sound.class, soundName.toUpperCase(Locale.ROOT)).orNull();
+        final Sound sound = EnumUtils.getIfPresent(Sound.class, soundName.toUpperCase(Locale.ROOT)).orElse(null);
         if (sound != null) {
             soundName = sound.name();
         }

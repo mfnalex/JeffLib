@@ -29,7 +29,7 @@
     <parent>
         <groupId>com.jeff-media.jefflib</groupId>
         <artifactId>jefflib-parent</artifactId>
-        <version><!-- changeme -->14.2.3</version>
+        <version><!-- changeme -->14.2.4</version>
     </parent>
     <build>
         <resources>
@@ -161,13 +161,13 @@
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.19.2-R0.1-SNAPSHOT</version>
+            <version>1.21.3-R0.1-SNAPSHOT</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot</artifactId>
-            <version>1.20.5-R0.1-SNAPSHOT</version>
+            <version>1.21.3-R0.1-SNAPSHOT</version>
             <classifier>remapped-mojang</classifier>
             <scope>test</scope>
         </dependency>
@@ -199,24 +199,24 @@
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-nms-generic</artifactId>
-            <version><!-- changeme -->14.2.3</version>
+            <version><!-- changeme -->14.2.4</version>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-paper-hacks</artifactId>
-            <version><!-- changeme -->14.2.3</version>
+            <version><!-- changeme -->14.2.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-keyed</artifactId>
-            <version><!-- changeme -->14.2.3</version>
+            <version><!-- changeme -->14.2.4</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-glowenchantment-legacy</artifactId>
-            <version><!-- changeme -->14.2.3</version>
+            <version><!-- changeme -->14.2.4</version>
             <scope>compile</scope>
         </dependency>
 
