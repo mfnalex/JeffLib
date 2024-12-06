@@ -22,7 +22,7 @@
     <parent>
         <artifactId>jefflib-parent</artifactId>
         <groupId>com.jeff-media.jefflib</groupId>
-        <version><!-- changeme -->14.2.4</version>
+        <version>${revision}</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
@@ -162,7 +162,7 @@
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib</artifactId>
-            <version><!-- changeme -->14.2.4</version>
+            <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
