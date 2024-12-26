@@ -72,7 +72,7 @@ public class EntityUtils {
      * Gets the generic movement speed of an entity
      */
     public static double getMovementSpeed(@NotNull final LivingEntity entity) {
-        final AttributeInstance attribute = entity.getAttribute(Attribute.GENERIC_MOVEMENT_SPEED);
+        final AttributeInstance attribute = entity.getAttribute(Attribute.MOVEMENT_SPEED);
         if (attribute != null) {
             return attribute.getValue();
         }
