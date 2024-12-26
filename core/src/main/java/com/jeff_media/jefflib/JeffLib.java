@@ -52,7 +52,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 @UtilityClass
 public class JeffLib {
 
-    public static String LATEST_NMS = "v1_21_3";
+    public static String LATEST_NMS = "v1_21_4";
 
     private static final Random random = new Random();
     private static final ThreadLocalRandom threadLocalRandom = ThreadLocalRandom.current();

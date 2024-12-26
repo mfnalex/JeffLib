@@ -111,6 +111,11 @@
         </dependency>
         <dependency>
             <groupId>com.jeff-media.jefflib</groupId>
+            <artifactId>jefflib-nms-1.21.4</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.jeff-media.jefflib</groupId>
             <artifactId>jefflib-nms-1.21.3</artifactId>
             <version>${project.version}</version>
         </dependency>
