@@ -21,9 +21,9 @@
 ###############################
 
 # Path to your java 17 executable
-JAVA_PATH="/Library/Java/JavaVirtualMachines/jdk-17.jdk/Contents/Home/bin/java"
+JAVA_PATH="java17"
 # Path to your java 8 or java 11 java executable
-LEGACY_JAVA_PATH="/Library/Internet Plug-Ins/JavaAppletPlugin.plugin/Contents/Home/bin/java"
+LEGACY_JAVA_PATH="java8"
 
 ###############################
 # Do not edit below this line #

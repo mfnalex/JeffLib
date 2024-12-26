@@ -24,7 +24,7 @@
     <description>Library for Spigot plugins</description>
     <packaging>pom</packaging>
     <properties>
-        <revision>14.2.5</revision>
+        <revision>14.3.0</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
         <maven.build.timestamp.format>yyyyMMddHHmm</maven.build.timestamp.format>
@@ -184,7 +184,7 @@
     <repositories>
         <repository>
             <id>jeff-media-gbr</id>
-            <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
+            <url>https://repo.jeff-media.com/public/</url>
         </repository>
         <repository>
             <id>spigot-repo</id>
