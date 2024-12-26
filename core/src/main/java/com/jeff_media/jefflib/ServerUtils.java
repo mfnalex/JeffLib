@@ -82,7 +82,7 @@ public class ServerUtils {
      * Gets whether this server is running MockBukkit
      */
     public static boolean isRunningMockBukkit() {
-        return Bukkit.getServer().getClass().getName().equals("be.seeseemelk.mockbukkit.ServerMock");
+        return Bukkit.getServer().getClass().getName().equals("org.mockbukkit.mockbukkit.ServerMock");
     }
 
     /**

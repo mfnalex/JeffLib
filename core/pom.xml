@@ -144,6 +144,11 @@
             <id>lumine-repo</id>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
         </repository>
+        <repository>
+            <id>phoenix</id>
+            <url>https://nexus.phoenixdevt.fr/repository/maven-public/</url>
+        </repository>
+
         <!-- PlotSquared 6 -->
         <!--        <repository>-->
         <!--            <id>intellectual-sites</id>-->
@@ -178,9 +183,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.19</artifactId>
-            <version>2.145.0</version>
+            <groupId>org.mockbukkit.mockbukkit</groupId>
+            <artifactId>mockbukkit-v1.21</artifactId>
+            <version>4.21.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -248,7 +253,7 @@
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.10.10</version>
+            <version>2.11.6</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -269,12 +274,12 @@
             <version>7.0.9</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.oraxen</groupId>
-            <artifactId>oraxen</artifactId>
-            <version>bea381fb82</version>
-            <scope>provided</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>com.github.oraxen</groupId>-->
+<!--            <artifactId>oraxen</artifactId>-->
+<!--            <version>bea381fb82</version>-->
+<!--            <scope>provided</scope>-->
+<!--        </dependency>-->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>
@@ -289,23 +294,20 @@
         </dependency>
         <!-- MMOItems start -->
         <dependency>
-            <groupId>net.Indyuce</groupId>
-            <artifactId>MMOItems</artifactId>
-            <version>6.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>io.lumine</groupId>
-            <artifactId>MythicLib</artifactId>
-            <version>1.0.17</version>
+            <artifactId>MythicLib-dist</artifactId>
+            <version>1.6.2-SNAPSHOT</version>
             <scope>provided</scope>
+            <optional>true</optional>
         </dependency>
+
         <dependency>
             <groupId>net.Indyuce</groupId>
-            <artifactId>MMOCore</artifactId>
-            <version>1.6.2</version>
+            <artifactId>MMOItems-API</artifactId>
+            <version>6.9.5-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
+
         <!-- MMOItems End -->
         <!-- PlotSquared 6 Start -->
         <dependency>

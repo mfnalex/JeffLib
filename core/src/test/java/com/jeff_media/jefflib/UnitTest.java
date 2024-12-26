@@ -17,19 +17,20 @@
 
 package com.jeff_media.jefflib;
 
-import be.seeseemelk.mockbukkit.MockBukkit;
-import be.seeseemelk.mockbukkit.MockPlugin;
-import be.seeseemelk.mockbukkit.ServerMock;
+
 import lombok.Getter;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.mockbukkit.mockbukkit.MockBukkit;
+import org.mockbukkit.mockbukkit.ServerMock;
+import org.mockbukkit.mockbukkit.plugin.PluginMock;
 
 public class UnitTest {
 
     @Getter
     ServerMock server;
     @Getter
-    MockPlugin plugin;
+    PluginMock plugin;
 
     @BeforeEach
     void setup() throws IllegalAccessException {
