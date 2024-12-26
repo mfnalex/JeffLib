@@ -27,7 +27,7 @@ import net.minecraft.world.entity.ai.goal.MoveToBlockGoal;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_21_R2.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 import org.bukkit.entity.Creature;
 
 public abstract class HatchedMoveToBlockGoal extends MoveToBlockGoal implements PathfinderGoal {

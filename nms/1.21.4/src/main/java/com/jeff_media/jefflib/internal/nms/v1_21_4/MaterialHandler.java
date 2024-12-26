@@ -24,8 +24,8 @@ import net.minecraft.core.component.DataComponents;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.Items;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_21_R2.inventory.CraftItemStack;
-import org.bukkit.craftbukkit.v1_21_R2.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 

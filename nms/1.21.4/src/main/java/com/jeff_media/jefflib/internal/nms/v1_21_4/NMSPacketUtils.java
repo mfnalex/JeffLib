@@ -21,7 +21,7 @@ import lombok.experimental.UtilityClass;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.server.network.ServerGamePacketListenerImpl;
-import org.bukkit.craftbukkit.v1_21_R2.entity.CraftPlayer;
+import org.bukkit.craftbukkit.v1_21_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 
 @UtilityClass

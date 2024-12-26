@@ -26,8 +26,8 @@ import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockState;
 import org.bukkit.Fluid;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_21_R2.CraftFluid;
-import org.bukkit.craftbukkit.v1_21_R2.util.CraftMagicNumbers;
+import org.bukkit.craftbukkit.v1_21_R3.CraftFluid;
+import org.bukkit.craftbukkit.v1_21_R3.util.CraftMagicNumbers;
 import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 
