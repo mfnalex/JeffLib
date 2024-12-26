@@ -36,6 +36,7 @@
         <module>glow-enchantment/keyed</module>
         <module>glow-enchantment/legacy</module>
         <module>nms/generic</module>
+        <module>nms/1.21.4</module> <!-- 1.21.4 -->
         <module>nms/1.21.3</module> <!-- 1.21.3, 1.21.2 -->
         <module>nms/1.21</module>   <!-- 1.21.1, 1.21 -->
 		<module>nms/1.20.5</module> <!-- 1.20.6, 1.20.5 -->
