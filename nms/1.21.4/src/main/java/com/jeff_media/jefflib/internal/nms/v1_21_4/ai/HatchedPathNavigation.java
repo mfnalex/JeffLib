@@ -15,9 +15,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1.21.4.ai;
+package com.jeff_media.jefflib.internal.nms.v1_21_4.ai;
 
-import com.jeff_media.jefflib.internal.nms.v1.21.4.NMS;
+import com.jeff_media.jefflib.internal.nms.v1_21_4.NMS;
 import net.minecraft.world.entity.ai.navigation.PathNavigation;
 import org.bukkit.util.BlockVector;
 

@@ -15,7 +15,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.jeff_media.jefflib.internal.nms.v1.21.4;
+package com.jeff_media.jefflib.internal.nms.v1_21_4;
 
 import lombok.experimental.UtilityClass;
 import net.minecraft.network.protocol.Packet;
