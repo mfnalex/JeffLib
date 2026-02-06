@@ -17,9 +17,8 @@
 
 package com.jeff_media.jefflib.exceptions;
 
-import com.allatori.annotations.DoNotRename;
 
-@DoNotRename
+
 public class ConflictingEnchantmentException extends Exception {
 
     public ConflictingEnchantmentException(final String message) {

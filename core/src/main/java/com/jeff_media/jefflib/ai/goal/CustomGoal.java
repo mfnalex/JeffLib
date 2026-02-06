@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ai.navigation.Controls;
 import com.jeff_media.jefflib.ai.navigation.JumpController;
@@ -32,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * An extendable {@link PathfinderGoal} that can be used to create custom AI goals.
  */
-@DoNotRename
+
 public abstract class CustomGoal implements PathfinderGoal, CustomGoalExecutor {
 
     private final Mob bukkitEntity;

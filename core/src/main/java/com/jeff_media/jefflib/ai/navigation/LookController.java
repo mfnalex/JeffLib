@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib.ai.navigation;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Entity;
 import org.bukkit.util.Vector;
 
-@DoNotRename
+
 public interface LookController {
 
     @NMS

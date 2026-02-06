@@ -17,9 +17,8 @@
 
 package com.jeff_media.jefflib.exceptions;
 
-import com.allatori.annotations.DoNotRename;
 
-@DoNotRename
+
 public class JeffLibNotRelocatedException extends RuntimeException {
     public JeffLibNotRelocatedException(final String message) {
         super(message);

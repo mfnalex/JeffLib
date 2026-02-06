@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.data.McVersion;
 import com.jeff_media.jefflib.events.PlayerJumpEvent;
 import com.jeff_media.jefflib.events.PlayerScrollEvent;
@@ -122,7 +121,7 @@ public class JeffLib {
      *
      * @return Plugin instance
      */
-    @DoNotRename
+    
     public static Plugin getPlugin() {
         if (plugin == null) {
             //checkRelocation();
@@ -209,7 +208,7 @@ public class JeffLib {
      * @hidden
      * @nms
      */
-    @DoNotRename
+    
     @Internal
     @NMS
     public static AbstractNMSHandler getNMSHandler() {

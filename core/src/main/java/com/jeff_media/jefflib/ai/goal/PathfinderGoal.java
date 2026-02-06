@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 import org.bukkit.entity.Mob;
 
 /**
@@ -26,7 +25,7 @@ import org.bukkit.entity.Mob;
  *
  * @see CustomGoal
  */
-@DoNotRename
+
 public interface PathfinderGoal {
 
     /**

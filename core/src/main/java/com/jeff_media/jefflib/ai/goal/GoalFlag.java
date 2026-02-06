@@ -17,12 +17,11 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 
 /**
  * Represents the NMS GoalFlags
  */
-@DoNotRename
+
 public enum GoalFlag {
 
     MOVE, LOOK, JUMP, TARGET;

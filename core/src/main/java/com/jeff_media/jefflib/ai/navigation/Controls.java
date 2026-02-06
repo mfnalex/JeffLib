@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.navigation;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.EntityUtils;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import org.bukkit.entity.Mob;
@@ -26,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Represents an entity's navigation, movement, jump and look controls
  */
-@DoNotRename
+
 public final class Controls {
 
     private final MoveController moveController;

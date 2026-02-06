@@ -17,11 +17,10 @@
 
 package com.jeff_media.jefflib.exceptions;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import org.jetbrains.annotations.Nullable;
 
-@DoNotRename
+
 public class NMSNotSupportedException extends RuntimeException {
 
     public NMSNotSupportedException(final String message) {

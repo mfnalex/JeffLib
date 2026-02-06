@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.events;
 
-import com.allatori.annotations.DoNotRename;
 import lombok.Getter;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
@@ -43,13 +42,13 @@ public final class PlayerScrollEvent extends Event implements Cancellable {
         this.direction = direction;
     }
 
-    @DoNotRename
+    
     public static HandlerList getHandlerList() {
         return HANDLERS;
     }
 
     @Override
-    @DoNotRename
+    
     @NotNull
     public HandlerList getHandlers() {
         return HANDLERS;

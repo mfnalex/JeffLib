@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import java.util.Collection;
 import java.util.Set;
@@ -33,7 +32,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Utility methods to create some custom {@link PathfinderGoal}s. For a custom goal, extend {@link CustomGoal}
  */
-@DoNotRename
+
 public interface PathfinderGoals {
     /**
      * Creates a <b>Tempt goal</b>, that will tempt animals using a certain set of items. This behaves like the vanilla

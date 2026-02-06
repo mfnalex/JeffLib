@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.ai.navigation.Controls;
 import com.jeff_media.jefflib.ai.navigation.JumpController;
 import com.jeff_media.jefflib.ai.navigation.LookController;
@@ -31,7 +30,7 @@ import org.jetbrains.annotations.Nullable;
 /**
  * Represents an NMS pathfinder Goal that's used to execute a {@link CustomGoal}
  */
-@DoNotRename
+
 public interface CustomGoalExecutor {
 
     /**

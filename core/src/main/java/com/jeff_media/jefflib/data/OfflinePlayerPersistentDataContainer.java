@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.data;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.ProfileUtils;
 import com.jeff_media.jefflib.ReflUtils;
@@ -43,7 +42,7 @@ import org.jetbrains.annotations.NotNull;
  * @nms
  */
 @NMS
-@DoNotRename
+
 public class OfflinePlayerPersistentDataContainer implements PersistentDataContainer {
 
     private final PersistentDataContainer craftPersistentDataContainer;

@@ -17,10 +17,9 @@
 
 package com.jeff_media.jefflib.ai.navigation;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 
-@DoNotRename
+
 public interface MoveController {
 
     @NMS

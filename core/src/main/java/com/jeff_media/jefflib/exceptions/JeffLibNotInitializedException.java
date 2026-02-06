@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.exceptions;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import org.bukkit.plugin.Plugin;
 
@@ -26,7 +25,7 @@ import org.bukkit.plugin.Plugin;
  *
  * @deprecated JeffLib 9.0.0+ automatically gets the plugin's instance
  */
-@DoNotRename
+
 @Deprecated
 public final class JeffLibNotInitializedException extends IllegalStateException {
 

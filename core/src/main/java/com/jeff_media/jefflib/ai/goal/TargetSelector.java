@@ -17,7 +17,6 @@
 
 package com.jeff_media.jefflib.ai.goal;
 
-import com.allatori.annotations.DoNotRename;
 import com.jeff_media.jefflib.JeffLib;
 import com.jeff_media.jefflib.internal.annotations.NMS;
 import com.jeff_media.jefflib.internal.nms.AbstractNMSHandler;
@@ -27,7 +26,7 @@ import org.jetbrains.annotations.NotNull;
 /**
  * Represents an entity's target selector
  */
-@DoNotRename
+
 public final class TargetSelector extends GoalSelector {
 
     private TargetSelector(@NotNull final Mob mob) {
